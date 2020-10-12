@@ -1,15 +1,26 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from "react";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import NavigationBar from "./modules/root/components/NavigationBar/";
+import grey from "@material-ui/core/colors/grey";
 
 function App() {
+  const theme = createMuiTheme({
+    typography: {
+      fontFamily: ["Prompt", "sans-serif"].join(","),
+    },
+    palette: {
+      primary: {
+        main: `${grey[900]}`,
+      },
+    },
+  });
+
   return (
-    <div>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Button variant="contained" color="primary">
-      Hello World
-      </Button>
-    </div>
+      <NavigationBar />
+    </MuiThemeProvider>
   );
 }
 
