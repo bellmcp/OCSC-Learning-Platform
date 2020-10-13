@@ -225,7 +225,7 @@ export default function NavigationBar() {
           </Hidden>
           <img src={logo} alt="OCSC Logo" className={classes.logo} />
           <Typography className={classes.title} variant="h6" noWrap>
-            แพลตฟอร์มการเรียนรู้
+            Learning Platform
           </Typography>
 
           <div className={classes.grow} />

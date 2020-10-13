@@ -3,6 +3,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import NavigationBar from "../root/components/NavigationBar";
+import Carousel from "./components/Carousel/";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +25,7 @@ interface Props {
   window?: () => Window;
 }
 
-export default function ResponsiveDrawer(props: Props) {
+export default function Home(props: Props) {
   const classes = useStyles();
 
   return (
@@ -34,6 +35,7 @@ export default function ResponsiveDrawer(props: Props) {
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Carousel />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
