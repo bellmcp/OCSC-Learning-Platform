@@ -15,17 +15,26 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import ProfileIcon from "@material-ui/icons/AccountCircle";
+import SettingIcon from "@material-ui/icons/Settings";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
-
 import NavigationDrawer from "../NavigationDrawer";
+import Hidden from "@material-ui/core/Hidden";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import grey from "@material-ui/core/colors/grey";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
       flexGrow: 1,
+    },
+    appBar: {
+      [theme.breakpoints.up("sm")]: {
+        zIndex: theme.zIndex.drawer + 1,
+      },
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -43,10 +52,11 @@ const useStyles = makeStyles((theme: Theme) =>
     search: {
       position: "relative",
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: fade(theme.palette.common.white, 0.15),
-      "&:hover": {
-        backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
+      border: `1px solid ${grey[800]}`,
+      backgroundColor: fade(theme.palette.common.black, 0.9),
+      //   "&:hover": {
+      //     border: `1px solid ${grey[700]}`,
+      //   },
       marginLeft: 0,
       width: "100%",
       [theme.breakpoints.up("sm")]: {
@@ -91,6 +101,9 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
+    listItemIcon: {
+      minWidth: 40,
+    },
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
@@ -111,6 +124,12 @@ export default function NavigationBar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+    console.log(!mobileOpen);
+  };
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -140,8 +159,18 @@ export default function NavigationBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>โปรไฟล์</MenuItem>
-      <MenuItem onClick={handleMenuClose}>ตั้งค่า</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <ListItemIcon className={classes.listItemIcon}>
+          <ProfileIcon />
+        </ListItemIcon>
+        <ListItemText primary="บัญชีผู้ใช้" />
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <ListItemIcon className={classes.listItemIcon}>
+          <SettingIcon />
+        </ListItemIcon>
+        <ListItemText primary="ตั้งค่า" />
+      </MenuItem>
     </Menu>
   );
 
@@ -180,27 +209,34 @@ export default function NavigationBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
+          {/* Hide Sidebar Toggle Button on Desktop */}
+          <Hidden smUp implementation="css">
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <img src={logo} alt="OCSC Logo" className={classes.logo} />
           <Typography className={classes.title} variant="h6" noWrap>
             แพลตฟอร์มการเรียนรู้
           </Typography>
+
           <div className={classes.grow} />
+
+          {/* Search Bar */}
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="ค้นหา..."
+              placeholder="ค้นหา"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -208,6 +244,7 @@ export default function NavigationBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
+
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show notifications" color="inherit">
               <Badge badgeContent={2} color="secondary">
@@ -238,9 +275,14 @@ export default function NavigationBar() {
           </div>
         </Toolbar>
       </AppBar>
-      <NavigationDrawer />
+
       {renderMobileMenu}
       {renderMenu}
+
+      <NavigationDrawer
+        mobileOpen={mobileOpen}
+        handleDrawerToggle={handleDrawerToggle}
+      />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import React from "react";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import NavigationBar from "./modules/root/components/NavigationBar/";
 import grey from "@material-ui/core/colors/grey";
+import Home from "./modules/home";
 
 function App() {
   const theme = createMuiTheme({
@@ -19,7 +19,7 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <NavigationBar />
+      <Home />
     </MuiThemeProvider>
   );
 }
