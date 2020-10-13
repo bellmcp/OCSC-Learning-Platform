@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Carousel() {
+export default function Announcement() {
   const classes = useStyles();
 
   return (

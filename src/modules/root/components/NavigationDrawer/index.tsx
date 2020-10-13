@@ -102,7 +102,7 @@ export default function ResponsiveDrawer(props: Props) {
       <Divider />
       <p className={classes.listTitle}>ลงทะเบียน</p>
       <List dense>
-        {["หลักสูตร", "รายวิชา"].map((text, index) => (
+        {["คอร์สเรียน", "หลักสูตร"].map((text, index) => (
           <ListItem className={classes.listItem} button key={text}>
             <ListItemIcon className={classes.listItemIcon}>
               {index % 2 === 0 ? <CourseIcon /> : <SubjectIcon />}

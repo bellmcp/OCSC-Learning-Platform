@@ -3,7 +3,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import NavigationBar from "../root/components/NavigationBar";
-import Carousel from "./components/Carousel/";
+import Announcement from "./components/Announcement";
+import CourseGallery from "./components/CourseGallery";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +36,8 @@ export default function Home(props: Props) {
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Carousel />
+        <Announcement />
+        <CourseGallery />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus

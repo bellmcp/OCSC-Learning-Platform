@@ -236,7 +236,7 @@ export default function NavigationBar() {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="ค้นหา"
+              placeholder="ค้นหาคอร์สเรียน"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
