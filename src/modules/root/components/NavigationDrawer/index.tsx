@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
       [theme.breakpoints.up("sm")]: {
-        width: drawerWidth,
+        // width: drawerWidth,
         flexShrink: 0,
       },
     },
@@ -162,7 +162,9 @@ export default function ResponsiveDrawer(props: Props) {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+
+        {/* Desktop Permanent Sidebar */}
+        {/* <Hidden xsDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -172,7 +174,7 @@ export default function ResponsiveDrawer(props: Props) {
           >
             {drawer}
           </Drawer>
-        </Hidden>
+        </Hidden> */}
       </nav>
     </div>
   );

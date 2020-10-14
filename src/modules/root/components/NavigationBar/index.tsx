@@ -25,6 +25,12 @@ import Hidden from "@material-ui/core/Hidden";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import grey from "@material-ui/core/colors/grey";
+import amber from "@material-ui/core/colors/amber";
+import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
+
+import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
+import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,6 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
+      backgroundColor: "rgba(0,0,0,0.8)",
+      backdropFilter: "blur(6px)",
       [theme.breakpoints.up("sm")]: {
         zIndex: theme.zIndex.drawer + 1,
       },
@@ -51,9 +59,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     search: {
       position: "relative",
-      borderRadius: theme.shape.borderRadius,
-      border: `1px solid ${grey[800]}`,
       backgroundColor: fade(theme.palette.common.black, 0.9),
+      borderRadius: theme.shape.borderRadius,
       //   "&:hover": {
       //     border: `1px solid ${grey[700]}`,
       //   },
@@ -68,6 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 2),
       height: "100%",
       position: "absolute",
+      right: "0",
       pointerEvents: "none",
       display: "flex",
       alignItems: "center",
@@ -79,14 +87,20 @@ const useStyles = makeStyles((theme: Theme) =>
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+      paddingLeft: `calc(1em)`,
       transition: theme.transitions.create("width"),
       width: "100%",
+      borderRadius: theme.shape.borderRadius,
+      border: `1px solid ${grey[800]}`,
       [theme.breakpoints.up("sm")]: {
-        width: "12ch",
+        width: "24ch",
         "&:focus": {
-          width: "20ch",
+          borderRadius: theme.shape.borderRadius,
+          border: `1px solid ${amber[500]}`,
         },
+        // "&:focus": {
+        //   width: "30ch",
+        // },
       },
     },
     sectionDesktop: {
@@ -107,6 +121,12 @@ const useStyles = makeStyles((theme: Theme) =>
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
+    },
+    navItemActive: {
+      color: amber[500],
+    },
+    navItem: {
+      color: grey[50],
     },
   })
 );
@@ -224,11 +244,15 @@ export default function NavigationBar() {
             </IconButton>
           </Hidden>
           <img src={logo} alt="OCSC Logo" className={classes.logo} />
-          <Typography className={classes.title} variant="h6" noWrap>
+
+          <Typography
+            style={{ borderLeft: `2px solid ${grey[800]}`, padding: "0 20px" }}
+            className={classes.title}
+            variant="h6"
+            noWrap
+          >
             Learning Platform
           </Typography>
-
-          <div className={classes.grow} />
 
           {/* Search Bar */}
           <div className={classes.search}>
@@ -245,12 +269,43 @@ export default function NavigationBar() {
             />
           </div>
 
+          <div className={classes.grow} />
+
+          {/* Desktop Menu */}
+          <NavMenu useStyles={useLineNavigationMenuStyles}>
+            <NavItem active>
+              <Typography className={classes.navItemActive}>
+                หน้าหลัก
+              </Typography>
+            </NavItem>
+            <NavItem>
+              <Typography className={classes.navItem}>คอร์สเรียน</Typography>
+            </NavItem>
+            <NavItem>
+              <Typography className={classes.navItem}>หลักสูตร</Typography>
+            </NavItem>
+            <NavItem>
+              <Typography className={classes.navItem}>ช่วยเหลือ</Typography>
+            </NavItem>
+          </NavMenu>
+
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show notifications" color="inherit">
               <Badge badgeContent={2} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+
+            <Button
+              color="secondary"
+              size="small"
+              startIcon={
+                <Avatar alt="User" src={user} className={classes.small} />
+              }
+            >
+              <Typography>วุฒิภัทร</Typography>
+            </Button>
+
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -259,7 +314,7 @@ export default function NavigationBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <Avatar alt="User" src={user} className={classes.small} />
+              <ArrowDown />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
