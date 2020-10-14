@@ -16,7 +16,7 @@ import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import ProfileIcon from "@material-ui/icons/AccountCircle";
+import LogoutIcon from "@material-ui/icons/ExitToApp";
 import SettingIcon from "@material-ui/icons/Settings";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
@@ -31,6 +31,7 @@ import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -55,7 +56,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logo: {
       maxWidth: 120,
-      marginRight: 20,
     },
     search: {
       position: "relative",
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: 0,
       width: "100%",
       [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(6),
         width: "auto",
       },
     },
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: theme.shape.borderRadius,
       border: `1px solid ${grey[800]}`,
       [theme.breakpoints.up("sm")]: {
-        width: "24ch",
+        width: "32ch",
         "&:focus": {
           borderRadius: theme.shape.borderRadius,
           border: `1px solid ${amber[500]}`,
@@ -127,6 +127,19 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     navItem: {
       color: grey[50],
+    },
+    badge: {
+      zIndex: 10,
+    },
+    divider: {
+      width: 2,
+      height: 32,
+      marginLeft: theme.spacing(3),
+      marginRight: theme.spacing(3),
+      backgroundColor: grey[800],
+    },
+    profileButton: {
+      fontWeight: 600,
     },
   })
 );
@@ -181,15 +194,15 @@ export default function NavigationBar() {
     >
       <MenuItem onClick={handleMenuClose}>
         <ListItemIcon className={classes.listItemIcon}>
-          <ProfileIcon />
+          <SettingIcon />
         </ListItemIcon>
-        <ListItemText primary="บัญชีผู้ใช้" />
+        <ListItemText primary="การตั้งค่า" />
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <ListItemIcon className={classes.listItemIcon}>
-          <SettingIcon />
+          <LogoutIcon />
         </ListItemIcon>
-        <ListItemText primary="ตั้งค่า" />
+        <ListItemText primary="ออกจากระบบ" />
       </MenuItem>
     </Menu>
   );
@@ -245,12 +258,9 @@ export default function NavigationBar() {
           </Hidden>
           <img src={logo} alt="OCSC Logo" className={classes.logo} />
 
-          <Typography
-            style={{ borderLeft: `2px solid ${grey[800]}`, padding: "0 20px" }}
-            className={classes.title}
-            variant="h6"
-            noWrap
-          >
+          <Divider orientation="vertical" className={classes.divider} />
+
+          <Typography className={classes.title} variant="h6" noWrap>
             Learning Platform
           </Typography>
 
@@ -271,9 +281,9 @@ export default function NavigationBar() {
 
           <div className={classes.grow} />
 
-          {/* Desktop Menu */}
-          <NavMenu useStyles={useLineNavigationMenuStyles}>
-            <NavItem active>
+          {/* Desktop Navigation Menu */}
+          <NavMenu useStyles={useLineNavigationMenuStyles} color="inherit">
+            <NavItem active className={classes.navItemActive} color="inherit">
               <Typography className={classes.navItemActive}>
                 หน้าหลัก
               </Typography>
@@ -285,25 +295,32 @@ export default function NavigationBar() {
               <Typography className={classes.navItem}>หลักสูตร</Typography>
             </NavItem>
             <NavItem>
-              <Typography className={classes.navItem}>ช่วยเหลือ</Typography>
+              <Badge className={classes.badge} variant="dot" color="error">
+                <Typography className={classes.navItem}>ช่วยเหลือ</Typography>
+              </Badge>
             </NavItem>
           </NavMenu>
 
+          <Divider orientation="vertical" className={classes.divider} />
+
+          {/* Desktop Button Menu */}
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show notifications" color="inherit">
+            {/* <IconButton aria-label="show notifications" color="inherit">
               <Badge badgeContent={2} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
 
             <Button
-              color="secondary"
+              color="inherit"
               size="small"
               startIcon={
                 <Avatar alt="User" src={user} className={classes.small} />
               }
             >
-              <Typography>วุฒิภัทร</Typography>
+              <Typography className={classes.profileButton}>
+                วุฒิภัทร
+              </Typography>
             </Button>
 
             <IconButton
@@ -317,6 +334,8 @@ export default function NavigationBar() {
               <ArrowDown />
             </IconButton>
           </div>
+
+          {/* Mobile Button Menu */}
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
