@@ -4,6 +4,8 @@ import {
   makeStyles,
   Theme,
   createStyles,
+  createMuiTheme,
+  ThemeProvider,
 } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -32,6 +34,17 @@ import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+
+const darkTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: amber[500],
+    },
+  },
+  typography: {
+    fontFamily: ["Prompt", "sans-serif"].join(","),
+  },
+});
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -282,24 +295,26 @@ export default function NavigationBar() {
           <div className={classes.grow} />
 
           {/* Desktop Navigation Menu */}
-          <NavMenu useStyles={useLineNavigationMenuStyles} color="inherit">
-            <NavItem active className={classes.navItemActive} color="inherit">
-              <Typography className={classes.navItemActive}>
-                หน้าหลัก
-              </Typography>
-            </NavItem>
-            <NavItem>
-              <Typography className={classes.navItem}>คอร์สเรียน</Typography>
-            </NavItem>
-            <NavItem>
-              <Typography className={classes.navItem}>หลักสูตร</Typography>
-            </NavItem>
-            <NavItem>
-              <Badge className={classes.badge} variant="dot" color="error">
-                <Typography className={classes.navItem}>ช่วยเหลือ</Typography>
-              </Badge>
-            </NavItem>
-          </NavMenu>
+          <ThemeProvider theme={darkTheme}>
+            <NavMenu useStyles={useLineNavigationMenuStyles} color="inherit">
+              <NavItem active className={classes.navItemActive} color="inherit">
+                <Typography className={classes.navItemActive}>
+                  หน้าหลัก
+                </Typography>
+              </NavItem>
+              <NavItem>
+                <Typography className={classes.navItem}>คอร์สเรียน</Typography>
+              </NavItem>
+              <NavItem>
+                <Typography className={classes.navItem}>หลักสูตร</Typography>
+              </NavItem>
+              <NavItem>
+                <Badge className={classes.badge} variant="dot" color="error">
+                  <Typography className={classes.navItem}>ช่วยเหลือ</Typography>
+                </Badge>
+              </NavItem>
+            </NavMenu>
+          </ThemeProvider>
 
           <Divider orientation="vertical" className={classes.divider} />
 
