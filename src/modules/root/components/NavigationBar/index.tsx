@@ -329,6 +329,7 @@ export default function NavigationBar() {
             <Button
               color="inherit"
               size="small"
+              style={{ borderRadius: 50, padding: "0 10px" }}
               startIcon={
                 <Avatar alt="User" src={user} className={classes.small} />
               }
