@@ -26,7 +26,6 @@ import NavigationDrawer from "../NavigationDrawer";
 import Hidden from "@material-ui/core/Hidden";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
 
@@ -75,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: fade(theme.palette.common.black, 0.9),
       borderRadius: theme.shape.borderRadius,
       //   "&:hover": {
-      //     border: `1px solid ${grey[700]}`,
+      //     border: `1px solid ${theme.palette.grey[700]}`,
       //   },
       marginLeft: 0,
       width: "100%",
@@ -104,7 +103,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: theme.transitions.create("width"),
       width: "100%",
       borderRadius: theme.shape.borderRadius,
-      border: `1px solid ${grey[800]}`,
+      border: `1px solid ${theme.palette.grey[800]}`,
       [theme.breakpoints.up("sm")]: {
         width: "32ch",
         "&:focus": {
@@ -149,7 +148,7 @@ const useStyles = makeStyles((theme: Theme) =>
       height: 32,
       marginLeft: theme.spacing(3),
       marginRight: theme.spacing(3),
-      backgroundColor: grey[800],
+      backgroundColor: theme.palette.grey[800],
     },
     profileButton: {
       fontWeight: 600,

@@ -18,7 +18,6 @@ import {
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import grey from "@material-ui/core/colors/grey";
 
 const drawerWidth = 200;
 
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     listTitle: {
       marginBlockEnd: 0,
-      color: grey[500],
+      color: theme.palette.grey[500],
       paddingLeft: theme.spacing(3),
     },
     listItemIcon: {
@@ -68,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     copyright: {
       fontSize: "12px",
-      color: grey[500],
+      color: theme.palette.grey[500],
       padding: theme.spacing(2, 3),
     },
   })
