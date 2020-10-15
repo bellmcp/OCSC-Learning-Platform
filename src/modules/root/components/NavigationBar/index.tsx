@@ -34,6 +34,8 @@ import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 
+import { NavLink } from "react-router-dom";
+
 const darkTheme = createMuiTheme({
   palette: {
     primary: {
@@ -308,11 +310,13 @@ export default function NavigationBar() {
             <NavMenu useStyles={useLineNavigationMenuStyles} color="inherit">
               <NavItem active className={classes.navItemActive} color="inherit">
                 <Typography className={classes.navItemActive}>
-                  หน้าหลัก
+                  <NavLink to="/">หน้าหลัก</NavLink>
                 </Typography>
               </NavItem>
               <NavItem>
-                <Typography className={classes.navItem}>คอร์สเรียน</Typography>
+                <Typography className={classes.navItem}>
+                  <NavLink to="/course">คอร์สเรียน</NavLink>
+                </Typography>
               </NavItem>
               <NavItem>
                 <Typography className={classes.navItem}>หลักสูตร</Typography>
