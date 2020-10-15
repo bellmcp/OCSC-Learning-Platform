@@ -4,10 +4,10 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import NavigationBar from "../root/components/NavigationBar";
-import Announcement from "./components/Announcement";
 import CourseGallery from "./components/CourseGallery";
 import amber from "@material-ui/core/colors/amber";
 import Grid from "@material-ui/core/Grid";
+import Footer from "../root/components/Footer";
 
 const hero = require("../../assets/images/hero.jpg");
 
@@ -117,6 +117,8 @@ export default function Home(props: Props) {
           </main>
         </div>
       </Container>
+
+      <Footer />
     </>
   );
 }
