@@ -6,7 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
 import Home from "./modules/home";
-import Course from "./modules/course";
+import Courses from "./modules/courses";
 
 function App() {
   const theme = createMuiTheme({
@@ -29,9 +29,9 @@ function App() {
         <CssBaseline />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/course" component={Course} />
+          <Route exact path="/courses" component={Courses} />
           {/* TODO: 404 page */}
-          <Redirect to="/home" />
+          <Redirect to="/" />
         </Switch>
       </MuiThemeProvider>
     </BrowserRouter>

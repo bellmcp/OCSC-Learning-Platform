@@ -136,11 +136,14 @@ const useStyles = makeStyles((theme: Theme) =>
       width: theme.spacing(4),
       height: theme.spacing(4),
     },
-    navItemActive: {
-      color: amber[500],
+    noDecorationLink: {
+      textDecoration: "none",
     },
     navItem: {
       color: theme.palette.common.white,
+    },
+    navItemActive: {
+      color: amber[500],
     },
     badge: {
       zIndex: 10,
@@ -158,7 +161,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function NavigationBar() {
+const navigationItem = [
+  {
+    id: 0,
+    title: "หน้าหลัก",
+    url: "/",
+    notification: 0,
+  },
+  { id: 1, title: "คอร์สเรียน", url: "/courses", notification: 0 },
+  { id: 2, title: "หลักสูตร", url: "/", notification: 0 },
+  { id: 3, title: "ช่วยเหลือ", url: "/", notification: 1 },
+];
+
+interface NavigationBarProps {
+  active: number;
+}
+
+export default function NavigationBar(props: NavigationBarProps) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
@@ -280,7 +299,9 @@ export default function NavigationBar() {
               <MenuIcon />
             </IconButton>
           </Hidden>
-          <img src={logo} alt="OCSC Logo" className={classes.logo} />
+          <NavLink to="/">
+            <img src={logo} alt="OCSC Logo" className={classes.logo} />
+          </NavLink>
 
           <Divider orientation="vertical" className={classes.divider} />
 
@@ -308,24 +329,30 @@ export default function NavigationBar() {
           {/* Desktop Navigation Menu */}
           <ThemeProvider theme={darkTheme}>
             <NavMenu useStyles={useLineNavigationMenuStyles} color="inherit">
-              <NavItem active className={classes.navItemActive} color="inherit">
-                <Typography className={classes.navItemActive}>
-                  <NavLink to="/">หน้าหลัก</NavLink>
-                </Typography>
-              </NavItem>
-              <NavItem>
-                <Typography className={classes.navItem}>
-                  <NavLink to="/course">คอร์สเรียน</NavLink>
-                </Typography>
-              </NavItem>
-              <NavItem>
-                <Typography className={classes.navItem}>หลักสูตร</Typography>
-              </NavItem>
-              <NavItem>
-                <Badge className={classes.badge} variant="dot" color="error">
-                  <Typography className={classes.navItem}>ช่วยเหลือ</Typography>
-                </Badge>
-              </NavItem>
+              {navigationItem.map((item) => (
+                <NavLink to={item.url} className={classes.noDecorationLink}>
+                  <NavItem
+                    active={props.active === item.id}
+                    className={
+                      props.active === item.id
+                        ? classes.navItemActive
+                        : classes.navItem
+                    }
+                  >
+                    {item.notification !== 0 ? (
+                      <Badge
+                        className={classes.badge}
+                        variant="dot"
+                        color="error"
+                      >
+                        <Typography>{item.title}</Typography>
+                      </Badge>
+                    ) : (
+                      <Typography>{item.title}</Typography>
+                    )}
+                  </NavItem>
+                </NavLink>
+              ))}
             </NavMenu>
           </ThemeProvider>
 
@@ -333,12 +360,6 @@ export default function NavigationBar() {
 
           {/* Desktop Button Menu */}
           <div className={classes.sectionDesktop}>
-            {/* <IconButton aria-label="show notifications" color="inherit">
-              <Badge badgeContent={2} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton> */}
-
             <Button
               color="inherit"
               size="small"

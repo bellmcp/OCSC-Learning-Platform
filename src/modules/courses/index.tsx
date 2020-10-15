@@ -24,9 +24,9 @@ interface Props {
   window?: () => Window;
 }
 
-export default function Course(props: Props) {
+export default function Courses(props: Props) {
   const classes = useStyles();
-  const title = "OCSC Learning Platform";
+  const title = "คอร์สเรียน";
   const subtitle =
     "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
 
@@ -36,7 +36,7 @@ export default function Course(props: Props) {
       <Container>
         <div className={classes.main}>
           <CssBaseline />
-          <NavigationBar />
+          <NavigationBar active={1} />
           <main className={classes.content}></main>
         </div>
       </Container>

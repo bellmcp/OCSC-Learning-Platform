@@ -37,7 +37,7 @@ export default function Home(props: Props) {
       <Container>
         <div className={classes.main}>
           <CssBaseline />
-          <NavigationBar />
+          <NavigationBar active={0} />
           <main className={classes.content}>
             {/* <Carousel /> */}
             {/* <Announcement />*/}
