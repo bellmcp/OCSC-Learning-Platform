@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: amber[500],
     },
     navItem: {
-      color: grey[50],
+      color: theme.palette.common.white,
     },
     badge: {
       zIndex: 10,
