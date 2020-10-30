@@ -6,7 +6,7 @@ import Link from "@material-ui/core/Link";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="inherit">
+    <Typography variant="body2" color="inherit" align="center">
       {"Copyright © "}
       <Link color="secondary" href="https://material-ui.com/">
         Office of the Civil Service Commission (OCSC)
@@ -41,7 +41,7 @@ export default function Footer() {
   return (
     <footer className={classes.footer}>
       <Container maxWidth="lg">
-        <Typography variant="body1" color="inherit">
+        <Typography variant="body1" color="inherit" align="center">
           สำนักงานคณะกรรมการข้าราชการพลเรือน (สำนักงาน ก.พ.)
         </Typography>
         <Copyright />
