@@ -223,7 +223,6 @@ export default function Home(props: Props) {
           <CssBaseline />
           <NavigationBar active={0} />
           <main className={classes.content}>
-            {/* <Carousel /> */}
             <Announcement />
             <CourseGallery />
           </main>
