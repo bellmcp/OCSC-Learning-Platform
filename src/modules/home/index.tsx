@@ -18,6 +18,9 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
+import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
 const heroImage = require("../../assets/images/hero.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
+    },
+    carousel: {
+      margin: "0 30px",
     },
     cardSmall: {
       height: "100%",
@@ -78,16 +84,18 @@ function AnnoCard() {
 }
 
 function Announcement() {
+  const classes = useStyles();
   return (
     <CarouselProvider
+      infinite
       naturalSlideWidth={100}
       naturalSlideHeight={70}
       totalSlides={6}
       visibleSlides={3}
-      infinite
+      className={classes.carousel}
     >
       <div style={{ position: "relative" }}>
-        <Slider style={{ padding: "0 20px" }}>
+        <Slider style={{ padding: "0 18px" }}>
           <Slide index={0}>
             <div
               style={{
@@ -155,17 +163,35 @@ function Announcement() {
             </div>
           </Slide>
         </Slider>
-        <ButtonBack style={{ position: "absolute", top: "50%", left: 0 }}>
-          {"<"}
+        <ButtonBack
+          style={{
+            position: "absolute",
+            top: "45%",
+            left: "-20px",
+            background: "none",
+            border: 0,
+            padding: 0,
+          }}
+        >
+          <IconButton edge="end">
+            <ArrowBack />
+          </IconButton>
         </ButtonBack>
         <ButtonNext
           style={{
             position: "absolute",
-            top: "50%",
-            right: 0,
+            top: "45%",
+            right: "-20px",
+            background: "none",
+            border: 0,
+            padding: 0,
           }}
         >
-          {">"}
+          <div>
+            <IconButton edge="start">
+              <ArrowForward />
+            </IconButton>
+          </div>
         </ButtonNext>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
