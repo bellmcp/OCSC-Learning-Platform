@@ -11,13 +11,14 @@ import HomeIcon from "@material-ui/icons/Home";
 import CourseIcon from "@material-ui/icons/CollectionsBookmark";
 import SubjectIcon from "@material-ui/icons/MenuBook";
 import HelpIcon from "@material-ui/icons/Help";
-import ExitIcon from "@material-ui/icons/ExitToApp";
+import CloseIcon from "@material-ui/icons/CloseRounded";
 import {
   makeStyles,
   useTheme,
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
 
 const drawerWidth = 200;
 
@@ -54,10 +55,13 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
-    // necessary for content to be below app bar
-    toolbar: {
-      ...theme.mixins.toolbar,
+    closeButton: {
+      padding: theme.spacing(2, 4),
     },
+    // // necessary for content to be below app bar
+    // toolbar: {
+    //   ...theme.mixins.toolbar,
+    // },
     drawerPaper: {
       width: drawerWidth,
     },
@@ -69,6 +73,12 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "12px",
       color: theme.palette.grey[500],
       padding: theme.spacing(2, 3),
+    },
+    title: {
+      fontSize: "24px",
+      fontWeight: 600,
+      padding: theme.spacing(0, 3),
+      marginTop: 0,
     },
   })
 );
@@ -86,7 +96,15 @@ export default function ResponsiveDrawer(props: Props) {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <IconButton
+        edge="start"
+        className={classes.closeButton}
+        aria-label="close drawer"
+        onClick={props.handleDrawerToggle}
+      >
+        <CloseIcon />
+      </IconButton>
+      <p className={classes.title}>Learning Platform</p>
       <Divider />
       <List dense>
         {["หน้าหลัก"].map((text, index) => (
@@ -99,7 +117,6 @@ export default function ResponsiveDrawer(props: Props) {
         ))}
       </List>
       <Divider />
-      <p className={classes.listTitle}>ลงทะเบียน</p>
       <List dense>
         {["คอร์สเรียน", "หลักสูตร"].map((text, index) => (
           <ListItem className={classes.listItem} button key={text}>
@@ -116,17 +133,6 @@ export default function ResponsiveDrawer(props: Props) {
           <ListItem className={classes.listItem} button key={text}>
             <ListItemIcon className={classes.listItemIcon}>
               <HelpIcon />
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List dense>
-        {["ออกจากระบบ"].map((text) => (
-          <ListItem className={classes.listItem} button key={text}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <ExitIcon />
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>

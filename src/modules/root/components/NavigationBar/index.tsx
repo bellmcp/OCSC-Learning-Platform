@@ -224,11 +224,11 @@ export default function NavigationBar(props: NavigationBarProps) {
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "center",
+        horizontal: "right",
       }}
       transformOrigin={{
         vertical: "top",
-        horizontal: "center",
+        horizontal: "right",
       }}
     >
       <MenuItem onClick={handleMenuClose}>
@@ -266,19 +266,20 @@ export default function NavigationBar(props: NavigationBarProps) {
         >
           <Avatar alt="User" src={user} className={classes.small} />
         </IconButton>
-        <p>วุฒิภัทร</p>
+        <Typography style={{ fontWeight: 600 }}>วุฒิภัทร</Typography>
       </MenuItem>
+      <Divider />
       <MenuItem>
         <IconButton color="inherit">
           <SettingIcon />
         </IconButton>
-        <p>การตั้งค่า</p>
-      </MenuItem>{" "}
+        <Typography>การตั้งค่า</Typography>
+      </MenuItem>
       <MenuItem>
         <IconButton color="inherit">
           <LogoutIcon />
         </IconButton>
-        <p>ออกจากระบบ</p>
+        <Typography>ออกจากระบบ</Typography>
       </MenuItem>
     </Menu>
   );
