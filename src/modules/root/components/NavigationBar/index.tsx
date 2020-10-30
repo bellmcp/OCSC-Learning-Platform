@@ -166,7 +166,7 @@ const navigationItem = [
   },
   { id: 1, title: "คอร์สเรียน", url: "/courses", notification: 0 },
   { id: 2, title: "หลักสูตร", url: "/", notification: 0 },
-  { id: 3, title: "ช่วยเหลือ", url: "/", notification: 1 },
+  { id: 3, title: "ช่วยเหลือ", url: "/help", notification: 1 },
 ];
 
 interface NavigationBarProps {

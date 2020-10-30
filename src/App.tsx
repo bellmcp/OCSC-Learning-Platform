@@ -7,6 +7,7 @@ import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
 import Home from "./modules/home";
 import Courses from "./modules/courses";
+import Help from "./modules/help";
 
 function App() {
   const defaultTheme = createMuiTheme();
@@ -50,6 +51,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
+          <Route exact path="/help" component={Help} />
           {/* TODO: 404 page */}
           <Redirect to="/" />
         </Switch>
