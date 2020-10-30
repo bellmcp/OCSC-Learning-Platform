@@ -35,6 +35,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 
 import { NavLink } from "react-router-dom";
+import Container from "@material-ui/core/Container";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -60,30 +61,30 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     menuButton: {
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(1),
     },
     title: {
       display: "none",
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(2),
       [theme.breakpoints.up("sm")]: {
         display: "block",
       },
     },
     logo: {
       maxWidth: 120,
+      marginRight: theme.spacing(2),
+      [theme.breakpoints.down("xs")]: {
+        maxWidth: 110,
+      },
     },
     search: {
       position: "relative",
       backgroundColor: fade(theme.palette.common.black, 0.9),
       borderRadius: theme.shape.borderRadius,
-      //   "&:hover": {
-      //     border: `1px solid ${theme.palette.grey[700]}`,
-      //   },
-      marginLeft: 0,
       width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(6),
-        width: "auto",
-      },
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
     },
     searchIcon: {
       padding: theme.spacing(0, 2),
@@ -100,21 +101,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em)`,
+      paddingRight: `calc(3em)`,
       transition: theme.transitions.create("width"),
       width: "100%",
       borderRadius: theme.shape.borderRadius,
       border: `1px solid ${theme.palette.grey[800]}`,
-      [theme.breakpoints.up("sm")]: {
-        width: "32ch",
-        "&:focus": {
-          borderRadius: theme.shape.borderRadius,
-          border: `1px solid ${amber[500]}`,
-        },
-        // "&:focus": {
-        //   width: "30ch",
-        // },
+      "&:focus": {
+        border: `1px solid ${amber[500]}`,
       },
     },
     sectionDesktop: {
@@ -139,6 +133,9 @@ const useStyles = makeStyles((theme: Theme) =>
     noDecorationLink: {
       textDecoration: "none",
     },
+    navMenu: {
+      minWidth: "377px",
+    },
     navItem: {
       color: theme.palette.common.white,
     },
@@ -151,11 +148,10 @@ const useStyles = makeStyles((theme: Theme) =>
     divider: {
       width: 2,
       height: 32,
-      marginLeft: theme.spacing(3),
-      marginRight: theme.spacing(3),
+      margin: theme.spacing(2),
       backgroundColor: theme.palette.grey[800],
     },
-    profileButton: {
+    profileName: {
       fontWeight: 600,
     },
   })
@@ -262,14 +258,6 @@ export default function NavigationBar(props: NavigationBarProps) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={2} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>การแจ้งเตือน</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -278,7 +266,19 @@ export default function NavigationBar(props: NavigationBarProps) {
         >
           <Avatar alt="User" src={user} className={classes.small} />
         </IconButton>
-        <p>โปรไฟล์</p>
+        <p>วุฒิภัทร</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton color="inherit">
+          <SettingIcon />
+        </IconButton>
+        <p>การตั้งค่า</p>
+      </MenuItem>{" "}
+      <MenuItem>
+        <IconButton color="inherit">
+          <LogoutIcon />
+        </IconButton>
+        <p>ออกจากระบบ</p>
       </MenuItem>
     </Menu>
   );
@@ -286,118 +286,138 @@ export default function NavigationBar(props: NavigationBarProps) {
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          {/* Hide Sidebar Toggle Button on Desktop */}
-          <Hidden smUp implementation="css">
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <NavLink to="/">
+        <Container maxWidth="lg">
+          <Toolbar>
+            {/* Hide Sidebar Toggle Button on Desktop */}
+            <Hidden smUp implementation="css">
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerToggle}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Hidden>
+            {/* <NavLink to="/"> */}
             <img src={logo} alt="OCSC Logo" className={classes.logo} />
-          </NavLink>
+            {/* </NavLink> */}
 
-          <Divider orientation="vertical" className={classes.divider} />
-
-          <Typography className={classes.title} variant="h6" noWrap>
-            Learning Platform
-          </Typography>
-
-          {/* Search Bar */}
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="ค้นหาคอร์สเรียน"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-
-          <div className={classes.grow} />
-
-          {/* Desktop Navigation Menu */}
-          <ThemeProvider theme={darkTheme}>
-            <NavMenu useStyles={useLineNavigationMenuStyles} color="inherit">
-              {navigationItem.map((item) => (
-                <NavLink to={item.url} className={classes.noDecorationLink}>
-                  <NavItem
-                    active={props.active === item.id}
-                    className={
-                      props.active === item.id
-                        ? classes.navItemActive
-                        : classes.navItem
-                    }
-                  >
-                    {item.notification !== 0 ? (
-                      <Badge
-                        className={classes.badge}
-                        variant="dot"
-                        color="error"
-                      >
-                        <Typography>{item.title}</Typography>
-                      </Badge>
-                    ) : (
-                      <Typography>{item.title}</Typography>
-                    )}
-                  </NavItem>
-                </NavLink>
-              ))}
-            </NavMenu>
-          </ThemeProvider>
-
-          <Divider orientation="vertical" className={classes.divider} />
-
-          {/* Desktop Button Menu */}
-          <div className={classes.sectionDesktop}>
-            <Button
-              color="inherit"
-              size="small"
-              style={{ borderRadius: 50, padding: "0 10px" }}
-              startIcon={
-                <Avatar alt="User" src={user} className={classes.small} />
-              }
-            >
-              <Typography className={classes.profileButton}>
-                วุฒิภัทร
+            {/* <Divider orientation="vertical" className={classes.divider} /> */}
+            <Hidden mdDown implementation="css">
+              <Typography className={classes.title} variant="h6" noWrap>
+                Learning Platform
               </Typography>
-            </Button>
+            </Hidden>
 
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <ArrowDown />
-            </IconButton>
-          </div>
+            {/* Search Bar */}
+            <div className={classes.sectionDesktop}>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="ค้นหาคอร์สเรียน"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </div>
+            </div>
 
-          {/* Mobile Button Menu */}
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
+            <div className={classes.grow} />
+
+            {/* Desktop Navigation Menu */}
+            <Hidden xsDown implementation="css">
+              <ThemeProvider theme={darkTheme}>
+                <NavMenu
+                  useStyles={useLineNavigationMenuStyles}
+                  color="inherit"
+                  className={classes.navMenu}
+                >
+                  {navigationItem.map((item) => (
+                    <NavLink to={item.url} className={classes.noDecorationLink}>
+                      <NavItem
+                        active={props.active === item.id}
+                        className={
+                          props.active === item.id
+                            ? classes.navItemActive
+                            : classes.navItem
+                        }
+                      >
+                        {item.notification !== 0 ? (
+                          <Badge
+                            className={classes.badge}
+                            variant="dot"
+                            color="error"
+                          >
+                            <Typography noWrap>{item.title}</Typography>
+                          </Badge>
+                        ) : (
+                          <Typography noWrap>{item.title}</Typography>
+                        )}
+                      </NavItem>
+                    </NavLink>
+                  ))}
+                </NavMenu>
+              </ThemeProvider>
+            </Hidden>
+
+            {/* Desktop Button Menu */}
+            <div className={classes.sectionDesktop}>
+              <Divider orientation="vertical" className={classes.divider} />
+              <Button
+                color="inherit"
+                size="small"
+                style={{
+                  borderRadius: 50,
+                  padding: "10px 10px",
+                  margin: "6px 0",
+                }}
+                startIcon={
+                  <Avatar alt="User" src={user} className={classes.small} />
+                }
+              >
+                <Typography className={classes.profileName} noWrap>
+                  วุฒิภัทร
+                </Typography>
+              </Button>
+              <IconButton
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+                style={{
+                  margin: "6px 0",
+                }}
+              >
+                <ArrowDown />
+              </IconButton>
+            </div>
+
+            {/* Mobile Button Menu */}
+            <div className={classes.grow} />
+            <div className={classes.sectionMobile}>
+              <IconButton color="inherit">
+                <SearchIcon />
+              </IconButton>
+              <IconButton
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <Avatar alt="User" src={user} className={classes.small} />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </Container>
       </AppBar>
 
       {renderMobileMenu}

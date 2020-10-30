@@ -9,9 +9,29 @@ import Home from "./modules/home";
 import Courses from "./modules/courses";
 
 function App() {
+  const defaultTheme = createMuiTheme();
   const theme = createMuiTheme({
     typography: {
       fontFamily: ["Prompt", "sans-serif"].join(","),
+    },
+    overrides: {
+      MuiToolbar: {
+        gutters: {
+          [defaultTheme.breakpoints.up("xs")]: {
+            paddingLeft: 0,
+            paddingRight: 0,
+          },
+        },
+      },
+    },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 670,
+        md: 960,
+        lg: 1280,
+        xl: 1920,
+      },
     },
     palette: {
       primary: {
