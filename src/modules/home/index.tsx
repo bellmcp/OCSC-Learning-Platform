@@ -21,6 +21,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 const heroImage = require("../../assets/images/hero.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: theme.spacing(3),
     },
     carousel: {
-      margin: "0 30px",
+      padding: "0 10px",
     },
     cardSmall: {
       height: "100%",
@@ -85,22 +87,26 @@ function AnnoCard() {
 
 function Announcement() {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
     <CarouselProvider
       infinite
       naturalSlideWidth={100}
       naturalSlideHeight={70}
       totalSlides={6}
-      visibleSlides={3}
+      visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
       className={classes.carousel}
     >
       <div style={{ position: "relative" }}>
-        <Slider style={{ padding: "0 18px" }}>
+        <Slider style={{ padding: "0 0" }}>
           <Slide index={0}>
             <div
               style={{
                 width: "100%",
-                padding: "20px",
+                padding: "15px",
                 height: "100%",
               }}
             >
@@ -111,7 +117,7 @@ function Announcement() {
             <div
               style={{
                 width: "100%",
-                padding: "20px",
+                padding: "15px",
                 height: "100%",
               }}
             >
@@ -122,7 +128,7 @@ function Announcement() {
             <div
               style={{
                 width: "100%",
-                padding: "20px",
+                padding: "15px",
                 height: "100%",
               }}
             >
@@ -133,7 +139,7 @@ function Announcement() {
             <div
               style={{
                 width: "100%",
-                padding: "20px",
+                padding: "15px",
                 height: "100%",
               }}
             >
@@ -144,7 +150,7 @@ function Announcement() {
             <div
               style={{
                 width: "100%",
-                padding: "20px",
+                padding: "15px",
                 height: "100%",
               }}
             >
@@ -155,7 +161,7 @@ function Announcement() {
             <div
               style={{
                 width: "100%",
-                padding: "20px",
+                padding: "15px",
                 height: "100%",
               }}
             >
@@ -166,8 +172,8 @@ function Announcement() {
         <ButtonBack
           style={{
             position: "absolute",
-            top: "45%",
-            left: "-20px",
+            top: "43%",
+            left: "-25px",
             background: "none",
             border: 0,
             padding: 0,
@@ -180,8 +186,8 @@ function Announcement() {
         <ButtonNext
           style={{
             position: "absolute",
-            top: "45%",
-            right: "-20px",
+            top: "43%",
+            right: "-25px",
             background: "none",
             border: 0,
             padding: 0,
