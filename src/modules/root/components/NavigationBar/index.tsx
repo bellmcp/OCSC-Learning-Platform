@@ -319,7 +319,7 @@ export default function NavigationBar(props: NavigationBarProps) {
                   <SearchIcon />
                 </div>
                 <InputBase
-                  placeholder="ค้นหาคอร์สเรียน"
+                  placeholder="ค้นหา"
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     closeButton: {
-      padding: theme.spacing(2, 4),
+      margin: theme.spacing(1, 1),
     },
     // // necessary for content to be below app bar
     // toolbar: {
@@ -121,7 +121,7 @@ export default function ResponsiveDrawer(props: Props) {
         {["คอร์สเรียน", "หลักสูตร"].map((text, index) => (
           <ListItem className={classes.listItem} button key={text}>
             <ListItemIcon className={classes.listItemIcon}>
-              {index % 2 === 0 ? <CourseIcon /> : <SubjectIcon />}
+              {index % 2 === 0 ? <SubjectIcon /> : <CourseIcon />}
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
