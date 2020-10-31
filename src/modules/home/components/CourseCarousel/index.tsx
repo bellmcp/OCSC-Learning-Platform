@@ -16,11 +16,13 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CourseItem from "../CourseItem";
 
 import { CourseCarouselProps } from "../CourseCarousel/types";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     carousel: {
       padding: theme.spacing(0, 1),
+      width: "100% !important",
     },
     slider: {
       position: "relative",
@@ -59,45 +61,47 @@ export default function CourseCarousel({ courses }: CourseCarouselProps) {
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
-    <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={135}
-      isIntrinsicHeight
-      totalSlides={courses.length}
-      visibleSlides={isMdUp ? 4 : isSmUp ? 3 : 1}
-      step={3}
-      className={classes.carousel}
-    >
-      <div className={classes.slider}>
-        <Slider className={classes.slide}>
-          {courses.map((item, index) => (
-            <Slide index={index}>
-              <div className={classes.course}>
-                <CourseItem
-                  key={index}
-                  id={item.id}
-                  title={item.title}
-                  image={item.image}
-                  genre={item.genre}
-                  detail={item.detail}
-                  availableSeat={item.availableSeat}
-                  totalSeat={item.totalSeat}
-                />
-              </div>
-            </Slide>
-          ))}
-        </Slider>
-        <ButtonBack className={classes.buttonBack}>
-          <IconButton edge="end">
-            <ArrowBack />
-          </IconButton>
-        </ButtonBack>
-        <ButtonNext className={classes.buttonNext}>
-          <IconButton edge="start">
-            <ArrowForward />
-          </IconButton>
-        </ButtonNext>
-      </div>
-    </CarouselProvider>
+    <Grid container>
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={135}
+        // isIntrinsicHeight
+        totalSlides={courses.length}
+        visibleSlides={isMdUp ? 4 : isSmUp ? 3 : 1}
+        step={isMdUp ? 4 : isSmUp ? 3 : 1}
+        className={classes.carousel}
+      >
+        <div className={classes.slider}>
+          <Slider className={classes.slide}>
+            {courses.map((item, index) => (
+              <Slide index={index}>
+                <div className={classes.course}>
+                  <CourseItem
+                    key={index}
+                    id={item.id}
+                    title={item.title}
+                    image={item.image}
+                    genre={item.genre}
+                    detail={item.detail}
+                    availableSeat={item.availableSeat}
+                    totalSeat={item.totalSeat}
+                  />
+                </div>
+              </Slide>
+            ))}
+          </Slider>
+          <ButtonBack className={classes.buttonBack}>
+            <IconButton edge="end">
+              <ArrowBack />
+            </IconButton>
+          </ButtonBack>
+          <ButtonNext className={classes.buttonNext}>
+            <IconButton edge="start">
+              <ArrowForward />
+            </IconButton>
+          </ButtonNext>
+        </div>
+      </CarouselProvider>
+    </Grid>
   );
 }

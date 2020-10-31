@@ -6,12 +6,12 @@ import React from "react";
 import Footer from "../root/components/Footer";
 import Header from "../root/components/Header";
 import NavigationBar from "../root/components/NavigationBar";
-import CourseGallery from "./components/CourseGallery";
 import AnnouncementCarousel from "./components/AnnouncementCarousel";
 import CourseCarousel from "./components/CourseCarousel";
 
 import { AnnouncementItemProps } from "./components/AnnouncementItem/types";
 import { CourseItemProps } from "./components/CourseItem/types";
+import Typography from "@material-ui/core/Typography";
 
 const heroImage = require("../../assets/images/hero.jpg");
 
@@ -138,20 +138,22 @@ export default function Home(props: Props) {
   ];
 
   return (
-    <>
+    <React.Fragment>
+      <CssBaseline />
+      <NavigationBar active={0} />
       <Header title={title} subtitle={subtitle} imageUrl={heroImage} />
       <Container>
         <div className={classes.main}>
-          <CssBaseline />
-          <NavigationBar active={0} />
           <main className={classes.content}>
             <AnnouncementCarousel announcements={announcements} />
+            <Typography gutterBottom variant="h6">
+              คอร์สใหม่
+            </Typography>
             <CourseCarousel courses={courses} />
-            <CourseGallery />
           </main>
         </div>
       </Container>
       <Footer />
-    </>
+    </React.Fragment>
   );
 }
