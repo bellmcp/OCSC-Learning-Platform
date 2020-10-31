@@ -12,6 +12,8 @@ import CourseCarousel from "./components/CourseCarousel";
 import { AnnouncementItemProps } from "./components/AnnouncementItem/types";
 import { CourseItemProps } from "./components/CourseItem/types";
 import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Box from "@material-ui/core/Box";
 
 const heroImage = require("../../assets/images/hero.jpg");
 
@@ -146,8 +148,18 @@ export default function Home(props: Props) {
         <div className={classes.main}>
           <main className={classes.content}>
             <AnnouncementCarousel announcements={announcements} />
+            <Box my={3}>
+              <Divider />
+            </Box>
             <Typography gutterBottom variant="h6">
               คอร์สใหม่
+            </Typography>
+            <CourseCarousel courses={courses} />
+            <Box my={3}>
+              <Divider />
+            </Box>
+            <Typography gutterBottom variant="h6">
+              เรียนได้ทั้งปี
             </Typography>
             <CourseCarousel courses={courses} />
           </main>

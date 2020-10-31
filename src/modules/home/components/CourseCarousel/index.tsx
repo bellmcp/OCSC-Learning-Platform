@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
         maxWidth: "calc(100vw - 48px)",
       },
       [theme.breakpoints.down("xs")]: {
-        maxWidth: "calc(100vw - 36px)",
+        maxWidth: "calc(100vw - 36px)", //TODO: remove x-axis scrollbar on mobile
       },
     },
     slider: {

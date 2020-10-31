@@ -91,14 +91,16 @@ export default function CourseItem({
             {genre}
           </div>
         </Typography>
-        <Typography
-          variant="body2"
-          gutterBottom
-          color="textSecondary"
-          component="p"
-        >
-          <div className={classes.detail}>{detail}</div>
-        </Typography>
+        <Box my={2}>
+          <Typography
+            variant="body2"
+            gutterBottom
+            color="textSecondary"
+            component="p"
+          >
+            <div className={classes.detail}>{detail}</div>
+          </Typography>
+        </Box>
         <Box display="flex" alignItems="center">
           <Box width="100%" mr={1}>
             <LinearProgress
