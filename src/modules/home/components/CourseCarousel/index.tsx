@@ -22,7 +22,14 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     carousel: {
       padding: theme.spacing(0, 1),
-      width: "100% !important",
+      maxWidth: "calc(100vw)",
+      // minWidth: "unset",
+      [theme.breakpoints.down("sm")]: {
+        maxWidth: "calc(100vw - 48px)",
+      },
+      [theme.breakpoints.down("xs")]: {
+        maxWidth: "calc(100vw - 36px)",
+      },
     },
     slider: {
       position: "relative",
@@ -65,7 +72,7 @@ export default function CourseCarousel({ courses }: CourseCarouselProps) {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={135}
-        // isIntrinsicHeight
+        isIntrinsicHeight
         totalSlides={courses.length}
         visibleSlides={isMdUp ? 4 : isSmUp ? 3 : 1}
         step={isMdUp ? 4 : isSmUp ? 3 : 1}
