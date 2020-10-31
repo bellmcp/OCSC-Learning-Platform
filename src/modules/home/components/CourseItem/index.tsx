@@ -101,20 +101,22 @@ export default function CourseItem({
             <div className={classes.detail}>{detail}</div>
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center">
-          <Box width="100%" mr={1}>
-            <LinearProgress
-              variant="determinate"
-              value={((totalSeat - availableSeat) / totalSeat) * 100}
-              color="secondary"
-            />
+        {totalSeat && availableSeat ? (
+          <Box display="flex" alignItems="center">
+            <Box width="100%" mr={1}>
+              <LinearProgress
+                variant="determinate"
+                value={((totalSeat - availableSeat) / totalSeat) * 100}
+                color="secondary"
+              />
+            </Box>
+            <Box minWidth={75}>
+              <Typography variant="body2" color="primary" align="right">
+                {availableSeat} ที่ว่าง
+              </Typography>
+            </Box>
           </Box>
-          <Box minWidth={75}>
-            <Typography variant="body2" color="primary" align="right">
-              {availableSeat} ที่ว่าง
-            </Typography>
-          </Box>
-        </Box>
+        ) : null}
       </CardContent>
     </Card>
   );

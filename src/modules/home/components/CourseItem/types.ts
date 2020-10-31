@@ -4,6 +4,6 @@ export interface CourseItemProps {
     image: string;
     genre: string;
     detail: string;
-    availableSeat: number;
-    totalSeat: number;
+    availableSeat?: number;
+    totalSeat?: number;
 }
