@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
     course: {
       width: "100%",
       padding: "15px",
+      paddingBottom: 0,
       height: "100%",
     },
     buttonBack: {

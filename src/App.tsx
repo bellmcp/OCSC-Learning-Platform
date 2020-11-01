@@ -24,6 +24,14 @@ function App() {
           },
         },
       },
+      MuiCardContent: {
+        root: {
+          padding: 0,
+          "&:last-child": {
+            paddingBottom: 0,
+          },
+        },
+      },
     },
     breakpoints: {
       values: {

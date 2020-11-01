@@ -217,14 +217,22 @@ export default function Home(props: Props) {
             <Box my={3}>
               <Divider />
             </Box>
-            <Typography gutterBottom variant="h6">
+            <Typography
+              gutterBottom
+              variant="h6"
+              style={{ fontSize: "1.7rem" }}
+            >
               คอร์สใหม่
             </Typography>
             <CourseCarousel courses={courses} />
             <Box my={3}>
               <Divider />
             </Box>
-            <Typography gutterBottom variant="h6">
+            <Typography
+              gutterBottom
+              variant="h6"
+              style={{ fontSize: "1.7rem" }}
+            >
               เรียนได้ทั้งปี
             </Typography>
             <CourseCarousel courses={courses2} />

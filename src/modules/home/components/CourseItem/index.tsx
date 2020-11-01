@@ -13,13 +13,19 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    cardSmall: {
+    card: {
       height: "100%",
       display: "flex",
       flexDirection: "column",
+      position: "relative",
+      background: "none",
+      boxShadow: "none",
     },
-    cardMediaSmall: {
+    cardMedia: {
       paddingTop: "75%", // 4:3
+      borderRadius: theme.shape.borderRadius,
+      boxShadow:
+        "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
     },
     cardDetail: {
       position: "absolute",
@@ -29,8 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
       left: "50%",
       transform: "translateX(-50%)",
     },
-    cardContentSmall: {
+    cardContent: {
       flexGrow: 1,
+      padding: 0,
     },
     title: {
       overflow: "hidden",
@@ -68,10 +75,10 @@ export default function CourseItem({
   const classes = useStyles();
 
   return (
-    <Card className={classes.cardSmall} style={{ position: "relative" }}>
+    <Card className={classes.card}>
       <CardMedia
         key={id}
-        className={classes.cardMediaSmall}
+        className={classes.cardMedia}
         image={image}
         title={title}
         style={{
@@ -79,44 +86,51 @@ export default function CourseItem({
           backgroundSize: "cover",
         }}
       />
-      <CardContent className={classes.cardContentSmall}>
-        <Typography className={classes.title} variant="h6" component="h2">
-          {title}
-        </Typography>
-        <Typography gutterBottom>
-          <div className={classes.genre}>
-            <CourseGenreIcon
-              style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-            />
-            {genre}
-          </div>
-        </Typography>
+      <CardContent className={classes.cardContent}>
         <Box my={2}>
-          <Typography
-            variant="body2"
-            gutterBottom
-            color="textSecondary"
-            component="p"
-          >
-            <div className={classes.detail}>{detail}</div>
+          <Typography className={classes.title} variant="h6" component="h2">
+            {title}
           </Typography>
-        </Box>
-        {totalSeat && availableSeat ? (
-          <Box display="flex" alignItems="center">
-            <Box width="100%" mr={1}>
-              <LinearProgress
-                variant="determinate"
-                value={((totalSeat - availableSeat) / totalSeat) * 100}
-                color="secondary"
-              />
-            </Box>
-            <Box minWidth={75}>
-              <Typography variant="body2" color="primary" align="right">
-                {availableSeat} ที่ว่าง
-              </Typography>
-            </Box>
+          <Typography variant="body2">
+            <div className={classes.genre}>OCSC000{id}</div>
+          </Typography>
+          <Box my={1}>
+            <Typography
+              variant="body2"
+              gutterBottom
+              color="textSecondary"
+              component="p"
+            >
+              <div className={classes.detail}>{detail}</div>
+            </Typography>
           </Box>
-        ) : null}
+          <Box mt={2} mb={1}>
+            <Typography variant="body2">
+              <div className={classes.genre}>
+                <CourseGenreIcon
+                  style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                />
+                {genre}
+              </div>
+            </Typography>
+          </Box>
+          {totalSeat && availableSeat ? (
+            <Box display="flex" alignItems="center">
+              <Box width="100%" mr={1}>
+                <LinearProgress
+                  variant="determinate"
+                  value={((totalSeat - availableSeat) / totalSeat) * 100}
+                  color="secondary"
+                />
+              </Box>
+              <Box minWidth={75}>
+                <Typography variant="body2" color="primary" align="right">
+                  {availableSeat} ที่ว่าง
+                </Typography>
+              </Box>
+            </Box>
+          ) : null}
+        </Box>
       </CardContent>
     </Card>
   );
