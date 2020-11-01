@@ -9,6 +9,9 @@ import Home from "./modules/home";
 import Courses from "./modules/courses";
 import Help from "./modules/help";
 
+import { announcements } from "./shared/announcements";
+import { courses, courses2 } from "./shared/courses";
+
 function App() {
   const defaultTheme = createMuiTheme();
   const theme = createMuiTheme({
@@ -57,7 +60,17 @@ function App() {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <Home
+                announcements={announcements}
+                courses={courses}
+                courses2={courses2}
+              />
+            )}
+          />
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/help" component={Help} />
           {/* TODO: 404 page */}
