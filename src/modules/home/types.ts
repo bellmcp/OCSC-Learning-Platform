@@ -1,8 +1,7 @@
 import { AnnouncementItemProps } from "./components/AnnouncementItem/types"
-import { CourseItemProps } from "./components/CourseItem/types"
+import { coursesDataType } from '../courses/types'
 
 export interface CourseModuleProps {
     announcements: AnnouncementItemProps[];
-    courses: CourseItemProps[];
-    courses2: CourseItemProps[];
+    data: coursesDataType[];
 }

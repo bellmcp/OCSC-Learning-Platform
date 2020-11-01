@@ -9,7 +9,6 @@ import CourseItem from "../home/components/CourseItem";
 
 import { CourseModuleProps } from "./types";
 import Grid from "@material-ui/core/Grid";
-import { GroupOutlined } from "@material-ui/icons";
 
 const heroImage = require("../../assets/images/hero.jpg");
 

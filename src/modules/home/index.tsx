@@ -31,11 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Home({
-  announcements,
-  courses,
-  courses2,
-}: CourseModuleProps) {
+export default function Home({ announcements, data }: CourseModuleProps) {
   const classes = useStyles();
   const title = "OCSC Learning Platform";
   const subtitle =
@@ -50,48 +46,32 @@ export default function Home({
         <div className={classes.main}>
           <main className={classes.content}>
             <AnnouncementCarousel announcements={announcements} />
-            <Box my={3}>
-              <Divider />
-            </Box>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{ fontSize: "1.7rem" }}
-              >
-                คอร์สใหม่
-              </Typography>
-              <Link href="#" style={{ fontSize: "0.9rem" }}>
-                ดูเพิ่มเติม...
-              </Link>
-            </Grid>
-            <CourseCarousel courses={courses} />
-            <Box my={3}>
-              <Divider />
-            </Box>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{ fontSize: "1.7rem" }}
-              >
-                เรียนได้ทั้งปี
-              </Typography>
-              <Link href="#" style={{ fontSize: "0.9rem" }}>
-                ดูเพิ่มเติม...
-              </Link>
-            </Grid>
-            <CourseCarousel courses={courses2} />
+
+            {data.map((item, index) => (
+              <React.Fragment key={index}>
+                <Box my={3}>
+                  <Divider />
+                </Box>
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-between"
+                  alignItems="center"
+                >
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    style={{ fontSize: "1.7rem" }}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Link href="#" style={{ fontSize: "0.9rem" }}>
+                    ดูเพิ่มเติม
+                  </Link>
+                </Grid>
+                <CourseCarousel courses={item.courses} />
+              </React.Fragment>
+            ))}
           </main>
         </div>
       </Container>

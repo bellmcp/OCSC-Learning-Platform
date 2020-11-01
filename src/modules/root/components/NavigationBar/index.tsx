@@ -34,7 +34,6 @@ import Divider from "@material-ui/core/Divider";
 
 import { NavLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
 
 const darkTheme = createMuiTheme({
   palette: {
