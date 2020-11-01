@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     course: {
       width: "100%",
-      padding: "5px",
+      padding: "4px",
       paddingBottom: 0,
       height: "100%",
     },

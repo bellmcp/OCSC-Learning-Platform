@@ -5,8 +5,11 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import NavigationBar from "../root/components/NavigationBar";
 import Header from "../root/components/Header";
 import Footer from "../root/components/Footer";
+import CourseItem from "../home/components/CourseItem";
 
 import { CourseModuleProps } from "./types";
+import Grid from "@material-ui/core/Grid";
+import { GroupOutlined } from "@material-ui/icons";
 
 const heroImage = require("../../assets/images/hero.jpg");
 
@@ -23,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Courses(props: CourseModuleProps) {
+export default function Courses({ data }: CourseModuleProps) {
   const classes = useStyles();
   const title = "คอร์สเรียน";
   const subtitle =
@@ -36,7 +39,28 @@ export default function Courses(props: CourseModuleProps) {
       <Header title={title} subtitle={subtitle} imageUrl={heroImage} />
       <Container>
         <div className={classes.main}>
-          <main className={classes.content}></main>
+          <main className={classes.content}>
+            <Grid container spacing={1}>
+              {data.map((item, index) => (
+                <React.Fragment key={index}>
+                  {item.courses.map((course, index) => (
+                    <Grid item xs={12} sm={4} md={3}>
+                      <CourseItem
+                        key={index}
+                        id={course.id}
+                        title={course.title}
+                        image={course.image}
+                        genre={course.genre}
+                        detail={course.detail}
+                        availableSeat={course.availableSeat}
+                        totalSeat={course.totalSeat}
+                      />
+                    </Grid>
+                  ))}
+                </React.Fragment>
+              ))}
+            </Grid>
+          </main>
         </div>
       </Container>
       <Footer />

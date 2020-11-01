@@ -10,7 +10,7 @@ import Courses from "./modules/courses";
 import Help from "./modules/help";
 
 import { announcements } from "./shared/announcements";
-import { courses, courses2 } from "./shared/courses";
+import { courses, courses2, coursesData } from "./shared/courses";
 
 function App() {
   const defaultTheme = createMuiTheme();
@@ -71,9 +71,12 @@ function App() {
               />
             )}
           />
-          <Route exact path="/courses" component={Courses} />
+          <Route
+            exact
+            path="/courses"
+            component={() => <Courses data={coursesData} />}
+          />
           <Route exact path="/help" component={Help} />
-          {/* TODO: 404 page */}
           <Redirect to="/" />
         </Switch>
       </MuiThemeProvider>
