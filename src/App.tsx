@@ -7,6 +7,7 @@ import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
 import Home from "./modules/home";
 import Courses from "./modules/courses";
+import CourseDetail from "./modules/courses/components/CourseDetail";
 import Help from "./modules/help";
 
 import { announcements } from "./shared/announcements";
@@ -55,6 +56,19 @@ function App() {
     },
   });
 
+  // const getCourseData = ({ match }: any) => {
+  //   return (
+  //     <CourseDetail
+  //       course={coursesData.map(
+  //         (item) =>
+  //           item.courses.filter(
+  //             (course) => course.id === parseInt(match.params.courseId, 10)
+  //           )[0] //TODO: FIX bugs array out of range
+  //       )}
+  //     />
+  //   );
+  // };
+
   return (
     <BrowserRouter>
       <MuiThemeProvider theme={theme}>
@@ -71,6 +85,12 @@ function App() {
             exact
             path="/courses"
             component={() => <Courses data={coursesData} />}
+          />
+          <Route
+            path="/courses/:courseId"
+            component={() => (
+              <CourseDetail course={coursesData[0].courses[0]} />
+            )}
           />
           <Route exact path="/help" component={Help} />
           <Redirect to="/" />

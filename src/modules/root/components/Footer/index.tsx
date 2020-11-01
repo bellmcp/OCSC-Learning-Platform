@@ -9,12 +9,10 @@ import Box from "@material-ui/core/Box";
 function Copyright() {
   return (
     <Typography variant="body2" color="inherit" align="left">
-      {"Copyright © "}
+      {"Copyright © "} {new Date().getFullYear()}{" "}
       <Link color="secondary" href="https://material-ui.com/">
         Office of the Civil Service Commission (OCSC)
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
+      </Link>
     </Typography>
   );
 }

@@ -17,7 +17,6 @@ import CourseItem from "../CourseItem";
 
 import { CourseCarouselProps } from "../CourseCarousel/types";
 import Grid from "@material-ui/core/Grid";
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     carousel: {

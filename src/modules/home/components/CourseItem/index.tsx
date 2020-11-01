@@ -11,6 +11,7 @@ import blue from "@material-ui/core/colors/blue";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CardActionArea from "@material-ui/core/CardActionArea";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,8 +84,8 @@ export default function CourseItem({
 
   return (
     <CardActionArea
-      component="a"
-      href="#"
+      component={RouterLink}
+      to="/courses/1"
       classes={{
         root: classes.actionArea,
         focusHighlight: classes.focusHighlight,

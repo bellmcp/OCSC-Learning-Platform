@@ -3,6 +3,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
+import blue from "@material-ui/core/colors/blue";
+import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +25,10 @@ interface HeaderProps {
   title: string;
   subtitle: string;
   imageUrl: string;
+  isCourse?: boolean;
+  courseId?: number;
+  courseInstructor?: string;
+  courseGenre?: string;
 }
 
 export default function Header(props: HeaderProps) {
@@ -33,25 +39,62 @@ export default function Header(props: HeaderProps) {
       className={classes.header}
       style={{ backgroundImage: `url(${props.imageUrl})` }}
     >
-      <Container maxWidth="lg">
-        <Typography
-          component="h1"
-          variant="h3"
-          align="left"
-          color="inherit"
-          gutterBottom
-        >
-          {props.title}
-        </Typography>
-
-        <Grid container justify="flex-start" className={classes.subtitle}>
-          <Grid item>
-            <Typography paragraph align="left" color="inherit">
-              {props.subtitle}
-            </Typography>
+      {props.isCourse ? (
+        <Container maxWidth="lg">
+          <Typography
+            component="h1"
+            variant="h4"
+            align="left"
+            color="inherit"
+            gutterBottom
+          >
+            {props.title}
+          </Typography>
+          <Typography
+            component="h2"
+            variant="h6"
+            align="left"
+            color="inherit"
+            gutterBottom
+          >
+            OCSC000{props.courseId}
+          </Typography>
+          <Grid container justify="flex-start" className={classes.subtitle}>
+            <Grid item>
+              <Typography variant="body2">
+                <div>
+                  <CourseGenreIcon
+                    style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                  />
+                  {props.courseGenre}
+                </div>
+              </Typography>
+              <Typography paragraph align="left" color="inherit">
+                {props.courseInstructor}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      ) : (
+        <Container maxWidth="lg">
+          <Typography
+            component="h1"
+            variant="h3"
+            align="left"
+            color="inherit"
+            gutterBottom
+          >
+            {props.title}
+          </Typography>
+          <Grid container justify="flex-start" className={classes.subtitle}>
+            <Grid item>
+              <Typography paragraph align="left" color="inherit">
+                {props.subtitle}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      )}
     </div>
   );
 }
