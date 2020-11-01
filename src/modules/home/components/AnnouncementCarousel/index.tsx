@@ -72,6 +72,8 @@ export default function AnnouncementCarousel({
       naturalSlideHeight={70}
       totalSlides={announcements.length}
       visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
+      interval={5000}
+      isPlaying
       className={classes.carousel}
     >
       <div className={classes.slider}>

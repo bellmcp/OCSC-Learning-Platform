@@ -4,6 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 
 import { AnnouncementItemProps } from "./types";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,18 +35,20 @@ export default function AnnouncementItem({
   const classes = useStyles();
 
   return (
-    <Card className={classes.cardSmall} style={{ position: "relative" }}>
-      <CardMedia
-        key={id}
-        className={classes.cardMediaSmall}
-        image={image}
-        title="Image title"
-        style={{
-          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('${image}')`,
-          backgroundSize: "cover",
-        }}
-      />
-      <div className={classes.cardDetail}>{detail}</div>
-    </Card>
+    <Link href="#">
+      <Card className={classes.cardSmall} style={{ position: "relative" }}>
+        <CardMedia
+          key={id}
+          className={classes.cardMediaSmall}
+          image={image}
+          title="Image title"
+          style={{
+            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url('${image}')`,
+            backgroundSize: "cover",
+          }}
+        />
+        <div className={classes.cardDetail}>{detail}</div>
+      </Card>
+    </Link>
   );
 }
