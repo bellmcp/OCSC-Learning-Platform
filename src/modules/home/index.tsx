@@ -14,6 +14,8 @@ import { CourseItemProps } from "./components/CourseItem/types";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import { Link } from "@material-ui/core";
 
 const heroImage = require("../../assets/images/hero.jpg");
 
@@ -26,18 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
-    },
-    carousel: {
-      padding: "0 10px",
-    },
-    cardSmall: {
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-    },
-    cardMediaSmall: {
-      paddingTop: "75%", // 4:3
-      //paddingTop: "56.25%", // 16:9
     },
   })
 );
@@ -217,24 +207,44 @@ export default function Home(props: Props) {
             <Box my={3}>
               <Divider />
             </Box>
-            <Typography
-              gutterBottom
-              variant="h6"
-              style={{ fontSize: "1.7rem" }}
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
             >
-              คอร์สใหม่
-            </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem" }}
+              >
+                คอร์สใหม่
+              </Typography>
+              <Link href="#" style={{ fontSize: "0.9rem" }}>
+                ดูเพิ่มเติม...
+              </Link>
+            </Grid>
             <CourseCarousel courses={courses} />
             <Box my={3}>
               <Divider />
             </Box>
-            <Typography
-              gutterBottom
-              variant="h6"
-              style={{ fontSize: "1.7rem" }}
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
             >
-              เรียนได้ทั้งปี
-            </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem" }}
+              >
+                เรียนได้ทั้งปี
+              </Typography>
+              <Link href="#" style={{ fontSize: "0.9rem" }}>
+                ดูเพิ่มเติม...
+              </Link>
+            </Grid>
             <CourseCarousel courses={courses2} />
           </main>
         </div>

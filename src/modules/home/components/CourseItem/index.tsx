@@ -10,17 +10,24 @@ import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
 import blue from "@material-ui/core/colors/blue";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import CardActionArea from "@material-ui/core/CardActionArea";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       height: "100%",
       display: "flex",
+      padding: "15px",
+      paddingBottom: 0,
       flexDirection: "column",
       position: "relative",
       background: "none",
       boxShadow: "none",
     },
+    actionArea: {
+      borderRadius: theme.shape.borderRadius,
+    },
+    focusHighlight: {},
     cardMedia: {
       paddingTop: "75%", // 4:3
       borderRadius: theme.shape.borderRadius,
@@ -75,63 +82,72 @@ export default function CourseItem({
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
-      <CardMedia
-        key={id}
-        className={classes.cardMedia}
-        image={image}
-        title={title}
-        style={{
-          background: `url('${image}')`,
-          backgroundSize: "cover",
-        }}
-      />
-      <CardContent className={classes.cardContent}>
-        <Box my={2}>
-          <Typography className={classes.title} variant="h6" component="h2">
-            {title}
-          </Typography>
-          <Typography variant="body2">
-            <div className={classes.genre}>OCSC000{id}</div>
-          </Typography>
-          <Box my={1}>
-            <Typography
-              variant="body2"
-              gutterBottom
-              color="textSecondary"
-              component="p"
-            >
-              <div className={classes.detail}>{detail}</div>
+    <CardActionArea
+      component="a"
+      href="#"
+      classes={{
+        root: classes.actionArea,
+        focusHighlight: classes.focusHighlight,
+      }}
+    >
+      <Card className={classes.card}>
+        <CardMedia
+          key={id}
+          className={classes.cardMedia}
+          image={image}
+          title={title}
+          style={{
+            background: `url('${image}')`,
+            backgroundSize: "cover",
+          }}
+        />
+        <CardContent className={classes.cardContent}>
+          <Box my={2}>
+            <Typography className={classes.title} variant="h6" component="h2">
+              {title}
             </Typography>
-          </Box>
-          <Box mt={2} mb={1}>
             <Typography variant="body2">
-              <div className={classes.genre}>
-                <CourseGenreIcon
-                  style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-                />
-                {genre}
-              </div>
+              <div className={classes.genre}>OCSC000{id}</div>
             </Typography>
-          </Box>
-          {totalSeat && availableSeat ? (
-            <Box display="flex" alignItems="center">
-              <Box width="100%" mr={1}>
-                <LinearProgress
-                  variant="determinate"
-                  value={((totalSeat - availableSeat) / totalSeat) * 100}
-                  color="secondary"
-                />
-              </Box>
-              <Box minWidth={75}>
-                <Typography variant="body2" color="primary" align="right">
-                  {availableSeat} ที่ว่าง
-                </Typography>
-              </Box>
+            <Box my={1}>
+              <Typography
+                variant="body2"
+                gutterBottom
+                color="textSecondary"
+                component="p"
+              >
+                <div className={classes.detail}>{detail}</div>
+              </Typography>
             </Box>
-          ) : null}
-        </Box>
-      </CardContent>
-    </Card>
+            <Box mt={2} mb={1}>
+              <Typography variant="body2">
+                <div className={classes.genre}>
+                  <CourseGenreIcon
+                    style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                  />
+                  {genre}
+                </div>
+              </Typography>
+            </Box>
+            {totalSeat && availableSeat ? (
+              <Box display="flex" alignItems="center">
+                <Box width="100%" mr={1}>
+                  <LinearProgress
+                    variant="determinate"
+                    value={((totalSeat - availableSeat) / totalSeat) * 100}
+                    color="secondary"
+                  />
+                </Box>
+                <Box minWidth={75}>
+                  <Typography variant="body2" color="primary" align="right">
+                    {availableSeat} ที่ว่าง
+                  </Typography>
+                </Box>
+              </Box>
+            ) : null}
+          </Box>
+        </CardContent>
+      </Card>
+    </CardActionArea>
   );
 }
