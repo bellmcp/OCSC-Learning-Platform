@@ -34,6 +34,7 @@ import Divider from "@material-ui/core/Divider";
 
 import { NavLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
+import Link from "@material-ui/core/Link";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -70,11 +71,16 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     logo: {
+      display: "block",
       maxWidth: 120,
       marginRight: theme.spacing(2),
       [theme.breakpoints.down("xs")]: {
         maxWidth: 110,
       },
+    },
+    link: {
+      textDecoration: "none !important",
+      color: theme.palette.common.white,
     },
     search: {
       position: "relative",
@@ -299,15 +305,18 @@ export default function NavigationBar(props: NavigationBarProps) {
                 <MenuIcon />
               </IconButton>
             </Hidden>
-            {/* <NavLink to="/"> */}
-            <img src={logo} alt="OCSC Logo" className={classes.logo} />
-            {/* </NavLink> */}
+
+            <NavLink to="/" className={classes.link}>
+              <img src={logo} alt="OCSC Logo" className={classes.logo} />
+            </NavLink>
 
             {/* <Divider orientation="vertical" className={classes.divider} /> */}
             <Hidden mdDown implementation="css">
-              <Typography className={classes.title} variant="h6" noWrap>
-                Learning Platform
-              </Typography>
+              <NavLink to="/" className={classes.link}>
+                <Typography className={classes.title} variant="h6" noWrap>
+                  Learning Platform
+                </Typography>
+              </NavLink>
             </Hidden>
 
             {/* Search Bar */}
