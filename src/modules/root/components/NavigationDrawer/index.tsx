@@ -1,28 +1,31 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import HomeIcon from "@material-ui/icons/Home";
-import CourseIcon from "@material-ui/icons/CollectionsBookmark";
-import SubjectIcon from "@material-ui/icons/MenuBook";
-import HelpIcon from "@material-ui/icons/Help";
-import CloseIcon from "@material-ui/icons/CloseRounded";
 import {
   makeStyles,
   useTheme,
   Theme,
   createStyles,
 } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
 import MenuItem from "@material-ui/core/MenuItem";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Badge from "@material-ui/core/Badge";
+import HomeIcon from "@material-ui/icons/Home";
+import CourseIcon from "@material-ui/icons/CollectionsBookmark";
+import CurriculumIcon from "@material-ui/icons/MenuBook";
+import HelpIcon from "@material-ui/icons/Help";
+import CloseIcon from "@material-ui/icons/CloseRounded";
+import IconButton from "@material-ui/core/IconButton";
 
-const drawerWidth = 200;
+import { NavigationDrawerProps } from "./types";
+
+const DRAWER_WIDTH = 200;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
       [theme.breakpoints.up("sm")]: {
-        // width: drawerWidth,
+        width: DRAWER_WIDTH,
         flexShrink: 0,
       },
     },
@@ -41,7 +44,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     listItem: {
-      paddingLeft: theme.spacing(1),
+      padding: 0,
+      paddingLeft: 4,
     },
     listTitle: {
       marginBlockEnd: 0,
@@ -49,7 +53,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(3),
     },
     listItemIcon: {
-      minWidth: 20,
+      minWidth: 40,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -60,12 +64,8 @@ const useStyles = makeStyles((theme: Theme) =>
     closeButton: {
       margin: theme.spacing(1, 1),
     },
-    // // necessary for content to be below app bar
-    // toolbar: {
-    //   ...theme.mixins.toolbar,
-    // },
     drawerPaper: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
     },
     content: {
       flexGrow: 1,
@@ -97,7 +97,7 @@ const navigationItem = [
     id: 1,
     title: "คอร์สเรียน",
     url: "/courses",
-    icon: <SubjectIcon />,
+    icon: <CurriculumIcon />,
     notification: 0,
   },
   {
@@ -116,57 +116,61 @@ const navigationItem = [
   },
 ];
 
-interface Props {
-  window?: () => Window;
-  handleDrawerToggle: () => void;
-  mobileOpen: boolean;
-  active: number;
-}
-
-export default function ResponsiveDrawer(props: Props) {
-  const { window } = props;
+export default function NavigationDrawer({
+  window,
+  handleDrawerToggle,
+  mobileOpen,
+  active,
+}: NavigationDrawerProps) {
   const classes = useStyles();
   const theme = useTheme();
-
-  const drawer = (
-    <div>
-      <IconButton
-        edge="start"
-        className={classes.closeButton}
-        aria-label="close drawer"
-        onClick={props.handleDrawerToggle}
-      >
-        <CloseIcon />
-      </IconButton>
-      <p className={classes.title}>Learning Platform</p>
-      <List>
-        {navigationItem.map((item, index) => (
-          <React.Fragment>
-            {item.id === 0 ? <Divider /> : null}
-            <MenuItem
-              button
-              selected={index === props.active ? true : false}
-              component={RouterLink}
-              to={item.url}
-              onClick={props.handleDrawerToggle}
-            >
-              <ListItem className={classes.listItem} key={index} dense>
-                <ListItemIcon className={classes.listItemIcon}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.title} />
-              </ListItem>
-            </MenuItem>
-            {item.id === navigationItem.length - 1 ? <Divider /> : null}
-          </React.Fragment>
-        ))}
-      </List>
-      <p className={classes.copyright}>© 2020 สำนักงาน ก.พ.</p>
-    </div>
-  );
-
   const container =
     window !== undefined ? () => window().document.body : undefined;
+
+  function MobileDrawer() {
+    return (
+      <div>
+        <IconButton
+          edge="start"
+          className={classes.closeButton}
+          aria-label="close drawer"
+          onClick={handleDrawerToggle}
+        >
+          <CloseIcon />
+        </IconButton>
+        <p className={classes.title}>Learning Platform</p>
+        <List>
+          {navigationItem.map((item, index) => (
+            <React.Fragment>
+              {item.id === 0 ? <Divider /> : null}
+              <MenuItem
+                button
+                selected={index === active ? true : false}
+                component={RouterLink}
+                to={item.url}
+                onClick={handleDrawerToggle}
+              >
+                <ListItem className={classes.listItem} key={index} dense>
+                  <ListItemIcon className={classes.listItemIcon}>
+                    {item.notification !== 0 ? (
+                      <Badge variant="dot" color="error">
+                        {item.icon}
+                      </Badge>
+                    ) : (
+                      item.icon
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </ListItem>
+              </MenuItem>
+              {item.id === navigationItem.length - 1 ? <Divider /> : null}
+            </React.Fragment>
+          ))}
+        </List>
+        <p className={classes.copyright}>© 2020 สำนักงาน ก.พ.</p>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.root}>
@@ -177,8 +181,8 @@ export default function ResponsiveDrawer(props: Props) {
             container={container}
             variant="temporary"
             anchor={theme.direction === "rtl" ? "right" : "left"}
-            open={props.mobileOpen}
-            onClose={props.handleDrawerToggle}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
             classes={{
               paper: classes.drawerPaper,
             }}
@@ -186,7 +190,7 @@ export default function ResponsiveDrawer(props: Props) {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            {drawer}
+            <MobileDrawer />
           </Drawer>
         </Hidden>
       </nav>
