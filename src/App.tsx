@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Switch, Route, Redirect } from "react-router-dom";
+import ScrollToTop from "./common/utils/ScrollToTop";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import grey from "@material-ui/core/colors/grey";
@@ -73,6 +74,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Switch>
