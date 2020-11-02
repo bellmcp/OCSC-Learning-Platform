@@ -93,7 +93,7 @@ export default function CourseItem({
   return (
     <CardActionArea
       component={RouterLink}
-      to="/courses/1"
+      to={isCurriculum ? "/curriculum/1" : "/courses/1"}
       classes={{
         root: classes.actionArea,
         focusHighlight: classes.focusHighlight,

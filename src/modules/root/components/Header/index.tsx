@@ -40,10 +40,10 @@ export default function Header(props: HeaderProps) {
     <div
       className={classes.header}
       style={{
-        backgroundImage: `url(${props.isCourse ? null : props.imageUrl})`,
+        backgroundImage: `url(${props.imageUrl})`,
       }}
     >
-      {props.isCourse ? (
+      {/* {props.isCourse ? (
         <div
           style={{
             backgroundImage: `url(${props.imageUrl})`,
@@ -58,7 +58,7 @@ export default function Header(props: HeaderProps) {
             margin: 0,
           }}
         ></div>
-      ) : null}
+      ) : null} */}
 
       <div style={{ position: "relative" }}>
         {props.isCourse ? (
