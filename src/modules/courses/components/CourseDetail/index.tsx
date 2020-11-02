@@ -7,6 +7,15 @@ import Header from "../../../root/components/Header";
 import Footer from "../../../root/components/Footer";
 
 import { CourseDetailProps } from "../CourseDetail/types";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
+import Avatar from "@material-ui/core/Avatar";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import AssessmentIcon from "@material-ui/icons/Assessment";
+import CreateIcon from "@material-ui/icons/Create";
+import InfoIcon from "@material-ui/icons/Info";
+import { green, amber } from "@material-ui/core/colors";
 
 const heroImage = require("../../../../assets/images/hero.jpg");
 
@@ -20,6 +29,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     },
+    amber: {
+      color: theme.palette.getContrastText(amber[500]),
+      backgroundColor: amber[500],
+    },
   })
 );
 
@@ -28,6 +41,25 @@ export default function CourseDetail({ course }: CourseDetailProps) {
   const subtitle =
     "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
 
+  const details = [
+    {
+      title: "เกี่ยวกับรายวิชา",
+      detail: course.fineprint,
+      icon: <AssignmentIcon />,
+    },
+    {
+      title: "วัตถุประสงค์",
+      detail: course.objective,
+      icon: <CreateIcon />,
+    },
+    {
+      title: "เกณฑ์การวัดและประเมินผล",
+      detail: course.criteria,
+      icon: <AssessmentIcon />,
+    },
+    { title: "หมายเหตุ", detail: course.note, icon: <InfoIcon /> },
+  ];
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -35,17 +67,76 @@ export default function CourseDetail({ course }: CourseDetailProps) {
       <Header
         title={course.title}
         subtitle={subtitle}
-        imageUrl={heroImage}
+        imageUrl={course.image}
         isCourse
         courseId={course.id}
-        courseInstructor="รศ.ดร.สมิทธิ์ บุญชุติมา"
+        courseInstructor={course.instructor}
         courseGenre={course.genre}
       />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <h1>เกี่ยวกับรายวิชา</h1>
-            <p>{course.detail}</p>
+            <Grid container spacing={6}>
+              <Grid item xs={12} sm={6}>
+                {details.slice(0, 1).map((item, index) => (
+                  <Box my={5} key={index}>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="center"
+                      spacing={2}
+                    >
+                      <Grid item>
+                        <Avatar className={classes.amber}>{item.icon}</Avatar>
+                      </Grid>
+                      <Grid item>
+                        <h1>{item.title}</h1>
+                      </Grid>
+                    </Grid>
+                    <Grid>
+                      {item.detail ? (
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: item.detail,
+                          }}
+                        ></div>
+                      ) : null}
+                    </Grid>
+                  </Box>
+                ))}
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                {details.slice(1, 4).map((item, index) => (
+                  <Box my={5} key={index}>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="center"
+                      spacing={2}
+                    >
+                      <Grid item>
+                        <Avatar className={classes.amber}>{item.icon}</Avatar>
+                      </Grid>
+                      <Grid item>
+                        <h1>{item.title}</h1>
+                      </Grid>
+                    </Grid>
+                    {item.detail ? (
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: item.detail,
+                        }}
+                      ></div>
+                    ) : null}
+                  </Box>
+                ))}
+              </Grid>
+            </Grid>
+            <Box my={3}>
+              <Divider />
+            </Box>
           </main>
         </div>
       </Container>

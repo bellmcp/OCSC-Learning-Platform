@@ -95,7 +95,7 @@ function App() {
           <Route
             path="/courses/:courseId"
             component={() => <CourseDetail course={COURSES[0].courses[0]} />}
-          />{" "}
+          />
           <Route
             exact
             path="/curriculum"
