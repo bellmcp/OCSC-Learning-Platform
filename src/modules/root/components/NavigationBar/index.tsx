@@ -168,7 +168,7 @@ const navigationItem = [
     notification: 0,
   },
   { id: 1, title: "คอร์สเรียน", url: "/courses", notification: 0 },
-  { id: 2, title: "หลักสูตร", url: "/", notification: 0 },
+  { id: 2, title: "หลักสูตร", url: "/curriculum", notification: 0 },
   { id: 3, title: "ช่วยเหลือ", url: "/help", notification: 1 },
 ];
 

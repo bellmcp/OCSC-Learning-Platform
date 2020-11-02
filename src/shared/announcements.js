@@ -3,7 +3,7 @@ import announcement2 from "../assets/images/announcements/announcement2.png";
 import announcement3 from "../assets/images/announcements/announcement3.png";
 import announcement4 from "../assets/images/announcements/announcement4.png";
 
-export const announcements = [
+export const ANNOUNCEMENTS = [
   {
     id: 1,
     image: announcement1,

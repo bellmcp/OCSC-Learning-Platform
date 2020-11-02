@@ -7,12 +7,13 @@ import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
 import Home from "./modules/home";
 import Courses from "./modules/courses";
+import Curriculum from "./modules/curriculum";
 import CourseDetail from "./modules/courses/components/CourseDetail";
 import Help from "./modules/help";
 
-import { announcements } from "./shared/announcements";
-import { coursesData } from "./shared/courses";
-import { curriculumData } from "./shared/curriculum";
+import { ANNOUNCEMENTS } from "./shared/announcements";
+import { COURSES } from "./shared/courses";
+import { CURRICULUM } from "./shared/curriculum";
 
 function App() {
   const defaultTheme = createMuiTheme();
@@ -80,22 +81,25 @@ function App() {
             path="/"
             component={() => (
               <Home
-                announcements={announcements}
-                courses={coursesData}
-                curriculum={curriculumData}
+                announcements={ANNOUNCEMENTS}
+                courses={COURSES}
+                curriculum={CURRICULUM}
               />
             )}
           />
           <Route
             exact
             path="/courses"
-            component={() => <Courses data={coursesData} />}
+            component={() => <Courses courses={COURSES} />}
           />
           <Route
             path="/courses/:courseId"
-            component={() => (
-              <CourseDetail course={coursesData[0].courses[0]} />
-            )}
+            component={() => <CourseDetail course={COURSES[0].courses[0]} />}
+          />{" "}
+          <Route
+            exact
+            path="/curriculum"
+            component={() => <Curriculum curriculum={CURRICULUM} />}
           />
           <Route exact path="/help" component={Help} />
           <Redirect to="/" />

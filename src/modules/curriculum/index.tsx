@@ -7,7 +7,7 @@ import Header from "../root/components/Header";
 import Footer from "../root/components/Footer";
 import CourseItem from "../home/components/CourseItem";
 
-import { CourseModuleProps } from "./types";
+import { CurriculumModuleProps } from "./types";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import FormControl from "@material-ui/core/FormControl";
@@ -39,9 +39,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Courses({ courses }: CourseModuleProps) {
+export default function Curriculum({ curriculum }: CurriculumModuleProps) {
   const classes = useStyles();
-  const title = "คอร์สเรียน";
+  const title = "หลักสูตร";
   const subtitle =
     "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
   const [genre, setGenre] = React.useState<string | number>("");
@@ -62,7 +62,7 @@ export default function Courses({ courses }: CourseModuleProps) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar active={1} />
+      <NavigationBar active={2} />
       <Header title={title} subtitle={subtitle} imageUrl={heroImage} />
       <Container>
         <div className={classes.main}>
@@ -78,7 +78,7 @@ export default function Courses({ courses }: CourseModuleProps) {
                 variant="h6"
                 style={{ fontSize: "1.7rem" }}
               >
-                คอร์สทั้งหมด
+                หลักสูตรทั้งหมด
               </Typography>
               <FormControl className={classes.formControl}>
                 <InputLabel id="genre-filter-label">หมวดหมู่</InputLabel>
@@ -128,9 +128,9 @@ export default function Courses({ courses }: CourseModuleProps) {
               </FormControl>
             </Grid>
             <Grid container spacing={1}>
-              {courses.map((item, index) => (
+              {curriculum.map((item, index) => (
                 <React.Fragment key={index}>
-                  {item.courses.map((item, index) => (
+                  {item.curricula.map((item, index) => (
                     <Grid item xs={12} sm={4} md={3}>
                       <CourseItem
                         key={index}
@@ -141,6 +141,7 @@ export default function Courses({ courses }: CourseModuleProps) {
                         detail={item.detail}
                         availableSeat={item.availableSeat}
                         totalSeat={item.totalSeat}
+                        isCurriculum
                       />
                     </Grid>
                   ))}

@@ -6,7 +6,7 @@ import curriculum5 from "../assets/images/curriculum/curriculum5.png";
 import curriculum6 from "../assets/images/curriculum/curriculum6.png";
 import curriculum7 from "../assets/images/curriculum/curriculum7.png";
 
-export const curriculumData = [
+export const CURRICULUM = [
   {
     id: 1,
     name: "หลักสูตรยอดนิยม",

@@ -1,11 +1,11 @@
 import { CourseItemProps } from "../home/components/CourseItem/types"
 
-export interface coursesDataType {
+export interface CoursesDataType {
     id: number,
     name: string,
     courses: CourseItemProps[],
 }
 
 export interface CourseModuleProps {
-    data: coursesDataType[],
+    courses: CoursesDataType[],
 }

@@ -11,7 +11,7 @@ import course10 from "../assets/images/courses/course10.png";
 import course11 from "../assets/images/courses/course11.png";
 import course12 from "../assets/images/courses/course12.png";
 
-export const coursesData = [
+export const COURSES = [
   {
     id: 1,
     name: "คอร์สใหม่",
