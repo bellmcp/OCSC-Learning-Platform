@@ -1,9 +1,15 @@
+interface InstructorType {
+    name: string;
+    description: string;
+    image: string;
+}
+
 export interface CourseItemProps {
     id: number;
     title: string;
     image: string;
     genre: string;
-    instructor?: string;
+    instructor?: InstructorType;
     detail: string;
     fineprint?: string;
     objective?: string;

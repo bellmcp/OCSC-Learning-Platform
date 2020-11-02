@@ -16,6 +16,8 @@ import AssessmentIcon from "@material-ui/icons/Assessment";
 import CreateIcon from "@material-ui/icons/Create";
 import InfoIcon from "@material-ui/icons/Info";
 import { green, amber } from "@material-ui/core/colors";
+import { Typography } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper/Paper";
 
 const heroImage = require("../../../../assets/images/hero.jpg");
 
@@ -32,6 +34,10 @@ const useStyles = makeStyles((theme: Theme) =>
     amber: {
       color: theme.palette.getContrastText(amber[500]),
       backgroundColor: amber[500],
+    },
+    small: {
+      width: theme.spacing(12),
+      height: theme.spacing(12),
     },
   })
 );
@@ -60,6 +66,14 @@ export default function CourseDetail({ course }: CourseDetailProps) {
     { title: "หมายเหตุ", detail: course.note, icon: <InfoIcon /> },
   ];
 
+  const roundInfoPlaceholder = [
+    { title: "ช่วงเวลาเรียน" },
+    { title: "เนื้อหา" },
+    { title: "กลุ่มเป้าหมาย" },
+    { title: "เกณฑ์การเรียนจบ" },
+    { title: "แพลตฟอร์ม" },
+  ];
+
   function RenderCourseInfo({ index, title, info, icon }: any) {
     return (
       <Box my={5} key={index}>
@@ -78,13 +92,15 @@ export default function CourseDetail({ course }: CourseDetailProps) {
           </Grid>
         </Grid>
         <Grid>
-          {info ? (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: info,
-              }}
-            ></div>
-          ) : null}
+          <Typography variant="body2" color="textSecondary">
+            {info ? (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: info,
+                }}
+              ></div>
+            ) : null}
+          </Typography>
         </Grid>
       </Box>
     );
@@ -100,12 +116,40 @@ export default function CourseDetail({ course }: CourseDetailProps) {
         imageUrl={course.image}
         isCourse
         courseId={course.id}
-        courseInstructor={course.instructor}
+        courseInstructor={course.instructor?.name}
         courseGenre={course.genre}
       />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
+            <Box m={4} ml={0}>
+              <Grid container spacing={6}>
+                <Grid item xs={12} sm={6}>
+                  <h1 style={{ margin: 0 }}>รอบที่ 1</h1>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  {roundInfoPlaceholder.map((item, index) => (
+                    <Grid
+                      container
+                      spacing={3}
+                      key={index}
+                      alignItems="baseline"
+                    >
+                      <Grid item xs={4}>
+                        <Typography variant="h6">{item.title}</Typography>
+                      </Grid>
+                      <Grid item xs>
+                        เริ่มลงทะเบียน 9 ตุลาคม 2563 เริ่มเรียนได้ 10 ตุลาคม
+                        2563 สิ้นสุดการเรียน 30 พฤศจิกายน 2563
+                      </Grid>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Grid>
+            </Box>
+            <Box my={3}>
+              <Divider />
+            </Box>
             <Grid container spacing={6}>
               <Grid item xs={12} sm={6}>
                 {courseInfoPlaceholder.slice(0, 1).map((item, index) => (
@@ -131,6 +175,40 @@ export default function CourseDetail({ course }: CourseDetailProps) {
             <Box my={3}>
               <Divider />
             </Box>
+            <Grid
+              container
+              spacing={2}
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid item xs={12} sm={6}>
+                <h1>อาจารย์ผู้สอน</h1>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Box mb={3}>
+                  <Grid
+                    container
+                    spacing={2}
+                    direction="column"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <Avatar
+                      alt="User"
+                      src={course.instructor?.image}
+                      className={classes.small}
+                    />
+                    <Typography variant="h6" align="center" gutterBottom>
+                      {course.instructor?.name}
+                    </Typography>
+                    <Typography variant="body2" align="center">
+                      {course.instructor?.description}
+                    </Typography>
+                  </Grid>
+                </Box>
+              </Grid>
+            </Grid>
           </main>
         </div>
       </Container>
