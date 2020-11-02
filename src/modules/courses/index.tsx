@@ -9,6 +9,16 @@ import CourseItem from "../home/components/CourseItem";
 
 import { CourseModuleProps } from "./types";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
+import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownRounded";
+import blue from "@material-ui/core/colors/blue";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 const heroImage = require("../../assets/images/hero.jpg");
 
@@ -22,6 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 240,
+    },
   })
 );
 
@@ -30,6 +44,20 @@ export default function Courses({ data }: CourseModuleProps) {
   const title = "คอร์สเรียน";
   const subtitle =
     "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+  const [genre, setGenre] = React.useState<string | number>("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setGenre(event.target.value as number);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <React.Fragment>
@@ -39,6 +67,66 @@ export default function Courses({ data }: CourseModuleProps) {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="baseline"
+            >
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem" }}
+              >
+                คอร์สทั้งหมด
+              </Typography>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="genre-filter-label">หมวดหมู่</InputLabel>
+                <Select
+                  labelId="genre-filter-label"
+                  id="genre-filter"
+                  open={open}
+                  onClose={handleClose}
+                  onOpen={handleOpen}
+                  value={genre}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={"all"}>
+                    <em>ทั้งหมด</em>
+                  </MenuItem>
+                  <MenuItem value={"language"}>
+                    <CourseGenreIcon
+                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                    />
+                    ภาษา
+                  </MenuItem>
+                  <MenuItem value={"technology"}>
+                    <CourseGenreIcon
+                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                    />
+                    เทคโนโลยี
+                  </MenuItem>
+                  <MenuItem value={"management"}>
+                    <CourseGenreIcon
+                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                    />
+                    การจัดการ
+                  </MenuItem>
+                  <MenuItem value={"art_selfdev"}>
+                    <CourseGenreIcon
+                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                    />
+                    ศิลปะและการพัฒนาตนเอง
+                  </MenuItem>
+                  <MenuItem value={"health"}>
+                    <CourseGenreIcon
+                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                    />
+                    สุขภาพ
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
             <Grid container spacing={1}>
               {data.map((item, index) => (
                 <React.Fragment key={index}>
@@ -58,6 +146,23 @@ export default function Courses({ data }: CourseModuleProps) {
                   ))}
                 </React.Fragment>
               ))}
+            </Grid>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Box mt={6} mb={4}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  startIcon={<ArrowDownIcon />}
+                >
+                  ดูเพิ่มเติม
+                </Button>
+              </Box>
             </Grid>
           </main>
         </div>
