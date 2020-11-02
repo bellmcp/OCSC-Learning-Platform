@@ -17,6 +17,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import AnnouncementItem from "../AnnouncementItem";
 
 import { AnnouncementCarouselProps } from "../AnnouncementCarousel/types";
+import { amber, grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +38,20 @@ const useStyles = makeStyles((theme: Theme) =>
     dotGroup: {
       display: "flex",
       justifyContent: "center",
+    },
+    styledDot: {
+      "& .carousel__dot": {
+        backgroundColor: amber[500],
+        height: "8px",
+        width: "8px",
+        padding: "4px",
+        borderRadius: "50%",
+        border: "none",
+        margin: "0 4px",
+      },
+      "& .carousel__dot--selected": {
+        backgroundColor: grey[300],
+      },
     },
     buttonBack: {
       position: "absolute",
@@ -103,7 +118,7 @@ export default function AnnouncementCarousel({
         </ButtonNext>
       </div>
       <div className={classes.dotGroup}>
-        <DotGroup />
+        <DotGroup className={classes.styledDot} />
       </div>
     </CarouselProvider>
   );
