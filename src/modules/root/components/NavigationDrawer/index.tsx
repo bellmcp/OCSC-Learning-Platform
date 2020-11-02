@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
@@ -19,6 +20,7 @@ import {
   createStyles,
 } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const drawerWidth = 200;
 
@@ -39,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     listItem: {
-      paddingLeft: theme.spacing(3),
+      paddingLeft: theme.spacing(1),
     },
     listTitle: {
       marginBlockEnd: 0,
@@ -47,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(3),
     },
     listItemIcon: {
-      minWidth: 40,
+      minWidth: 20,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -83,10 +85,42 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const navigationItem = [
+  {
+    id: 0,
+    title: "หน้าหลัก",
+    url: "/",
+    icon: <HomeIcon />,
+    notification: 0,
+  },
+  {
+    id: 1,
+    title: "คอร์สเรียน",
+    url: "/courses",
+    icon: <SubjectIcon />,
+    notification: 0,
+  },
+  {
+    id: 2,
+    title: "หลักสูตร",
+    url: "/curriculum",
+    icon: <CourseIcon />,
+    notification: 0,
+  },
+  {
+    id: 3,
+    title: "ช่วยเหลือ",
+    url: "/help",
+    icon: <HelpIcon />,
+    notification: 1,
+  },
+];
+
 interface Props {
   window?: () => Window;
   handleDrawerToggle: () => void;
   mobileOpen: boolean;
+  active: number;
 }
 
 export default function ResponsiveDrawer(props: Props) {
@@ -105,40 +139,28 @@ export default function ResponsiveDrawer(props: Props) {
         <CloseIcon />
       </IconButton>
       <p className={classes.title}>Learning Platform</p>
-      <Divider />
-      <List dense>
-        {["หน้าหลัก"].map((text, index) => (
-          <ListItem className={classes.listItem} button key={text}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+      <List>
+        {navigationItem.map((item, index) => (
+          <React.Fragment>
+            {item.id === 0 ? <Divider /> : null}
+            <MenuItem
+              button
+              selected={index === props.active ? true : false}
+              component={RouterLink}
+              to={item.url}
+              onClick={props.handleDrawerToggle}
+            >
+              <ListItem className={classes.listItem} key={index} dense>
+                <ListItemIcon className={classes.listItemIcon}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItem>
+            </MenuItem>
+            {item.id === navigationItem.length - 1 ? <Divider /> : null}
+          </React.Fragment>
         ))}
       </List>
-      <Divider />
-      <List dense>
-        {["คอร์สเรียน", "หลักสูตร"].map((text, index) => (
-          <ListItem className={classes.listItem} button key={text}>
-            <ListItemIcon className={classes.listItemIcon}>
-              {index % 2 === 0 ? <SubjectIcon /> : <CourseIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List dense>
-        {["ช่วยเหลือ"].map((text) => (
-          <ListItem className={classes.listItem} button key={text}>
-            <ListItemIcon className={classes.listItemIcon}>
-              <HelpIcon />
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
       <p className={classes.copyright}>© 2020 สำนักงาน ก.พ.</p>
     </div>
   );
@@ -167,19 +189,6 @@ export default function ResponsiveDrawer(props: Props) {
             {drawer}
           </Drawer>
         </Hidden>
-
-        {/* Desktop Permanent Sidebar */}
-        {/* <Hidden xsDown implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {drawer}
-          </Drawer>
-        </Hidden> */}
       </nav>
     </div>
   );

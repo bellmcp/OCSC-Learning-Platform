@@ -433,6 +433,7 @@ export default function NavigationBar(props: NavigationBarProps) {
       <NavigationDrawer
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
+        active={props.active}
       />
     </div>
   );
