@@ -6,4 +6,5 @@ export interface CourseItemProps {
     detail: string;
     availableSeat?: number;
     totalSeat?: number;
+    isCurriculum?: boolean;
 }

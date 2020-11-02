@@ -12,6 +12,7 @@ import Help from "./modules/help";
 
 import { announcements } from "./shared/announcements";
 import { coursesData } from "./shared/courses";
+import { curriculumData } from "./shared/curriculum";
 
 function App() {
   const defaultTheme = createMuiTheme();
@@ -78,7 +79,11 @@ function App() {
             exact
             path="/"
             component={() => (
-              <Home announcements={announcements} data={coursesData} />
+              <Home
+                announcements={announcements}
+                courses={coursesData}
+                curriculum={curriculumData}
+              />
             )}
           />
           <Route

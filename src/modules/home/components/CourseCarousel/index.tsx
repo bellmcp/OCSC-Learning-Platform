@@ -61,7 +61,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CourseCarousel({ courses }: CourseCarouselProps) {
+export default function CourseCarousel({
+  courses,
+  isCurriculum,
+}: CourseCarouselProps) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -92,6 +95,7 @@ export default function CourseCarousel({ courses }: CourseCarouselProps) {
                     detail={item.detail}
                     availableSeat={item.availableSeat}
                     totalSeat={item.totalSeat}
+                    isCurriculum={isCurriculum}
                   />
                 </div>
               </Slide>

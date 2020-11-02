@@ -35,6 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow:
         "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
     },
+    cardMediaStack: {
+      paddingTop: "75%", // 4:3
+      borderRadius: theme.shape.borderRadius,
+      boxShadow:
+        "0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)",
+    },
     cardDetail: {
       position: "absolute",
       color: "white",
@@ -79,6 +85,7 @@ export default function CourseItem({
   detail,
   availableSeat,
   totalSeat,
+  isCurriculum,
 }: CourseItemProps) {
   const classes = useStyles();
 
@@ -92,23 +99,48 @@ export default function CourseItem({
       }}
     >
       <Card className={classes.card}>
-        <CardMedia
-          key={id}
-          className={classes.cardMedia}
-          image={image}
-          title={title}
-          style={{
-            background: `url('${image}')`,
-            backgroundSize: "cover",
-          }}
-        />
+        {isCurriculum ? (
+          <CardMedia
+            key={id}
+            className={classes.cardMediaStack}
+            image={image}
+            title={title}
+            style={{
+              background: `url('${image}')`,
+              backgroundSize: "cover",
+            }}
+          />
+        ) : (
+          <CardMedia
+            key={id}
+            className={classes.cardMedia}
+            image={image}
+            title={title}
+            style={{
+              background: `url('${image}')`,
+              backgroundSize: "cover",
+            }}
+          />
+        )}
         <CardContent className={classes.cardContent}>
           <Box my={2}>
+            {isCurriculum ? (
+              <Typography
+                className={classes.title}
+                variant="caption"
+                color="textSecondary"
+              >
+                หลักสูตร
+              </Typography>
+            ) : null}
             <Typography className={classes.title} variant="h6" component="h2">
               {title}
             </Typography>
             <Typography variant="body2">
-              <div className={classes.genre}>OCSC000{id}</div>
+              <div className={classes.genre}>
+                OCSC000{id}
+                {isCurriculum ? "C" : null}
+              </div>
             </Typography>
             <Box my={1}>
               <Typography

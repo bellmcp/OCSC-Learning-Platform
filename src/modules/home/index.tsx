@@ -31,7 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Home({ announcements, data }: CourseModuleProps) {
+export default function Home({
+  announcements,
+  courses,
+  curriculum,
+}: CourseModuleProps) {
   const classes = useStyles();
   const title = "OCSC Learning Platform";
   const subtitle =
@@ -47,7 +51,7 @@ export default function Home({ announcements, data }: CourseModuleProps) {
           <main className={classes.content}>
             <AnnouncementCarousel announcements={announcements} />
 
-            {data.map((item, index) => (
+            {courses.map((item, index) => (
               <React.Fragment key={index}>
                 <Box my={3}>
                   <Divider />
@@ -70,6 +74,32 @@ export default function Home({ announcements, data }: CourseModuleProps) {
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.courses} />
+              </React.Fragment>
+            ))}
+
+            {curriculum.map((item, index) => (
+              <React.Fragment key={index}>
+                <Box my={3}>
+                  <Divider />
+                </Box>
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-between"
+                  alignItems="center"
+                >
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    style={{ fontSize: "1.7rem" }}
+                  >
+                    {item.name}
+                  </Typography>
+                  <Link href="#" style={{ fontSize: "0.9rem" }}>
+                    ดูเพิ่มเติม
+                  </Link>
+                </Grid>
+                <CourseCarousel courses={item.curricula} isCurriculum />
               </React.Fragment>
             ))}
           </main>
