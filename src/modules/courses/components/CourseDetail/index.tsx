@@ -41,7 +41,7 @@ export default function CourseDetail({ course }: CourseDetailProps) {
   const subtitle =
     "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
 
-  const details = [
+  const courseInfoPlaceholder = [
     {
       title: "เกี่ยวกับรายวิชา",
       detail: course.fineprint,
@@ -53,12 +53,42 @@ export default function CourseDetail({ course }: CourseDetailProps) {
       icon: <CreateIcon />,
     },
     {
-      title: "เกณฑ์การวัดและประเมินผล",
+      title: "เกณฑ์การวัด และประเมินผล",
       detail: course.criteria,
       icon: <AssessmentIcon />,
     },
     { title: "หมายเหตุ", detail: course.note, icon: <InfoIcon /> },
   ];
+
+  function RenderCourseInfo({ index, title, info, icon }: any) {
+    return (
+      <Box my={5} key={index}>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+          spacing={2}
+        >
+          <Grid item>
+            <Avatar className={classes.amber}>{icon}</Avatar>
+          </Grid>
+          <Grid item>
+            <h1>{title}</h1>
+          </Grid>
+        </Grid>
+        <Grid>
+          {info ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: info,
+              }}
+            ></div>
+          ) : null}
+        </Grid>
+      </Box>
+    );
+  }
 
   return (
     <React.Fragment>
@@ -78,59 +108,23 @@ export default function CourseDetail({ course }: CourseDetailProps) {
           <main className={classes.content}>
             <Grid container spacing={6}>
               <Grid item xs={12} sm={6}>
-                {details.slice(0, 1).map((item, index) => (
-                  <Box my={5} key={index}>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="flex-start"
-                      alignItems="center"
-                      spacing={2}
-                    >
-                      <Grid item>
-                        <Avatar className={classes.amber}>{item.icon}</Avatar>
-                      </Grid>
-                      <Grid item>
-                        <h1>{item.title}</h1>
-                      </Grid>
-                    </Grid>
-                    <Grid>
-                      {item.detail ? (
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: item.detail,
-                          }}
-                        ></div>
-                      ) : null}
-                    </Grid>
-                  </Box>
+                {courseInfoPlaceholder.slice(0, 1).map((item, index) => (
+                  <RenderCourseInfo
+                    index={index}
+                    title={item.title}
+                    info={item.detail}
+                    icon={item.icon}
+                  />
                 ))}
               </Grid>
               <Grid item xs={12} sm={6}>
-                {details.slice(1, 4).map((item, index) => (
-                  <Box my={5} key={index}>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="flex-start"
-                      alignItems="center"
-                      spacing={2}
-                    >
-                      <Grid item>
-                        <Avatar className={classes.amber}>{item.icon}</Avatar>
-                      </Grid>
-                      <Grid item>
-                        <h1>{item.title}</h1>
-                      </Grid>
-                    </Grid>
-                    {item.detail ? (
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: item.detail,
-                        }}
-                      ></div>
-                    ) : null}
-                  </Box>
+                {courseInfoPlaceholder.slice(1, 4).map((item, index) => (
+                  <RenderCourseInfo
+                    index={index}
+                    title={item.title}
+                    info={item.detail}
+                    icon={item.icon}
+                  />
                 ))}
               </Grid>
             </Grid>

@@ -67,66 +67,88 @@ export default function Courses({ courses }: CourseModuleProps) {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="baseline"
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{ fontSize: "1.7rem" }}
+            <Box mb={2}>
+              <Grid
+                container
+                direction="row"
+                justify="space-between"
+                alignItems="baseline"
               >
-                คอร์สทั้งหมด
-              </Typography>
-              <FormControl className={classes.formControl}>
-                <InputLabel id="genre-filter-label">หมวดหมู่</InputLabel>
-                <Select
-                  labelId="genre-filter-label"
-                  id="genre-filter"
-                  open={open}
-                  onClose={handleClose}
-                  onOpen={handleOpen}
-                  value={genre}
-                  onChange={handleChange}
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  style={{ fontSize: "1.7rem" }}
                 >
-                  <MenuItem value={"all"}>
-                    <em>ทั้งหมด</em>
-                  </MenuItem>
-                  <MenuItem value={"language"}>
-                    <CourseGenreIcon
-                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-                    />
-                    ภาษา
-                  </MenuItem>
-                  <MenuItem value={"technology"}>
-                    <CourseGenreIcon
-                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-                    />
-                    เทคโนโลยี
-                  </MenuItem>
-                  <MenuItem value={"management"}>
-                    <CourseGenreIcon
-                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-                    />
-                    การจัดการ
-                  </MenuItem>
-                  <MenuItem value={"art_selfdev"}>
-                    <CourseGenreIcon
-                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-                    />
-                    ศิลปะและการพัฒนาตนเอง
-                  </MenuItem>
-                  <MenuItem value={"health"}>
-                    <CourseGenreIcon
-                      style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
-                    />
-                    สุขภาพ
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
+                  คอร์สทั้งหมด
+                </Typography>
+                <FormControl className={classes.formControl}>
+                  <InputLabel id="genre-filter-label">หมวดหมู่</InputLabel>
+                  <Select
+                    labelId="genre-filter-label"
+                    id="genre-filter"
+                    open={open}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    value={genre}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value={"all"}>
+                      <em>ทั้งหมด</em>
+                    </MenuItem>
+                    <MenuItem value={"language"}>
+                      <CourseGenreIcon
+                        style={{
+                          color: blue[500],
+                          fontSize: 12,
+                          marginRight: 6,
+                        }}
+                      />
+                      ภาษา
+                    </MenuItem>
+                    <MenuItem value={"technology"}>
+                      <CourseGenreIcon
+                        style={{
+                          color: blue[500],
+                          fontSize: 12,
+                          marginRight: 6,
+                        }}
+                      />
+                      เทคโนโลยี
+                    </MenuItem>
+                    <MenuItem value={"management"}>
+                      <CourseGenreIcon
+                        style={{
+                          color: blue[500],
+                          fontSize: 12,
+                          marginRight: 6,
+                        }}
+                      />
+                      การจัดการ
+                    </MenuItem>
+                    <MenuItem value={"art_selfdev"}>
+                      <CourseGenreIcon
+                        style={{
+                          color: blue[500],
+                          fontSize: 12,
+                          marginRight: 6,
+                        }}
+                      />
+                      ศิลปะและการพัฒนาตนเอง
+                    </MenuItem>
+                    <MenuItem value={"health"}>
+                      <CourseGenreIcon
+                        style={{
+                          color: blue[500],
+                          fontSize: 12,
+                          marginRight: 6,
+                        }}
+                      />
+                      สุขภาพ
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Box>
             <Grid container spacing={1}>
               {courses.map((item, index) => (
                 <React.Fragment key={index}>
@@ -159,6 +181,7 @@ export default function Courses({ courses }: CourseModuleProps) {
                   color="primary"
                   size="large"
                   startIcon={<ArrowDownIcon />}
+                  style={{ borderRadius: 25 }}
                 >
                   ดูเพิ่มเติม
                 </Button>
