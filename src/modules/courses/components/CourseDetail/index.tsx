@@ -14,10 +14,12 @@ import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import CreateIcon from "@material-ui/icons/Create";
+import ArrowRightIcon from "@material-ui/icons/KeyboardArrowRightRounded";
 import InfoIcon from "@material-ui/icons/Info";
 import { green, amber } from "@material-ui/core/colors";
 import { Typography } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper/Paper";
+import Button from "@material-ui/core/Button/Button";
 
 const heroImage = require("../../../../assets/images/hero.jpg");
 
@@ -67,11 +69,11 @@ export default function CourseDetail({ course }: CourseDetailProps) {
   ];
 
   const roundInfoPlaceholder = [
-    { title: "ช่วงเวลาเรียน" },
-    { title: "เนื้อหา" },
-    { title: "กลุ่มเป้าหมาย" },
-    { title: "เกณฑ์การเรียนจบ" },
-    { title: "แพลตฟอร์ม" },
+    { title: "ช่วงเวลาเรียน", detail: course.round?.duration },
+    { title: "เนื้อหา", detail: course.round?.unit },
+    { title: "กลุ่มเป้าหมาย", detail: course.round?.target },
+    { title: "เกณฑ์การเรียนจบ", detail: course.round?.goal },
+    { title: "แพลตฟอร์ม", detail: course.round?.platform },
   ];
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
@@ -124,10 +126,18 @@ export default function CourseDetail({ course }: CourseDetailProps) {
           <main className={classes.content}>
             <Box m={4} ml={0}>
               <Grid container spacing={6}>
-                <Grid item xs={12} sm={6}>
-                  <h1 style={{ margin: 0 }}>รอบที่ 1</h1>
+                <Grid item xs={12} sm={12} md={6}>
+                  <h1 style={{ margin: 0 }}>รอบที่ {course.round?.id}</h1>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="large"
+                    endIcon={<ArrowRightIcon />}
+                  >
+                    ลงทะเบียนเรียน
+                  </Button>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   {roundInfoPlaceholder.map((item, index) => (
                     <Grid
                       container
@@ -139,8 +149,13 @@ export default function CourseDetail({ course }: CourseDetailProps) {
                         <Typography variant="h6">{item.title}</Typography>
                       </Grid>
                       <Grid item xs>
-                        เริ่มลงทะเบียน 9 ตุลาคม 2563 เริ่มเรียนได้ 10 ตุลาคม
-                        2563 สิ้นสุดการเรียน 30 พฤศจิกายน 2563
+                        <Typography variant="body2" color="textSecondary">
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: item.detail ? item.detail : "ไม่มีข้อมูล",
+                            }}
+                          ></div>
+                        </Typography>
                       </Grid>
                     </Grid>
                   ))}
