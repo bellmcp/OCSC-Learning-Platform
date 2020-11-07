@@ -9,7 +9,7 @@ import curriculum7 from "../assets/images/curriculum/curriculum7.png";
 export const CURRICULUM = [
   {
     id: 1,
-    name: "หลักสูตรยอดนิยม",
+    name: "หลักสูตร",
     curricula: [
       {
         id: 1,

@@ -27,6 +27,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "dev": "react-scripts start",
     "start": "node index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",

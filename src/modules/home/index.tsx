@@ -39,7 +39,7 @@ export default function Home({
   const classes = useStyles();
   const title = "OCSC Learning Platform";
   const subtitle =
-    "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+    "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
 
   return (
     <React.Fragment>
@@ -50,6 +50,27 @@ export default function Home({
         <div className={classes.main}>
           <main className={classes.content}>
             <AnnouncementCarousel announcements={announcements} />
+
+            <Box my={3}>
+              <Divider />
+            </Box>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem" }}
+              >
+                เข้าเรียนต่อ
+              </Typography>
+              <Link href="/learn" style={{ fontSize: "0.9rem" }}>
+                ดูทั้งหมด...
+              </Link>
+            </Grid>
 
             {courses.map((item, index) => (
               <React.Fragment key={index}>
@@ -69,8 +90,8 @@ export default function Home({
                   >
                     {item.name}
                   </Typography>
-                  <Link href="#" style={{ fontSize: "0.9rem" }}>
-                    ดูเพิ่มเติม
+                  <Link href="/courses" style={{ fontSize: "0.9rem" }}>
+                    ดูทั้งหมด...
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.courses} />
@@ -95,8 +116,8 @@ export default function Home({
                   >
                     {item.name}
                   </Typography>
-                  <Link href="#" style={{ fontSize: "0.9rem" }}>
-                    ดูเพิ่มเติม
+                  <Link href="/curriculum" style={{ fontSize: "0.9rem" }}>
+                    ดูทั้งหมด...
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.curricula} isCurriculum />

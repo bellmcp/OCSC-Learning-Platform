@@ -7,7 +7,7 @@ export const ANNOUNCEMENTS = [
   {
     id: 1,
     image: announcement1,
-    detail: "คอร์สเรียน OCSC ประจำเดือนตุลาคม พร้อมเปิดให้ลงทะเบียนเรียนแล้ว!",
+    detail: "รายวิชา OCSC ประจำเดือนตุลาคม พร้อมเปิดให้ลงทะเบียนเรียนแล้ว!",
   },
   {
     id: 2,

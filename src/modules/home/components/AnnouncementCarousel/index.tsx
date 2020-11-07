@@ -52,6 +52,14 @@ const useStyles = makeStyles((theme: Theme) =>
       "& .carousel__dot--selected": {
         backgroundColor: grey[300],
       },
+      [theme.breakpoints.down("sm")]: {
+        "& .carousel__dot": {
+          backgroundColor: grey[300],
+        },
+        "& .carousel__dot--selected": {
+          backgroundColor: amber[500],
+        },
+      },
     },
     buttonBack: {
       position: "absolute",

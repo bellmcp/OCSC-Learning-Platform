@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Courses({ courses }: CourseModuleProps) {
   const classes = useStyles();
-  const title = "คอร์สเรียน";
+  const title = "รายวิชา";
 
   const [genre, setGenre] = React.useState<string | number>("");
   const [open, setOpen] = React.useState(false);
@@ -87,7 +87,7 @@ export default function Courses({ courses }: CourseModuleProps) {
                   variant="h6"
                   style={{ fontSize: "1.7rem" }}
                 >
-                  คอร์สทั้งหมด
+                  รายวิชาทั้งหมด
                 </Typography>
                 <FormControl className={classes.formControl}>
                   <InputLabel id="genre-filter-label">หมวดหมู่</InputLabel>
