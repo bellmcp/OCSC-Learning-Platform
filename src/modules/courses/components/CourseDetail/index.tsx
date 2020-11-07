@@ -32,7 +32,7 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
 
-const heroImage = require("../../../../assets/images/hero.jpg");
+const heroImage = require("../../../../assets/images/course_blur.png");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -1,12 +1,11 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +35,6 @@ const OCSC_PHONE = "โทร. 02-547-1795 , 02-547-1807 (ภายในเว�
 
 export default function Footer() {
   const classes = useStyles();
-  const theme = useTheme();
   const isFhdUp = useMediaQuery("(min-width:1080px)");
 
   function DesktopFooter() {

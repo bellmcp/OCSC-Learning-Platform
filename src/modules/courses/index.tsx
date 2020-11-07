@@ -20,6 +20,8 @@ import blue from "@material-ui/core/colors/blue";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 
+import CourseIcon from "@material-ui/icons/MenuBook";
+
 const heroImage = require("../../assets/images/hero.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,8 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Courses({ courses }: CourseModuleProps) {
   const classes = useStyles();
   const title = "คอร์สเรียน";
-  const subtitle =
-    "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+
   const [genre, setGenre] = React.useState<string | number>("");
   const [open, setOpen] = React.useState(false);
 
@@ -66,7 +67,11 @@ export default function Courses({ courses }: CourseModuleProps) {
     <React.Fragment>
       <CssBaseline />
       <NavigationBar active={1} />
-      <Header title={title} subtitle={subtitle} imageUrl={heroImage} />
+      <Header
+        title={title}
+        icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={heroImage}
+      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>

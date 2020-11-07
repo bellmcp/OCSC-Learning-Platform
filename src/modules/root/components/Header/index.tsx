@@ -5,14 +5,13 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import blue from "@material-ui/core/colors/blue";
 import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
-import zIndex from "@material-ui/core/styles/zIndex";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       color: theme.palette.common.white,
       backgroundSize: "cover",
-      maxHeight: "500px",
+      minHeight: "370px",
       padding: theme.spacing(16, 0, 8),
     },
     subtitle: {
@@ -25,7 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
 interface HeaderProps {
   window?: () => Window;
   title: string;
-  subtitle: string;
+  subtitle?: string;
+  icon?: any;
   imageUrl: string;
   isCourse?: boolean;
   courseId?: number;
@@ -105,7 +105,9 @@ export default function Header(props: HeaderProps) {
               align="left"
               color="inherit"
               gutterBottom
+              style={{ marginTop: props.icon ? 50 : 0 }}
             >
+              {props.icon}
               {props.title}
             </Typography>
             <Grid container justify="flex-start" className={classes.subtitle}>

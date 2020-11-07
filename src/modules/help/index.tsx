@@ -5,6 +5,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import NavigationBar from "../root/components/NavigationBar";
 import Header from "../root/components/Header";
 import Footer from "../root/components/Footer";
+
+import HelpIcon from "@material-ui/icons/Help";
 const heroImage = require("../../assets/images/hero.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,12 +29,14 @@ interface Props {
 export default function Help(props: Props) {
   const classes = useStyles();
   const title = "ช่วยเหลือ";
-  const subtitle =
-    "คอร์สเรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
 
   return (
     <>
-      <Header title={title} subtitle={subtitle} imageUrl={heroImage} />
+      <Header
+        title={title}
+        icon={<HelpIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={heroImage}
+      />
       <Container>
         <div className={classes.main}>
           <CssBaseline />
