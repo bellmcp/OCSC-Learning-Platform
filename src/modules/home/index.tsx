@@ -16,6 +16,9 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "@material-ui/core";
 
+import MyCourseItem from "./components/MyCourseItem";
+import CourseFilter from "./components/CourseFilter";
+
 const heroImage = require("../../assets/images/hero.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,6 +60,20 @@ export default function Home({
             <Grid
               container
               direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "2.3rem" }}
+              >
+                เข้าเรียน
+              </Typography>
+            </Grid>
+            <Grid
+              container
+              direction="row"
               justify="space-between"
               alignItems="center"
             >
@@ -65,18 +82,52 @@ export default function Home({
                 variant="h6"
                 style={{ fontSize: "1.7rem" }}
               >
-                เข้าเรียนต่อ
+                รายวิชาของฉัน
               </Typography>
               <Link href="/learn" style={{ fontSize: "0.9rem" }}>
                 ดูทั้งหมด...
               </Link>
             </Grid>
+            <MyCourseItem />
 
             {courses.map((item, index) => (
               <React.Fragment key={index}>
-                <Box my={3}>
-                  <Divider />
-                </Box>
+                {index === 0 ? (
+                  <React.Fragment>
+                    <Box my={3}>
+                      <Divider />
+                    </Box>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        style={{ fontSize: "2.3rem" }}
+                      >
+                        ลงทะเบียนเรียน
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <CourseFilter />
+                    </Grid>
+                  </React.Fragment>
+                ) : null}
+
+                {index === 0 ? null : (
+                  <Box my={3}>
+                    <Divider />
+                  </Box>
+                )}
+
                 <Grid
                   container
                   direction="row"
@@ -91,7 +142,7 @@ export default function Home({
                     {item.name}
                   </Typography>
                   <Link href="/courses" style={{ fontSize: "0.9rem" }}>
-                    ดูทั้งหมด...
+                    ดูเพิ่มเติม...
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.courses} />
@@ -117,7 +168,7 @@ export default function Home({
                     {item.name}
                   </Typography>
                   <Link href="/curriculum" style={{ fontSize: "0.9rem" }}>
-                    ดูทั้งหมด...
+                    ดูเพิ่มเติม...
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.curricula} isCurriculum />

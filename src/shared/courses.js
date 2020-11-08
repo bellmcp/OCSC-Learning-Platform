@@ -16,7 +16,7 @@ import instructor1 from "../assets/images/instructors/instructor1.png";
 export const COURSES = [
   {
     id: 1,
-    name: "ยอดนิยม",
+    name: "รายวิชายอดนิยม",
     courses: [
       {
         id: 1,
@@ -95,7 +95,7 @@ export const COURSES = [
   },
   {
     id: 2,
-    name: "รายวิชา",
+    name: "รายวิชาทั้งหมด",
     courses: [
       {
         id: 6,

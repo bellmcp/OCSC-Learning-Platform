@@ -9,7 +9,7 @@ import curriculum7 from "../assets/images/curriculum/curriculum7.png";
 export const CURRICULUM = [
   {
     id: 1,
-    name: "หลักสูตร",
+    name: "หลักสูตรทั้งหมด",
     curricula: [
       {
         id: 1,
@@ -31,12 +31,12 @@ export const CURRICULUM = [
           },
           {
             id: 3,
-            title: "ศาสนาสากลและพระพุทธศาสนา",
+            title: "ประวัติศาสตร์",
             image: curriculum1,
           },
           {
             id: 4,
-            title: "กฎหมายและสังคมวิทยา",
+            title: "ศาสนาสากลและพระพุทธศาสนา",
             image: curriculum1,
           },
           {
