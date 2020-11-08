@@ -44,6 +44,11 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       flex: 1,
     },
+    cardImage: {
+      [theme.breakpoints.down("xs")]: {
+        display: "none",
+      },
+    },
   })
 );
 
@@ -117,17 +122,17 @@ function getStepProgress(step: number) {
               <Grid container alignItems="center">
                 <Grid item>
                   <CheckCircleIcon
-                    style={{ color: green[800], marginRight: 10 }}
+                    style={{ color: green[800], marginRight: "10px" }}
                   />
                 </Grid>
-                <Grid item>เรียนจบแล้ว เมื่อวันที่ 1 พฤศจิกายน 2563</Grid>
+                <Grid item>
+                  <Typography variant="body2" gutterBottom>
+                    เรียนจบแล้ว เมื่อ 1 พฤศจิกายน 2563
+                  </Typography>
+                </Grid>
               </Grid>
             </Typography>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ marginRight: 30 }}
-            >
+            <Button variant="outlined" color="primary">
               ดูเกียรติบัตร
             </Button>
           </Grid>
@@ -146,17 +151,17 @@ function getStepProgress(step: number) {
               <Grid container alignItems="center">
                 <Grid item>
                   <CheckCircleIcon
-                    style={{ color: green[800], marginRight: 10 }}
+                    style={{ color: green[800], marginRight: "10px" }}
                   />
                 </Grid>
-                <Grid item>เรียนจบแล้ว เมื่อวันที่ 8 พฤศจิกายน 2563</Grid>
+                <Grid item>
+                  <Typography variant="body2" gutterBottom>
+                    เรียนจบแล้ว เมื่อ 8 พฤศจิกายน 2563
+                  </Typography>
+                </Grid>
               </Grid>
             </Typography>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ marginRight: 30 }}
-            >
+            <Button variant="outlined" color="primary">
               ดูเกียรติบัตร
             </Button>
           </Grid>
@@ -182,7 +187,6 @@ function getStepProgress(step: number) {
             <Button
               variant="contained"
               color="secondary"
-              style={{ marginRight: 30 }}
               startIcon={<PlayArrowIcon />}
             >
               เข้าเรียนต่อ
@@ -201,14 +205,12 @@ function getStepProgress(step: number) {
           >
             <Typography variant="body2" color="textPrimary" component="p">
               <Grid container alignItems="center">
-                รายวิชานี้ ประกอบด้วย 2 บทเรียน ใช้เวลาเรียนประมาณ 16 ชม.
+                <Typography variant="body2" gutterBottom>
+                  รายวิชานี้ ประกอบด้วย 2 บทเรียน
+                </Typography>
               </Grid>
             </Typography>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ marginRight: 30 }}
-            >
+            <Button variant="contained" color="primary">
               เริ่มเรียนเลย
             </Button>
           </Grid>
@@ -225,14 +227,12 @@ function getStepProgress(step: number) {
           >
             <Typography variant="body2" color="textPrimary" component="p">
               <Grid container alignItems="center">
-                รายวิชานี้ ประกอบด้วย 3 บทเรียน ใช้เวลาเรียนประมาณ 28 ชม.
+                <Typography variant="body2" gutterBottom>
+                  รายวิชานี้ ประกอบด้วย 3 บทเรียน
+                </Typography>
               </Grid>
             </Typography>
-            <Button
-              variant="contained"
-              color="secondary"
-              style={{ marginRight: 30 }}
-            >
+            <Button variant="contained" color="primary">
               เริ่มเรียนเลย
             </Button>
           </Grid>
@@ -334,17 +334,16 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
               title="Live from space album cover"
               style={{
                 width: "200px",
-                height: "165px",
                 borderRadius: "4 0 0 0",
-                marginRight: 30,
               }}
+              className={classes.cardImage}
             />
             <div className={classes.controls}>
               <Grid container direction="column">
                 <Grid item>
-                  <Box mt={2}>
+                  <Box my={2} mx={3}>
                     <Typography
-                      variant="caption"
+                      variant="body2"
                       color="secondary"
                       style={{ fontWeight: "bold" }}
                     >
@@ -367,43 +366,45 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                   </Box>
                 </Grid>
                 <Grid item>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                  >
-                    <Grid item>
-                      <Box mr={6}>
-                        <Typography
-                          variant="h6"
-                          color="textSecondary"
-                          component="h2"
-                          style={{ fontSize: "1rem" }}
+                  <Box ml={3} mr={0}>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="space-between"
+                      alignItems="center"
+                    >
+                      <Grid item>
+                        <Box>
+                          <Typography
+                            variant="h6"
+                            color="textSecondary"
+                            component="h2"
+                            style={{ fontSize: "1rem" }}
+                          >
+                            5 รายวิชา
+                          </Typography>
+                        </Box>
+                      </Grid>
+                      <Grid item style={{ flexGrow: 1 }}>
+                        <Stepper
+                          nonLinear
+                          activeStep={activeStep}
+                          // connector={<ColorlibConnector />}
                         >
-                          5 รายวิชา:
-                        </Typography>
-                      </Box>
+                          {steps.map((label, index) => (
+                            <Step key={label}>
+                              <StepButton
+                                onClick={handleStep(index)}
+                                completed={completed[index]}
+                              >
+                                {label}
+                              </StepButton>
+                            </Step>
+                          ))}
+                        </Stepper>
+                      </Grid>
                     </Grid>
-                    <Grid item style={{ flexGrow: 1 }}>
-                      <Stepper
-                        nonLinear
-                        activeStep={activeStep}
-                        // connector={<ColorlibConnector />}
-                      >
-                        {steps.map((label, index) => (
-                          <Step key={label}>
-                            <StepButton
-                              onClick={handleStep(index)}
-                              completed={completed[index]}
-                            >
-                              {label}
-                            </StepButton>
-                          </Step>
-                        ))}
-                      </Stepper>
-                    </Grid>
-                  </Grid>
+                  </Box>
                 </Grid>
               </Grid>
             </div>
@@ -416,25 +417,30 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
               title="Live from space album cover"
               style={{
                 width: "200px",
-                height: "140px",
                 borderRadius: "4 0 0 0",
-                marginRight: 30,
               }}
+              className={classes.cardImage}
             />
             <div className={classes.controls}>
               <Grid container direction="column">
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  gutterBottom
-                  style={{ fontSize: "1.1rem" }}
-                >
-                  {getStepContent(activeStep)}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {getStepDescription(activeStep)}
-                </Typography>
-                {getStepProgress(activeStep)}
+                <Box my={2} mx={3}>
+                  <Typography
+                    variant="h6"
+                    component="h2"
+                    gutterBottom
+                    style={{ fontSize: "1.1rem" }}
+                  >
+                    {getStepContent(activeStep)}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {getStepDescription(activeStep)}
+                  </Typography>
+                  {getStepProgress(activeStep)}
+                </Box>
               </Grid>
             </div>
           </div>
@@ -454,56 +460,53 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                   title="Live from space album cover"
                   style={{
                     width: "200px",
-                    height: "140px",
                     borderRadius: "4 0 0 0",
-                    marginRight: 30,
                   }}
+                  className={classes.cardImage}
                 />
                 <div className={classes.controls}>
                   <Grid container direction="column">
-                    <Typography variant="h6" component="h2">
-                      การงบประมาณภาครัฐ
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      component="p"
-                    >
-                      OCSC0002
-                    </Typography>
-                    <Box my={1}>
-                      <Grid
-                        container
-                        direction="row"
-                        justify="space-between"
-                        alignItems="center"
+                    <Box my={2} mx={3}>
+                      <Typography variant="h6" component="h2">
+                        การงบประมาณภาครัฐ
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
                       >
-                        <Typography
-                          variant="body2"
-                          color="textPrimary"
-                          component="p"
+                        OCSC0002
+                      </Typography>
+                      <Box my={1}>
+                        <Grid
+                          container
+                          direction="row"
+                          justify="space-between"
+                          alignItems="center"
                         >
-                          <Grid container alignItems="center">
-                            <Grid item>
-                              <PlayCircleFilledIcon
-                                style={{ marginRight: 10 }}
-                              />
+                          <Typography
+                            variant="body2"
+                            color="textPrimary"
+                            component="p"
+                          >
+                            <Grid container alignItems="center">
+                              <Grid item>
+                                <PlayCircleFilledIcon
+                                  style={{ marginRight: 10 }}
+                                />
+                              </Grid>
+                              <Grid item>บทที่ 2: วางแผนงบประมาณภาครัฐ</Grid>
                             </Grid>
-                            <Grid item>
-                              บทที่ 5:
-                              การตรวจสอบติดตามและประเมินผลการดำเนินงานในระบบงบประมาณ
-                            </Grid>
-                          </Grid>
-                        </Typography>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          style={{ marginRight: 30 }}
-                          startIcon={<PlayArrowIcon />}
-                        >
-                          เข้าเรียนต่อ
-                        </Button>
-                      </Grid>
+                          </Typography>
+                          <Button
+                            variant="contained"
+                            color="secondary"
+                            startIcon={<PlayArrowIcon />}
+                          >
+                            เข้าเรียนต่อ
+                          </Button>
+                        </Grid>
+                      </Box>
                     </Box>
                   </Grid>
                 </div>
