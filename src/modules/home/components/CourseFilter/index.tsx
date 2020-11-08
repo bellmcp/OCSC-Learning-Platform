@@ -1,11 +1,15 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import green from "@material-ui/core/colors/green";
+import indigo from "@material-ui/core/colors/indigo";
+import orange from "@material-ui/core/colors/orange";
+import pink from "@material-ui/core/colors/pink";
+import purple from "@material-ui/core/colors/purple";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
-import blue from "@material-ui/core/colors/blue";
+import React from "react";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,7 +62,7 @@ export default function CourseFilter() {
         <MenuItem value={"language"}>
           <CourseGenreIcon
             style={{
-              color: blue[500],
+              color: purple[500],
               fontSize: 12,
               marginRight: 6,
             }}
@@ -68,7 +72,7 @@ export default function CourseFilter() {
         <MenuItem value={"technology"}>
           <CourseGenreIcon
             style={{
-              color: blue[500],
+              color: indigo[500],
               fontSize: 12,
               marginRight: 6,
             }}
@@ -78,7 +82,7 @@ export default function CourseFilter() {
         <MenuItem value={"management"}>
           <CourseGenreIcon
             style={{
-              color: blue[500],
+              color: pink[500],
               fontSize: 12,
               marginRight: 6,
             }}
@@ -88,7 +92,7 @@ export default function CourseFilter() {
         <MenuItem value={"art_selfdev"}>
           <CourseGenreIcon
             style={{
-              color: blue[500],
+              color: orange[500],
               fontSize: 12,
               marginRight: 6,
             }}
@@ -98,7 +102,7 @@ export default function CourseFilter() {
         <MenuItem value={"health"}>
           <CourseGenreIcon
             style={{
-              color: blue[500],
+              color: green[500],
               fontSize: 12,
               marginRight: 6,
             }}

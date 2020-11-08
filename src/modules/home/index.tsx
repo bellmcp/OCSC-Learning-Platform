@@ -60,20 +60,6 @@ export default function Home({
             <Grid
               container
               direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{ fontSize: "2.3rem" }}
-              >
-                เข้าเรียน
-              </Typography>
-            </Grid>
-            <Grid
-              container
-              direction="row"
               justify="space-between"
               alignItems="center"
             >
@@ -82,10 +68,10 @@ export default function Home({
                 variant="h6"
                 style={{ fontSize: "1.7rem" }}
               >
-                รายวิชาของฉัน
+                เข้าเรียน
               </Typography>
               <Link href="/learn" style={{ fontSize: "0.9rem" }}>
-                ดูทั้งหมด...
+                ดูทั้งหมด {">"}
               </Link>
             </Grid>
             <MyCourseItem />
@@ -94,31 +80,19 @@ export default function Home({
               <React.Fragment key={index}>
                 {index === 0 ? (
                   <React.Fragment>
-                    <Box my={3}>
+                    <Box mt={3} mb={2}>
                       <Divider />
                     </Box>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="center"
-                      alignItems="center"
-                    >
-                      <Typography
-                        gutterBottom
-                        variant="h6"
-                        style={{ fontSize: "2.3rem" }}
+                    <Box mb={2}>
+                      <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
                       >
-                        ลงทะเบียนเรียน
-                      </Typography>
-                    </Grid>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="center"
-                      alignItems="center"
-                    >
-                      <CourseFilter />
-                    </Grid>
+                        <CourseFilter />
+                      </Grid>
+                    </Box>
                   </React.Fragment>
                 ) : null}
 

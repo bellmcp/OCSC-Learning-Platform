@@ -129,7 +129,8 @@ export default function CourseItem({
               <Typography
                 className={classes.title}
                 variant="caption"
-                color="textSecondary"
+                color="secondary"
+                style={{ fontWeight: "bold" }}
               >
                 หลักสูตร
               </Typography>
