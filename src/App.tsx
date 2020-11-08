@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 import { BrowserRouter } from "react-router-dom";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ScrollToTop from "./common/utils/ScrollToTop";
@@ -17,6 +18,8 @@ import Help from "./modules/help";
 import { ANNOUNCEMENTS } from "./shared/announcements";
 import { COURSES } from "./shared/courses";
 import { CURRICULUM } from "./shared/curriculum";
+
+import meta from "./meta.jpg";
 
 function App() {
   const defaultTheme = createMuiTheme();
@@ -77,6 +80,39 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>OCSC Learning Platform</title>
+        <meta name="title" content="OCSC Learning Platform" />
+        <meta
+          name="description"
+          content="เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform"
+        />
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="http://ocsc-learning-platform.herokuapp.com/"
+        />
+        <meta property="og:title" content="OCSC Learning Platform" />
+        <meta
+          property="og:description"
+          content="เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform"
+        />
+        <meta property="og:image" content={meta} />
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="http://ocsc-learning-platform.herokuapp.com/"
+        />
+        <meta property="twitter:title" content="OCSC Learning Platform" />
+        <meta
+          property="twitter:description"
+          content="เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform"
+        />
+        <meta property="twitter:image" content={meta} />
+      </Helmet>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Switch>
