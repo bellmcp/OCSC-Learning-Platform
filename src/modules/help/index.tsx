@@ -158,16 +158,17 @@ export default function Help() {
                             ลงทะเบียนเรียนไม่ได้
                           </Typography>
                         </Grid>
-                        <Typography variant="body2" component="p" gutterBottom>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                          gutterBottom
+                        >
                           ลงทะเบียนเรียนวิชา OCSC00001 ไม่ได้ครับ
                           เนื่องจากเลยระยะเวลาที่กำหนดแล้ว
                         </Typography>
-                        <Typography
-                          variant="caption"
-                          color="textSecondary"
-                          component="h2"
-                        >
-                          7 พฤศจิกายน 21:05 น.
+                        <Typography variant="caption" component="h2">
+                          <em>7 พฤศจิกายน 21:05 น.</em>
                         </Typography>
                       </Box>
                       <Divider />
@@ -187,6 +188,7 @@ export default function Help() {
                           variant="body2"
                           component="p"
                           align="right"
+                          color="textSecondary"
                           gutterBottom
                         >
                           ขออภัยสำหรับความไม่สะดวกค่ะ
@@ -196,11 +198,10 @@ export default function Help() {
                         </Typography>
                         <Typography
                           variant="caption"
-                          color="textSecondary"
                           align="right"
                           component="h2"
                         >
-                          8 พฤศจิกายน 10:24 น.
+                          <em>8 พฤศจิกายน 10:24 น.</em>
                         </Typography>
                       </Box>
                     </CardContent>
@@ -235,16 +236,17 @@ export default function Help() {
                             วิดีโอกระตุก
                           </Typography>
                         </Grid>
-                        <Typography variant="body2" component="p" gutterBottom>
+                        <Typography
+                          variant="body2"
+                          component="p"
+                          color="textSecondary"
+                          gutterBottom
+                        >
                           รายวิชาการงบประมาณภาครัฐ วิดีโอกระตุกมากครับ
                           รบกวนแก้ไขด้วยครับ
                         </Typography>
-                        <Typography
-                          variant="caption"
-                          color="textSecondary"
-                          component="h2"
-                        >
-                          9 พฤศจิกายน 12:59 น.
+                        <Typography variant="caption" component="h2">
+                          <em>9 พฤศจิกายน 12:59 น.</em>
                         </Typography>
                       </Box>
                     </CardContent>
