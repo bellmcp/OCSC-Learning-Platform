@@ -137,7 +137,7 @@ const useStyles = makeStyles((theme: Theme) =>
       textDecoration: "none",
     },
     navMenu: {
-      minWidth: "377px",
+      minWidth: "270px",
     },
     navItem: {
       color: theme.palette.common.white,
@@ -167,9 +167,8 @@ const navigationItem = [
     url: "/",
     notification: 0,
   },
-  { id: 1, title: "คอร์สเรียน", url: "/courses", notification: 0 },
-  { id: 2, title: "หลักสูตร", url: "/curriculum", notification: 0 },
-  { id: 3, title: "ช่วยเหลือ", url: "/help", notification: 1 },
+  { id: 1, title: "เข้าเรียน", url: "/learn", notification: 0 },
+  { id: 2, title: "ช่วยเหลือ", url: "/help", notification: 1 },
 ];
 
 interface NavigationBarProps {

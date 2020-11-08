@@ -17,8 +17,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Badge from "@material-ui/core/Badge";
 import HomeIcon from "@material-ui/icons/Home";
-import CurriculumIcon from "@material-ui/icons/CollectionsBookmark";
-import CourseIcon from "@material-ui/icons/MenuBook";
+import LearnIcon from "@material-ui/icons/PlayArrow";
 import HelpIcon from "@material-ui/icons/Help";
 import CloseIcon from "@material-ui/icons/CloseRounded";
 import IconButton from "@material-ui/core/IconButton";
@@ -95,20 +94,13 @@ const navigationItem = [
   },
   {
     id: 1,
-    title: "คอร์สเรียน",
-    url: "/courses",
-    icon: <CourseIcon />,
+    title: "เข้าเรียน",
+    url: "/learn",
+    icon: <LearnIcon />,
     notification: 0,
   },
   {
     id: 2,
-    title: "หลักสูตร",
-    url: "/curriculum",
-    icon: <CurriculumIcon />,
-    notification: 0,
-  },
-  {
-    id: 3,
     title: "ช่วยเหลือ",
     url: "/help",
     icon: <HelpIcon />,
