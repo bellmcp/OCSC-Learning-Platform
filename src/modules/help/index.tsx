@@ -10,22 +10,22 @@ import {
 import NavigationBar from "../root/components/NavigationBar";
 import Header from "../root/components/Header";
 import Footer from "../root/components/Footer";
-
 import HelpIcon from "@material-ui/icons/Help";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import { CardContent } from "@material-ui/core";
+import CardContent from "@material-ui/core/CardContent";
 import Card from "@material-ui/core/Card/Card";
 import Box from "@material-ui/core/Box/Box";
-import Divider from "@material-ui/core/Divider/Divider";
+import Divider from "@material-ui/core/Divider";
 import CardActions from "@material-ui/core/CardActions/CardActions";
 import Button from "@material-ui/core/Button/Button";
 import SendIcon from "@material-ui/icons/Send";
+import Badge from "@material-ui/core/Badge/Badge";
 import CheckIcon from "@material-ui/icons/Check";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import ModeCommentIcon from "@material-ui/icons/ModeComment";
-import Badge from "@material-ui/core/Badge/Badge";
+
 const heroImage = require("../../assets/images/hero.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       "& > *": {
         margin: theme.spacing(1),
-        width: "90%",
+        width: "100%",
       },
     },
   })
@@ -57,11 +57,7 @@ const StyledBadge = withStyles((theme: Theme) =>
   })
 )(Badge);
 
-interface Props {
-  window?: () => Window;
-}
-
-export default function Help(props: Props) {
+export default function Help() {
   const classes = useStyles();
   const title = "ช่วยเหลือ";
 
@@ -81,7 +77,7 @@ export default function Help(props: Props) {
               container
               justify="space-between"
               alignItems="flex-start"
-              spacing={4}
+              spacing={10}
             >
               <Grid item xs={12} sm={12} md={6}>
                 <Typography
@@ -122,7 +118,7 @@ export default function Help(props: Props) {
                       />
                     </Grid>
                   </Grid>
-                  <Divider />
+
                   <Button
                     color="primary"
                     variant="contained"
@@ -154,17 +150,24 @@ export default function Help(props: Props) {
                           style={{ fontWeight: "bold" }}
                           gutterBottom
                         >
-                          หมายเลขอ้างอิง: 00002
+                          เลขที่อ้างอิง: 00002
                         </Typography>
                         <Grid container alignItems="center">
                           <ChatBubbleIcon style={{ marginRight: 10 }} />
-                          <Typography variant="h6" component="h1">
+                          <Typography variant="h6" component="h1" gutterBottom>
                             ลงทะเบียนเรียนไม่ได้
                           </Typography>
                         </Grid>
-                        <Typography variant="body2" component="p">
+                        <Typography variant="body2" component="p" gutterBottom>
                           ลงทะเบียนเรียนวิชา OCSC00001 ไม่ได้ครับ
                           เนื่องจากเลยระยะเวลาที่กำหนดแล้ว
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          color="textSecondary"
+                          component="h2"
+                        >
+                          7 พฤศจิกายน 21:05 น.
                         </Typography>
                       </Box>
                       <Divider />
@@ -177,7 +180,7 @@ export default function Help(props: Props) {
                             align="right"
                             gutterBottom
                           >
-                            ข้อความจากเจ้าหน้าที่
+                            ข้อความตอบกลับ
                           </Typography>
                         </Grid>
                         <Typography
@@ -197,7 +200,7 @@ export default function Help(props: Props) {
                           align="right"
                           component="h2"
                         >
-                          ส่งเมื่อ: วันที่ 8 พฤศจิกายน 2563 เวลา 10:24 น.
+                          8 พฤศจิกายน 10:24 น.
                         </Typography>
                       </Box>
                     </CardContent>
@@ -224,38 +227,24 @@ export default function Help(props: Props) {
                           style={{ fontWeight: "bold" }}
                           gutterBottom
                         >
-                          หมายเลขอ้างอิง: 00001
+                          เลขที่อ้างอิง: 00003
                         </Typography>
                         <Grid container alignItems="center">
                           <ChatBubbleIcon style={{ marginRight: 10 }} />
-                          <Typography variant="h6" component="h1">
+                          <Typography variant="h6" component="h1" gutterBottom>
                             วิดีโอกระตุก
                           </Typography>
                         </Grid>
-                        <Typography variant="body2" component="p">
-                          วิดีโอกระตุกมากเลยครับ รบกวนแก้ไขด้วยครับ
+                        <Typography variant="body2" component="p" gutterBottom>
+                          รายวิชาการงบประมาณภาครัฐ วิดีโอกระตุกมากครับ
+                          รบกวนแก้ไขด้วยครับ
                         </Typography>
-                      </Box>
-                      <Divider />
-                      <Box m={3}>
-                        <Grid container alignItems="center" justify="flex-end">
-                          <ModeCommentIcon style={{ marginRight: 10 }} />
-                          <Typography
-                            variant="h6"
-                            component="h1"
-                            align="right"
-                            gutterBottom
-                          >
-                            ข้อความจากเจ้าหน้าที่
-                          </Typography>
-                        </Grid>
                         <Typography
-                          variant="body2"
-                          component="p"
-                          align="right"
-                          gutterBottom
+                          variant="caption"
+                          color="textSecondary"
+                          component="h2"
                         >
-                          (ยังไม่ได้รับการตอบกลับ)
+                          9 พฤศจิกายน 12:59 น.
                         </Typography>
                       </Box>
                     </CardContent>
