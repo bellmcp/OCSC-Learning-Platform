@@ -66,7 +66,7 @@ export default function Courses({ courses }: CourseModuleProps) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar active={1} />
+      <NavigationBar active={0} />
       <Header
         title={title}
         icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}

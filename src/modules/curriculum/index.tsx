@@ -62,7 +62,7 @@ export default function Curriculum({ curriculum }: CurriculumModuleProps) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar active={2} />
+      <NavigationBar active={0} />
       <Header
         title={title}
         icon={

@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
-import { Link } from "@material-ui/core";
+import { NavLink as Link } from "react-router-dom";
 
 import MyCourseItem from "./components/MyCourseItem";
 import CourseFilter from "./components/CourseFilter";
@@ -70,7 +70,10 @@ export default function Home({
               >
                 เข้าเรียน
               </Typography>
-              <Link href="/learn" style={{ fontSize: "0.9rem" }}>
+              <Link
+                to="/learn"
+                style={{ color: "inherit", fontSize: "0.9rem" }}
+              >
                 ดูทั้งหมด {">"}
               </Link>
             </Grid>
@@ -115,8 +118,11 @@ export default function Home({
                   >
                     {item.name}
                   </Typography>
-                  <Link href="/courses" style={{ fontSize: "0.9rem" }}>
-                    ดูเพิ่มเติม...
+                  <Link
+                    to="/courses"
+                    style={{ color: "inherit", fontSize: "0.9rem" }}
+                  >
+                    ดูทั้งหมด {">"}
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.courses} />
@@ -141,8 +147,11 @@ export default function Home({
                   >
                     {item.name}
                   </Typography>
-                  <Link href="/curriculum" style={{ fontSize: "0.9rem" }}>
-                    ดูเพิ่มเติม...
+                  <Link
+                    to="/curriculum"
+                    style={{ color: "inherit", fontSize: "0.9rem" }}
+                  >
+                    ดูทั้งหมด {">"}
                   </Link>
                 </Grid>
                 <CourseCarousel courses={item.curricula} isCurriculum />
