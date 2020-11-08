@@ -57,6 +57,41 @@ export default function CourseFilter() {
         onChange={handleChange}
       >
         <MenuItem value={"all"}>
+          <CourseGenreIcon
+            style={{
+              color: purple[500],
+              fontSize: 12,
+            }}
+          />
+          <CourseGenreIcon
+            style={{
+              color: indigo[500],
+              fontSize: 12,
+              marginLeft: 3,
+            }}
+          />
+          <CourseGenreIcon
+            style={{
+              color: pink[500],
+              fontSize: 12,
+              marginLeft: 3,
+            }}
+          />
+          <CourseGenreIcon
+            style={{
+              color: orange[500],
+              fontSize: 12,
+              marginLeft: 3,
+            }}
+          />
+          <CourseGenreIcon
+            style={{
+              color: green[500],
+              fontSize: 12,
+              marginLeft: 3,
+              marginRight: 6,
+            }}
+          />
           <em>ทั้งหมด</em>
         </MenuItem>
         <MenuItem value={"language"}>

@@ -12,6 +12,11 @@ import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { Link as RouterLink } from "react-router-dom";
+import green from "@material-ui/core/colors/green";
+import indigo from "@material-ui/core/colors/indigo";
+import orange from "@material-ui/core/colors/orange";
+import pink from "@material-ui/core/colors/pink";
+import purple from "@material-ui/core/colors/purple";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -77,6 +82,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+function getGenreColor(genre: string) {
+  switch (genre) {
+    case "ภาษา":
+      return purple[500];
+    case "เทคโนโลยี":
+      return indigo[500];
+    case "การจัดการ":
+      return pink[500];
+    case "ศิลปะและการพัฒนาตนเอง":
+      return orange[500];
+    case "สุขภาพ":
+      return green[500];
+    default:
+      return indigo[500];
+  }
+}
 
 export default function CourseItem({
   id,
@@ -158,7 +180,11 @@ export default function CourseItem({
               <Typography variant="body2">
                 <div className={classes.genre}>
                   <CourseGenreIcon
-                    style={{ color: blue[500], fontSize: 12, marginRight: 6 }}
+                    style={{
+                      color: getGenreColor(genre),
+                      fontSize: 12,
+                      marginRight: 6,
+                    }}
                   />
                   {genre}
                 </div>
