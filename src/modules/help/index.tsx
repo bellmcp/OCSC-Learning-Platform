@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       "& > *": {
         margin: theme.spacing(1),
-        width: "100%",
+        width: "calc(100% - 20px)",
       },
     },
   })
@@ -77,7 +77,7 @@ export default function Help() {
               container
               justify="space-between"
               alignItems="flex-start"
-              spacing={10}
+              spacing={4}
             >
               <Grid item xs={12} sm={12} md={6}>
                 <Typography
