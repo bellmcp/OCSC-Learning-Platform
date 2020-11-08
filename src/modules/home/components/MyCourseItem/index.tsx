@@ -265,7 +265,11 @@ function getStepProgress(step: number) {
 //   },
 // })(StepConnector);
 
-export default function MyCourseItem() {
+interface MyCourseItemProps {
+  isHome?: boolean;
+}
+
+export default function MyCourseItem({ isHome }: MyCourseItemProps) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(2);
   const [completed, setCompleted] = React.useState<{ [k: number]: boolean }>({
@@ -436,65 +440,78 @@ export default function MyCourseItem() {
           </div>
         </Card>
       </Box>
-      {/* 
-      <Box mt={4} mb={6}>
-        <Card elevation={2}>
-          <div className={classes.details}>
-            <CardMedia
-              image={course6}
-              title="Live from space album cover"
-              style={{
-                width: "200px",
-                height: "140px",
-                borderRadius: "4 0 0 0",
-                marginRight: 30,
-              }}
-            />
-            <div className={classes.controls}>
-              <Grid container direction="column">
-                <Typography variant="h6" component="h2">
-                  การงบประมาณภาครัฐ
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  OCSC0002
-                </Typography>
-                <Box my={1}>
-                  <Grid
-                    container
-                    direction="row"
-                    justify="space-between"
-                    alignItems="center"
-                  >
+
+      {isHome ? null : (
+        <React.Fragment>
+          <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
+            รายวิชาของฉัน
+          </Typography>
+          <Box mt={4} mb={6}>
+            <Card elevation={2}>
+              <div className={classes.details}>
+                <CardMedia
+                  image={course6}
+                  title="Live from space album cover"
+                  style={{
+                    width: "200px",
+                    height: "140px",
+                    borderRadius: "4 0 0 0",
+                    marginRight: 30,
+                  }}
+                />
+                <div className={classes.controls}>
+                  <Grid container direction="column">
+                    <Typography variant="h6" component="h2">
+                      การงบประมาณภาครัฐ
+                    </Typography>
                     <Typography
                       variant="body2"
-                      color="textPrimary"
+                      color="textSecondary"
                       component="p"
                     >
-                      <Grid container alignItems="center">
-                        <Grid item>
-                          <PlayCircleFilledIcon style={{ marginRight: 10 }} />
-                        </Grid>
-                        <Grid item>
-                          บทที่ 5:
-                          การตรวจสอบติดตามและประเมินผลการดำเนินงานในระบบงบประมาณ
-                        </Grid>
-                      </Grid>
+                      OCSC0002
                     </Typography>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      style={{ marginRight: 30 }}
-                      startIcon={<PlayArrowIcon />}
-                    >
-                      เข้าเรียนต่อ
-                    </Button>
+                    <Box my={1}>
+                      <Grid
+                        container
+                        direction="row"
+                        justify="space-between"
+                        alignItems="center"
+                      >
+                        <Typography
+                          variant="body2"
+                          color="textPrimary"
+                          component="p"
+                        >
+                          <Grid container alignItems="center">
+                            <Grid item>
+                              <PlayCircleFilledIcon
+                                style={{ marginRight: 10 }}
+                              />
+                            </Grid>
+                            <Grid item>
+                              บทที่ 5:
+                              การตรวจสอบติดตามและประเมินผลการดำเนินงานในระบบงบประมาณ
+                            </Grid>
+                          </Grid>
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          style={{ marginRight: 30 }}
+                          startIcon={<PlayArrowIcon />}
+                        >
+                          เข้าเรียนต่อ
+                        </Button>
+                      </Grid>
+                    </Box>
                   </Grid>
-                </Box>
-              </Grid>
-            </div>
-          </div>
-        </Card>
-      </Box> */}
+                </div>
+              </div>
+            </Card>
+          </Box>
+        </React.Fragment>
+      )}
     </React.Fragment>
   );
 }

@@ -7,6 +7,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import grey from "@material-ui/core/colors/grey";
 import amber from "@material-ui/core/colors/amber";
 import Home from "./modules/home";
+import Learn from "./modules/learn";
 import Courses from "./modules/courses";
 import Curriculum from "./modules/curriculum";
 import CourseDetail from "./modules/courses/components/CourseDetail";
@@ -89,6 +90,7 @@ function App() {
               />
             )}
           />
+          <Route exact path="/learn" component={Learn} />
           <Route
             exact
             path="/courses"

@@ -74,7 +74,7 @@ export default function Home({
                 ดูทั้งหมด {">"}
               </Link>
             </Grid>
-            <MyCourseItem />
+            <MyCourseItem isHome />
 
             {courses.map((item, index) => (
               <React.Fragment key={index}>
