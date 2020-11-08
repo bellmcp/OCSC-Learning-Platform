@@ -84,29 +84,28 @@ export default function Footer() {
             fontSize="h6.fontSize"
             fontWeight="fontWeightMedium"
             textAlign="center"
-            mb={3}
+            mb={6}
           >
             {OCSC_NAME_TH}
           </Box>
         </Grid>
         <Grid item>
-          <Box lineHeight={1.2} fontSize={16} textAlign="center" mb={1}>
+          <Box lineHeight={1.2} fontSize={12} textAlign="center" mb={1}>
             {OCSC_ADDRESS}
           </Box>
-          <Box lineHeight={1.2} fontSize={16} textAlign="center" mb={1}>
+          <Box lineHeight={1.2} fontSize={12} textAlign="center" mb={1}>
+            E-mail:{" "}
             <Link href="mailto:ocsc.hrd@gmail.com" color="secondary">
               {OCSC_EMAIL}
             </Link>
           </Box>
-          <Box lineHeight={1.2} fontSize={16} textAlign="center">
+          <Box lineHeight={1.2} fontSize={12} textAlign="center">
             {OCSC_PHONE}
           </Box>
         </Grid>
         <Grid item>
-          <Box mt={3}>
-            <Typography variant="body2" color="inherit" align="center">
-              {"Copyright © "} {new Date().getFullYear()} {OCSC_NAME_EN}
-            </Typography>
+          <Box mt={6} lineHeight={1.2} fontSize={9} textAlign="center">
+            {"Copyright © "} {new Date().getFullYear()} {OCSC_NAME_EN}
           </Box>
         </Grid>
       </Grid>
