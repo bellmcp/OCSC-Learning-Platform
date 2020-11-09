@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import NavigationBar from "../../../root/components/NavigationBar";
+import NavigationBar from "../NavigationBar";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -26,8 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: drawerWidth,
     },
     drawer: {
+      display: "unset",
       width: drawerWidth,
       flexShrink: 0,
+      [theme.breakpoints.down("xs")]: {
+        display: "none",
+      },
     },
     drawerPaper: {
       width: drawerWidth,

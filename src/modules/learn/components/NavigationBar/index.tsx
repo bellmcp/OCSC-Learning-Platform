@@ -20,11 +20,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
 import SettingIcon from "@material-ui/icons/Settings";
 import Avatar from "@material-ui/core/Avatar";
-import NavigationDrawer from "../NavigationDrawer";
 import Hidden from "@material-ui/core/Hidden";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import amber from "@material-ui/core/colors/amber";
+import grey from "@material-ui/core/colors/grey";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
 
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      backgroundColor: "rgba(0,0,0,0.8)",
+      backgroundColor: grey[900],
       backdropFilter: "blur(6px)",
       [theme.breakpoints.up("sm")]: {
         zIndex: theme.zIndex.drawer + 1,
@@ -309,7 +309,7 @@ export default function NavigationBar(props: NavigationBarProps) {
             </NavLink>
 
             {/* <Divider orientation="vertical" className={classes.divider} /> */}
-            <Hidden mdDown implementation="css">
+            <Hidden xsDown implementation="css">
               <NavLink to="/" className={classes.link}>
                 <Typography className={classes.title} variant="h6" noWrap>
                   Learning Platform
@@ -317,60 +317,7 @@ export default function NavigationBar(props: NavigationBarProps) {
               </NavLink>
             </Hidden>
 
-            {/* Search Bar */}
-            <div className={classes.sectionDesktop}>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="ค้นหา"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
-            </div>
-
             <div className={classes.grow} />
-
-            {/* Desktop Navigation Menu */}
-            <Hidden xsDown implementation="css">
-              <ThemeProvider theme={darkTheme}>
-                <NavMenu
-                  useStyles={useLineNavigationMenuStyles}
-                  color="inherit"
-                  className={classes.navMenu}
-                >
-                  {navigationItem.map((item) => (
-                    <NavLink to={item.url} className={classes.noDecorationLink}>
-                      <NavItem
-                        active={props.active === item.id}
-                        className={
-                          props.active === item.id
-                            ? classes.navItemActive
-                            : classes.navItem
-                        }
-                      >
-                        {item.notification !== 0 ? (
-                          <Badge
-                            className={classes.badge}
-                            variant="dot"
-                            color="error"
-                          >
-                            <Typography noWrap>{item.title}</Typography>
-                          </Badge>
-                        ) : (
-                          <Typography noWrap>{item.title}</Typography>
-                        )}
-                      </NavItem>
-                    </NavLink>
-                  ))}
-                </NavMenu>
-              </ThemeProvider>
-            </Hidden>
 
             {/* Desktop Button Menu */}
             <div className={classes.sectionDesktop}>
@@ -411,9 +358,6 @@ export default function NavigationBar(props: NavigationBarProps) {
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
-              <IconButton color="inherit">
-                <SearchIcon />
-              </IconButton>
               <IconButton
                 aria-label="show more"
                 aria-controls={mobileMenuId}
@@ -430,12 +374,6 @@ export default function NavigationBar(props: NavigationBarProps) {
 
       {renderMobileMenu}
       {renderMenu}
-
-      <NavigationDrawer
-        mobileOpen={mobileOpen}
-        handleDrawerToggle={handleDrawerToggle}
-        active={props.active}
-      />
     </div>
   );
 }
