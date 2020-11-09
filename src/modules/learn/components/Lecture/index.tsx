@@ -14,8 +14,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import React from "react";
 import NavigationBar from "../NavigationBar";
 import Player from "../Player";
+import SideBar from "../SideBar";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -68,35 +69,12 @@ export default function Lecture() {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <List>
-            {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+          <SideBar />
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Container maxWidth="md">
             <Box my={4}>
-              <Typography variant="h6" color="initial" gutterBottom>
-                Video: ประวัติศาสตร์ไทย
-              </Typography>
               <Player />
             </Box>
           </Container>

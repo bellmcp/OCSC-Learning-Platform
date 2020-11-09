@@ -291,7 +291,7 @@ export default function NavigationBar(props: NavigationBarProps) {
           {/* <Divider orientation="vertical" className={classes.divider} /> */}
           <Hidden xsDown implementation="css">
             <Typography className={classes.title} variant="h6" noWrap>
-              มหากาพย์ สังคมศึกษา น่ารู้
+              Learning Platform
             </Typography>
           </Hidden>
 
