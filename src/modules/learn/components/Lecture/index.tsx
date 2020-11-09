@@ -1,13 +1,9 @@
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React from "react";
 import NavigationBar from "../NavigationBar";
-import Player from "../Player";
 import SideBar from "../SideBar";
 
 const drawerWidth = 300;
@@ -44,7 +40,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Lecture() {
+interface LectureProps {
+  content: any;
+  id: number;
+}
+
+export default function Lecture({ content, id }: LectureProps) {
   const classes = useStyles();
 
   return (
@@ -63,25 +64,11 @@ export default function Lecture() {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <SideBar />
+          <SideBar id={id} />
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <Container maxWidth="md">
-            <Box my={2}>
-              <Typography
-                variant="h6"
-                color="initial"
-                gutterBottom
-                style={{ fontSize: "1.5rem" }}
-              >
-                ประวัติศาสตร์ไทย (Video)
-              </Typography>
-            </Box>
-            <Box my={4}>
-              <Player />
-            </Box>
-          </Container>
+          {content}
         </main>
       </div>
     </React.Fragment>

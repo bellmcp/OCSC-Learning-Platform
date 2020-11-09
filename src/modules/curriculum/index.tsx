@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       margin: theme.spacing(1),
       minWidth: 240,
+      [theme.breakpoints.down("xs")]: {
+        width: "100%",
+      },
     },
   })
 );

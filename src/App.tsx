@@ -10,6 +10,9 @@ import amber from "@material-ui/core/colors/amber";
 import Home from "./modules/home";
 import Learn from "./modules/learn";
 import Lecture from "./modules/learn/components/Lecture";
+import Video from "./modules/learn/components/Video";
+import Read from "./modules/learn/components/Read";
+import Youtube from "./modules/learn/components/Youtube";
 import Courses from "./modules/courses";
 import Curriculum from "./modules/curriculum";
 import CourseDetail from "./modules/courses/components/CourseDetail";
@@ -129,7 +132,21 @@ function App() {
             )}
           />
           <Route exact path="/learn" component={Learn} />
-          <Route exact path="/learn/:contentId" component={Lecture} />
+          <Route
+            exact
+            path="/learn/epic-social-studies/"
+            component={() => <Lecture content={<Video />} id={3} />}
+          />
+          <Route
+            exact
+            path="/learn/epic-social-studies/read"
+            component={() => <Lecture content={<Read />} id={4} />}
+          />
+          <Route
+            exact
+            path="/learn/epic-social-studies/youtube"
+            component={() => <Lecture content={<Youtube />} id={5} />}
+          />
           <Route
             exact
             path="/courses"

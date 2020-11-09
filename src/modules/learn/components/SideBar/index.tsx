@@ -5,6 +5,7 @@ import {
   createStyles,
   withStyles,
 } from "@material-ui/core/styles";
+import { Link as RouterLink } from "react-router-dom";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
 import MuiListItem from "@material-ui/core/ListItem";
@@ -24,6 +25,7 @@ import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import green from "@material-ui/core/colors/green";
 import amber from "@material-ui/core/colors/amber";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -104,17 +106,22 @@ const course3 = [
     title: "ประวัติศาสตร์ไทย (Video)",
     detail: "15 นาที",
     icon: <VideoIcon />,
-    isSelected: true,
+    id: 3,
+    link: "/learn/epic-social-studies/",
   },
   {
     title: "เอกสารประกอบ (PDF)",
     detail: "8 นาที",
     icon: <ReadIcon />,
+    id: 4,
+    link: "/learn/epic-social-studies/read",
   },
   {
     title: "สรุปเนื้อหา (Youtube)",
     detail: "5 นาที",
     icon: <YouTubeIcon />,
+    id: 5,
+    link: "/learn/epic-social-studies/youtube",
   },
   {
     title: "แบบทดสอบหลังเรียน",
@@ -164,7 +171,11 @@ const course5 = [
   },
 ];
 
-export default function NestedList() {
+interface SideBarProps {
+  id: number;
+}
+
+export default function SideBar({ id }: SideBarProps) {
   const classes = useStyles();
   const [open1, setOpen1] = React.useState(false);
   const [open2, setOpen2] = React.useState(false);
@@ -289,11 +300,13 @@ export default function NestedList() {
       <Collapse in={open3} timeout="auto" unmountOnExit>
         <List component="div" disablePadding dense>
           {course3.map((item, index) => (
-            <ListItem
+            <MenuItem
               button
               key={index}
               className={classes.nested}
-              selected={item.isSelected}
+              selected={item.id === id}
+              component={RouterLink}
+              to={item.link ? item.link : "/learn/epic-social-studies/"}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
@@ -308,7 +321,7 @@ export default function NestedList() {
                   </Typography>
                 }
               />
-            </ListItem>
+            </MenuItem>
           ))}
         </List>
       </Collapse>
