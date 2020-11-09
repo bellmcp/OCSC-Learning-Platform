@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
+      padding: "0 20px",
       backgroundColor: grey[900],
       backdropFilter: "blur(6px)",
       [theme.breakpoints.up("sm")]: {
@@ -289,87 +290,85 @@ export default function NavigationBar(props: NavigationBarProps) {
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
-        <Container maxWidth="lg">
-          <Toolbar>
-            {/* Hide Sidebar Toggle Button on Desktop */}
-            <Hidden smUp implementation="css">
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerToggle}
-              >
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
+        <Toolbar>
+          {/* Hide Sidebar Toggle Button on Desktop */}
+          <Hidden smUp implementation="css">
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
 
+          <NavLink to="/" className={classes.link}>
+            <img src={logo} alt="OCSC Logo" className={classes.logo} />
+          </NavLink>
+
+          {/* <Divider orientation="vertical" className={classes.divider} /> */}
+          <Hidden xsDown implementation="css">
             <NavLink to="/" className={classes.link}>
-              <img src={logo} alt="OCSC Logo" className={classes.logo} />
+              <Typography className={classes.title} variant="h6" noWrap>
+                Learning Platform
+              </Typography>
             </NavLink>
+          </Hidden>
 
-            {/* <Divider orientation="vertical" className={classes.divider} /> */}
-            <Hidden xsDown implementation="css">
-              <NavLink to="/" className={classes.link}>
-                <Typography className={classes.title} variant="h6" noWrap>
-                  Learning Platform
-                </Typography>
-              </NavLink>
-            </Hidden>
+          <div className={classes.grow} />
 
-            <div className={classes.grow} />
-
-            {/* Desktop Button Menu */}
-            <div className={classes.sectionDesktop}>
-              <Divider orientation="vertical" className={classes.divider} />
-              <Button
-                color="inherit"
-                size="small"
-                style={{
-                  borderRadius: 50,
-                  padding: "10px 10px",
-                  margin: "6px 0",
-                }}
-                startIcon={
-                  <Avatar alt="User" src={user} className={classes.small} />
-                }
-              >
-                <Typography className={classes.profileName} noWrap>
-                  วุฒิภัทร
-                </Typography>
-              </Button>
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-                style={{
-                  margin: "6px 0",
-                }}
-              >
-                <ArrowDown />
-              </IconButton>
-            </div>
-
-            {/* Mobile Button Menu */}
-            <Hidden only={["xs", "lg", "md", "xl"]}>
-              <div className={classes.grow} />
-            </Hidden>
-            <div className={classes.sectionMobile}>
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
+          {/* Desktop Button Menu */}
+          <div className={classes.sectionDesktop}>
+            <Divider orientation="vertical" className={classes.divider} />
+            <Button
+              color="inherit"
+              size="small"
+              style={{
+                borderRadius: 50,
+                padding: "10px 10px",
+                margin: "6px 0",
+              }}
+              startIcon={
                 <Avatar alt="User" src={user} className={classes.small} />
-              </IconButton>
-            </div>
-          </Toolbar>
-        </Container>
+              }
+            >
+              <Typography className={classes.profileName} noWrap>
+                วุฒิภัทร
+              </Typography>
+            </Button>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+              style={{
+                margin: "6px 0",
+              }}
+            >
+              <ArrowDown />
+            </IconButton>
+          </div>
+
+          {/* Mobile Button Menu */}
+          <Hidden only={["xs", "lg", "md", "xl"]}>
+            <div className={classes.grow} />
+          </Hidden>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <Avatar alt="User" src={user} className={classes.small} />
+            </IconButton>
+          </div>
+        </Toolbar>
       </AppBar>
 
       {renderMobileMenu}
