@@ -3,14 +3,8 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import MailIcon from "@material-ui/icons/Mail";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import React from "react";
 import NavigationBar from "../NavigationBar";
 import Player from "../Player";
@@ -74,6 +68,16 @@ export default function Lecture() {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Container maxWidth="md">
+            <Box my={2}>
+              <Typography
+                variant="h6"
+                color="initial"
+                gutterBottom
+                style={{ fontSize: "1.5rem" }}
+              >
+                ประวัติศาสตร์ไทย (Video)
+              </Typography>
+            </Box>
             <Box my={4}>
               <Player />
             </Box>

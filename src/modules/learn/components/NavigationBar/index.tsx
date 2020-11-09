@@ -290,9 +290,11 @@ export default function NavigationBar(props: NavigationBarProps) {
 
           {/* <Divider orientation="vertical" className={classes.divider} /> */}
           <Hidden xsDown implementation="css">
-            <Typography className={classes.title} variant="h6" noWrap>
-              Learning Platform
-            </Typography>
+            <NavLink to="/" className={classes.link}>
+              <Typography className={classes.title} variant="h6" noWrap>
+                Learning Platform
+              </Typography>
+            </NavLink>
           </Hidden>
 
           <div className={classes.grow} />

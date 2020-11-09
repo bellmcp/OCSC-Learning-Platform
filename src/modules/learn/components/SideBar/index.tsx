@@ -1,8 +1,13 @@
 import React from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  Theme,
+  createStyles,
+  withStyles,
+} from "@material-ui/core/styles";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
+import MuiListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
@@ -18,6 +23,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Box from "@material-ui/core/Box";
 import green from "@material-ui/core/colors/green";
+import amber from "@material-ui/core/colors/amber";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +37,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
+const ListItem = withStyles({
+  root: {
+    "&$selected": {
+      borderLeft: `6px solid ${amber[500]}`,
+      paddingLeft: "26px",
+    },
+  },
+  selected: {},
+})(MuiListItem);
 
 const course1 = [
   {
@@ -88,6 +104,7 @@ const course3 = [
     title: "ประวัติศาสตร์ไทย (Video)",
     detail: "15 นาที",
     icon: <VideoIcon />,
+    isSelected: true,
   },
   {
     title: "เอกสารประกอบ (PDF)",
@@ -180,7 +197,7 @@ export default function NestedList() {
             <Typography
               style={{
                 fontSize: "1.2rem",
-                fontWeight: 600,
+                fontWeight: 500,
               }}
             >
               มหากาพย์ สังคมศึกษา น่ารู้
@@ -196,7 +213,7 @@ export default function NestedList() {
       <ListItem button onClick={handleClick1}>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: "1rem", fontWeight: 600 }}>
+            <Typography style={{ fontSize: "0.9rem", fontWeight: 500 }}>
               1. สังคมศึกษา น่ารู้: ภูมิศาสตร์
             </Typography>
           }
@@ -210,7 +227,7 @@ export default function NestedList() {
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography style={{ fontSize: "0.9rem" }}>
+                  <Typography style={{ fontSize: "0.8rem" }}>
                     {item.title}
                   </Typography>
                 }
@@ -229,7 +246,7 @@ export default function NestedList() {
       <ListItem button onClick={handleClick2}>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: "1rem", fontWeight: 600 }}>
+            <Typography style={{ fontSize: "0.9rem", fontWeight: 500 }}>
               2. สังคมศึกษา น่ารู้: เศรษฐศาสตร์
             </Typography>
           }
@@ -243,7 +260,7 @@ export default function NestedList() {
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography style={{ fontSize: "0.9rem" }}>
+                  <Typography style={{ fontSize: "0.8rem" }}>
                     {item.title}
                   </Typography>
                 }
@@ -262,7 +279,7 @@ export default function NestedList() {
       <ListItem button onClick={handleClick3}>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: "1rem", fontWeight: 600 }}>
+            <Typography style={{ fontSize: "0.9rem", fontWeight: 500 }}>
               3. สังคมศึกษา น่ารู้: ประวัติศาสตร์
             </Typography>
           }
@@ -272,11 +289,16 @@ export default function NestedList() {
       <Collapse in={open3} timeout="auto" unmountOnExit>
         <List component="div" disablePadding dense>
           {course3.map((item, index) => (
-            <ListItem button key={index} className={classes.nested}>
+            <ListItem
+              button
+              key={index}
+              className={classes.nested}
+              selected={item.isSelected}
+            >
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography style={{ fontSize: "0.9rem" }}>
+                  <Typography style={{ fontSize: "0.8rem" }}>
                     {item.title}
                   </Typography>
                 }
@@ -295,7 +317,7 @@ export default function NestedList() {
       <ListItem button onClick={handleClick4}>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: "1rem", fontWeight: 600 }}>
+            <Typography style={{ fontSize: "0.9rem", fontWeight: 500 }}>
               4. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา
             </Typography>
           }
@@ -309,7 +331,7 @@ export default function NestedList() {
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography style={{ fontSize: "0.9rem" }}>
+                  <Typography style={{ fontSize: "0.8rem" }}>
                     {item.title}
                   </Typography>
                 }
@@ -328,7 +350,7 @@ export default function NestedList() {
       <ListItem button onClick={handleClick5}>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: "1rem", fontWeight: 600 }}>
+            <Typography style={{ fontSize: "0.9rem", fontWeight: 500 }}>
               5. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา
             </Typography>
           }
@@ -342,7 +364,7 @@ export default function NestedList() {
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography style={{ fontSize: "0.9rem" }}>
+                  <Typography style={{ fontSize: "0.8rem" }}>
                     {item.title}
                   </Typography>
                 }
@@ -364,7 +386,7 @@ export default function NestedList() {
         </ListItemIcon>
         <ListItemText
           primary={
-            <Typography style={{ fontSize: "0.9rem" }}>
+            <Typography style={{ fontSize: "0.8rem" }}>
               แบบประเมินหลักสูตร
             </Typography>
           }
