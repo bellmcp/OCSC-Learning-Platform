@@ -1,50 +1,30 @@
-import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import amber from "@material-ui/core/colors/amber";
+import grey from "@material-ui/core/colors/grey";
+import Divider from "@material-ui/core/Divider";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import {
+  createMuiTheme,
+  createStyles,
   fade,
   makeStyles,
   Theme,
-  createStyles,
-  createMuiTheme,
-  ThemeProvider,
 } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
 import LogoutIcon from "@material-ui/icons/ExitToApp";
-import SettingIcon from "@material-ui/icons/Settings";
-import Avatar from "@material-ui/core/Avatar";
-import Hidden from "@material-ui/core/Hidden";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import amber from "@material-ui/core/colors/amber";
-import grey from "@material-ui/core/colors/grey";
 import ArrowDown from "@material-ui/icons/KeyboardArrowDown";
-
-import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
-import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-
+import MenuIcon from "@material-ui/icons/Menu";
+import SettingIcon from "@material-ui/icons/Settings";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import Container from "@material-ui/core/Container";
-
-const darkTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: amber[500],
-    },
-  },
-  typography: {
-    fontFamily: ["Prompt", "sans-serif"].join(","),
-  },
-});
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -310,11 +290,9 @@ export default function NavigationBar(props: NavigationBarProps) {
 
           {/* <Divider orientation="vertical" className={classes.divider} /> */}
           <Hidden xsDown implementation="css">
-            <NavLink to="/" className={classes.link}>
-              <Typography className={classes.title} variant="h6" noWrap>
-                Learning Platform
-              </Typography>
-            </NavLink>
+            <Typography className={classes.title} variant="h6" noWrap>
+              มหากาพย์ สังคมศึกษา น่ารู้
+            </Typography>
           </Hidden>
 
           <div className={classes.grow} />
