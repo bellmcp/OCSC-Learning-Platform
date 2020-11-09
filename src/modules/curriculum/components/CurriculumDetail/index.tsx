@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -13,7 +14,6 @@ import Avatar from "@material-ui/core/Avatar";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import AssessmentIcon from "@material-ui/icons/Assessment";
 import CreateIcon from "@material-ui/icons/Create";
-import ArrowRightIcon from "@material-ui/icons/KeyboardArrowRightRounded";
 import InfoIcon from "@material-ui/icons/Info";
 import { amber } from "@material-ui/core/colors";
 import { Typography } from "@material-ui/core";
@@ -187,6 +187,8 @@ export default function CurriculumDetail() {
                       color="secondary"
                       size="large"
                       startIcon={<PlayArrowIcon />}
+                      component={NavLink}
+                      to="/learn/epic-social-studies"
                     >
                       เข้าเรียน
                     </Button>

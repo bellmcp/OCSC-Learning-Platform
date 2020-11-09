@@ -1,5 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { NavLink } from "react-router-dom";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
@@ -188,6 +189,8 @@ function getStepProgress(step: number) {
               variant="contained"
               color="secondary"
               startIcon={<PlayArrowIcon />}
+              component={NavLink}
+              to="/learn/epic-social-studies"
             >
               เข้าเรียนต่อ
             </Button>
