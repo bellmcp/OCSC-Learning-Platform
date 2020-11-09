@@ -6,7 +6,6 @@ import NavigationBar from "../../../root/components/NavigationBar";
 import Header from "../../../root/components/Header";
 import Footer from "../../../root/components/Footer";
 
-import { CourseDetailProps } from "../CourseDetail/types";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -30,9 +29,9 @@ import List from "@material-ui/core/List/List";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
-const heroImage = require("../../../../assets/images/course_blur.png");
+const heroImage = require("../../../../assets/images/curriculum_blur.png");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -65,7 +64,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CourseDetail({ course }: CourseDetailProps) {
+export default function CurriculumDetail() {
   const classes = useStyles();
   const subtitle =
     "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
@@ -80,29 +79,47 @@ export default function CourseDetail({ course }: CourseDetailProps) {
 
   const courseInfoPlaceholder = [
     {
-      title: "เกี่ยวกับรายวิชา",
-      detail: course.fineprint,
+      title: "เกี่ยวกับหลักสูตร",
+      detail:
+        "หลักสูตรนี้จะมีชื่อว่า มหากาพย์ สังคมศึกษา น่ารู้ โดยจะมีทั้งหมด 5 เรื่อง ได้แก่ <ol><li>กฎหมายและสังคมวิทยา <li>ศาสนาสากลและพระพุทธศาสนา <li>เศรษฐศาสตร์ <li>ภูมิศาสตร์ <li>ประวัติศาสตร์</ol>วิชานี้จะเป็นเป็นการนำเสนอความรู้เรื่องสังคมศึกษาที่จำเป็นต่อนักเรียน นิสิต นักศึกษา และประชาชนทั่วไป ผู้เรียนสามารถนำความรู้ที่ได้ไปใช้กับการสอบเข้าศึกษาต่อในมหาวิทยาลัย และนำไปใช้ในชีวิตประจำวัน",
       icon: <AssignmentIcon />,
     },
     {
       title: "วัตถุประสงค์",
-      detail: course.objective,
+      detail:
+        "<ol><li>เพื่อให้ผู้เรียนสามารถนำความรู้ที่ได้เรียนในแต่ละคลิปนำไปปรับใช้ในการเรียน การทำงาน และชีวิตประจำวันได้<li>เพื่อผลิตสื่อวีดิทัศน์สำหรับการเรียนการสอนในรูปแบบออนไลน์ให้สำหรับนิสิต และประชาชนทั่วไป ได้ศึกษาเพิ่มเติมความรู้ด้วยตนเอง</ol>",
       icon: <CreateIcon />,
     },
     {
       title: "เกณฑ์การวัดและประเมินผล",
-      detail: course.criteria,
+      detail:
+        "มีการวัดและประเมินผลผ่านแบบทดสอบหลังเรียน (Posttest) โดยจะเป็นคะแนนจาก Posttest เท่ากับ 100 คะแนน ทั้งนี้ผู้เรียนต้องทำคะแนนรวมทั้งหมดให้ได้ร้อยละ 60 ขึ้นไป และเรียนจบภายในเวลาที่กำหนดจึงจะสามารถขอรับ Certificate of Completion ได้",
       icon: <AssessmentIcon />,
     },
-    { title: "หมายเหตุ", detail: course.note, icon: <InfoIcon /> },
+    {
+      title: "หมายเหตุ",
+      detail:
+        "<ol><li>ผู้เรียนจะมีสิทธิ์ทำแบบทดสอบหลังเรียน (Posttest) เมื่อเข้าร่วมกิจกรรมการเรียน (Course Progress) มากกว่า 80% ขึ้นไป<li>ผู้เรียนจะสามารถทำข้อสอบ Posttest ได้เพียง 1 ครั้งเท่านั้น</ol>",
+      icon: <InfoIcon />,
+    },
   ];
 
   const roundInfoPlaceholder = [
-    { title: "ช่วงเวลาเรียน", detail: course.round?.duration },
-    { title: "เนื้อหา", detail: course.round?.unit },
-    { title: "กลุ่มเป้าหมาย", detail: course.round?.target },
-    { title: "เกณฑ์การเรียนจบ", detail: course.round?.goal },
-    { title: "แพลตฟอร์ม", detail: course.round?.platform },
+    {
+      title: "ช่วงเวลาเรียน",
+      detail:
+        "เริ่มลงทะเบียน 10 กรกฎาคม 2563<br/>เริ่มเรียน 11 กรกฎาคม 2563<br/>สิ้นสุดการเรียน 31 สิงหาคม 2563",
+    },
+    { title: "เนื้อหา", detail: "4 บทเรียน" },
+    {
+      title: "กลุ่มเป้าหมาย",
+      detail: "นิสิต นักศึกษา และบุคคลทั่วไป<br/>จำนวน 5,000 คน",
+    },
+    {
+      title: "เกณฑ์การเรียนจบ",
+      detail: "ผู้เรียนต้องทำคะแนนรวมทั้งหมด<br/>ให้ได้ร้อยละ 60 ขึ้นไป",
+    },
+    { title: "แพลตฟอร์ม", detail: "OCSC Learning Platform" },
   ];
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
@@ -142,13 +159,13 @@ export default function CourseDetail({ course }: CourseDetailProps) {
       <CssBaseline />
       <NavigationBar active={1} />
       <Header
-        title={course.title}
+        title={"มหากาพย์ สังคมศึกษา น่ารู้"}
         subtitle={subtitle}
         imageUrl={heroImage}
         isCourse
-        courseId={course.id}
-        courseInstructor={course.instructor?.name}
-        courseGenre={course.genre}
+        courseId={1}
+        courseInstructor={"อาจารย์ กนก จันทรา และคณะ"}
+        courseGenre={"ศิลปะและการพัฒนาตนเอง"}
       />
       <Container>
         <div className={classes.main}>
@@ -156,40 +173,22 @@ export default function CourseDetail({ course }: CourseDetailProps) {
             <Box mt={4} mb={6}>
               <Grid container spacing={6}>
                 <Grid item xs={12} sm={12} md={6}>
-                  <h1 style={{ margin: 0 }}>รอบที่ {course.round?.id}</h1>
+                  <h1 style={{ margin: 0 }}>รอบที่ 4</h1>
                   <Box mb={3}>
-                    {course.totalSeat && course.availableSeat ? (
-                      <Box display="flex" alignItems="center">
-                        <Box width="100%">
-                          <Typography
-                            variant="body2"
-                            color="primary"
-                            align="right"
-                          >
-                            {course.availableSeat} / {course.totalSeat} ที่ว่าง
-                          </Typography>
-                          <LinearProgress
-                            variant="determinate"
-                            value={
-                              ((course.totalSeat - course.availableSeat) /
-                                course.totalSeat) *
-                              100
-                            }
-                            color="secondary"
-                          />
-                        </Box>
-                        <Box></Box>
-                      </Box>
-                    ) : null}
+                    <Box display="flex" alignItems="center">
+                      <Typography>
+                        คุณลงทะเบียนหลักสูตรนี้แล้ว เริ่มเรียนได้เลย
+                      </Typography>
+                    </Box>
                   </Box>
                   <Box my={3}>
                     <Button
                       variant="contained"
                       color="secondary"
                       size="large"
-                      endIcon={<ArrowRightIcon />}
+                      startIcon={<PlayArrowIcon />}
                     >
-                      ลงทะเบียนเรียน
+                      เข้าเรียน
                     </Button>
                   </Box>
                 </Grid>
@@ -254,7 +253,7 @@ export default function CourseDetail({ course }: CourseDetailProps) {
               alignItems="center"
             >
               <Grid item xs={12} sm={8}>
-                <h1>ประมวลรายวิชา</h1>
+                <h1>ประมวลหลักสูตร</h1>
               </Grid>
               <Grid item xs={12} sm={8}>
                 <Box mb={3}>

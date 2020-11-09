@@ -13,6 +13,7 @@ import Lecture from "./modules/learn/components/Lecture";
 import Courses from "./modules/courses";
 import Curriculum from "./modules/curriculum";
 import CourseDetail from "./modules/courses/components/CourseDetail";
+import CurriculumDetail from "./modules/curriculum/components/CurriculumDetail";
 import Help from "./modules/help";
 
 import { ANNOUNCEMENTS } from "./shared/announcements";
@@ -142,6 +143,11 @@ function App() {
             exact
             path="/curriculum"
             component={() => <Curriculum curriculum={CURRICULUM} />}
+          />
+          <Route
+            exact
+            path="/curriculum/:curriculumId"
+            component={() => <CurriculumDetail />}
           />
           <Route exact path="/help" component={Help} />
           <Redirect to="/" />
