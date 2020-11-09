@@ -364,7 +364,7 @@ export default function SideBar({ id }: SideBarProps) {
         <ListItemText
           primary={
             <Typography style={{ fontSize: "0.9rem", fontWeight: 500 }}>
-              5. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา
+              5. สังคมศึกษา น่ารู้: กฎหมายและสังคมวิทยา
             </Typography>
           }
         />
@@ -392,7 +392,6 @@ export default function SideBar({ id }: SideBarProps) {
         </List>
       </Collapse>
 
-      {/* Course 5 */}
       <ListItem button dense>
         <ListItemIcon>
           <RatingIcon />
