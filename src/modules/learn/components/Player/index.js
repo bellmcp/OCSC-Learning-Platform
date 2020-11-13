@@ -253,7 +253,7 @@ export default function Player() {
             ref={playerRef}
             width="100%"
             height="100%"
-            url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            url="https://ocsc-learning-platform.herokuapp.com/video.mp4"
             pip={pip}
             playing={playing}
             controls={false}

@@ -45,6 +45,7 @@ export default function AnnouncementItem({
           style={{
             background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url('${image}')`,
             backgroundSize: "cover",
+            backgroundPosition: "center top",
           }}
         />
         <div className={classes.cardDetail}>{detail}</div>
