@@ -6,7 +6,6 @@ import Slider from "@material-ui/core/Slider";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import Typography from "@material-ui/core/Typography";
-import BookmarkIcon from "@material-ui/icons/Bookmark";
 import FastForwardIcon from "@material-ui/icons/FastForward";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 import FullScreen from "@material-ui/icons/Fullscreen";
@@ -116,7 +115,6 @@ const Control = forwardRef(
       onToggleFullScreen,
       volume,
       onVolumeChange,
-      onBookmark,
     },
     ref
   ) => {
@@ -145,19 +143,10 @@ const Control = forwardRef(
             container
             direction="row"
             alignItems="center"
-            justify="flex-end"
+            justify="flex-start"
             style={{ padding: 16 }}
           >
-            <Grid item>
-              <Button
-                onClick={onBookmark}
-                variant="contained"
-                color="primary"
-                startIcon={<BookmarkIcon />}
-              >
-                บันทึก
-              </Button>
-            </Grid>
+            <Grid item></Grid>
           </Grid>
           <Grid container direction="row" alignItems="center" justify="center">
             <IconButton

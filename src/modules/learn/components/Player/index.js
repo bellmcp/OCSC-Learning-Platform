@@ -1,8 +1,5 @@
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import React, { useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import screenfull from "screenfull";
@@ -87,7 +84,6 @@ let count = 0;
 export default function Player() {
   const classes = useStyles();
   const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
-  const [bookmarks, setBookmarks] = useState([]);
   const [state, setState] = useState({
     pip: false,
     playing: true,
@@ -105,7 +101,6 @@ export default function Player() {
   const playerRef = useRef(null);
   const playerContainerRef = useRef(null);
   const controlsRef = useRef(null);
-  const canvasRef = useRef(null);
   const {
     playing,
     light,
@@ -201,31 +196,6 @@ export default function Player() {
     setState({ ...state, muted: !state.muted });
   };
 
-  const addBookmark = () => {
-    const canvas = canvasRef.current;
-    canvas.width = 160;
-    canvas.height = 90;
-    const ctx = canvas.getContext("2d");
-
-    ctx.drawImage(
-      playerRef.current.getInternalPlayer(),
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    const dataUri = canvas.toDataURL();
-    canvas.width = 0;
-    canvas.height = 0;
-    const bookmarksCopy = [...bookmarks];
-    bookmarksCopy.push({
-      time: playerRef.current.getCurrentTime(),
-      display: format(playerRef.current.getCurrentTime()),
-      image: dataUri,
-    });
-    setBookmarks(bookmarksCopy);
-  };
-
   const currentTime =
     playerRef && playerRef.current
       ? playerRef.current.getCurrentTime()
@@ -294,39 +264,8 @@ export default function Player() {
             onPlaybackRateChange={handlePlaybackRate}
             onToggleFullScreen={toggleFullScreen}
             volume={volume}
-            onBookmark={addBookmark}
           />
         </div>
-
-        {bookmarks.length !== 0 ? (
-          <Grid container style={{ marginTop: 20 }} spacing={3}>
-            {bookmarks.map((bookmark, index) => (
-              <Grid key={index} item>
-                <Paper
-                  onClick={() => {
-                    playerRef.current.seekTo(bookmark.time);
-                    controlsRef.current.style.visibility = "visible";
-                    setTimeout(() => {
-                      controlsRef.current.style.visibility = "hidden";
-                    }, 1000);
-                  }}
-                  elevation={3}
-                >
-                  <img
-                    alt="Bookmark"
-                    crossOrigin="anonymous"
-                    src={bookmark.image}
-                  />
-                  <Typography variant="body2" align="center">
-                    นาทีที่ {bookmark.display}
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-        ) : null}
-
-        <canvas ref={canvasRef} />
       </Container>
     </React.Fragment>
   );
