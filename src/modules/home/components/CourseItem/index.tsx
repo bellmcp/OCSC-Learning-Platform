@@ -175,20 +175,22 @@ export default function CourseItem({
                 <div className={classes.detail}>{detail}</div>
               </Typography>
             </Box>
-            <Box mt={2} mb={1}>
-              <Typography variant="body2">
-                <div className={classes.genre}>
-                  <CourseGenreIcon
-                    style={{
-                      color: getGenreColor(genre),
-                      fontSize: 12,
-                      marginRight: 6,
-                    }}
-                  />
-                  {genre}
-                </div>
-              </Typography>
-            </Box>
+            {!isCurriculum && genre ? (
+              <Box mt={2} mb={1}>
+                <Typography variant="body2">
+                  <div className={classes.genre}>
+                    <CourseGenreIcon
+                      style={{
+                        color: getGenreColor(genre),
+                        fontSize: 12,
+                        marginRight: 6,
+                      }}
+                    />
+                    {genre}
+                  </div>
+                </Typography>
+              </Box>
+            ) : null}
             {totalSeat && availableSeat ? (
               <Box display="flex" alignItems="center">
                 <Box width="100%" mr={1}>

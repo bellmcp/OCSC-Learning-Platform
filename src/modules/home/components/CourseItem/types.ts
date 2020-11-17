@@ -11,7 +11,7 @@ export interface CourseItemProps {
     id: number;
     title: string;
     image: string;
-    genre: string;
+    genre?: string;
     round?: CourseRoundType;
     detail: string;
     fineprint?: string;

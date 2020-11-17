@@ -164,7 +164,6 @@ export default function CurriculumDetail() {
         imageUrl={heroImage}
         isCourse
         courseId={1}
-        courseGenre={"ศิลปะและการพัฒนาตนเอง"}
       />
       <Container>
         <div className={classes.main}>

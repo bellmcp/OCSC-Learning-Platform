@@ -92,20 +92,22 @@ export default function Header(props: HeaderProps) {
                 OCSC000{props.courseId}
               </Typography>
               <Grid container justify="flex-start" className={classes.subtitle}>
-                <Grid item>
-                  <Typography variant="body2">
-                    <div>
-                      <CourseGenreIcon
-                        style={{
-                          color: blue[500],
-                          fontSize: 12,
-                          marginRight: 6,
-                        }}
-                      />
-                      {props.courseGenre}
-                    </div>
-                  </Typography>
-                </Grid>
+                {props.courseGenre ? (
+                  <Grid item>
+                    <Typography variant="body2">
+                      <div>
+                        <CourseGenreIcon
+                          style={{
+                            color: blue[500],
+                            fontSize: 12,
+                            marginRight: 6,
+                          }}
+                        />
+                        {props.courseGenre}
+                      </div>
+                    </Typography>
+                  </Grid>
+                ) : null}
               </Grid>
             </Container>
           ) : (
