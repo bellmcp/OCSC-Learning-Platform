@@ -1,9 +1,3 @@
-interface InstructorType {
-    name: string;
-    description: string;
-    image: string;
-}
-
 interface CourseRoundType {
     id: number;
     duration: string;
@@ -18,7 +12,6 @@ export interface CourseItemProps {
     title: string;
     image: string;
     genre: string;
-    instructor?: InstructorType;
     round?: CourseRoundType;
     detail: string;
     fineprint?: string;

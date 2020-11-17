@@ -11,8 +11,6 @@ import course10 from "../assets/images/courses/course10.png";
 import course11 from "../assets/images/courses/course11.png";
 import course12 from "../assets/images/courses/course12.png";
 
-import instructor1 from "../assets/images/instructors/instructor1.png";
-
 export const COURSES = [
   {
     id: 1,
@@ -23,12 +21,6 @@ export const COURSES = [
         title: "การประชาสัมพันธ์ผ่านวิทยุและโทรทัศน์",
         image: course1,
         genre: "ศิลปะและการพัฒนาตนเอง",
-        instructor: {
-          name: "รศ.ดร.สมิทธิ์ บุญชุติมา",
-          description:
-            "อาจารย์ประจำภาควิชาการประชาสัมพันธ์ คณะนิเทศศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย",
-          image: instructor1,
-        },
         round: {
           id: 2,
           duration:

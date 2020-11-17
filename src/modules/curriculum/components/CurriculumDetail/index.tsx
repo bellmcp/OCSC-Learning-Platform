@@ -164,7 +164,6 @@ export default function CurriculumDetail() {
         imageUrl={heroImage}
         isCourse
         courseId={1}
-        courseInstructor={"อาจารย์ กนก จันทรา และคณะ"}
         courseGenre={"ศิลปะและการพัฒนาตนเอง"}
       />
       <Container>
@@ -496,45 +495,6 @@ export default function CurriculumDetail() {
                 </Box>
               </Grid>
             </Grid>
-            {/* <Box my={3}>
-              <Divider />
-            </Box>
-            <Grid
-              container
-              spacing={2}
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item xs={12} sm={6}>
-                <h1>อาจารย์ผู้สอน</h1>
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <Box mb={3}>
-                  <Grid
-                    container
-                    spacing={2}
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-                  >
-                    <Avatar
-                      alt="User"
-                      src={course.instructor?.image}
-                      className={classes.small}
-                    />
-                    <Box mt={2}>
-                      <Typography variant="h6" align="center" gutterBottom>
-                        {course.instructor?.name}
-                      </Typography>
-                      <Typography variant="body2" align="center">
-                        {course.instructor?.description}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Box>
-              </Grid>
-            </Grid> */}
           </main>
         </div>
       </Container>

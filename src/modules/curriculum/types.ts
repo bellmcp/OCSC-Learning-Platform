@@ -1,12 +1,5 @@
 import { CourseItemProps } from "../home/components/CourseItem/types"
 
-
-interface InstructorType {
-    name: string;
-    description: string;
-    image: string;
-}
-
 interface CurriculumRoundType {
     id: number;
     duration: string;
@@ -23,7 +16,6 @@ export interface CurriculumDataType {
     title?: string;
     image?: string;
     genre?: string;
-    instructor?: InstructorType;
     round?: CurriculumRoundType;
     detail?: string;
     fineprint?: string;

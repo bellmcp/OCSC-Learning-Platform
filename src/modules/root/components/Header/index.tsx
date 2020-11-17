@@ -37,7 +37,6 @@ interface HeaderProps {
   imageUrl: string;
   isCourse?: boolean;
   courseId?: number;
-  courseInstructor?: string;
   courseGenre?: string;
 }
 
@@ -105,9 +104,6 @@ export default function Header(props: HeaderProps) {
                       />
                       {props.courseGenre}
                     </div>
-                  </Typography>
-                  <Typography paragraph align="left" color="inherit">
-                    {props.courseInstructor}
                   </Typography>
                 </Grid>
               </Grid>
@@ -181,9 +177,6 @@ export default function Header(props: HeaderProps) {
                       />
                       {props.courseGenre}
                     </div>
-                  </Typography>
-                  <Typography paragraph align="left" color="inherit">
-                    {props.courseInstructor}
                   </Typography>
                 </Grid>
               </Grid>
