@@ -17,7 +17,7 @@ import Grid from "@material-ui/core/Grid";
 import { NavLink as Link } from "react-router-dom";
 
 import MyCourseItem from "./components/MyCourseItem";
-import CourseFilter from "./components/CourseFilter";
+import CourseFilter from "../courses/components/CourseFilter";
 
 const heroImage = require("../../assets/images/root/hero-min.jpg");
 

@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     styledDot: {
       "& .carousel__dot": {
-        backgroundColor: amber[500],
+        backgroundColor: grey[300],
         height: "8px",
         width: "8px",
         padding: "4px",
@@ -50,15 +50,7 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: "0 4px",
       },
       "& .carousel__dot--selected": {
-        backgroundColor: grey[300],
-      },
-      [theme.breakpoints.down("sm")]: {
-        "& .carousel__dot": {
-          backgroundColor: grey[300],
-        },
-        "& .carousel__dot--selected": {
-          backgroundColor: amber[500],
-        },
+        backgroundColor: amber[500],
       },
     },
     buttonBack: {
