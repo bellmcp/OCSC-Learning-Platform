@@ -68,7 +68,7 @@ export default function Home({
                 variant="h6"
                 style={{ fontSize: "1.7rem" }}
               >
-                เข้าเรียน
+                วิชาที่เรียนล่าสุด
               </Typography>
               <Link
                 to="/learn"

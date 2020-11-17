@@ -25,6 +25,7 @@ import Badge from "@material-ui/core/Badge/Badge";
 import CheckIcon from "@material-ui/icons/Check";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import ModeCommentIcon from "@material-ui/icons/ModeComment";
+import AttachmentIcon from "@material-ui/icons/AttachFile";
 
 const heroImage = require("../../assets/images/hero.jpg");
 
@@ -169,17 +170,28 @@ export default function Help() {
                         </Typography>
                         <Typography variant="caption" component="h2">
                           <em>7 พฤศจิกายน 21:05 น.</em>
+                          <AttachmentIcon
+                            style={{
+                              fontSize: 14,
+                              marginLeft: "10px",
+                              marginRight: "5px",
+                            }}
+                          />
+                          มีไฟล์แนบ
                         </Typography>
                       </Box>
                       <Divider />
                       <Box m={3}>
                         <Grid container alignItems="center" justify="flex-end">
-                          <ModeCommentIcon style={{ marginRight: 10 }} />
+                          <Badge color="error" variant="dot">
+                            <ModeCommentIcon />
+                          </Badge>
                           <Typography
                             variant="h6"
                             component="h1"
                             align="right"
                             gutterBottom
+                            style={{ marginLeft: "10px" }}
                           >
                             ข้อความตอบกลับ
                           </Typography>
