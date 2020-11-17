@@ -7,7 +7,6 @@ import { CourseItemProps } from "./types";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
-import blue from "@material-ui/core/colors/blue";
 import Box from "@material-ui/core/Box";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import CardActionArea from "@material-ui/core/CardActionArea";

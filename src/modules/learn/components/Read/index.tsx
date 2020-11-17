@@ -3,18 +3,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    playerWrapper: {
-      position: "relative",
-      paddingTop: "56.25%",
-    },
-    reactPlayer: { position: "absolute", top: 0, left: 0 },
-  })
-);
 
 interface onDocumentLoadSuccessProps {
   numPages: any;
@@ -43,8 +32,7 @@ function PDFContent() {
   );
 }
 
-export default function Video() {
-  const classes = useStyles();
+export default function Read() {
   return (
     <React.Fragment>
       <Container maxWidth="md">

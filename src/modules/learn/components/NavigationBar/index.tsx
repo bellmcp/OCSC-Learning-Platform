@@ -11,7 +11,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import {
-  createMuiTheme,
   createStyles,
   fade,
   makeStyles,
@@ -140,17 +139,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-const navigationItem = [
-  {
-    id: 0,
-    title: "หน้าหลัก",
-    url: "/",
-    notification: 0,
-  },
-  { id: 1, title: "เข้าเรียน", url: "/learn", notification: 0 },
-  { id: 2, title: "ช่วยเหลือ", url: "/help", notification: 1 },
-];
 
 interface NavigationBarProps {
   active: number;
