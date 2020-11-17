@@ -22,7 +22,7 @@ import Button from "@material-ui/core/Button";
 
 import CourseIcon from "@material-ui/icons/MenuBook";
 
-const heroImage = require("../../assets/images/hero.jpg");
+const heroImage = require("../../assets/images/root/hero-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

@@ -183,8 +183,8 @@ export default function NavigationBar(props: NavigationBarProps) {
     setMobileMoreAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
 
-  const logo = require("../../../../assets/images/ocsc_logo.png");
-  const user = require("../../../../assets/images/user.jpg");
+  const logo = require("../../../../assets/images/root/logo-min.png");
+  const user = require("../../../../assets/images/root/user-min.jpg");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);

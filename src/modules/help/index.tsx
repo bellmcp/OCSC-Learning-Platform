@@ -27,7 +27,7 @@ import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import ModeCommentIcon from "@material-ui/icons/ModeComment";
 import AttachmentIcon from "@material-ui/icons/AttachFile";
 
-const heroImage = require("../../assets/images/hero.jpg");
+const heroImage = require("../../assets/images/root/hero-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

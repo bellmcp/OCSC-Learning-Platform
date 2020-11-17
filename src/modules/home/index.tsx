@@ -19,7 +19,7 @@ import { NavLink as Link } from "react-router-dom";
 import MyCourseItem from "./components/MyCourseItem";
 import CourseFilter from "./components/CourseFilter";
 
-const heroImage = require("../../assets/images/hero.jpg");
+const heroImage = require("../../assets/images/root/hero-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

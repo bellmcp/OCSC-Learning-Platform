@@ -10,7 +10,7 @@ import LearnIcon from "@material-ui/icons/PlayArrow";
 import MyCourseItem from "../home/components/MyCourseItem";
 import Typography from "@material-ui/core/Typography";
 
-const heroImage = require("../../assets/images/hero.jpg");
+const heroImage = require("../../assets/images/root/hero-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

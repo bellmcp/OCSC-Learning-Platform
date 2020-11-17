@@ -31,7 +31,7 @@ import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
-const heroImage = require("../../../../assets/images/curriculum_blur.png");
+const heroImage = require("../../../../assets/images/root/curriculum-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

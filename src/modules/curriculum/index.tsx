@@ -22,7 +22,7 @@ import Button from "@material-ui/core/Button";
 
 import CurriculumIcon from "@material-ui/icons/CollectionsBookmark";
 
-const heroImage = require("../../assets/images/hero.jpg");
+const heroImage = require("../../assets/images/root/hero-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

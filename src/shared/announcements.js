@@ -1,7 +1,8 @@
-import announcement1 from "../assets/images/announcements/announcement1.png";
-import announcement2 from "../assets/images/announcements/announcement2.png";
-import announcement3 from "../assets/images/announcements/announcement3.png";
-import announcement4 from "../assets/images/announcements/announcement4.png";
+import announcement1 from "../assets/images/announcements/announcement1-min.jpg";
+import announcement2 from "../assets/images/announcements/announcement2-min.jpg";
+import announcement3 from "../assets/images/announcements/announcement3-min.jpg";
+import announcement4 from "../assets/images/announcements/announcement4-min.jpg";
+import announcement5 from "../assets/images/announcements/announcement5-min.jpg";
 
 export const ANNOUNCEMENTS = [
   {
@@ -24,5 +25,10 @@ export const ANNOUNCEMENTS = [
     image: announcement4,
     detail:
       "ฉลองครบรอบ 3 ปี OCSC กับ 'มหากาพย์ อังกฤษ อัพเกรด' ที่กลับมาเปิดให้ลงทะเบียนอีกครั้ง!",
+  },
+  {
+    id: 5,
+    image: announcement5,
+    detail: "สำนักงาน ก.พ. ยินดีต้อนรับ",
   },
 ];
