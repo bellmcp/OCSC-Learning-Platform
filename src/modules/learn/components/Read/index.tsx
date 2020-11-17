@@ -41,9 +41,9 @@ export default function Read() {
             variant="h6"
             color="initial"
             gutterBottom
-            style={{ fontSize: "1.5rem" }}
+            style={{ fontSize: "1.4rem", fontWeight: 600 }}
           >
-            เอกสารประกอบ (PDF)
+            เอกสาร: หลักธรรมเบื้องต้น
           </Typography>
         </Box>
         <Box my={4}>

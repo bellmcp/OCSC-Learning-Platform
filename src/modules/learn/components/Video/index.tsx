@@ -13,9 +13,9 @@ export default function Video() {
             variant="h6"
             color="initial"
             gutterBottom
-            style={{ fontSize: "1.5rem" }}
+            style={{ fontSize: "1.4rem", fontWeight: 600 }}
           >
-            ประวัติศาสตร์ไทย (Video)
+            วิดีโอ: พระพุทธศาสนา
           </Typography>
         </Box>
         <Box my={4}>
