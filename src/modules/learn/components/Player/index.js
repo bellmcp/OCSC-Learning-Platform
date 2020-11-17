@@ -8,6 +8,7 @@ import Control from "./Control";
 const useStyles = makeStyles((theme) => ({
   playerWrapper: {
     width: "100%",
+    height: "500px",
     position: "relative",
   },
   controlsWrapper: {
@@ -81,7 +82,7 @@ const format = (seconds) => {
 
 let count = 0;
 
-export default function Player() {
+export default function Player(props) {
   const classes = useStyles();
   const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
   const [state, setState] = useState({
@@ -223,7 +224,7 @@ export default function Player() {
             ref={playerRef}
             width="100%"
             height="100%"
-            url="https://ocsc-learning-platform.herokuapp.com/video.mp4"
+            url={props.url}
             pip={pip}
             playing={playing}
             controls={false}
