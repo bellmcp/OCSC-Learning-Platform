@@ -32,62 +32,62 @@ function PDFContent() {
   }
 
   return (
-    // <div>
-    //   <Document
-    //     file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
-    //     onLoadSuccess={onDocumentLoadSuccess}
+    <div>
+      <Document
+        file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
+        onLoadSuccess={onDocumentLoadSuccess}
+      >
+        <Page pageNumber={pageNumber} />
+      </Document>
+      <p>
+        Page {pageNumber} of {numPages}
+      </p>
+    </div>
+    // <>
+    //   <Grid
+    //     container
+    //     spacing={1}
+    //     direction="row"
+    //     justify="flex-start"
+    //     alignItems="flex-start"
+    //     alignContent="stretch"
+    //     wrap="nowrap"
     //   >
-    //     <Page pageNumber={pageNumber} />
-    //   </Document>
-    //   <p>
-    //     Page {pageNumber} of {numPages}
-    //   </p>
-    // </div>
-    <>
-      <Grid
-        container
-        spacing={1}
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-        alignContent="stretch"
-        wrap="nowrap"
-      >
-        <Grid item>
-          <Document
-            file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
-            onLoadSuccess={onDocumentLoadSuccess}
-          >
-            <Page pageNumber={pageNumber} />
-          </Document>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        spacing={1}
-        direction="column"
-        justify="center"
-        alignItems="center"
-        alignContent="center"
-        wrap="nowrap"
-      >
-        <Grid item>
-          <p>
-            หน้าที่ {pageNumber || (numPages ? 1 : "-")} จาก {numPages || "-"}
-          </p>
-        </Grid>
-        <Grid item>
-          <ButtonGroup variant="outlined" color="default" aria-label="">
-            <Button disabled={pageNumber <= 1} onClick={previousPage}>
-              Previous
-            </Button>
-            <Button disabled={pageNumber === numPages} onClick={nextPage}>
-              Next
-            </Button>
-          </ButtonGroup>
-        </Grid>
-      </Grid>
-    </>
+    //     <Grid item>
+    //       <Document
+    //         file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
+    //         onLoadSuccess={onDocumentLoadSuccess}
+    //       >
+    //         <Page pageNumber={pageNumber} />
+    //       </Document>
+    //     </Grid>
+    //   </Grid>
+    //   <Grid
+    //     container
+    //     spacing={1}
+    //     direction="column"
+    //     justify="center"
+    //     alignItems="center"
+    //     alignContent="center"
+    //     wrap="nowrap"
+    //   >
+    //     <Grid item>
+    //       <p>
+    //         หน้าที่ {pageNumber || (numPages ? 1 : "-")} จาก {numPages || "-"}
+    //       </p>
+    //     </Grid>
+    //     <Grid item>
+    //       <ButtonGroup variant="outlined" color="default" aria-label="">
+    //         <Button disabled={pageNumber <= 1} onClick={previousPage}>
+    //           Previous
+    //         </Button>
+    //         <Button disabled={pageNumber === numPages} onClick={nextPage}>
+    //           Next
+    //         </Button>
+    //       </ButtonGroup>
+    //     </Grid>
+    //   </Grid>
+    // </>
   );
 }
 
