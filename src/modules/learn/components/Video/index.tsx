@@ -51,13 +51,25 @@ export default function Video() {
                 value="https://ocsc-learning-platform.herokuapp.com/video.mp4"
                 aria-label="ลิงก์หลัก"
               >
-                ลิงก์หลัก
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  style={{ fontWeight: 500, padding: "0 6px" }}
+                >
+                  ลิงก์หลัก
+                </Typography>
               </ToggleButton>
               <ToggleButton
                 value="https://www.youtube.com/watch?v=DJX9fCdgMsg"
                 aria-label="ลิงก์สำรอง"
               >
-                สำรอง
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  style={{ fontWeight: 500, padding: "0 6px" }}
+                >
+                  ลิงก์สำรอง
+                </Typography>
               </ToggleButton>
             </ToggleButtonGroup>
           </Grid>

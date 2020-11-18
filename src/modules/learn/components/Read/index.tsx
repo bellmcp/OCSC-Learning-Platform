@@ -1,13 +1,12 @@
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import Divider from "@material-ui/core/Divider";
-import Link from "@material-ui/core/Link";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function PDFContent() {
@@ -33,15 +32,29 @@ function PDFContent() {
 
   return (
     <div>
-      <Document
-        file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
-        onLoadSuccess={onDocumentLoadSuccess}
+      <Grid
+        container
+        spacing={1}
+        direction="column"
+        justify="center"
+        alignItems="center"
+        alignContent="center"
+        wrap="nowrap"
       >
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
+        <Grid item>
+          <Document
+            file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
+            onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+        </Grid>
+        <Grid item>
+          <p>
+            หน้าที่ {pageNumber} จาก {numPages}
+          </p>
+        </Grid>
+      </Grid>
     </div>
     // <>
     //   <Grid

@@ -55,8 +55,8 @@ export default function ItemComponent({
       </Grid>
       <Divider className={classes.divider} />
       <form>
-        <FormControl component="fieldset">
-          {options ? (
+        {options ? (
+          <FormControl component="fieldset">
             <RadioGroup aria-label={question} name={question}>
               <Grid
                 container
@@ -83,17 +83,20 @@ export default function ItemComponent({
                 ))}
               </Grid>
             </RadioGroup>
-          ) : (
-            <Box mt={3} mb={2}>
+          </FormControl>
+        ) : (
+          <Box mt={3} mb={2}>
+            <div>
               <TextField
                 id="outlined-basic"
                 placeholder="แสดงความคิดเห็น"
+                variant="outlined"
                 fullWidth
                 multiline
               />
-            </Box>
-          )}
-        </FormControl>
+            </div>
+          </Box>
+        )}
       </form>
     </React.Fragment>
   );
