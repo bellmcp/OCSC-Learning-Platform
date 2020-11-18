@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Link from "@material-ui/core/Link";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface onDocumentLoadSuccessProps {
@@ -14,25 +15,83 @@ interface onDocumentLoadSuccessProps {
 }
 
 function PDFContent() {
-  const [numPages, setNumPages] = useState(null);
+  const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
 
-  function onDocumentLoadSuccess({ numPages }: onDocumentLoadSuccessProps) {
+  function onDocumentLoadSuccess({ numPages }: any) {
     setNumPages(numPages);
+    setPageNumber(1);
+  }
+
+  function changePage(offset: any) {
+    setPageNumber((prevPageNumber) => prevPageNumber + offset);
+  }
+
+  function previousPage() {
+    changePage(-1);
+  }
+
+  function nextPage() {
+    changePage(1);
   }
 
   return (
-    <div>
-      <Document
-        file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
-        onLoadSuccess={onDocumentLoadSuccess}
+    // <div>
+    //   <Document
+    //     file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
+    //     onLoadSuccess={onDocumentLoadSuccess}
+    //   >
+    //     <Page pageNumber={pageNumber} />
+    //   </Document>
+    //   <p>
+    //     Page {pageNumber} of {numPages}
+    //   </p>
+    // </div>
+    <>
+      <Grid
+        container
+        spacing={1}
+        direction="row"
+        justify="flex-start"
+        alignItems="flex-start"
+        alignContent="stretch"
+        wrap="nowrap"
       >
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
-    </div>
+        <Grid item>
+          <Document
+            file="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
+            onLoadSuccess={onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        spacing={1}
+        direction="column"
+        justify="center"
+        alignItems="center"
+        alignContent="center"
+        wrap="nowrap"
+      >
+        <Grid item>
+          <p>
+            หน้าที่ {pageNumber || (numPages ? 1 : "-")} จาก {numPages || "-"}
+          </p>
+        </Grid>
+        <Grid item>
+          <ButtonGroup variant="outlined" color="default" aria-label="">
+            <Button disabled={pageNumber <= 1} onClick={previousPage}>
+              Previous
+            </Button>
+            <Button disabled={pageNumber >= numPages} onClick={nextPage}>
+              Next
+            </Button>
+          </ButtonGroup>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
