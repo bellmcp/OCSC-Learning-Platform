@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function CourseFilter() {
   const classes = useStyles();
-  const [genre, setGenre] = React.useState<string | number>("all");
+  const [genre, setGenre] = React.useState<string | number>("");
   const [open, setOpen] = React.useState(false);
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setGenre(event.target.value as number);

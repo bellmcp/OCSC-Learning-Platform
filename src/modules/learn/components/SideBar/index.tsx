@@ -70,6 +70,8 @@ const course3 = [
     title: "แบบประเมินรายวิชา",
     detail: "0/1 ครั้ง",
     icon: <SurveyIcon />,
+    id: 6,
+    link: "/learn/epic-social-studies/survey",
   },
 ];
 
