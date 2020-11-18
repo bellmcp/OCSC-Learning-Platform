@@ -10,12 +10,8 @@ import Link from "@material-ui/core/Link";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-interface onDocumentLoadSuccessProps {
-  numPages: any;
-}
-
 function PDFContent() {
-  const [numPages, setNumPages] = useState(0);
+  const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
   function onDocumentLoadSuccess({ numPages }: any) {
@@ -85,7 +81,7 @@ function PDFContent() {
             <Button disabled={pageNumber <= 1} onClick={previousPage}>
               Previous
             </Button>
-            <Button disabled={pageNumber >= numPages} onClick={nextPage}>
+            <Button disabled={pageNumber === numPages} onClick={nextPage}>
               Next
             </Button>
           </ButtonGroup>
