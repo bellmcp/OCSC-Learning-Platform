@@ -12,7 +12,7 @@ import Learn from "./modules/learn";
 import Lecture from "./modules/learn/components/Lecture";
 import Video from "./modules/learn/components/Video";
 import Read from "./modules/learn/components/Read";
-import Youtube from "./modules/learn/components/Youtube";
+import Exam from "./modules/learn/components/Exam";
 import Courses from "./modules/courses";
 import Curriculum from "./modules/curriculum";
 import CourseDetail from "./modules/courses/components/CourseDetail";
@@ -144,8 +144,8 @@ function App() {
           />
           <Route
             exact
-            path="/learn/epic-social-studies/youtube"
-            component={() => <Lecture content={<Youtube />} id={5} />}
+            path="/learn/epic-social-studies/exam"
+            component={() => <Lecture content={<Exam />} id={5} />}
           />
           <Route
             exact

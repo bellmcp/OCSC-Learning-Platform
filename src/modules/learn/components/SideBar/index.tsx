@@ -8,6 +8,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import VideoIcon from "@material-ui/icons/PlayCircleFilled";
 import ReadIcon from "@material-ui/icons/MenuBook";
 import QuizIcon from "@material-ui/icons/LibraryBooks";
+import SurveyIcon from "@material-ui/icons/ThumbUp";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import Rating from "@material-ui/lab/Rating";
 import Typography from "@material-ui/core/Typography";
@@ -62,6 +63,13 @@ const course3 = [
     title: "แบบทดสอบหลังเรียน",
     detail: "0/1 ครั้ง",
     icon: <QuizIcon />,
+    id: 5,
+    link: "/learn/epic-social-studies/exam",
+  },
+  {
+    title: "แบบประเมินรายวิชา",
+    detail: "0/1 ครั้ง",
+    icon: <SurveyIcon />,
   },
 ];
 
