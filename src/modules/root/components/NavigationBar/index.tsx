@@ -192,7 +192,6 @@ export default function NavigationBar(props: NavigationBarProps) {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-    console.log(!mobileOpen);
   };
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {

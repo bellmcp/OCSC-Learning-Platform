@@ -57,7 +57,7 @@ export default function ItemComponent({
           <RadioGroup aria-label={question} name={question}>
             <Grid className={classes.options} container spacing={0}>
               {options.map((option) => (
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                   <FormControlLabel
                     value={option}
                     control={<Radio />}

@@ -191,7 +191,7 @@ export default function CourseItem({
                 </Typography>
               </Box>
             ) : null}
-            {totalSeat && availableSeat ? (
+            {/* {totalSeat && availableSeat ? (
               <Box display="flex" alignItems="center">
                 <Box width="100%" mr={1}>
                   <LinearProgress
@@ -206,7 +206,7 @@ export default function CourseItem({
                   </Typography>
                 </Box>
               </Box>
-            ) : null}
+            ) : null} */}
           </Box>
         </CardContent>
       </Card>
