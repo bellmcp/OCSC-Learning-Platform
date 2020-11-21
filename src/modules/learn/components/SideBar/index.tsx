@@ -169,7 +169,7 @@ export default function SideBar({ id }: SideBarProps) {
             </Typography>
           </Grid>
           <Grid item>
-            <Rating name="size-large" defaultValue={0} size="large" />
+            <Rating name="size-large" defaultValue={3} size="large" />
           </Grid>
         </Grid>
       </Box>

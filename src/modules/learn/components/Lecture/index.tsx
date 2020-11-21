@@ -15,8 +15,10 @@ import LinearProgress, {
   LinearProgressProps,
 } from "@material-ui/core/LinearProgress";
 import amber from "@material-ui/core/colors/amber";
+import Hidden from "@material-ui/core/Hidden";
 
 const drawerWidth = 300;
+const footerHeight = 60;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(1),
       position: "relative",
+      marginBottom: footerHeight,
     },
     bottom: {
       position: "sticky",
@@ -53,13 +56,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     timerContainer: {
       position: "fixed",
-      height: "60px",
+      height: footerHeight,
       bottom: 0,
       width: `calc(100% - ${drawerWidth}px)`,
       borderTop: "1px solid rgba(0, 0, 0, 0.12)",
       backgroundColor: theme.palette.background.paper,
       marginLeft: drawerWidth,
       zIndex: 1201,
+      [theme.breakpoints.down("xs")]: {
+        width: "100%",
+        marginLeft: "0",
+      },
     },
   })
 );
@@ -178,7 +185,10 @@ export default function Lecture({ content, id }: LectureProps) {
               </div>
               <div>
                 <Typography variant="h6" style={{ fontSize: "1rem" }}>
-                  <b>เวลาเข้าเรียน:</b> {progress}/30 นาที
+                  <Hidden only={["xs"]}>
+                    <b>เวลาเข้าเรียน:</b>
+                  </Hidden>{" "}
+                  {progress}/30 นาที
                 </Typography>
               </div>
               <div style={{ width: "100px" }}>

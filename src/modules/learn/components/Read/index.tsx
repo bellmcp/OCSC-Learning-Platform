@@ -126,6 +126,7 @@ export default function Read() {
             <Link
               href="https://ocsc-learning-platform.herokuapp.com/sample.pdf"
               target="_blank"
+              style={{ textDecoration: "none" }}
             >
               <Button variant="outlined" color="default">
                 ดาวน์โหลดไฟล์
