@@ -91,6 +91,7 @@ export default function ItemComponent({
                 id="outlined-basic"
                 placeholder="แสดงความคิดเห็น"
                 variant="outlined"
+                color="secondary"
                 fullWidth
                 multiline
               />
