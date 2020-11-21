@@ -8,7 +8,7 @@ import Control from "./Control";
 const useStyles = makeStyles((theme) => ({
   playerWrapper: {
     width: "100%",
-    height: "500px",
+    height: "auto",
     position: "relative",
   },
   controlsWrapper: {
