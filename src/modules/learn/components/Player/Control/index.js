@@ -25,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    height: "99%",
-    background: "rgba(0,0,0,0.6)",
+    height: "auto",
+    background:
+      "linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6))",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   controlIcons: {
-    color: "#777",
+    color: "#fff",
     fontSize: 50,
     transform: "scale(0.9)",
     "&:hover": {
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bottomIcons: {
-    color: "#999",
+    color: "#fff",
     "&:hover": {
       color: "#fff",
     },
@@ -59,10 +60,10 @@ const PrettoSlider = withStyles({
     height: 8,
   },
   thumb: {
-    height: 24,
-    width: 24,
+    height: 16,
+    width: 16,
     border: "2px solid currentColor",
-    marginTop: -8,
+    marginTop: -4,
     marginLeft: -12,
     "&:focus, &:hover, &$active": {
       boxShadow: "inherit",
