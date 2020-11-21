@@ -1,10 +1,20 @@
+import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import React from "react";
 import NavigationBar from "../NavigationBar";
 import SideBar from "../SideBar";
+import CircularProgress, {
+  CircularProgressProps,
+} from "@material-ui/core/CircularProgress";
+import LinearProgress, {
+  LinearProgressProps,
+} from "@material-ui/core/LinearProgress";
+import amber from "@material-ui/core/colors/amber";
 
 const drawerWidth = 300;
 
@@ -33,13 +43,23 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
-      padding: theme.spacing(3),
+      padding: theme.spacing(1),
       position: "relative",
     },
     bottom: {
       position: "sticky",
       bottom: 0,
       width: "100%",
+    },
+    timerContainer: {
+      position: "fixed",
+      height: "60px",
+      bottom: 0,
+      width: `calc(100% - ${drawerWidth}px)`,
+      borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+      backgroundColor: theme.palette.background.paper,
+      marginLeft: drawerWidth,
+      zIndex: 1201,
     },
   })
 );
@@ -49,8 +69,73 @@ interface LectureProps {
   id: number;
 }
 
+function CircularProgressWithLabel(
+  props: CircularProgressProps & { value: number }
+) {
+  return (
+    <Box position="relative" display="inline-flex">
+      <CircularProgress variant="static" {...props} />
+      <Box
+        top={0}
+        left={0}
+        bottom={0}
+        right={0}
+        position="absolute"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Typography
+          variant="caption"
+          component="div"
+          color="textPrimary"
+        >{`${Math.round(props.value)} s`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
+function LinearProgressWithLabel(
+  props: LinearProgressProps & { value: number }
+) {
+  return (
+    <Box display="flex" alignItems="center">
+      <Box width="100%" mr={1}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box minWidth={35}>
+        <Typography variant="body2" color="textPrimary">{`${Math.round(
+          props.value
+        )}%`}</Typography>
+      </Box>
+    </Box>
+  );
+}
+
 export default function Lecture({ content, id }: LectureProps) {
   const classes = useStyles();
+  const [timer, setTimer] = React.useState(1);
+  const [progress, setProgress] = React.useState(1);
+
+  React.useEffect(() => {
+    const round = setInterval(() => {
+      setTimer((prevProgress) => (prevProgress >= 60 ? 10 : prevProgress + 1));
+    }, 1000);
+    return () => {
+      clearInterval(round);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const sequence = setInterval(() => {
+      setProgress((prevProgress) =>
+        prevProgress >= 100 ? 10 : prevProgress + 1
+      );
+    }, 100000);
+    return () => {
+      clearInterval(sequence);
+    };
+  }, []);
 
   return (
     <React.Fragment>
@@ -74,6 +159,37 @@ export default function Lecture({ content, id }: LectureProps) {
           <div className={classes.toolbar} />
           {content}
         </main>
+        <div className={classes.timerContainer}>
+          <Box mx={2} mt={1}>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <div>
+                <CircularProgressWithLabel
+                  value={timer}
+                  style={{
+                    backgroundColor: `${amber[500]}`,
+                    borderRadius: "50%",
+                  }}
+                />
+              </div>
+              <div>
+                <Typography variant="h6" style={{ fontSize: "1rem" }}>
+                  <b>เวลาเข้าเรียน:</b> {progress}/30 นาที
+                </Typography>
+              </div>
+              <div style={{ width: "100px" }}>
+                <LinearProgressWithLabel
+                  value={(progress / 30) * 100}
+                  color="secondary"
+                />
+              </div>
+            </Grid>
+          </Box>
+        </div>
       </div>
     </React.Fragment>
   );
