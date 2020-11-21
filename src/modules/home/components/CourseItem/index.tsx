@@ -16,6 +16,8 @@ import indigo from "@material-ui/core/colors/indigo";
 import orange from "@material-ui/core/colors/orange";
 import pink from "@material-ui/core/colors/pink";
 import purple from "@material-ui/core/colors/purple";
+import blue from "@material-ui/core/colors/blue";
+import brown from "@material-ui/core/colors/brown";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,16 +86,20 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function getGenreColor(genre: string) {
   switch (genre) {
-    case "ภาษา":
+    case "การบริหารงาน":
       return purple[500];
-    case "เทคโนโลยี":
+    case "การบริหารทรัพยากรบุคคล":
       return indigo[500];
-    case "การจัดการ":
+    case "กฎหมายและระเบียบราชการ":
       return pink[500];
-    case "ศิลปะและการพัฒนาตนเอง":
+    case "การเขียนหนังสือราชการ":
       return orange[500];
-    case "สุขภาพ":
+    case "ทักษะทางสังคม (Soft Skill)":
       return green[500];
+    case "ทักษะด้านดิจิทัล":
+      return blue[500];
+    case "ทักษะด้านภาษา":
+      return brown[500];
     default:
       return indigo[500];
   }
