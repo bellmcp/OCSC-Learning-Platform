@@ -81,7 +81,11 @@ function CircularProgressWithLabel(
 ) {
   return (
     <Box position="relative" display="inline-flex">
-      <CircularProgress variant="static" {...props} />
+      <CircularProgress
+        variant="static"
+        {...props}
+        value={props.value * 1.66666666667}
+      />
       <Box
         top={0}
         left={0}
