@@ -14,13 +14,18 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import Rating from "@material-ui/lab/Rating";
 import amber from "@material-ui/core/colors/amber";
-import course6 from "../../../../assets/images/courses/course2.png";
+import course55555 from "../../../../assets/images/courses/course2.png";
 import curriculum1 from "../../../../assets/images/curriculum/curriculum1.png";
+import curriculum2 from "../../../../assets/images/curriculum/curriculum7.png";
 import course1 from "../../../../assets/images/curriculum/curriculum1/course1.png";
 import course2 from "../../../../assets/images/curriculum/curriculum1/course2.png";
 import course3 from "../../../../assets/images/curriculum/curriculum1/course3.png";
 import course4 from "../../../../assets/images/curriculum/curriculum1/course4.png";
 import course5 from "../../../../assets/images/curriculum/curriculum1/course5.png";
+
+import course6 from "../../../../assets/images/curriculum/curriculum2/course1.png";
+import course7 from "../../../../assets/images/curriculum/curriculum2/course2.png";
+import course8 from "../../../../assets/images/curriculum/curriculum2/course3.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,6 +86,25 @@ const myCourses = [
   },
 ];
 
+const myCourses2 = [
+  {
+    title: "1. อังกฤษ อัพเกรด: ไวยากรณ์พร้อมรบ",
+    id: "OCSC00006C-01",
+    image: course6,
+    isLatest: true,
+  },
+  {
+    title: "2. อังกฤษ อัพเกรด: Conversation มั่นใจ",
+    id: "OCSC00006C-02",
+    image: course7,
+  },
+  {
+    title: "3. อังกฤษ อัพเกรด : ศัพท์ทะลุ อ่านทะลวง",
+    id: "OCSC00006C-03",
+    image: course8,
+  },
+];
+
 interface MyCourseItemProps {
   isHome?: boolean;
 }
@@ -89,7 +113,7 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Box mt={2} mb={6}>
+      <Box mt={2} mb={4}>
         <Card elevation={4}>
           <div className={classes.details}>
             <CardMedia
@@ -255,6 +279,140 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
         </Card>
       </Box>
 
+      {!isHome ? (
+        <Box mt={2} mb={6}>
+          <Card elevation={4}>
+            <div className={classes.details}>
+              <CardMedia
+                image={curriculum2}
+                title="Live from space album cover"
+                style={{
+                  width: "200px",
+                  borderRadius: "4 0 0 0",
+                  borderLeft: `10px solid ${amber[500]}`,
+                }}
+                className={classes.cardImage}
+              />
+              <div className={classes.controls}>
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-between"
+                  alignItems="center"
+                >
+                  <Grid item>
+                    <Box my={2} mx={3}>
+                      <Typography
+                        variant="body2"
+                        color="secondary"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        หลักสูตร
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        component="h2"
+                        style={{ fontSize: "1.4rem" }}
+                      >
+                        มหากาพย์ อังกฤษ อัพเกรด
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        OCSC00006C
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item>
+                    <Box my={3} mx={3}>
+                      <Grid
+                        container
+                        justify="center"
+                        direction="column"
+                        alignItems="center"
+                      >
+                        <Grid item>
+                          <Typography
+                            style={{
+                              fontSize: "0.8rem",
+                            }}
+                            gutterBottom
+                          >
+                            โปรดให้คะแนนหลักสูตรนี้
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Rating
+                            name="size-large"
+                            defaultValue={4}
+                            size="large"
+                          />
+                        </Grid>
+                      </Grid>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </div>
+            </div>
+            <Divider />
+            <Divider />
+            {myCourses2.map((item, index) => (
+              <div key={index}>
+                <Divider />
+                <div className={classes.details}>
+                  <CardMedia
+                    image={item.image}
+                    title="Live from space album cover"
+                    style={{
+                      width: "200px",
+                      borderRadius: "4 0 0 0",
+                    }}
+                    className={classes.cardImage}
+                  />
+                  <div className={classes.controls}>
+                    <Grid container direction="column">
+                      <Box my={2} ml={5} mr={3}>
+                        <Grid
+                          container
+                          direction="row"
+                          justify="space-between"
+                          alignItems="center"
+                        >
+                          <Grid item>
+                            <Typography
+                              variant="h6"
+                              component="h2"
+                              gutterBottom
+                              style={{ fontSize: "1.1rem" }}
+                            >
+                              {item.title}
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              color="textSecondary"
+                              component="p"
+                            >
+                              {item.id}
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Button variant="outlined" color="primary">
+                              เข้าเรียน
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </Box>
+                    </Grid>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Card>
+        </Box>
+      ) : null}
+
       {isHome ? null : (
         <React.Fragment>
           <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
@@ -264,7 +422,7 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
             <Card elevation={2}>
               <div className={classes.details}>
                 <CardMedia
-                  image={course6}
+                  image={course55555}
                   title="Live from space album cover"
                   style={{
                     width: "200px",
