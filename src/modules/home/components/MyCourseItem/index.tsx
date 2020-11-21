@@ -11,21 +11,24 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CheckIcon from "@material-ui/icons/CheckCircle";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import Rating from "@material-ui/lab/Rating";
 import amber from "@material-ui/core/colors/amber";
-import course55555 from "../../../../assets/images/courses/course2.png";
+
 import curriculum1 from "../../../../assets/images/curriculum/curriculum1.png";
-import curriculum2 from "../../../../assets/images/curriculum/curriculum7.png";
 import course1 from "../../../../assets/images/curriculum/curriculum1/course1.png";
 import course2 from "../../../../assets/images/curriculum/curriculum1/course2.png";
 import course3 from "../../../../assets/images/curriculum/curriculum1/course3.png";
 import course4 from "../../../../assets/images/curriculum/curriculum1/course4.png";
 import course5 from "../../../../assets/images/curriculum/curriculum1/course5.png";
 
+import curriculum2 from "../../../../assets/images/curriculum/curriculum7.png";
 import course6 from "../../../../assets/images/curriculum/curriculum2/course1.png";
 import course7 from "../../../../assets/images/curriculum/curriculum2/course2.png";
 import course8 from "../../../../assets/images/curriculum/curriculum2/course3.png";
+
+import singleCourse1 from "../../../../assets/images/courses/course2.png";
+import singleCourse2 from "../../../../assets/images/courses/course4.png";
+import singleCourse3 from "../../../../assets/images/courses/course5.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -102,6 +105,24 @@ const myCourses2 = [
     title: "3. อังกฤษ อัพเกรด : ศัพท์ทะลุ อ่านทะลวง",
     id: "OCSC00006C-03",
     image: course8,
+  },
+];
+
+const mySingleCourses = [
+  {
+    title: "การงบประมาณภาครัฐ",
+    id: "OCSC0002",
+    image: singleCourse1,
+  },
+  {
+    title: "อาหารสุขภาพ รู้ทัน รู้จริง",
+    id: "OCSC00004",
+    image: singleCourse2,
+  },
+  {
+    title: "ประกันสังคมนั้นสำคัญไฉน (Why Social Security is Vital to Us.)",
+    id: "OCSC00005",
+    image: singleCourse3,
   },
 ];
 
@@ -418,67 +439,58 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
           <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
             รายวิชาของฉัน
           </Typography>
-          <Box mt={4} mb={6}>
-            <Card elevation={2}>
-              <div className={classes.details}>
-                <CardMedia
-                  image={course55555}
-                  title="Live from space album cover"
-                  style={{
-                    width: "200px",
-                    borderRadius: "4 0 0 0",
-                  }}
-                  className={classes.cardImage}
-                />
-                <div className={classes.controls}>
-                  <Grid container direction="column">
-                    <Box my={2} mx={3}>
-                      <Typography variant="h6" component="h2">
-                        การงบประมาณภาครัฐ
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        OCSC0002
-                      </Typography>
-                      <Box my={1}>
+          {mySingleCourses.map((item, index) => (
+            <Box mt={3} key={index}>
+              <Card elevation={2}>
+                <div className={classes.details}>
+                  <CardMedia
+                    image={item.image}
+                    title="Live from space album cover"
+                    style={{
+                      width: "200px",
+                      borderRadius: "4 0 0 0",
+                    }}
+                    className={classes.cardImage}
+                  />
+                  <div className={classes.controls}>
+                    <Grid container direction="column">
+                      <Box my={2} mx={3}>
                         <Grid
                           container
                           direction="row"
                           justify="space-between"
                           alignItems="center"
                         >
-                          <Typography
-                            variant="body2"
-                            color="textPrimary"
-                            component="p"
-                          >
-                            <Grid container alignItems="center">
-                              <Grid item>
-                                <PlayCircleFilledIcon
-                                  style={{ marginRight: 10 }}
-                                />
-                              </Grid>
-                              <Grid item>บทที่ 2: วางแผนงบประมาณภาครัฐ</Grid>
-                            </Grid>
-                          </Typography>
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            startIcon={<PlayArrowIcon />}
-                          >
-                            เข้าเรียนต่อ
-                          </Button>
+                          <Grid item>
+                            <Typography
+                              variant="h6"
+                              component="h2"
+                              gutterBottom
+                              style={{ fontSize: "1.1rem" }}
+                            >
+                              {item.title}
+                            </Typography>
+                            <Typography
+                              variant="body2"
+                              color="textSecondary"
+                              component="p"
+                            >
+                              {item.id}
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Button variant="outlined" color="primary">
+                              เข้าเรียน
+                            </Button>
+                          </Grid>
                         </Grid>
                       </Box>
-                    </Box>
-                  </Grid>
+                    </Grid>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          </Box>
+              </Card>
+            </Box>
+          ))}
         </React.Fragment>
       )}
     </React.Fragment>

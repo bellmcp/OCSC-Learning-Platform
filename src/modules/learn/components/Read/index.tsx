@@ -22,13 +22,13 @@ function PDFContent() {
     setPageNumber((prevPageNumber) => prevPageNumber + offset);
   }
 
-  function previousPage() {
-    changePage(-1);
-  }
+  // function previousPage() {
+  //   changePage(-1);
+  // }
 
-  function nextPage() {
-    changePage(1);
-  }
+  // function nextPage() {
+  //   changePage(1);
+  // }
 
   return (
     <div>
