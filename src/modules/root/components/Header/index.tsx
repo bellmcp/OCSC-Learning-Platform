@@ -8,7 +8,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import blue from "@material-ui/core/colors/blue";
+import purple from "@material-ui/core/colors/purple";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CourseGenreIcon from "@material-ui/icons/FiberManualRecord";
 
@@ -98,7 +98,7 @@ export default function Header(props: HeaderProps) {
                       <div>
                         <CourseGenreIcon
                           style={{
-                            color: blue[500],
+                            color: purple[500],
                             fontSize: 12,
                             marginRight: 6,
                           }}
@@ -172,7 +172,7 @@ export default function Header(props: HeaderProps) {
                     <div>
                       <CourseGenreIcon
                         style={{
-                          color: blue[500],
+                          color: purple[500],
                           fontSize: 12,
                           marginRight: 6,
                         }}

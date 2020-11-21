@@ -30,6 +30,7 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import SurveyIcon from "@material-ui/icons/ThumbUp";
 
 const heroImage = require("../../../../assets/images/root/curriculum-min.jpg");
 
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightMedium,
-      flexBasis: "66.66%",
+      flexBasis: "100%",
       flexShrink: 0,
     },
     secondaryHeading: {
@@ -121,6 +122,43 @@ export default function CurriculumDetail() {
     },
     { title: "แพลตฟอร์ม", detail: "OCSC Learning Platform" },
   ];
+
+  function renderMockContent() {
+    return (
+      <>
+        <ListItem>
+          <ListItemIcon>
+            <LibraryBooksIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="แบบทดสอบก่อนเรียน"
+            secondary="5 คะแนน, สูงสุด 1 ครั้ง"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <PlayCircleFilledIcon />
+          </ListItemIcon>
+          <ListItemText primary="วิดีโอ: แนะนำรายวิชา" secondary="5 นาที" />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <LibraryBooksIcon />
+          </ListItemIcon>
+          <ListItemText
+            primary="แบบทดสอบหลังเรียน"
+            secondary="5 คะแนน, สูงสุด 1 ครั้ง"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <SurveyIcon />
+          </ListItemIcon>
+          <ListItemText primary="แบบประเมินรายวิชา" />
+        </ListItem>
+      </>
+    );
+  }
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
     return (
@@ -267,21 +305,11 @@ export default function CurriculumDetail() {
                       id="panel1bh-header"
                     >
                       <Typography className={classes.heading}>
-                        แบบทดสอบก่อนเรียน
+                        1. สังคมศึกษา น่ารู้: ภูมิศาสตร์
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <List dense>
-                        <ListItem>
-                          <ListItemIcon>
-                            <LibraryBooksIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="แบบทดสอบก่อนเรียน (Pre-test)"
-                            secondary="แบบทดสอบ, 1 ชั่วโมง, สูงสุด 1 ครั้ง"
-                          />
-                        </ListItem>
-                      </List>
+                      <List dense>{renderMockContent()}</List>
                     </AccordionDetails>
                   </Accordion>
                   <Accordion
@@ -294,62 +322,12 @@ export default function CurriculumDetail() {
                       id="panel2bh-header"
                     >
                       <Typography className={classes.heading}>
-                        บทที่ 1: PR in Radio Broadcasting
-                      </Typography>
-                      <Typography className={classes.secondaryHeading}>
-                        4 วิดีโอ, 1 บทความ
+                        2. สังคมศึกษา น่ารู้: เศรษฐศาสตร์
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                       <Typography>
-                        <List dense>
-                          <ListItem>
-                            <ListItemIcon>
-                              <PlayCircleFilledIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="1.1 ความรู้พื้นฐานทางวิทยุกระจายเสียง"
-                              secondary="วิดีโอ, 30 นาที"
-                            />
-                          </ListItem>
-                          <ListItem>
-                            <ListItemIcon>
-                              <PlayCircleFilledIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="1.2
-                        ประเภทรายการวิทยุกระจายเสียงและความสำคัญต่อการประชาสัมพันธ์"
-                              secondary="วิดีโอ, 30 นาที"
-                            />
-                          </ListItem>
-                          <ListItem>
-                            <ListItemIcon>
-                              <PlayCircleFilledIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="1.3 ประเภทของประชาสัมพันธ์ผ่านสื่อวิทยุกระจายเสียง"
-                              secondary="วิดีโอ, 30 นาที"
-                            />
-                          </ListItem>
-                          <ListItem>
-                            <ListItemIcon>
-                              <PlayCircleFilledIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="1.4 การเขียนบทวิทยุเพื่อการประชาสัมพันธ์"
-                              secondary="วิดีโอ, 30 นาที"
-                            />
-                          </ListItem>
-                          <ListItem>
-                            <ListItemIcon>
-                              <MenuBookIcon />
-                            </ListItemIcon>
-                            <ListItemText
-                              primary="1.5 เทคนิคการผลิตสื่อประชาสัมพันธ์แบบโฆษณาทางวิทยุ"
-                              secondary="บทความ, 15 นาที"
-                            />
-                          </ListItem>
-                        </List>
+                        <List dense>{renderMockContent()}</List>
                       </Typography>
                     </AccordionDetails>
                   </Accordion>
@@ -363,105 +341,11 @@ export default function CurriculumDetail() {
                       id="panel3bh-header"
                     >
                       <Typography className={classes.heading}>
-                        บทที่ 2: PR in Television Broadcasting
-                      </Typography>
-                      <Typography className={classes.secondaryHeading}>
-                        8 วิดีโอ, 1 บทความ
+                        3. สังคมศึกษา น่ารู้: ประวัติศาสตร์
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <List dense>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.1 ความเป็นมาของสื่อวิทยุโทรทัศน์"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.2 ประเภทของระบบวิทยุโทรทัศน์"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.3 ประเภทของรายการวิทยุโทรทัศน์"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.4 รูปแบบการประชาสัมพันธ์ผ่านสื่อวิทยุโทรทัศน์"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.5 การผลิตสื่อประชาสัมพันธ์ทางโทรทัศน์"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.6 การเขียนบทโทรทัศน์เพื่อการประชาสัมพันธ์ ตอนที่ 1"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.7 การเขียนบทโทรทัศน์เพื่อการประชาสัมพันธ์ ตอนที่ 2"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <MenuBookIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.8 ตัวอย่างการเขียนบทประชาสัมพันธ์ทางโทรทัศน์ ตอนที่ 1"
-                            secondary="บทความ, 15 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.9 ตัวอย่างการเขียนบทประชาสัมพันธ์ทางโทรทัศน์ ตอนที่ 2"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <PlayCircleFilledIcon />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary="2.10 รู้ทันสื่อโทรทัศน์ก่อนเลือกใช้"
-                            secondary="วิดีโอ, 30 นาที"
-                          />
-                        </ListItem>
-                      </List>
+                      <List dense>{renderMockContent()}</List>
                     </AccordionDetails>
                   </Accordion>
                   <Accordion
@@ -474,7 +358,7 @@ export default function CurriculumDetail() {
                       id="panel4bh-header"
                     >
                       <Typography className={classes.heading}>
-                        แบบทดสอบหลังเรียน
+                        4. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา
                       </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -484,11 +368,70 @@ export default function CurriculumDetail() {
                             <LibraryBooksIcon />
                           </ListItemIcon>
                           <ListItemText
-                            primary="แบบทดสอบหลังเรียน (Post-test)"
-                            secondary="แบบทดสอบ, 1 ชั่วโมง, สูงสุด 3 ครั้ง"
+                            primary="แบบทดสอบก่อนเรียน"
+                            secondary="10 คะแนน, สูงสุด 1 ครั้ง"
                           />
                         </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <PlayCircleFilledIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="วิดีโอ: ศาสนาสากล"
+                            secondary="30 นาที"
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <PlayCircleFilledIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="วิดีโอ: พระพุทธศาสนา"
+                            secondary="15 นาที"
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <MenuBookIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="เอกสาร: หลักธรรมเบื้องต้น"
+                            secondary="8 นาที"
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <LibraryBooksIcon />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary="แบบทดสอบหลังเรียน"
+                            secondary="20 คะแนน, สูงสุด 1 ครั้ง"
+                          />
+                        </ListItem>
+                        <ListItem>
+                          <ListItemIcon>
+                            <SurveyIcon />
+                          </ListItemIcon>
+                          <ListItemText primary="แบบประเมินรายวิชา" />
+                        </ListItem>
                       </List>
+                    </AccordionDetails>
+                  </Accordion>
+                  <Accordion
+                    expanded={expanded === "panel5"}
+                    onChange={handleChange("panel5")}
+                  >
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id="panel1bh-header"
+                    >
+                      <Typography className={classes.heading}>
+                        5. สังคมศึกษา น่ารู้: กฎหมายและสังคมวิทยา
+                      </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <List dense>{renderMockContent()}</List>
                     </AccordionDetails>
                   </Accordion>
                 </Box>

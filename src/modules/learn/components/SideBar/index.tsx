@@ -61,7 +61,7 @@ const course3 = [
   },
   {
     title: "แบบทดสอบหลังเรียน",
-    detail: "0/1 ครั้ง",
+    detail: "0/20 คะแนน, 0/1 ครั้ง",
     icon: <QuizIcon />,
     id: 5,
     link: "/learn/epic-social-studies/exam",

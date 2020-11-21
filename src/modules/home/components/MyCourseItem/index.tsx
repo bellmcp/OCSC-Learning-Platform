@@ -65,11 +65,13 @@ const myCourses = [
     title: "1. สังคมศึกษา น่ารู้: ภูมิศาสตร์",
     id: "OCSC00001C-01",
     image: course1,
+    isCompleted: true,
   },
   {
     title: "2. สังคมศึกษา น่ารู้: เศรษฐศาสตร์",
     id: "OCSC00001C-02",
     image: course2,
+    isCompleted: true,
   },
   {
     title: "3. สังคมศึกษา น่ารู้: ประวัติศาสตร์",
@@ -273,14 +275,17 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                                 alignContent="center"
                                 wrap="nowrap"
                               >
-                                <Grid item>
-                                  <CheckIcon
-                                    style={{
-                                      color: green[800],
-                                      marginRight: 2,
-                                    }}
-                                  />
-                                </Grid>
+                                {item.isCompleted ? (
+                                  <Grid item>
+                                    <CheckIcon
+                                      style={{
+                                        color: green[800],
+                                        marginRight: 2,
+                                      }}
+                                    />
+                                  </Grid>
+                                ) : null}
+
                                 <Grid item>
                                   <Button variant="outlined" color="primary">
                                     เข้าเรียน
