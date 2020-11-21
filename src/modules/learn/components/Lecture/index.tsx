@@ -122,11 +122,11 @@ function LinearProgressWithLabel(
 export default function Lecture({ content, id }: LectureProps) {
   const classes = useStyles();
   const [timer, setTimer] = React.useState(1);
-  const [progress, setProgress] = React.useState(1);
+  const [progress, setProgress] = React.useState(0);
 
   React.useEffect(() => {
     const round = setInterval(() => {
-      setTimer((prevProgress) => (prevProgress >= 60 ? 10 : prevProgress + 1));
+      setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
     }, 1000);
     return () => {
       clearInterval(round);
@@ -136,11 +136,11 @@ export default function Lecture({ content, id }: LectureProps) {
   React.useEffect(() => {
     const sequence = setInterval(() => {
       setProgress((prevProgress) =>
-        prevProgress >= 100 ? 10 : prevProgress + 1
+        prevProgress >= 15 ? 0 : prevProgress + 1
       );
-    }, 100000);
+    }, 60000);
     return () => {
-      clearInterval(sequence);
+      clearTimeout(sequence);
     };
   }, []);
 
@@ -188,12 +188,12 @@ export default function Lecture({ content, id }: LectureProps) {
                   <Hidden only={["xs"]}>
                     <b>เวลาเข้าเรียน:</b>
                   </Hidden>{" "}
-                  {progress}/30 นาที
+                  {progress}/15 นาที
                 </Typography>
               </div>
               <div style={{ width: "100px" }}>
                 <LinearProgressWithLabel
-                  value={(progress / 30) * 100}
+                  value={(progress / 15) * 100}
                   color="secondary"
                 />
               </div>
