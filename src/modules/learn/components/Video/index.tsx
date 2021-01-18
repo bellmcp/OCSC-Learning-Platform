@@ -10,7 +10,7 @@ import Player from "../Player";
 
 export default function Video() {
   const [source, setSource] = React.useState<string | null>(
-    "https://ocsc-learning-platform.herokuapp.com/video.mp4"
+    "https://learn.ocsc.info/test/content.mp4"
   );
 
   const handleSource = (
@@ -38,7 +38,7 @@ export default function Video() {
               gutterBottom
               style={{ fontSize: "1.4rem", fontWeight: 600 }}
             >
-              วิดีโอ: พระพุทธศาสนา
+              วิดีโอ: ทดสอบระบบ
             </Typography>
             <ToggleButtonGroup
               value={source}
@@ -48,7 +48,7 @@ export default function Video() {
               size="small"
             >
               <ToggleButton
-                value="https://ocsc-learning-platform.herokuapp.com/video.mp4"
+                value="https://learn.ocsc.info/test/content.mp4"
                 aria-label="ลิงก์หลัก"
               >
                 <Typography

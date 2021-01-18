@@ -18,6 +18,7 @@ import green from "@material-ui/core/colors/green";
 import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
 import Badge from "@material-ui/core/Badge";
+import FileIcon from "@material-ui/icons/AttachFile";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -46,7 +47,7 @@ const course3 = [
     completed: true,
   },
   {
-    title: "วิดีโอ: พระพุทธศาสนา",
+    title: "วิดีโอ: ทดสอบระบบ",
     detail: "15 นาที",
     icon: <VideoIcon />,
     id: 3,
@@ -72,6 +73,13 @@ const course3 = [
     icon: <SurveyIcon />,
     id: 6,
     link: "/learn/epic-social-studies/survey",
+  },
+  {
+    title: "ไฟล์: ทดสอบระบบ",
+    detail: "1 นาที",
+    icon: <FileIcon />,
+    id: 7,
+    link: "/learn/epic-social-studies/file",
   },
 ];
 

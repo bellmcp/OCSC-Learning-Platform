@@ -14,6 +14,7 @@ import Video from "./modules/learn/components/Video";
 import Read from "./modules/learn/components/Read";
 import Exam from "./modules/learn/components/Exam";
 import Survey from "./modules/learn/components/Survey";
+import File from "./modules/learn/components/File";
 import Courses from "./modules/courses";
 import Curriculum from "./modules/curriculum";
 import CourseDetail from "./modules/courses/components/CourseDetail";
@@ -152,6 +153,11 @@ function App() {
             exact
             path="/learn/epic-social-studies/survey"
             component={() => <Lecture content={<Survey />} id={6} />}
+          />
+          <Route
+            exact
+            path="/learn/epic-social-studies/file"
+            component={() => <Lecture content={<File />} id={7} />}
           />
           <Route
             exact
