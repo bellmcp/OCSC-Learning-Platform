@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   fade,
   makeStyles,
@@ -183,6 +184,7 @@ interface NavigationBarProps {
 
 export default function NavigationBar(props: NavigationBarProps) {
   const classes = useStyles();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
@@ -195,6 +197,10 @@ export default function NavigationBar(props: NavigationBarProps) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const LinkToLogin = () => {
+    history.push("/login");
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -270,7 +276,7 @@ export default function NavigationBar(props: NavigationBarProps) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      <MenuItem onClick={LinkToLogin}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -399,6 +405,7 @@ export default function NavigationBar(props: NavigationBarProps) {
             <div className={classes.sectionDesktop}>
               <Divider orientation="vertical" className={classes.divider} />
               <Button
+                onClick={LinkToLogin}
                 color="inherit"
                 size="small"
                 style={{

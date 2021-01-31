@@ -5,6 +5,7 @@ import CoursesRoutes from "modules/courses/components/Routes";
 import LearnRoutes from "modules/learn/components/Routes";
 import SupportRoutes from "modules/support/components/Routes";
 import UserRoutes from "modules/user/components/Routes";
+import LoginRoutes from "modules/login/components/Routes";
 
 export default function Routes() {
   return (
@@ -20,6 +21,9 @@ export default function Routes() {
       </Route>
       <Route path="/user">
         <UserRoutes></UserRoutes>
+      </Route>
+      <Route path="/login">
+        <LoginRoutes></LoginRoutes>
       </Route>
       <Route exact path="/">
         <HomeRoutes></HomeRoutes>
