@@ -17,6 +17,7 @@
     "@types/react-helmet": "^6.1.0",
     "@types/react-pdf": "^5.0.0",
     "@types/react-router-dom": "^5.1.6",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "pure-react-carousel": "^1.27.6",

@@ -29,10 +29,12 @@ import {
   Menu as MenuIcon,
   Search as SearchIcon,
   ExitToApp as LogoutIcon,
-  Settings as SettingIcon,
+  // Settings as SettingIcon,
   KeyboardArrowDown as ArrowDown,
+  Dashboard,
+  Person,
 } from "@material-ui/icons";
-import { amber } from "@material-ui/core/colors";
+import { amber, grey } from "@material-ui/core/colors";
 import NavigationDrawer from "./NavigationDrawer";
 
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
@@ -135,6 +137,7 @@ const useStyles = makeStyles((theme: Theme) =>
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
+      backgroundColor: grey[700],
     },
     noDecorationLink: {
       textDecoration: "none",
@@ -235,7 +238,7 @@ export default function NavigationBar(props: NavigationBarProps) {
         horizontal: "right",
       }}
     >
-      <MenuItem onClick={handleMenuClose}>
+      {/* <MenuItem onClick={handleMenuClose}>
         <ListItemIcon className={classes.listItemIcon}>
           <SettingIcon />
         </ListItemIcon>
@@ -246,6 +249,12 @@ export default function NavigationBar(props: NavigationBarProps) {
           <LogoutIcon />
         </ListItemIcon>
         <ListItemText primary="ออกจากระบบ" />
+      </MenuItem> */}
+      <MenuItem onClick={handleMenuClose}>
+        <ListItemIcon className={classes.listItemIcon}>
+          <Dashboard />
+        </ListItemIcon>
+        <ListItemText primary="กลับสู่ Portal" />
       </MenuItem>
     </Menu>
   );
@@ -268,12 +277,14 @@ export default function NavigationBar(props: NavigationBarProps) {
           aria-haspopup="true"
           color="inherit"
         >
-          <Avatar alt="User" src={user} className={classes.small} />
+          <Avatar alt="User" className={classes.small}>
+            <Person />
+          </Avatar>
         </IconButton>
-        <Typography style={{ fontWeight: 600 }}>วุฒิภัทร</Typography>
+        <Typography style={{ fontWeight: 600 }}>เข้าสู่ระบบ</Typography>
       </MenuItem>
       <Divider />
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton color="inherit">
           <SettingIcon />
         </IconButton>
@@ -284,6 +295,12 @@ export default function NavigationBar(props: NavigationBarProps) {
           <LogoutIcon />
         </IconButton>
         <Typography>ออกจากระบบ</Typography>
+      </MenuItem> */}
+      <MenuItem>
+        <IconButton color="inherit">
+          <Dashboard />
+        </IconButton>
+        <Typography>กลับสู่ Portal</Typography>
       </MenuItem>
     </Menu>
   );
@@ -386,11 +403,13 @@ export default function NavigationBar(props: NavigationBarProps) {
                   margin: "6px 0",
                 }}
                 startIcon={
-                  <Avatar alt="User" src={user} className={classes.small} />
+                  <Avatar className={classes.small}>
+                    <Person />
+                  </Avatar>
                 }
               >
                 <Typography className={classes.profileName} noWrap>
-                  วุฒิภัทร
+                  เข้าสู่ระบบ
                 </Typography>
               </Button>
               <IconButton

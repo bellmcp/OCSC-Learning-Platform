@@ -1,5 +1,6 @@
 export interface AnnouncementItemProps {
     id: number;
-    image: string;
-    detail: string;
+    ImageUrl: string;
+    Headline: string;
+    TargetUrl: string;
 }

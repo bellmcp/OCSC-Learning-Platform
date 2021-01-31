@@ -1,5 +1,11 @@
-import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {
+  createStyles,
+  useTheme,
+  makeStyles,
+  Theme,
+} from "@material-ui/core/styles";
 import {
   CarouselProvider,
   Slider,
@@ -9,14 +15,17 @@ import {
   DotGroup,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowForward from "@material-ui/icons/ArrowForwardIosRounded";
-import ArrowBack from "@material-ui/icons/ArrowBackIosRounded";
-import { useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {
+  useMediaQuery,
+  IconButton,
+  Grid,
+  CircularProgress,
+} from "@material-ui/core";
+import {
+  ArrowBackIosRounded as ArrowBack,
+  ArrowForwardIosRounded as ArrowForward,
+} from "@material-ui/icons";
 import AnnouncementItem from "../AnnouncementItem";
-
-import { AnnouncementCarouselProps } from "../AnnouncementCarousel/types";
 import { amber, grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -72,54 +81,74 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AnnouncementCarousel({
-  announcements,
-}: AnnouncementCarouselProps) {
+export default function AnnouncementCarousel() {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
 
+  const [announcements, setAnnouncements] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const loadAnnouncements = async () => {
+      setIsLoading(true);
+      const { data } = await axios.get("/PressReleases");
+      setAnnouncements(data);
+      setIsLoading(false);
+    };
+
+    loadAnnouncements();
+  }, []);
+
   return (
-    <CarouselProvider
-      infinite
-      naturalSlideWidth={100}
-      naturalSlideHeight={70}
-      totalSlides={announcements.length}
-      visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
-      interval={5000}
-      isPlaying
-      className={classes.carousel}
-    >
-      <div className={classes.slider}>
-        <Slider className={classes.slide}>
-          {announcements.map((item, index) => (
-            <Slide index={index}>
-              <div className={classes.announcement}>
-                <AnnouncementItem
-                  key={index}
-                  id={item.id}
-                  image={item.image}
-                  detail={item.detail}
-                />
-              </div>
-            </Slide>
-          ))}
-        </Slider>
-        <ButtonBack className={classes.buttonBack}>
-          <IconButton edge="end">
-            <ArrowBack />
-          </IconButton>
-        </ButtonBack>
-        <ButtonNext className={classes.buttonNext}>
-          <IconButton edge="start">
-            <ArrowForward />
-          </IconButton>
-        </ButtonNext>
-      </div>
-      <div className={classes.dotGroup}>
-        <DotGroup className={classes.styledDot} />
-      </div>
-    </CarouselProvider>
+    <>
+      {isLoading ? (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 305 }}
+        >
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <CarouselProvider
+          infinite
+          naturalSlideWidth={100}
+          naturalSlideHeight={70}
+          totalSlides={announcements.length}
+          visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
+          interval={5000}
+          isPlaying
+          className={classes.carousel}
+        >
+          <div className={classes.slider}>
+            <Slider className={classes.slide}>
+              {announcements.map((announcement: any) => (
+                <Slide index={announcement.id}>
+                  <div className={classes.announcement}>
+                    <AnnouncementItem key={announcement.id} {...announcement} />
+                  </div>
+                </Slide>
+              ))}
+            </Slider>
+            <ButtonBack className={classes.buttonBack}>
+              <IconButton edge="end">
+                <ArrowBack />
+              </IconButton>
+            </ButtonBack>
+            <ButtonNext className={classes.buttonNext}>
+              <IconButton edge="start">
+                <ArrowForward />
+              </IconButton>
+            </ButtonNext>
+          </div>
+          <div className={classes.dotGroup}>
+            <DotGroup className={classes.styledDot} />
+          </div>
+        </CarouselProvider>
+      )}
+    </>
   );
 }

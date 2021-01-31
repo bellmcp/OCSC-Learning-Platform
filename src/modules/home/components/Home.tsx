@@ -22,11 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Home({
-  announcements,
-  courses,
-  curriculum,
-}: CourseModuleProps) {
+export default function Home({ courses, curriculum }: CourseModuleProps) {
   const classes = useStyles();
 
   return (
@@ -34,12 +30,8 @@ export default function Home({
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <AnnouncementCarousel announcements={announcements} />
-
-            <Box my={3}>
-              <Divider />
-            </Box>
-            <Grid
+            <AnnouncementCarousel />
+            {/* <Grid
               container
               direction="row"
               justify="space-between"
@@ -59,7 +51,7 @@ export default function Home({
                 ดูทั้งหมด {">"}
               </Link>
             </Grid>
-            <MyCourseItem isHome />
+            <MyCourseItem isHome /> */}
 
             {courses.map((item, index) => (
               <React.Fragment key={index}>
