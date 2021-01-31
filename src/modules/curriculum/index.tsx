@@ -1,3 +1,4 @@
+import React from "react";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
@@ -7,8 +8,7 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CurriculumIcon from "@material-ui/icons/CollectionsBookmark";
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownRounded";
-import React from "react";
-import CourseFilter from "../courses/components/CourseFilter";
+// import CourseFilter from "../courses/components/CourseFilter";
 import CourseItem from "../home/components/CourseItem";
 import Footer from "../root/components/Footer";
 import Header from "../root/components/Header";
@@ -69,7 +69,7 @@ export default function Curriculum({ curriculum }: CurriculumModuleProps) {
                 >
                   หลักสูตรทั้งหมด
                 </Typography>
-                <CourseFilter />
+                {/* <CourseFilter /> */}
               </Grid>
             </Box>
             <Grid container spacing={1}>

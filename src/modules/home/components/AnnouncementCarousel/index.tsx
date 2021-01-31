@@ -108,7 +108,7 @@ export default function AnnouncementCarousel() {
           container
           justify="center"
           alignItems="center"
-          style={{ height: 305 }}
+          style={{ height: 304 }}
         >
           <CircularProgress />
         </Grid>

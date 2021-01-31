@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
 import CourseItem from "modules/home/components/CourseItem";
-import CourseFilter from "./CourseFilter";
+import CategoryFilter from "./CategoryFilter";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -70,7 +70,7 @@ export default function CourseList() {
                 >
                   รายวิชาทั้งหมด
                 </Typography>
-                <CourseFilter />
+                <CategoryFilter />
               </Grid>
             </Box>
             {isLoading ? (
@@ -78,7 +78,7 @@ export default function CourseList() {
                 container
                 justify="center"
                 alignItems="center"
-                style={{ height: 305 }}
+                style={{ height: 407 }}
               >
                 <CircularProgress />
               </Grid>

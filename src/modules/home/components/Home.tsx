@@ -1,9 +1,16 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Container, Typography, Link, Grid } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Link,
+  Grid,
+  Box,
+  Divider,
+} from "@material-ui/core";
 import MyCourseItem from "./MyCourseItem";
-import CourseFilter from "modules/courses/components/CourseFilter";
+import CategoryFilter from "modules/courses/components/CategoryFilter";
 import CourseCarousel from "./CourseCarousel";
 import AnnouncementCarousel from "./AnnouncementCarousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
@@ -54,6 +61,20 @@ export default function Home({ curriculum }: CourseModuleProps) {
               </Link>
             </Grid>
             <MyCourseItem isHome /> */}
+
+            <Box mt={3} mb={2}>
+              <Divider />
+            </Box>
+            <Box mb={2}>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <CategoryFilter />
+              </Grid>
+            </Box>
 
             <Grid
               container

@@ -93,7 +93,7 @@ export default function CourseList() {
           container
           justify="center"
           alignItems="center"
-          style={{ height: 406 }}
+          style={{ height: 407 }}
         >
           <CircularProgress />
         </Grid>
