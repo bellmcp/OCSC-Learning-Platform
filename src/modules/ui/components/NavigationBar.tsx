@@ -1,6 +1,8 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import * as actionsEdit from "modules/user/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import {
   fade,
   makeStyles,
@@ -30,13 +32,14 @@ import {
   Menu as MenuIcon,
   Search as SearchIcon,
   ExitToApp as LogoutIcon,
-  // Settings as SettingIcon,
   KeyboardArrowDown as ArrowDown,
+  ViewCarousel as Portal,
   Person,
 } from "@material-ui/icons";
 import { amber, grey } from "@material-ui/core/colors";
 import NavigationDrawer from "./NavigationDrawer";
-
+import { getCookie, eraseCookie } from "cookies/cookies";
+import { parseJwt } from "utils/getDataJWT";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 
@@ -139,6 +142,12 @@ const useStyles = makeStyles((theme: Theme) =>
       height: theme.spacing(4),
       backgroundColor: grey[700],
     },
+    loggedIn: {
+      color: "black",
+      width: theme.spacing(4),
+      height: theme.spacing(4),
+      backgroundColor: amber[500],
+    },
     noDecorationLink: {
       textDecoration: "none",
     },
@@ -185,6 +194,7 @@ interface NavigationBarProps {
 export default function NavigationBar(props: NavigationBarProps) {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
@@ -197,9 +207,43 @@ export default function NavigationBar(props: NavigationBarProps) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const token = getCookie("token");
+  const id = parseJwt(token).unique_name;
+  useEffect(() => {
+    if (login()) {
+      const actionProfile = actionsEdit.loadGetProfile();
+      dispatch(actionProfile);
+    }
+    // eslint-disable-next-line
+  }, [id]);
+  const { data } = useSelector((state: any) => state.user);
+  const login = () => {
+    if (token === null) {
+      return false;
+    }
+    if (
+      (token !== "" || token !== undefined) &&
+      parseJwt(token).role === "user"
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   const LinkToLogin = () => {
     history.push("/login");
+  };
+
+  const LinkToProfile = () => {
+    history.push("/me");
+  };
+
+  const { pathname } = useLocation();
+
+  const logout = () => {
+    eraseCookie("token");
+    history.push(`${pathname}`);
+    window.location.reload();
   };
 
   const handleDrawerToggle = () => {
@@ -258,10 +302,18 @@ export default function NavigationBar(props: NavigationBarProps) {
       </MenuItem> */}
       <MenuItem onClick={handleMenuClose}>
         <ListItemIcon className={classes.listItemIcon}>
-          <LogoutIcon />
+          <Portal />
         </ListItemIcon>
         <ListItemText primary="ไปยัง Portal" />
       </MenuItem>
+      {login() ? (
+        <MenuItem onClick={logout}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="ออกจากระบบ" />
+        </MenuItem>
+      ) : null}
     </Menu>
   );
 
@@ -404,25 +456,47 @@ export default function NavigationBar(props: NavigationBarProps) {
             {/* Desktop Button Menu */}
             <div className={classes.sectionDesktop}>
               <Divider orientation="vertical" className={classes.divider} />
-              <Button
-                onClick={LinkToLogin}
-                color="inherit"
-                size="small"
-                style={{
-                  borderRadius: 50,
-                  padding: "10px 10px",
-                  margin: "6px 0",
-                }}
-                startIcon={
-                  <Avatar className={classes.small}>
-                    <Person />
-                  </Avatar>
-                }
-              >
-                <Typography className={classes.profileName} noWrap>
-                  เข้าสู่ระบบ
-                </Typography>
-              </Button>
+              {login() ? (
+                <Button
+                  onClick={LinkToProfile}
+                  color="inherit"
+                  size="small"
+                  style={{
+                    borderRadius: 50,
+                    padding: "10px 10px",
+                    margin: "6px 0",
+                  }}
+                  startIcon={
+                    <Avatar className={classes.loggedIn}>
+                      <Person />
+                    </Avatar>
+                  }
+                >
+                  <Typography className={classes.profileName} noWrap>
+                    {data.firstName}
+                  </Typography>
+                </Button>
+              ) : (
+                <Button
+                  onClick={LinkToLogin}
+                  color="inherit"
+                  size="small"
+                  style={{
+                    borderRadius: 50,
+                    padding: "10px 10px",
+                    margin: "6px 0",
+                  }}
+                  startIcon={
+                    <Avatar className={classes.small}>
+                      <Person />
+                    </Avatar>
+                  }
+                >
+                  <Typography className={classes.profileName} noWrap>
+                    เข้าสู่ระบบ
+                  </Typography>
+                </Button>
+              )}
               <IconButton
                 edge="end"
                 aria-label="account of current user"
