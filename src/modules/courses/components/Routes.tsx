@@ -13,7 +13,7 @@ export default function Routes() {
         <CourseDetails course={COURSES[0].courses[0]}></CourseDetails>
       </Route>
       <Route path={path}>
-        <CourseList courses={COURSES}></CourseList>
+        <CourseList></CourseList>
       </Route>
     </Switch>
   );

@@ -1,10 +1,19 @@
-import React from "react";
+// @ts-nocheck
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography, Box, Button, Container, Grid } from "@material-ui/core";
+import {
+  Typography,
+  Box,
+  Button,
+  Container,
+  Grid,
+  CircularProgress,
+} from "@material-ui/core";
 import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
 import CourseItem from "modules/home/components/CourseItem";
 import CourseFilter from "./CourseFilter";
-import { CourseModuleProps } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,9 +35,21 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CourseList({ courses }: CourseModuleProps) {
+export default function CourseList() {
   const classes = useStyles();
-  const title = "รายวิชา";
+  const { search } = useLocation();
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const loadCourses = async () => {
+      setIsLoading(true);
+      const { data } = await axios.get(`/Courses${search}`);
+      setCourses(data);
+      setIsLoading(false);
+    };
+    loadCourses();
+  }, [search]);
 
   return (
     <React.Fragment>
@@ -52,26 +73,24 @@ export default function CourseList({ courses }: CourseModuleProps) {
                 <CourseFilter />
               </Grid>
             </Box>
-            <Grid container spacing={1}>
-              {courses.map((item, index) => (
-                <React.Fragment key={index}>
-                  {item.courses.map((item, index) => (
-                    <Grid item xs={12} sm={4} md={3}>
-                      <CourseItem
-                        key={index}
-                        id={item.id}
-                        title={item.title}
-                        image={item.image}
-                        genre={item.genre}
-                        detail={item.detail}
-                        availableSeat={item.availableSeat}
-                        totalSeat={item.totalSeat}
-                      />
-                    </Grid>
-                  ))}
-                </React.Fragment>
-              ))}
-            </Grid>
+            {isLoading ? (
+              <Grid
+                container
+                justify="center"
+                alignItems="center"
+                style={{ height: 305 }}
+              >
+                <CircularProgress />
+              </Grid>
+            ) : (
+              <Grid container spacing={1}>
+                {courses.map((course) => (
+                  <Grid item key={course.id} xs={12} sm={4} md={3}>
+                    <CourseItem {...course} />
+                  </Grid>
+                ))}
+              </Grid>
+            )}
             <Grid
               container
               direction="row"
@@ -80,6 +99,7 @@ export default function CourseList({ courses }: CourseModuleProps) {
             >
               <Box mt={6} mb={4}>
                 <Button
+                  disabled
                   variant="contained"
                   color="primary"
                   size="large"

@@ -1,13 +1,14 @@
 import React from "react";
-import { NavLink as Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Container, Typography, Divider, Box, Grid } from "@material-ui/core";
+import { Container, Typography, Link, Grid } from "@material-ui/core";
 import MyCourseItem from "./MyCourseItem";
 import CourseFilter from "modules/courses/components/CourseFilter";
 import CourseCarousel from "./CourseCarousel";
 import AnnouncementCarousel from "./AnnouncementCarousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { CourseModuleProps } from "../types";
+import CourseList from "./CourseList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Home({ courses, curriculum }: CourseModuleProps) {
+export default function Home({ curriculum }: CourseModuleProps) {
   const classes = useStyles();
 
   return (
@@ -31,6 +32,7 @@ export default function Home({ courses, curriculum }: CourseModuleProps) {
         <div className={classes.main}>
           <main className={classes.content}>
             <AnnouncementCarousel />
+
             {/* <Grid
               container
               direction="row"
@@ -53,6 +55,27 @@ export default function Home({ courses, curriculum }: CourseModuleProps) {
             </Grid>
             <MyCourseItem isHome /> */}
 
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem" }}
+              >
+                รายวิชา
+              </Typography>
+              <Link component={RouterLink} to="/courses" underline="hover">
+                ดูทั้งหมด {">"}
+              </Link>
+            </Grid>
+
+            <CourseList />
+
+            {/* 
             {courses.map((item, index) => (
               <React.Fragment key={index}>
                 {index === 0 ? (
@@ -101,8 +124,8 @@ export default function Home({ courses, curriculum }: CourseModuleProps) {
                 </Grid>
                 <CourseCarousel courses={item.courses} />
               </React.Fragment>
-            ))}
-
+            ))} */}
+            {/* 
             {curriculum.map((item, index) => (
               <React.Fragment key={index}>
                 <Box my={3}>
@@ -130,7 +153,7 @@ export default function Home({ courses, curriculum }: CourseModuleProps) {
                 </Grid>
                 <CourseCarousel courses={item.curricula} isCurriculum />
               </React.Fragment>
-            ))}
+            ))} */}
           </main>
         </div>
       </Container>

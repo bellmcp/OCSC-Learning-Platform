@@ -1,8 +1,6 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Home from "./Home";
-
-import { COURSES } from "shared/courses";
 import { CURRICULUM } from "shared/curriculum";
 
 export default function Routes() {
@@ -11,7 +9,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={path}>
-        <Home courses={COURSES} curriculum={CURRICULUM} />
+        <Home curriculum={CURRICULUM} />
       </Route>
     </Switch>
   );
