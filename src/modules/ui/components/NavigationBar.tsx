@@ -31,7 +31,6 @@ import {
   ExitToApp as LogoutIcon,
   // Settings as SettingIcon,
   KeyboardArrowDown as ArrowDown,
-  Dashboard,
   Person,
 } from "@material-ui/icons";
 import { amber, grey } from "@material-ui/core/colors";
@@ -179,6 +178,7 @@ const navigationItem = [
 
 interface NavigationBarProps {
   active: number;
+  setActivePage: (id: number) => void;
 }
 
 export default function NavigationBar(props: NavigationBarProps) {
@@ -252,9 +252,9 @@ export default function NavigationBar(props: NavigationBarProps) {
       </MenuItem> */}
       <MenuItem onClick={handleMenuClose}>
         <ListItemIcon className={classes.listItemIcon}>
-          <Dashboard />
+          <LogoutIcon />
         </ListItemIcon>
-        <ListItemText primary="กลับสู่ Portal" />
+        <ListItemText primary="ไปยัง Portal" />
       </MenuItem>
     </Menu>
   );
@@ -298,9 +298,9 @@ export default function NavigationBar(props: NavigationBarProps) {
       </MenuItem> */}
       <MenuItem>
         <IconButton color="inherit">
-          <Dashboard />
+          <LogoutIcon />
         </IconButton>
-        <Typography>กลับสู่ Portal</Typography>
+        <Typography>ไปยัง Portal</Typography>
       </MenuItem>
     </Menu>
   );
@@ -364,7 +364,11 @@ export default function NavigationBar(props: NavigationBarProps) {
                   className={classes.navMenu}
                 >
                   {navigationItem.map((item) => (
-                    <NavLink to={item.url} className={classes.noDecorationLink}>
+                    <NavLink
+                      to={item.url}
+                      className={classes.noDecorationLink}
+                      onClick={() => props.setActivePage(item.id)}
+                    >
                       <NavItem
                         active={props.active === item.id}
                         className={

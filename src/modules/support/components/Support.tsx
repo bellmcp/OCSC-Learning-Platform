@@ -190,7 +190,7 @@ export default function Support() {
                           component="p"
                           gutterBottom
                         >
-                          ลงทะเบียนเรียนวิชา OCSC00001 ไม่ได้ครับ
+                          ลงทะเบียนเรียน COURSE01 ไม่ได้ครับ
                           เนื่องจากเลยระยะเวลาที่กำหนดแล้ว
                         </Typography>
                         <Typography variant="caption" component="h2">
@@ -207,14 +207,17 @@ export default function Support() {
                       </Box>
                       <Divider />
                       <Box m={3}>
-                        <Grid container alignItems="center" justify="flex-end">
-                          <Badge color="error" variant="dot">
-                            <ModeCommentIcon />
-                          </Badge>
+                        <Grid
+                          container
+                          alignItems="center"
+                          justify="flex-start"
+                        >
+                          {/* <Badge color="error" variant="dot"> */}
+                          <ModeCommentIcon />
+                          {/* </Badge> */}
                           <Typography
                             variant="h6"
                             component="h1"
-                            align="right"
                             gutterBottom
                             style={{ marginLeft: "10px" }}
                           >
@@ -224,20 +227,13 @@ export default function Support() {
                         <Typography
                           variant="body2"
                           component="p"
-                          align="right"
                           color="textSecondary"
                           gutterBottom
                         >
                           ขออภัยสำหรับความไม่สะดวกค่ะ
-                          เจ้าหน้าที่ได้ดำเนินการลงทะเบียนรายวิชา OCSC00001
-                          การประชาสัมพันธ์ผ่านวิทยุและโทรทัศน์ ให้คุณ วุฒิภัทร
-                          เรียบร้อยแล้วค่ะ
+                          เจ้าหน้าที่ได้ดำเนินการลงทะเบียนให้เรียบร้อยแล้วค่ะ
                         </Typography>
-                        <Typography
-                          variant="caption"
-                          align="right"
-                          component="h2"
-                        >
+                        <Typography variant="caption" component="h2">
                           <em>8 พฤศจิกายน 10:24 น.</em>
                         </Typography>
                       </Box>

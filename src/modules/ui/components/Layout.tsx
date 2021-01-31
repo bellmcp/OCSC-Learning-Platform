@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -17,6 +18,27 @@ const HERO_IMAGE_URL =
   "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
 export default function Layout() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const setInitialActivePage = () => {
+      switch (pathname) {
+        case "/":
+          setActivePage(0);
+          break;
+        case "/learn":
+          setActivePage(1);
+          break;
+        case "/support":
+          setActivePage(2);
+          break;
+        default:
+          setActivePage(99);
+          break;
+      }
+    };
+    setInitialActivePage();
+  }, [pathname]);
+  const [activePage, setActivePage] = useState(0);
   const defaultTheme = createMuiTheme();
   const theme = createMuiTheme({
     typography: {
@@ -62,7 +84,7 @@ export default function Layout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <NavigationBar active={1} />
+      <NavigationBar active={activePage} setActivePage={setActivePage} />
       <Header title={TITLE} subtitle={SUBTITLE} imageUrl={HERO_IMAGE_URL} />
       <Content />
       <Footer />
