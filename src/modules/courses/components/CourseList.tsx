@@ -1,21 +1,10 @@
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownRounded";
-import CourseIcon from "@material-ui/icons/MenuBook";
 import React from "react";
-import CourseItem from "../home/components/CourseItem";
-import Footer from "../root/components/Footer";
-import Header from "../root/components/Header";
-import NavigationBar from "../root/components/NavigationBar";
-import CourseFilter from "./components/CourseFilter";
-import { CourseModuleProps } from "./types";
-
-const heroImage = require("../../assets/images/root/hero-min.jpg");
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { Typography, Box, Button, Container, Grid } from "@material-ui/core";
+import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
+import CourseItem from "modules/home/components/CourseItem";
+import CourseFilter from "./CourseFilter";
+import { CourseModuleProps } from "../types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,19 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Courses({ courses }: CourseModuleProps) {
+export default function CourseList({ courses }: CourseModuleProps) {
   const classes = useStyles();
   const title = "รายวิชา";
 
   return (
     <React.Fragment>
-      <CssBaseline />
-      <NavigationBar active={0} />
-      <Header
-        title={title}
-        icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
-        imageUrl={heroImage}
-      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
@@ -111,7 +93,6 @@ export default function Courses({ courses }: CourseModuleProps) {
           </main>
         </div>
       </Container>
-      <Footer />
     </React.Fragment>
   );
 }

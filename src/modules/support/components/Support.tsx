@@ -7,10 +7,6 @@ import {
   Theme,
   withStyles,
 } from "@material-ui/core/styles";
-import NavigationBar from "../root/components/NavigationBar";
-import Header from "../root/components/Header";
-import Footer from "../root/components/Footer";
-import HelpIcon from "@material-ui/icons/Help";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -26,8 +22,6 @@ import CheckIcon from "@material-ui/icons/Check";
 import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
 import ModeCommentIcon from "@material-ui/icons/ModeComment";
 import AttachmentIcon from "@material-ui/icons/AttachFile";
-
-const heroImage = require("../../assets/images/root/hero-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,19 +52,14 @@ const StyledBadge = withStyles((theme: Theme) =>
   })
 )(Badge);
 
-export default function Help() {
+export default function Support() {
   const classes = useStyles();
   const title = "ช่วยเหลือ";
 
   return (
-    <React.Fragment>
+    <>
       <CssBaseline />
-      <NavigationBar active={2} />
-      <Header
-        title={title}
-        icon={<HelpIcon fontSize="large" style={{ marginRight: "24px" }} />}
-        imageUrl={heroImage}
-      />
+
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
@@ -269,7 +258,6 @@ export default function Help() {
           </main>
         </div>
       </Container>
-      <Footer />
-    </React.Fragment>
+    </>
   );
 }

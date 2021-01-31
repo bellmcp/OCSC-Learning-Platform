@@ -1,39 +1,34 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import NavigationBar from "../../../root/components/NavigationBar";
-import Header from "../../../root/components/Header";
-import Footer from "../../../root/components/Footer";
-
-import { CourseDetailProps } from "../CourseDetail/types";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Avatar from "@material-ui/core/Avatar";
-import AssignmentIcon from "@material-ui/icons/Assignment";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import CreateIcon from "@material-ui/icons/Create";
-import ArrowRightIcon from "@material-ui/icons/KeyboardArrowRightRounded";
-import InfoIcon from "@material-ui/icons/Info";
+import { CourseDetailProps } from "./CourseDetail/types";
+import {
+  Typography,
+  Container,
+  Box,
+  Grid,
+  Divider,
+  Avatar,
+  Button,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  LinearProgress,
+} from "@material-ui/core";
+import {
+  Assignment as AssignmentIcon,
+  Assessment as AssessmentIcon,
+  Create as CreateIcon,
+  KeyboardArrowRightRounded as ArrowRightIcon,
+  Info as InfoIcon,
+  ThumbUp as SurveyIcon,
+  PlayCircleFilled as PlayCircleFilledIcon,
+  LibraryBooks as LibraryBooksIcon,
+} from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
-import { Typography } from "@material-ui/core";
-import Button from "@material-ui/core/Button/Button";
-import Accordion from "@material-ui/core/Accordion/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import SurveyIcon from "@material-ui/icons/ThumbUp";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import List from "@material-ui/core/List/List";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
-import LinearProgress from "@material-ui/core/LinearProgress/LinearProgress";
-
-const heroImage = require("../../../../assets/images/root/course-min.jpg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,7 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CourseDetail({ course }: CourseDetailProps) {
+export default function CourseDetails({ course }: CourseDetailProps) {
   const classes = useStyles();
   const subtitle =
     "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
@@ -173,17 +168,7 @@ export default function CourseDetail({ course }: CourseDetailProps) {
   }
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <NavigationBar active={1} />
-      <Header
-        title={course.title}
-        subtitle={subtitle}
-        imageUrl={heroImage}
-        isCourse
-        courseId={course.id}
-        courseGenre={course.genre}
-      />
+    <>
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
@@ -313,7 +298,6 @@ export default function CourseDetail({ course }: CourseDetailProps) {
           </main>
         </div>
       </Container>
-      <Footer />
-    </React.Fragment>
+    </>
   );
 }
