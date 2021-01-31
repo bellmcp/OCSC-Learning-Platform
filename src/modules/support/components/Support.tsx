@@ -1,27 +1,32 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import moment from "moment";
+import { useForm } from "react-hook-form";
+import {
+  Container,
+  Typography,
+  Grid,
+  TextField,
+  CardContent,
+  Card,
+  Box,
+  Divider,
+  CardActions,
+  Button,
+  Badge,
+} from "@material-ui/core";
 import {
   createStyles,
   makeStyles,
   Theme,
   withStyles,
 } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
-import CardContent from "@material-ui/core/CardContent";
-import Card from "@material-ui/core/Card/Card";
-import Box from "@material-ui/core/Box/Box";
-import Divider from "@material-ui/core/Divider";
-import CardActions from "@material-ui/core/CardActions/CardActions";
-import Button from "@material-ui/core/Button/Button";
-import SendIcon from "@material-ui/icons/Send";
-import Badge from "@material-ui/core/Badge/Badge";
-import CheckIcon from "@material-ui/icons/Check";
-import ChatBubbleIcon from "@material-ui/icons/ChatBubbleOutlineOutlined";
-import ModeCommentIcon from "@material-ui/icons/ModeComment";
-import AttachmentIcon from "@material-ui/icons/AttachFile";
+import {
+  Send as SendIcon,
+  Check as CheckIcon,
+  ChatBubbleOutlineOutlined as ChatBubbleIcon,
+  ModeComment as ModeCommentIcon,
+  AttachFile as AttachmentIcon,
+} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -54,12 +59,20 @@ const StyledBadge = withStyles((theme: Theme) =>
 
 export default function Support() {
   const classes = useStyles();
-  const title = "ช่วยเหลือ";
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data: any) => {
+    alert(
+      `RESULT: ${JSON.stringify(
+        data
+      )}\nTIMESTAMP: {"CreateDate": ${moment().format("DD-MM-YYYY hh:mm:ss")}}`
+    );
+  };
+  const onRead = () => {
+    alert(`{"Id": 00002, "IsAcknowledged": true}`);
+  };
 
   return (
     <>
-      <CssBaseline />
-
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
@@ -77,19 +90,41 @@ export default function Support() {
                 >
                   ติดต่อเจ้าหน้าที่
                 </Typography>
-                <form className={classes.root} noValidate autoComplete="off">
+                <form
+                  className={classes.root}
+                  onSubmit={handleSubmit(onSubmit)}
+                  noValidate
+                  autoComplete="off"
+                >
                   <TextField
-                    id="title"
+                    name="Subject"
+                    inputRef={register({ required: true })}
+                    helperText={errors.Subject && "กรุณากรอกปัญหาที่พบ"}
+                    error={!!errors.Subject}
+                    id="Subject"
                     label="ปัญหาที่พบ"
                     placeholder="เช่น ลงทะเบียนเรียนไม่ได้"
                     required
                     multiline
                   />
-                  <TextField id="detail" label="รายละเอียด (ถ้ามี)" multiline />
                   <TextField
-                    id="detail"
+                    name="Message"
+                    inputRef={register}
+                    id="Message"
+                    label="รายละเอียด (ถ้ามี)"
+                    multiline
+                  />
+                  <TextField
+                    name="Contact"
+                    inputRef={register({ required: true })}
+                    helperText={
+                      errors.Contact
+                        ? "กรุณากรอกช่องทางติดต่อกลับ"
+                        : "เบอร์โทรศัพท์ หรือ อีเมล และเวลาที่สะดวกติดต่อกลับ (ถ้ามี)"
+                    }
+                    error={!!errors.Contact}
+                    id="Contact"
                     label="ช่องทางติดต่อกลับ"
-                    helperText="เบอร์โทรศัพท์ หรือ อีเมล และเวลาที่สะดวกติดต่อกลับ (ถ้ามี)"
                     required
                     multiline
                   />
@@ -101,8 +136,8 @@ export default function Support() {
                     </Grid>
                     <Grid item>
                       <input
-                        id="upload-photo"
-                        name="upload-photo"
+                        name="AttachFile"
+                        id="AttachFile"
                         type="file"
                         style={{ width: "100%" }}
                       />
@@ -110,6 +145,7 @@ export default function Support() {
                   </Grid>
 
                   <Button
+                    type="submit"
                     color="primary"
                     variant="contained"
                     startIcon={<SendIcon />}
@@ -208,6 +244,7 @@ export default function Support() {
                     </CardContent>
                     <CardActions>
                       <Button
+                        onClick={onRead}
                         color="secondary"
                         variant="contained"
                         startIcon={<CheckIcon />}
