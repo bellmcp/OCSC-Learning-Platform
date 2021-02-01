@@ -7,15 +7,8 @@ import {
 } from "@material-ui/core/styles";
 import { grey, amber } from "@material-ui/core/colors";
 import NavigationBar from "./NavigationBar";
-import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
-
-const TITLE = "OCSC Learning Platform";
-const SUBTITLE =
-  "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
-const HERO_IMAGE_URL =
-  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -85,7 +78,6 @@ export default function Layout() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NavigationBar active={activePage} setActivePage={setActivePage} />
-      <Header title={TITLE} subtitle={SUBTITLE} imageUrl={HERO_IMAGE_URL} />
       <Content />
       <Footer />
     </ThemeProvider>

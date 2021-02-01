@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { NavLink, useHistory } from "react-router-dom";
-import * as actionsEdit from "modules/user/actions";
+import * as userActions from "modules/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
@@ -37,11 +37,11 @@ import {
   Person,
 } from "@material-ui/icons";
 import { amber, grey } from "@material-ui/core/colors";
-import NavigationDrawer from "./NavigationDrawer";
-import { getCookie, eraseCookie } from "cookies/cookies";
-import { parseJwt } from "utils/getDataJWT";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
+import { getCookie, eraseCookie } from "cookies/cookies";
+import { parseJwt } from "utils/getDataJWT";
+import NavigationDrawer from "./NavigationDrawer";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -202,21 +202,22 @@ export default function NavigationBar(props: NavigationBarProps) {
   ] = React.useState<null | HTMLElement>(null);
 
   const logo = require("assets/images/root/logo-min.png");
-  const user = require("assets/images/root/user-min.jpg");
+  // const user = require("assets/images/root/user-min.jpg");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const token = getCookie("token");
   const id = parseJwt(token).unique_name;
   useEffect(() => {
     if (login()) {
-      const actionProfile = actionsEdit.loadGetProfile();
+      const actionProfile = userActions.loadGetProfile();
       dispatch(actionProfile);
     }
     // eslint-disable-next-line
   }, [id]);
-  const { data } = useSelector((state: any) => state.user);
+  const { data: user } = useSelector((state: any) => state.user);
   const login = () => {
     if (token === null) {
       return false;
@@ -238,9 +239,15 @@ export default function NavigationBar(props: NavigationBarProps) {
     history.push("/me");
   };
 
+  const LinkToPortal = () => {
+    handleMenuClose();
+    alert("Redirect to https://welearn.ocsc.go.th/learning-portal");
+  };
+
   const { pathname } = useLocation();
 
   const logout = () => {
+    handleMenuClose();
     eraseCookie("token");
     history.push(`${pathname}`);
     window.location.reload();
@@ -300,7 +307,7 @@ export default function NavigationBar(props: NavigationBarProps) {
         </ListItemIcon>
         <ListItemText primary="ออกจากระบบ" />
       </MenuItem> */}
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem onClick={LinkToPortal}>
         <ListItemIcon className={classes.listItemIcon}>
           <Portal />
         </ListItemIcon>
@@ -354,7 +361,7 @@ export default function NavigationBar(props: NavigationBarProps) {
         </IconButton>
         <Typography>ออกจากระบบ</Typography>
       </MenuItem> */}
-      <MenuItem>
+      <MenuItem onClick={LinkToPortal}>
         <IconButton color="inherit">
           <LogoutIcon />
         </IconButton>
@@ -435,7 +442,7 @@ export default function NavigationBar(props: NavigationBarProps) {
                             : classes.navItem
                         }
                       >
-                        {item.notification !== 0 ? (
+                        {login() && item.notification !== 0 ? (
                           <Badge
                             className={classes.badge}
                             variant="dot"
@@ -473,7 +480,7 @@ export default function NavigationBar(props: NavigationBarProps) {
                   }
                 >
                   <Typography className={classes.profileName} noWrap>
-                    {data.firstName}
+                    {user.firstName}
                   </Typography>
                 </Button>
               ) : (
@@ -527,7 +534,7 @@ export default function NavigationBar(props: NavigationBarProps) {
                 onClick={handleMobileMenuOpen}
                 color="inherit"
               >
-                <Avatar alt="User" src={user} className={classes.small} />
+                <Avatar alt="User" className={classes.small} />
               </IconButton>
             </div>
           </Toolbar>

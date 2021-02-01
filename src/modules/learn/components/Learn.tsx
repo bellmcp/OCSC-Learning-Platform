@@ -1,7 +1,9 @@
 import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Typography, Container } from "@material-ui/core";
+import { PlayArrow as LearnIcon } from "@material-ui/icons";
 import MyCourseItem from "modules/home/components/MyCourseItem";
+import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,15 +18,19 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {
-  window?: () => Window;
-}
+const TITLE = "เข้าเรียน";
+const HERO_IMAGE_URL = "https://via.placeholder.com/20/795548/795548?Text=";
 
-export default function Learn(props: Props) {
+export default function Learn() {
   const classes = useStyles();
 
   return (
     <>
+      <Header
+        title={TITLE}
+        icon={<LearnIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={HERO_IMAGE_URL}
+      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>

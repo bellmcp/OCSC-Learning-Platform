@@ -13,8 +13,14 @@ import {
   Paper,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Person, Lock, Visibility, VisibilityOff } from "@material-ui/icons";
+import {
+  Person as PersonIcon,
+  Lock as LockIcon,
+  Visibility as VisibilityIcon,
+  VisibilityOff as VisibilityOffIcon,
+} from "@material-ui/icons";
 import * as actions from "../actions";
+import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -37,6 +43,9 @@ interface State {
   password: string;
   showPassword: boolean;
 }
+
+const TITLE = "เข้าสู่ระบบ";
+const HERO_IMAGE_URL = "https://via.placeholder.com/20/e64a19/e64a19?Text=";
 
 export default function Login() {
   const classes = useStyles();
@@ -83,6 +92,11 @@ export default function Login() {
 
   return (
     <>
+      <Header
+        title={TITLE}
+        icon={<PersonIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={HERO_IMAGE_URL}
+      />
       <Container component="main" maxWidth="xs">
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" style={{ marginBottom: 16 }}>
@@ -102,7 +116,7 @@ export default function Login() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Person />
+                    <PersonIcon />
                   </InputAdornment>
                 ),
               }}
@@ -121,7 +135,7 @@ export default function Login() {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Lock />
+                    <LockIcon />
                   </InputAdornment>
                 ),
                 endAdornment: (
@@ -131,7 +145,11 @@ export default function Login() {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                     >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                      {values.showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),

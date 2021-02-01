@@ -26,7 +26,9 @@ import {
   ChatBubbleOutlineOutlined as ChatBubbleIcon,
   ModeComment as ModeCommentIcon,
   AttachFile as AttachmentIcon,
+  Help as HelpIcon,
 } from "@material-ui/icons";
+import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,6 +59,9 @@ const StyledBadge = withStyles((theme: Theme) =>
   })
 )(Badge);
 
+const TITLE = "ช่วยเหลือ";
+const HERO_IMAGE_URL = "https://via.placeholder.com/20/607d8b/607d8b?Text=";
+
 export default function Support() {
   const classes = useStyles();
   const { register, handleSubmit, errors } = useForm();
@@ -67,12 +72,18 @@ export default function Support() {
       )}\nTIMESTAMP: {"CreateDate": ${moment().format("DD-MM-YYYY hh:mm:ss")}}`
     );
   };
+
   const onRead = () => {
     alert(`{"Id": 00002, "IsAcknowledged": true}`);
   };
 
   return (
     <>
+      <Header
+        title={TITLE}
+        icon={<HelpIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={HERO_IMAGE_URL}
+      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>

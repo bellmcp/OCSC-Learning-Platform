@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Container,
@@ -11,11 +12,11 @@ import {
 } from "@material-ui/core";
 import MyCourseItem from "./MyCourseItem";
 import CategoryFilter from "modules/courses/components/CategoryFilter";
-import CourseCarousel from "./CourseCarousel";
 import AnnouncementCarousel from "./AnnouncementCarousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { CourseModuleProps } from "../types";
 import CourseList from "./CourseList";
+import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,11 +31,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const TITLE = "OCSC Learning Platform";
+const SUBTITLE =
+  "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+const HERO_IMAGE_URL =
+  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
+
 export default function Home({ curriculum }: CourseModuleProps) {
   const classes = useStyles();
+  const { data: user } = useSelector((state: any) => state.user);
 
   return (
     <>
+      <Header
+        title={user.firstName ? `สวัสดี ${user.firstName}` : TITLE}
+        subtitle={SUBTITLE}
+        imageUrl={HERO_IMAGE_URL}
+      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
@@ -143,7 +156,7 @@ export default function Home({ curriculum }: CourseModuleProps) {
                     ดูทั้งหมด {">"}
                   </Link>
                 </Grid>
-                <CourseCarousel courses={item.courses} />
+              
               </React.Fragment>
             ))} */}
             {/* 
@@ -172,7 +185,7 @@ export default function Home({ curriculum }: CourseModuleProps) {
                     ดูทั้งหมด {">"}
                   </Link>
                 </Grid>
-                <CourseCarousel courses={item.curricula} isCurriculum />
+            
               </React.Fragment>
             ))} */}
           </main>
