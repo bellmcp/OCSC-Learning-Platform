@@ -60,7 +60,8 @@ const StyledBadge = withStyles((theme: Theme) =>
 )(Badge);
 
 const TITLE = "ช่วยเหลือ";
-const HERO_IMAGE_URL = "https://via.placeholder.com/20/607d8b/607d8b?Text=";
+const HERO_IMAGE_URL =
+  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
 export default function Support() {
   const classes = useStyles();

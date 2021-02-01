@@ -14,6 +14,8 @@ import {
 import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
 import CourseItem from "modules/home/components/CourseItem";
 import CategoryFilter from "./CategoryFilter";
+import { MenuBook as CourseIcon } from "@material-ui/icons";
+import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,6 +37,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const TITLE = "รายวิชา";
+const HERO_IMAGE_URL =
+  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
+
 export default function CourseList() {
   const classes = useStyles();
   const { search } = useLocation();
@@ -53,6 +59,11 @@ export default function CourseList() {
 
   return (
     <React.Fragment>
+      <Header
+        title={TITLE}
+        icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={HERO_IMAGE_URL}
+      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>

@@ -45,7 +45,8 @@ interface State {
 }
 
 const TITLE = "เข้าสู่ระบบ";
-const HERO_IMAGE_URL = "https://via.placeholder.com/20/e64a19/e64a19?Text=";
+const HERO_IMAGE_URL =
+  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
 export default function Login() {
   const classes = useStyles();
@@ -99,8 +100,16 @@ export default function Login() {
       />
       <Container component="main" maxWidth="xs">
         <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" style={{ marginBottom: 16 }}>
+          <Typography
+            component="h1"
+            variant="h4"
+            style={{ fontWeight: 600 }}
+            gutterBottom
+          >
             เข้าสู่ระบบ
+          </Typography>
+          <Typography component="h2" variant="body2" color="textSecondary">
+            userID: 1555327140532, password: 12345678
           </Typography>
           <form className={classes.form} noValidate>
             <TextField

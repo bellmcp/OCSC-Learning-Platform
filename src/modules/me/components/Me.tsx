@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Header from "modules/ui/components/Header";
 import { Container, Typography, Paper, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { amber } from "@material-ui/core/colors";
 import { Person as PersonIcon } from "@material-ui/icons";
 
 const TITLE = "โปรไฟล์";
@@ -16,6 +17,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    backgroundColor: amber[500],
+    color: "black",
   },
 }));
 
@@ -31,7 +38,7 @@ export default function Me() {
       />
       <Container component="main" maxWidth="md">
         <Paper className={classes.paper}>
-          <Avatar style={{ width: 80, height: 80 }} />
+          <Avatar className={classes.avatar} />
           <Typography
             component="h2"
             variant="body1"
@@ -47,10 +54,12 @@ export default function Me() {
             gutterBottom
             style={{ fontWeight: 600 }}
           >
-            {data.title} {data.firstName} {data.lastName}
+            {data.firstName
+              ? `${data.title} ${data.firstName} ${data.lastName}`
+              : "คุณยังไม่ได้เข้าสู่ระบบ"}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
-            เพศ{data.gender === "m" ? "ชาย" : "หญิง"}
+            {data.gender && (data.gender === "m" ? "เพศชาย" : "เพศหญิง")}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
             {data.email}

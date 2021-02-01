@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const TITLE = "เข้าเรียน";
-const HERO_IMAGE_URL = "https://via.placeholder.com/20/795548/795548?Text=";
+const HERO_IMAGE_URL =
+  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
 export default function Learn() {
   const classes = useStyles();
