@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core/styles";
 import { grey, amber } from "@material-ui/core/colors";
 import NavigationBar from "./NavigationBar";
-import Content from "./Content";
+import Routes from "./Routes";
 import Footer from "./Footer";
 
 export default function Layout() {
@@ -78,7 +78,7 @@ export default function Layout() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NavigationBar active={activePage} setActivePage={setActivePage} />
-      <Content />
+      <Routes />
       <Footer />
     </ThemeProvider>
   );

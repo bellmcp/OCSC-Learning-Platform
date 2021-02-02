@@ -10,9 +10,9 @@ import CurriculumIcon from "@material-ui/icons/CollectionsBookmark";
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownRounded";
 // import CourseFilter from "../courses/components/CourseFilter";
 import CourseItem from "../home/components/CourseItem";
-import Footer from "../root/components/Footer";
-import Header from "../root/components/Header";
-import NavigationBar from "../root/components/NavigationBar";
+import Footer from "modules/ui/components/Footer";
+import Header from "modules/ui/components/Header";
+import NavigationBar from "modules/ui/components/NavigationBar";
 import { CurriculumModuleProps } from "./types";
 
 const heroImage = require("../../assets/images/root/hero-min.jpg");
@@ -44,7 +44,12 @@ export default function Curriculum({ curriculum }: CurriculumModuleProps) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar active={0} />
+      <NavigationBar
+        active={0}
+        setActivePage={() => {
+          console.log("mock");
+        }}
+      />
       <Header
         title={title}
         icon={

@@ -25,7 +25,7 @@ import {
   ArrowBackIosRounded as ArrowBack,
   ArrowForwardIosRounded as ArrowForward,
 } from "@material-ui/icons";
-import AnnouncementItem from "../AnnouncementItem";
+import PressItem from "./PressItem";
 import { amber, grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AnnouncementCarousel() {
+export default function PressList() {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -128,7 +128,7 @@ export default function AnnouncementCarousel() {
               {announcements.map((announcement: any) => (
                 <Slide index={announcement.id}>
                   <div className={classes.announcement}>
-                    <AnnouncementItem key={announcement.id} {...announcement} />
+                    <PressItem key={announcement.id} {...announcement} />
                   </div>
                 </Slide>
               ))}

@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import NavigationBar from "../../../root/components/NavigationBar";
-import Header from "../../../root/components/Header";
-import Footer from "../../../root/components/Footer";
+import NavigationBar from "modules/ui/components/NavigationBar";
+import Header from "modules/ui/components/Header";
+import Footer from "modules/ui/components/Footer";
 
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -190,7 +190,12 @@ export default function CurriculumDetail() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar active={1} />
+      <NavigationBar
+        active={1}
+        setActivePage={() => {
+          console.log("mock");
+        }}
+      />
       <Header
         title={"มหากาพย์ สังคมศึกษา น่ารู้"}
         subtitle={subtitle}

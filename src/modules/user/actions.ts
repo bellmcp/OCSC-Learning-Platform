@@ -1,6 +1,6 @@
 import axios from "axios";
-import { getCookie } from "cookies/cookies";
-import { parseJwt } from "utils/getDataJWT";
+import { getCookie } from "utils/cookies";
+import parseJwt from "utils/parseJwt";
 const LOAD_PROFILE_REQUEST = "learning-portal/src/ui/LOAD_PROFILE_REQUEST";
 const LOAD_PROFILE_SUCCESS = "learning-portal/src/ui/LOAD_PROFILE_SUCCESS";
 const LOAD_PROFILE_FAILURE = "learning-portal/src/ui/LOAD_EDIT_FAILURE";

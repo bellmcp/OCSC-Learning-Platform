@@ -2,8 +2,6 @@ import React from "react";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
-
-import { AnnouncementItemProps } from "./types";
 import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -27,12 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function AnnouncementItem({
-  id,
-  headline,
-  imageUrl,
-  targetUrl,
-}: any) {
+export default function PressItem({ id, headline, imageUrl, targetUrl }: any) {
   const classes = useStyles();
 
   return (

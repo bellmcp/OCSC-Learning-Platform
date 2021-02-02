@@ -26,7 +26,7 @@ import {
   CloseRounded as CloseIcon,
 } from "@material-ui/icons";
 
-import { NavigationDrawerProps } from "./types";
+import { NavigationDrawerProps } from "../types";
 
 const DRAWER_WIDTH = 200;
 

@@ -10,12 +10,11 @@ import {
   Box,
   Divider,
 } from "@material-ui/core";
-import MyCourseItem from "./MyCourseItem";
 import CategoryFilter from "modules/courses/components/CategoryFilter";
-import AnnouncementCarousel from "./AnnouncementCarousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { CourseModuleProps } from "../types";
 import CourseList from "./CourseList";
+import PressList from "modules/press/components/PressList";
 import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,7 +50,7 @@ export default function Home({ curriculum }: CourseModuleProps) {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <AnnouncementCarousel />
+            <PressList />
 
             {/* <Grid
               container

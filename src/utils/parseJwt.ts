@@ -1,4 +1,4 @@
-export function parseJwt(token) {
+export default function parseJwt(token: string | null) {
   if (token === null) {
     return "";
   }

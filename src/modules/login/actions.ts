@@ -1,6 +1,6 @@
 import axios from "axios";
 import { push } from "connected-react-router";
-import { setCookie } from "cookies/cookies";
+import { setCookie } from "utils/cookies";
 const LOAD_LOGIN_REQUEST = "learning-platform/src/login/LOAD_LOGIN_REQUEST";
 const LOAD_LOGIN_SUCCESS = "learning-platform/src/login/LOAD_LOGIN_SUCCESS";
 const LOAD_LOGIN_FAILURE = "learning-platform/src/login/LOAD_LOGIN_FAILURE";

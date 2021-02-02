@@ -3,6 +3,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import * as userActions from "modules/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { getCookie, eraseCookie } from "utils/cookies";
+import parseJwt from "utils/parseJwt";
 import {
   fade,
   makeStyles,
@@ -39,8 +41,6 @@ import {
 import { amber, grey } from "@material-ui/core/colors";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
-import { getCookie, eraseCookie } from "cookies/cookies";
-import { parseJwt } from "utils/getDataJWT";
 import NavigationDrawer from "./NavigationDrawer";
 
 const darkTheme = createMuiTheme({
