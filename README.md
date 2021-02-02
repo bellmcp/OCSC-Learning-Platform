@@ -9,7 +9,7 @@ An e-Learning platform for the Office of the Civil Service Commission (OCSC). St
 
 # Demo
 
-- [https://ocsc-learning-platform.herokuapp.com/](https://ocsc-learning-platform.herokuapp.com/)
+- [https://ocsc-learning-platform.vercel.app/](https://ocsc-learning-platform.vercel.app/)
 
 # License
 
