@@ -29,27 +29,27 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function AnnouncementItem({
   id,
-  ImageUrl,
-  Headline,
-  TargetUrl,
-}: AnnouncementItemProps) {
+  headline,
+  imageUrl,
+  targetUrl,
+}: any) {
   const classes = useStyles();
 
   return (
-    <Link href={TargetUrl}>
+    <Link href={targetUrl} target="_blank">
       <Card className={classes.cardSmall} style={{ position: "relative" }}>
         <CardMedia
           key={id}
           className={classes.cardMediaSmall}
-          image={ImageUrl}
-          title={Headline}
+          image={imageUrl}
+          title={headline}
           style={{
-            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url('${ImageUrl}')`,
+            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url('${imageUrl}')`,
             backgroundSize: "cover",
             backgroundPosition: "center top",
           }}
         />
-        <div className={classes.cardDetail}>{Headline}</div>
+        <div className={classes.cardDetail}>{headline}</div>
       </Card>
     </Link>
   );

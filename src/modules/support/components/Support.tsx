@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Container, Grid } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Help as HelpIcon } from "@material-ui/icons";
 import Header from "modules/ui/components/Header";
 import SupportForm from "./SupportForm";
 import SupportList from "./SupportList";
+import Login from "modules/login/components/Login";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,33 +27,40 @@ const HERO_IMAGE_URL =
 
 export default function Support() {
   const classes = useStyles();
+  const { data: user } = useSelector((state: any) => state.user);
 
   return (
     <>
-      <Header
-        title={TITLE}
-        icon={<HelpIcon fontSize="large" style={{ marginRight: "24px" }} />}
-        imageUrl={HERO_IMAGE_URL}
-      />
-      <Container>
-        <div className={classes.main}>
-          <main className={classes.content}>
-            <Grid
-              container
-              justify="space-between"
-              alignItems="flex-start"
-              spacing={4}
-            >
-              <Grid item xs={12} sm={12} md={6}>
-                <SupportForm />
-              </Grid>
-              <Grid item xs={12} sm={12} md={6}>
-                <SupportList />
-              </Grid>
-            </Grid>
-          </main>
-        </div>
-      </Container>
+      {user.length !== 0 ? (
+        <>
+          <Header
+            title={TITLE}
+            icon={<HelpIcon fontSize="large" style={{ marginRight: "24px" }} />}
+            imageUrl={HERO_IMAGE_URL}
+          />
+          <Container>
+            <div className={classes.main}>
+              <main className={classes.content}>
+                <Grid
+                  container
+                  justify="space-between"
+                  alignItems="flex-start"
+                  spacing={4}
+                >
+                  <Grid item xs={12} md={6}>
+                    <SupportForm />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <SupportList />
+                  </Grid>
+                </Grid>
+              </main>
+            </div>
+          </Container>
+        </>
+      ) : (
+        <Login title="คุณยังไม่ได้เข้าสู่ระบบ" />
+      )}
     </>
   );
 }

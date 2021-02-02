@@ -36,7 +36,7 @@ export default function SupportItem({
 
   return (
     <Box my={3}>
-      <Card elevation={4}>
+      <Card>
         <CardContent>
           <Box m={3}>
             <Typography
@@ -121,7 +121,7 @@ export default function SupportItem({
                   align="right"
                   color="textSecondary"
                 >
-                  <b>ส่งเมื่อ:</b> {ReplyDate}
+                  <b>ตอบกลับเมื่อ:</b> {ReplyDate}
                 </Typography>
               </Box>
             </>

@@ -23,7 +23,6 @@ export default function SupportList() {
       setIsLoading(true);
       const { data } = await axios.get(`/Supports`);
       setSupports(data);
-      console.log(data);
       setIsLoading(false);
     };
     loadSupports();
