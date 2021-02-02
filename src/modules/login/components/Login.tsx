@@ -108,9 +108,19 @@ export default function Login() {
           >
             เข้าสู่ระบบ
           </Typography>
-          <Typography component="h2" variant="body2" color="textSecondary">
-            userID: 1555327140532, password: 12345678
-          </Typography>
+          <p style={{ textAlign: "center" }}>
+            userID: 1555327140532
+            <br />
+            password: 12345678
+            <br />
+            CURRENT_API_ENDPOINT:
+            https://welearn.ocsc.go.th/learning-portal-api/
+          </p>
+          <Typography
+            component="h2"
+            variant="body2"
+            color="textSecondary"
+          ></Typography>
           <form className={classes.form} noValidate>
             <TextField
               variant="outlined"

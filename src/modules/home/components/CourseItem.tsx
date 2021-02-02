@@ -156,7 +156,7 @@ export default function CourseItem({
                         marginRight: 6,
                       }}
                     />
-                    {categories[CourseCategoryId - 1]?.CourseCategory}
+                    {categories[CourseCategoryId]?.CourseCategory}
                   </div>
                 )}
               </Typography>
