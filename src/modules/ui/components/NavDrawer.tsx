@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const navigationItem = [
+const navigationItems = [
   {
     id: 0,
     title: "หน้าหลัก",
@@ -106,13 +106,13 @@ const navigationItem = [
   {
     id: 2,
     title: "ช่วยเหลือ",
-    url: "/help",
+    url: "/support",
     icon: <HelpIcon />,
-    notification: 1,
+    notification: 0,
   },
 ];
 
-export default function NavigationDrawer({
+export default function NavDrawer({
   window,
   handleDrawerToggle,
   mobileOpen,
@@ -136,34 +136,38 @@ export default function NavigationDrawer({
         </IconButton>
         <p className={classes.title}>Learning Platform</p>
         <List>
-          {navigationItem.map((item, index) => (
+          {navigationItems.map((navigationItem, index) => (
             <React.Fragment>
-              {item.id === 0 ? <Divider /> : null}
+              {navigationItem.id === 0 ? <Divider /> : null}
               <MenuItem
                 button
                 selected={index === active ? true : false}
                 component={RouterLink}
-                to={item.url}
+                to={navigationItem.url}
                 onClick={handleDrawerToggle}
               >
                 <ListItem className={classes.listItem} key={index} dense>
                   <ListItemIcon className={classes.listItemIcon}>
-                    {item.notification !== 0 ? (
+                    {navigationItem.notification !== 0 ? (
                       <Badge variant="dot" color="error">
-                        {item.icon}
+                        {navigationItem.icon}
                       </Badge>
                     ) : (
-                      item.icon
+                      navigationItem.icon
                     )}
                   </ListItemIcon>
-                  <ListItemText primary={item.title} />
+                  <ListItemText primary={navigationItem.title} />
                 </ListItem>
               </MenuItem>
-              {item.id === navigationItem.length - 1 ? <Divider /> : null}
+              {navigationItem.id === navigationItems.length - 1 ? (
+                <Divider />
+              ) : null}
             </React.Fragment>
           ))}
         </List>
-        <p className={classes.copyright}>© 2020 สำนักงาน ก.พ.</p>
+        <p className={classes.copyright}>
+          © {new Date().getFullYear()} สำนักงาน ก.พ.
+        </p>
       </div>
     );
   }
@@ -171,7 +175,7 @@ export default function NavigationDrawer({
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer}>
         <Hidden smUp implementation="css">
           <Drawer
             container={container}
@@ -183,7 +187,7 @@ export default function NavigationDrawer({
               paper: classes.drawerPaper,
             }}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             }}
           >
             <MobileDrawer />

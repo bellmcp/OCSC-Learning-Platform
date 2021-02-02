@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { amber } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -27,6 +28,10 @@ const useStyles = makeStyles((theme) =>
     },
     text: {
       color: theme.palette.common.white,
+      textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)",
+    },
+    amber: {
+      color: amber[500],
       textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)",
     },
   })
@@ -69,19 +74,19 @@ export default function Aside({ title }: any) {
           <List dense>
             <ListItem>
               <ListItemIcon>
-                <CheckCircleIcon className={classes.text} />
+                <CheckCircleIcon className={classes.amber} />
               </ListItemIcon>
               <ListItemText primary="ลงทะเบียนเรียน" className={classes.text} />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <CheckCircleIcon className={classes.text} />
+                <CheckCircleIcon className={classes.amber} />
               </ListItemIcon>
               <ListItemText primary="เข้าเรียน" className={classes.text} />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <CheckCircleIcon className={classes.text} />
+                <CheckCircleIcon className={classes.amber} />
               </ListItemIcon>
               <ListItemText
                 primary="ขอความช่วยเหลือ"

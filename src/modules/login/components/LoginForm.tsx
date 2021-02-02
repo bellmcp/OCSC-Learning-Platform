@@ -24,10 +24,13 @@ import * as actions from "../actions";
 const useStyles = makeStyles((theme) => ({
   paper: {
     height: "100%",
-    padding: theme.spacing(16, 16),
     display: "flex",
     flexDirection: "column",
     alignItems: "left",
+    padding: theme.spacing(16, 16),
+    [theme.breakpoints.down("sm")]: {
+      padding: theme.spacing(10, 4),
+    },
   },
   form: {
     width: "100%",

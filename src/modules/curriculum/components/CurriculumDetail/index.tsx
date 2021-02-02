@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import NavigationBar from "modules/ui/components/NavigationBar";
+import NavBar from "modules/ui/components/NavBar";
 import Header from "modules/ui/components/Header";
 import Footer from "modules/ui/components/Footer";
 
@@ -190,7 +190,7 @@ export default function CurriculumDetail() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar
+      <NavBar
         active={1}
         setActivePage={() => {
           console.log("mock");

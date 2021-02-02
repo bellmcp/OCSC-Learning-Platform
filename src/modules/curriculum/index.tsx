@@ -12,7 +12,7 @@ import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownRounded";
 import CourseItem from "../home/components/CourseItem";
 import Footer from "modules/ui/components/Footer";
 import Header from "modules/ui/components/Header";
-import NavigationBar from "modules/ui/components/NavigationBar";
+import NavBar from "modules/ui/components/NavBar";
 import { CurriculumModuleProps } from "./types";
 
 const heroImage = require("../../assets/images/root/hero-min.jpg");
@@ -44,7 +44,7 @@ export default function Curriculum({ curriculum }: CurriculumModuleProps) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar
+      <NavBar
         active={0}
         setActivePage={() => {
           console.log("mock");

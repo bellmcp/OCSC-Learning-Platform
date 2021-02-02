@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import * as userActions from "modules/user/actions";
-import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
@@ -20,12 +20,8 @@ import {
   IconButton,
   InputBase,
   Badge,
-  MenuItem,
-  Menu,
   Avatar,
   Hidden,
-  ListItemIcon,
-  ListItemText,
   Button,
   Divider,
   Container,
@@ -33,15 +29,14 @@ import {
 import {
   Menu as MenuIcon,
   Search as SearchIcon,
-  ExitToApp as LogoutIcon,
-  KeyboardArrowDown as ArrowDown,
-  ViewCarousel as Portal,
-  Person,
+  KeyboardArrowDown as ArrowDownIcon,
 } from "@material-ui/icons";
 import { amber, grey } from "@material-ui/core/colors";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
-import NavigationDrawer from "./NavigationDrawer";
+import NavDrawer from "./NavDrawer";
+import NavDropdownMobile from "./NavDropdownMobile";
+import NavDropdownDesktop from "./NavDropdownDesktop";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -76,6 +71,9 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up("sm")]: {
         display: "block",
       },
+      "&:hover": {
+        cursor: "pointer",
+      },
     },
     logo: {
       display: "block",
@@ -83,6 +81,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
       [theme.breakpoints.down("xs")]: {
         maxWidth: 110,
+      },
+      "&:hover": {
+        cursor: "pointer",
       },
     },
     link: {
@@ -134,9 +135,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: "none",
       },
     },
-    listItemIcon: {
-      minWidth: 40,
-    },
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
@@ -169,7 +167,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
       backgroundColor: theme.palette.grey[800],
     },
-    profileName: {
+    bold: {
       fontWeight: 600,
     },
   })
@@ -191,7 +189,7 @@ interface NavigationBarProps {
   setActivePage: (id: number) => void;
 }
 
-export default function NavigationBar(props: NavigationBarProps) {
+export default function NavBar(props: NavigationBarProps) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -202,7 +200,6 @@ export default function NavigationBar(props: NavigationBarProps) {
   ] = React.useState<null | HTMLElement>(null);
 
   const logo = require("assets/images/root/logo-min.png");
-  // const user = require("assets/images/root/user-min.jpg");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -215,7 +212,6 @@ export default function NavigationBar(props: NavigationBarProps) {
       const actionProfile = userActions.loadGetProfile();
       dispatch(actionProfile);
     }
-    // eslint-disable-next-line
   }, [id]);
   const { data: user } = useSelector((state: any) => state.user);
   const login = () => {
@@ -231,17 +227,28 @@ export default function NavigationBar(props: NavigationBarProps) {
     return false;
   };
 
-  const LinkToLogin = () => {
+  const linkToHome = () => {
+    handleMenuClose();
+    history.push("/");
+  };
+
+  const linkToLogin = () => {
+    handleMenuClose();
     history.push("/login");
   };
 
-  const LinkToProfile = () => {
+  const linkToProfile = () => {
+    handleMenuClose();
     history.push("/me");
   };
 
-  const LinkToPortal = () => {
+  const linkToPortal = () => {
     handleMenuClose();
     alert("Redirect to https://welearn.ocsc.go.th/learning-portal");
+  };
+
+  const toggleSearchBar = () => {
+    alert(`Toggle Search Bar`);
   };
 
   const { pathname } = useLocation();
@@ -275,133 +282,42 @@ export default function NavigationBar(props: NavigationBarProps) {
   };
 
   const menuId = "primary-search-account-menu";
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      // anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      // transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      elevation={0}
-      getContentAnchorEl={null}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-    >
-      {/* <MenuItem onClick={handleMenuClose}>
-        <ListItemIcon className={classes.listItemIcon}>
-          <SettingIcon />
-        </ListItemIcon>
-        <ListItemText primary="การตั้งค่า" />
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <ListItemIcon className={classes.listItemIcon}>
-          <LogoutIcon />
-        </ListItemIcon>
-        <ListItemText primary="ออกจากระบบ" />
-      </MenuItem> */}
-      <MenuItem onClick={LinkToPortal}>
-        <ListItemIcon className={classes.listItemIcon}>
-          <Portal />
-        </ListItemIcon>
-        <ListItemText primary="ไปยัง Portal" />
-      </MenuItem>
-      {login() ? (
-        <MenuItem onClick={logout}>
-          <ListItemIcon className={classes.listItemIcon}>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="ออกจากระบบ" />
-        </MenuItem>
-      ) : null}
-    </Menu>
-  );
-
   const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={LinkToLogin}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <Avatar alt="User" className={classes.small}>
-            <Person />
-          </Avatar>
-        </IconButton>
-        <Typography style={{ fontWeight: 600 }}>เข้าสู่ระบบ</Typography>
-      </MenuItem>
-      <Divider />
-      {/* <MenuItem>
-        <IconButton color="inherit">
-          <SettingIcon />
-        </IconButton>
-        <Typography>การตั้งค่า</Typography>
-      </MenuItem>
-      <MenuItem>
-        <IconButton color="inherit">
-          <LogoutIcon />
-        </IconButton>
-        <Typography>ออกจากระบบ</Typography>
-      </MenuItem> */}
-      <MenuItem onClick={LinkToPortal}>
-        <IconButton color="inherit">
-          <LogoutIcon />
-        </IconButton>
-        <Typography>ไปยัง Portal</Typography>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
         <Container maxWidth="lg">
           <Toolbar>
-            {/* Hide Sidebar Toggle Button on Desktop */}
+            {/* DRAWER TOGGLE */}
             <Hidden smUp implementation="css">
               <IconButton
                 edge="start"
                 className={classes.menuButton}
                 color="inherit"
-                aria-label="open drawer"
                 onClick={handleDrawerToggle}
               >
                 <MenuIcon />
               </IconButton>
             </Hidden>
-
-            <NavLink to="/" className={classes.link}>
-              <img src={logo} alt="OCSC Logo" className={classes.logo} />
-            </NavLink>
-
-            {/* <Divider orientation="vertical" className={classes.divider} /> */}
+            {/* SITE LOGO */}
+            <img
+              src={logo}
+              alt="OCSC Logo"
+              className={classes.logo}
+              onClick={linkToHome}
+            />
             <Hidden mdDown implementation="css">
-              <NavLink to="/" className={classes.link}>
-                <Typography className={classes.title} variant="h6" noWrap>
-                  Learning Platform
-                </Typography>
-              </NavLink>
+              <Typography
+                variant="h6"
+                noWrap
+                className={classes.title}
+                onClick={linkToHome}
+              >
+                Learning Platform
+              </Typography>
             </Hidden>
-
-            {/* Search Bar */}
+            {/* SEARCH */}
             <div className={classes.sectionDesktop}>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
@@ -417,10 +333,8 @@ export default function NavigationBar(props: NavigationBarProps) {
                 />
               </div>
             </div>
-
             <div className={classes.grow} />
-
-            {/* Desktop Navigation Menu */}
+            {/* DESKTOP NAVIGATION */}
             <Hidden xsDown implementation="css">
               <ThemeProvider theme={darkTheme}>
                 <NavMenu
@@ -459,92 +373,84 @@ export default function NavigationBar(props: NavigationBarProps) {
                 </NavMenu>
               </ThemeProvider>
             </Hidden>
-
-            {/* Desktop Button Menu */}
+            {/* DESKTOP DROPDOWN */}
             <div className={classes.sectionDesktop}>
               <Divider orientation="vertical" className={classes.divider} />
-              {login() ? (
-                <Button
-                  onClick={LinkToProfile}
-                  color="inherit"
-                  size="small"
-                  style={{
-                    borderRadius: 50,
-                    padding: "10px 10px",
-                    margin: "6px 0",
-                  }}
-                  startIcon={
-                    <Avatar className={classes.loggedIn}>
-                      <Person />
-                    </Avatar>
-                  }
-                >
-                  <Typography className={classes.profileName} noWrap>
-                    {user.firstName}
-                  </Typography>
-                </Button>
-              ) : (
-                <Button
-                  onClick={LinkToLogin}
-                  color="inherit"
-                  size="small"
-                  style={{
-                    borderRadius: 50,
-                    padding: "10px 10px",
-                    margin: "6px 0",
-                  }}
-                  startIcon={
-                    <Avatar className={classes.small}>
-                      <Person />
-                    </Avatar>
-                  }
-                >
-                  <Typography className={classes.profileName} noWrap>
-                    เข้าสู่ระบบ
-                  </Typography>
-                </Button>
-              )}
+              <Button
+                onClick={login() ? linkToProfile : linkToLogin}
+                color="inherit"
+                size="small"
+                style={{
+                  borderRadius: 50,
+                  padding: "10px 10px",
+                  margin: "6px 0",
+                }}
+                startIcon={
+                  <Avatar
+                    className={login() ? classes.loggedIn : classes.small}
+                  />
+                }
+              >
+                <Typography className={classes.bold} noWrap>
+                  {login() ? user.firstName : "เข้าสู่ระบบ"}
+                </Typography>
+              </Button>
               <IconButton
                 edge="end"
-                aria-label="account of current user"
                 aria-controls={menuId}
-                aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
                 color="inherit"
                 style={{
                   margin: "6px 0",
                 }}
               >
-                <ArrowDown />
+                <ArrowDownIcon />
               </IconButton>
             </div>
-
-            {/* Mobile Button Menu */}
+            {/* MOBILE DROPDOWN */}
             <Hidden only={["xs", "lg", "md", "xl"]}>
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
               <IconButton color="inherit">
-                <SearchIcon />
+                <SearchIcon onClick={toggleSearchBar} />
               </IconButton>
               <IconButton
-                aria-label="show more"
                 aria-controls={mobileMenuId}
-                aria-haspopup="true"
                 onClick={handleMobileMenuOpen}
                 color="inherit"
               >
-                <Avatar alt="User" className={classes.small} />
+                <Avatar
+                  className={login() ? classes.loggedIn : classes.small}
+                />
               </IconButton>
             </div>
           </Toolbar>
         </Container>
       </AppBar>
 
-      {renderMobileMenu}
-      {renderMenu}
-
-      <NavigationDrawer
+      <NavDropdownMobile
+        login={login}
+        logout={logout}
+        user={user}
+        mobileMenuId={mobileMenuId}
+        mobileMoreAnchorEl={mobileMoreAnchorEl}
+        isMobileMenuOpen={isMobileMenuOpen}
+        handleMobileMenuClose={handleMobileMenuClose}
+        linkToProfile={linkToProfile}
+        linkToLogin={linkToLogin}
+        linkToPortal={linkToPortal}
+      />
+      <NavDropdownDesktop
+        login={login}
+        logout={logout}
+        linkToPortal={linkToPortal}
+        anchorEl={anchorEl}
+        menuId={menuId}
+        isMenuOpen={isMenuOpen}
+        handleMenuClose={handleMenuClose}
+      />
+      <NavDrawer
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
         active={props.active}
