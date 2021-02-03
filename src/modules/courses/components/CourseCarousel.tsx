@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+// @ts-nocheck
+import React from "react";
 import {
   CarouselProvider,
   Slider,
@@ -13,13 +12,13 @@ import {
   Grid,
   IconButton,
   CircularProgress,
-  Container,
 } from "@material-ui/core/";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   ArrowForwardIosRounded as ArrowForward,
   ArrowBackIosRounded as ArrowBack,
 } from "@material-ui/icons";
+
 import CourseItem from "./CourseItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -84,24 +83,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CourseList() {
+export default function CourseCarousel({ courses, categories, isLoading }) {
   const classes = useStyles();
-  const { search } = useLocation();
-  const [courses, setCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
-
-  useEffect(() => {
-    const loadCourses = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get(`/Courses${search}`);
-      setCourses(data);
-      setIsLoading(false);
-    };
-    loadCourses();
-  }, [search]);
 
   return (
     <>
@@ -110,7 +96,7 @@ export default function CourseList() {
           container
           justify="center"
           alignItems="center"
-          style={{ height: 407 }}
+          style={{ height: 411 }}
         >
           <CircularProgress color="secondary" />
         </Grid>
@@ -132,7 +118,7 @@ export default function CourseList() {
                 {courses.map((course: any) => (
                   <Slide key={course.id} index={course.id}>
                     <div className={classes.course}>
-                      <CourseItem {...course} />
+                      <CourseItem {...course} categories={categories} />
                     </div>
                   </Slide>
                 ))}

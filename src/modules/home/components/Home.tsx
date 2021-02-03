@@ -1,6 +1,8 @@
-import React from "react";
+// @ts-nocheck
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Container,
@@ -10,11 +12,14 @@ import {
   Box,
   Divider,
 } from "@material-ui/core";
-import CategoryFilter from "modules/courses/components/CategoryFilter";
+import CategoryFilter from "modules/categories/components/CategoryFilter";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { CourseModuleProps } from "../types";
-import CourseList from "./CourseList";
-import PressList from "modules/press/components/PressList";
+
+import * as pressesActions from "modules/press/actions";
+import * as coursesActions from "modules/courses/actions";
+import * as categoriesActions from "modules/categories/actions";
+import CourseCarousel from "modules/courses/components/CourseCarousel";
+import PressCarousel from "modules/press/components/PressCarousel";
 import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,21 +41,45 @@ const SUBTITLE =
 const HERO_IMAGE_URL =
   "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
-export default function Home({ curriculum }: CourseModuleProps) {
+export default function Home() {
   const classes = useStyles();
-  const { data: user } = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
+  const { search } = useLocation();
+  const { items: users } = useSelector((state) => state.user);
+  const { isLoading: isPressesLoading, items: presses } = useSelector(
+    (state) => state.press
+  );
+  const { isLoading: isCoursesLoading, items: courses } = useSelector(
+    (state) => state.courses
+  );
+  const { items: categories } = useSelector((state) => state.categories);
+
+  useEffect(() => {
+    const presses_action = pressesActions.loadPresses();
+    dispatch(presses_action);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const courses_action = coursesActions.loadCourses(search);
+    dispatch(courses_action);
+  }, [dispatch, search]);
+
+  useEffect(() => {
+    const categories_action = categoriesActions.loadCategories();
+    dispatch(categories_action);
+  }, [dispatch]);
 
   return (
     <>
       <Header
-        title={user.firstName ? `สวัสดี ${user.firstName}` : TITLE}
+        title={users.firstName ? `สวัสดี ${users.firstName}` : TITLE}
         subtitle={SUBTITLE}
         imageUrl={HERO_IMAGE_URL}
       />
       <Container maxWidth="lg">
         <div className={classes.main}>
           <main className={classes.content}>
-            <PressList />
+            <PressCarousel presses={presses} isLoading={isPressesLoading} />
 
             {/* <Grid
               container
@@ -84,7 +113,7 @@ export default function Home({ curriculum }: CourseModuleProps) {
                 justify="center"
                 alignItems="center"
               >
-                <CategoryFilter />
+                <CategoryFilter categories={categories} />
               </Grid>
             </Box>
 
@@ -106,7 +135,11 @@ export default function Home({ curriculum }: CourseModuleProps) {
               </Link>
             </Grid>
 
-            <CourseList />
+            <CourseCarousel
+              courses={courses}
+              categories={categories}
+              isLoading={isCoursesLoading}
+            />
 
             {/* 
             {courses.map((item, index) => (

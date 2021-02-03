@@ -1,6 +1,6 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
@@ -34,6 +34,8 @@ import {
   People as PeopleIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
+
+import * as actions from "../actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,14 +71,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CourseDetails() {
   const classes = useStyles();
   const { id }: any = useParams();
-  const [course, setCourse] = useState();
+
+  const dispatch = useDispatch();
+  const [course] = useSelector((state) => state.courses.items);
+
   useEffect(() => {
-    const loadCourse = async () => {
-      const { data } = await axios.get(`/Courses/${id}`);
-      setCourse(data);
-    };
-    loadCourse();
-  }, [id]);
+    const action = actions.loadCourse(id);
+    dispatch(action);
+  }, [dispatch, id]);
 
   const [expanded, setExpanded] = React.useState<string | false>(false);
 

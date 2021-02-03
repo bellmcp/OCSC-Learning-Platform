@@ -4,9 +4,19 @@ import { connectRouter } from "connected-react-router";
 import login from "modules/login/reducer";
 import user from "modules/user/reducer";
 
-export default (history:any) =>
+import categories from "modules/categories/reducer";
+import courses from "modules/courses/reducer";
+import press from "modules/press/reducer";
+import support from "modules/support/reducer";
+
+//root reducer
+export default (history: any) =>
   combineReducers({
     router: connectRouter(history),
     login,
     user,
+    categories,
+    courses,
+    press,
+    support,
   });

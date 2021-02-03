@@ -1,42 +1,32 @@
 import {
-  LOAD_PROFILE_REQUEST,
-  LOAD_PROFILE_SUCCESS,
-  LOAD_PROFILE_FAILURE,
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAILURE,
 } from "./actions";
+
 const initialState = {
   isLoading: false,
-  status: [],
-  message: [],
-  data: [],
-  user: [],
-  isErrorProfile: 404,
+  items: [],
 };
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
-    case LOAD_PROFILE_REQUEST:
+    case LOAD_USER_REQUEST:
       return {
         ...state,
         isLoading: true,
-        message: [],
-        data: [],
-        isErrorProfile: [],
+        items: [],
       };
-    case LOAD_PROFILE_SUCCESS:
+    case LOAD_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        message: action.payload.message,
-        status: action.payload.status,
-        data: action.payload.data,
+        items: action.payload.users,
       };
-    case LOAD_PROFILE_FAILURE:
+    case LOAD_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
-        message: action.payload.message,
-        status: action.payload.status,
-        isErrorProfile: action.payload.isErrorProfile,
       };
     default:
       return state;

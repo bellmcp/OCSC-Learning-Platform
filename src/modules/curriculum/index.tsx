@@ -8,8 +8,8 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CurriculumIcon from "@material-ui/icons/CollectionsBookmark";
 import ArrowDownIcon from "@material-ui/icons/KeyboardArrowDownRounded";
-// import CourseFilter from "../courses/components/CourseFilter";
-import CourseItem from "../home/components/CourseItem";
+
+import CourseItem from "modules/courses/components/CourseItem";
 import Footer from "modules/ui/components/Footer";
 import Header from "modules/ui/components/Header";
 import NavBar from "modules/ui/components/NavBar";

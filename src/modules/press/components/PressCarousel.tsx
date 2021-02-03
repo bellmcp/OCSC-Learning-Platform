@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// @ts-nocheck
+import React from "react";
 import {
   createStyles,
   useTheme,
@@ -25,8 +25,9 @@ import {
   ArrowBackIosRounded as ArrowBack,
   ArrowForwardIosRounded as ArrowForward,
 } from "@material-ui/icons";
-import PressItem from "./PressItem";
 import { amber, grey } from "@material-ui/core/colors";
+
+import PressItem from "./PressItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -105,25 +106,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function PressList() {
+export default function PressCarousel({ presses, isLoading }) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
-
-  const [announcements, setAnnouncements] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const loadAnnouncements = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get("/PressReleases");
-      setAnnouncements(data);
-      setIsLoading(false);
-    };
-
-    loadAnnouncements();
-  }, []);
 
   return (
     <>
@@ -141,7 +128,7 @@ export default function PressList() {
           infinite
           naturalSlideWidth={100}
           naturalSlideHeight={70}
-          totalSlides={announcements.length}
+          totalSlides={presses.length}
           visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
           interval={6000}
           isPlaying
@@ -151,7 +138,7 @@ export default function PressList() {
             <div className={classes.growButtonBack} />
             <div className={classes.growButtonNext} />
             <Slider className={classes.slide}>
-              {announcements.map((announcement: any) => (
+              {presses.map((announcement: any) => (
                 <Slide index={announcement.id}>
                   <div className={classes.announcement}>
                     <PressItem key={announcement.id} {...announcement} />

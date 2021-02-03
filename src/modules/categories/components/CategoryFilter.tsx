@@ -1,6 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import queryString from "query-string";
 import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,14 +17,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategoryFilter() {
+export default function CategoryFilter({ categories }) {
   const classes = useStyles();
   const { search } = useLocation();
   const { initialCategoryId } = queryString.parse(search);
   const [open, setOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState(initialCategoryId);
-  const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { path } = useRouteMatch();
 
@@ -45,16 +42,6 @@ export default function CategoryFilter() {
   const handleOpen = () => {
     setOpen(true);
   };
-
-  useEffect(() => {
-    const loadCategories = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get("/CourseCategories");
-      setCategories(data);
-      setIsLoading(false);
-    };
-    loadCategories();
-  }, []);
 
   return (
     <FormControl className={classes.formControl}>

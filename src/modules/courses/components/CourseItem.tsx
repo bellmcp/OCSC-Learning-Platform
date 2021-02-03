@@ -1,8 +1,6 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import Skeleton from "@material-ui/lab/Skeleton";
 import {
   Box,
   Card,
@@ -79,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CourseItem({
+  categories,
   id,
   Code,
   Name,
@@ -91,19 +90,6 @@ export default function CourseItem({
   SeqFlow,
 }: any) {
   const classes = useStyles();
-  const [categories, setCategories] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const loadCategories = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get("/CourseCategories");
-      setCategories(data);
-      setIsLoading(false);
-    };
-
-    loadCategories();
-  }, []);
 
   return (
     <CardActionArea
@@ -145,58 +131,21 @@ export default function CourseItem({
             </Box>
             <Box mt={2} mb={1}>
               <Typography variant="body2">
-                {isLoading ? (
-                  <Skeleton />
-                ) : (
-                  <div className={classes.genre}>
-                    <Circle
-                      style={{
-                        color: categoryColor(CourseCategoryId),
-                        fontSize: 12,
-                        marginRight: 6,
-                      }}
-                    />
-                    {categories[CourseCategoryId]?.CourseCategory}
-                  </div>
-                )}
+                <div className={classes.genre}>
+                  <Circle
+                    style={{
+                      color: categoryColor(CourseCategoryId),
+                      fontSize: 12,
+                      marginRight: 6,
+                    }}
+                  />
+                  {categories[CourseCategoryId - 1]?.CourseCategory}
+                </div>
               </Typography>
             </Box>
           </Box>
         </CardContent>
       </Card>
     </CardActionArea>
-    // <Grid item xs={12} sm={6} lg={3}>
-    //   <Card onClick={navigateToDetails}>
-    //     <CardActionArea>
-    //       <CardMedia image={Thumbnail} title={Name} className={classes.media} />
-    //       <CardContent>
-    //         <Typography gutterBottom variant="h5" component="h2">
-    //           {Name}
-    //         </Typography>
-    //         <Typography
-    //           gutterBottom
-    //           variant="body2"
-    //           component="p"
-    //           color="textSecondary"
-    //           className={classes.description}
-    //         >
-    //           {LearningObjective}
-    //         </Typography>
-    //         <Grid
-    //           container
-    //           alignItems="center"
-    //           justify="space-between"
-    //           className={classes.footer}
-    //         >
-    //           <span>{Code}</span>
-    //           <Chip
-    //             label={categories[CourseCategoryId - 1]?.CourseCategory}
-    //             size="small"
-    //           ></Chip>
-    //         </Grid>
-    //       </CardContent>
-    //     </CardActionArea>
-    //   </Card>
-    // </Grid>
   );
 }

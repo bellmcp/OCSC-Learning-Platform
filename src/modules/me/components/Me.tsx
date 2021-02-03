@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Me() {
   const classes = useStyles();
-  const { data } = useSelector((state: any) => state.user);
+  const { items: users } = useSelector((state: any) => state.user);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
@@ -74,8 +74,8 @@ export default function Me() {
             gutterBottom
             style={{ marginTop: 20, fontWeight: 600 }}
           >
-            {data.firstName
-              ? `${data.title} ${data.firstName} ${data.lastName}`
+            {users.firstName
+              ? `${users.title} ${users.firstName} ${users.lastName}`
               : "คุณยังไม่ได้เข้าสู่ระบบ"}
           </Typography>
           <Typography
@@ -85,16 +85,17 @@ export default function Me() {
             color="secondary"
             style={{ fontWeight: 800 }}
           >
-            {data.id}
+            {users.id}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
-            <b>เพศ:</b> {data.gender && (data.gender === "m" ? "ชาย" : "หญิง")}
+            <b>เพศ:</b>{" "}
+            {users.gender && (users.gender === "m" ? "ชาย" : "หญิง")}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
-            <b>อีเมล:</b> {data.email}
+            <b>อีเมล:</b> {users.email}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
-            <b>เข้าร่วมเมื่อ:</b> {data.createDate}
+            <b>เข้าร่วมเมื่อ:</b> {users.createDate}
           </Typography>
           <Box mt={6} style={{ width: !matches ? "100%" : "500px" }}>
             <Grid

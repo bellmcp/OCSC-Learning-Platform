@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// @ts-nocheck
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Typography, Badge, Grid, CircularProgress } from "@material-ui/core";
 import { createStyles, Theme, withStyles } from "@material-ui/core/styles";
+
+import * as actions from "../actions";
 import SupportItem from "./SupportItem";
 
 const StyledBadge = withStyles((theme: Theme) =>
@@ -15,18 +18,13 @@ const StyledBadge = withStyles((theme: Theme) =>
 )(Badge);
 
 export default function SupportList() {
-  const [supports, setSupports] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { isLoading, items: supports } = useSelector((state) => state.support);
 
   useEffect(() => {
-    const loadSupports = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get(`/Supports`);
-      setSupports(data);
-      setIsLoading(false);
-    };
-    loadSupports();
-  }, []);
+    const action = actions.loadSupports();
+    dispatch(action);
+  }, [dispatch]);
 
   const UNREAD_NOTIFICATION_COUNT = supports.filter((support: any) => {
     return support.ReplyMessage !== null && support.IsAcknowledged === false;

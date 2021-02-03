@@ -1,7 +1,7 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Typography,
@@ -12,9 +12,12 @@ import {
   CircularProgress,
 } from "@material-ui/core";
 import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
-import CourseItem from "modules/home/components/CourseItem";
-import CategoryFilter from "./CategoryFilter";
+import CourseItem from "./CourseItem";
+import CategoryFilter from "modules/categories/components/CategoryFilter";
 import { MenuBook as CourseIcon } from "@material-ui/icons";
+
+import * as coursesActions from "../actions";
+import * as categoriesActions from "modules/categories/actions";
 import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -44,18 +47,20 @@ const HERO_IMAGE_URL =
 export default function CourseList() {
   const classes = useStyles();
   const { search } = useLocation();
-  const [courses, setCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  const { isLoading, items: courses } = useSelector((state) => state.courses);
+  const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    const loadCourses = async () => {
-      setIsLoading(true);
-      const { data } = await axios.get(`/Courses${search}`);
-      setCourses(data);
-      setIsLoading(false);
-    };
-    loadCourses();
-  }, [search]);
+    const courses_action = coursesActions.loadCourses(search);
+    dispatch(courses_action);
+  }, [dispatch, search]);
+
+  useEffect(() => {
+    const categories_action = categoriesActions.loadCategories();
+    dispatch(categories_action);
+  }, [dispatch]);
 
   return (
     <>
@@ -81,7 +86,7 @@ export default function CourseList() {
                 >
                   รายวิชาทั้งหมด
                 </Typography>
-                <CategoryFilter />
+                <CategoryFilter categories={categories} />
               </Grid>
             </Box>
             {isLoading ? (
@@ -97,7 +102,7 @@ export default function CourseList() {
               <Grid container spacing={1}>
                 {courses.map((course) => (
                   <Grid item key={course.id} xs={12} sm={4} md={3}>
-                    <CourseItem {...course} />
+                    <CourseItem {...course} categories={categories} />
                   </Grid>
                 ))}
               </Grid>

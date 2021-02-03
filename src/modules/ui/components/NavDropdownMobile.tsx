@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function NavDropdownMobile({
-  user,
+  users,
   login,
   logout,
   mobileMenuId,
@@ -62,7 +62,7 @@ export default function NavDropdownMobile({
           <Avatar className={login() ? classes.loggedIn : classes.small} />
         </IconButton>
         <Typography className={classes.bold}>
-          {login() ? user.firstName : "เข้าสู่ระบบ"}
+          {login() ? users.firstName : "เข้าสู่ระบบ"}
         </Typography>
       </MenuItem>
       <Divider />

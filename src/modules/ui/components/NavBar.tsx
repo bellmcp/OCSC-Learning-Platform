@@ -1,7 +1,7 @@
+// @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import * as userActions from "modules/user/actions";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import {
@@ -33,6 +33,9 @@ import {
 import { amber, grey } from "@material-ui/core/colors";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
+
+import * as userActions from "modules/user/actions";
+import * as supportActions from "modules/support/actions";
 import NavDrawer from "./NavDrawer";
 import NavDropdownMobile from "./NavDropdownMobile";
 import NavDropdownDesktop from "./NavDropdownDesktop";
@@ -172,17 +175,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const navigationItem = [
-  {
-    id: 0,
-    title: "หน้าหลัก",
-    url: "/",
-    notification: 0,
-  },
-  { id: 1, title: "เข้าเรียน", url: "/learn", notification: 0 },
-  { id: 2, title: "ช่วยเหลือ", url: "/support", notification: 1 },
-];
-
 interface NavigationBarProps {
   active: number;
   setActivePage: (id: number) => void;
@@ -208,11 +200,11 @@ export default function NavBar(props: NavigationBarProps) {
   const id = parseJwt(token).unique_name;
   useEffect(() => {
     if (login()) {
-      const actionProfile = userActions.loadGetProfile();
+      const actionProfile = userActions.loadUser();
       dispatch(actionProfile);
     }
-  }, [id]);
-  const { data: user } = useSelector((state: any) => state.user);
+  }, [dispatch, id]);
+  const { items: users } = useSelector((state: any) => state.user);
   const login = () => {
     if (token === null) {
       return false;
@@ -225,6 +217,33 @@ export default function NavBar(props: NavigationBarProps) {
     }
     return false;
   };
+
+  const { items: supports } = useSelector((state) => state.support);
+
+  useEffect(() => {
+    const action = supportActions.loadSupports();
+    dispatch(action);
+  }, [dispatch]);
+
+  const UNREAD_NOTIFICATION_COUNT = supports.filter((support: any) => {
+    return support.ReplyMessage !== null && support.IsAcknowledged === false;
+  }).length;
+
+  const navigationItem = [
+    {
+      id: 0,
+      title: "หน้าหลัก",
+      url: "/",
+      notification: 0,
+    },
+    { id: 1, title: "เข้าเรียน", url: "/learn", notification: 0 },
+    {
+      id: 2,
+      title: "ช่วยเหลือ",
+      url: "/support",
+      notification: UNREAD_NOTIFICATION_COUNT,
+    },
+  ];
 
   const linkToHome = () => {
     handleMenuClose();
@@ -392,7 +411,7 @@ export default function NavBar(props: NavigationBarProps) {
                 }
               >
                 <Typography className={classes.bold} noWrap>
-                  {login() ? user.firstName : "เข้าสู่ระบบ"}
+                  {login() ? users.firstName : "เข้าสู่ระบบ"}
                 </Typography>
               </Button>
               <IconButton
@@ -432,7 +451,7 @@ export default function NavBar(props: NavigationBarProps) {
       <NavDropdownMobile
         login={login}
         logout={logout}
-        user={user}
+        users={users}
         mobileMenuId={mobileMenuId}
         mobileMoreAnchorEl={mobileMoreAnchorEl}
         isMobileMenuOpen={isMobileMenuOpen}

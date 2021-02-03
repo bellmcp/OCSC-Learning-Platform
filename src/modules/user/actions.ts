@@ -1,45 +1,34 @@
 import axios from "axios";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
-const LOAD_PROFILE_REQUEST = "learning-portal/src/ui/LOAD_PROFILE_REQUEST";
-const LOAD_PROFILE_SUCCESS = "learning-portal/src/ui/LOAD_PROFILE_SUCCESS";
-const LOAD_PROFILE_FAILURE = "learning-portal/src/ui/LOAD_EDIT_FAILURE";
+const LOAD_USER_REQUEST = "app/user/LOAD_USER_REQUEST";
+const LOAD_USER_SUCCESS = "app/user/LOAD_USER_SUCCESS";
+const LOAD_USER_FAILURE = "app/user/LOAD_USER_FAILURE";
 
-function loadGetProfile() {
+function loadUser() {
   return async (dispatch: any) => {
-    dispatch({ type: LOAD_PROFILE_REQUEST });
+    dispatch({ type: LOAD_USER_REQUEST });
     try {
       const token = getCookie("token");
-      const data = await axios.get(`/Users/${parseJwt(token).unique_name}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        baseURL: 'https://welearn.ocsc.go.th/learning-portal-api/',
-      });
+      const { data } = await axios.get(
+        `/Users/${parseJwt(token).unique_name}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          baseURL: "https://welearn.ocsc.go.th/learning-portal-api/",
+        }
+      );
       dispatch({
-        type: LOAD_PROFILE_SUCCESS,
+        type: LOAD_USER_SUCCESS,
         payload: {
-          message: "แก้ไขเรียบร้อยเเล้ว",
-          data: data.data,
-          status: data.status,
+          users: data,
         },
       });
     } catch (err) {
-      dispatch({
-        type: LOAD_PROFILE_FAILURE,
-        payload: {
-          message: "เกิดข้อผิดพลาด",
-          status: err.response.status,
-          isErrorProfile: err.response.status,
-        },
-      });
+      dispatch({ type: LOAD_USER_FAILURE });
     }
   };
 }
 
-export {
-  LOAD_PROFILE_REQUEST,
-  LOAD_PROFILE_SUCCESS,
-  LOAD_PROFILE_FAILURE,
-  loadGetProfile,
-};
+export { LOAD_USER_REQUEST, LOAD_USER_SUCCESS, LOAD_USER_FAILURE, loadUser };

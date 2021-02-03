@@ -27,11 +27,11 @@ const HERO_IMAGE_URL =
 
 export default function Support() {
   const classes = useStyles();
-  const { data: user } = useSelector((state: any) => state.user);
+  const { items: users } = useSelector((state: any) => state.user);
 
   return (
     <>
-      {user.length !== 0 ? (
+      {users.length !== 0 ? (
         <>
           <Header
             title={TITLE}
