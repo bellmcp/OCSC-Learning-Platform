@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import * as userActions from "modules/user/actions";
-import { useLocation } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import {
@@ -251,12 +250,10 @@ export default function NavBar(props: NavigationBarProps) {
     alert(`Toggle Search Bar`);
   };
 
-  const { pathname } = useLocation();
-
   const logout = () => {
     handleMenuClose();
     eraseCookie("token");
-    history.push(`${pathname}`);
+    history.push("/");
     window.location.reload();
   };
 
@@ -330,6 +327,9 @@ export default function NavBar(props: NavigationBarProps) {
                     input: classes.inputInput,
                   }}
                   inputProps={{ "aria-label": "search" }}
+                  onChange={(event) => {
+                    alert(`Search query: ${event.target.value}`);
+                  }}
                 />
               </div>
             </div>

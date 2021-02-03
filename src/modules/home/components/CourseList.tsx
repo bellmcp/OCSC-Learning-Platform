@@ -13,6 +13,7 @@ import {
   Grid,
   IconButton,
   CircularProgress,
+  Container,
 } from "@material-ui/core/";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
@@ -27,15 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   carousel: {
-    padding: theme.spacing(0, 1),
-    maxWidth: "calc(100vw)",
-    // minWidth: "unset",
-    [theme.breakpoints.down("sm")]: {
-      maxWidth: "calc(100vw - 48px)",
-    },
-    [theme.breakpoints.down("xs")]: {
-      maxWidth: "calc(100vw - 36px)", //TODO: remove x-axis scrollbar on mobile
-    },
+    maxWidth: "calc(100vw - 74px)",
   },
   slider: {
     position: "relative",
@@ -98,7 +91,7 @@ export default function CourseList() {
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid container>
+        <Grid container direction="row" justify="center" alignItems="center">
           <CarouselProvider
             naturalSlideWidth={100}
             naturalSlideHeight={135}

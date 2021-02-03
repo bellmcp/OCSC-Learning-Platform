@@ -47,7 +47,7 @@ export default function Home({ curriculum }: CourseModuleProps) {
         subtitle={SUBTITLE}
         imageUrl={HERO_IMAGE_URL}
       />
-      <Container>
+      <Container maxWidth="lg">
         <div className={classes.main}>
           <main className={classes.content}>
             <PressList />

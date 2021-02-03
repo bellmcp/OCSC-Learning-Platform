@@ -7,6 +7,12 @@ import {
   Theme,
 } from "@material-ui/core/styles";
 import {
+  useMediaQuery,
+  IconButton,
+  Grid,
+  CircularProgress,
+} from "@material-ui/core";
+import {
   CarouselProvider,
   Slider,
   Slide,
@@ -15,12 +21,6 @@ import {
   DotGroup,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import {
-  useMediaQuery,
-  IconButton,
-  Grid,
-  CircularProgress,
-} from "@material-ui/core";
 import {
   ArrowBackIosRounded as ArrowBack,
   ArrowForwardIosRounded as ArrowForward,
@@ -119,7 +119,7 @@ export default function PressList() {
           naturalSlideHeight={70}
           totalSlides={announcements.length}
           visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
-          interval={5000}
+          interval={6000}
           isPlaying
           className={classes.carousel}
         >
