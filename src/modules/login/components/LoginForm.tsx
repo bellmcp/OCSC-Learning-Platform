@@ -11,6 +11,9 @@ import {
   IconButton,
   Paper,
   Toolbar,
+  Grid,
+  Divider,
+  Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -18,6 +21,7 @@ import {
   Lock as LockIcon,
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
+  ArrowForwardIos as ArrowForwardIcon,
 } from "@material-ui/icons";
 import * as actions from "../actions";
 
@@ -68,6 +72,14 @@ export default function LoginForm() {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     event.preventDefault();
+  };
+
+  const linkToForgotPassword = () => {
+    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/forget`);
+  };
+
+  const linkToSignUp = () => {
+    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/signup`);
   };
 
   const { register, handleSubmit, errors } = useForm({
@@ -163,7 +175,15 @@ export default function LoginForm() {
           value={values.password}
           onChange={handleChange("password")}
         />
-        {messageLogin && <FormHelperText error>{messageLogin}</FormHelperText>}
+        <Button onClick={linkToForgotPassword}>ลืมรหัสผ่าน</Button>
+        {messageLogin && (
+          <FormHelperText
+            error
+            style={{ fontSize: "0.9rem", textAlign: "center" }}
+          >
+            {messageLogin}
+          </FormHelperText>
+        )}
         <Button
           size="large"
           color="secondary"
@@ -176,6 +196,23 @@ export default function LoginForm() {
           เข้าสู่ระบบ
         </Button>
       </form>
+      <Box mt={4}>
+        <Divider />
+      </Box>
+      <Box my={3}>
+        <Grid container justify="space-between" alignItems="center">
+          <Typography variant="body2" color="textPrimary">
+            ยังไม่มีบัญชีใช่ไหม?
+          </Typography>
+          <Button
+            onClick={linkToSignUp}
+            variant="text"
+            endIcon={<ArrowForwardIcon />}
+          >
+            สมัครสมาชิก
+          </Button>
+        </Grid>
+      </Box>
     </Paper>
   );
 }
