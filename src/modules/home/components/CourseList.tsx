@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
     background: "none",
     border: "none",
     padding: theme.spacing(0, 0),
+    zIndex: 2,
   },
   buttonNext: {
     position: "absolute",
@@ -57,6 +58,29 @@ const useStyles = makeStyles((theme) => ({
     background: "none",
     border: "none",
     padding: theme.spacing(0, 0),
+    zIndex: 2,
+  },
+  growButtonBack: {
+    position: "absolute",
+    top: "50%",
+    left: "-28px",
+    height: "100%",
+    width: "22px",
+    backgroundColor: "#fafafa",
+    transform: "translateY(-50%)",
+    zIndex: 1,
+    boxShadow: "0 0px 11px 15px #fafafa",
+  },
+  growButtonNext: {
+    position: "absolute",
+    top: "50%",
+    right: "-28px",
+    height: "100%",
+    width: "22px",
+    backgroundColor: "#fafafa",
+    transform: "translateY(-50%)",
+    zIndex: 1,
+    boxShadow: "0 0px 11px 15px #fafafa",
   },
 }));
 
@@ -88,7 +112,7 @@ export default function CourseList() {
           alignItems="center"
           style={{ height: 407 }}
         >
-          <CircularProgress />
+          <CircularProgress color="secondary" />
         </Grid>
       ) : (
         <Grid container direction="row" justify="center" alignItems="center">
@@ -102,6 +126,8 @@ export default function CourseList() {
             className={classes.carousel}
           >
             <div className={classes.slider}>
+              <div className={classes.growButtonBack} />
+              <div className={classes.growButtonNext} />
               <Slider className={classes.slide}>
                 {courses.map((course: any) => (
                   <Slide key={course.id} index={course.id}>

@@ -69,6 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "none",
       border: "none",
       padding: theme.spacing(0, 0),
+      zIndex: 2,
     },
     buttonNext: {
       position: "absolute",
@@ -77,6 +78,29 @@ const useStyles = makeStyles((theme: Theme) =>
       background: "none",
       border: "none",
       padding: theme.spacing(0, 0),
+      zIndex: 2,
+    },
+    growButtonBack: {
+      position: "absolute",
+      top: "50%",
+      left: "-28px",
+      height: "100%",
+      width: "22px",
+      backgroundColor: "#fafafa",
+      transform: "translateY(-50%)",
+      zIndex: 1,
+      boxShadow: "0 0px 11px 15px #fafafa",
+    },
+    growButtonNext: {
+      position: "absolute",
+      top: "50%",
+      right: "-28px",
+      height: "100%",
+      width: "22px",
+      backgroundColor: "#fafafa",
+      transform: "translateY(-50%)",
+      zIndex: 1,
+      boxShadow: "0 0px 11px 15px #fafafa",
     },
   })
 );
@@ -110,7 +134,7 @@ export default function PressList() {
           alignItems="center"
           style={{ height: 304 }}
         >
-          <CircularProgress />
+          <CircularProgress color="secondary" />
         </Grid>
       ) : (
         <CarouselProvider
@@ -124,6 +148,8 @@ export default function PressList() {
           className={classes.carousel}
         >
           <div className={classes.slider}>
+            <div className={classes.growButtonBack} />
+            <div className={classes.growButtonNext} />
             <Slider className={classes.slide}>
               {announcements.map((announcement: any) => (
                 <Slide index={announcement.id}>

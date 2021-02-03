@@ -46,7 +46,7 @@ export default function SupportList() {
           alignItems="center"
           style={{ height: 307 }}
         >
-          <CircularProgress />
+          <CircularProgress color="secondary" />
         </Grid>
       ) : (
         <>

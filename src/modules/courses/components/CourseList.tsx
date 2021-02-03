@@ -91,7 +91,7 @@ export default function CourseList() {
                 alignItems="center"
                 style={{ height: 407 }}
               >
-                <CircularProgress />
+                <CircularProgress color="secondary" />
               </Grid>
             ) : (
               <Grid container spacing={1}>
