@@ -64,25 +64,26 @@ export default function Aside({ title }: any) {
         </Grid>
         <Grid item>
           <Typography
-            paragraph
+            component="h2"
+            variant="h6"
             align="left"
             gutterBottom
             className={classes.text}
           >
             เข้าสู่ระบบเพื่อใช้งาน
           </Typography>
-          <List dense>
-            <ListItem>
-              <ListItemIcon>
-                <CheckCircleIcon className={classes.amber} />
-              </ListItemIcon>
-              <ListItemText primary="ลงทะเบียนเรียน" className={classes.text} />
-            </ListItem>
+          <List>
             <ListItem>
               <ListItemIcon>
                 <CheckCircleIcon className={classes.amber} />
               </ListItemIcon>
               <ListItemText primary="เข้าเรียน" className={classes.text} />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <CheckCircleIcon className={classes.amber} />
+              </ListItemIcon>
+              <ListItemText primary="ลงทะเบียนเรียน" className={classes.text} />
             </ListItem>
             <ListItem>
               <ListItemIcon>

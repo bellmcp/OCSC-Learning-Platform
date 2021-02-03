@@ -34,6 +34,42 @@ export default function SupportItem({
     alert(`{"Id": ${id}, "IsAcknowledged": true}`);
   };
 
+  const renderReadButton = () => {
+    if (ReplyMessage !== null) {
+      if (!IsAcknowledged) {
+        return (
+          <CardActions>
+            <Button
+              onClick={onRead}
+              color="secondary"
+              variant="contained"
+              startIcon={<CheckIcon />}
+              fullWidth
+            >
+              ทำเครื่องหมายว่าอ่านแล้ว
+            </Button>
+          </CardActions>
+        );
+      } else {
+        return (
+          <CardActions>
+            <Button
+              disabled
+              color="secondary"
+              variant="contained"
+              startIcon={<CheckIcon />}
+              fullWidth
+            >
+              อ่านแล้ว
+            </Button>
+          </CardActions>
+        );
+      }
+    } else {
+      return null;
+    }
+  };
+
   return (
     <Box my={3}>
       <Card>
@@ -127,19 +163,7 @@ export default function SupportItem({
             </>
           ) : null}
         </CardContent>
-        {ReplyMessage && !IsAcknowledged ? (
-          <CardActions>
-            <Button
-              onClick={onRead}
-              color="secondary"
-              variant="contained"
-              startIcon={<CheckIcon />}
-              fullWidth
-            >
-              ทำเครื่องหมายว่าอ่านแล้ว
-            </Button>
-          </CardActions>
-        ) : null}
+        {renderReadButton()}
       </Card>
     </Box>
   );
