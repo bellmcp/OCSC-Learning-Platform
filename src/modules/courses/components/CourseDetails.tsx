@@ -1,6 +1,8 @@
-import React from "react";
+// @ts-nocheck
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { CourseDetailProps } from "./CourseDetail/types";
 import {
   Typography,
   Container,
@@ -17,6 +19,7 @@ import {
   ListItemIcon,
   ListItemText,
   LinearProgress,
+  Toolbar,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
@@ -27,6 +30,8 @@ import {
   ThumbUp as SurveyIcon,
   PlayCircleFilled as PlayCircleFilledIcon,
   LibraryBooks as LibraryBooksIcon,
+  MenuBook as CourseIcon,
+  People as PeopleIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
 
@@ -61,10 +66,18 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CourseDetails({ course }: CourseDetailProps) {
+export default function CourseDetails() {
   const classes = useStyles();
-  const subtitle =
-    "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+  const { id }: any = useParams();
+  const [course, setCourse] = useState();
+  useEffect(() => {
+    const loadCourse = async () => {
+      const { data } = await axios.get(`/Courses/${id}`);
+      setCourse(data);
+    };
+    loadCourse();
+  }, [id]);
+
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange = (panel: string) => (
@@ -77,26 +90,37 @@ export default function CourseDetails({ course }: CourseDetailProps) {
   const courseInfoPlaceholder = [
     {
       title: "เป้าหมายการเรียนรู้",
-      detail: course.fineprint,
+      detail: course?.LearningObjective,
       icon: <AssignmentIcon />,
     },
     {
       title: "ประเด็นการเรียนรู้",
-      detail: course.objective,
+      detail: course?.LearningTopic,
       icon: <CreateIcon />,
     },
     {
       title: "วิธีการประเมินผล",
-      detail: course.criteria,
+      detail: course?.Assessment,
       icon: <AssessmentIcon />,
     },
-    { title: "กลุ่มเป้าหมาย", detail: course.note, icon: <InfoIcon /> },
+    {
+      title: "กลุ่มเป้าหมาย",
+      detail: course?.TargetGroup,
+      icon: <PeopleIcon />,
+    },
+    {
+      title: "หมายเหตุ",
+      detail: course?.SeqFlow
+        ? "บังคับเรียนตามลำดับเนื้อหา"
+        : "ไม่บังคับเรียนตามลำดับเนื้อหา",
+      icon: <InfoIcon />,
+    },
   ];
 
-  const roundInfoPlaceholder = [
-    { title: "ช่วงเวลาเรียน", detail: course.round?.duration },
-    { title: "เงื่อนไขการลงทะเบียน", detail: course.round?.goal },
-  ];
+  // const roundInfoPlaceholder = [
+  //   { title: "ช่วงเวลาเรียน", detail: course.round?.duration },
+  //   { title: "เงื่อนไขการลงทะเบียน", detail: course.round?.goal },
+  // ];
 
   function renderMockContent() {
     return (
@@ -137,7 +161,7 @@ export default function CourseDetails({ course }: CourseDetailProps) {
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
     return (
-      <Box my={5} key={index}>
+      <Box mb={3} key={index}>
         <Grid
           container
           direction="row"
@@ -169,10 +193,17 @@ export default function CourseDetails({ course }: CourseDetailProps) {
 
   return (
     <>
+      <Toolbar />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <Box mt={4} mb={6}>
+            <Grid container justify="space-between" alignItems="center">
+              <h1>รายวิชา {course?.Name}</h1>
+              <Typography variant="body2" component="p" color="textSecondary">
+                รหัสวิชา: {course?.Code}
+              </Typography>
+            </Grid>
+            {/* <Box mt={4} mb={6}>
               <Grid container spacing={6}>
                 <Grid item xs={12} sm={12} md={6}>
                   <h1 style={{ margin: 0 }}>รอบที่ {course.round?.id}</h1>
@@ -236,13 +267,13 @@ export default function CourseDetails({ course }: CourseDetailProps) {
                   ))}
                 </Grid>
               </Grid>
-            </Box>
-            <Box my={3}>
+            </Box> */}
+            <Box mb={3}>
               <Divider />
             </Box>
             <Grid container spacing={6}>
-              <Grid item xs={12} sm={6}>
-                {courseInfoPlaceholder.slice(0, 1).map((item, index) => (
+              <Grid item xs={12} sm={7}>
+                {courseInfoPlaceholder.slice(0, 2).map((item, index) => (
                   <RenderCourseInfo
                     index={index}
                     title={item.title}
@@ -251,18 +282,20 @@ export default function CourseDetails({ course }: CourseDetailProps) {
                   />
                 ))}
               </Grid>
-              <Grid item xs={12} sm={6}>
-                {courseInfoPlaceholder.slice(1, 4).map((item, index) => (
-                  <RenderCourseInfo
-                    index={index}
-                    title={item.title}
-                    info={item.detail}
-                    icon={item.icon}
-                  />
-                ))}
+              <Grid item xs={12} sm={5}>
+                {courseInfoPlaceholder
+                  .slice(2, courseInfoPlaceholder.length)
+                  .map((item, index) => (
+                    <RenderCourseInfo
+                      index={index}
+                      title={item.title}
+                      info={item.detail}
+                      icon={item.icon}
+                    />
+                  ))}
               </Grid>
             </Grid>
-            <Box my={3}>
+            {/* <Box my={3}>
               <Divider />
             </Box>
             <Grid
@@ -294,7 +327,7 @@ export default function CourseDetails({ course }: CourseDetailProps) {
                   </Accordion>
                 </Box>
               </Grid>
-            </Grid>
+            </Grid> */}
           </main>
         </div>
       </Container>

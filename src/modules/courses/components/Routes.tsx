@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import CourseList from "./CourseList";
 import CourseDetails from "./CourseDetails";
-import { COURSES } from "shared/courses";
 
 export default function Routes() {
   const { path } = useRouteMatch();
@@ -10,7 +9,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={`${path}/:id`}>
-        <CourseDetails course={COURSES[0].courses[0]}></CourseDetails>
+        <CourseDetails></CourseDetails>
       </Route>
       <Route path={path}>
         <CourseList></CourseList>

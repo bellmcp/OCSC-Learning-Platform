@@ -58,7 +58,7 @@ export default function CourseList() {
   }, [search]);
 
   return (
-    <React.Fragment>
+    <>
       <Header
         title={TITLE}
         icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
@@ -124,6 +124,6 @@ export default function CourseList() {
           </main>
         </div>
       </Container>
-    </React.Fragment>
+    </>
   );
 }
