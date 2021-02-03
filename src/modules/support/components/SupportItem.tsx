@@ -66,7 +66,16 @@ export default function SupportItem({
         );
       }
     } else {
-      return null;
+      return (
+        <>
+          <Divider />
+          <Box m={3}>
+            <Typography variant="body1" component="p" align="center">
+              รอการตอบกลับจากเจ้าหน้าที่
+            </Typography>
+          </Box>
+        </>
+      );
     }
   };
 

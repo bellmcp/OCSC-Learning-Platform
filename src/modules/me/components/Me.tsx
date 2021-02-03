@@ -1,10 +1,24 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Header from "modules/ui/components/Header";
-import { Container, Typography, Paper, Avatar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  Container,
+  Typography,
+  Paper,
+  Avatar,
+  Grid,
+  Box,
+  Button,
+} from "@material-ui/core";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { amber } from "@material-ui/core/colors";
-import { Person as PersonIcon } from "@material-ui/icons";
+import {
+  Person as PersonIcon,
+  Edit as EditIcon,
+  Lock as LockIcon,
+  FolderSpecial as FolderIcon,
+} from "@material-ui/icons";
 
 const TITLE = "โปรไฟล์";
 const HERO_IMAGE_URL =
@@ -29,6 +43,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Me() {
   const classes = useStyles();
   const { data } = useSelector((state: any) => state.user);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
+  const linkToCertificate = () => {
+    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/history`);
+  };
+
+  const linkToEditProfile = () => {
+    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/edit`);
+  };
+
+  const linkToChangePassword = () => {
+    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/reset`);
+  };
+
   return (
     <>
       <Header
@@ -37,36 +66,79 @@ export default function Me() {
         imageUrl={HERO_IMAGE_URL}
       />
       <Container component="main" maxWidth="md">
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} style={{ textAlign: "center" }}>
           <Avatar className={classes.avatar} />
-          <Typography
-            component="h2"
-            variant="body1"
-            gutterBottom
-            color="textSecondary"
-            style={{ marginTop: 20, fontWeight: 600 }}
-          >
-            {data.id}
-          </Typography>
           <Typography
             component="h1"
             variant="h4"
             gutterBottom
-            style={{ fontWeight: 600 }}
+            style={{ marginTop: 20, fontWeight: 600 }}
           >
             {data.firstName
               ? `${data.title} ${data.firstName} ${data.lastName}`
               : "คุณยังไม่ได้เข้าสู่ระบบ"}
           </Typography>
-          <Typography component="h2" variant="body1" color="textSecondary">
-            {data.gender && (data.gender === "m" ? "เพศชาย" : "เพศหญิง")}
+          <Typography
+            component="h2"
+            variant="body1"
+            gutterBottom
+            color="secondary"
+            style={{ fontWeight: 800 }}
+          >
+            {data.id}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
-            {data.email}
+            <b>เพศ:</b> {data.gender && (data.gender === "m" ? "ชาย" : "หญิง")}
           </Typography>
           <Typography component="h2" variant="body1" color="textSecondary">
-            {data.createDate}
+            <b>อีเมล:</b> {data.email}
           </Typography>
+          <Typography component="h2" variant="body1" color="textSecondary">
+            <b>เข้าร่วมเมื่อ:</b> {data.createDate}
+          </Typography>
+          <Box mt={6} style={{ width: !matches ? "100%" : "500px" }}>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              spacing={2}
+            >
+              <Grid item xs={12} sm={4}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<FolderIcon />}
+                  onClick={linkToCertificate}
+                  fullWidth={!matches}
+                >
+                  ประกาศนียบัตร
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<EditIcon />}
+                  onClick={linkToEditProfile}
+                  fullWidth={!matches}
+                >
+                  แก้ไขโปรไฟล์
+                </Button>
+              </Grid>
+              <Grid item xs={12} sm={4}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<LockIcon />}
+                  onClick={linkToChangePassword}
+                  fullWidth={!matches}
+                >
+                  เปลี่ยนรหัสผ่าน
+                </Button>
+              </Grid>
+            </Grid>
+          </Box>
         </Paper>
       </Container>
     </>
