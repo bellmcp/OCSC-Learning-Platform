@@ -2,6 +2,7 @@ import {
   LOAD_SUPPORT_REQUEST,
   LOAD_SUPPORT_SUCCESS,
   LOAD_SUPPORT_FAILURE,
+  SEND_SUPPORT_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -17,6 +18,12 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: false, items: action.payload.supports };
     case LOAD_SUPPORT_FAILURE:
       return { ...state, isLoading: false };
+    case SEND_SUPPORT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        items: state.items.concat(action.payload.support),
+      };
     default:
       return state;
   }

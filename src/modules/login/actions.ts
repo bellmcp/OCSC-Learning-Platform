@@ -1,10 +1,10 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 import { setCookie } from "utils/cookies";
-const LOAD_LOGIN_REQUEST = "learning-platform/src/login/LOAD_LOGIN_REQUEST";
-const LOAD_LOGIN_SUCCESS = "learning-platform/src/login/LOAD_LOGIN_SUCCESS";
-const LOAD_LOGIN_FAILURE = "learning-platform/src/login/LOAD_LOGIN_FAILURE";
-const CLEAR_MESSAGE_LOGIN = "learning-platform/src/login/CLEAR_MESSAGE_LOGIN";
+const LOAD_LOGIN_REQUEST = "app/login/LOAD_LOGIN_REQUEST";
+const LOAD_LOGIN_SUCCESS = "app/login/LOAD_LOGIN_SUCCESS";
+const LOAD_LOGIN_FAILURE = "app/login/LOAD_LOGIN_FAILURE";
+const CLEAR_MESSAGE_LOGIN = "app/login/CLEAR_MESSAGE_LOGIN";
 
 function clearMessageLogin() {
   return {
@@ -16,7 +16,9 @@ function loadLogin(userInfo: any) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_LOGIN_REQUEST });
     try {
-      const result = await axios.post('/Tokens', userInfo, { baseURL: 'https://welearn.ocsc.go.th/learning-portal-api/' })
+      const result = await axios.post("/Tokens", userInfo, {
+        baseURL: "https://welearn.ocsc.go.th/learning-portal-api/",
+      });
       dispatch({
         type: LOAD_LOGIN_SUCCESS,
         payload: {

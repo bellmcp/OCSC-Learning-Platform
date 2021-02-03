@@ -1,9 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useForm } from "react-hook-form";
 import { Typography, Grid, TextField, Button } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Send as SendIcon } from "@material-ui/icons";
+
+import * as actions from "../actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,13 +21,17 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SupportForm() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data: any) => {
-    alert(
-      `RESULT: ${JSON.stringify(
-        data
-      )}\nTIMESTAMP: {"CreateDate": ${moment().format("DD-MM-YYYY hh:mm:ss")}}`
-    );
+    console.log(data);
+    const action = actions.sendSupport(data);
+    dispatch(action);
+    // alert(
+    //   `RESULT: ${JSON.stringify(
+    //     data
+    //   )}\nTIMESTAMP: {"CreateDate": ${moment().format("DD-MM-YYYY hh:mm:ss")}}`
+    // );
   };
 
   return (
