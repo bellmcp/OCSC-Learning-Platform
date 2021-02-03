@@ -24,11 +24,7 @@ import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    main: {
-      display: "flex",
-    },
     content: {
-      flexGrow: 1,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     },
@@ -76,12 +72,9 @@ export default function Home() {
         subtitle={SUBTITLE}
         imageUrl={HERO_IMAGE_URL}
       />
-      <Container maxWidth="lg">
-        <div className={classes.main}>
-          <main className={classes.content}>
-            <PressCarousel presses={presses} isLoading={isPressesLoading} />
-
-            {/* <Grid
+      <Container maxWidth="lg" className={classes.content}>
+        <PressCarousel presses={presses} isLoading={isPressesLoading} />
+        {/* <Grid
               container
               direction="row"
               justify="space-between"
@@ -103,45 +96,36 @@ export default function Home() {
             </Grid>
             <MyCourseItem isHome /> */}
 
-            <Box mt={3} mb={2}>
-              <Divider />
-            </Box>
-            <Box mb={2}>
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                <CategoryFilter categories={categories} />
-              </Grid>
-            </Box>
+        <Box mt={3} mb={2}>
+          <Divider />
+        </Box>
+        <Box mb={2}>
+          <Grid container direction="row" justify="center" alignItems="center">
+            <CategoryFilter categories={categories} />
+          </Grid>
+        </Box>
 
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{ fontSize: "1.7rem" }}
-              >
-                รายวิชา
-              </Typography>
-              <Link component={RouterLink} to="/courses" underline="hover">
-                ดูทั้งหมด {">"}
-              </Link>
-            </Grid>
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
+            รายวิชา
+          </Typography>
+          <Link component={RouterLink} to="/courses" underline="hover">
+            ดูทั้งหมด {">"}
+          </Link>
+        </Grid>
 
-            <CourseCarousel
-              courses={courses}
-              categories={categories}
-              isLoading={isCoursesLoading}
-            />
+        <CourseCarousel
+          courses={courses}
+          categories={categories}
+          isLoading={isCoursesLoading}
+        />
 
-            {/* 
+        {/* 
             {courses.map((item, index) => (
               <React.Fragment key={index}>
                 {index === 0 ? (
@@ -191,7 +175,7 @@ export default function Home() {
               
               </React.Fragment>
             ))} */}
-            {/* 
+        {/* 
             {curriculum.map((item, index) => (
               <React.Fragment key={index}>
                 <Box my={3}>
@@ -220,8 +204,6 @@ export default function Home() {
             
               </React.Fragment>
             ))} */}
-          </main>
-        </div>
       </Container>
     </>
   );

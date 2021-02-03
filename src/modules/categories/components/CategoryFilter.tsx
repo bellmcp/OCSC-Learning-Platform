@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import { useHistory, useRouteMatch, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,11 +20,16 @@ const useStyles = makeStyles((theme) => ({
 export default function CategoryFilter({ categories }) {
   const classes = useStyles();
   const { search } = useLocation();
-  const { initialCategoryId } = queryString.parse(search);
+  const { CourseCategoryId } = queryString.parse(search);
   const [open, setOpen] = useState(false);
-  const [activeCategoryId, setActiveCategoryId] = useState(initialCategoryId);
+  const [activeCategoryId, setActiveCategoryId] = useState(0);
   const history = useHistory();
   const { path } = useRouteMatch();
+
+  useEffect(() => {
+    setActiveCategoryId(CourseCategoryId);
+    console.log(CourseCategoryId);
+  }, [CourseCategoryId]);
 
   const handleChange = (event) => {
     setActiveCategoryId(event.target.value);
