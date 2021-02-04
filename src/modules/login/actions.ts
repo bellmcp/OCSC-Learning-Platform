@@ -1,10 +1,10 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 import { setCookie } from "utils/cookies";
-const LOAD_LOGIN_REQUEST = "app/login/LOAD_LOGIN_REQUEST";
-const LOAD_LOGIN_SUCCESS = "app/login/LOAD_LOGIN_SUCCESS";
-const LOAD_LOGIN_FAILURE = "app/login/LOAD_LOGIN_FAILURE";
-const CLEAR_MESSAGE_LOGIN = "app/login/CLEAR_MESSAGE_LOGIN";
+const LOAD_LOGIN_REQUEST = "learning-platform/login/LOAD_LOGIN_REQUEST";
+const LOAD_LOGIN_SUCCESS = "learning-platform/login/LOAD_LOGIN_SUCCESS";
+const LOAD_LOGIN_FAILURE = "learning-platform/login/LOAD_LOGIN_FAILURE";
+const CLEAR_MESSAGE_LOGIN = "learning-platform/login/CLEAR_MESSAGE_LOGIN";
 
 function clearMessageLogin() {
   return {

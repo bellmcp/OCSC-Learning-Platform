@@ -1,7 +1,10 @@
 import axios from "axios";
-const LOAD_CATEGORIES_REQUEST = "app/categories/LOAD_CATEGORIES_REQUEST";
-const LOAD_CATEGORIES_SUCCESS = "app/categories/LOAD_CATEGORIES_SUCCESS";
-const LOAD_CATEGORIES_FAILURE = "app/categories/LOAD_CATEGORIES_FAILURE";
+const LOAD_CATEGORIES_REQUEST =
+  "learning-platform/categories/LOAD_CATEGORIES_REQUEST";
+const LOAD_CATEGORIES_SUCCESS =
+  "learning-platform/categories/LOAD_CATEGORIES_SUCCESS";
+const LOAD_CATEGORIES_FAILURE =
+  "learning-platform/categories/LOAD_CATEGORIES_FAILURE";
 
 function loadCategories() {
   return async (dispatch: any) => {

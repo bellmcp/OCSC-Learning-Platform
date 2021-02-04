@@ -104,14 +104,34 @@ export default function LoginForm() {
   return (
     <Paper className={classes.paper} elevation={0}>
       <Toolbar />
-      <Typography
-        component="h1"
-        variant="h4"
-        style={{ fontWeight: 600 }}
-        gutterBottom
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
       >
-        เข้าสู่ระบบ
-      </Typography>
+        <Typography
+          component="h1"
+          variant="h4"
+          style={{ fontWeight: 600 }}
+          gutterBottom
+        >
+          เข้าสู่ระบบ
+        </Typography>
+        <Typography
+          component="p"
+          color="error"
+          variant="caption"
+          style={{ fontWeight: 600, textAlign: "right" }}
+          gutterBottom
+        >
+          FOR DEV ONLY
+          <br />
+          ID: 1555327140532
+          <br />
+          PW: 12345678
+        </Typography>
+      </Grid>
       <Typography
         component="h2"
         variant="body2"

@@ -2,12 +2,12 @@
 import axios from "axios";
 import moment from "moment";
 import * as uiActions from "modules/ui/actions";
-const LOAD_SUPPORT_REQUEST = "app/support/LOAD_SUPPORT_REQUEST";
-const LOAD_SUPPORT_SUCCESS = "app/support/LOAD_SUPPORT_SUCCESS";
-const LOAD_SUPPORT_FAILURE = "app/support/LOAD_SUPPORT_FAILURE";
-const SEND_SUPPORT_REQUEST = "app/support/SEND_SUPPORT_REQUEST";
-const SEND_SUPPORT_SUCCESS = "app/support/SEND_SUPPORT_SUCCESS";
-const SEND_SUPPORT_FAILURE = "app/support/SEND_SUPPORT_FAILURE";
+const LOAD_SUPPORT_REQUEST = "learning-platform/support/LOAD_SUPPORT_REQUEST";
+const LOAD_SUPPORT_SUCCESS = "learning-platform/support/LOAD_SUPPORT_SUCCESS";
+const LOAD_SUPPORT_FAILURE = "learning-platform/support/LOAD_SUPPORT_FAILURE";
+const SEND_SUPPORT_REQUEST = "learning-platform/support/SEND_SUPPORT_REQUEST";
+const SEND_SUPPORT_SUCCESS = "learning-platform/support/SEND_SUPPORT_SUCCESS";
+const SEND_SUPPORT_FAILURE = "learning-platform/support/SEND_SUPPORT_FAILURE";
 
 function loadSupports() {
   return async (dispatch: any) => {

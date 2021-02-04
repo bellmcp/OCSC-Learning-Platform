@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
-const LOAD_USER_REQUEST = "app/user/LOAD_USER_REQUEST";
-const LOAD_USER_SUCCESS = "app/user/LOAD_USER_SUCCESS";
-const LOAD_USER_FAILURE = "app/user/LOAD_USER_FAILURE";
+const LOAD_USER_REQUEST = "learning-platform/user/LOAD_USER_REQUEST";
+const LOAD_USER_SUCCESS = "learning-platform/user/LOAD_USER_SUCCESS";
+const LOAD_USER_FAILURE = "learning-platform/user/LOAD_USER_FAILURE";
 
 function loadUser() {
   return async (dispatch: any) => {

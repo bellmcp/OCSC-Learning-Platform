@@ -1,5 +1,5 @@
-const SET_FLASH_MESSAGE = "app/ui/SET_FLASH_MESSAGE";
-const CLEAR_FLASH_MESSAGE = "app/ui/CLEAR_FLASH_MESSAGE";
+const SET_FLASH_MESSAGE = "learning-platform/ui/SET_FLASH_MESSAGE";
+const CLEAR_FLASH_MESSAGE = "learning-platform/ui/CLEAR_FLASH_MESSAGE";
 
 function setFlashMessage(message: string) {
   return {
