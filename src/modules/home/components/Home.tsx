@@ -1,11 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Link as RouterLink,
-  useLocation,
-  useRouteMatch,
-} from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Container,

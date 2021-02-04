@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import {
