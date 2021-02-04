@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import {
@@ -185,6 +185,7 @@ export default function NavBar(props: NavigationBarProps) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
+  const path = "/learning-platform";
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
@@ -234,31 +235,31 @@ export default function NavBar(props: NavigationBarProps) {
     {
       id: 0,
       title: "หน้าหลัก",
-      url: "/",
+      url: `${path}`,
       notification: 0,
     },
-    { id: 1, title: "เข้าเรียน", url: "/learn", notification: 0 },
+    { id: 1, title: "เข้าเรียน", url: `${path}/learn`, notification: 0 },
     {
       id: 2,
       title: "ช่วยเหลือ",
-      url: "/support",
+      url: `${path}/support`,
       notification: UNREAD_NOTIFICATION_COUNT,
     },
   ];
 
   const linkToHome = () => {
     handleMenuClose();
-    history.push("/");
+    history.push(`${path}`);
   };
 
   const linkToLogin = () => {
     handleMenuClose();
-    history.push("/login");
+    history.push(`${path}/login`);
   };
 
   const linkToProfile = () => {
     handleMenuClose();
-    history.push("/me");
+    history.push(`${path}/me`);
   };
 
   const linkToPortal = () => {
@@ -273,7 +274,7 @@ export default function NavBar(props: NavigationBarProps) {
   const logout = () => {
     handleMenuClose();
     eraseCookie("token");
-    history.push("/");
+    history.push(`${path}`);
     window.location.reload();
     dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว"));
   };

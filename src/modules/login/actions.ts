@@ -7,6 +7,8 @@ const LOAD_LOGIN_SUCCESS = "learning-platform/login/LOAD_LOGIN_SUCCESS";
 const LOAD_LOGIN_FAILURE = "learning-platform/login/LOAD_LOGIN_FAILURE";
 const CLEAR_MESSAGE_LOGIN = "learning-platform/login/CLEAR_MESSAGE_LOGIN";
 
+const path = "/learning-platform";
+
 function clearMessageLogin() {
   return {
     type: CLEAR_MESSAGE_LOGIN,
@@ -29,7 +31,7 @@ function loadLogin(userInfo: any) {
         },
       });
       setCookie("token", result.data.token, 3);
-      dispatch(push("/"));
+      dispatch(push(`${path}`));
       dispatch(uiActions.setFlashMessage("เข้าสู่ระบบเรียบร้อยแล้ว"));
     } catch (err) {
       if (err.response.status === 401) {

@@ -29,6 +29,7 @@ import {
 import { NavigationDrawerProps } from "../types";
 
 const DRAWER_WIDTH = 200;
+const path = "/learning-platform";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -92,21 +93,21 @@ const navigationItems = [
   {
     id: 0,
     title: "หน้าหลัก",
-    url: "/",
+    url: `${path}`,
     icon: <HomeIcon />,
     notification: 0,
   },
   {
     id: 1,
     title: "เข้าเรียน",
-    url: "/learn",
+    url: `${path}/learn`,
     icon: <LearnIcon />,
     notification: 0,
   },
   {
     id: 2,
     title: "ช่วยเหลือ",
-    url: "/support",
+    url: `${path}/support`,
     icon: <HelpIcon />,
     notification: 0,
   },

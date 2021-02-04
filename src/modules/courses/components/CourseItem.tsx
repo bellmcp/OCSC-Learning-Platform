@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useRouteMatch } from "react-router-dom";
 import {
   Box,
   Card,
@@ -90,11 +90,12 @@ export default function CourseItem({
   SeqFlow,
 }: any) {
   const classes = useStyles();
+  const { path } = useRouteMatch();
 
   return (
     <CardActionArea
       component={RouterLink}
-      to={`courses/${id}`}
+      to={`${path}/courses/${id}`}
       classes={{
         root: classes.actionArea,
         focusHighlight: classes.focusHighlight,

@@ -2,6 +2,7 @@
   "name": "ocsc-learning-platform",
   "version": "0.1.0",
   "main": "index.js",
+  "homepage": "https://welearn.ocsc.go.th/learning-platform", 
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",

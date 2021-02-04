@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useRouteMatch } from "react-router-dom";
 import { CssBaseline, Snackbar, IconButton } from "@material-ui/core";
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -17,6 +17,7 @@ import Footer from "./Footer";
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const path = "/learning-platform";
   const dispatch = useDispatch();
   const flashMessage = useSelector((state) => state.ui.flashMessage);
 
@@ -25,13 +26,13 @@ export default function Layout() {
   useEffect(() => {
     const setInitialActivePage = () => {
       switch (pathname) {
-        case "/":
+        case `${path}`:
           setActivePage(0);
           break;
-        case "/learn":
+        case `${path}/learn`:
           setActivePage(1);
           break;
-        case "/support":
+        case `${path}/support`:
           setActivePage(2);
           break;
         default:

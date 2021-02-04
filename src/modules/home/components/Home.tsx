@@ -1,8 +1,11 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { Link as RouterLink } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useLocation,
+  useRouteMatch,
+} from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Container,
@@ -40,6 +43,7 @@ const HERO_IMAGE_URL =
 export default function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const path = "/learning-platform";
   const { search } = useLocation();
   const { items: users } = useSelector((state) => state.user);
   const { isLoading: isPressesLoading, items: presses } = useSelector(
@@ -114,7 +118,7 @@ export default function Home() {
           <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
             รายวิชา
           </Typography>
-          <Link component={RouterLink} to="/courses" underline="hover">
+          <Link component={RouterLink} to={`${path}/courses`} underline="hover">
             ดูทั้งหมด {">"}
           </Link>
         </Grid>

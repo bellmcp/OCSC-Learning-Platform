@@ -8,28 +8,30 @@ import UserRoutes from "modules/user/components/Routes";
 import LoginRoutes from "modules/login/components/Routes";
 import MeRoutes from "modules/me/components/Routes";
 
+const PATH = "/learning-platform";
+
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/courses">
+      <Route path={`${PATH}/courses`}>
         <CoursesRoutes></CoursesRoutes>
       </Route>
-      <Route path="/learn">
+      <Route path={`${PATH}/learn`}>
         <LearnRoutes></LearnRoutes>
       </Route>
-      <Route path="/support">
+      <Route path={`${PATH}/support`}>
         <SupportRoutes></SupportRoutes>
       </Route>
-      <Route path="/user">
+      <Route path={`${PATH}/user`}>
         <UserRoutes></UserRoutes>
       </Route>
-      <Route path="/login">
+      <Route path={`${PATH}/login`}>
         <LoginRoutes></LoginRoutes>
       </Route>
-      <Route path="/me">
+      <Route path={`${PATH}/me`}>
         <MeRoutes></MeRoutes>
       </Route>
-      <Route exact path="/">
+      <Route exact path={`${PATH}`}>
         <HomeRoutes></HomeRoutes>
       </Route>
       <Route>
