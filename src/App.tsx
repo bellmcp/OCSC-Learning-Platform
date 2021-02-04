@@ -1,5 +1,5 @@
 import React from "react";
-import Helmet from "react-helmet";
+// import Helmet from "react-helmet";
 import { BrowserRouter } from "react-router-dom";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ScrollToTop from "./common/utils/ScrollToTop";
@@ -86,54 +86,35 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>OCSC Learning Platform</title>
-        <meta name="title" content="OCSC Learning Platform" />
-        <meta
-          name="description"
-          content="เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform"
-        />
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="http://ocsc-learning-platform.herokuapp.com/"
-        />
-        <meta property="og:title" content="OCSC Learning Platform" />
-        <meta
-          property="og:description"
-          content="เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform"
-        />
-        <meta property="og:image" content={meta} />
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="http://ocsc-learning-platform.herokuapp.com/"
-        />
-        <meta property="twitter:title" content="OCSC Learning Platform" />
-        <meta
-          property="twitter:description"
-          content="เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform"
-        />
-        <meta property="twitter:image" content={meta} />
-      </Helmet>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Switch>
-          <Route
+          {/* <Route
             exact
             path="/"
             component={() => (
-              <Home
-                announcements={ANNOUNCEMENTS}
-                courses={COURSES}
-                curriculum={CURRICULUM}
-              />
+              // <Home
+              //   announcements={ANNOUNCEMENTS}
+              //   courses={COURSES}
+              //   curriculum={CURRICULUM}
+              // />
+              <h1>
+                Please Go To
+                <a href="https://ocsc-learning-platform.vercel.app/">
+                  https://ocsc-learning-platform.vercel.app
+                </a>
+              </h1>
             )}
+          /> */}
+          <Route
+            path="/"
+            component={() => {
+              window.location.href =
+                "https://ocsc-learning-platform.vercel.app/";
+              return null;
+            }}
           />
-          <Route exact path="/learn" component={Learn} />
+          {/* <Route exact path="/learn" component={Learn} />
           <Route
             exact
             path="/learn/epic-social-studies/"
@@ -179,7 +160,7 @@ function App() {
             component={() => <CurriculumDetail />}
           />
           <Route exact path="/help" component={Help} />
-          <Redirect to="/" />
+          <Redirect to="/" /> */}
         </Switch>
       </MuiThemeProvider>
     </BrowserRouter>
