@@ -349,7 +349,7 @@ export default function NavBar(props: NavigationBarProps) {
                     input: classes.inputInput,
                   }}
                   inputProps={{ "aria-label": "search" }}
-                  onChange={(event) => {
+                  onBlur={(event) => {
                     alert(`Search query: ${event.target.value}`);
                   }}
                 />

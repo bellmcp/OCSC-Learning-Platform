@@ -90,7 +90,11 @@ export default function CurriculumItem({
   return (
     <CardActionArea
       component={RouterLink}
-      to={`${path}/curriculums/${id}`}
+      to={
+        path === "/learning-platform/curriculums"
+          ? `${path}/${id}`
+          : `${path}/curriculums/${id}`
+      }
       classes={{
         root: classes.actionArea,
         focusHighlight: classes.focusHighlight,

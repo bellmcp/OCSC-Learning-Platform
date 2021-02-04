@@ -95,7 +95,11 @@ export default function CourseItem({
   return (
     <CardActionArea
       component={RouterLink}
-      to={`${path}/courses/${id}`}
+      to={
+        path === "/learning-platform/courses"
+          ? `${path}/${id}`
+          : `${path}/courses/${id}`
+      }
       classes={{
         root: classes.actionArea,
         focusHighlight: classes.focusHighlight,
