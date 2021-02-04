@@ -5,6 +5,7 @@ import configureStore, { history } from "store/configureStore";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import ScrollToTop from "utils/ScrollToTop";
 import Layout from "modules/ui/components/Layout";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import META_IMAGE from "./meta.jpg";
 
 const TITLE = "OCSC Learning Platform";
@@ -16,28 +17,40 @@ const store = configureStore();
 
 export default function App() {
   return (
-    <HelmetProvider>
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Helmet>
-            <title>{TITLE}</title>
-            <meta name="title" content={TITLE} />
-            <meta name="description" content={DESCRIPTION} />
-            <meta property="og:type" content="website" />
-            <meta property="og:url" content={URL} />
-            <meta property="og:title" content={TITLE} />
-            <meta property="og:description" content={DESCRIPTION} />
-            <meta property="og:image" content={META_IMAGE} />
-            <meta property="twitter:card" content="summary_large_image" />
-            <meta property="twitter:url" content={URL} />
-            <meta property="twitter:title" content={TITLE} />
-            <meta property="twitter:description" content={DESCRIPTION} />
-            <meta property="twitter:image" content={META_IMAGE} />
-          </Helmet>
-          <ScrollToTop />
-          <Layout />
-        </ConnectedRouter>
-      </Provider>
-    </HelmetProvider>
+    // <HelmetProvider>
+    //   <Provider store={store}>
+    //     <ConnectedRouter history={history}>
+    //       <Helmet>
+    //         <title>{TITLE}</title>
+    //         <meta name="title" content={TITLE} />
+    //         <meta name="description" content={DESCRIPTION} />
+    //         <meta property="og:type" content="website" />
+    //         <meta property="og:url" content={URL} />
+    //         <meta property="og:title" content={TITLE} />
+    //         <meta property="og:description" content={DESCRIPTION} />
+    //         <meta property="og:image" content={META_IMAGE} />
+    //         <meta property="twitter:card" content="summary_large_image" />
+    //         <meta property="twitter:url" content={URL} />
+    //         <meta property="twitter:title" content={TITLE} />
+    //         <meta property="twitter:description" content={DESCRIPTION} />
+    //         <meta property="twitter:image" content={META_IMAGE} />
+    //       </Helmet>
+    //       <ScrollToTop />
+    //       <Layout />
+    //     </ConnectedRouter>
+    //   </Provider>
+    // </HelmetProvider>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path="/"
+          component={() => {
+            window.location.href =
+              "https://welearn.ocsc.go.th/learning-platform";
+            return null;
+          }}
+        />
+      </Switch>
+    </BrowserRouter>
   );
 }
