@@ -1,17 +1,27 @@
+// @ts-nocheck
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, Snackbar, IconButton } from "@material-ui/core";
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
   ThemeProvider,
 } from "@material-ui/core/styles";
+import { Close as CloseIcon } from "@material-ui/icons";
 import { grey, amber } from "@material-ui/core/colors";
+
+import * as actions from "../actions";
 import NavBar from "./NavBar";
 import Routes from "./Routes";
 import Footer from "./Footer";
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const flashMessage = useSelector((state) => state.ui.flashMessage);
+
+  const closeFlashMessage = () => dispatch(actions.clearFlashMessage());
+
   useEffect(() => {
     const setInitialActivePage = () => {
       switch (pathname) {
@@ -31,8 +41,11 @@ export default function Layout() {
     };
     setInitialActivePage();
   }, [pathname]);
+
   const [activePage, setActivePage] = useState(0);
+
   const defaultTheme = createMuiTheme();
+
   const theme = createMuiTheme({
     typography: {
       fontFamily: ["Prompt", "sans-serif"].join(","),
@@ -79,6 +92,22 @@ export default function Layout() {
       <CssBaseline />
       <NavBar active={activePage} setActivePage={setActivePage} />
       <Routes />
+      <Snackbar
+        open={flashMessage}
+        onClose={closeFlashMessage}
+        message={flashMessage}
+        autoHideDuration={6000}
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={closeFlashMessage}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
+      />
       <Footer />
     </ThemeProvider>
   );

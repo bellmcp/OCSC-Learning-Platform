@@ -34,6 +34,7 @@ import { amber, grey } from "@material-ui/core/colors";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 
+import * as uiActions from "modules/ui/actions";
 import * as userActions from "modules/user/actions";
 import * as supportActions from "modules/support/actions";
 import NavDrawer from "./NavDrawer";
@@ -274,6 +275,7 @@ export default function NavBar(props: NavigationBarProps) {
     eraseCookie("token");
     history.push("/");
     window.location.reload();
+    dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว"));
   };
 
   const handleDrawerToggle = () => {

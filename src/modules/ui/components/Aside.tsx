@@ -59,7 +59,7 @@ export default function Aside({ title }: any) {
             className={classes.text}
             style={{ marginBottom: 36 }}
           >
-            {title ? title : "ยินดีต้อนรับ"}
+            {title ? title : "OCSC Learning Platform"}
           </Typography>
         </Grid>
         <Grid item>

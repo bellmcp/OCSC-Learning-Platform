@@ -1,6 +1,7 @@
 import axios from "axios";
 import { push } from "connected-react-router";
 import { setCookie } from "utils/cookies";
+import * as uiActions from "modules/ui/actions";
 const LOAD_LOGIN_REQUEST = "learning-platform/login/LOAD_LOGIN_REQUEST";
 const LOAD_LOGIN_SUCCESS = "learning-platform/login/LOAD_LOGIN_SUCCESS";
 const LOAD_LOGIN_FAILURE = "learning-platform/login/LOAD_LOGIN_FAILURE";
@@ -29,6 +30,7 @@ function loadLogin(userInfo: any) {
       });
       setCookie("token", result.data.token, 3);
       dispatch(push("/"));
+      dispatch(uiActions.setFlashMessage("เข้าสู่ระบบเรียบร้อยแล้ว"));
     } catch (err) {
       if (err.response.status === 401) {
         dispatch({
