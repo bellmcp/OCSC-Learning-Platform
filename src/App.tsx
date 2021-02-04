@@ -110,7 +110,7 @@ function App() {
             path="/"
             component={() => {
               window.location.href =
-                "https://ocsc-learning-platform.vercel.app/";
+                "https://welearn.ocsc.go.th/learning-platform";
               return null;
             }}
           />
