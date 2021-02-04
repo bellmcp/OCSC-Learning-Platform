@@ -1,5 +1,5 @@
-import { CurriculumDataType } from '../curriculum/types'
+import { CurriculumDataType } from "../curriculums/types";
 
 export interface CourseModuleProps {
-    curriculum: CurriculumDataType[];
+  curriculum: CurriculumDataType[];
 }

@@ -20,7 +20,7 @@ import {
   ArrowBackIosRounded as ArrowBack,
 } from "@material-ui/icons";
 
-import CourseItem from "./CourseItem";
+import CurriculumItem from "./CurriculumItem";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CourseCarousel({ courses, categories, isLoading }) {
+export default function CurriculumCarousel({ curriculums, isLoading }) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
@@ -102,7 +102,7 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
           <CircularProgress color="secondary" />
         </Grid>
       );
-    } else if (courses.length === 0) {
+    } else if (curriculums.length === 0) {
       return (
         <Grid
           container
@@ -122,7 +122,7 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
             naturalSlideWidth={100}
             naturalSlideHeight={135}
             isIntrinsicHeight
-            totalSlides={courses.length}
+            totalSlides={curriculums.length}
             visibleSlides={isMdUp ? 4 : isSmUp ? 3 : 1}
             step={isMdUp ? 4 : isSmUp ? 3 : 1}
             className={classes.carousel}
@@ -131,10 +131,10 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
               <div className={classes.growButtonBack} />
               <div className={classes.growButtonNext} />
               <Slider className={classes.slide}>
-                {courses.map((course: any) => (
-                  <Slide key={course.id} index={course.id}>
-                    <div className={classes.course}>
-                      <CourseItem {...course} categories={categories} />
+                {curriculums.map((curriculum: any) => (
+                  <Slide key={curriculum.id} index={curriculum.id}>
+                    <div className={classes.curriculum}>
+                      <CurriculumItem {...curriculum} />
                     </div>
                   </Slide>
                 ))}

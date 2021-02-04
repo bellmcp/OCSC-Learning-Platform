@@ -21,9 +21,11 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import * as pressesActions from "modules/press/actions";
 import * as coursesActions from "modules/courses/actions";
 import * as categoriesActions from "modules/categories/actions";
-import CourseCarousel from "modules/courses/components/CourseCarousel";
-import PressCarousel from "modules/press/components/PressCarousel";
+import * as curriculumsActions from "modules/curriculums/actions";
 import Header from "modules/ui/components/Header";
+import PressCarousel from "modules/press/components/PressCarousel";
+import CourseCarousel from "modules/courses/components/CourseCarousel";
+import CurriculumCarousel from "modules/curriculums/components/CurriculumCarousel";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,6 +54,9 @@ export default function Home() {
   const { isLoading: isCoursesLoading, items: courses } = useSelector(
     (state) => state.courses
   );
+  const { isLoading: isCurriculumsLoading, items: curriculums } = useSelector(
+    (state) => state.curriculums
+  );
   const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
@@ -67,6 +72,11 @@ export default function Home() {
   useEffect(() => {
     const categories_action = categoriesActions.loadCategories();
     dispatch(categories_action);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const curriculums_action = curriculumsActions.loadCurriculums();
+    dispatch(curriculums_action);
   }, [dispatch]);
 
   return (
@@ -103,31 +113,95 @@ export default function Home() {
         <Box mt={3} mb={2}>
           <Divider />
         </Box>
-        <Box mb={2}>
-          <Grid container direction="row" justify="center" alignItems="center">
-            <CategoryFilter categories={categories} />
-          </Grid>
-        </Box>
 
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="center"
-        >
-          <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
-            รายวิชา
-          </Typography>
-          <Link component={RouterLink} to={`${path}/courses`} underline="hover">
-            ดูทั้งหมด {">"}
-          </Link>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <CategoryFilter categories={categories} />
         </Grid>
 
-        <CourseCarousel
-          courses={courses}
-          categories={categories}
-          isLoading={isCoursesLoading}
-        />
+        <Box my={3}>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
+            <Typography
+              gutterBottom
+              variant="h6"
+              style={{ fontSize: "1.7rem" }}
+            >
+              แนะนำ
+            </Typography>
+          </Grid>
+          <CourseCarousel
+            courses={courses.filter((course) => {
+              return course.Recommended === true;
+            })}
+            categories={categories}
+            isLoading={isCoursesLoading}
+          />
+        </Box>
+
+        <Box my={3}>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
+            <Typography
+              gutterBottom
+              variant="h6"
+              style={{ fontSize: "1.7rem" }}
+            >
+              รายวิชา
+            </Typography>
+            <Link
+              component={RouterLink}
+              to={`${path}/courses`}
+              underline="hover"
+            >
+              ดูทั้งหมด {">"}
+            </Link>
+          </Grid>
+          <CourseCarousel
+            courses={courses}
+            categories={categories}
+            isLoading={isCoursesLoading}
+          />
+        </Box>
+
+        <Box mt={3} mb={2}>
+          <Divider />
+        </Box>
+
+        <Box my={3}>
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
+            <Typography
+              gutterBottom
+              variant="h6"
+              style={{ fontSize: "1.7rem" }}
+            >
+              หลักสูตร
+            </Typography>
+            <Link
+              component={RouterLink}
+              to={`${path}/curriculums`}
+              underline="hover"
+            >
+              ดูทั้งหมด {">"}
+            </Link>
+          </Grid>
+          <CurriculumCarousel
+            curriculums={curriculums}
+            isLoading={isCurriculumsLoading}
+          />
+        </Box>
 
         {/* 
             {courses.map((item, index) => (
