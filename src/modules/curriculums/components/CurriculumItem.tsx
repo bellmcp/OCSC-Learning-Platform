@@ -133,7 +133,12 @@ export default function CurriculumItem({
                 color="textSecondary"
                 component="p"
               >
-                <div className={classes.detail}>{LearningObjective}</div>
+                <div
+                  className={classes.detail}
+                  dangerouslySetInnerHTML={{
+                    __html: LearningObjective,
+                  }}
+                ></div>
               </Typography>
             </Box>
           </Box>

@@ -11,6 +11,7 @@ import {
   Divider,
   Avatar,
   Toolbar,
+  CircularProgress,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
@@ -59,6 +60,7 @@ export default function CurriculumDetails() {
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
+  const { isLoading } = useSelector((state) => state.curriculums);
 
   useEffect(() => {
     const action = actions.loadCurriculum(id);
@@ -126,39 +128,58 @@ export default function CurriculumDetails() {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <Grid container justify="space-between" alignItems="center">
-              <h1>หลักสูตร {curriculum?.Name}</h1>
-              <Typography variant="body2" component="p" color="textSecondary">
-                รหัสหลักสูตร: {curriculum?.Code}
-              </Typography>
-            </Grid>
-            <Box mb={3}>
-              <Divider />
-            </Box>
-            <Grid container spacing={6}>
-              <Grid item xs={12} sm={7}>
-                {curriculumInfoPlaceholder.slice(0, 2).map((item, index) => (
-                  <RenderCurriculumInfo
-                    index={index}
-                    title={item.title}
-                    info={item.detail}
-                    icon={item.icon}
-                  />
-                ))}
+            {isLoading ? (
+              <Grid
+                container
+                justify="center"
+                alignItems="center"
+                style={{ height: 500 }}
+              >
+                <CircularProgress color="secondary" />
               </Grid>
-              <Grid item xs={12} sm={5}>
-                {curriculumInfoPlaceholder
-                  .slice(2, curriculumInfoPlaceholder.length)
-                  .map((item, index) => (
-                    <RenderCurriculumInfo
-                      index={index}
-                      title={item.title}
-                      info={item.detail}
-                      icon={item.icon}
-                    />
-                  ))}
-              </Grid>
-            </Grid>
+            ) : (
+              <>
+                <Grid container justify="space-between" alignItems="center">
+                  <h1>หลักสูตร {curriculum?.Name}</h1>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    color="textSecondary"
+                  >
+                    รหัสหลักสูตร: {curriculum?.Code}
+                  </Typography>
+                </Grid>
+                <Box mb={3}>
+                  <Divider />
+                </Box>
+                <Grid container spacing={6}>
+                  <Grid item xs={12} sm={7}>
+                    {curriculumInfoPlaceholder
+                      .slice(0, 2)
+                      .map((item, index) => (
+                        <RenderCurriculumInfo
+                          index={index}
+                          title={item.title}
+                          info={item.detail}
+                          icon={item.icon}
+                        />
+                      ))}
+                  </Grid>
+                  <Grid item xs={12} sm={5}>
+                    {curriculumInfoPlaceholder
+                      .slice(2, curriculumInfoPlaceholder.length)
+                      .map((item, index) => (
+                        <RenderCurriculumInfo
+                          index={index}
+                          title={item.title}
+                          info={item.detail}
+                          icon={item.icon}
+                        />
+                      ))}
+                  </Grid>
+                </Grid>
+              </>
+            )}
           </main>
         </div>
       </Container>

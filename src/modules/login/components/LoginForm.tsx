@@ -125,7 +125,7 @@ export default function LoginForm() {
           style={{ fontWeight: 600, textAlign: "right" }}
           gutterBottom
         >
-          FOR DEV ONLY
+          FOR DEVELOPMENT
           <br />
           ID: 1555327140532
           <br />

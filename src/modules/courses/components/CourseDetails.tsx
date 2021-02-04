@@ -10,27 +10,14 @@ import {
   Grid,
   Divider,
   Avatar,
-  Button,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  LinearProgress,
   Toolbar,
+  CircularProgress,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
   Assessment as AssessmentIcon,
   Create as CreateIcon,
-  KeyboardArrowRightRounded as ArrowRightIcon,
   Info as InfoIcon,
-  ThumbUp as SurveyIcon,
-  PlayCircleFilled as PlayCircleFilledIcon,
-  LibraryBooks as LibraryBooksIcon,
-  MenuBook as CourseIcon,
   People as PeopleIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
@@ -74,20 +61,12 @@ export default function CourseDetails() {
 
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
+  const { isLoading } = useSelector((state) => state.courses);
 
   useEffect(() => {
     const action = actions.loadCourse(id);
     dispatch(action);
   }, [dispatch, id]);
-
-  const [expanded, setExpanded] = React.useState<string | false>(false);
-
-  const handleChange = (panel: string) => (
-    event: React.ChangeEvent<{}>,
-    isExpanded: boolean
-  ) => {
-    setExpanded(isExpanded ? panel : false);
-  };
 
   const courseInfoPlaceholder = [
     {
@@ -118,48 +97,6 @@ export default function CourseDetails() {
       icon: <InfoIcon />,
     },
   ];
-
-  // const roundInfoPlaceholder = [
-  //   { title: "ช่วงเวลาเรียน", detail: course.round?.duration },
-  //   { title: "เงื่อนไขการลงทะเบียน", detail: course.round?.goal },
-  // ];
-
-  function renderMockContent() {
-    return (
-      <>
-        <ListItem>
-          <ListItemIcon>
-            <LibraryBooksIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="แบบทดสอบก่อนเรียน"
-            secondary="5 คะแนน, สูงสุด 1 ครั้ง"
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <PlayCircleFilledIcon />
-          </ListItemIcon>
-          <ListItemText primary="วิดีโอ: แนะนำรายวิชา" secondary="5 นาที" />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <LibraryBooksIcon />
-          </ListItemIcon>
-          <ListItemText
-            primary="แบบทดสอบหลังเรียน"
-            secondary="5 คะแนน, สูงสุด 1 ครั้ง"
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <SurveyIcon />
-          </ListItemIcon>
-          <ListItemText primary="แบบประเมินรายวิชา" />
-        </ListItem>
-      </>
-    );
-  }
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
     return (
@@ -199,137 +136,57 @@ export default function CourseDetails() {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <Grid container justify="space-between" alignItems="center">
-              <h1>รายวิชา {course?.Name}</h1>
-              <Typography variant="body2" component="p" color="textSecondary">
-                รหัสวิชา: {course?.Code}
-              </Typography>
-            </Grid>
-            {/* <Box mt={4} mb={6}>
-              <Grid container spacing={6}>
-                <Grid item xs={12} sm={12} md={6}>
-                  <h1 style={{ margin: 0 }}>รอบที่ {course.round?.id}</h1>
-                  <Box mb={3}>
-                    {course.totalSeat && course.availableSeat ? (
-                      <Box display="flex" alignItems="center">
-                        <Box width="100%">
-                          <Typography
-                            variant="body2"
-                            color="primary"
-                            align="right"
-                          >
-                            {course.availableSeat} / {course.totalSeat} ที่ว่าง
-                          </Typography>
-                          <LinearProgress
-                            variant="determinate"
-                            value={
-                              ((course.totalSeat - course.availableSeat) /
-                                course.totalSeat) *
-                              100
-                            }
-                            color="secondary"
-                          />
-                        </Box>
-                        <Box></Box>
-                      </Box>
-                    ) : null}
-                  </Box>
-                  <Box my={3}>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      size="large"
-                      endIcon={<ArrowRightIcon />}
-                    >
-                      ลงทะเบียนเรียน
-                    </Button>
-                  </Box>
+            {isLoading ? (
+              <Grid
+                container
+                justify="center"
+                alignItems="center"
+                style={{ height: 500 }}
+              >
+                <CircularProgress color="secondary" />
+              </Grid>
+            ) : (
+              <>
+                <Grid container justify="space-between" alignItems="center">
+                  <h1>รายวิชา {course?.Name}</h1>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    color="textSecondary"
+                  >
+                    รหัสวิชา: {course?.Code}
+                  </Typography>
                 </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                  {roundInfoPlaceholder.map((item, index) => (
-                    <Grid
-                      container
-                      spacing={3}
-                      key={index}
-                      alignItems="baseline"
-                    >
-                      <Grid item xs={5}>
-                        <Typography variant="h6">{item.title}</Typography>
-                      </Grid>
-                      <Grid item xs>
-                        <Typography variant="body2" color="textSecondary">
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: item.detail ? item.detail : "ไม่มีข้อมูล",
-                            }}
-                          ></div>
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Grid>
-            </Box> */}
-            <Box mb={3}>
-              <Divider />
-            </Box>
-            <Grid container spacing={6}>
-              <Grid item xs={12} sm={7}>
-                {courseInfoPlaceholder.slice(0, 2).map((item, index) => (
-                  <RenderCourseInfo
-                    index={index}
-                    title={item.title}
-                    info={item.detail}
-                    icon={item.icon}
-                  />
-                ))}
-              </Grid>
-              <Grid item xs={12} sm={5}>
-                {courseInfoPlaceholder
-                  .slice(2, courseInfoPlaceholder.length)
-                  .map((item, index) => (
-                    <RenderCourseInfo
-                      index={index}
-                      title={item.title}
-                      info={item.detail}
-                      icon={item.icon}
-                    />
-                  ))}
-              </Grid>
-            </Grid>
-            {/* <Box my={3}>
-              <Divider />
-            </Box>
-            <Grid
-              container
-              spacing={2}
-              direction="column"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item xs={12} sm={8}>
-                <h1>ประมวลรายวิชา</h1>
-              </Grid>
-              <Grid item xs={12} sm={8}>
+
                 <Box mb={3}>
-                  <Accordion expanded={true} onChange={handleChange("panel2")}>
-                    <AccordionSummary
-                      aria-controls="panel2bh-content"
-                      id="panel2bh-header"
-                    >
-                      <Typography className={classes.heading}>
-                        การประชาสัมพันธ์ผ่านวิทยุและโทรทัศน์
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        <List dense>{renderMockContent()}</List>
-                      </Typography>
-                    </AccordionDetails>
-                  </Accordion>
+                  <Divider />
                 </Box>
-              </Grid>
-            </Grid> */}
+                <Grid container spacing={6}>
+                  <Grid item xs={12} sm={7}>
+                    {courseInfoPlaceholder.slice(0, 2).map((item, index) => (
+                      <RenderCourseInfo
+                        index={index}
+                        title={item.title}
+                        info={item.detail}
+                        icon={item.icon}
+                      />
+                    ))}
+                  </Grid>
+                  <Grid item xs={12} sm={5}>
+                    {courseInfoPlaceholder
+                      .slice(2, courseInfoPlaceholder.length)
+                      .map((item, index) => (
+                        <RenderCourseInfo
+                          index={index}
+                          title={item.title}
+                          info={item.detail}
+                          icon={item.icon}
+                        />
+                      ))}
+                  </Grid>
+                </Grid>
+              </>
+            )}
           </main>
         </div>
       </Container>
