@@ -8,6 +8,7 @@ import SupportRoutes from "modules/support/components/Routes";
 import UserRoutes from "modules/user/components/Routes";
 import LoginRoutes from "modules/login/components/Routes";
 import MeRoutes from "modules/me/components/Routes";
+import NotFound from "./NotFound";
 
 const PATH = "/learning-platform";
 
@@ -39,7 +40,7 @@ export default function Routes() {
         <HomeRoutes></HomeRoutes>
       </Route>
       <Route>
-        <h1 style={{ textAlign: "center" }}>Page not found</h1>
+        <NotFound />
       </Route>
     </Switch>
   );
