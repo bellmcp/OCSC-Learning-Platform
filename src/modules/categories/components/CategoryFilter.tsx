@@ -36,7 +36,7 @@ export default function CategoryFilter({ categories }) {
     history.push(
       event.target.value === 0
         ? `${path}`
-        : `${path}?CourseCategoryId=${event.target.value}`
+        : `${path}?courseCategoryId=${event.target.value}`
     );
   };
 
@@ -72,7 +72,7 @@ export default function CategoryFilter({ categories }) {
                 marginRight: 12,
               }}
             />
-            {category.CourseCategory}
+            {category.courseCategory}
           </MenuItem>
         ))}
       </Select>

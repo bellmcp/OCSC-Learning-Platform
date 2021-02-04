@@ -71,27 +71,27 @@ export default function CourseDetails() {
   const courseInfoPlaceholder = [
     {
       title: "เป้าหมายการเรียนรู้",
-      detail: course?.LearningObjective,
+      detail: course?.learningObjective,
       icon: <AssignmentIcon />,
     },
     {
       title: "ประเด็นการเรียนรู้",
-      detail: course?.LearningTopic,
+      detail: course?.learningTopic,
       icon: <CreateIcon />,
     },
     {
       title: "วิธีการประเมินผล",
-      detail: course?.Assessment,
+      detail: course?.assessment,
       icon: <AssessmentIcon />,
     },
     {
       title: "กลุ่มเป้าหมาย",
-      detail: course?.TargetGroup,
+      detail: course?.targetGroup,
       icon: <PeopleIcon />,
     },
     {
       title: "หมายเหตุ",
-      detail: course?.SeqFlow
+      detail: course?.seqFlow
         ? "บังคับเรียนตามลำดับเนื้อหา"
         : "ไม่บังคับเรียนตามลำดับเนื้อหา",
       icon: <InfoIcon />,
@@ -148,13 +148,13 @@ export default function CourseDetails() {
             ) : (
               <>
                 <Grid container justify="space-between" alignItems="center">
-                  <h1>รายวิชา {course?.Name}</h1>
+                  <h1>รายวิชา {course?.name}</h1>
                   <Typography
                     variant="body2"
                     component="p"
                     color="textSecondary"
                   >
-                    รหัสวิชา: {course?.Code}
+                    รหัสวิชา: {course?.code}
                   </Typography>
                 </Grid>
 

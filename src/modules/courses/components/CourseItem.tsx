@@ -79,15 +79,11 @@ const useStyles = makeStyles((theme) => ({
 export default function CourseItem({
   categories,
   id,
-  Code,
-  Name,
-  CourseCategoryId,
-  LearningObjective,
-  LearningTopic,
-  TargetGroup,
-  Assessment,
-  Thumbnail,
-  SeqFlow,
+  code,
+  name,
+  courseCategoryId,
+  learningObjective,
+  thumbnail,
 }: any) {
   const classes = useStyles();
   const { path } = useRouteMatch();
@@ -109,20 +105,20 @@ export default function CourseItem({
         <CardMedia
           key={id}
           className={classes.cardMedia}
-          image={Thumbnail}
-          title={Name}
+          image={thumbnail}
+          title={name}
           style={{
-            background: `url('${Thumbnail}')`,
+            background: `url('${thumbnail}')`,
             backgroundSize: "cover",
           }}
         />
         <CardContent className={classes.cardContent}>
           <Box my={2}>
             <Typography className={classes.title} variant="h6" component="h2">
-              {Name}
+              {name}
             </Typography>
             <Typography variant="body2">
-              <div className={classes.genre}>{Code}</div>
+              <div className={classes.genre}>{code}</div>
             </Typography>
             <Box my={1}>
               <Typography
@@ -134,7 +130,7 @@ export default function CourseItem({
                 <div
                   className={classes.detail}
                   dangerouslySetInnerHTML={{
-                    __html: LearningObjective,
+                    __html: learningObjective,
                   }}
                 ></div>
               </Typography>
@@ -144,12 +140,12 @@ export default function CourseItem({
                 <div className={classes.genre}>
                   <Circle
                     style={{
-                      color: categoryColor(CourseCategoryId),
+                      color: categoryColor(courseCategoryId),
                       fontSize: 12,
                       marginRight: 6,
                     }}
                   />
-                  {categories[CourseCategoryId - 1]?.CourseCategory}
+                  {categories[courseCategoryId - 1]?.courseCategory}
                 </div>
               </Typography>
             </Box>

@@ -76,13 +76,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CurriculumItem({
   id,
-  Code,
-  Name,
-  LearningObjective,
-  LearningTopic,
-  TargetGroup,
-  Assessment,
-  Thumbnail,
+  code,
+  name,
+  learningObjective,
+  thumbnail,
 }: any) {
   const classes = useStyles();
   const { path } = useRouteMatch();
@@ -104,10 +101,10 @@ export default function CurriculumItem({
         <CardMedia
           key={id}
           className={classes.cardMediaStack}
-          image={Thumbnail}
-          title={Name}
+          image={thumbnail}
+          title={name}
           style={{
-            background: `url('${Thumbnail}')`,
+            background: `url('${thumbnail}')`,
             backgroundSize: "cover",
           }}
         />
@@ -121,10 +118,10 @@ export default function CurriculumItem({
               หลักสูตร
             </Typography>
             <Typography className={classes.title} variant="h6" component="h2">
-              {Name}
+              {name}
             </Typography>
             <Typography variant="body2">
-              <div className={classes.genre}>{Code}</div>
+              <div className={classes.genre}>{code}</div>
             </Typography>
             <Box my={1}>
               <Typography
@@ -136,7 +133,7 @@ export default function CurriculumItem({
                 <div
                   className={classes.detail}
                   dangerouslySetInnerHTML={{
-                    __html: LearningObjective,
+                    __html: learningObjective,
                   }}
                 ></div>
               </Typography>

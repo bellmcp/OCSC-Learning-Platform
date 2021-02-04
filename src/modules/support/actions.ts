@@ -5,15 +5,13 @@ import * as uiActions from "modules/ui/actions";
 const LOAD_SUPPORT_REQUEST = "learning-platform/support/LOAD_SUPPORT_REQUEST";
 const LOAD_SUPPORT_SUCCESS = "learning-platform/support/LOAD_SUPPORT_SUCCESS";
 const LOAD_SUPPORT_FAILURE = "learning-platform/support/LOAD_SUPPORT_FAILURE";
-const SEND_SUPPORT_REQUEST = "learning-platform/support/SEND_SUPPORT_REQUEST";
 const SEND_SUPPORT_SUCCESS = "learning-platform/support/SEND_SUPPORT_SUCCESS";
-const SEND_SUPPORT_FAILURE = "learning-platform/support/SEND_SUPPORT_FAILURE";
 
 function loadSupports() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_SUPPORT_REQUEST });
     try {
-      const { data } = await axios.get("/Supports2");
+      const { data } = await axios.get("/Supports");
       dispatch({
         type: LOAD_SUPPORT_SUCCESS,
         payload: {
@@ -34,15 +32,15 @@ function sendSupport(supportInfo) {
       },
     } = getState();
 
-    const { data } = await axios.post("/Supports2", {
+    const { data } = await axios.post("/Supports", {
       id: Math.floor(Math.random() * 101),
       userId: id,
       ...supportInfo,
-      AttachFile: null,
-      ReplyMessage: null,
-      ReplyDate: null,
-      CreateDate: moment().format("YYYY-MM-DD HH:mm:ss"),
-      IsAcknowledged: false,
+      attachFile: null,
+      replyMessage: null,
+      replyDate: null,
+      createDate: moment().format("YYYY-MM-DD HH:mm:ss"),
+      isAcknowledged: false,
     });
 
     dispatch({ type: SEND_SUPPORT_SUCCESS, payload: { support: data } });

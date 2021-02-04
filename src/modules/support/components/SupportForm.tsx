@@ -23,14 +23,8 @@ export default function SupportForm() {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
     const action = actions.sendSupport(data);
     dispatch(action);
-    // alert(
-    //   `RESULT: ${JSON.stringify(
-    //     data
-    //   )}\nTIMESTAMP: {"CreateDate": ${moment().format("DD-MM-YYYY hh:mm:ss")}}`
-    // );
   };
 
   return (
@@ -45,33 +39,33 @@ export default function SupportForm() {
         autoComplete="off"
       >
         <TextField
-          name="Subject"
+          name="subject"
           inputRef={register({ required: true })}
-          helperText={errors.Subject && "กรุณากรอกปัญหาที่พบ"}
-          error={!!errors.Subject}
-          id="Subject"
+          helperText={errors.subject && "กรุณากรอกปัญหาที่พบ"}
+          error={!!errors.subject}
+          id="subject"
           label="ปัญหาที่พบ"
           placeholder="เช่น ลงทะเบียนเรียนไม่ได้"
           required
           multiline
         />
         <TextField
-          name="Message"
+          name="message"
           inputRef={register}
-          id="Message"
+          id="message"
           label="รายละเอียด (ถ้ามี)"
           multiline
         />
         <TextField
-          name="Contact"
+          name="contact"
           inputRef={register({ required: true })}
           helperText={
-            errors.Contact
+            errors.contact
               ? "กรุณากรอกช่องทางติดต่อกลับ"
               : "เบอร์โทรศัพท์ หรือ อีเมล และเวลาที่สะดวกติดต่อกลับ (ถ้ามี)"
           }
-          error={!!errors.Contact}
-          id="Contact"
+          error={!!errors.contact}
+          id="contact"
           label="ช่องทางติดต่อกลับ"
           required
           multiline
@@ -84,8 +78,8 @@ export default function SupportForm() {
           </Grid>
           <Grid item>
             <input
-              name="AttachFile"
-              id="AttachFile"
+              name="attachFile"
+              id="attachFile"
               type="file"
               style={{ width: "100%" }}
             />

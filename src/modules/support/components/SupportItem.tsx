@@ -20,23 +20,22 @@ import {
 
 export default function SupportItem({
   id,
-  UserId,
-  Subject,
-  Message,
-  Contact,
-  AttachFile,
-  CreateDate,
-  ReplyMessage,
-  ReplyDate,
-  IsAcknowledged,
+  subject,
+  message,
+  contact,
+  attachFile,
+  createDate,
+  replyMessage,
+  replyDate,
+  isAcknowledged,
 }: any) {
   const onRead = () => {
-    alert(`{"Id": ${id}, "IsAcknowledged": true}`);
+    alert(`{"id": ${id}, "isAcknowledged": true}`);
   };
 
   const renderReadButton = () => {
-    if (ReplyMessage !== null) {
-      if (!IsAcknowledged) {
+    if (replyMessage !== null) {
+      if (!isAcknowledged) {
         return (
           <CardActions>
             <Button
@@ -101,25 +100,25 @@ export default function SupportItem({
                 gutterBottom
                 style={{ fontWeight: 600 }}
               >
-                {Subject}
+                {subject}
               </Typography>
             </Grid>
-            {Message ? (
+            {message ? (
               <Typography
                 variant="body1"
                 component="p"
                 gutterBottom
                 style={{ marginBottom: 16 }}
               >
-                {Message}
+                {message}
               </Typography>
             ) : null}
             <Typography variant="caption" component="p" color="textSecondary">
-              <b>ช่องทางติดต่อกลับ:</b> {Contact}
+              <b>ช่องทางติดต่อกลับ:</b> {contact}
             </Typography>
             <Typography variant="caption" component="p" color="textSecondary">
-              <b>ส่งเมื่อ:</b> {CreateDate}
-              {AttachFile ? (
+              <b>ส่งเมื่อ:</b> {createDate}
+              {attachFile ? (
                 <>
                   <AttachmentIcon
                     style={{
@@ -128,19 +127,19 @@ export default function SupportItem({
                       marginRight: "4px",
                     }}
                   />
-                  <Link href={AttachFile} target="_blank">
+                  <Link href={attachFile} target="_blank">
                     ไฟล์แนบ
                   </Link>
                 </>
               ) : null}
             </Typography>
           </Box>
-          {ReplyMessage ? (
+          {replyMessage ? (
             <>
               <Divider />
               <Box m={3}>
                 <Grid container alignItems="center" justify="flex-end">
-                  <Badge variant="dot" color="error" invisible={IsAcknowledged}>
+                  <Badge variant="dot" color="error" invisible={isAcknowledged}>
                     <ModeCommentIcon />
                   </Badge>
                   <Typography
@@ -158,7 +157,7 @@ export default function SupportItem({
                   gutterBottom
                   align="right"
                 >
-                  {ReplyMessage}
+                  {replyMessage}
                 </Typography>
                 <Typography
                   variant="caption"
@@ -166,7 +165,7 @@ export default function SupportItem({
                   align="right"
                   color="textSecondary"
                 >
-                  <b>ตอบกลับเมื่อ:</b> {ReplyDate}
+                  <b>ตอบกลับเมื่อ:</b> {replyDate}
                 </Typography>
               </Box>
             </>

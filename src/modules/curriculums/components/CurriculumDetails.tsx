@@ -70,22 +70,22 @@ export default function CurriculumDetails() {
   const curriculumInfoPlaceholder = [
     {
       title: "เป้าหมายการเรียนรู้",
-      detail: curriculum?.LearningObjective,
+      detail: curriculum?.learningObjective,
       icon: <AssignmentIcon />,
     },
     {
       title: "ประเด็นการเรียนรู้",
-      detail: curriculum?.LearningTopic,
+      detail: curriculum?.learningTopic,
       icon: <CreateIcon />,
     },
     {
       title: "วิธีการประเมินผล",
-      detail: curriculum?.Assessment,
+      detail: curriculum?.assessment,
       icon: <AssessmentIcon />,
     },
     {
       title: "กลุ่มเป้าหมาย",
-      detail: curriculum?.TargetGroup,
+      detail: curriculum?.targetGroup,
       icon: <PeopleIcon />,
     },
   ];
@@ -140,13 +140,13 @@ export default function CurriculumDetails() {
             ) : (
               <>
                 <Grid container justify="space-between" alignItems="center">
-                  <h1>หลักสูตร {curriculum?.Name}</h1>
+                  <h1>หลักสูตร {curriculum?.name}</h1>
                   <Typography
                     variant="body2"
                     component="p"
                     color="textSecondary"
                   >
-                    รหัสหลักสูตร: {curriculum?.Code}
+                    รหัสหลักสูตร: {curriculum?.code}
                   </Typography>
                 </Grid>
                 <Box mb={3}>
