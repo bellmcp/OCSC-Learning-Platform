@@ -14,16 +14,16 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={`${path}/demo/file`}>
-        <Lecture content={<File />} id={7} />
-      </Route>
-      <Route path={`${path}/demo/survey`}>
-        <Lecture content={<Survey />} id={6} />
-      </Route>
-      <Route path={`${path}/demo/exam`}>
-        <Lecture content={<Exam />} id={5} />
+        <Lecture content={<File />} id={4} />
       </Route>
       <Route path={`${path}/demo/read`}>
-        <Lecture content={<Read />} id={4} />
+        <Lecture content={<Read />} id={5} />
+      </Route>
+      <Route path={`${path}/demo/exam`}>
+        <Lecture content={<Exam />} id={6} />
+      </Route>
+      <Route path={`${path}/demo/survey`}>
+        <Lecture content={<Survey />} id={7} />
       </Route>
       <Route path={`${path}/demo`}>
         <Lecture content={<Video />} id={3} />

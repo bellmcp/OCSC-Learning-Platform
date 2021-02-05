@@ -62,32 +62,32 @@ const course3 = [
     link: `${path}/learn/demo`,
   },
   {
+    title: "ไฟล์: ทดสอบระบบ",
+    detail: "1 นาที",
+    icon: <FileIcon />,
+    id: 4,
+    link: `${path}/learn/demo/file`,
+  },
+  {
     title: "เอกสาร: ทดสอบระบบ",
     detail: "1 นาที",
     icon: <ReadIcon />,
-    id: 4,
+    id: 5,
     link: `${path}/learn/demo/read`,
   },
   {
     title: "แบบทดสอบหลังเรียน",
     detail: "0/5 คะแนน, 0/1 ครั้ง",
     icon: <QuizIcon />,
-    id: 5,
+    id: 6,
     link: `${path}/learn/demo/exam`,
   },
   {
     title: "แบบประเมินรายวิชา",
     detail: "0/1 ครั้ง",
     icon: <SurveyIcon />,
-    id: 6,
-    link: `${path}/learn/demo/survey`,
-  },
-  {
-    title: "ไฟล์: ทดสอบระบบ",
-    detail: "1 นาที",
-    icon: <FileIcon />,
     id: 7,
-    link: `${path}/learn/demo/file`,
+    link: `${path}/learn/demo/survey`,
   },
 ];
 

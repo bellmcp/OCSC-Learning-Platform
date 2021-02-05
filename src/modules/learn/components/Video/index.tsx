@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Container, Divider, Grid, Typography } from "@material-ui/core";
+
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import Player from "../Player";
 
@@ -18,7 +19,7 @@ export default function Video() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Container maxWidth="md">
         <Box my={2}>
           <Grid
@@ -74,6 +75,6 @@ export default function Video() {
           <Player url={source} />
         </Box>
       </Container>
-    </React.Fragment>
+    </>
   );
 }
