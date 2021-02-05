@@ -8,7 +8,9 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={path}>
-        <Home />
+        <div style={{ overflowX: "hidden" }}>
+          <Home />
+        </div>
       </Route>
     </Switch>
   );
