@@ -121,7 +121,7 @@ export default function Read() {
               gutterBottom
               style={{ fontSize: "1.4rem", fontWeight: 600 }}
             >
-              เอกสาร: หลักธรรมเบื้องต้น
+              เอกสาร: ทดสอบระบบ
             </Typography>
             <Link
               href="https://ocsc-learning-platform.herokuapp.com/sample.pdf"

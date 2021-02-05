@@ -1,24 +1,32 @@
 import React from "react";
+import clsx from "clsx";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Link as RouterLink } from "react-router-dom";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import List from "@material-ui/core/List";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import VideoIcon from "@material-ui/icons/PlayCircleFilled";
-import ReadIcon from "@material-ui/icons/MenuBook";
-import QuizIcon from "@material-ui/icons/LibraryBooks";
-import SurveyIcon from "@material-ui/icons/ThumbUp";
-import CheckIcon from "@material-ui/icons/CheckCircle";
+import { Link as RouterLink, useHistory } from "react-router-dom";
+import {
+  ListSubheader,
+  List,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  Divider,
+  Box,
+  MenuItem,
+  Grid,
+  Badge,
+  Button,
+  Toolbar,
+} from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import Box from "@material-ui/core/Box";
-import green from "@material-ui/core/colors/green";
-import MenuItem from "@material-ui/core/MenuItem";
-import Grid from "@material-ui/core/Grid";
-import Badge from "@material-ui/core/Badge";
-import FileIcon from "@material-ui/icons/AttachFile";
+import {
+  PlayCircleFilled as VideoIcon,
+  MenuBook as ReadIcon,
+  LibraryBooks as QuizIcon,
+  ThumbUp as SurveyIcon,
+  CheckCircle as CheckIcon,
+  Language as FileIcon,
+  ArrowBackIos as ArrowBackIcon,
+} from "@material-ui/icons";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,56 +38,56 @@ const useStyles = makeStyles((theme: Theme) =>
     nested: {
       paddingLeft: theme.spacing(3),
     },
+    completed: {
+      paddingLeft: theme.spacing(2),
+      borderLeft: `8px solid ${green[800]}`,
+    },
   })
 );
+
+const path = "/learning-platform";
 
 const course3 = [
   {
     title: "แบบทดสอบก่อนเรียน",
-    detail: "9/10 คะแนน, 1/1 ครั้ง",
+    detail: "5/5 คะแนน, 1/1 ครั้ง",
     icon: <QuizIcon />,
-    completed: true,
-  },
-  {
-    title: "วิดีโอ: ศาสนาสากล",
-    detail: "30 นาที",
-    icon: <VideoIcon />,
     completed: true,
   },
   {
     title: "วิดีโอ: ทดสอบระบบ",
-    detail: "15 นาที",
+    detail: "2 นาที",
     icon: <VideoIcon />,
     id: 3,
-    link: "/learn/epic-social-studies/",
-  },
-  {
-    title: "เอกสาร: หลักธรรมเบื้องต้น",
-    detail: "8 นาที",
-    icon: <ReadIcon />,
-    id: 4,
-    link: "/learn/epic-social-studies/read",
-  },
-  {
-    title: "แบบทดสอบหลังเรียน",
-    detail: "0/20 คะแนน, 0/1 ครั้ง",
-    icon: <QuizIcon />,
-    id: 5,
-    link: "/learn/epic-social-studies/exam",
-  },
-  {
-    title: "แบบประเมินรายวิชา",
-    detail: "0/1 ครั้ง",
-    icon: <SurveyIcon />,
-    id: 6,
-    link: "/learn/epic-social-studies/survey",
+    link: `${path}/learn/demo`,
   },
   {
     title: "ไฟล์: ทดสอบระบบ",
     detail: "1 นาที",
     icon: <FileIcon />,
+    id: 4,
+    link: `${path}/learn/demo/file`,
+  },
+  {
+    title: "เอกสาร: ทดสอบระบบ",
+    detail: "1 นาที",
+    icon: <ReadIcon />,
+    id: 5,
+    link: `${path}/learn/demo/read`,
+  },
+  {
+    title: "แบบทดสอบหลังเรียน",
+    detail: "0/5 คะแนน, 0/1 ครั้ง",
+    icon: <QuizIcon />,
+    id: 6,
+    link: `${path}/learn/demo/exam`,
+  },
+  {
+    title: "แบบประเมินรายวิชา",
+    detail: "0/1 ครั้ง",
+    icon: <SurveyIcon />,
     id: 7,
-    link: "/learn/epic-social-studies/file",
+    link: `${path}/learn/demo/survey`,
   },
 ];
 
@@ -89,39 +97,56 @@ interface SideBarProps {
 
 export default function SideBar({ id }: SideBarProps) {
   const classes = useStyles();
+  const history = useHistory();
+  const path = "/learning-platform";
+
+  const linkToLearn = () => {
+    history.push(`${path}/learn`);
+  };
 
   return (
     <List
       component="nav"
-      aria-labelledby="nested-list-subheader"
       subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          <Box my={3}>
-            <Typography
-              style={{
-                fontSize: "0.8rem",
-              }}
-              gutterBottom
+        <ListSubheader component="div" style={{ zIndex: 2 }}>
+          <Toolbar />
+          <Box mt={1} mb={3}>
+            <Button
+              variant="text"
+              color="default"
+              size="small"
+              startIcon={<ArrowBackIcon />}
+              onClick={linkToLearn}
             >
-              OCSC00001C-04
-            </Typography>
-            <Typography
-              color="textPrimary"
-              style={{
-                fontSize: "1.2rem",
-                fontWeight: 600,
-              }}
-            >
-              4. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา
-            </Typography>
+              ออกจากห้องเรียน
+            </Button>
+            <Box mt={1}>
+              <Typography
+                style={{
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                }}
+                gutterBottom
+              >
+                หลักสูตร ทดสอบหลักสูตร 01
+              </Typography>
+              <Typography
+                color="textPrimary"
+                style={{
+                  fontSize: "1.2rem",
+                  fontWeight: 600,
+                }}
+              >
+                รายวิชา ทดสอบรายวิชา 01
+              </Typography>
+            </Box>
           </Box>
+          <Divider />
         </ListSubheader>
       }
       className={classes.root}
       dense
     >
-      <Divider />
-
       <List component="div" disablePadding dense>
         {course3.map((item, index) => (
           <MenuItem
@@ -129,15 +154,18 @@ export default function SideBar({ id }: SideBarProps) {
             key={index}
             selected={item.id === id}
             component={RouterLink}
-            to={item.link ? item.link : "/learn/epic-social-studies/"}
-            className={classes.nested}
+            to={item.link ? item.link : `${path}/learn/demo`}
+            className={clsx({
+              [classes.nested]: true,
+              [classes.completed]: item.completed,
+            })}
           >
             <ListItemIcon>
               {item.completed ? (
                 <Badge
                   badgeContent={
                     <CheckIcon
-                      style={{ color: green[800], fontSize: "16px" }}
+                      style={{ color: green[800], fontSize: "18px" }}
                     />
                   }
                 >
@@ -163,7 +191,7 @@ export default function SideBar({ id }: SideBarProps) {
         ))}
       </List>
 
-      <Divider />
+      <Divider variant="middle" />
       <Box my={3}>
         <Grid container justify="center" direction="column" alignItems="center">
           <Grid item>
@@ -177,7 +205,14 @@ export default function SideBar({ id }: SideBarProps) {
             </Typography>
           </Grid>
           <Grid item>
-            <Rating name="size-large" defaultValue={3} size="large" />
+            <Rating
+              name="size-large"
+              defaultValue={0}
+              size="large"
+              onChange={(event, newValue) => {
+                alert(`Voted: ${newValue} stars`);
+              }}
+            />
           </Grid>
         </Grid>
       </Box>

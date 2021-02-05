@@ -1,15 +1,11 @@
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import React from "react";
+import React, { useState } from "react";
+import { Box, Container, Divider, Grid, Typography } from "@material-ui/core";
+
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import Player from "../Player";
 
 export default function Video() {
-  const [source, setSource] = React.useState<string | null>(
+  const [source, setSource] = useState<string | null>(
     "https://learn.ocsc.info/test/content.mp4"
   );
 
@@ -23,7 +19,7 @@ export default function Video() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Container maxWidth="md">
         <Box my={2}>
           <Grid
@@ -60,7 +56,7 @@ export default function Video() {
                 </Typography>
               </ToggleButton>
               <ToggleButton
-                value="https://www.youtube.com/watch?v=DJX9fCdgMsg"
+                value="https://www.youtube.com/watch?v=zw4sHOIx8t0"
                 aria-label="ลิงก์สำรอง"
               >
                 <Typography
@@ -79,6 +75,6 @@ export default function Video() {
           <Player url={source} />
         </Box>
       </Container>
-    </React.Fragment>
+    </>
   );
 }
