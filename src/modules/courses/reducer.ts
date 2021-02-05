@@ -5,6 +5,7 @@ import {
   LOAD_COURSE_REQUEST,
   LOAD_COURSE_SUCCESS,
   LOAD_COURSE_FAILURE,
+  CLEAR_COURSES,
 } from "./actions";
 
 const initialState = {
@@ -24,6 +25,8 @@ export default function (state = initialState, action: any) {
     case LOAD_COURSES_FAILURE:
     case LOAD_COURSE_FAILURE:
       return { ...state, isLoading: false };
+    case CLEAR_COURSES:
+      return { ...state, isLoading: false, items: [] };
     default:
       return state;
   }

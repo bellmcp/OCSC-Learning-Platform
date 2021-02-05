@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomeRoutes from "modules/home/components/Routes";
-import CoursesRoutes from "modules/courses/components/Routes";
+import CourseRoutes from "modules/courses/components/Routes";
 import CurriculumRoutes from "modules/curriculums/components/Routes";
 import LearnRoutes from "modules/learn/components/Routes";
 import SupportRoutes from "modules/support/components/Routes";
@@ -16,7 +16,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={`${PATH}/courses`}>
-        <CoursesRoutes></CoursesRoutes>
+        <CourseRoutes></CourseRoutes>
       </Route>
       <Route path={`${PATH}/curriculums`}>
         <CurriculumRoutes></CurriculumRoutes>

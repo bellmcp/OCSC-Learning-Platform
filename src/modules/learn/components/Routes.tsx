@@ -1,12 +1,13 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import Learn from "./Learn";
 import Lecture from "./Lecture";
 import Video from "./Video";
 import Read from "./Read";
 import Exam from "./Exam";
 import Survey from "./Survey";
 import File from "./File";
+
+import RegistrationList from "modules/registrations/components/RegistrationList";
 
 export default function Routes() {
   const { path } = useRouteMatch();
@@ -29,7 +30,7 @@ export default function Routes() {
         <Lecture content={<Video />} id={3} />
       </Route>
       <Route path={path}>
-        <Learn />
+        <RegistrationList />
       </Route>
     </Switch>
   );

@@ -14,22 +14,6 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import Rating from "@material-ui/lab/Rating";
 import amber from "@material-ui/core/colors/amber";
 
-import curriculum1 from "../../../../assets/images/curriculum/curriculum1.png";
-import course1 from "../../../../assets/images/curriculum/curriculum1/course1.png";
-import course2 from "../../../../assets/images/curriculum/curriculum1/course2.png";
-import course3 from "../../../../assets/images/curriculum/curriculum1/course3.png";
-import course4 from "../../../../assets/images/curriculum/curriculum1/course4.png";
-import course5 from "../../../../assets/images/curriculum/curriculum1/course5.png";
-
-import curriculum2 from "../../../../assets/images/curriculum/curriculum7.png";
-import course6 from "../../../../assets/images/curriculum/curriculum2/course1.png";
-import course7 from "../../../../assets/images/curriculum/curriculum2/course2.png";
-import course8 from "../../../../assets/images/curriculum/curriculum2/course3.png";
-
-import singleCourse1 from "../../../../assets/images/courses/course2.png";
-import singleCourse2 from "../../../../assets/images/courses/course4.png";
-import singleCourse3 from "../../../../assets/images/courses/course5.png";
-
 const path = "/learning-platform";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -64,69 +48,21 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const myCourses = [
   {
-    title: "1. สังคมศึกษา น่ารู้: ภูมิศาสตร์",
-    id: "OCSC00001C-01",
-    image: course1,
+    title: "ทดสอบรายวิชา 00",
+    id: "COURSE00",
+    image: "https://via.placeholder.com/150?text=COURSE00",
     isCompleted: true,
   },
   {
-    title: "2. สังคมศึกษา น่ารู้: เศรษฐศาสตร์",
-    id: "OCSC00001C-02",
-    image: course2,
-    isCompleted: true,
-  },
-  {
-    title: "3. สังคมศึกษา น่ารู้: ประวัติศาสตร์ *** ทดสอบระบบ ***",
-    id: "OCSC00001C-03",
-    image: course3,
+    title: "ทดสอบรายวิชา 01 *** ทดสอบระบบห้องเรียน ***",
+    id: "COURSE01",
+    image: "https://via.placeholder.com/150?text=COURSE01",
     isLatest: true,
   },
   {
-    title: "4. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา",
-    id: "OCSC00001C-04",
-    image: course4,
-  },
-  {
-    title: "5. สังคมศึกษา น่ารู้: กฎหมายและสังคมวิทยา",
-    id: "OCSC00001C-05",
-    image: course5,
-  },
-];
-
-const myCourses2 = [
-  {
-    title: "1. อังกฤษ อัพเกรด: ไวยากรณ์พร้อมรบ",
-    id: "OCSC00006C-01",
-    image: course6,
-    isLatest: true,
-  },
-  {
-    title: "2. อังกฤษ อัพเกรด: Conversation มั่นใจ",
-    id: "OCSC00006C-02",
-    image: course7,
-  },
-  {
-    title: "3. อังกฤษ อัพเกรด : ศัพท์ทะลุ อ่านทะลวง",
-    id: "OCSC00006C-03",
-    image: course8,
-  },
-];
-
-const mySingleCourses = [
-  {
-    title: "การงบประมาณภาครัฐ",
-    id: "OCSC0002",
-    image: singleCourse1,
-  },
-  {
-    title: "อาหารสุขภาพ รู้ทัน รู้จริง",
-    id: "OCSC00004",
-    image: singleCourse2,
-  },
-  {
-    title: "ประกันสังคมนั้นสำคัญไฉน (Why Social Security is Vital to Us.)",
-    id: "OCSC00005",
-    image: singleCourse3,
+    title: "ทดสอบรายวิชา 02",
+    id: "COURSE02",
+    image: "https://via.placeholder.com/150?text=COURSE02",
   },
 ];
 
@@ -137,13 +73,12 @@ interface MyCourseItemProps {
 export default function MyCourseItem({ isHome }: MyCourseItemProps) {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <>
       <Box mt={2} mb={4}>
-        <Card elevation={4}>
+        <Card>
           <div className={classes.details}>
             <CardMedia
-              image={curriculum1}
-              title="Live from space album cover"
+              image="https://via.placeholder.com/300?text=CURRICULUM01"
               style={{
                 width: "200px",
                 borderRadius: "4 0 0 0",
@@ -172,14 +107,14 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                       component="h2"
                       style={{ fontSize: "1.4rem" }}
                     >
-                      มหากาพย์ สังคมศึกษา น่ารู้
+                      ทดสอบหลักสูตร 01
                     </Typography>
                     <Typography
                       variant="body2"
                       color="textSecondary"
                       component="p"
                     >
-                      OCSC00001C
+                      CURRICULUM01
                     </Typography>
                   </Box>
                 </Grid>
@@ -204,8 +139,11 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                       <Grid item>
                         <Rating
                           name="size-large"
-                          defaultValue={2}
+                          defaultValue={0}
                           size="large"
+                          onChange={(event, newValue) => {
+                            alert(`Voted: ${newValue} stars`);
+                          }}
                         />
                       </Grid>
                     </Grid>
@@ -231,7 +169,7 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                 />
                 <div className={classes.controls}>
                   <Grid container direction="column">
-                    <Box my={2} ml={5} mr={3}>
+                    <Box my={2} mx={3}>
                       <Grid
                         container
                         direction="row"
@@ -242,7 +180,6 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                           <Typography
                             variant="h6"
                             component="h2"
-                            gutterBottom
                             style={{ fontSize: "1.1rem" }}
                           >
                             {item.title}
@@ -306,200 +243,6 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
           ))}
         </Card>
       </Box>
-
-      {!isHome ? (
-        <Box mt={2} mb={6}>
-          <Card elevation={4}>
-            <div className={classes.details}>
-              <CardMedia
-                image={curriculum2}
-                title="Live from space album cover"
-                style={{
-                  width: "200px",
-                  borderRadius: "4 0 0 0",
-                  borderLeft: `10px solid ${amber[500]}`,
-                }}
-                className={classes.cardImage}
-              />
-              <div className={classes.controls}>
-                <Grid
-                  container
-                  direction="row"
-                  justify="space-between"
-                  alignItems="center"
-                >
-                  <Grid item>
-                    <Box my={2} mx={3}>
-                      <Typography
-                        variant="body2"
-                        color="secondary"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        หลักสูตร
-                      </Typography>
-                      <Typography
-                        variant="h6"
-                        component="h2"
-                        style={{ fontSize: "1.4rem" }}
-                      >
-                        มหากาพย์ อังกฤษ อัพเกรด
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        OCSC00006C
-                      </Typography>
-                    </Box>
-                  </Grid>
-                  <Grid item>
-                    <Box my={3} mx={3}>
-                      <Grid
-                        container
-                        justify="center"
-                        direction="column"
-                        alignItems="center"
-                      >
-                        <Grid item>
-                          <Typography
-                            style={{
-                              fontSize: "0.8rem",
-                            }}
-                            gutterBottom
-                          >
-                            โปรดให้คะแนนหลักสูตรนี้
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Rating
-                            name="size-large"
-                            defaultValue={4}
-                            size="large"
-                          />
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </Grid>
-                </Grid>
-              </div>
-            </div>
-            <Divider />
-            <Divider />
-            {myCourses2.map((item, index) => (
-              <div key={index}>
-                <Divider />
-                <div className={classes.details}>
-                  <CardMedia
-                    image={item.image}
-                    title="Live from space album cover"
-                    style={{
-                      width: "200px",
-                      borderRadius: "4 0 0 0",
-                    }}
-                    className={classes.cardImage}
-                  />
-                  <div className={classes.controls}>
-                    <Grid container direction="column">
-                      <Box my={2} ml={5} mr={3}>
-                        <Grid
-                          container
-                          direction="row"
-                          justify="space-between"
-                          alignItems="center"
-                        >
-                          <Grid item>
-                            <Typography
-                              variant="h6"
-                              component="h2"
-                              gutterBottom
-                              style={{ fontSize: "1.1rem" }}
-                            >
-                              {item.title}
-                            </Typography>
-                            <Typography
-                              variant="body2"
-                              color="textSecondary"
-                              component="p"
-                            >
-                              {item.id}
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <Button variant="outlined" color="primary">
-                              เข้าเรียน
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                    </Grid>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Card>
-        </Box>
-      ) : null}
-
-      {isHome ? null : (
-        <React.Fragment>
-          <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
-            รายวิชาของฉัน
-          </Typography>
-          {mySingleCourses.map((item, index) => (
-            <Box mt={3} key={index}>
-              <Card elevation={2}>
-                <div className={classes.details}>
-                  <CardMedia
-                    image={item.image}
-                    title="Live from space album cover"
-                    style={{
-                      width: "200px",
-                      borderRadius: "4 0 0 0",
-                    }}
-                    className={classes.cardImage}
-                  />
-                  <div className={classes.controls}>
-                    <Grid container direction="column">
-                      <Box my={2} mx={3}>
-                        <Grid
-                          container
-                          direction="row"
-                          justify="space-between"
-                          alignItems="center"
-                        >
-                          <Grid item>
-                            <Typography
-                              variant="h6"
-                              component="h2"
-                              gutterBottom
-                              style={{ fontSize: "1.1rem" }}
-                            >
-                              {item.title}
-                            </Typography>
-                            <Typography
-                              variant="body2"
-                              color="textSecondary"
-                              component="p"
-                            >
-                              {item.id}
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <Button variant="outlined" color="primary">
-                              เข้าเรียน
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      </Box>
-                    </Grid>
-                  </div>
-                </div>
-              </Card>
-            </Box>
-          ))}
-        </React.Fragment>
-      )}
-    </React.Fragment>
+    </>
   );
 }
