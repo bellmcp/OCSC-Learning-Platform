@@ -1,22 +1,22 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
 import { useSelector } from "react-redux";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import Grid from "@material-ui/core/Grid";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import SideBar from "../SideBar";
-import CircularProgress, {
+import {
+  Divider,
+  Drawer,
+  Grid,
+  Typography,
+  CircularProgress,
   CircularProgressProps,
-} from "@material-ui/core/CircularProgress";
-import LinearProgress, {
+  LinearProgress,
   LinearProgressProps,
-} from "@material-ui/core/LinearProgress";
-import amber from "@material-ui/core/colors/amber";
-import Hidden from "@material-ui/core/Hidden";
+  Hidden,
+  Toolbar,
+} from "@material-ui/core";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { amber } from "@material-ui/core/colors/";
 import Login from "modules/login/components/Login";
+import SideBar from "../SideBar";
 
 const drawerWidth = 300;
 const footerHeight = 60;
@@ -41,8 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
     drawerPaper: {
       width: drawerWidth,
     },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
     content: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
@@ -101,7 +99,7 @@ function CircularProgressWithLabel(
           variant="caption"
           component="div"
           color="textPrimary"
-        >{`${Math.round(props.value)} s`}</Typography>
+        >{`${Math.round(props.value)} วิ`}</Typography>
       </Box>
     </Box>
   );
@@ -153,10 +151,9 @@ export default function Lecture({ content, id }: LectureProps) {
 
   return (
     <>
-      <CssBaseline />
       {users.length !== 0 ? (
         <div className={classes.root}>
-          <CssBaseline />
+          <Toolbar />
           <Drawer
             className={classes.drawer}
             variant="permanent"
@@ -165,12 +162,11 @@ export default function Lecture({ content, id }: LectureProps) {
             }}
             anchor="left"
           >
-            <div className={classes.toolbar} />
             <Divider />
             <SideBar id={id} />
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.toolbar} />
+            <Toolbar />
             {content}
           </main>
           <div className={classes.timerContainer}>
@@ -181,7 +177,7 @@ export default function Lecture({ content, id }: LectureProps) {
                 justify="space-between"
                 alignItems="center"
               >
-                <div>
+                <Grid item>
                   <CircularProgressWithLabel
                     value={timer}
                     style={{
@@ -189,21 +185,21 @@ export default function Lecture({ content, id }: LectureProps) {
                       borderRadius: "50%",
                     }}
                   />
-                </div>
-                <div>
+                </Grid>
+                <Grid item>
                   <Typography variant="h6" style={{ fontSize: "1rem" }}>
                     <Hidden only={["xs"]}>
-                      <b>เวลาเข้าเรียน:</b>
+                      <b>เวลาเรียนสะสม:</b>
                     </Hidden>{" "}
                     {progress}/15 นาที
                   </Typography>
-                </div>
-                <div style={{ width: "100px" }}>
+                </Grid>
+                <Grid item style={{ width: "100px" }}>
                   <LinearProgressWithLabel
                     value={(progress / 15) * 100}
                     color="secondary"
                   />
-                </div>
+                </Grid>
               </Grid>
             </Box>
           </div>

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import {
@@ -184,6 +184,7 @@ interface NavigationBarProps {
 export default function NavBar(props: NavigationBarProps) {
   const classes = useStyles();
   const history = useHistory();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const path = "/learning-platform";
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -306,7 +307,9 @@ export default function NavBar(props: NavigationBarProps) {
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
-        <Container maxWidth="lg">
+        <Container
+          maxWidth={!pathname.includes(`${path}/learn/demo`) ? "lg" : false}
+        >
           <Toolbar>
             {/* DRAWER TOGGLE */}
             <Hidden smUp implementation="css">

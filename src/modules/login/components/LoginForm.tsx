@@ -146,7 +146,7 @@ export default function LoginForm() {
           inputRef={register}
           label="เลขประจำตัวประชาชน"
           name="userId"
-          helperText={errors.userId ? "กรุณากรอกเลขประจำตัวประชาชน" : ""}
+          helperText={errors.userId ? "กรุณากรอกเลขประจำตัวประชาชน" : null}
           error={!!errors.userId}
           style={{ letterSpacing: " 0.25em" }}
           InputProps={{
@@ -166,7 +166,7 @@ export default function LoginForm() {
           label="รหัสผ่าน"
           name="password"
           autoComplete="on"
-          helperText={errors.password ? "กรุณากรอกรหัสผ่าน" : ""}
+          helperText={errors.password ? "กรุณากรอกรหัสผ่าน" : null}
           error={!!errors.password}
           style={{ letterSpacing: " 0.25em" }}
           InputProps={{

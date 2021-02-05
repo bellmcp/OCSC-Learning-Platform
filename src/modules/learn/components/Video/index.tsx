@@ -1,15 +1,10 @@
-import Box from "@material-ui/core/Box";
-import Container from "@material-ui/core/Container";
-import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import ToggleButton from "@material-ui/lab/ToggleButton";
-import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
-import React from "react";
+import React, { useState } from "react";
+import { Box, Container, Divider, Grid, Typography } from "@material-ui/core";
+import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import Player from "../Player";
 
 export default function Video() {
-  const [source, setSource] = React.useState<string | null>(
+  const [source, setSource] = useState<string | null>(
     "https://learn.ocsc.info/test/content.mp4"
   );
 
