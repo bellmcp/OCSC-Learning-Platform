@@ -60,7 +60,7 @@ export default function Video() {
                 </Typography>
               </ToggleButton>
               <ToggleButton
-                value="https://www.youtube.com/watch?v=DJX9fCdgMsg"
+                value="https://www.youtube.com/watch?v=zw4sHOIx8t0"
                 aria-label="ลิงก์สำรอง"
               >
                 <Typography

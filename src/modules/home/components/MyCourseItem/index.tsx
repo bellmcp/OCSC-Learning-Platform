@@ -30,6 +30,8 @@ import singleCourse1 from "../../../../assets/images/courses/course2.png";
 import singleCourse2 from "../../../../assets/images/courses/course4.png";
 import singleCourse3 from "../../../../assets/images/courses/course5.png";
 
+const path = "/learning-platform";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -74,7 +76,7 @@ const myCourses = [
     isCompleted: true,
   },
   {
-    title: "3. สังคมศึกษา น่ารู้: ประวัติศาสตร์",
+    title: "3. สังคมศึกษา น่ารู้: ประวัติศาสตร์ *** ทดสอบระบบ ***",
     id: "OCSC00001C-03",
     image: course3,
     isLatest: true,
@@ -260,7 +262,7 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                               color="secondary"
                               startIcon={<PlayArrowIcon />}
                               component={NavLink}
-                              to="/learn/epic-social-studies"
+                              to={`${path}/learn/demo`}
                             >
                               เข้าเรียนต่อ
                             </Button>

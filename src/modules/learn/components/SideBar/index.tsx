@@ -33,53 +33,55 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const path = "/learning-platform";
+
 const course3 = [
   {
     title: "แบบทดสอบก่อนเรียน",
-    detail: "9/10 คะแนน, 1/1 ครั้ง",
+    detail: "5/5 คะแนน, 1/1 ครั้ง",
     icon: <QuizIcon />,
     completed: true,
   },
   {
-    title: "วิดีโอ: ศาสนาสากล",
-    detail: "30 นาที",
+    title: "วิดีโอ: ทดสอบระบบ 1",
+    detail: "2 นาที",
     icon: <VideoIcon />,
     completed: true,
   },
   {
-    title: "วิดีโอ: ทดสอบระบบ",
-    detail: "15 นาที",
+    title: "วิดีโอ: ทดสอบระบบ 2",
+    detail: "2 นาที",
     icon: <VideoIcon />,
     id: 3,
-    link: "/learn/epic-social-studies/",
+    link: `${path}/learn/demo`,
   },
   {
-    title: "เอกสาร: หลักธรรมเบื้องต้น",
-    detail: "8 นาที",
+    title: "เอกสาร: ทดสอบระบบ",
+    detail: "1 นาที",
     icon: <ReadIcon />,
     id: 4,
-    link: "/learn/epic-social-studies/read",
+    link: `${path}/learn/demo/read`,
   },
   {
     title: "แบบทดสอบหลังเรียน",
-    detail: "0/20 คะแนน, 0/1 ครั้ง",
+    detail: "0/5 คะแนน, 0/1 ครั้ง",
     icon: <QuizIcon />,
     id: 5,
-    link: "/learn/epic-social-studies/exam",
+    link: `${path}/learn/demo/exam`,
   },
   {
     title: "แบบประเมินรายวิชา",
     detail: "0/1 ครั้ง",
     icon: <SurveyIcon />,
     id: 6,
-    link: "/learn/epic-social-studies/survey",
+    link: `${path}/learn/demo/survey`,
   },
   {
     title: "ไฟล์: ทดสอบระบบ",
     detail: "1 นาที",
     icon: <FileIcon />,
     id: 7,
-    link: "/learn/epic-social-studies/file",
+    link: `${path}/learn/demo/file`,
   },
 ];
 
@@ -103,7 +105,7 @@ export default function SideBar({ id }: SideBarProps) {
               }}
               gutterBottom
             >
-              OCSC00001C-04
+              หลักสูตร ทดสอบหลักสูตร 01
             </Typography>
             <Typography
               color="textPrimary"
@@ -112,7 +114,7 @@ export default function SideBar({ id }: SideBarProps) {
                 fontWeight: 600,
               }}
             >
-              4. สังคมศึกษา น่ารู้: ศาสนาสากลและพระพุทธศาสนา
+              รายวิชา ทดสอบรายวิชา 01
             </Typography>
           </Box>
         </ListSubheader>
@@ -129,7 +131,7 @@ export default function SideBar({ id }: SideBarProps) {
             key={index}
             selected={item.id === id}
             component={RouterLink}
-            to={item.link ? item.link : "/learn/epic-social-studies/"}
+            to={item.link ? item.link : `${path}/learn/demo`}
             className={classes.nested}
           >
             <ListItemIcon>
@@ -177,7 +179,14 @@ export default function SideBar({ id }: SideBarProps) {
             </Typography>
           </Grid>
           <Grid item>
-            <Rating name="size-large" defaultValue={3} size="large" />
+            <Rating
+              name="size-large"
+              defaultValue={0}
+              size="large"
+              onChange={(event, newValue) => {
+                alert(`Voted: ${newValue} stars`);
+              }}
+            />
           </Grid>
         </Grid>
       </Box>
