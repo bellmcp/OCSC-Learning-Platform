@@ -102,7 +102,18 @@ export default function RegistrationList() {
                   </Typography>
                 </Box>
 
-                <MyCourseItem />
+                {isRegistrationsLoading || isRegisteredCoursesLoading ? (
+                  <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    style={{ height: 380 }}
+                  >
+                    <CircularProgress color="secondary" />
+                  </Grid>
+                ) : (
+                  <MyCourseItem />
+                )}
 
                 <Divider />
 
@@ -120,7 +131,7 @@ export default function RegistrationList() {
                     container
                     justify="center"
                     alignItems="center"
-                    style={{ height: 400 }}
+                    style={{ height: 380 }}
                   >
                     <CircularProgress color="secondary" />
                   </Grid>

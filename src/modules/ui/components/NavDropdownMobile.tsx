@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  Typography,
-  IconButton,
   MenuItem,
   Menu,
   Avatar,
   Divider,
+  ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
@@ -57,27 +57,32 @@ export default function NavDropdownMobile({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={login() ? linkToProfile : linkToLogin}>
-        <IconButton color="inherit">
+      <MenuItem
+        onClick={login() ? linkToProfile : linkToLogin}
+        style={{ paddingTop: 0 }}
+      >
+        <ListItemIcon color="inherit">
           <Avatar className={login() ? classes.loggedIn : classes.small} />
-        </IconButton>
-        <Typography className={classes.bold}>
-          {login() ? users.firstName : "เข้าสู่ระบบ"}
-        </Typography>
+        </ListItemIcon>
+        <ListItemText
+          className={classes.bold}
+          primary={login() ? users.firstName : "เข้าสู่ระบบ"}
+          secondary={login() && "ดูโปรไฟล์ >"}
+        />
       </MenuItem>
       <Divider />
       <MenuItem onClick={linkToPortal}>
-        <IconButton color="inherit">
-          <PortalIcon />
-        </IconButton>
-        <Typography>ไปยัง Portal</Typography>
+        <ListItemIcon color="inherit">
+          <PortalIcon style={{ margin: 8, marginLeft: 4 }} />
+        </ListItemIcon>
+        <ListItemText primary="ไปยัง Portal"></ListItemText>
       </MenuItem>
       {login() && (
         <MenuItem onClick={logout}>
-          <IconButton color="inherit">
-            <LogoutIcon />
-          </IconButton>
-          <Typography>ออกจากระบบ</Typography>
+          <ListItemIcon color="inherit">
+            <LogoutIcon style={{ margin: 8, marginLeft: 4 }} />
+          </ListItemIcon>
+          <ListItemText primary="ออกจากระบบ"></ListItemText>
         </MenuItem>
       )}
     </Menu>

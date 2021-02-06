@@ -470,6 +470,7 @@ export default function NavBar(props: NavigationBarProps) {
         login={login}
         logout={logout}
         linkToPortal={linkToPortal}
+        linkToProfile={linkToProfile}
         anchorEl={anchorEl}
         menuId={menuId}
         isMenuOpen={isMenuOpen}
