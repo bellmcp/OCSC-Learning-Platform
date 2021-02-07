@@ -1,16 +1,17 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Container,
   Typography,
-  Link,
   Grid,
   Box,
   Divider,
+  Button,
 } from "@material-ui/core";
+import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
 import CategoryFilter from "modules/categories/components/CategoryFilter";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
@@ -41,8 +42,18 @@ const HERO_IMAGE_URL =
 export default function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const path = "/learning-platform";
   const { search } = useLocation();
+
+  const linkToCourses = () => {
+    history.push(`${path}/courses`);
+  };
+
+  const linkToCurriculums = () => {
+    history.push(`${path}/curriculums`);
+  };
+
   const { items: users } = useSelector((state) => state.user);
   const { isLoading: isPressesLoading, items: presses } = useSelector(
     (state) => state.press
@@ -114,7 +125,7 @@ export default function Home() {
           <CategoryFilter categories={categories} />
         </Grid>
 
-        <Box my={3}>
+        <Box mt={2} mb={3}>
           <Grid
             container
             direction="row"
@@ -152,13 +163,15 @@ export default function Home() {
             >
               รายวิชา
             </Typography>
-            <Link
-              component={RouterLink}
-              to={`${path}/courses`}
-              underline="hover"
+            <Button
+              variant="text"
+              color="default"
+              endIcon={<ArrowForwardIcon />}
+              onClick={linkToCourses}
+              style={{ marginBottom: "0.35em" }}
             >
-              ดูทั้งหมด {">"}
-            </Link>
+              ดูทั้งหมด
+            </Button>
           </Grid>
           <CourseCarousel
             courses={courses.slice(0, 10)}
@@ -185,13 +198,15 @@ export default function Home() {
             >
               หลักสูตร
             </Typography>
-            <Link
-              component={RouterLink}
-              to={`${path}/curriculums`}
-              underline="hover"
+            <Button
+              variant="text"
+              color="default"
+              endIcon={<ArrowForwardIcon />}
+              onClick={linkToCurriculums}
+              style={{ marginBottom: "0.35em" }}
             >
-              ดูทั้งหมด {">"}
-            </Link>
+              ดูทั้งหมด
+            </Button>
           </Grid>
           <CurriculumCarousel
             curriculums={curriculums}
