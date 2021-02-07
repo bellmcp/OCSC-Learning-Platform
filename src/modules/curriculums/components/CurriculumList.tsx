@@ -80,7 +80,6 @@ export default function CurriculumList() {
                 direction={matches ? "row" : "column"}
                 justify={matches ? "space-between" : "center"}
                 alignItems={matches ? "flex-end" : "center"}
-                noWrap
               >
                 <Typography
                   gutterBottom

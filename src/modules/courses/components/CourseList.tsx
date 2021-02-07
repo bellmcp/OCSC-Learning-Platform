@@ -88,7 +88,6 @@ export default function CourseList() {
                 direction={matches ? "row" : "column"}
                 justify={matches ? "space-between" : "center"}
                 alignItems={matches ? "flex-end" : "center"}
-                noWrap
               >
                 <Grid item>
                   <Typography
