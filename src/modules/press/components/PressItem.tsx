@@ -29,7 +29,7 @@ export default function PressItem({ id, headline, imageUrl, targetUrl }: any) {
   const classes = useStyles();
 
   return (
-    <Link href={targetUrl} target="_blank">
+    <Link href={targetUrl} target="_blank" rel="noreferrer">
       <Card className={classes.cardSmall} style={{ position: "relative" }}>
         <CardMedia
           key={id}

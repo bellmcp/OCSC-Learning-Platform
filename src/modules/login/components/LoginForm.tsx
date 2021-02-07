@@ -120,9 +120,9 @@ export default function LoginForm() {
         </Typography>
         <Typography
           component="p"
-          color="error"
+          color="textSecondary"
           variant="caption"
-          style={{ fontWeight: 600, textAlign: "right" }}
+          style={{ textAlign: "right" }}
           gutterBottom
         >
           FOR DEVELOPMENT

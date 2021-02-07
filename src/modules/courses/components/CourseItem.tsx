@@ -110,6 +110,7 @@ export default function CourseItem({
           style={{
             background: `url('${thumbnail}')`,
             backgroundSize: "cover",
+            backgroundPosition: "center center",
           }}
         />
         <CardContent className={classes.cardContent}>

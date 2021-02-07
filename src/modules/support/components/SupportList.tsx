@@ -1,8 +1,19 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography, Badge, Grid, CircularProgress } from "@material-ui/core";
-import { createStyles, Theme, withStyles } from "@material-ui/core/styles";
+import {
+  useMediaQuery,
+  Typography,
+  Badge,
+  Grid,
+  CircularProgress,
+} from "@material-ui/core";
+import {
+  createStyles,
+  Theme,
+  withStyles,
+  useTheme,
+} from "@material-ui/core/styles";
 
 import * as actions from "../actions";
 import SupportItem from "./SupportItem";
@@ -18,6 +29,8 @@ const StyledBadge = withStyles((theme: Theme) =>
 )(Badge);
 
 export default function SupportList() {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
   const { isLoading, items: supports } = useSelector((state) => state.support);
 
@@ -32,7 +45,12 @@ export default function SupportList() {
 
   return (
     <>
-      <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
+      <Typography
+        gutterBottom
+        variant="h6"
+        style={{ fontSize: "1.7rem", fontWeight: 600 }}
+        align={matches ? "left" : "center"}
+      >
         <StyledBadge badgeContent={UNREAD_NOTIFICATION_COUNT} color="error">
           กล่องข้อความ
         </StyledBadge>

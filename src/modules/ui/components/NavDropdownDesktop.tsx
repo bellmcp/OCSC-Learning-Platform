@@ -1,9 +1,16 @@
 import React from "react";
-import { MenuItem, Menu, ListItemIcon, ListItemText } from "@material-ui/core";
+import {
+  MenuItem,
+  Menu,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
   ExitToApp as LogoutIcon,
-  ViewCarousel as Portal,
+  ViewCarousel as PortalIcon,
+  Person as ProfileIcon,
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function NavDropdownDesktop({
   login,
   logout,
+  linkToProfile,
   linkToPortal,
   anchorEl,
   menuId,
@@ -32,7 +40,6 @@ export default function NavDropdownDesktop({
       keepMounted
       open={isMenuOpen}
       onClose={handleMenuClose}
-      elevation={0}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",
@@ -43,19 +50,30 @@ export default function NavDropdownDesktop({
         horizontal: "right",
       }}
     >
+      {login() && (
+        <MenuItem onClick={linkToProfile}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <ProfileIcon />
+          </ListItemIcon>
+          <ListItemText primary="โปรไฟล์" />
+        </MenuItem>
+      )}
       <MenuItem onClick={linkToPortal}>
         <ListItemIcon className={classes.listItemIcon}>
-          <Portal />
+          <PortalIcon />
         </ListItemIcon>
         <ListItemText primary="ไปยัง Portal" />
       </MenuItem>
       {login() && (
-        <MenuItem onClick={logout}>
-          <ListItemIcon className={classes.listItemIcon}>
-            <LogoutIcon />
-          </ListItemIcon>
-          <ListItemText primary="ออกจากระบบ" />
-        </MenuItem>
+        <>
+          <Divider />
+          <MenuItem onClick={logout}>
+            <ListItemIcon className={classes.listItemIcon}>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="ออกจากระบบ" />
+          </MenuItem>
+        </>
       )}
     </Menu>
   );

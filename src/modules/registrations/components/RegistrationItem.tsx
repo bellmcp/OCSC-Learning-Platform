@@ -1,18 +1,25 @@
 import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import {
+  useMediaQuery,
   Typography,
   Card,
   CardMedia,
   Grid,
   Box,
   Button,
+  Hidden,
+  Divider,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
-      height: "100px",
       width: "100%",
       display: "flex",
       flexDirection: "row",
@@ -26,9 +33,9 @@ const useStyles = makeStyles((theme: Theme) =>
     cardImage: {
       width: "150px",
       borderRadius: "4 0 0 0",
-      [theme.breakpoints.down("xs")]: {
-        display: "none",
-      },
+      // [theme.breakpoints.down("xs")]: {
+      //   display: "none",
+      // },
     },
   })
 );
@@ -42,6 +49,8 @@ export default function RegistrationItem({
   registrations,
 }: any) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
     <Card>
@@ -66,15 +75,15 @@ export default function RegistrationItem({
                 wrap="nowrap"
               >
                 <Grid item>
-                  <Typography variant="h6" component="h2">
-                    {name}
-                  </Typography>
                   <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
+                    variant="h6"
+                    component="h2"
+                    style={{ lineHeight: "1.1" }}
                     gutterBottom
                   >
+                    {name}
+                  </Typography>
+                  <Typography variant="body2" component="p" gutterBottom>
                     {code}
                   </Typography>
                   <Typography
@@ -84,8 +93,6 @@ export default function RegistrationItem({
                   >
                     {`รอบที่ ${registrations[keyId]?.courseRoundId} (${registrations[keyId]?.courseStart} ถึง ${registrations[keyId]?.courseEnd})`}
                   </Typography>
-                </Grid>
-                <Grid item>
                   <Typography
                     variant="caption"
                     color="textSecondary"
@@ -93,15 +100,29 @@ export default function RegistrationItem({
                   >
                     {`ลงทะเบียนเมื่อ: ${registrations[keyId]?.registrationDate}`}
                   </Typography>
-                  <Button variant="outlined" color="primary">
-                    เข้าเรียน
-                  </Button>
                 </Grid>
+                {!matches && (
+                  <Grid item>
+                    <Button variant="outlined" color="primary">
+                      เข้าเรียน
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
             </Box>
           </Grid>
         </div>
       </div>
+      {matches && (
+        <>
+          <Divider />
+          <Box m={1}>
+            <Button variant="text" color="primary" fullWidth>
+              เข้าเรียน
+            </Button>
+          </Box>
+        </>
+      )}
     </Card>
   );
 }

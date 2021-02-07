@@ -1,16 +1,23 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link as RouterLink, useLocation } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { useLocation, useHistory } from "react-router-dom";
 import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import {
+  useMediaQuery,
   Container,
   Typography,
-  Link,
   Grid,
   Box,
   Divider,
+  Button,
 } from "@material-ui/core";
+import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
 import CategoryFilter from "modules/categories/components/CategoryFilter";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
@@ -40,9 +47,21 @@ const HERO_IMAGE_URL =
 
 export default function Home() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
+  const history = useHistory();
   const path = "/learning-platform";
   const { search } = useLocation();
+
+  const linkToCourses = () => {
+    history.push(`${path}/courses`);
+  };
+
+  const linkToCurriculums = () => {
+    history.push(`${path}/curriculums`);
+  };
+
   const { items: users } = useSelector((state) => state.user);
   const { isLoading: isPressesLoading, items: presses } = useSelector(
     (state) => state.press
@@ -114,19 +133,19 @@ export default function Home() {
           <CategoryFilter categories={categories} />
         </Grid>
 
-        <Box my={3}>
+        <Box mt={2} mb={3}>
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justify={matches ? "space-between" : "center"}
             alignItems="center"
           >
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem" }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
-              แนะนำ
+              รายการแนะนำ
             </Typography>
           </Grid>
           <CourseCarousel
@@ -148,20 +167,22 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem" }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
               รายวิชา
             </Typography>
-            <Link
-              component={RouterLink}
-              to={`${path}/courses`}
-              underline="hover"
+            <Button
+              variant="text"
+              color="default"
+              endIcon={<ArrowForwardIcon />}
+              onClick={linkToCourses}
+              style={{ marginBottom: "0.35em" }}
             >
-              ดูทั้งหมด {">"}
-            </Link>
+              ดูทั้งหมด
+            </Button>
           </Grid>
           <CourseCarousel
-            courses={courses}
+            courses={courses.slice(0, 10)}
             categories={categories}
             isLoading={isCoursesLoading}
           />
@@ -181,17 +202,19 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem" }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
               หลักสูตร
             </Typography>
-            <Link
-              component={RouterLink}
-              to={`${path}/curriculums`}
-              underline="hover"
+            <Button
+              variant="text"
+              color="default"
+              endIcon={<ArrowForwardIcon />}
+              onClick={linkToCurriculums}
+              style={{ marginBottom: "0.35em" }}
             >
-              ดูทั้งหมด {">"}
-            </Link>
+              ดูทั้งหมด
+            </Button>
           </Grid>
           <CurriculumCarousel
             curriculums={curriculums}

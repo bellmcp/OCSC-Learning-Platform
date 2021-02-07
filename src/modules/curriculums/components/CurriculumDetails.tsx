@@ -10,7 +10,6 @@ import {
   Grid,
   Divider,
   Avatar,
-  Toolbar,
   CircularProgress,
 } from "@material-ui/core";
 import {
@@ -21,7 +20,11 @@ import {
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
 
-import * as actions from "../actions";
+import * as curriculumsActions from "../actions";
+import * as coursesActions from "modules/courses/actions";
+import * as categoriesActions from "modules/categories/actions";
+import CurriculumHeader from "modules/curriculums/components/CurriculumHeader";
+import CourseItem from "modules/courses/components/CourseItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,12 +63,28 @@ export default function CurriculumDetails() {
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
-  const { isLoading } = useSelector((state) => state.curriculums);
+  const { isLoading: isCurriculumLoading } = useSelector(
+    (state) => state.curriculums
+  );
+  const { isLoading: isCoursesLoading, items: courses } = useSelector(
+    (state) => state.courses
+  );
+  const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    const action = actions.loadCurriculum(id);
+    const action = curriculumsActions.loadCurriculum(id);
     dispatch(action);
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const courses_action = coursesActions.loadCourses("/");
+    dispatch(courses_action);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const categories_action = categoriesActions.loadCategories();
+    dispatch(categories_action);
+  }, [dispatch]);
 
   const curriculumInfoPlaceholder = [
     {
@@ -92,23 +111,40 @@ export default function CurriculumDetails() {
 
   function RenderCurriculumInfo({ index, title, info, icon }: any) {
     return (
-      <Box mb={3} key={index}>
+      <Box mb={4} key={index}>
         <Grid
           container
           direction="row"
           justify="flex-start"
           alignItems="center"
           spacing={2}
+          wrap="nowrap"
+          style={{
+            marginBottom: 4,
+          }}
         >
           <Grid item>
             <Avatar className={classes.amber}>{icon}</Avatar>
           </Grid>
           <Grid item>
-            <h1>{title}</h1>
+            <Typography
+              variant="h6"
+              style={{
+                fontSize: "1.7rem",
+                lineHeight: "0.9",
+                fontWeight: 600,
+              }}
+            >
+              {title}
+            </Typography>
           </Grid>
         </Grid>
         <Grid>
-          <Typography variant="body2" color="textSecondary">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            style={{ marginLeft: 58 }}
+          >
             {info ? (
               <div
                 dangerouslySetInnerHTML={{
@@ -124,11 +160,16 @@ export default function CurriculumDetails() {
 
   return (
     <>
-      <Toolbar />
+      <CurriculumHeader
+        title={curriculum?.name}
+        code={curriculum?.code}
+        icon={<PeopleIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={curriculum?.thumbnail}
+      />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            {isLoading ? (
+            {isCurriculumLoading || isCoursesLoading ? (
               <Grid
                 container
                 justify="center"
@@ -139,45 +180,56 @@ export default function CurriculumDetails() {
               </Grid>
             ) : (
               <>
-                <Grid container justify="space-between" alignItems="center">
-                  <h1>หลักสูตร {curriculum?.name}</h1>
+                <Box mt={2}>
+                  <Grid container spacing={6}>
+                    <Grid item xs={12} sm={7}>
+                      {curriculumInfoPlaceholder
+                        .slice(0, 2)
+                        .map((item, index) => (
+                          <RenderCurriculumInfo
+                            index={index}
+                            title={item.title}
+                            info={item.detail}
+                            icon={item.icon}
+                          />
+                        ))}
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                      {curriculumInfoPlaceholder
+                        .slice(2, curriculumInfoPlaceholder.length)
+                        .map((item, index) => (
+                          <RenderCurriculumInfo
+                            index={index}
+                            title={item.title}
+                            info={item.detail}
+                            icon={item.icon}
+                          />
+                        ))}
+                    </Grid>
+                  </Grid>
+
+                  <Box mt={2} mb={4}>
+                    <Divider />
+                  </Box>
+
                   <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
+                    style={{
+                      fontSize: "1.7rem",
+                      fontWeight: 600,
+                    }}
                   >
-                    รหัสหลักสูตร: {curriculum?.code}
+                    หลักสูตรนี้ประกอบด้วย
                   </Typography>
-                </Grid>
-                <Box mb={3}>
-                  <Divider />
+                  <Box my={3}>
+                    <Grid container spacing={1}>
+                      {courses.slice(0, 3).map((course) => (
+                        <Grid item key={course.id} xs={12} sm={4} md={3}>
+                          <CourseItem {...course} categories={categories} />
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </Box>
                 </Box>
-                <Grid container spacing={6}>
-                  <Grid item xs={12} sm={7}>
-                    {curriculumInfoPlaceholder
-                      .slice(0, 2)
-                      .map((item, index) => (
-                        <RenderCurriculumInfo
-                          index={index}
-                          title={item.title}
-                          info={item.detail}
-                          icon={item.icon}
-                        />
-                      ))}
-                  </Grid>
-                  <Grid item xs={12} sm={5}>
-                    {curriculumInfoPlaceholder
-                      .slice(2, curriculumInfoPlaceholder.length)
-                      .map((item, index) => (
-                        <RenderCurriculumInfo
-                          index={index}
-                          title={item.title}
-                          info={item.detail}
-                          icon={item.icon}
-                        />
-                      ))}
-                  </Grid>
-                </Grid>
               </>
             )}
           </main>

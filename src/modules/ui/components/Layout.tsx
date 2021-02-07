@@ -78,7 +78,6 @@ export default function Layout() {
     },
     breakpoints: {
       values: {
-        xs: 0,
         sm: 670,
         md: 960,
         lg: 1280,

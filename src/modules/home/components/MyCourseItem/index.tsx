@@ -1,18 +1,28 @@
 import React from "react";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+
 import { NavLink } from "react-router-dom";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import green from "@material-ui/core/colors/green";
-import Divider from "@material-ui/core/Divider";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import CheckIcon from "@material-ui/icons/CheckCircle";
-import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import {
+  useMediaQuery,
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Divider,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import amber from "@material-ui/core/colors/amber";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import { green, amber } from "@material-ui/core/colors";
+import {
+  CheckCircle as CheckIcon,
+  PlayArrow as PlayArrowIcon,
+} from "@material-ui/icons";
 
 const path = "/learning-platform";
 
@@ -39,48 +49,52 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
     },
     cardImage: {
-      [theme.breakpoints.down("xs")]: {
-        display: "none",
-      },
+      // [theme.breakpoints.down("xs")]: {
+      //   display: "none",
+      // },
     },
   })
 );
 
 const myCourses = [
   {
-    title: "ทดสอบรายวิชา 00",
-    id: "COURSE00",
-    image: "https://via.placeholder.com/150?text=COURSE00",
+    title: "รายวิชา 01",
+    id: "COURSE01",
+    image: "https://welearn.ocsc.go.th/images/courses/ocsc/004.jpg",
     isCompleted: true,
   },
   {
-    title: "ทดสอบรายวิชา 01 *** ทดสอบระบบห้องเรียน ***",
-    id: "COURSE01",
-    image: "https://via.placeholder.com/150?text=COURSE01",
+    title: "รายวิชา 02 (ทดสอบห้องเรียน)",
+    id: "COURSE02",
+    image: "https://welearn.ocsc.go.th/images/courses/ocsc/005.jpg",
     isLatest: true,
   },
   {
-    title: "ทดสอบรายวิชา 02",
-    id: "COURSE02",
-    image: "https://via.placeholder.com/150?text=COURSE02",
+    title: "รายวิชา 03",
+    id: "COURSE03",
+    image: "https://welearn.ocsc.go.th/images/courses/ocsc/011.jpg",
   },
 ];
 
-interface MyCourseItemProps {
-  isHome?: boolean;
-}
-
-export default function MyCourseItem({ isHome }: MyCourseItemProps) {
+export default function MyCourseItem({ isHome }: any) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("xs"));
+
   return (
     <>
       <Box mt={2} mb={4}>
-        <Card>
+        <Card
+          style={{
+            boxShadow:
+              "0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)",
+          }}
+        >
           <div className={classes.details}>
             <CardMedia
-              image="https://via.placeholder.com/300?text=CURRICULUM01"
+              image="https://welearn.ocsc.go.th/images/courses/ocsc/006.jpg"
               style={{
-                width: "200px",
+                width: "150px",
                 borderRadius: "4 0 0 0",
                 borderLeft: `10px solid ${amber[500]}`,
               }}
@@ -99,15 +113,17 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                       variant="body2"
                       color="secondary"
                       style={{ fontWeight: "bold" }}
+                      gutterBottom
                     >
                       หลักสูตร
                     </Typography>
                     <Typography
                       variant="h6"
                       component="h2"
-                      style={{ fontSize: "1.4rem" }}
+                      style={{ fontSize: "1.4rem", lineHeight: "1.2" }}
+                      gutterBottom
                     >
-                      ทดสอบหลักสูตร 01
+                      หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                     </Typography>
                     <Typography
                       variant="body2"
@@ -152,18 +168,16 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
               </Grid>
             </div>
           </div>
-          <Divider />
-          <Divider />
           {myCourses.map((item, index) => (
             <div key={index}>
               <Divider />
               <div className={classes.details}>
                 <CardMedia
                   image={item.image}
-                  title="Live from space album cover"
                   style={{
-                    width: "200px",
+                    width: "150px",
                     borderRadius: "4 0 0 0",
+                    borderLeft: `10px solid ${amber[500]}`,
                   }}
                   className={classes.cardImage}
                 />
@@ -224,7 +238,6 @@ export default function MyCourseItem({ isHome }: MyCourseItemProps) {
                                     />
                                   </Grid>
                                 ) : null}
-
                                 <Grid item>
                                   <Button variant="outlined" color="primary">
                                     เข้าเรียน

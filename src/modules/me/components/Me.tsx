@@ -70,9 +70,8 @@ export default function Me() {
           <Avatar className={classes.avatar} />
           <Typography
             component="h1"
-            variant="h4"
-            gutterBottom
-            style={{ marginTop: 20, fontWeight: 600 }}
+            variant="h6"
+            style={{ marginTop: 14, fontSize: "1.7rem", fontWeight: 600 }}
           >
             {users.firstName
               ? `${users.title} ${users.firstName} ${users.lastName}`

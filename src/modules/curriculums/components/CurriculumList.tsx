@@ -1,8 +1,14 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import {
+  useMediaQuery,
   Typography,
   Box,
   Button,
@@ -44,6 +50,9 @@ const HERO_IMAGE_URL =
 export default function CurriculumList() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+
   const { isLoading, items: curriculums } = useSelector(
     (state) => state.curriculums
   );
@@ -68,14 +77,14 @@ export default function CurriculumList() {
             <Box mb={2}>
               <Grid
                 container
-                direction="row"
-                justify="space-between"
-                alignItems="baseline"
+                direction={matches ? "row" : "column"}
+                justify={matches ? "space-between" : "center"}
+                alignItems={matches ? "flex-end" : "center"}
               >
                 <Typography
                   gutterBottom
                   variant="h6"
-                  style={{ fontSize: "1.7rem" }}
+                  style={{ fontSize: "1.7rem", fontWeight: 600 }}
                 >
                   หลักสูตรทั้งหมด
                 </Typography>

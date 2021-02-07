@@ -1,8 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Typography, Grid, TextField, Button } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  useMediaQuery,
+  Typography,
+  Grid,
+  TextField,
+  Button,
+} from "@material-ui/core";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
 import { Send as SendIcon } from "@material-ui/icons";
 
 import * as actions from "../actions";
@@ -20,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function SupportForm() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data: any) => {
@@ -29,7 +42,12 @@ export default function SupportForm() {
 
   return (
     <>
-      <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
+      <Typography
+        gutterBottom
+        variant="h6"
+        style={{ fontSize: "1.7rem", fontWeight: 600 }}
+        align={matches ? "left" : "center"}
+      >
         ติดต่อเจ้าหน้าที่
       </Typography>
       <form

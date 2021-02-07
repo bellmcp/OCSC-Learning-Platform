@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme) => ({
 export default function CategoryFilter({ categories }) {
   const classes = useStyles();
   const { search } = useLocation();
-  const { CourseCategoryId } = queryString.parse(search);
+  const history = useHistory();
+
   const [open, setOpen] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState(0);
-  const history = useHistory();
+  const { CourseCategoryId } = queryString.parse(search);
   const { path } = useRouteMatch();
 
   useEffect(() => {
@@ -52,6 +53,10 @@ export default function CategoryFilter({ categories }) {
     <FormControl className={classes.formControl}>
       <InputLabel id="categories-filter-label">หมวดหมู่</InputLabel>
       <Select
+        MenuProps={{
+          anchorOrigin: { vertical: "bottom", horizontal: "center" },
+          transformOrigin: { vertical: "top", horizontal: "center" },
+        }}
         labelId="categories-filter-label"
         id="categories-filter"
         open={open}
