@@ -93,7 +93,11 @@ export default function CourseList() {
                   <Typography
                     gutterBottom
                     variant="h6"
-                    style={{ fontSize: "1.7rem", marginBottom: 0 }}
+                    style={{
+                      fontSize: "1.7rem",
+                      marginBottom: 0,
+                      fontWeight: 600,
+                    }}
                   >
                     รายวิชาทั้งหมด
                   </Typography>

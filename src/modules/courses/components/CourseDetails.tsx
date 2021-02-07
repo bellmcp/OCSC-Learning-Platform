@@ -142,7 +142,11 @@ export default function CourseDetails() {
           <Grid item>
             <Typography
               variant="h6"
-              style={{ fontSize: "1.7rem", lineHeight: "0.9" }}
+              style={{
+                fontSize: "1.7rem",
+                lineHeight: "0.9",
+                fontWeight: 600,
+              }}
             >
               {title}
             </Typography>
@@ -229,7 +233,14 @@ export default function CourseDetails() {
                 <Box mt={4} mb={6}>
                   <Grid container spacing={6}>
                     <Grid item xs={12} sm={7}>
-                      <h1 style={{ margin: 0 }}>รอบที่ 1/2563</h1>
+                      <Typography
+                        style={{
+                          fontSize: "1.7rem",
+                          fontWeight: 600,
+                        }}
+                      >
+                        รอบที่ 1/2563
+                      </Typography>
                       <Box mb={3}>
                         <Box display="flex" alignItems="center">
                           <Box width="100%">

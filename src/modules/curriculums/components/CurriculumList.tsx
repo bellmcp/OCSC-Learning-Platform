@@ -84,7 +84,7 @@ export default function CurriculumList() {
                 <Typography
                   gutterBottom
                   variant="h6"
-                  style={{ fontSize: "1.7rem" }}
+                  style={{ fontSize: "1.7rem", fontWeight: 600 }}
                 >
                   หลักสูตรทั้งหมด
                 </Typography>

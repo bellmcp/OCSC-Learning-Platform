@@ -124,7 +124,7 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem" }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
               รายการแนะนำ
             </Typography>
@@ -148,7 +148,7 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem" }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
               รายวิชา
             </Typography>
@@ -181,7 +181,7 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem" }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
               หลักสูตร
             </Typography>
