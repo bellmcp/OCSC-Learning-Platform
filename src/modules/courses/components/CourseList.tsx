@@ -2,8 +2,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import {
+  useMediaQuery,
   Typography,
   Box,
   Button,
@@ -11,13 +17,15 @@ import {
   Grid,
   CircularProgress,
 } from "@material-ui/core";
-import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
-import CourseItem from "./CourseItem";
-import CategoryFilter from "modules/categories/components/CategoryFilter";
-import { MenuBook as CourseIcon } from "@material-ui/icons";
+import {
+  KeyboardArrowDownRounded as ArrowDownIcon,
+  MenuBook as CourseIcon,
+} from "@material-ui/icons";
 
 import * as coursesActions from "../actions";
 import * as categoriesActions from "modules/categories/actions";
+import CourseItem from "./CourseItem";
+import CategoryFilter from "modules/categories/components/CategoryFilter";
 import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -46,6 +54,8 @@ const HERO_IMAGE_URL =
 
 export default function CourseList() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { search } = useLocation();
 
   const dispatch = useDispatch();
@@ -75,18 +85,23 @@ export default function CourseList() {
             <Box mb={2}>
               <Grid
                 container
-                direction="row"
-                justify="space-between"
-                alignItems="baseline"
+                direction={matches ? "row" : "column"}
+                justify={matches ? "space-between" : "center"}
+                alignItems={matches ? "flex-end" : "center"}
+                noWrap
               >
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  style={{ fontSize: "1.7rem" }}
-                >
-                  รายวิชาทั้งหมด
-                </Typography>
-                <CategoryFilter categories={categories} />
+                <Grid item>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    style={{ fontSize: "1.7rem", marginBottom: 0 }}
+                  >
+                    รายวิชาทั้งหมด
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <CategoryFilter categories={categories} />
+                </Grid>
               </Grid>
             </Box>
             {isLoading ? (

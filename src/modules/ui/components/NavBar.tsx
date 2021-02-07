@@ -24,6 +24,7 @@ import {
   Button,
   Divider,
   Container,
+  Tooltip,
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
@@ -401,25 +402,27 @@ export default function NavBar(props: NavigationBarProps) {
             {/* DESKTOP DROPDOWN */}
             <div className={classes.sectionDesktop}>
               <Divider orientation="vertical" className={classes.divider} />
-              <Button
-                onClick={login() ? linkToProfile : linkToLogin}
-                color="inherit"
-                size="small"
-                style={{
-                  borderRadius: 50,
-                  padding: "10px 10px",
-                  margin: "6px 0",
-                }}
-                startIcon={
-                  <Avatar
-                    className={login() ? classes.loggedIn : classes.small}
-                  />
-                }
-              >
-                <Typography className={classes.bold} noWrap>
-                  {login() ? users.firstName : "เข้าสู่ระบบ"}
-                </Typography>
-              </Button>
+              <Tooltip title="ดูโปรไฟล์">
+                <Button
+                  onClick={login() ? linkToProfile : linkToLogin}
+                  color="inherit"
+                  size="small"
+                  style={{
+                    borderRadius: 50,
+                    padding: "10px 10px",
+                    margin: "6px 0",
+                  }}
+                  startIcon={
+                    <Avatar
+                      className={login() ? classes.loggedIn : classes.small}
+                    />
+                  }
+                >
+                  <Typography className={classes.bold} noWrap>
+                    {login() ? users.firstName : "เข้าสู่ระบบ"}
+                  </Typography>
+                </Button>
+              </Tooltip>
               <IconButton
                 edge="end"
                 aria-controls={menuId}
@@ -437,8 +440,8 @@ export default function NavBar(props: NavigationBarProps) {
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
-              <IconButton color="inherit">
-                <SearchIcon onClick={toggleSearchBar} />
+              <IconButton color="inherit" onClick={toggleSearchBar}>
+                <SearchIcon />
               </IconButton>
               <IconButton
                 aria-controls={mobileMenuId}

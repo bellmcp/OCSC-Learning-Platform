@@ -40,7 +40,6 @@ export default function NavDropdownDesktop({
       keepMounted
       open={isMenuOpen}
       onClose={handleMenuClose}
-      elevation={0}
       getContentAnchorEl={null}
       anchorOrigin={{
         vertical: "bottom",

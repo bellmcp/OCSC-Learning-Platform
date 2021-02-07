@@ -57,10 +57,7 @@ export default function NavDropdownMobile({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem
-        onClick={login() ? linkToProfile : linkToLogin}
-        style={{ paddingTop: 0 }}
-      >
+      <MenuItem onClick={login() ? linkToProfile : linkToLogin}>
         <ListItemIcon color="inherit">
           <Avatar className={login() ? classes.loggedIn : classes.small} />
         </ListItemIcon>
@@ -70,7 +67,6 @@ export default function NavDropdownMobile({
           secondary={login() && "ดูโปรไฟล์ >"}
         />
       </MenuItem>
-      <Divider />
       <MenuItem onClick={linkToPortal}>
         <ListItemIcon color="inherit">
           <PortalIcon style={{ margin: 8, marginLeft: 4 }} />
@@ -78,12 +74,15 @@ export default function NavDropdownMobile({
         <ListItemText primary="ไปยัง Portal"></ListItemText>
       </MenuItem>
       {login() && (
-        <MenuItem onClick={logout}>
-          <ListItemIcon color="inherit">
-            <LogoutIcon style={{ margin: 8, marginLeft: 4 }} />
-          </ListItemIcon>
-          <ListItemText primary="ออกจากระบบ"></ListItemText>
-        </MenuItem>
+        <>
+          <Divider />
+          <MenuItem onClick={logout}>
+            <ListItemIcon color="inherit">
+              <LogoutIcon style={{ margin: 8, marginLeft: 4 }} />
+            </ListItemIcon>
+            <ListItemText primary="ออกจากระบบ"></ListItemText>
+          </MenuItem>
+        </>
       )}
     </Menu>
   );
