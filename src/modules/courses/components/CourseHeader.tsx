@@ -50,12 +50,12 @@ export default function CourseHeader({
           <Grid
             container
             direction="column"
-            justify="center"
+            justify="space-between"
             alignItems={matches ? "flex-start" : "center"}
           >
             <Typography
               component="h1"
-              variant="h3"
+              variant={matches ? "h3" : "h4"}
               align="center"
               color="inherit"
               gutterBottom
@@ -64,7 +64,7 @@ export default function CourseHeader({
             </Typography>
             <Typography
               component="h2"
-              variant="h6"
+              variant={matches ? "h6" : "body1"}
               align="center"
               color="inherit"
               gutterBottom

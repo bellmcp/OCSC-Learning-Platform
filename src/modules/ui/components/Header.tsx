@@ -5,9 +5,13 @@ import {
   Theme,
   useTheme,
 } from "@material-ui/core/styles";
-import { useMediaQuery, Container, Typography, Grid } from "@material-ui/core";
-import { purple } from "@material-ui/core/colors";
-import { FiberManualRecord as CourseGenreIcon } from "@material-ui/icons";
+import {
+  useMediaQuery,
+  Container,
+  Typography,
+  Grid,
+  Toolbar,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -16,209 +20,77 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: "cover",
       backgroundPosition: "center center",
       minHeight: "370px",
-      padding: theme.spacing(16, 0, 8),
       textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)",
     },
     subtitle: {
       marginTop: theme.spacing(4),
-      maxWidth: 500,
     },
   })
 );
 
-interface HeaderProps {
-  window?: () => Window;
-  title: string;
-  subtitle?: string;
-  icon?: any;
-  imageUrl: string;
-  isCourse?: boolean;
-  courseId?: number;
-  courseGenre?: string;
-}
-
-export default function Header(props: HeaderProps) {
+export default function Header(props: any) {
   const classes = useStyles();
   const theme = useTheme();
-  const isSmDown = useMediaQuery(theme.breakpoints.down("sm"));
-
-  function DesktopHeader() {
-    return (
-      <div
-        className={classes.header}
-        style={{
-          backgroundImage: `url(${props.imageUrl})`,
-        }}
-      >
-        {/* {props.isCourse ? (
-      <div
-        style={{
-          backgroundImage: `url(${props.imageUrl})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-          filter: "brightness(70%) blur(10px)",
-          transform: "scale(1.1)",
-          width: "100%",
-          height: "350px",
-          position: "absolute",
-          top: 0,
-          margin: 0,
-        }}
-      ></div>
-    ) : null} */}
-
-        <div style={{ position: "relative" }}>
-          {props.isCourse ? (
-            <Container maxWidth="lg">
-              <Typography
-                component="h1"
-                variant="h4"
-                align="left"
-                color="inherit"
-                gutterBottom
-              >
-                {props.title}
-              </Typography>
-              <Typography
-                component="h2"
-                variant="h6"
-                align="left"
-                color="inherit"
-                gutterBottom
-              >
-                OCSC000{props.courseId}
-              </Typography>
-              <Grid container justify="flex-start" className={classes.subtitle}>
-                {props.courseGenre ? (
-                  <Grid item>
-                    <Typography variant="body2">
-                      <div>
-                        <CourseGenreIcon
-                          style={{
-                            color: purple[500],
-                            fontSize: 12,
-                            marginRight: 6,
-                          }}
-                        />
-                        {props.courseGenre}
-                      </div>
-                    </Typography>
-                  </Grid>
-                ) : null}
-              </Grid>
-            </Container>
-          ) : (
-            <Container maxWidth="lg">
-              <Typography
-                component="h1"
-                variant="h3"
-                align="left"
-                color="inherit"
-                gutterBottom
-                style={{ marginTop: props.icon ? 50 : 0 }}
-              >
-                {props.icon}
-                {props.title}
-              </Typography>
-              <Grid container justify="flex-start" className={classes.subtitle}>
-                <Grid item>
-                  <Typography paragraph align="left" color="inherit">
-                    {props.subtitle}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  function MobileHeader() {
-    return (
-      <div
-        className={classes.header}
-        style={{
-          backgroundImage: `url(${props.imageUrl})`,
-        }}
-      >
-        <div style={{ position: "relative" }}>
-          {props.isCourse ? (
-            <Container maxWidth="lg">
-              <Typography
-                component="h1"
-                variant="h4"
-                align="left"
-                color="inherit"
-                gutterBottom
-              >
-                {props.title}
-              </Typography>
-              <Typography
-                component="h2"
-                variant="h6"
-                align="left"
-                color="inherit"
-                gutterBottom
-              >
-                OCSC000{props.courseId}
-              </Typography>
-              <Grid container justify="flex-start" className={classes.subtitle}>
-                <Grid item>
-                  <Typography variant="body2">
-                    <div>
-                      <CourseGenreIcon
-                        style={{
-                          color: purple[500],
-                          fontSize: 12,
-                          marginRight: 6,
-                        }}
-                      />
-                      {props.courseGenre}
-                    </div>
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          ) : (
-            <Container maxWidth="lg">
-              <Typography
-                component="h1"
-                variant="h3"
-                align="center"
-                color="inherit"
-                gutterBottom
-                style={{
-                  fontSize: "2.2rem",
-                  marginTop: props.icon ? 50 : 0,
-                  marginBottom: 50,
-                }}
-              >
-                {props.icon}
-                {props.title}
-              </Typography>
-              <Grid container justify="center">
-                <Grid item>
-                  <Typography
-                    paragraph
-                    align="center"
-                    color="inherit"
-                    style={{ margin: "0 20px", maxWidth: "500px" }}
-                  >
-                    {props.subtitle}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Container>
-          )}
-        </div>
-      </div>
-    );
-  }
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <React.Fragment>
-      {isSmDown ? <MobileHeader /> : <DesktopHeader />}
-    </React.Fragment>
+    <Grid
+      container
+      direction="column"
+      justify="center"
+      alignItems="center"
+      className={classes.header}
+      style={{
+        backgroundImage: `url(${props.imageUrl})`,
+      }}
+    >
+      <Toolbar />
+      <Container maxWidth="lg">
+        <Grid
+          container
+          direction="column"
+          justify="space-between"
+          alignItems={matches ? "center" : "flex-start"}
+        >
+          <Grid
+            container
+            justify={matches ? "center" : "flex-start"}
+            alignItems="center"
+          >
+            <Grid item style={{ marginTop: 8 }}>
+              {props.icon}
+            </Grid>
+            <Grid item>
+              <Typography
+                component="h1"
+                variant={matches ? "h4" : "h3"}
+                align={matches ? "center" : "left"}
+                color="inherit"
+              >
+                {props.title}
+              </Typography>
+            </Grid>
+          </Grid>
+          {props.subtitle && (
+            <Grid
+              container
+              justify="flex-start"
+              className={classes.subtitle}
+              style={{ maxWidth: matches ? 300 : 480 }}
+            >
+              <Grid item>
+                <Typography
+                  paragraph
+                  align={matches ? "center" : "left"}
+                  color="inherit"
+                >
+                  {props.subtitle}
+                </Typography>
+              </Grid>
+            </Grid>
+          )}
+        </Grid>
+      </Container>
+    </Grid>
   );
 }
