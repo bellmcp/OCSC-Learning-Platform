@@ -96,7 +96,7 @@ export default function RegistrationList() {
                   <Typography
                     gutterBottom
                     variant="h6"
-                    style={{ fontSize: "1.7rem" }}
+                    style={{ fontSize: "1.7rem", fontWeight: 600 }}
                   >
                     หลักสูตรของฉัน
                   </Typography>
@@ -121,7 +121,7 @@ export default function RegistrationList() {
                   <Typography
                     gutterBottom
                     variant="h6"
-                    style={{ fontSize: "1.7rem" }}
+                    style={{ fontSize: "1.7rem", fontWeight: 600 }}
                   >
                     รายวิชาของฉัน
                   </Typography>

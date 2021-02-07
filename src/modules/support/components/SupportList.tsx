@@ -32,7 +32,11 @@ export default function SupportList() {
 
   return (
     <>
-      <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
+      <Typography
+        gutterBottom
+        variant="h6"
+        style={{ fontSize: "1.7rem", fontWeight: 600 }}
+      >
         <StyledBadge badgeContent={UNREAD_NOTIFICATION_COUNT} color="error">
           กล่องข้อความ
         </StyledBadge>

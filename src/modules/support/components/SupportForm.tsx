@@ -29,7 +29,11 @@ export default function SupportForm() {
 
   return (
     <>
-      <Typography gutterBottom variant="h6" style={{ fontSize: "1.7rem" }}>
+      <Typography
+        gutterBottom
+        variant="h6"
+        style={{ fontSize: "1.7rem", fontWeight: 600 }}
+      >
         ติดต่อเจ้าหน้าที่
       </Typography>
       <form

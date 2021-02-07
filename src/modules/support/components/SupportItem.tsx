@@ -94,12 +94,7 @@ export default function SupportItem({
             </Typography>
             <Grid container alignItems="center">
               <ChatBubbleIcon style={{ marginRight: 10 }} />
-              <Typography
-                variant="h6"
-                component="h1"
-                gutterBottom
-                style={{ fontWeight: 600 }}
-              >
+              <Typography variant="h6" component="h1" gutterBottom>
                 {subject}
               </Typography>
             </Grid>
