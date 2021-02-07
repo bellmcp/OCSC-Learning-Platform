@@ -1,7 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Container, Grid } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { useMediaQuery, Container, Grid, Divider } from "@material-ui/core";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
 import { Help as HelpIcon } from "@material-ui/icons";
 import Header from "modules/ui/components/Header";
 import SupportForm from "./SupportForm";
@@ -27,6 +32,8 @@ const HERO_IMAGE_URL =
 
 export default function Support() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { items: users } = useSelector((state: any) => state.user);
 
   return (
@@ -50,6 +57,11 @@ export default function Support() {
                   <Grid item xs={12} md={6}>
                     <SupportForm />
                   </Grid>
+                  {!matches && (
+                    <Grid item xs={12} md={6}>
+                      <Divider />
+                    </Grid>
+                  )}
                   <Grid item xs={12} md={6}>
                     <SupportList />
                   </Grid>

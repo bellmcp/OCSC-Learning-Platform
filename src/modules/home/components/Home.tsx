@@ -2,8 +2,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
+import {
+  useMediaQuery,
   Container,
   Typography,
   Grid,
@@ -41,6 +47,8 @@ const HERO_IMAGE_URL =
 
 export default function Home() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
   const history = useHistory();
   const path = "/learning-platform";
@@ -129,7 +137,7 @@ export default function Home() {
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justify={matches ? "space-between" : "center"}
             alignItems="center"
           >
             <Typography

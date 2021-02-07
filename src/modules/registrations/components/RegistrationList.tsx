@@ -2,6 +2,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  useMediaQuery,
   Typography,
   Container,
   Grid,
@@ -9,7 +10,12 @@ import {
   Divider,
   CircularProgress,
 } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
 import { PlayArrow as LearnIcon } from "@material-ui/icons";
 
 import * as registrationsActions from "modules/registrations/actions";
@@ -62,6 +68,8 @@ const HERO_IMAGE_URL =
 export default function RegistrationList() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const { items: users } = useSelector((state: any) => state.user);
   const {
@@ -97,6 +105,7 @@ export default function RegistrationList() {
                     gutterBottom
                     variant="h6"
                     style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                    align={matches ? "left" : "center"}
                   >
                     หลักสูตรของฉัน
                   </Typography>
@@ -122,6 +131,7 @@ export default function RegistrationList() {
                     gutterBottom
                     variant="h6"
                     style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                    align={matches ? "left" : "center"}
                   >
                     รายวิชาของฉัน
                   </Typography>
