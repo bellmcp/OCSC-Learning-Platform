@@ -126,7 +126,7 @@ export default function Home() {
               variant="h6"
               style={{ fontSize: "1.7rem" }}
             >
-              แนะนำ
+              รายการแนะนำ
             </Typography>
           </Grid>
           <CourseCarousel
@@ -161,7 +161,7 @@ export default function Home() {
             </Link>
           </Grid>
           <CourseCarousel
-            courses={courses}
+            courses={courses.slice(0, 10)}
             categories={categories}
             isLoading={isCoursesLoading}
           />

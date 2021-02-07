@@ -106,6 +106,7 @@ export default function CurriculumItem({
           style={{
             background: `url('${thumbnail}')`,
             backgroundSize: "cover",
+            backgroundPosition: "center center",
           }}
         />
         <CardContent className={classes.cardContent}>
