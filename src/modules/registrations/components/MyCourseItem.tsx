@@ -13,9 +13,9 @@ import {
   Grid,
   Box,
   Button,
-  Hidden,
   Divider,
 } from "@material-ui/core";
+import { PlayArrow as PlayIcon } from "@material-ui/icons/";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,15 +33,11 @@ const useStyles = makeStyles((theme: Theme) =>
     cardImage: {
       width: "150px",
       borderRadius: "4 0 0 0",
-      // [theme.breakpoints.down("xs")]: {
-      //   display: "none",
-      // },
     },
   })
 );
 
-export default function RegistrationItem({
-  id,
+export default function MyCourseItem({
   keyId,
   thumbnail,
   name,
@@ -83,27 +79,44 @@ export default function RegistrationItem({
                   >
                     {name}
                   </Typography>
-                  <Typography variant="body2" component="p" gutterBottom>
+                  <Typography variant="body1" component="p" gutterBottom>
                     {code}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    component="p"
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    {`รอบที่ ${registrations[keyId]?.courseRoundId}`}
                   </Typography>
                   <Typography
                     variant="caption"
                     component="p"
                     color="textSecondary"
+                    style={{ lineHeight: "1.2" }}
+                    gutterBottom
                   >
-                    {`รอบที่ ${registrations[keyId]?.courseRoundId} (${registrations[keyId]?.courseStart} ถึง ${registrations[keyId]?.courseEnd})`}
+                    <b>ลงทะเบียนเมื่อ: </b>
+                    {`${registrations[keyId]?.registrationDate}`}
                   </Typography>
                   <Typography
                     variant="caption"
+                    component="p"
                     color="textSecondary"
-                    style={{ marginRight: 16 }}
+                    style={{ lineHeight: "1.2" }}
                   >
-                    {`ลงทะเบียนเมื่อ: ${registrations[keyId]?.registrationDate}`}
+                    <b>เข้าเรียนได้ตั้งแต่: </b>
+                    {`${registrations[keyId]?.courseStart} ถึง ${registrations[keyId]?.courseEnd}`}
                   </Typography>
                 </Grid>
                 {!matches && (
                   <Grid item>
-                    <Button variant="outlined" color="primary">
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      startIcon={<PlayIcon />}
+                    >
                       เข้าเรียน
                     </Button>
                   </Grid>
@@ -117,7 +130,12 @@ export default function RegistrationItem({
         <>
           <Divider />
           <Box m={1}>
-            <Button variant="text" color="primary" fullWidth>
+            <Button
+              variant="text"
+              color="primary"
+              startIcon={<PlayIcon />}
+              fullWidth
+            >
               เข้าเรียน
             </Button>
           </Box>

@@ -21,8 +21,8 @@ import { PlayArrow as LearnIcon } from "@material-ui/icons";
 import * as registrationsActions from "modules/registrations/actions";
 import Header from "modules/ui/components/Header";
 import Login from "modules/login/components/Login";
-import MyCourseItem from "modules/home/components/MyCourseItem";
-import RegistrationItem from "./RegistrationItem";
+import MyCurriculumItem from "./MyCurriculumItem";
+import MyCourseItem from "./MyCourseItem";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -100,7 +100,7 @@ export default function RegistrationList() {
           <Container>
             <div className={classes.main}>
               <main className={classes.content}>
-                <Box mt={4} mb={3}>
+                <Box my={4}>
                   <Typography
                     gutterBottom
                     variant="h6"
@@ -121,12 +121,26 @@ export default function RegistrationList() {
                     <CircularProgress color="secondary" />
                   </Grid>
                 ) : (
-                  <MyCourseItem />
+                  <Grid container direction="column" spacing={2}>
+                    {registeredCourses
+                      .slice(0, 1)
+                      .map((registeredCourse, id) => (
+                        <Grid item key={registeredCourse.id}>
+                          <MyCurriculumItem
+                            {...registeredCourse}
+                            keyId={id}
+                            registrations={registrations}
+                          />
+                        </Grid>
+                      ))}
+                  </Grid>
                 )}
 
-                <Divider />
+                <Box mt={5} mb={4}>
+                  <Divider />
+                </Box>
 
-                <Box mt={4} mb={3}>
+                <Box mb={3}>
                   <Typography
                     gutterBottom
                     variant="h6"
@@ -149,7 +163,7 @@ export default function RegistrationList() {
                   <Grid container direction="column" spacing={2}>
                     {registeredCourses.map((registeredCourse, id) => (
                       <Grid item key={registeredCourse.id}>
-                        <RegistrationItem
+                        <MyCourseItem
                           {...registeredCourse}
                           keyId={id}
                           registrations={registrations}

@@ -103,9 +103,9 @@ export default function MyCourseItem({ isHome }: any) {
             <div className={classes.controls}>
               <Grid
                 container
-                direction="row"
+                direction={matches ? "column" : "row"}
                 justify="space-between"
-                alignItems="center"
+                alignItems={matches ? "flex-start" : "center"}
               >
                 <Grid item>
                   <Box my={2} mx={3}>
@@ -182,7 +182,12 @@ export default function MyCourseItem({ isHome }: any) {
                   className={classes.cardImage}
                 />
                 <div className={classes.controls}>
-                  <Grid container direction="column">
+                  <Grid
+                    container
+                    direction={matches ? "column" : "row"}
+                    justify="space-between"
+                    alignItems={matches ? "flex-start" : "center"}
+                  >
                     <Box my={2} mx={3}>
                       <Grid
                         container

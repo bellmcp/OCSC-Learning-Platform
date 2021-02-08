@@ -80,7 +80,8 @@ export default function Header(props: any) {
             >
               <Grid item>
                 <Typography
-                  paragraph
+                  component="p"
+                  variant={matches ? "body2" : "body1"}
                   align={matches ? "center" : "left"}
                   color="inherit"
                 >
