@@ -119,7 +119,7 @@ export default function MyCurriculumItem({
                         variant="body2"
                         align="center"
                       >
-                        ให้คะแนนหลักสูตรนี้
+                        โปรดให้คะแนนหลักสูตรนี้
                       </Typography>
                       <Rating
                         name="size-large"
@@ -151,7 +151,7 @@ export default function MyCurriculumItem({
               >
                 <Grid item>
                   <Typography component="p" variant="body2" align="center">
-                    ให้คะแนนหลักสูตรนี้
+                    โปรดให้คะแนนหลักสูตรนี้
                   </Typography>
                 </Grid>
                 <Grid item>

@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import {
-  ListSubheader,
   List,
   ListItemIcon,
   ListItemText,
@@ -14,7 +13,6 @@ import {
   Grid,
   Badge,
   Button,
-  Toolbar,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import {
@@ -32,7 +30,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: "100%",
-      maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
     nested: {
@@ -91,11 +88,7 @@ const course3 = [
   },
 ];
 
-interface SideBarProps {
-  id: number;
-}
-
-export default function SideBar({ id }: SideBarProps) {
+export default function SideBarMobile({ id }: any) {
   const classes = useStyles();
   const history = useHistory();
   const path = "/learning-platform";
@@ -105,48 +98,33 @@ export default function SideBar({ id }: SideBarProps) {
   };
 
   return (
-    <List
-      component="nav"
-      subheader={
-        <ListSubheader component="div" style={{ zIndex: 2 }}>
-          <Toolbar />
-          <Box mt={1} mb={3}>
-            <Button
-              variant="text"
-              color="default"
-              size="small"
-              startIcon={<ArrowBackIcon />}
-              onClick={linkToLearn}
-            >
-              ออกจากห้องเรียน
-            </Button>
-            <Box mt={1}>
-              <Typography
-                style={{
-                  fontSize: "0.8rem",
-                  fontWeight: 600,
-                }}
-                gutterBottom
-              >
-                หลักสูตร หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
-              </Typography>
-              <Typography
-                color="textPrimary"
-                style={{
-                  fontSize: "1.2rem",
-                  fontWeight: 600,
-                }}
-              >
-                รายวิชา ทดสอบรายวิชา 01
-              </Typography>
-            </Box>
-          </Box>
-          <Divider />
-        </ListSubheader>
-      }
-      className={classes.root}
-      dense
-    >
+    <List component="nav" className={classes.root} dense>
+      <Box my={2}>
+        <Grid direction="column" justify="center" alignItems="center">
+          <Typography
+            style={{
+              fontSize: "0.8rem",
+              fontWeight: 600,
+            }}
+            color="textSecondary"
+            align="center"
+            gutterBottom
+          >
+            หลักสูตร หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+          </Typography>
+          <Typography
+            color="textPrimary"
+            style={{
+              fontSize: "1.2rem",
+              fontWeight: 600,
+            }}
+            align="center"
+          >
+            รายวิชา ทดสอบรายวิชา 01
+          </Typography>
+        </Grid>
+      </Box>
+      <Divider />
       <List component="div" disablePadding dense>
         {course3.map((item, index) => (
           <MenuItem
@@ -192,7 +170,7 @@ export default function SideBar({ id }: SideBarProps) {
       </List>
 
       <Divider variant="middle" />
-      <Box my={3}>
+      <Box mt={3} mb={2}>
         <Grid container justify="center" direction="column" alignItems="center">
           <Grid item>
             <Typography component="p" variant="caption" align="center">

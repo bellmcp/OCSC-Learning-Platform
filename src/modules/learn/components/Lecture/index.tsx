@@ -2,6 +2,7 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 import { useSelector } from "react-redux";
 import {
+  useMediaQuery,
   Divider,
   Drawer,
   Grid,
@@ -13,10 +14,17 @@ import {
   Hidden,
   Toolbar,
 } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
 import { amber } from "@material-ui/core/colors/";
 import Login from "modules/login/components/Login";
 import SideBar from "../SideBar";
+
+import SideBarMobile from "../SideBarMobile";
 
 const drawerWidth = 300;
 const footerHeight = 60;
@@ -65,6 +73,23 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down("xs")]: {
         width: "100%",
         marginLeft: "0",
+      },
+    },
+    mobileSidebarContainer: {
+      position: "fixed",
+      display: "none",
+      height: "25vh",
+      width: "100%",
+      bottom: 0,
+      borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+      backgroundColor: theme.palette.background.paper,
+      marginLeft: "0",
+      marginBottom: footerHeight,
+      zIndex: 1201,
+      overflow: "auto",
+      boxShadow: "0 -5px 5px -5px rgba(0, 0, 0, 0.342)",
+      [theme.breakpoints.down("xs")]: {
+        display: "unset",
       },
     },
   })
@@ -124,6 +149,9 @@ function LinearProgressWithLabel(
 
 export default function Lecture({ content, id }: LectureProps) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("xs"));
+
   const [timer, setTimer] = React.useState(1);
   const [progress, setProgress] = React.useState(0);
 
@@ -169,6 +197,9 @@ export default function Lecture({ content, id }: LectureProps) {
             <Toolbar />
             {content}
           </main>
+          <div className={classes.mobileSidebarContainer}>
+            <SideBarMobile id={id} />
+          </div>
           <div className={classes.timerContainer}>
             <Box mx={2} mt={1}>
               <Grid
