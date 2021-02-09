@@ -90,7 +90,7 @@ export default function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    const curriculums_action = curriculumsActions.loadCurriculums();
+    const curriculums_action = curriculumsActions.loadCurriculums("");
     dispatch(curriculums_action);
   }, [dispatch]);
 
