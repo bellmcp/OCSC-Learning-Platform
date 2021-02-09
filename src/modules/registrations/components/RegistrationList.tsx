@@ -74,17 +74,39 @@ export default function RegistrationList() {
   const { items: users } = useSelector((state: any) => state.user);
   const {
     isLoading: isRegistrationsLoading,
-    items: registrations,
+    myCourses: myCoursesRegistrations,
+    myCurriculums: myCurriculumsRegistrations,
   } = useSelector((state) => state.registrations);
-  const {
-    isLoading: isRegisteredCoursesLoading,
-    items: registeredCourses,
-  } = useSelector((state) => state.courses);
+  const { isLoading: isMyCoursesLoading, items: myCurriculums } = useSelector(
+    (state) => state.curriculums
+  );
+  const { isLoading: isMyCurriculumsLoading, items: myCourses } = useSelector(
+    (state) => state.courses
+  );
 
   useEffect(() => {
     const course_registrations_action = registrationsActions.loadCourseRegistrations();
     dispatch(course_registrations_action);
   }, [dispatch]);
+
+  useEffect(() => {
+    const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
+    dispatch(curriculum_registrations_action);
+  }, [dispatch]);
+
+  const individualCourses = myCoursesRegistrations.filter(
+    (myCoursesRegistration) =>
+      myCoursesRegistration.curriculumRegistrationId === null
+  );
+  const individualCoursesIds = individualCourses.map(
+    (individualCourse) => individualCourse.courseId
+  );
+  const individualCoursesList = myCourses.filter((myCourse) =>
+    individualCoursesIds.includes(myCourse.id)
+  );
+  const childCoursesList = myCourses.filter(
+    (myCourse) => !individualCoursesIds.includes(myCourse.id)
+  );
 
   return (
     <>
@@ -111,7 +133,7 @@ export default function RegistrationList() {
                   </Typography>
                 </Box>
 
-                {isRegistrationsLoading || isRegisteredCoursesLoading ? (
+                {isRegistrationsLoading || isMyCurriculumsLoading ? (
                   <Grid
                     container
                     justify="center"
@@ -122,17 +144,17 @@ export default function RegistrationList() {
                   </Grid>
                 ) : (
                   <Grid container direction="column" spacing={2}>
-                    {registeredCourses
-                      .slice(0, 1)
-                      .map((registeredCourse, id) => (
-                        <Grid item key={registeredCourse.id}>
-                          <MyCurriculumItem
-                            {...registeredCourse}
-                            keyId={id}
-                            registrations={registrations}
-                          />
-                        </Grid>
-                      ))}
+                    {myCurriculums.map((myCurriculum, id) => (
+                      <Grid item key={myCurriculum.id}>
+                        <MyCurriculumItem
+                          {...myCurriculum}
+                          keyId={id}
+                          registrations={myCurriculumsRegistrations}
+                          childCourses={childCoursesList}
+                          myCoursesRegistrations={myCoursesRegistrations}
+                        />
+                      </Grid>
+                    ))}
                   </Grid>
                 )}
 
@@ -150,7 +172,7 @@ export default function RegistrationList() {
                     รายวิชาของฉัน
                   </Typography>
                 </Box>
-                {isRegistrationsLoading || isRegisteredCoursesLoading ? (
+                {isRegistrationsLoading || isMyCoursesLoading ? (
                   <Grid
                     container
                     justify="center"
@@ -161,12 +183,12 @@ export default function RegistrationList() {
                   </Grid>
                 ) : (
                   <Grid container direction="column" spacing={2}>
-                    {registeredCourses.map((registeredCourse, id) => (
-                      <Grid item key={registeredCourse.id}>
+                    {individualCoursesList.map((myCourse, id) => (
+                      <Grid item key={myCourse.id}>
                         <MyCourseItem
-                          {...registeredCourse}
+                          {...myCourse}
                           keyId={id}
-                          registrations={registrations}
+                          registrations={myCoursesRegistrations}
                         />
                       </Grid>
                     ))}

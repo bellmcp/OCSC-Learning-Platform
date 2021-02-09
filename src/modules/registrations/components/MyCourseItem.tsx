@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import {
   createStyles,
   makeStyles,
@@ -37,6 +38,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+const path = "/learning-platform";
+
 export default function MyCourseItem({
   keyId,
   thumbnail,
@@ -47,6 +50,11 @@ export default function MyCourseItem({
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const history = useHistory();
+
+  const linkToDemoLecture = () => {
+    history.push(`${path}/learn/demo`);
+  };
 
   return (
     <Card>
@@ -57,6 +65,7 @@ export default function MyCourseItem({
             background: `url('${thumbnail}')`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
+            backgroundRepeat: "no-repeat",
           }}
           className={classes.cardImage}
         />
@@ -69,6 +78,7 @@ export default function MyCourseItem({
                 justify="space-between"
                 alignItems="center"
                 wrap="nowrap"
+                spacing={2}
               >
                 <Grid item>
                   <Typography
@@ -116,6 +126,7 @@ export default function MyCourseItem({
                       variant="outlined"
                       color="primary"
                       startIcon={<PlayIcon />}
+                      onClick={linkToDemoLecture}
                     >
                       เข้าเรียน
                     </Button>
@@ -135,6 +146,7 @@ export default function MyCourseItem({
               color="primary"
               startIcon={<PlayIcon />}
               fullWidth
+              onClick={linkToDemoLecture}
             >
               เข้าเรียน
             </Button>

@@ -12,11 +12,11 @@ const LOAD_CURRICULUM_SUCCESS =
 const LOAD_CURRICULUM_FAILURE =
   "learning-platform/curriculums/LOAD_CURRICULUM_FAILURE";
 
-function loadCurriculums() {
+function loadCurriculums(query: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUMS_REQUEST });
     try {
-      const { data } = await axios.get("/Curriculums");
+      const { data } = await axios.get(`/Curriculums${query}`);
       dispatch({
         type: LOAD_CURRICULUMS_SUCCESS,
         payload: {
