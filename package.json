@@ -2,7 +2,7 @@
   "name": "ocsc-learning-platform",
   "version": "0.1.0",
   "main": "index.js",
-  "homepage": "https://welearn.ocsc.go.th/learning-platform", 
+  "homepage": "https://welearn.ocsc.go.th/learning-platform",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -21,12 +21,15 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/yup": "^0.29.11",
     "axios": "^0.21.1",
+    "babel-plugin-import": "^1.13.3",
     "connected-react-router": "^6.8.0",
+    "customize-cra": "^1.0.0",
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "pure-react-carousel": "^1.27.6",
     "query-string": "^6.13.8",
     "react": "^16.13.1",
+    "react-app-rewired": "^2.1.8",
     "react-dom": "^16.13.1",
     "react-helmet-async": "^1.0.7",
     "react-hook-form": "5.7.2",
@@ -44,9 +47,9 @@
     "yup": "0.29.3"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "node index.js",
-    "build": "CI='' react-scripts build",
+    "dev": "react-app-rewired start",
+    "start": "react-app-rewired index.js",
+    "build": "CI='' react-app-rewired build",
     "deploy": "vercel --prod",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
