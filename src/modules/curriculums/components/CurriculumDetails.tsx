@@ -11,12 +11,14 @@ import {
   Divider,
   Avatar,
   CircularProgress,
+  Button,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
   Assessment as AssessmentIcon,
   Create as CreateIcon,
   People as PeopleIcon,
+  ArrowForwardIos as ArrowForwardIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
 
@@ -229,6 +231,29 @@ export default function CurriculumDetails() {
                       ))}
                     </Grid>
                   </Box>
+                </Box>
+
+                <Box mt={2} mb={4}>
+                  <Divider />
+                </Box>
+
+                <Typography
+                  style={{
+                    fontSize: "1.7rem",
+                    fontWeight: 600,
+                  }}
+                >
+                  ลงทะเบียน
+                </Typography>
+                <Box my={3}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    endIcon={<ArrowForwardIcon />}
+                    onClick={() => alert("Register")}
+                  >
+                    ลงทะเบียนหลักสูตร
+                  </Button>
                 </Box>
               </>
             )}
