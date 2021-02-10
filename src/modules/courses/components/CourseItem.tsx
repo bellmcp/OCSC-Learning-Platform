@@ -87,20 +87,21 @@ export default function CourseItem({
 }: any) {
   const classes = useStyles();
   const { path } = useRouteMatch();
+  const basePath = "/learning-platform";
+
+  const getCourseDetailsTargetUrl = () => {
+    switch (path) {
+      case `${basePath}/curriculums/:id`:
+        return `${basePath}/courses/${id}`;
+      case `${basePath}/courses`:
+        return `${path}/${id}`;
+      default:
+        return `${path}/courses/${id}`;
+    }
+  };
 
   return (
-    <CardActionArea
-      component={RouterLink}
-      to={
-        path === "/learning-platform/courses"
-          ? `${path}/${id}`
-          : `${path}/courses/${id}`
-      }
-      classes={{
-        root: classes.actionArea,
-        focusHighlight: classes.focusHighlight,
-      }}
-    >
+    <CardActionArea component={RouterLink} to={getCourseDetailsTargetUrl}>
       <Card className={classes.card}>
         <CardMedia
           key={id}
