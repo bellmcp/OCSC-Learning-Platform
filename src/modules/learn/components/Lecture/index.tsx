@@ -236,7 +236,7 @@ export default function Lecture({ content, id }: LectureProps) {
           </div>
         </div>
       ) : (
-        <Login title="คุณยังไม่ได้เข้าสู่ระบบ" />
+        <Login />
       )}
     </>
   );

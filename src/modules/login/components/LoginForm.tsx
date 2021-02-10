@@ -27,6 +27,7 @@ import * as actions from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
+    backgroundColor: theme.palette.background.default,
     height: "100%",
     display: "flex",
     flexDirection: "column",
@@ -122,7 +123,7 @@ export default function LoginForm() {
           component="p"
           color="textSecondary"
           variant="caption"
-          style={{ textAlign: "right" }}
+          style={{ textAlign: "right", lineHeight: "1.2" }}
           gutterBottom
         >
           FOR DEVELOPMENT

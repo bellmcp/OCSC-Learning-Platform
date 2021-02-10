@@ -1,19 +1,15 @@
 import React from "react";
-import { Grid, Hidden } from "@material-ui/core";
-import Aside from "modules/ui/components/Aside";
+import { Container, Grid } from "@material-ui/core";
 import LoginForm from "./LoginForm";
 
-export default function Login({ title }: any) {
+export default function Login() {
   return (
-    <Grid container>
-      <Hidden smDown>
+    <Container maxWidth="lg">
+      <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={12} md={6}>
-          <Aside title={title} />
+          <LoginForm />
         </Grid>
-      </Hidden>
-      <Grid item xs={12} md={6}>
-        <LoginForm />
       </Grid>
-    </Grid>
+    </Container>
   );
 }

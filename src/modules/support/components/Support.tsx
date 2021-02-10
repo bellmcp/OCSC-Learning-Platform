@@ -71,7 +71,7 @@ export default function Support() {
           </Container>
         </>
       ) : (
-        <Login title="คุณยังไม่ได้เข้าสู่ระบบ" />
+        <Login />
       )}
     </>
   );
