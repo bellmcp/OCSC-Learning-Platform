@@ -63,7 +63,7 @@ export default function NavDropdownMobile({
         </ListItemIcon>
         <ListItemText
           className={classes.bold}
-          primary={login() ? users.firstName : "เข้าสู่ระบบ"}
+          primary={login() ? users.firstname : "เข้าสู่ระบบ"}
           secondary={login() && "ดูโปรไฟล์ >"}
         />
       </MenuItem>

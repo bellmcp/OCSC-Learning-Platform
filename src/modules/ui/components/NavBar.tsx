@@ -419,7 +419,7 @@ export default function NavBar(props: NavigationBarProps) {
                   }
                 >
                   <Typography className={classes.bold} noWrap>
-                    {login() ? users.firstName : "เข้าสู่ระบบ"}
+                    {login() ? users.firstname : "เข้าสู่ระบบ"}
                   </Typography>
                 </Button>
               </Tooltip>

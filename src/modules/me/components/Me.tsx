@@ -73,8 +73,8 @@ export default function Me() {
             variant="h6"
             style={{ marginTop: 14, fontSize: "1.7rem", fontWeight: 600 }}
           >
-            {users.firstName
-              ? `${users.title} ${users.firstName} ${users.lastName}`
+            {users.firstname
+              ? `${users.title} ${users.firstname} ${users.lastname}`
               : "คุณยังไม่ได้เข้าสู่ระบบ"}
           </Typography>
           <Typography
@@ -85,16 +85,6 @@ export default function Me() {
             style={{ fontWeight: 800 }}
           >
             {users.id}
-          </Typography>
-          <Typography component="h2" variant="body1" color="textSecondary">
-            <b>เพศ:</b>{" "}
-            {users.gender && (users.gender === "m" ? "ชาย" : "หญิง")}
-          </Typography>
-          <Typography component="h2" variant="body1" color="textSecondary">
-            <b>อีเมล:</b> {users.email}
-          </Typography>
-          <Typography component="h2" variant="body1" color="textSecondary">
-            <b>เข้าร่วมเมื่อ:</b> {users.createDate}
           </Typography>
           <Box mt={6} style={{ width: !matches ? "100%" : "500px" }}>
             <Grid

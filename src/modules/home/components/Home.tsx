@@ -97,7 +97,7 @@ export default function Home() {
   return (
     <>
       <Header
-        title={users.firstName ? `สวัสดี ${users.firstName}` : TITLE}
+        title={users.firstname ? `สวัสดี ${users.firstname}` : TITLE}
         subtitle={SUBTITLE}
         imageUrl={HERO_IMAGE_URL}
       />

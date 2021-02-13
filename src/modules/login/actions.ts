@@ -20,7 +20,7 @@ function loadLogin(userInfo: any) {
     dispatch({ type: LOAD_LOGIN_REQUEST });
     try {
       const result = await axios.post("/Tokens", userInfo, {
-        baseURL: "https://welearn.ocsc.go.th/learning-portal-api/",
+        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
       });
       dispatch({
         type: LOAD_LOGIN_SUCCESS,

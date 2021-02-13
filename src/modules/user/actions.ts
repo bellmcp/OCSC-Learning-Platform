@@ -16,7 +16,7 @@ function loadUser() {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-          baseURL: "https://welearn.ocsc.go.th/learning-portal-api/",
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
         }
       );
       dispatch({
