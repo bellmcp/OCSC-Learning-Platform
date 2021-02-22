@@ -17,8 +17,6 @@ import {
   Divider,
   Avatar,
   CircularProgress,
-  LinearProgress,
-  Button,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
@@ -26,13 +24,13 @@ import {
   Create as CreateIcon,
   Info as InfoIcon,
   People as PeopleIcon,
-  ArrowForwardIos as ArrowForwardIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
 
 import * as coursesActions from "../actions";
 import * as categoriesActions from "modules/categories/actions";
 import CourseHeader from "./CourseHeader";
+import CourseRound from "./CourseRound";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -69,12 +67,18 @@ export default function CourseDetails() {
 
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
+  const { rounds } = useSelector((state) => state.courses);
   const { isLoading: isCourseLoading } = useSelector((state) => state.courses);
   const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     const courses_action = coursesActions.loadCourse(id);
     dispatch(courses_action);
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    const course_round_action = coursesActions.loadCourseRounds(id);
+    dispatch(course_round_action);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -110,16 +114,6 @@ export default function CourseDetails() {
         : "ไม่บังคับเรียนตามลำดับเนื้อหา",
       icon: <InfoIcon />,
     },
-  ];
-
-  const roundInfoPlaceholder = [
-    { title: "เปิดให้ลงทะเบียน", detail: "2020-01-01 ถึง 2020-01-31" },
-    {
-      title: "เงื่อนไขการลงทะเบียน",
-      detail: "เฉพาะข้าราชการบรรจุใหม่กระทรวงการคลังเท่านั้น",
-    },
-    { title: "เข้าเรียนได้ตั้งแต่", detail: "2020-02-01 ถึง 2020-03-31" },
-    { title: "จำนวนผู้เรียนที่รับได้สูงสุด", detail: "300 คน" },
   ];
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
@@ -226,78 +220,18 @@ export default function CourseDetails() {
                   </Grid>
                 </Box>
 
-                <Box mt={2} mb={3}>
-                  <Divider />
-                </Box>
-
-                <Box mt={4} mb={6}>
-                  <Grid container spacing={6}>
-                    <Grid item xs={12} sm={7}>
-                      <Typography
-                        style={{
-                          fontSize: "1.7rem",
-                          fontWeight: 600,
-                        }}
-                      >
-                        รอบที่ 1/2563
-                      </Typography>
-                      <Box mb={3}>
-                        <Box display="flex" alignItems="center">
-                          <Box width="100%">
-                            <Typography
-                              variant="body2"
-                              color="primary"
-                              align="right"
-                            >
-                              100 / 300 คน
-                            </Typography>
-                            <LinearProgress
-                              variant="determinate"
-                              value={33}
-                              color="secondary"
-                            />
-                          </Box>
-                          <Box></Box>
-                        </Box>
+                {rounds && (
+                  <>
+                    <Box mt={2} mb={3}>
+                      <Divider />
+                    </Box>
+                    {rounds.map((round) => (
+                      <Box mt={4} mb={6}>
+                        <CourseRound {...round} />
                       </Box>
-                      <Box my={3}>
-                        <Button
-                          variant="contained"
-                          color="secondary"
-                          endIcon={<ArrowForwardIcon />}
-                          onClick={() => alert("Register")}
-                        >
-                          ลงทะเบียนเรียน
-                        </Button>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                      {roundInfoPlaceholder.map((item, index) => (
-                        <Grid
-                          container
-                          spacing={3}
-                          key={index}
-                          alignItems="baseline"
-                        >
-                          <Grid item xs={6}>
-                            <Typography variant="h6">{item.title}</Typography>
-                          </Grid>
-                          <Grid item xs={6}>
-                            <Typography variant="body2" color="textSecondary">
-                              <div
-                                dangerouslySetInnerHTML={{
-                                  __html: item.detail
-                                    ? item.detail
-                                    : "ไม่มีข้อมูล",
-                                }}
-                              ></div>
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      ))}
-                    </Grid>
-                  </Grid>
-                </Box>
+                    ))}
+                  </>
+                )}
               </>
             )}
           </div>
