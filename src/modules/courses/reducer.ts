@@ -2,6 +2,9 @@ import {
   LOAD_COURSES_REQUEST,
   LOAD_COURSES_SUCCESS,
   LOAD_COURSES_FAILURE,
+  LOAD_RECOMMENDED_COURSES_REQUEST,
+  LOAD_RECOMMENDED_COURSES_SUCCESS,
+  LOAD_RECOMMENDED_COURSES_FAILURE,
   LOAD_COURSE_REQUEST,
   LOAD_COURSE_SUCCESS,
   LOAD_COURSE_FAILURE,
@@ -11,18 +14,31 @@ import {
 const initialState = {
   isLoading: false,
   items: [],
+  recommended: [],
 };
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
     case LOAD_COURSES_REQUEST:
+    case LOAD_RECOMMENDED_COURSES_REQUEST:
     case LOAD_COURSE_REQUEST:
-      return { ...state, isLoading: true, items: [] };
+      return { ...state, isLoading: true, items: [], recommended: [] };
     case LOAD_COURSES_SUCCESS:
-      return { ...state, isLoading: false, items: action.payload.courses };
+      return {
+        ...state,
+        isLoading: false,
+        items: action.payload.courses,
+      };
+    case LOAD_RECOMMENDED_COURSES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        recommended: action.payload.recommendedCourses,
+      };
     case LOAD_COURSE_SUCCESS:
       return { ...state, isLoading: false, items: [action.payload.course] };
     case LOAD_COURSES_FAILURE:
+    case LOAD_RECOMMENDED_COURSES_FAILURE:
     case LOAD_COURSE_FAILURE:
       return { ...state, isLoading: false };
     case CLEAR_COURSES:

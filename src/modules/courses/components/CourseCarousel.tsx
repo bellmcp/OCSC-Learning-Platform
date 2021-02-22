@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
   },
   carousel: {
+    width: "100%",
     maxWidth: "100%",
   },
   slider: {

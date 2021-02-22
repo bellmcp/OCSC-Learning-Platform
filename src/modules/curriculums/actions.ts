@@ -16,7 +16,9 @@ function loadCurriculums(query: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUMS_REQUEST });
     try {
-      const { data } = await axios.get(`/Curriculums${query}`);
+      const { data } = await axios.get(`/Curriculums${query}`, {
+        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
+      });
       dispatch({
         type: LOAD_CURRICULUMS_SUCCESS,
         payload: {
@@ -33,7 +35,9 @@ function loadCurriculum(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUM_REQUEST });
     try {
-      const { data } = await axios.get(`/Curriculums/${id}`);
+      const { data } = await axios.get(`/Curriculums/${id}`, {
+        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
+      });
       dispatch({
         type: LOAD_CURRICULUM_SUCCESS,
         payload: {

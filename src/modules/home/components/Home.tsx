@@ -69,6 +69,10 @@ export default function Home() {
   const { isLoading: isCoursesLoading, items: courses } = useSelector(
     (state) => state.courses
   );
+  const {
+    isLoading: isRecommendedCoursesLoading,
+    recommended: recommendedCourses,
+  } = useSelector((state) => state.courses);
   const { isLoading: isCurriculumsLoading, items: curriculums } = useSelector(
     (state) => state.curriculums
   );
@@ -83,6 +87,11 @@ export default function Home() {
     const courses_action = coursesActions.loadCourses(search);
     dispatch(courses_action);
   }, [dispatch, search]);
+
+  useEffect(() => {
+    const recommended_courses_action = coursesActions.loadRecommendedCourses();
+    dispatch(recommended_courses_action);
+  }, [dispatch]);
 
   useEffect(() => {
     const categories_action = categoriesActions.loadCategories();
@@ -149,11 +158,9 @@ export default function Home() {
             </Typography>
           </Grid>
           <CourseCarousel
-            courses={courses.filter((course) => {
-              return course.Recommended === true;
-            })}
+            courses={recommendedCourses}
             categories={categories}
-            isLoading={isCoursesLoading}
+            isLoading={isRecommendedCoursesLoading}
           />
         </Box>
 
