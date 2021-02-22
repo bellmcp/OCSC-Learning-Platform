@@ -266,7 +266,7 @@ export default function NavBar(props: NavigationBarProps) {
 
   const linkToPortal = () => {
     handleMenuClose();
-    alert("Redirect to https://welearn.ocsc.go.th/learning-portal");
+    window.open("https://welearn.ocsc.go.th/learning-portal", "_blank");
   };
 
   const toggleSearchBar = () => {

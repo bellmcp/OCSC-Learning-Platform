@@ -47,15 +47,15 @@ export default function Me() {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
 
   const linkToCertificate = () => {
-    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/history`);
+    window.open("https://welearn.ocsc.go.th/learning-portal/history", "_blank");
   };
 
   const linkToEditProfile = () => {
-    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/edit`);
+    window.open("https://welearn.ocsc.go.th/learning-portal/edit", "_blank");
   };
 
   const linkToChangePassword = () => {
-    alert(`Redirect to https://welearn.ocsc.go.th/learning-portal/reset`);
+    window.open("https://welearn.ocsc.go.th/learning-portal/reset", "_blank");
   };
 
   return (
@@ -86,7 +86,7 @@ export default function Me() {
           >
             {users.id}
           </Typography>
-          <Box mt={6} style={{ width: !matches ? "100%" : "500px" }}>
+          <Box mt={3} style={{ width: !matches ? "100%" : "500px" }}>
             <Grid
               container
               direction="row"
