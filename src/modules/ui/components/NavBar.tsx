@@ -402,7 +402,7 @@ export default function NavBar(props: NavigationBarProps) {
             {/* DESKTOP DROPDOWN */}
             <div className={classes.sectionDesktop}>
               <Divider orientation="vertical" className={classes.divider} />
-              <Tooltip title="ดูโปรไฟล์">
+              <Tooltip title={login() ? "ดูโปรไฟล์" : ""}>
                 <Button
                   onClick={login() ? linkToProfile : linkToLogin}
                   color="inherit"
