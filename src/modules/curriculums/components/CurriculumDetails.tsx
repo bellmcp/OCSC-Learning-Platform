@@ -65,17 +65,20 @@ export default function CurriculumDetails() {
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
+  const { child: childCourses } = useSelector((state) => state.curriculums);
   const { isLoading: isCurriculumLoading } = useSelector(
     (state) => state.curriculums
-  );
-  const { isLoading: isCoursesLoading, items: courses } = useSelector(
-    (state) => state.courses
   );
   const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    const action = curriculumsActions.loadCurriculum(id);
-    dispatch(action);
+    const curriculum_action = curriculumsActions.loadCurriculum(id);
+    dispatch(curriculum_action);
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    const curriculum_child_action = curriculumsActions.loadCurriculumChild(id);
+    dispatch(curriculum_child_action);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -171,7 +174,7 @@ export default function CurriculumDetails() {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            {isCurriculumLoading || isCoursesLoading ? (
+            {isCurriculumLoading ? (
               <Grid
                 container
                 justify="center"
@@ -224,7 +227,7 @@ export default function CurriculumDetails() {
                   </Typography>
                   <Box my={3}>
                     <Grid container spacing={1}>
-                      {courses.slice(0, 3).map((course) => (
+                      {childCourses.map((course) => (
                         <Grid item key={course.id} xs={12} sm={4} md={3}>
                           <CourseItem {...course} categories={categories} />
                         </Grid>
@@ -245,6 +248,7 @@ export default function CurriculumDetails() {
                 >
                   ลงทะเบียน
                 </Typography>
+
                 <Box my={3}>
                   <Button
                     variant="contained"
