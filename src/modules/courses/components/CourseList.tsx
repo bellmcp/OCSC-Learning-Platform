@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
+import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
@@ -57,20 +58,59 @@ export default function CourseList() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { search } = useLocation();
+  const { courseCategoryId } = queryString.parse(search);
 
   const dispatch = useDispatch();
   const { isLoading, items: courses } = useSelector((state) => state.courses);
   const { items: categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
-    const courses_action = coursesActions.loadCourses(search);
+    const courses_action = coursesActions.loadCourses(courseCategoryId);
     dispatch(courses_action);
-  }, [dispatch, search]);
+  }, [dispatch, courseCategoryId]);
 
   useEffect(() => {
     const categories_action = categoriesActions.loadCategories();
     dispatch(categories_action);
   }, [dispatch]);
+
+  function renderFilteredResult() {
+    if (isLoading) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 400 }}
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      );
+    } else if (courses.length === 0) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 411 }}
+        >
+          <Typography component="h2" variant="body1" color="textSecondary">
+            ไม่พบผลลัพธ์การค้นหา
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid container spacing={1}>
+          {courses.map((course) => (
+            <Grid item key={course.id} xs={12} sm={4} md={3}>
+              <CourseItem {...course} categories={categories} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    }
+  }
 
   return (
     <>
@@ -107,24 +147,7 @@ export default function CourseList() {
                 </Grid>
               </Grid>
             </Box>
-            {isLoading ? (
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: 407 }}
-              >
-                <CircularProgress color="secondary" />
-              </Grid>
-            ) : (
-              <Grid container spacing={1}>
-                {courses.map((course) => (
-                  <Grid item key={course.id} xs={12} sm={4} md={3}>
-                    <CourseItem {...course} categories={categories} />
-                  </Grid>
-                ))}
-              </Grid>
-            )}
+            {renderFilteredResult()}
             <Grid
               container
               direction="row"

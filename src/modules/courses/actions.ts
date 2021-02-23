@@ -19,13 +19,19 @@ const LOAD_COURSE_ROUND_FAILURE =
   "learning-platform/courses/LOAD_COURSE_ROUND_FAILURE";
 const CLEAR_COURSES = "learning-platform/courses/CLEAR_COURSES";
 
-function loadCourses(query: string) {
+function loadCourses(courseCategoryId: string) {
   return async (dispatch: any) => {
+    console.log(courseCategoryId);
     dispatch({ type: LOAD_COURSES_REQUEST });
     try {
-      const { data } = await axios.get(`/Courses${query}`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      const { data } = await axios.get(
+        courseCategoryId === undefined
+          ? `/Courses`
+          : `/CourseCategories/${courseCategoryId}/Courses`,
+        {
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
+        }
+      );
       dispatch({
         type: LOAD_COURSES_SUCCESS,
         payload: {

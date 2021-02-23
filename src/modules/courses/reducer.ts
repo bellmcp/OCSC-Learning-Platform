@@ -24,15 +24,18 @@ const initialState = {
 export default function (state = initialState, action: any) {
   switch (action.type) {
     case LOAD_COURSES_REQUEST:
-    case LOAD_RECOMMENDED_COURSES_REQUEST:
     case LOAD_COURSE_REQUEST:
     case LOAD_COURSE_ROUND_REQUEST:
       return {
         ...state,
         isLoading: true,
         items: [],
-        recommended: [],
         rounds: [],
+      };
+    case LOAD_RECOMMENDED_COURSES_REQUEST:
+      return {
+        ...state,
+        recommended: [],
       };
     case LOAD_COURSES_SUCCESS:
       return {

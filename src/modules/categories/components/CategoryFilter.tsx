@@ -23,14 +23,13 @@ export default function CategoryFilter({ categories }) {
   const history = useHistory();
 
   const [open, setOpen] = useState(false);
-  const [activeCategoryId, setActiveCategoryId] = useState(0);
-  const { CourseCategoryId } = queryString.parse(search);
+  const [activeCategoryId, setActiveCategoryId] = useState(undefined);
+  const { courseCategoryId } = queryString.parse(search);
   const { path } = useRouteMatch();
 
   useEffect(() => {
-    setActiveCategoryId(CourseCategoryId);
-    console.log(CourseCategoryId);
-  }, [CourseCategoryId]);
+    setActiveCategoryId(courseCategoryId);
+  }, [courseCategoryId]);
 
   const handleChange = (event) => {
     setActiveCategoryId(event.target.value);

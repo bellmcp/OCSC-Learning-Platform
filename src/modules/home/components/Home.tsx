@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
+import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import {
@@ -53,6 +54,7 @@ export default function Home() {
   const history = useHistory();
   const path = "/learning-platform";
   const { search } = useLocation();
+  const { courseCategoryId } = queryString.parse(search);
 
   const linkToCourses = () => {
     history.push(`${path}/courses`);
@@ -84,9 +86,9 @@ export default function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    const courses_action = coursesActions.loadCourses(search);
+    const courses_action = coursesActions.loadCourses(courseCategoryId);
     dispatch(courses_action);
-  }, [dispatch, search]);
+  }, [dispatch, courseCategoryId]);
 
   useEffect(() => {
     const recommended_courses_action = coursesActions.loadRecommendedCourses();
@@ -138,11 +140,7 @@ export default function Home() {
           <Divider />
         </Box>
 
-        <Grid container direction="row" justify="center" alignItems="center">
-          <CategoryFilter categories={categories} />
-        </Grid>
-
-        <Box mt={2} mb={3}>
+        <Box my={3}>
           <Grid
             container
             direction="row"
@@ -163,6 +161,14 @@ export default function Home() {
             isLoading={isRecommendedCoursesLoading}
           />
         </Box>
+
+        <Box mt={3} mb={2}>
+          <Divider />
+        </Box>
+
+        <Grid container direction="row" justify="center" alignItems="center">
+          <CategoryFilter categories={categories} />
+        </Grid>
 
         <Box my={3}>
           <Grid
