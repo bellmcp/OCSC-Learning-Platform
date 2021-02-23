@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import DayJS from "react-dayjs";
 import {
   Typography,
   Box,
@@ -10,9 +11,7 @@ import {
 import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
 
 export default function CourseRound({
-  id,
   name,
-  courseId,
   registrationStart,
   registrationEnd,
   registrationCondition,
@@ -20,21 +19,7 @@ export default function CourseRound({
   courseEnd,
   maxStudents,
   numStudents,
-  course,
 }: any) {
-  const roundInfos = [
-    {
-      title: "เปิดให้ลงทะเบียน",
-      detail: `${registrationStart} ถึง ${registrationEnd}`,
-    },
-    {
-      title: "เงื่อนไขการลงทะเบียน",
-      detail: registrationCondition,
-    },
-    { title: "เข้าเรียนได้ตั้งแต่", detail: `${courseStart} ถึง ${courseEnd}` },
-    { title: "จำนวนผู้เรียนที่รับได้สูงสุด", detail: `${maxStudents} คน` },
-  ];
-
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} sm={7}>
@@ -73,22 +58,48 @@ export default function CourseRound({
         </Box>
       </Grid>
       <Grid item xs={12} sm={5}>
-        {roundInfos.map((roundInfo, index) => (
-          <Grid container spacing={3} key={index} alignItems="baseline">
-            <Grid item xs={6}>
-              <Typography variant="h6">{roundInfo.title}</Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="body2" color="textSecondary">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: roundInfo.detail ? roundInfo.detail : "ไม่มีข้อมูล",
-                  }}
-                ></div>
-              </Typography>
-            </Grid>
+        <Grid container spacing={3} alignItems="baseline">
+          <Grid item xs={6}>
+            <Typography variant="h6">เปิดให้ลงทะเบียน</Typography>
           </Grid>
-        ))}
+          <Grid item xs={6}>
+            <Typography variant="body2" color="textSecondary">
+              <DayJS format="DD/MM/YYYY">{registrationStart}</DayJS> ถึง{" "}
+              <DayJS format="DD/MM/YYYY">{registrationEnd}</DayJS>
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} alignItems="baseline">
+          <Grid item xs={6}>
+            <Typography variant="h6">เงื่อนไขการลงทะเบียน</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2" color="textSecondary">
+              {registrationCondition}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} alignItems="baseline">
+          <Grid item xs={6}>
+            <Typography variant="h6">เข้าเรียนได้</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2" color="textSecondary">
+              <DayJS format="DD/MM/YYYY">{courseStart}</DayJS> ถึง{" "}
+              <DayJS format="DD/MM/YYYY">{courseEnd}</DayJS>
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3} alignItems="baseline">
+          <Grid item xs={6}>
+            <Typography variant="h6">จำนวนผู้เรียนสูงสุด</Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <Typography variant="body2" color="textSecondary">
+              {maxStudents} คน
+            </Typography>
+          </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
