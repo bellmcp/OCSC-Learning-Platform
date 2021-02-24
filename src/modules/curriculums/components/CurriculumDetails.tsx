@@ -25,6 +25,7 @@ import { amber } from "@material-ui/core/colors";
 import * as curriculumsActions from "../actions";
 import * as coursesActions from "modules/courses/actions";
 import * as categoriesActions from "modules/categories/actions";
+import * as registrationsActions from "modules/registrations/actions";
 import CurriculumHeader from "modules/curriculums/components/CurriculumHeader";
 import CourseItem from "modules/courses/components/CourseItem";
 
@@ -70,6 +71,7 @@ export default function CurriculumDetails() {
     (state) => state.curriculums
   );
   const { items: categories } = useSelector((state) => state.categories);
+  const { items: users } = useSelector((state: any) => state.user);
 
   useEffect(() => {
     const curriculum_action = curriculumsActions.loadCurriculum(id);
@@ -90,6 +92,11 @@ export default function CurriculumDetails() {
     const categories_action = categoriesActions.loadCategories();
     dispatch(categories_action);
   }, [dispatch]);
+
+  const registerCurriculum = () => {
+    const registration_action = registrationsActions.registerCurriculum(id);
+    dispatch(registration_action);
+  };
 
   const curriculumInfoPlaceholder = [
     {
@@ -250,14 +257,26 @@ export default function CurriculumDetails() {
                 </Typography>
 
                 <Box my={3}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    endIcon={<ArrowForwardIcon />}
-                    onClick={() => alert("Register")}
-                  >
-                    ลงทะเบียนหลักสูตร
-                  </Button>
+                  <Grid container spacing={3} alignItems="center">
+                    <Grid item>
+                      <Button
+                        disabled={users.length === 0}
+                        variant="contained"
+                        color="secondary"
+                        endIcon={<ArrowForwardIcon />}
+                        onClick={registerCurriculum}
+                      >
+                        ลงทะเบียนหลักสูตร
+                      </Button>
+                    </Grid>
+                    {users.length === 0 && (
+                      <Grid item>
+                        <Typography variant="body2" color="textPrimary">
+                          โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
+                        </Typography>
+                      </Grid>
+                    )}
+                  </Grid>
                 </Box>
               </>
             )}
