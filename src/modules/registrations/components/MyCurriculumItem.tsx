@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import { useDispatch } from "react-redux";
 import DayJS from "react-dayjs";
 import {
   createStyles,
@@ -19,6 +20,7 @@ import {
 import { Rating } from "@material-ui/lab/";
 
 import MyCourseItem from "./MyCourseItem";
+import * as registrationsActions from "../actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,6 +66,15 @@ export default function MyCurriculumItem({
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const dispatch = useDispatch();
+
+  const updateSatisfactionScore = (newValue) => {
+    const satisfaction_score_action = registrationsActions.updateSatisfactionScore(
+      id,
+      newValue
+    );
+    dispatch(satisfaction_score_action);
+  };
 
   return (
     <>
@@ -135,7 +146,7 @@ export default function MyCurriculumItem({
                         defaultValue={satisfactionScore}
                         size="large"
                         onChange={(event, newValue) => {
-                          alert(`Voted: ${newValue} stars`);
+                          updateSatisfactionScore(newValue);
                         }}
                       />
                     </Grid>
@@ -169,7 +180,7 @@ export default function MyCurriculumItem({
                     defaultValue={satisfactionScore}
                     size="large"
                     onChange={(event, newValue) => {
-                      alert(`Voted: ${newValue} stars`);
+                      updateSatisfactionScore(newValue);
                     }}
                   />
                 </Grid>

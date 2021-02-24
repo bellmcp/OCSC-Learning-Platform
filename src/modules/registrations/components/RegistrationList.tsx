@@ -18,7 +18,7 @@ import {
 } from "@material-ui/core/styles";
 import { PlayArrow as LearnIcon } from "@material-ui/icons";
 
-import * as registrationsActions from "modules/registrations/actions";
+import * as registrationsActions from "../actions";
 import Header from "modules/ui/components/Header";
 import Login from "modules/login/components/Login";
 import MyCurriculumItem from "./MyCurriculumItem";

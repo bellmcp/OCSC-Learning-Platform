@@ -94,15 +94,15 @@ export default function CurriculumDetails() {
     dispatch(categories_action);
   }, [dispatch]);
 
-  const registerCurriculum = () => {
-    const registration_action = registrationsActions.registerCurriculum(id);
-    dispatch(registration_action);
-  };
-
   useEffect(() => {
     const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
     dispatch(curriculum_registrations_action);
   }, [dispatch]);
+
+  const registerCurriculum = () => {
+    const registration_action = registrationsActions.registerCurriculum(id);
+    dispatch(registration_action);
+  };
 
   const curriculumInfoPlaceholder = [
     {

@@ -11,6 +11,9 @@ import {
   CURRICULUM_REGISTRATION_REQUEST,
   CURRICULUM_REGISTRATION_SUCCESS,
   CURRICULUM_REGISTRATION_FAILURE,
+  UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST,
+  UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
+  UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -19,6 +22,7 @@ const initialState = {
   myCurriculums: [],
   courseRegister: [],
   curriculumRegister: [],
+  satisfactionScore: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -31,6 +35,8 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: true, courseRegister: [] };
     case CURRICULUM_REGISTRATION_REQUEST:
       return { ...state, isLoading: true, curriculumRegister: [] };
+    case UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST:
+      return { ...state, isLoading: true, satisfactionScore: [] };
     case LOAD_COURSE_REGISTRATIONS_SUCCESS:
       return {
         ...state,
@@ -55,10 +61,17 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         curriculumRegister: action.payload.curriculumRegister,
       };
+    case UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        satisfactionScore: action.payload.satisfactionScoreUpdate,
+      };
     case LOAD_COURSE_REGISTRATIONS_FAILURE:
     case LOAD_CURRICULUM_REGISTRATIONS_FAILURE:
     case COURSE_REGISTRATION_FAILURE:
     case CURRICULUM_REGISTRATION_FAILURE:
+    case UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE:
       return { ...state, isLoading: false };
     default:
       return state;
