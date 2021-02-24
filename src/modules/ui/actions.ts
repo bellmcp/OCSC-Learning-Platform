@@ -1,11 +1,12 @@
 const SET_FLASH_MESSAGE = "learning-platform/ui/SET_FLASH_MESSAGE";
 const CLEAR_FLASH_MESSAGE = "learning-platform/ui/CLEAR_FLASH_MESSAGE";
 
-function setFlashMessage(message: string) {
+function setFlashMessage(message: string, severity: string) {
   return {
     type: SET_FLASH_MESSAGE,
     payload: {
       message,
+      severity,
     },
   };
 }

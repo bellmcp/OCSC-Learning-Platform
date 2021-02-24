@@ -32,7 +32,9 @@ function loadLogin(userInfo: any) {
       });
       setCookie("token", result.data.token, 3);
       dispatch(push(`${path}`));
-      dispatch(uiActions.setFlashMessage("เข้าสู่ระบบเรียบร้อยแล้ว"));
+      dispatch(
+        uiActions.setFlashMessage("เข้าสู่ระบบเรียบร้อยแล้ว", "success")
+      );
     } catch (err) {
       if (err.response.status === 401) {
         dispatch({
@@ -57,7 +59,7 @@ function loadLogin(userInfo: any) {
           type: LOAD_LOGIN_FAILURE,
           payload: {
             status: err.response.status,
-            messageLogin: `เกิดข้อผิดพลาดบางอย่าง โปรดลองใหม่อีกครั้ง ${err.response.status}`,
+            messageLogin: `เกิดข้อผิดพลาด ${err.response.status} โปรดลองใหม่อีกครั้ง`,
           },
         });
       }

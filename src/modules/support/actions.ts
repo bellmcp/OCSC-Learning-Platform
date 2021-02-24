@@ -44,7 +44,7 @@ function sendSupport(supportInfo) {
     });
 
     dispatch({ type: SEND_SUPPORT_SUCCESS, payload: { support: data } });
-    dispatch(uiActions.setFlashMessage("ได้รับข้อมูลเรียบร้อย"));
+    dispatch(uiActions.setFlashMessage("ได้รับข้อมูลเรียบร้อย", "success"));
   };
 }
 

@@ -278,7 +278,7 @@ export default function NavBar(props: NavigationBarProps) {
     eraseCookie("token");
     history.push(`${path}`);
     window.location.reload();
-    dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว"));
+    dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว", "success"));
   };
 
   const handleDrawerToggle = () => {

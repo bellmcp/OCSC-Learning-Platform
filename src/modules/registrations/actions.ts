@@ -91,12 +91,17 @@ function registerCurriculum(curriculumId) {
         type: CURRICULUM_REGISTRATION_SUCCESS,
         payload: { curriculumRegister: data },
       });
-      dispatch(uiActions.setFlashMessage("ลงทะเบียนหลักสูตรเรียบร้อยแล้ว"));
+      dispatch(
+        uiActions.setFlashMessage("ลงทะเบียนหลักสูตรเรียบร้อยแล้ว", "success")
+      );
       dispatch(push(`${path}/learn`));
     } catch (err) {
       dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
       dispatch(
-        uiActions.setFlashMessage(`ลงทะเบียนหลักสูตรไม่สำเร็จ ${err.message}`)
+        uiActions.setFlashMessage(
+          `ลงทะเบียนหลักสูตรไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
       );
     }
   };

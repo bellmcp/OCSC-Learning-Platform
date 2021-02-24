@@ -9,6 +9,7 @@ import {
 } from "@material-ui/core/styles";
 import { Close as CloseIcon } from "@material-ui/icons";
 import { grey, amber } from "@material-ui/core/colors";
+import Alert from "@material-ui/lab/Alert";
 
 import * as actions from "../actions";
 import NavBar from "./NavBar";
@@ -19,7 +20,7 @@ export default function Layout() {
   const { pathname } = useLocation();
   const path = "/learning-platform";
   const dispatch = useDispatch();
-  const flashMessage = useSelector((state) => state.ui.flashMessage);
+  const { flashMessage, alertType } = useSelector((state) => state.ui);
 
   const closeFlashMessage = () => dispatch(actions.clearFlashMessage());
 
@@ -114,7 +115,16 @@ export default function Layout() {
             <CloseIcon fontSize="small" />
           </IconButton>
         }
-      />
+      >
+        <Alert
+          onClose={closeFlashMessage}
+          severity={alertType ? alertType : "info"}
+          elevation={6}
+          variant="filled"
+        >
+          {flashMessage}
+        </Alert>
+      </Snackbar>
       {!pathname.includes(`${path}/learn/demo`) && <Footer />}
     </ThemeProvider>
   );
