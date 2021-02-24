@@ -1,5 +1,6 @@
 // @ts-nocheck
 import axios from "axios";
+import { getCookie } from "utils/cookies";
 import { push } from "connected-react-router";
 import * as coursesActions from "modules/courses/actions";
 import * as curriculumsActions from "modules/curriculums/actions";
@@ -16,6 +17,12 @@ const LOAD_CURRICULUM_REGISTRATIONS_SUCCESS =
   "learning-platform/registrations/LOAD_CURRICULUM_REGISTRATIONS_SUCCESS";
 const LOAD_CURRICULUM_REGISTRATIONS_FAILURE =
   "learning-platform/registrations/LOAD_CURRICULUM_REGISTRATIONS_FAILURE";
+const COURSE_REGISTRATION_REQUEST =
+  "learning-platform/registrations/COURSE_REGISTRATION_REQUEST";
+const COURSE_REGISTRATION_SUCCESS =
+  "learning-platform/registrations/COURSE_REGISTRATION_SUCCESS";
+const COURSE_REGISTRATION_FAILURE =
+  "learning-platform/registrations/COURSE_REGISTRATION_FAILURE";
 const CURRICULUM_REGISTRATION_REQUEST =
   "learning-platform/registrations/CURRICULUM_REGISTRATION_REQUEST";
 const CURRICULUM_REGISTRATION_SUCCESS =
@@ -69,12 +76,50 @@ function loadCurriculumRegistrations() {
   };
 }
 
+function registerCourse(courseRoundId) {
+  return async (dispatch, getState) => {
+    const {
+      user: { items },
+    } = getState();
+    const token = getCookie("token");
+
+    try {
+      const { data } = await axios.post(
+        `/Users/${items.id}/CourseRegistrations`,
+        {
+          courseRoundId: parseInt(courseRoundId),
+        },
+        {
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      dispatch({
+        type: CURRICULUM_REGISTRATION_SUCCESS,
+        payload: { courseRegister: data },
+      });
+      dispatch(
+        uiActions.setFlashMessage("ลงทะเบียนรายวิชาเรียบร้อยแล้ว", "success")
+      );
+      dispatch(push(`${path}/learn`));
+    } catch (err) {
+      dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `ลงทะเบียนรายวิชาไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
+    }
+  };
+}
+
 function registerCurriculum(curriculumId) {
   return async (dispatch, getState) => {
     const {
       user: { items },
-      login: { users },
     } = getState();
+    const token = getCookie("token");
 
     try {
       const { data } = await axios.post(
@@ -84,7 +129,7 @@ function registerCurriculum(curriculumId) {
         },
         {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
-          headers: { Authorization: `Bearer ${users.token}` },
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       dispatch({
@@ -114,10 +159,14 @@ export {
   LOAD_CURRICULUM_REGISTRATIONS_REQUEST,
   LOAD_CURRICULUM_REGISTRATIONS_SUCCESS,
   LOAD_CURRICULUM_REGISTRATIONS_FAILURE,
+  COURSE_REGISTRATION_REQUEST,
+  COURSE_REGISTRATION_SUCCESS,
+  COURSE_REGISTRATION_FAILURE,
   CURRICULUM_REGISTRATION_REQUEST,
   CURRICULUM_REGISTRATION_SUCCESS,
   CURRICULUM_REGISTRATION_FAILURE,
   loadCourseRegistrations,
   loadCurriculumRegistrations,
+  registerCourse,
   registerCurriculum,
 };

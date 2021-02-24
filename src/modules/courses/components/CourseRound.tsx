@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import { useDispatch } from "react-redux";
 import DayJS from "react-dayjs";
 import {
   Typography,
@@ -10,7 +11,10 @@ import {
 } from "@material-ui/core";
 import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
 
+import * as registrationsActions from "modules/registrations/actions";
+
 export default function CourseRound({
+  id,
   name,
   registrationStart,
   registrationEnd,
@@ -20,6 +24,13 @@ export default function CourseRound({
   maxStudents,
   numStudents,
 }: any) {
+  const dispatch = useDispatch();
+
+  const registerCourse = () => {
+    const registration_action = registrationsActions.registerCourse(id);
+    dispatch(registration_action);
+  };
+
   return (
     <Grid container spacing={6}>
       <Grid item xs={12} sm={7}>
@@ -51,7 +62,7 @@ export default function CourseRound({
             variant="contained"
             color="secondary"
             endIcon={<ArrowForwardIcon />}
-            onClick={() => alert("Register")}
+            onClick={registerCourse}
           >
             ลงทะเบียนเรียน
           </Button>

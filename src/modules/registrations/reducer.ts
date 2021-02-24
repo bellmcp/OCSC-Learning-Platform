@@ -5,6 +5,9 @@ import {
   LOAD_CURRICULUM_REGISTRATIONS_REQUEST,
   LOAD_CURRICULUM_REGISTRATIONS_SUCCESS,
   LOAD_CURRICULUM_REGISTRATIONS_FAILURE,
+  COURSE_REGISTRATION_REQUEST,
+  COURSE_REGISTRATION_SUCCESS,
+  COURSE_REGISTRATION_FAILURE,
   CURRICULUM_REGISTRATION_REQUEST,
   CURRICULUM_REGISTRATION_SUCCESS,
   CURRICULUM_REGISTRATION_FAILURE,
@@ -14,6 +17,7 @@ const initialState = {
   isLoading: false,
   myCourses: [],
   myCurriculums: [],
+  courseRegister: [],
   curriculumRegister: [],
 };
 
@@ -23,6 +27,8 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: true, myCourses: [] };
     case LOAD_CURRICULUM_REGISTRATIONS_REQUEST:
       return { ...state, isLoading: true, myCurriculums: [] };
+    case COURSE_REGISTRATION_REQUEST:
+      return { ...state, isLoading: true, courseRegister: [] };
     case CURRICULUM_REGISTRATION_REQUEST:
       return { ...state, isLoading: true, curriculumRegister: [] };
     case LOAD_COURSE_REGISTRATIONS_SUCCESS:
@@ -37,6 +43,12 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         myCurriculums: action.payload.curriculumsRegistrations,
       };
+    case COURSE_REGISTRATION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        curriculumRegister: action.payload.courseRegister,
+      };
     case CURRICULUM_REGISTRATION_SUCCESS:
       return {
         ...state,
@@ -45,6 +57,7 @@ export default function (state = initialState, action: any) {
       };
     case LOAD_COURSE_REGISTRATIONS_FAILURE:
     case LOAD_CURRICULUM_REGISTRATIONS_FAILURE:
+    case COURSE_REGISTRATION_FAILURE:
     case CURRICULUM_REGISTRATION_FAILURE:
       return { ...state, isLoading: false };
     default:
