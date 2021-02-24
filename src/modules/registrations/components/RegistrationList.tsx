@@ -74,15 +74,9 @@ export default function RegistrationList() {
   const { items: users } = useSelector((state: any) => state.user);
   const {
     isLoading: isRegistrationsLoading,
-    myCourses: myCoursesRegistrations,
-    myCurriculums: myCurriculumsRegistrations,
+    myCourses,
+    myCurriculums,
   } = useSelector((state) => state.registrations);
-  const { isLoading: isMyCoursesLoading, items: myCurriculums } = useSelector(
-    (state) => state.curriculums
-  );
-  const { isLoading: isMyCurriculumsLoading, items: myCourses } = useSelector(
-    (state) => state.courses
-  );
 
   useEffect(() => {
     const course_registrations_action = registrationsActions.loadCourseRegistrations();
@@ -94,19 +88,86 @@ export default function RegistrationList() {
     dispatch(curriculum_registrations_action);
   }, [dispatch]);
 
-  const individualCourses = myCoursesRegistrations.filter(
-    (myCoursesRegistration) =>
-      myCoursesRegistration.curriculumRegistrationId === null
-  );
-  const individualCoursesIds = individualCourses.map(
-    (individualCourse) => individualCourse.courseId
-  );
-  const individualCoursesList = myCourses.filter((myCourse) =>
-    individualCoursesIds.includes(myCourse.id)
-  );
-  const childCoursesList = myCourses.filter(
-    (myCourse) => !individualCoursesIds.includes(myCourse.id)
-  );
+  function renderRegisteredCurriculumsList() {
+    if (isRegistrationsLoading) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 380 }}
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      );
+    } else if (myCurriculums.length === 0) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 160 }}
+        >
+          <Typography component="h2" variant="body1" color="textSecondary">
+            คุณยังไม่ได้ลงทะเบียนหลักสูตร
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid container direction="column" spacing={2}>
+          {myCurriculums.map((myCurriculum) => (
+            <Grid item key={myCurriculum.id}>
+              <MyCurriculumItem {...myCurriculum} myCourses={myCourses} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    }
+  }
+
+  function renderRegisteredCoursesList() {
+    if (isRegistrationsLoading) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 380 }}
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      );
+    } else if (
+      myCourses.filter((myCourse) => myCourse.curriculumRegistrationId === null)
+        .length === 0
+    ) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 160 }}
+        >
+          <Typography component="h2" variant="body1" color="textSecondary">
+            คุณยังไม่ได้ลงทะเบียนรายวิชา
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid container direction="column" spacing={2}>
+          {myCourses
+            .filter((myCourse) => myCourse.curriculumRegistrationId === null)
+            .map((myCourse) => (
+              <Grid item key={myCourse.id}>
+                <MyCourseItem {...myCourse} />
+              </Grid>
+            ))}
+        </Grid>
+      );
+    }
+  }
 
   return (
     <>
@@ -132,37 +193,11 @@ export default function RegistrationList() {
                     หลักสูตรของฉัน
                   </Typography>
                 </Box>
-
-                {isRegistrationsLoading || isMyCurriculumsLoading ? (
-                  <Grid
-                    container
-                    justify="center"
-                    alignItems="center"
-                    style={{ height: 380 }}
-                  >
-                    <CircularProgress color="secondary" />
-                  </Grid>
-                ) : (
-                  <Grid container direction="column" spacing={2}>
-                    {myCurriculums.map((myCurriculum, id) => (
-                      <Grid item key={myCurriculum.id}>
-                        <MyCurriculumItem
-                          {...myCurriculum}
-                          keyId={id}
-                          registrations={myCurriculumsRegistrations}
-                          childCourses={childCoursesList}
-                          myCoursesRegistrations={myCoursesRegistrations}
-                        />
-                      </Grid>
-                    ))}
-                  </Grid>
-                )}
-
-                <Box mt={5} mb={4}>
+                {renderRegisteredCurriculumsList()}
+                <Box mt={4} mb={3}>
                   <Divider />
                 </Box>
-
-                <Box mb={3}>
+                <Box my={3}>
                   <Typography
                     gutterBottom
                     variant="h6"
@@ -172,28 +207,7 @@ export default function RegistrationList() {
                     รายวิชาของฉัน
                   </Typography>
                 </Box>
-                {isRegistrationsLoading || isMyCoursesLoading ? (
-                  <Grid
-                    container
-                    justify="center"
-                    alignItems="center"
-                    style={{ height: 380 }}
-                  >
-                    <CircularProgress color="secondary" />
-                  </Grid>
-                ) : (
-                  <Grid container direction="column" spacing={2}>
-                    {individualCoursesList.map((myCourse, id) => (
-                      <Grid item key={myCourse.id}>
-                        <MyCourseItem
-                          {...myCourse}
-                          keyId={id}
-                          registrations={myCoursesRegistrations}
-                        />
-                      </Grid>
-                    ))}
-                  </Grid>
-                )}
+                {renderRegisteredCoursesList()}
               </main>
             </div>
           </Container>

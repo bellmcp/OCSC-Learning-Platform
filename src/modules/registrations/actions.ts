@@ -33,10 +33,16 @@ const CURRICULUM_REGISTRATION_FAILURE =
 const path = "/learning-platform";
 
 function loadCourseRegistrations() {
-  return async (dispatch: any) => {
+  return async (dispatch: any, getState) => {
+    const {
+      user: { items },
+    } = getState();
     dispatch({ type: LOAD_COURSE_REGISTRATIONS_REQUEST });
     try {
-      const { data } = await axios.get("/CourseRegistrations");
+      const { data } = await axios.get(
+        `/Users/${items.id}/CourseRegistrations`,
+        { baseURL: "https://welearn.ocsc.go.th/learning-platform-api" }
+      );
       const courseIds = data.map((item) => item.courseId);
       const query = courseIds.map((id) => `id=${id}`).join("&");
 
@@ -55,10 +61,18 @@ function loadCourseRegistrations() {
 }
 
 function loadCurriculumRegistrations() {
-  return async (dispatch: any) => {
+  return async (dispatch: any, getState) => {
+    const {
+      user: { items },
+    } = getState();
     dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_REQUEST });
     try {
-      const { data } = await axios.get("/CurriculumRegistrations");
+      const { data } = await axios.get(
+        `/Users/${items.id}/CurriculumRegistrations`,
+        {
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+        }
+      );
       const curriculumIds = data.map((item) => item.curriculumId);
       const query = curriculumIds.map((id) => `id=${id}`).join("&");
 
@@ -82,7 +96,7 @@ function registerCourse(courseRoundId) {
       user: { items },
     } = getState();
     const token = getCookie("token");
-
+    dispatch({ type: CURRICULUM_REGISTRATION_REQUEST });
     try {
       const { data } = await axios.post(
         `/Users/${items.id}/CourseRegistrations`,
@@ -103,7 +117,7 @@ function registerCourse(courseRoundId) {
       );
       dispatch(push(`${path}/learn`));
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
+      dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
           `ลงทะเบียนรายวิชาไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
@@ -141,7 +155,7 @@ function registerCurriculum(curriculumId) {
       );
       dispatch(push(`${path}/learn`));
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
+      dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
           `ลงทะเบียนหลักสูตรไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,

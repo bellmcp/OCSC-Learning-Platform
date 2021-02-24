@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import DayJS from "react-dayjs";
 import {
   createStyles,
   makeStyles,
@@ -15,7 +16,7 @@ import {
   Box,
   Divider,
 } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
+import { Rating } from "@material-ui/lab/";
 
 import MyCourseItem from "./MyCourseItem";
 
@@ -44,13 +45,21 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function MyCurriculumItem({
-  keyId,
-  thumbnail,
-  name,
+  id,
+  userId,
+  curriculumId,
+  registrationDate,
+  satisfactionScore,
+  isCompleted,
+  completeDate,
   code,
-  registrations,
-  childCourses,
-  myCoursesRegistrations,
+  name,
+  learningObjective,
+  learningTopic,
+  targetGroup,
+  assessment,
+  thumbnail,
+  myCourses,
 }: any) {
   const classes = useStyles();
   const theme = useTheme();
@@ -107,8 +116,8 @@ export default function MyCurriculumItem({
                       style={{ lineHeight: "1.2" }}
                       gutterBottom
                     >
-                      <b>ลงทะเบียนเมื่อ: </b>
-                      {`${registrations[keyId]?.registrationDate}`}
+                      <b>ลงทะเบียนเมื่อ </b>
+                      <DayJS format="DD/MM/YYYY">{registrationDate}</DayJS>
                     </Typography>
                   </Grid>
                   {!matches && (
@@ -119,11 +128,11 @@ export default function MyCurriculumItem({
                         variant="body2"
                         align="center"
                       >
-                        โปรดให้คะแนนหลักสูตรนี้
+                        โปรดให้คะแนนหลักสูตร
                       </Typography>
                       <Rating
                         name="size-large"
-                        defaultValue={registrations[keyId]?.satisfactionScore}
+                        defaultValue={satisfactionScore}
                         size="large"
                         onChange={(event, newValue) => {
                           alert(`Voted: ${newValue} stars`);
@@ -157,7 +166,7 @@ export default function MyCurriculumItem({
                 <Grid item>
                   <Rating
                     name="size-large"
-                    defaultValue={registrations[keyId]?.satisfactionScore}
+                    defaultValue={satisfactionScore}
                     size="large"
                     onChange={(event, newValue) => {
                       alert(`Voted: ${newValue} stars`);
@@ -169,19 +178,20 @@ export default function MyCurriculumItem({
           </>
         )}
       </Card>
-      <Box mx={2} mt={2}>
-        <Grid container direction="column" spacing={2}>
-          {childCourses.map((myCourse, id) => (
-            <Grid item key={myCourse.id}>
-              <MyCourseItem
-                {...myCourse}
-                keyId={id}
-                registrations={myCoursesRegistrations}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+      {myCourses.filter((myCourse) => myCourse.curriculumRegistrationId === id)
+        .length !== 0 && (
+        <Box mx={2} mt={2}>
+          <Grid container direction="column" spacing={2}>
+            {myCourses
+              .filter((myCourse) => myCourse.curriculumRegistrationId === id)
+              .map((childCourse) => (
+                <Grid item key={childCourse.id}>
+                  <MyCourseItem {...childCourse} />
+                </Grid>
+              ))}
+          </Grid>
+        </Box>
+      )}
     </>
   );
 }

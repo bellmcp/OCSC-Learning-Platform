@@ -1,4 +1,6 @@
+// @ts-nocheck
 import React from "react";
+import DayJS from "react-dayjs";
 import { useHistory } from "react-router-dom";
 import {
   createStyles,
@@ -41,11 +43,25 @@ const useStyles = makeStyles((theme: Theme) =>
 const path = "/learning-platform";
 
 export default function MyCourseItem({
-  keyId,
-  thumbnail,
-  name,
+  id,
+  userId,
+  curriculumRegistrationId,
+  courseRoundId,
+  courseStart,
+  courseEnd,
+  registrationDate,
+  satisfactionScore,
+  isCompleted,
+  completeDate,
+  courseId,
   code,
-  registrations,
+  name,
+  categoryId,
+  learningObjective,
+  learningTopic,
+  targetGroup,
+  thumbnail,
+  seqFlow,
 }: any) {
   const classes = useStyles();
   const theme = useTheme();
@@ -84,8 +100,7 @@ export default function MyCourseItem({
                   <Typography
                     variant="h6"
                     component="h2"
-                    style={{ lineHeight: "1.1" }}
-                    gutterBottom
+                    style={{ lineHeight: "1.1", marginBottom: 4 }}
                   >
                     {name}
                   </Typography>
@@ -98,7 +113,7 @@ export default function MyCourseItem({
                     color="textSecondary"
                     gutterBottom
                   >
-                    {`รอบที่ ${registrations[keyId]?.courseRoundId}`}
+                    รอบที่ {courseRoundId}
                   </Typography>
                   <Typography
                     variant="caption"
@@ -107,8 +122,8 @@ export default function MyCourseItem({
                     style={{ lineHeight: "1.2" }}
                     gutterBottom
                   >
-                    <b>ลงทะเบียนเมื่อ: </b>
-                    {`${registrations[keyId]?.registrationDate}`}
+                    <b>ลงทะเบียนเมื่อ </b>
+                    <DayJS format="DD/MM/YYYY">{registrationDate}</DayJS>
                   </Typography>
                   <Typography
                     variant="caption"
@@ -116,8 +131,9 @@ export default function MyCourseItem({
                     color="textSecondary"
                     style={{ lineHeight: "1.2" }}
                   >
-                    <b>เข้าเรียนได้ตั้งแต่: </b>
-                    {`${registrations[keyId]?.courseStart} ถึง ${registrations[keyId]?.courseEnd}`}
+                    <b>เข้าเรียนได้ตั้งแต่ </b>
+                    <DayJS format="DD/MM/YYYY">{courseStart}</DayJS> ถึง{" "}
+                    <DayJS format="DD/MM/YYYY">{courseEnd}</DayJS>
                   </Typography>
                 </Grid>
                 {!matches && (
