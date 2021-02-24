@@ -72,6 +72,7 @@ export default function CurriculumDetails() {
   );
   const { items: categories } = useSelector((state) => state.categories);
   const { items: users } = useSelector((state: any) => state.user);
+  const { myCurriculums } = useSelector((state) => state.registrations);
 
   useEffect(() => {
     const curriculum_action = curriculumsActions.loadCurriculum(id);
@@ -97,6 +98,11 @@ export default function CurriculumDetails() {
     const registration_action = registrationsActions.registerCurriculum(id);
     dispatch(registration_action);
   };
+
+  useEffect(() => {
+    const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
+    dispatch(curriculum_registrations_action);
+  }, [dispatch]);
 
   const curriculumInfoPlaceholder = [
     {
@@ -259,20 +265,47 @@ export default function CurriculumDetails() {
                 <Box my={3}>
                   <Grid container spacing={3} alignItems="center">
                     <Grid item>
-                      <Button
-                        disabled={users.length === 0}
-                        variant="contained"
-                        color="secondary"
-                        endIcon={<ArrowForwardIcon />}
-                        onClick={registerCurriculum}
-                      >
-                        ลงทะเบียนหลักสูตร
-                      </Button>
+                      {users.length === 0 ? (
+                        <Button
+                          disabled
+                          variant="contained"
+                          color="secondary"
+                          endIcon={<ArrowForwardIcon />}
+                          onClick={registerCurriculum}
+                        >
+                          ลงทะเบียนหลักสูตร
+                        </Button>
+                      ) : (
+                        <Button
+                          disabled={
+                            myCurriculums.filter(
+                              (myCurriculum) =>
+                                myCurriculum.curriculumId === parseInt(id)
+                            ).length === 0
+                          }
+                          variant="contained"
+                          color="secondary"
+                          endIcon={<ArrowForwardIcon />}
+                          onClick={registerCurriculum}
+                        >
+                          ลงทะเบียนหลักสูตร
+                        </Button>
+                      )}
                     </Grid>
                     {users.length === 0 && (
                       <Grid item>
                         <Typography variant="body2" color="textPrimary">
                           โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
+                        </Typography>
+                      </Grid>
+                    )}
+                    {myCurriculums.filter(
+                      (myCurriculum) =>
+                        myCurriculum.curriculumId === parseInt(id)
+                    ).length === 0 && (
+                      <Grid item>
+                        <Typography variant="body2" color="textPrimary">
+                          ลงทะเบียนหลักสูตรแล้ว เริ่มเรียนได้เลย
                         </Typography>
                       </Grid>
                     )}
