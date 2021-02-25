@@ -83,7 +83,15 @@ export default function CategoryFilter({ categories }) {
           ))}
         </MenuItem>
         {categories.map((category) => (
-          <MenuItem key={category.id} value={category.id}>
+          <MenuItem
+            key={category.id}
+            value={category.id}
+            style={{
+              textOverflow: "ellipsis",
+              whiteSpace: "normal",
+              lineHeight: "1.4",
+            }}
+          >
             <Circle
               style={{
                 color: categoryColor(category.id),
