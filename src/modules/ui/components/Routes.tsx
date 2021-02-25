@@ -5,9 +5,9 @@ import CourseRoutes from "modules/courses/components/Routes";
 import CurriculumRoutes from "modules/curriculums/components/Routes";
 import LearnRoutes from "modules/learn/components/Routes";
 import SupportRoutes from "modules/support/components/Routes";
-import UserRoutes from "modules/user/components/Routes";
 import LoginRoutes from "modules/login/components/Routes";
 import MeRoutes from "modules/me/components/Routes";
+import PrivateRoute from "modules/routes/PrivateRoute";
 import NotFound from "./NotFound";
 
 const PATH = "/learning-platform";
@@ -21,20 +21,11 @@ export default function Routes() {
       <Route path={`${PATH}/curriculums`}>
         <CurriculumRoutes></CurriculumRoutes>
       </Route>
-      <Route path={`${PATH}/learn`}>
-        <LearnRoutes></LearnRoutes>
-      </Route>
-      <Route path={`${PATH}/support`}>
-        <SupportRoutes></SupportRoutes>
-      </Route>
-      <Route path={`${PATH}/user`}>
-        <UserRoutes></UserRoutes>
-      </Route>
+      <PrivateRoute component={LearnRoutes} path={`${PATH}/learn`} />
+      <PrivateRoute component={SupportRoutes} path={`${PATH}/support`} />
+      <PrivateRoute component={MeRoutes} path={`${PATH}/me`} />
       <Route path={`${PATH}/login`}>
         <LoginRoutes></LoginRoutes>
-      </Route>
-      <Route path={`${PATH}/me`}>
-        <MeRoutes></MeRoutes>
       </Route>
       <Route exact path={`${PATH}`}>
         <HomeRoutes></HomeRoutes>
