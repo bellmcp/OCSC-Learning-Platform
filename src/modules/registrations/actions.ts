@@ -49,8 +49,6 @@ function loadCourseRegistrations() {
       const { data } = await axios.get(`/Users/${userId}/CourseRegistrations`, {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
       });
-      const courseIds = data.map((item) => item.courseId);
-      const query = courseIds.map((id) => `id=${id}`).join("&");
 
       dispatch({
         type: LOAD_COURSE_REGISTRATIONS_SUCCESS,
@@ -58,8 +56,6 @@ function loadCourseRegistrations() {
           coursesRegistrations: data,
         },
       });
-
-      dispatch(coursesActions.loadCourses(`?${query}`));
     } catch (err) {
       dispatch({ type: LOAD_COURSE_REGISTRATIONS_FAILURE });
     }
@@ -78,8 +74,6 @@ function loadCurriculumRegistrations() {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
         }
       );
-      const curriculumIds = data.map((item) => item.curriculumId);
-      const query = curriculumIds.map((id) => `id=${id}`).join("&");
 
       dispatch({
         type: LOAD_CURRICULUM_REGISTRATIONS_SUCCESS,
@@ -87,8 +81,6 @@ function loadCurriculumRegistrations() {
           curriculumsRegistrations: data,
         },
       });
-
-      dispatch(curriculumsActions.loadCurriculums(`?${query}`));
     } catch (err) {
       dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
     }

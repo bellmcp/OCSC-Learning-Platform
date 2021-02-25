@@ -27,7 +27,6 @@ const CLEAR_COURSES = "learning-platform/courses/CLEAR_COURSES";
 
 function loadCourses(courseCategoryId: string) {
   return async (dispatch: any) => {
-    console.log(courseCategoryId);
     dispatch({ type: LOAD_COURSES_REQUEST });
     try {
       const { data } = await axios.get(

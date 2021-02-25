@@ -74,11 +74,6 @@ export default function CurriculumDetails() {
   const { myCurriculums } = useSelector((state) => state.registrations);
   const { child: childCourses } = useSelector((state) => state.curriculums);
 
-  const isRegistered =
-    myCurriculums.filter(
-      (myCurriculum) => myCurriculum.curriculumId === parseInt(id)
-    ).length !== 0;
-
   useEffect(() => {
     const curriculum_action = curriculumsActions.loadCurriculum(id);
     dispatch(curriculum_action);
@@ -190,7 +185,12 @@ export default function CurriculumDetails() {
           </Typography>
         </Grid>
       );
-    } else if (isRegistered) {
+    } else if (
+      isLogin() &&
+      myCurriculums.filter(
+        (myCurriculum) => myCurriculum.curriculumId === parseInt(id)
+      ).length !== 0
+    ) {
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">

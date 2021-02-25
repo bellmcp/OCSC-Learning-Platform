@@ -37,6 +37,7 @@ import {
 import { amber } from "@material-ui/core/colors";
 
 import * as coursesActions from "../actions";
+import * as registrationsActions from "modules/registrations/actions";
 import * as categoriesActions from "modules/categories/actions";
 import CourseHeader from "./CourseHeader";
 import CourseRound from "./CourseRound";
@@ -79,11 +80,17 @@ export default function CourseDetails() {
   const { rounds, contents } = useSelector((state) => state.courses);
   const { isLoading: isCourseLoading } = useSelector((state) => state.courses);
   const { items: categories } = useSelector((state) => state.categories);
+  const { myCourses } = useSelector((state) => state.registrations);
 
   useEffect(() => {
     const courses_action = coursesActions.loadCourse(id);
     dispatch(courses_action);
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const course_registrations_action = registrationsActions.loadCourseRegistrations();
+    dispatch(course_registrations_action);
+  }, [dispatch]);
 
   useEffect(() => {
     const course_round_action = coursesActions.loadCourseRounds(id);
@@ -256,7 +263,7 @@ export default function CourseDetails() {
                     </Box>
                     {rounds.map((round) => (
                       <Box mt={4} mb={6}>
-                        <CourseRound {...round} />
+                        <CourseRound {...round} myCourses={myCourses} />
                       </Box>
                     ))}
                   </>

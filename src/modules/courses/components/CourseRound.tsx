@@ -10,6 +10,7 @@ import {
   Button,
 } from "@material-ui/core";
 import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
+import { isLogin } from "utils/isLogin";
 
 import * as registrationsActions from "modules/registrations/actions";
 
@@ -23,6 +24,7 @@ export default function CourseRound({
   courseEnd,
   maxStudents,
   numStudents,
+  myCourses,
 }: any) {
   const dispatch = useDispatch();
 
@@ -30,6 +32,41 @@ export default function CourseRound({
     const registration_action = registrationsActions.registerCourse(id);
     dispatch(registration_action);
   };
+
+  function renderRegisterButton() {
+    if (!isLogin()) {
+      return (
+        <Grid item>
+          <Typography variant="body2" color="textSecondary">
+            โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
+          </Typography>
+        </Grid>
+      );
+    } else if (
+      isLogin() &&
+      myCourses.filter((myCourse) => myCourse.courseId === parseInt(id))
+        .length !== 0
+    ) {
+      return (
+        <Grid item>
+          <Typography variant="body2" color="textSecondary">
+            คุณลงทะเบียนรอบนี้แล้ว เริ่มเรียนได้เลย
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Button
+          variant="contained"
+          color="secondary"
+          endIcon={<ArrowForwardIcon />}
+          onClick={registerCourse}
+        >
+          ลงทะเบียนเรียน
+        </Button>
+      );
+    }
+  }
 
   return (
     <Grid container spacing={6}>
@@ -57,16 +94,7 @@ export default function CourseRound({
             <Box></Box>
           </Box>
         </Box>
-        <Box my={3}>
-          <Button
-            variant="contained"
-            color="secondary"
-            endIcon={<ArrowForwardIcon />}
-            onClick={registerCourse}
-          >
-            ลงทะเบียนเรียน
-          </Button>
-        </Box>
+        <Box my={3}>{renderRegisterButton()}</Box>
       </Grid>
       <Grid item xs={12} sm={5}>
         <Grid container spacing={3} alignItems="baseline">
