@@ -144,10 +144,10 @@ export default function PressCarousel({ presses, isLoading }) {
               ))}
             </Slider>
             <ButtonBack className={classes.buttonBack}>
-              <ArrowBack />
+              <ArrowBack fontSize={isSmUp ? "default" : "small"} />
             </ButtonBack>
             <ButtonNext className={classes.buttonNext}>
-              <ArrowForward />
+              <ArrowForward fontSize={isSmUp ? "default" : "small"} />
             </ButtonNext>
           </div>
           {/* <div className={classes.dotGroup}>

@@ -52,6 +52,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 0),
     zIndex: 2,
     outline: "none !important",
+    [theme.breakpoints.down("xs")]: {
+      left: "-10px",
+    },
   },
   buttonNext: {
     position: "absolute",
@@ -62,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 0),
     zIndex: 2,
     outline: "none !important",
+    [theme.breakpoints.down("xs")]: {
+      right: "-10px",
+    },
   },
   growButtonBack: {
     position: "absolute",
@@ -143,10 +149,10 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
                 ))}
               </Slider>
               <ButtonBack className={classes.buttonBack}>
-                <ArrowBack />
+                <ArrowBack fontSize={isSmUp ? "default" : "small"} />
               </ButtonBack>
               <ButtonNext className={classes.buttonNext}>
-                <ArrowForward />
+                <ArrowForward fontSize={isSmUp ? "default" : "small"} />
               </ButtonNext>
             </div>
           </CarouselProvider>
