@@ -276,9 +276,11 @@ export default function NavBar(props: NavigationBarProps) {
   const logout = () => {
     handleMenuClose();
     eraseCookie("token");
-    history.push(`${path}`);
-    window.location.reload();
     dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว", "success"));
+    setTimeout(() => {
+      history.push(`${path}`);
+      window.location.reload();
+    }, 1500);
   };
 
   const handleDrawerToggle = () => {
