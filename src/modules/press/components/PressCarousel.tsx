@@ -84,10 +84,10 @@ const useStyles = makeStyles((theme: Theme) =>
       left: "-28px",
       height: "100%",
       width: "22px",
-      backgroundColor: "#fafafa",
+      backgroundColor: theme.palette.background.default,
       transform: "translateY(-50%)",
       zIndex: 1,
-      boxShadow: "0 0px 11px 15px #fafafa",
+      boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
     },
     growButtonNext: {
       position: "absolute",
@@ -95,10 +95,10 @@ const useStyles = makeStyles((theme: Theme) =>
       right: "-28px",
       height: "100%",
       width: "22px",
-      backgroundColor: "#fafafa",
+      backgroundColor: theme.palette.background.default,
       transform: "translateY(-50%)",
       zIndex: 1,
-      boxShadow: "0 0px 11px 15px #fafafa",
+      boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
     },
   })
 );
@@ -122,7 +122,7 @@ export default function PressCarousel({ presses, isLoading }) {
         </Grid>
       ) : (
         <CarouselProvider
-          infinite
+          // infinite
           naturalSlideWidth={100}
           naturalSlideHeight={70}
           totalSlides={presses.length}
@@ -150,9 +150,9 @@ export default function PressCarousel({ presses, isLoading }) {
               <ArrowForward />
             </ButtonNext>
           </div>
-          <div className={classes.dotGroup}>
+          {/* <div className={classes.dotGroup}>
             <DotGroup className={classes.styledDot} />
-          </div>
+          </div> */}
         </CarouselProvider>
       )}
     </>

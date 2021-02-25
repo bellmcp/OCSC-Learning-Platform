@@ -69,10 +69,10 @@ const useStyles = makeStyles((theme) => ({
     left: "-28px",
     height: "100%",
     width: "22px",
-    backgroundColor: "#fafafa",
+    backgroundColor: theme.palette.background.default,
     transform: "translateY(-50%)",
     zIndex: 1,
-    boxShadow: "0 0px 11px 15px #fafafa",
+    boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
   },
   growButtonNext: {
     position: "absolute",
@@ -80,10 +80,10 @@ const useStyles = makeStyles((theme) => ({
     right: "-28px",
     height: "100%",
     width: "22px",
-    backgroundColor: "#fafafa",
+    backgroundColor: theme.palette.background.default,
     transform: "translateY(-50%)",
     zIndex: 1,
-    boxShadow: "0 0px 11px 15px #fafafa",
+    boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
   },
 }));
 
