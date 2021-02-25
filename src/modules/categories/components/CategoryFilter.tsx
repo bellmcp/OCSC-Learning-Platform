@@ -21,14 +21,20 @@ export default function CategoryFilter({ categories }) {
   const classes = useStyles();
   const { search } = useLocation();
   const history = useHistory();
-
-  const [open, setOpen] = useState(false);
-  const [activeCategoryId, setActiveCategoryId] = useState(undefined);
   const { courseCategoryId } = queryString.parse(search);
   const { path } = useRouteMatch();
 
+  const [open, setOpen] = useState(false);
+  const [activeCategoryId, setActiveCategoryId] = useState(
+    parseInt(courseCategoryId)
+  );
+
   useEffect(() => {
-    setActiveCategoryId(courseCategoryId);
+    if (courseCategoryId === undefined) {
+      setActiveCategoryId(0);
+    } else {
+      setActiveCategoryId(parseInt(courseCategoryId));
+    }
   }, [courseCategoryId]);
 
   const handleChange = (event) => {
@@ -65,7 +71,16 @@ export default function CategoryFilter({ categories }) {
         onChange={handleChange}
       >
         <MenuItem value={0}>
-          <em style={{ marginRight: 6 }}>ทั้งหมด</em>
+          <em style={{ marginRight: 12 }}>ทั้งหมด</em>{" "}
+          {categories.map((category) => (
+            <Circle
+              style={{
+                color: categoryColor(category.id),
+                fontSize: 12,
+                marginRight: 6,
+              }}
+            />
+          ))}
         </MenuItem>
         {categories.map((category) => (
           <MenuItem key={category.id} value={category.id}>

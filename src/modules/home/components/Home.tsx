@@ -162,7 +162,7 @@ export default function Home() {
           />
         </Box>
 
-        <Box mt={3} mb={2}>
+        <Box mt={3} mb={3}>
           <Divider />
         </Box>
 
