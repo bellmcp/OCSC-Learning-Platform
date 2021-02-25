@@ -73,11 +73,19 @@ export default function RegistrationList() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
-  const {
+  var {
     isLoading: isRegistrationsLoading,
     myCourses,
     myCurriculums,
   } = useSelector((state) => state.registrations);
+
+  if (myCourses === "") {
+    myCourses = [];
+  }
+
+  if (myCurriculums === "") {
+    myCurriculums = [];
+  }
 
   useEffect(() => {
     const course_registrations_action = registrationsActions.loadCourseRegistrations();

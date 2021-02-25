@@ -28,6 +28,10 @@ export default function CourseRound({
 }: any) {
   const dispatch = useDispatch();
 
+  if (myCourses === "") {
+    myCourses = [];
+  }
+
   const registerCourse = () => {
     const registration_action = registrationsActions.registerCourse(id);
     dispatch(registration_action);

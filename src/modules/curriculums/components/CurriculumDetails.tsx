@@ -71,8 +71,12 @@ export default function CurriculumDetails() {
     (state) => state.curriculums
   );
   const { items: categories } = useSelector((state) => state.categories);
-  const { myCurriculums } = useSelector((state) => state.registrations);
+  var { myCurriculums } = useSelector((state) => state.registrations);
   const { child: childCourses } = useSelector((state) => state.curriculums);
+
+  if (myCurriculums === "") {
+    myCurriculums = [];
+  }
 
   useEffect(() => {
     const curriculum_action = curriculumsActions.loadCurriculum(id);
