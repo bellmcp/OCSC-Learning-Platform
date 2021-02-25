@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   slide: {
     padding: theme.spacing(0, 0),
+    outline: "none !important",
   },
   course: {
     width: "100%",

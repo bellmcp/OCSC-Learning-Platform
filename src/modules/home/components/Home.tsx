@@ -37,6 +37,15 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     },
+    sectionTitle: {
+      fontSize: "1.7rem",
+      fontWeight: 600,
+      zIndex: 3,
+    },
+    seeAllButton: {
+      marginBottom: "0.35em",
+      zIndex: 3,
+    },
   })
 );
 
@@ -150,7 +159,7 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem", fontWeight: 600 }}
+              className={classes.sectionTitle}
             >
               รายการแนะนำ
             </Typography>
@@ -180,7 +189,7 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem", fontWeight: 600 }}
+              className={classes.sectionTitle}
             >
               รายวิชา
             </Typography>
@@ -189,7 +198,7 @@ export default function Home() {
               color="default"
               endIcon={<ArrowForwardIcon />}
               onClick={linkToCourses}
-              style={{ marginBottom: "0.35em" }}
+              className={classes.seeAllButton}
             >
               ดูทั้งหมด
             </Button>
@@ -215,7 +224,7 @@ export default function Home() {
             <Typography
               gutterBottom
               variant="h6"
-              style={{ fontSize: "1.7rem", fontWeight: 600 }}
+              className={classes.sectionTitle}
             >
               หลักสูตร
             </Typography>
@@ -224,7 +233,7 @@ export default function Home() {
               color="default"
               endIcon={<ArrowForwardIcon />}
               onClick={linkToCurriculums}
-              style={{ marginBottom: "0.35em" }}
+              className={classes.seeAllButton}
             >
               ดูทั้งหมด
             </Button>
