@@ -31,11 +31,7 @@ import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    main: {
-      display: "flex",
-    },
     content: {
-      flexGrow: 1,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
     },
@@ -119,56 +115,61 @@ export default function CourseList() {
         icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
         imageUrl={HERO_IMAGE_URL}
       />
-      <Container>
-        <div className={classes.main}>
-          <main className={classes.content}>
-            <Box mb={2}>
-              <Grid
-                container
-                direction={matches ? "row" : "column"}
-                justify={matches ? "space-between" : "center"}
-                alignItems={matches ? "flex-end" : "center"}
-              >
-                <Grid item>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    style={{
-                      fontSize: "1.7rem",
-                      marginBottom: 0,
-                      fontWeight: 600,
-                    }}
-                  >
-                    รายวิชาทั้งหมด
-                  </Typography>
-                </Grid>
+      <Container maxWidth="lg">
+        <main className={classes.content}>
+          <Box mb={2}>
+            <Grid
+              container
+              direction={matches ? "row" : "column"}
+              justify={matches ? "space-between" : "center"}
+              alignItems={matches ? "flex-end" : "center"}
+            >
+              <Grid item>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  style={{
+                    fontSize: "1.7rem",
+                    marginBottom: 0,
+                    fontWeight: 600,
+                  }}
+                >
+                  รายวิชาทั้งหมด
+                </Typography>
+              </Grid>
+              {matches && (
                 <Grid item>
                   <CategoryFilter categories={categories} />
                 </Grid>
-              </Grid>
-            </Box>
-            {renderFilteredResult()}
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Box mt={6} mb={4}>
-                <Button
-                  disabled
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  startIcon={<ArrowDownIcon />}
-                  style={{ borderRadius: 25 }}
-                >
-                  ดูเพิ่มเติม
-                </Button>
-              </Box>
+              )}
             </Grid>
-          </main>
-        </div>
+            {!matches && (
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <CategoryFilter categories={categories} />
+              </Grid>
+            )}
+          </Box>
+          {renderFilteredResult()}
+          <Grid container direction="row" justify="center" alignItems="center">
+            <Box mt={6} mb={4}>
+              <Button
+                disabled
+                variant="contained"
+                color="primary"
+                size="large"
+                startIcon={<ArrowDownIcon />}
+                style={{ borderRadius: 25 }}
+              >
+                ดูเพิ่มเติม
+              </Button>
+            </Box>
+          </Grid>
+        </main>
       </Container>
     </>
   );
