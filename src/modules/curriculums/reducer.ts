@@ -20,8 +20,9 @@ export default function (state = initialState, action: any) {
   switch (action.type) {
     case LOAD_CURRICULUMS_REQUEST:
     case LOAD_CURRICULUM_REQUEST:
+      return { ...state, isLoading: true, items: [] };
     case LOAD_CURRICULUM_CHILD_REQUEST:
-      return { ...state, isLoading: true, items: [], child: [] };
+      return { ...state, isLoading: true, child: [] };
     case LOAD_CURRICULUMS_SUCCESS:
       return { ...state, isLoading: false, items: action.payload.curriculums };
     case LOAD_CURRICULUM_SUCCESS:

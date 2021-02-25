@@ -67,12 +67,12 @@ export default function CurriculumDetails() {
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
-  const { child: childCourses } = useSelector((state) => state.curriculums);
   const { isLoading: isCurriculumLoading } = useSelector(
     (state) => state.curriculums
   );
   const { items: categories } = useSelector((state) => state.categories);
   const { myCurriculums } = useSelector((state) => state.registrations);
+  const { child: childCourses } = useSelector((state) => state.curriculums);
 
   const isRegistered =
     myCurriculums.filter(
