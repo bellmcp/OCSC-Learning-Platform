@@ -101,7 +101,7 @@ export default function RegistrationList() {
   };
 
   function renderRegisteredCurriculumsList() {
-    if (isRegistrationsLoading) {
+    if (false) {
       return (
         <Grid
           container

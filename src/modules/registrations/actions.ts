@@ -194,13 +194,7 @@ function updateSatisfactionScore(registrationId, satisfactionScore) {
         type: UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
         payload: { satisfactionScoreUpdate: data },
       });
-      dispatch(
-        uiActions.setFlashMessage(
-          "บันทึกข้อมูลเรียบร้อย ขอบคุณที่ให้คะแนน",
-          "success"
-        )
-      );
-      dispatch(push(`${path}/learn`));
+      dispatch(uiActions.setFlashMessage("บันทึกข้อมูลเรียบร้อย", "success"));
     } catch (err) {
       dispatch({ type: UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE });
       dispatch(

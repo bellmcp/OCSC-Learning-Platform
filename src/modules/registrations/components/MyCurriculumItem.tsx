@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import DayJS from "react-dayjs";
 import {
@@ -67,6 +67,11 @@ export default function MyCurriculumItem({
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
   const dispatch = useDispatch();
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    setValue(satisfactionScore);
+  }, [satisfactionScore]);
 
   const updateSatisfactionScore = (newValue) => {
     const satisfaction_score_action = registrationsActions.updateSatisfactionScore(
@@ -74,6 +79,7 @@ export default function MyCurriculumItem({
       newValue
     );
     dispatch(satisfaction_score_action);
+    setValue(newValue);
   };
 
   return (
@@ -143,7 +149,7 @@ export default function MyCurriculumItem({
                       </Typography>
                       <Rating
                         name="size-large"
-                        defaultValue={satisfactionScore}
+                        value={value}
                         size="large"
                         onChange={(event, newValue) => {
                           updateSatisfactionScore(newValue);
@@ -177,7 +183,7 @@ export default function MyCurriculumItem({
                 <Grid item>
                   <Rating
                     name="size-large"
-                    defaultValue={satisfactionScore}
+                    value={value}
                     size="large"
                     onChange={(event, newValue) => {
                       updateSatisfactionScore(newValue);
