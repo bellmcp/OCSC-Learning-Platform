@@ -3,8 +3,6 @@ import axios from "axios";
 import { getCookie } from "utils/cookies";
 import { push } from "connected-react-router";
 import parseJwt from "utils/parseJwt";
-import * as coursesActions from "modules/courses/actions";
-import * as curriculumsActions from "modules/curriculums/actions";
 import * as uiActions from "modules/ui/actions";
 
 const LOAD_COURSE_REGISTRATIONS_REQUEST =

@@ -22,7 +22,6 @@ import { PlayArrow as LearnIcon } from "@material-ui/icons";
 
 import * as registrationsActions from "../actions";
 import Header from "modules/ui/components/Header";
-import Login from "modules/login/components/Login";
 import MyCurriculumItem from "./MyCurriculumItem";
 import MyCourseItem from "./MyCourseItem";
 
@@ -74,8 +73,6 @@ export default function RegistrationList() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
-
-  const { items: users } = useSelector((state: any) => state.user);
   const {
     isLoading: isRegistrationsLoading,
     myCourses,
@@ -205,50 +202,42 @@ export default function RegistrationList() {
 
   return (
     <>
-      {users.length !== 0 ? (
-        <>
-          <Header
-            title={TITLE}
-            icon={
-              <LearnIcon fontSize="large" style={{ marginRight: "24px" }} />
-            }
-            imageUrl={HERO_IMAGE_URL}
-          />
-          <Container>
-            <div className={classes.main}>
-              <main className={classes.content}>
-                <Box my={4}>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                    align={matches ? "left" : "center"}
-                  >
-                    หลักสูตรของฉัน
-                  </Typography>
-                </Box>
-                {renderRegisteredCurriculumsList()}
-                <Box mt={4} mb={3}>
-                  <Divider />
-                </Box>
-                <Box my={3}>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                    align={matches ? "left" : "center"}
-                  >
-                    รายวิชาของฉัน
-                  </Typography>
-                </Box>
-                {renderRegisteredCoursesList()}
-              </main>
-            </div>
-          </Container>
-        </>
-      ) : (
-        <Login />
-      )}
+      <Header
+        title={TITLE}
+        icon={<LearnIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        imageUrl={HERO_IMAGE_URL}
+      />
+      <Container>
+        <div className={classes.main}>
+          <main className={classes.content}>
+            <Box my={4}>
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                align={matches ? "left" : "center"}
+              >
+                หลักสูตรของฉัน
+              </Typography>
+            </Box>
+            {renderRegisteredCurriculumsList()}
+            <Box mt={4} mb={3}>
+              <Divider />
+            </Box>
+            <Box my={3}>
+              <Typography
+                gutterBottom
+                variant="h6"
+                style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                align={matches ? "left" : "center"}
+              >
+                รายวิชาของฉัน
+              </Typography>
+            </Box>
+            {renderRegisteredCoursesList()}
+          </main>
+        </div>
+      </Container>
     </>
   );
 }
