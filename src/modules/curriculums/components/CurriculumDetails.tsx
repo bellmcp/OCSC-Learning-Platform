@@ -21,6 +21,7 @@ import {
   ArrowForwardIos as ArrowForwardIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
+import { isLogin } from "utils/isLogin";
 
 import * as curriculumsActions from "../actions";
 import * as coursesActions from "modules/courses/actions";
@@ -71,13 +72,22 @@ export default function CurriculumDetails() {
     (state) => state.curriculums
   );
   const { items: categories } = useSelector((state) => state.categories);
-  const { items: users } = useSelector((state: any) => state.user);
   const { myCurriculums } = useSelector((state) => state.registrations);
+
+  const isRegistered =
+    myCurriculums.filter(
+      (myCurriculum) => myCurriculum.curriculumId === parseInt(id)
+    ).length !== 0;
 
   useEffect(() => {
     const curriculum_action = curriculumsActions.loadCurriculum(id);
     dispatch(curriculum_action);
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
+    dispatch(curriculum_registrations_action);
+  }, [dispatch]);
 
   useEffect(() => {
     const curriculum_child_action = curriculumsActions.loadCurriculumChild(id);
@@ -92,11 +102,6 @@ export default function CurriculumDetails() {
   useEffect(() => {
     const categories_action = categoriesActions.loadCategories();
     dispatch(categories_action);
-  }, [dispatch]);
-
-  useEffect(() => {
-    const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
-    dispatch(curriculum_registrations_action);
   }, [dispatch]);
 
   const registerCurriculum = () => {
@@ -174,6 +179,39 @@ export default function CurriculumDetails() {
         </Grid>
       </Box>
     );
+  }
+
+  function renderRegisterButton() {
+    if (!isLogin()) {
+      return (
+        <Grid item>
+          <Typography variant="body2" color="textSecondary">
+            โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
+          </Typography>
+        </Grid>
+      );
+    } else if (isRegistered) {
+      return (
+        <Grid item>
+          <Typography variant="body2" color="textSecondary">
+            คุณลงทะเบียนหลักสูตรนี้แล้ว เริ่มเรียนได้เลย
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid item>
+          <Button
+            variant="contained"
+            color="secondary"
+            endIcon={<ArrowForwardIcon />}
+            onClick={registerCurriculum}
+          >
+            ลงทะเบียนหลักสูตร
+          </Button>
+        </Grid>
+      );
+    }
   }
 
   return (
@@ -264,51 +302,7 @@ export default function CurriculumDetails() {
 
                 <Box my={3}>
                   <Grid container spacing={3} alignItems="center">
-                    <Grid item>
-                      {users.length === 0 ? (
-                        <Button
-                          disabled
-                          variant="contained"
-                          color="secondary"
-                          endIcon={<ArrowForwardIcon />}
-                          onClick={registerCurriculum}
-                        >
-                          ลงทะเบียนหลักสูตร
-                        </Button>
-                      ) : (
-                        <Button
-                          disabled={
-                            myCurriculums.filter(
-                              (myCurriculum) =>
-                                myCurriculum.curriculumId === parseInt(id)
-                            ).length === 0
-                          }
-                          variant="contained"
-                          color="secondary"
-                          endIcon={<ArrowForwardIcon />}
-                          onClick={registerCurriculum}
-                        >
-                          ลงทะเบียนหลักสูตร
-                        </Button>
-                      )}
-                    </Grid>
-                    {users.length === 0 && (
-                      <Grid item>
-                        <Typography variant="body2" color="textPrimary">
-                          โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
-                        </Typography>
-                      </Grid>
-                    )}
-                    {myCurriculums.filter(
-                      (myCurriculum) =>
-                        myCurriculum.curriculumId === parseInt(id)
-                    ).length === 0 && (
-                      <Grid item>
-                        <Typography variant="body2" color="textPrimary">
-                          ลงทะเบียนหลักสูตรแล้ว เริ่มเรียนได้เลย
-                        </Typography>
-                      </Grid>
-                    )}
+                    {renderRegisterButton()}
                   </Grid>
                 </Box>
               </>
