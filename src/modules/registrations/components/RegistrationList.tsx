@@ -1,6 +1,8 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { getCookie } from "utils/cookies";
+import parseJwt from "utils/parseJwt";
 import { useHistory } from "react-router-dom";
 import {
   useMediaQuery,
@@ -74,6 +76,8 @@ export default function RegistrationList() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
+  const token = getCookie("token");
+  console.log(parseJwt(token).unique_name);
 
   const { items: users } = useSelector((state: any) => state.user);
   const {

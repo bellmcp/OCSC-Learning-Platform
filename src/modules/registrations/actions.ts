@@ -2,9 +2,11 @@
 import axios from "axios";
 import { getCookie } from "utils/cookies";
 import { push } from "connected-react-router";
+import parseJwt from "utils/parseJwt";
 import * as coursesActions from "modules/courses/actions";
 import * as curriculumsActions from "modules/curriculums/actions";
 import * as uiActions from "modules/ui/actions";
+
 const LOAD_COURSE_REGISTRATIONS_REQUEST =
   "learning-platform/registrations/LOAD_COURSE_REGISTRATIONS_REQUEST";
 const LOAD_COURSE_REGISTRATIONS_SUCCESS =
@@ -40,15 +42,13 @@ const path = "/learning-platform";
 
 function loadCourseRegistrations() {
   return async (dispatch: any, getState) => {
-    const {
-      user: { items },
-    } = getState();
+    const token = getCookie("token");
+    const userId = parseJwt(token).unique_name;
     dispatch({ type: LOAD_COURSE_REGISTRATIONS_REQUEST });
     try {
-      const { data } = await axios.get(
-        `/Users/${items.id}/CourseRegistrations`,
-        { baseURL: "https://welearn.ocsc.go.th/learning-platform-api" }
-      );
+      const { data } = await axios.get(`/Users/${userId}/CourseRegistrations`, {
+        baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+      });
       const courseIds = data.map((item) => item.courseId);
       const query = courseIds.map((id) => `id=${id}`).join("&");
 
@@ -67,14 +67,13 @@ function loadCourseRegistrations() {
 }
 
 function loadCurriculumRegistrations() {
-  return async (dispatch: any, getState) => {
-    const {
-      user: { items },
-    } = getState();
+  return async (dispatch: any) => {
+    const token = getCookie("token");
+    const userId = parseJwt(token).unique_name;
     dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_REQUEST });
     try {
       const { data } = await axios.get(
-        `/Users/${items.id}/CurriculumRegistrations`,
+        `/Users/${userId}/CurriculumRegistrations`,
         {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
         }
