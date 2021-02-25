@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   useMediaQuery,
   Typography,
@@ -9,6 +10,7 @@ import {
   Box,
   Divider,
   CircularProgress,
+  Button,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -68,8 +70,10 @@ const HERO_IMAGE_URL =
 export default function RegistrationList() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const path = "/learning-platform";
 
   const { items: users } = useSelector((state: any) => state.user);
   const {
@@ -88,6 +92,14 @@ export default function RegistrationList() {
     dispatch(curriculum_registrations_action);
   }, [dispatch]);
 
+  const linkToCourses = () => {
+    history.push(`${path}/courses`);
+  };
+
+  const linkToCurriculums = () => {
+    history.push(`${path}/curriculums`);
+  };
+
   function renderRegisteredCurriculumsList() {
     if (isRegistrationsLoading) {
       return (
@@ -104,6 +116,7 @@ export default function RegistrationList() {
       return (
         <Grid
           container
+          direction="column"
           justify="center"
           alignItems="center"
           style={{ height: 160 }}
@@ -111,6 +124,16 @@ export default function RegistrationList() {
           <Typography component="h2" variant="body1" color="textSecondary">
             คุณยังไม่ได้ลงทะเบียนหลักสูตร
           </Typography>
+          <Box mt={2} mb={4}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ width: 200 }}
+              onClick={linkToCurriculums}
+            >
+              ดูหลักสูตรทั้งหมด
+            </Button>
+          </Box>
         </Grid>
       );
     } else {
@@ -145,6 +168,7 @@ export default function RegistrationList() {
       return (
         <Grid
           container
+          direction="column"
           justify="center"
           alignItems="center"
           style={{ height: 160 }}
@@ -152,6 +176,16 @@ export default function RegistrationList() {
           <Typography component="h2" variant="body1" color="textSecondary">
             คุณยังไม่ได้ลงทะเบียนรายวิชา
           </Typography>
+          <Box mt={2} mb={4}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ width: 200 }}
+              onClick={linkToCourses}
+            >
+              ดูรายวิชาทั้งหมด
+            </Button>
+          </Box>
         </Grid>
       );
     } else {
