@@ -17,6 +17,10 @@ import {
   Divider,
   Avatar,
   CircularProgress,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
@@ -24,6 +28,11 @@ import {
   Create as CreateIcon,
   Info as InfoIcon,
   People as PeopleIcon,
+  PlayCircleFilled as VideoIcon,
+  MenuBook as ReadIcon,
+  LibraryBooks as QuizIcon,
+  ThumbUp as SurveyIcon,
+  Language as FileIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
 
@@ -67,7 +76,7 @@ export default function CourseDetails() {
 
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
-  const { rounds } = useSelector((state) => state.courses);
+  const { rounds, contents } = useSelector((state) => state.courses);
   const { isLoading: isCourseLoading } = useSelector((state) => state.courses);
   const { items: categories } = useSelector((state) => state.categories);
 
@@ -79,6 +88,11 @@ export default function CourseDetails() {
   useEffect(() => {
     const course_round_action = coursesActions.loadCourseRounds(id);
     dispatch(course_round_action);
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    const course_content_action = coursesActions.loadCourseContents(id);
+    dispatch(course_content_action);
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -115,6 +129,21 @@ export default function CourseDetails() {
       icon: <InfoIcon />,
     },
   ];
+
+  function GenerateCourseContentIcon(type: string) {
+    switch (type) {
+      case "c":
+        return <VideoIcon />;
+      case "r":
+        return <ReadIcon />;
+      case "t":
+        return <QuizIcon />;
+      case "e":
+        return <SurveyIcon />;
+      default:
+        return <FileIcon />;
+    }
+  }
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
     return (
@@ -230,6 +259,42 @@ export default function CourseDetails() {
                         <CourseRound {...round} />
                       </Box>
                     ))}
+                  </>
+                )}
+
+                {contents && (
+                  <>
+                    <Box mt={2} mb={3}>
+                      <Divider />
+                    </Box>
+                    <Typography
+                      style={{
+                        fontSize: "1.7rem",
+                        fontWeight: 600,
+                      }}
+                    >
+                      ประมวลรายวิชา
+                    </Typography>
+                    <Box my={1} style={{ maxWidth: 500 }}>
+                      <List>
+                        {contents.map((content, id) => (
+                          <>
+                            {id !== 0 && <Divider variant="middle" />}
+                            <ListItem>
+                              <ListItemIcon>
+                                {GenerateCourseContentIcon(content.type)}
+                              </ListItemIcon>
+                              <ListItemText
+                                primary={content.name}
+                                secondary={
+                                  content.minutes && `${content.minutes} นาที`
+                                }
+                              />
+                            </ListItem>
+                          </>
+                        ))}
+                      </List>
+                    </Box>
                   </>
                 )}
               </>

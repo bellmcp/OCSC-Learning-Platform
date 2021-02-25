@@ -11,6 +11,9 @@ import {
   LOAD_COURSE_ROUND_REQUEST,
   LOAD_COURSE_ROUND_SUCCESS,
   LOAD_COURSE_ROUND_FAILURE,
+  LOAD_COURSE_CONTENT_REQUEST,
+  LOAD_COURSE_CONTENT_SUCCESS,
+  LOAD_COURSE_CONTENT_FAILURE,
   CLEAR_COURSES,
 } from "./actions";
 
@@ -19,6 +22,7 @@ const initialState = {
   items: [],
   recommended: [],
   rounds: [],
+  contents: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -26,11 +30,13 @@ export default function (state = initialState, action: any) {
     case LOAD_COURSES_REQUEST:
     case LOAD_COURSE_REQUEST:
     case LOAD_COURSE_ROUND_REQUEST:
+    case LOAD_COURSE_CONTENT_REQUEST:
       return {
         ...state,
         isLoading: true,
         items: [],
         rounds: [],
+        contents: [],
       };
     case LOAD_RECOMMENDED_COURSES_REQUEST:
       return {
@@ -57,10 +63,17 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         rounds: action.payload.courseRounds,
       };
+    case LOAD_COURSE_CONTENT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        contents: action.payload.courseContents,
+      };
     case LOAD_COURSES_FAILURE:
     case LOAD_RECOMMENDED_COURSES_FAILURE:
     case LOAD_COURSE_FAILURE:
     case LOAD_COURSE_ROUND_FAILURE:
+    case LOAD_COURSE_CONTENT_FAILURE:
       return { ...state, isLoading: false };
     case CLEAR_COURSES:
       return { ...state, isLoading: false, items: [] };
