@@ -110,6 +110,7 @@ export default function CourseItem({
           title={name}
           style={{
             background: `url('${thumbnail}')`,
+            backgroundColor: "lightgray",
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
@@ -117,10 +118,10 @@ export default function CourseItem({
         <CardContent className={classes.cardContent}>
           <Box my={2}>
             <Typography className={classes.title} variant="h6" component="h2">
-              {name}
+              {name ? name : "รายวิชา"}
             </Typography>
             <Typography variant="body2">
-              <div className={classes.genre}>{code}</div>
+              <div className={classes.genre}>{code ? code : "รหัสรายวิชา"}</div>
             </Typography>
             <Box my={1}>
               <Typography
@@ -132,7 +133,9 @@ export default function CourseItem({
                 <div
                   className={classes.detail}
                   dangerouslySetInnerHTML={{
-                    __html: learningObjective,
+                    __html: learningObjective
+                      ? learningObjective
+                      : "ไม่มีข้อมูล",
                   }}
                 ></div>
               </Typography>

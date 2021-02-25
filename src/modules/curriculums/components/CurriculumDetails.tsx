@@ -107,22 +107,26 @@ export default function CurriculumDetails() {
   const curriculumInfoPlaceholder = [
     {
       title: "เป้าหมายการเรียนรู้",
-      detail: curriculum?.learningObjective,
+      detail: curriculum?.learningObjective
+        ? curriculum?.learningObjective
+        : "ไม่มีข้อมูล",
       icon: <AssignmentIcon />,
     },
     {
       title: "ประเด็นการเรียนรู้",
-      detail: curriculum?.learningTopic,
+      detail: curriculum?.learningTopic
+        ? curriculum?.learningTopic
+        : "ไม่มีข้อมูล",
       icon: <CreateIcon />,
     },
     {
       title: "วิธีการประเมินผล",
-      detail: curriculum?.assessment,
+      detail: curriculum?.assessment ? curriculum?.assessment : "ไม่มีข้อมูล",
       icon: <AssessmentIcon />,
     },
     {
       title: "กลุ่มเป้าหมาย",
-      detail: curriculum?.targetGroup,
+      detail: curriculum?.targetGroup ? curriculum?.targetGroup : "ไม่มีข้อมูล",
       icon: <PeopleIcon />,
     },
   ];
@@ -217,8 +221,8 @@ export default function CurriculumDetails() {
   return (
     <>
       <CurriculumHeader
-        title={curriculum?.name}
-        code={curriculum?.code}
+        title={curriculum?.name ? curriculum?.name : "หลักสูตร"}
+        code={curriculum?.code ? curriculum?.code : "รหัสหลักสูตร"}
         icon={<PeopleIcon fontSize="large" style={{ marginRight: "24px" }} />}
         imageUrl={curriculum?.thumbnail}
       />

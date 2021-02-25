@@ -110,22 +110,24 @@ export default function CourseDetails() {
   const courseInfoPlaceholder = [
     {
       title: "เป้าหมายการเรียนรู้",
-      detail: course?.learningObjective,
+      detail: course?.learningObjective
+        ? course?.learningObjective
+        : "ไม่มีข้อมูล",
       icon: <AssignmentIcon />,
     },
     {
       title: "ประเด็นการเรียนรู้",
-      detail: course?.learningTopic,
+      detail: course?.learningTopic ? course?.learningTopic : "ไม่มีข้อมูล",
       icon: <CreateIcon />,
     },
     {
       title: "วิธีการประเมินผล",
-      detail: course?.assessment,
+      detail: course?.assessment ? course?.assessment : "ไม่มีข้อมูล",
       icon: <AssessmentIcon />,
     },
     {
       title: "กลุ่มเป้าหมาย",
-      detail: course?.targetGroup,
+      detail: course?.targetGroup ? course?.targetGroup : "ไม่มีข้อมูล",
       icon: <PeopleIcon />,
     },
     {
@@ -204,8 +206,8 @@ export default function CourseDetails() {
   return (
     <>
       <CourseHeader
-        title={course?.name}
-        code={course?.code}
+        title={course?.name ? course?.name : "รายวิชา"}
+        code={course?.code ? course?.code : "รหัสรายวิชา"}
         icon={<PeopleIcon fontSize="large" style={{ marginRight: "24px" }} />}
         imageUrl={course?.thumbnail}
         categoryId={course?.courseCategoryId}

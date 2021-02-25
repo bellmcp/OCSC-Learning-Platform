@@ -105,6 +105,7 @@ export default function CurriculumItem({
           title={name}
           style={{
             background: `url('${thumbnail}')`,
+            backgroundColor: "lightgray",
             backgroundSize: "cover",
             backgroundPosition: "center center",
           }}
@@ -119,10 +120,12 @@ export default function CurriculumItem({
               หลักสูตร
             </Typography>
             <Typography className={classes.title} variant="h6" component="h2">
-              {name}
+              {name ? name : "หลักสูตร"}
             </Typography>
             <Typography variant="body2">
-              <div className={classes.genre}>{code}</div>
+              <div className={classes.genre}>
+                {code ? code : "รหัสหลักสูตร"}
+              </div>
             </Typography>
             <Box my={1}>
               <Typography
@@ -134,7 +137,9 @@ export default function CurriculumItem({
                 <div
                   className={classes.detail}
                   dangerouslySetInnerHTML={{
-                    __html: learningObjective,
+                    __html: learningObjective
+                      ? learningObjective
+                      : "ไม่มีข้อมูล",
                   }}
                 ></div>
               </Typography>
