@@ -71,7 +71,13 @@ export default function Me() {
           <Typography
             component="h1"
             variant="h6"
-            style={{ marginTop: 14, fontSize: "1.7rem", fontWeight: 600 }}
+            gutterBottom
+            style={{
+              marginTop: 14,
+              fontSize: "1.7rem",
+              fontWeight: 600,
+              lineHeight: "1.2",
+            }}
           >
             {users.firstname
               ? `${users.title} ${users.firstname} ${users.lastname}`
