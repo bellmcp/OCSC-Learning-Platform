@@ -128,7 +128,7 @@ export default function LoginForm() {
         >
           FOR DEVELOPMENT
           <br />
-          ID: 1555327140532
+          ID: 3329900271574
           <br />
           PW: 12345678
         </Typography>
@@ -197,14 +197,12 @@ export default function LoginForm() {
           onChange={handleChange("password")}
         />
         <Button onClick={linkToForgotPassword}>ลืมรหัสผ่าน</Button>
-        {messageLogin && (
-          <FormHelperText
-            error
-            style={{ fontSize: "0.9rem", textAlign: "center" }}
-          >
-            {messageLogin}
-          </FormHelperText>
-        )}
+        <FormHelperText
+          error
+          style={{ fontSize: "0.9rem", textAlign: "center" }}
+        >
+          {messageLogin ? messageLogin : ""}
+        </FormHelperText>
         <Button
           size="large"
           color="secondary"
