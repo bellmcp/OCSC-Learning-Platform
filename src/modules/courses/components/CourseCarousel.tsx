@@ -10,7 +10,6 @@ import {
 import {
   useMediaQuery,
   Grid,
-  IconButton,
   CircularProgress,
   Typography,
 } from "@material-ui/core/";
@@ -46,21 +45,23 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBack: {
     position: "absolute",
-    top: "43%",
-    left: "-25px",
+    top: "47%",
+    left: "-15px",
     background: "none",
     border: "none",
     padding: theme.spacing(0, 0),
     zIndex: 2,
+    outline: "none !important",
   },
   buttonNext: {
     position: "absolute",
-    top: "43%",
-    right: "-25px",
+    top: "47%",
+    right: "-15px",
     background: "none",
     border: "none",
     padding: theme.spacing(0, 0),
     zIndex: 2,
+    outline: "none !important",
   },
   growButtonBack: {
     position: "absolute",
@@ -142,14 +143,10 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
                 ))}
               </Slider>
               <ButtonBack className={classes.buttonBack}>
-                <IconButton edge="end">
-                  <ArrowBack />
-                </IconButton>
+                <ArrowBack />
               </ButtonBack>
               <ButtonNext className={classes.buttonNext}>
-                <IconButton edge="start">
-                  <ArrowForward />
-                </IconButton>
+                <ArrowForward />
               </ButtonNext>
             </div>
           </CarouselProvider>

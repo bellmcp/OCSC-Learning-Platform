@@ -6,12 +6,7 @@ import {
   makeStyles,
   Theme,
 } from "@material-ui/core/styles";
-import {
-  useMediaQuery,
-  IconButton,
-  Grid,
-  CircularProgress,
-} from "@material-ui/core";
+import { useMediaQuery, Grid, CircularProgress } from "@material-ui/core";
 import {
   CarouselProvider,
   Slider,
@@ -65,21 +60,23 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     buttonBack: {
       position: "absolute",
-      top: "43%",
-      left: "-25px",
+      top: "47%",
+      left: "-15px",
       background: "none",
       border: "none",
       padding: theme.spacing(0, 0),
       zIndex: 2,
+      outline: "none !important",
     },
     buttonNext: {
       position: "absolute",
-      top: "43%",
-      right: "-25px",
+      top: "47%",
+      right: "-15px",
       background: "none",
       border: "none",
       padding: theme.spacing(0, 0),
       zIndex: 2,
+      outline: "none !important",
     },
     growButtonBack: {
       position: "absolute",
@@ -147,14 +144,10 @@ export default function PressCarousel({ presses, isLoading }) {
               ))}
             </Slider>
             <ButtonBack className={classes.buttonBack}>
-              <IconButton edge="end">
-                <ArrowBack />
-              </IconButton>
+              <ArrowBack />
             </ButtonBack>
             <ButtonNext className={classes.buttonNext}>
-              <IconButton edge="start">
-                <ArrowForward />
-              </IconButton>
+              <ArrowForward />
             </ButtonNext>
           </div>
           <div className={classes.dotGroup}>
