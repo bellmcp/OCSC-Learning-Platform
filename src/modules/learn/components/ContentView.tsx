@@ -8,7 +8,7 @@ import contentType from "utils/contentType";
 import VideoPlayer from "./VideoPlayer";
 import PdfViewer from "./PdfViewer";
 
-export default function ContentView({ activeContentView }) {
+export default function ContentView({ contentId, activeContentView }) {
   const [activeSource, setActiveSource] = useState("");
 
   useEffect(() => {
@@ -24,14 +24,12 @@ export default function ContentView({ activeContentView }) {
     }
   };
 
-  console.log(activeContentView);
-
   function renderContentView() {
     switch (contentType(activeSource)) {
       case "video":
         return <VideoPlayer url={activeSource} />;
       case "pdf":
-        return <PdfViewer pdf={activeSource} />;
+        return <PdfViewer url={activeSource} />;
       case "iframe":
         return (
           <Iframe
@@ -58,60 +56,93 @@ export default function ContentView({ activeContentView }) {
 
   return (
     <>
-      <Container maxWidth="lg">
-        <Box mt={4} mb={3}>
+      {contentId === undefined ? (
+        <Box my={10}>
           <Grid
             container
-            direction="row"
-            justify="space-between"
+            direction="column"
+            justify="center"
             alignItems="center"
           >
             <Typography
               variant="h6"
-              color="initial"
+              color="textPrimary"
+              gutterBottom
               style={{ fontSize: "1.6rem", fontWeight: 600 }}
             >
-              {activeContentView?.name}
+              ยินดีต้อนรับ
             </Typography>
-            {activeContentView?.type === "c" && (
-              <ToggleButtonGroup
-                value={activeSource}
-                exclusive
-                onChange={handleSource}
-                aria-label="สลับลิงก์"
-                size="small"
-              >
-                <ToggleButton
-                  value={activeContentView?.content1}
-                  aria-label="ลิงก์หลัก"
-                >
-                  <Typography
-                    variant="body2"
-                    color="primary"
-                    style={{ fontWeight: 500, padding: "0 6px" }}
-                  >
-                    ลิงก์หลัก
-                  </Typography>
-                </ToggleButton>
-                <ToggleButton
-                  value={activeContentView?.content2}
-                  aria-label="ลิงก์สำรอง"
-                >
-                  <Typography
-                    variant="body2"
-                    color="primary"
-                    style={{ fontWeight: 500, padding: "0 6px" }}
-                  >
-                    ลิงก์สำรอง
-                  </Typography>
-                </ToggleButton>
-              </ToggleButtonGroup>
-            )}
+            <Typography variant="body1" color="textSecondary">
+              โปรดเลือกเนื้อหาที่ต้องการเรียนจากสารบัญ
+            </Typography>
           </Grid>
         </Box>
-        <Divider />
-        <Box my={4}>{renderContentView()}</Box>
-      </Container>
+      ) : (
+        <Container maxWidth="lg">
+          <Box mt={4} mb={3}>
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Typography
+                variant="h6"
+                color="initial"
+                style={{ fontSize: "1.6rem", fontWeight: 600 }}
+              >
+                {activeContentView?.name}
+              </Typography>
+              {activeContentView?.type === "c" && (
+                <ToggleButtonGroup
+                  value={activeSource}
+                  exclusive
+                  onChange={handleSource}
+                  aria-label="สลับลิงก์"
+                  size="small"
+                >
+                  <ToggleButton
+                    value={activeContentView?.content1}
+                    aria-label="ลิงก์หลัก"
+                  >
+                    <Typography
+                      variant="body2"
+                      color="primary"
+                      style={{ fontWeight: 500, padding: "0 6px" }}
+                    >
+                      ลิงก์หลัก
+                    </Typography>
+                  </ToggleButton>
+                  <ToggleButton
+                    value={activeContentView?.content2}
+                    aria-label="ลิงก์สำรอง"
+                  >
+                    <Typography
+                      variant="body2"
+                      color="primary"
+                      style={{ fontWeight: 500, padding: "0 6px" }}
+                    >
+                      ลิงก์สำรอง
+                    </Typography>
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              )}
+            </Grid>
+          </Box>
+          <Divider />
+          <Box my={4}>
+            <Box mb={4}>
+              <Typography variant="body2" color="textSecondary">
+                FOR DEVELOPMENT
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                Current content url: {activeSource}
+              </Typography>
+            </Box>
+            {renderContentView()}
+          </Box>
+        </Container>
+      )}
     </>
   );
 }

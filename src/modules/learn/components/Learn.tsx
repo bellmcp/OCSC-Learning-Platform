@@ -103,11 +103,14 @@ export default function Learn() {
 
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
-  const { contents: courseContents } = useSelector((state) => state.courses);
+  var { contents: courseContents } = useSelector((state) => state.courses);
   const { myCourses } = useSelector((state) => state.registrations);
   const courseRegistrationDetails = myCourses.filter(
     (myCourse) => myCourse.courseId === parseInt(courseId)
   );
+  if (courseContents.length === 0) {
+    courseContents = [];
+  }
   const activeContentView = courseContents.filter(
     (courseContent) => courseContent.id === parseInt(contentId)
   );
@@ -147,7 +150,10 @@ export default function Learn() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <ContentView activeContentView={activeContentView[0]} />
+        <ContentView
+          contentId={contentId}
+          activeContentView={activeContentView[0]}
+        />
       </main>
       {/* <div className={classes.mobileSidebarContainer}>
         <SideBarMobile id={id} />
