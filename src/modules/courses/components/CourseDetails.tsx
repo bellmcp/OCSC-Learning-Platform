@@ -269,7 +269,11 @@ export default function CourseDetails() {
                     </Box>
                     {rounds.map((round) => (
                       <Box mt={4} mb={6}>
-                        <CourseRound {...round} myCourses={myCourses} />
+                        <CourseRound
+                          {...round}
+                          myCourses={myCourses}
+                          courseId={id}
+                        />
                       </Box>
                     ))}
                   </>

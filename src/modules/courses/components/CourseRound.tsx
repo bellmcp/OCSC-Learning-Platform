@@ -26,6 +26,7 @@ export default function CourseRound({
   maxStudents,
   numStudents,
   myCourses,
+  courseId,
 }: any) {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -48,6 +49,16 @@ export default function CourseRound({
     dispatch(registration_action);
   };
 
+  console.log(id);
+  console.log(courseId);
+  console.log(
+    myCourses.filter(
+      (myCourse) =>
+        myCourse.courseId === parseInt(courseId) &&
+        myCourse.courseRoundId === parseInt(id)
+    )
+  );
+
   function renderRegisterButton() {
     if (!isLogin()) {
       return (
@@ -64,17 +75,20 @@ export default function CourseRound({
       );
     } else if (
       isLogin() &&
-      myCourses.filter((myCourse) => myCourse.courseId === parseInt(id))
-        .length !== 0
+      myCourses.filter(
+        (myCourse) =>
+          myCourse.courseId === parseInt(courseId) &&
+          myCourse.courseRoundId === parseInt(id)
+      ).length !== 0
     ) {
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">
-            คุณลงทะเบียนรายวิชานี้แล้ว เข้าเรียนได้เลย
+            คุณลงทะเบียนรอบนี้แล้ว เข้าเรียนได้เลย
           </Typography>
           <Box my={2}>
             <Button
-              color="secondary"
+              color="primary"
               variant="contained"
               endIcon={<ArrowForwardIcon />}
               onClick={linkToLearn}
