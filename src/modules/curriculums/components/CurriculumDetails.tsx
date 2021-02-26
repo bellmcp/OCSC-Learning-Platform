@@ -2,7 +2,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from "@material-ui/core/styles";
 import {
   Typography,
   Container,
@@ -12,6 +17,7 @@ import {
   Avatar,
   CircularProgress,
   Button,
+  useMediaQuery,
 } from "@material-ui/core";
 import {
   Assignment as AssignmentIcon,
@@ -39,6 +45,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
+      [theme.breakpoints.down("xs")]: {
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+      },
     },
     amber: {
       color: theme.palette.getContrastText(amber[500]),
@@ -63,6 +73,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function CurriculumDetails() {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { id }: any = useParams();
 
   const dispatch = useDispatch();
@@ -157,7 +169,7 @@ export default function CurriculumDetails() {
               variant="h6"
               style={{
                 fontSize: "1.7rem",
-                lineHeight: "0.9",
+                lineHeight: "1.1",
                 fontWeight: 600,
               }}
             >
@@ -275,15 +287,21 @@ export default function CurriculumDetails() {
                   <Box mt={2} mb={4}>
                     <Divider />
                   </Box>
-
-                  <Typography
-                    style={{
-                      fontSize: "1.7rem",
-                      fontWeight: 600,
-                    }}
+                  <Grid
+                    container
+                    direction="row"
+                    justify={matches ? "flex-start" : "center"}
+                    alignItems="center"
                   >
-                    หลักสูตรนี้ประกอบด้วย
-                  </Typography>
+                    <Typography
+                      style={{
+                        fontSize: "1.7rem",
+                        fontWeight: 600,
+                      }}
+                    >
+                      หลักสูตรนี้ประกอบด้วย
+                    </Typography>
+                  </Grid>
                   <Box my={3}>
                     <Grid container spacing={1}>
                       {childCourses.map((course) => (
@@ -298,16 +316,21 @@ export default function CurriculumDetails() {
                 <Box mt={2} mb={4}>
                   <Divider />
                 </Box>
-
-                <Typography
-                  style={{
-                    fontSize: "1.7rem",
-                    fontWeight: 600,
-                  }}
+                <Grid
+                  container
+                  direction="row"
+                  justify={matches ? "flex-start" : "center"}
+                  alignItems="center"
                 >
-                  ลงทะเบียน
-                </Typography>
-
+                  <Typography
+                    style={{
+                      fontSize: "1.7rem",
+                      fontWeight: 600,
+                    }}
+                  >
+                    ลงทะเบียน
+                  </Typography>
+                </Grid>
                 <Box my={3}>
                   <Grid container spacing={3} alignItems="center">
                     {renderRegisterButton()}

@@ -47,6 +47,10 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
+      [theme.breakpoints.down("xs")]: {
+        paddingLeft: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+      },
     },
     amber: {
       color: theme.palette.getContrastText(amber[500]),
@@ -176,7 +180,7 @@ export default function CourseDetails() {
               variant="h6"
               style={{
                 fontSize: "1.7rem",
-                lineHeight: "0.9",
+                lineHeight: "1.1",
                 fontWeight: 600,
               }}
             >
@@ -276,14 +280,21 @@ export default function CourseDetails() {
                     <Box mt={2} mb={3}>
                       <Divider />
                     </Box>
-                    <Typography
-                      style={{
-                        fontSize: "1.7rem",
-                        fontWeight: 600,
-                      }}
+                    <Grid
+                      container
+                      direction="row"
+                      justify={matches ? "flex-start" : "center"}
+                      alignItems="center"
                     >
-                      ประมวลรายวิชา
-                    </Typography>
+                      <Typography
+                        style={{
+                          fontSize: "1.7rem",
+                          fontWeight: 600,
+                        }}
+                      >
+                        ประมวลรายวิชา
+                      </Typography>
+                    </Grid>
                     <Box my={1} style={{ maxWidth: 500 }}>
                       <List>
                         {contents.map((content, id) => (

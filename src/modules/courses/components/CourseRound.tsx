@@ -78,8 +78,10 @@ export default function CourseRound({
         <Typography
           style={{
             fontSize: "1.7rem",
+            lineHeight: "1.2",
             fontWeight: 600,
           }}
+          gutterBottom
         >
           {name}
         </Typography>
@@ -103,7 +105,9 @@ export default function CourseRound({
       <Grid item xs={12} sm={5}>
         <Grid container spacing={3} alignItems="baseline">
           <Grid item xs={6}>
-            <Typography variant="h6">เปิดให้ลงทะเบียน</Typography>
+            <Typography variant="h6" style={{ lineHeight: "1.2" }} gutterBottom>
+              เปิดให้ลงทะเบียน
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
@@ -114,7 +118,9 @@ export default function CourseRound({
         </Grid>
         <Grid container spacing={3} alignItems="baseline">
           <Grid item xs={6}>
-            <Typography variant="h6">เงื่อนไขการลงทะเบียน</Typography>
+            <Typography variant="h6" style={{ lineHeight: "1.2" }} gutterBottom>
+              เงื่อนไขการลงทะเบียน
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
@@ -124,7 +130,9 @@ export default function CourseRound({
         </Grid>
         <Grid container spacing={3} alignItems="baseline">
           <Grid item xs={6}>
-            <Typography variant="h6">เข้าเรียนได้</Typography>
+            <Typography variant="h6" style={{ lineHeight: "1.2" }} gutterBottom>
+              เข้าเรียนได้
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
@@ -135,7 +143,9 @@ export default function CourseRound({
         </Grid>
         <Grid container spacing={3} alignItems="baseline">
           <Grid item xs={6}>
-            <Typography variant="h6">จำนวนผู้เรียนสูงสุด</Typography>
+            <Typography variant="h6" style={{ lineHeight: "1.2" }} gutterBottom>
+              จำนวนผู้เรียนสูงสุด
+            </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
