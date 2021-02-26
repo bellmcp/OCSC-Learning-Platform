@@ -29,12 +29,12 @@ import {
   Info as InfoIcon,
   People as PeopleIcon,
   PlayCircleFilled as VideoIcon,
-  MenuBook as ReadIcon,
   LibraryBooks as QuizIcon,
   ThumbUp as SurveyIcon,
   Language as FileIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
+import contentType from "utils/contentType";
 
 import * as coursesActions from "../actions";
 import * as registrationsActions from "modules/registrations/actions";
@@ -147,14 +147,27 @@ export default function CourseDetails() {
     switch (type) {
       case "c":
         return <VideoIcon />;
-      case "r":
-        return <ReadIcon />;
       case "t":
         return <QuizIcon />;
       case "e":
         return <SurveyIcon />;
       default:
         return <FileIcon />;
+    }
+  }
+
+  function GenerateCourseContentType(type: string) {
+    switch (type) {
+      case "video":
+        return "วิดีโอ";
+      case "youtube":
+        return "วิดีโอ";
+      case "pdf":
+        return "เนื้อหา";
+      case "iframe":
+        return "เนื้อหา";
+      default:
+        return "";
     }
   }
 
@@ -313,9 +326,13 @@ export default function CourseDetails() {
                               </ListItemIcon>
                               <ListItemText
                                 primary={content.name}
-                                secondary={
-                                  content.minutes && `${content.minutes} นาที`
-                                }
+                                secondary={`${GenerateCourseContentType(
+                                  contentType(content.content1)
+                                )}${
+                                  content.minutes
+                                    ? `, ${content.minutes} นาที`
+                                    : ""
+                                }`}
                               />
                             </ListItem>
                           </>

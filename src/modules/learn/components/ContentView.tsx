@@ -1,25 +1,54 @@
-import React, { useState } from "react";
+//@ts-nocheck
+import React, { useState, useEffect } from "react";
+import Iframe from "react-iframe";
 import { Box, Container, Divider, Grid, Typography } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
+import contentType from "utils/contentType";
 
-export default function ContentView() {
-  const [source, setSource] = useState<string | null>(
-    "https://learn.ocsc.info/test/content.mp4"
-  );
+import VideoPlayer from "./VideoPlayer";
+
+export default function ContentView({ activeContentView }) {
+  const [activeSource, setActiveSource] = useState("");
+
+  useEffect(() => {
+    setActiveSource(activeContentView?.content1);
+  }, [activeContentView]);
 
   const handleSource = (
     event: React.MouseEvent<HTMLElement>,
     newSource: string | null
   ) => {
     if (newSource !== null) {
-      setSource(newSource);
+      setActiveSource(newSource);
     }
   };
+
+  function renderContentView() {
+    switch (contentType(activeSource)) {
+      case "video":
+        return <VideoPlayer url={activeSource} />;
+      case "pdf":
+        return <h1>Render pdf</h1>;
+      case "iframe":
+        return (
+          <Iframe
+            url={activeSource}
+            width="100%"
+            height="800px"
+            allowFullScreen
+            frameBorder={0}
+            scrolling="auto"
+          />
+        );
+      default:
+        return <h1>Unsupported content</h1>;
+    }
+  }
 
   return (
     <>
       <Container maxWidth="lg">
-        <Box mt={6} mb={3}>
+        <Box mt={4} mb={3}>
           <Grid
             container
             direction="row"
@@ -29,20 +58,19 @@ export default function ContentView() {
             <Typography
               variant="h6"
               color="initial"
-              gutterBottom
               style={{ fontSize: "1.4rem", fontWeight: 600 }}
             >
-              เนื้อหา
+              {activeContentView?.name}
             </Typography>
             <ToggleButtonGroup
-              value={source}
+              value={activeSource}
               exclusive
               onChange={handleSource}
               aria-label="สลับลิงก์"
               size="small"
             >
               <ToggleButton
-                value="https://learn.ocsc.info/test/content.mp4"
+                value={activeContentView?.content1}
                 aria-label="ลิงก์หลัก"
               >
                 <Typography
@@ -54,7 +82,7 @@ export default function ContentView() {
                 </Typography>
               </ToggleButton>
               <ToggleButton
-                value="https://www.youtube.com/watch?v=zw4sHOIx8t0"
+                value={activeContentView?.content2}
                 aria-label="ลิงก์สำรอง"
               >
                 <Typography
@@ -69,7 +97,12 @@ export default function ContentView() {
           </Grid>
         </Box>
         <Divider />
-        <Box my={4}>เนื้อหา</Box>
+        <Box my={4}>
+          {renderContentView()}
+          {activeContentView?.content1}
+          <br />
+          {activeContentView?.content2}
+        </Box>
       </Container>
     </>
   );

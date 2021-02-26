@@ -1,7 +1,8 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
+import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import {
   useMediaQuery,
   Divider,
@@ -97,6 +98,8 @@ export default function Learn() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("xs"));
   const { id: courseId }: any = useParams();
+  const { search } = useLocation();
+  const { contentId } = queryString.parse(search);
 
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
@@ -104,6 +107,9 @@ export default function Learn() {
   const { myCourses } = useSelector((state) => state.registrations);
   const courseRegistrationDetails = myCourses.filter(
     (myCourse) => myCourse.courseId === parseInt(courseId)
+  );
+  const activeContentView = courseContents.filter(
+    (courseContent) => courseContent.id === parseInt(contentId)
   );
 
   useEffect(() => {
@@ -141,7 +147,7 @@ export default function Learn() {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        <ContentView />
+        <ContentView activeContentView={activeContentView[0]} />
       </main>
       {/* <div className={classes.mobileSidebarContainer}>
         <SideBarMobile id={id} />

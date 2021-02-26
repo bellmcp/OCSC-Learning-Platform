@@ -15,11 +15,11 @@ import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import {
   PlayCircleFilled as VideoIcon,
-  MenuBook as ReadIcon,
   LibraryBooks as QuizIcon,
   ThumbUp as SurveyIcon,
   Language as FileIcon,
 } from "@material-ui/icons";
+import contentType from "utils/contentType";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -47,8 +47,6 @@ export default function ContentList({ courseContents }: any) {
     switch (type) {
       case "c":
         return <VideoIcon />;
-      case "r":
-        return <ReadIcon />;
       case "t":
         return <QuizIcon />;
       case "e":
@@ -57,6 +55,22 @@ export default function ContentList({ courseContents }: any) {
         return <FileIcon />;
     }
   }
+
+  function GenerateCourseContentType(type: string) {
+    switch (type) {
+      case "video":
+        return "วิดีโอ";
+      case "youtube":
+        return "วิดีโอ";
+      case "pdf":
+        return "เนื้อหา";
+      case "iframe":
+        return "เนื้อหา";
+      default:
+        return "";
+    }
+  }
+
   return (
     <List component="div">
       {courseContents.length === 0 ? (
@@ -106,7 +120,13 @@ export default function ContentList({ courseContents }: any) {
                 secondary={
                   courseContent?.minutes && (
                     <Typography variant="body2" color="textSecondary">
-                      {courseContent?.minutes} นาที
+                      {`${GenerateCourseContentType(
+                        contentType(courseContent.content1)
+                      )}${
+                        courseContent.minutes
+                          ? `, ${courseContent.minutes} นาที`
+                          : ""
+                      }`}
                     </Typography>
                   )
                 }
