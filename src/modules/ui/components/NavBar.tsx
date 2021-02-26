@@ -280,7 +280,7 @@ export default function NavBar(props: NavigationBarProps) {
     setTimeout(() => {
       history.push(`${path}`);
       window.location.reload();
-    }, 1500);
+    }, 1000);
   };
 
   const handleDrawerToggle = () => {
