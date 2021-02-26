@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
+import LoadingBar from "react-redux-loading-bar";
 import { CssBaseline, Snackbar, IconButton } from "@material-ui/core";
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -98,6 +99,16 @@ export default function Layout() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <LoadingBar
+        maxProgress={100}
+        updateTime={100}
+        style={{
+          zIndex: 9999999999,
+          height: 2,
+          backgroundColor: theme.palette.secondary.main,
+          transition: "all 5s ease 3s",
+        }}
+      />
       <NavBar active={activePage} setActivePage={setActivePage} />
       <Routes />
       <Snackbar

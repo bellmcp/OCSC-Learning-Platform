@@ -39,6 +39,7 @@
     "react-pdf": "^5.0.0",
     "react-player": "^2.6.2",
     "react-redux": "^7.2.2",
+    "react-redux-loading-bar": "^5.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-swipeable-views": "^0.13.9",
