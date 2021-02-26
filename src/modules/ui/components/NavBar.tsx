@@ -311,7 +311,7 @@ export default function NavBar(props: NavigationBarProps) {
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar}>
         <Container
-          maxWidth={!pathname.includes(`${path}/learn/demo`) ? "lg" : false}
+          maxWidth={!pathname.includes(`${path}/learn/courses`) ? "lg" : false}
         >
           <Toolbar>
             {/* DRAWER TOGGLE */}

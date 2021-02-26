@@ -34,19 +34,15 @@ export default function Layout() {
         case `${path}/learn`:
           setActivePage(1);
           break;
-        case `${path}/learn/demo`:
-        case `${path}/learn/demo/read`:
-        case `${path}/learn/demo/exam`:
-        case `${path}/learn/demo/survey`:
-        case `${path}/learn/demo/file`:
-          setActivePage(1);
-          break;
         case `${path}/support`:
           setActivePage(2);
           break;
         default:
           setActivePage(99);
           break;
+      }
+      if (pathname.includes("/learn/courses")) {
+        setActivePage(1);
       }
     };
     setInitialActivePage();
