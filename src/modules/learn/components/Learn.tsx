@@ -25,6 +25,7 @@ import {
 import { amber } from "@material-ui/core/colors";
 
 import * as coursesActions from "modules/courses/actions";
+import * as registrationsActions from "modules/registrations/actions";
 import SideBar from "./SideBar";
 import SideBarMobile from "./SideBarMobile";
 
@@ -158,6 +159,12 @@ export default function Lecture({ content, id }: LectureProps) {
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
   const { contents: courseContents } = useSelector((state) => state.courses);
+  const { isLoading: isRegistrationsLoading, myCourses } = useSelector(
+    (state) => state.registrations
+  );
+  const courseRegistrationDetails = myCourses.filter(
+    (myCourse) => myCourse.courseId === parseInt(courseId)
+  );
 
   useEffect(() => {
     const courses_action = coursesActions.loadCourse(courseId);
@@ -168,6 +175,11 @@ export default function Lecture({ content, id }: LectureProps) {
     const course_content_action = coursesActions.loadCourseContents(courseId);
     dispatch(course_content_action);
   }, [dispatch, courseId]);
+
+  useEffect(() => {
+    const course_registrations_action = registrationsActions.loadCourseRegistrations();
+    dispatch(course_registrations_action);
+  }, [dispatch]);
 
   // const [timer, setTimer] = React.useState(1);
   // const [progress, setProgress] = React.useState(0);
@@ -204,7 +216,11 @@ export default function Lecture({ content, id }: LectureProps) {
         anchor="left"
       >
         <Divider />
-        <SideBar id={id} course={course} courseContents={courseContents} />
+        <SideBar
+          course={course}
+          courseContents={courseContents}
+          courseRegistrationDetails={courseRegistrationDetails}
+        />
       </Drawer>
       <main className={classes.content}>
         <Toolbar />

@@ -74,7 +74,7 @@ export default function MyCurriculumItem({
   }, [satisfactionScore]);
 
   const updateSatisfactionScore = (newValue) => {
-    const satisfaction_score_action = registrationsActions.updateSatisfactionScore(
+    const satisfaction_score_action = registrationsActions.updateCurriculumSatisfactionScore(
       id,
       newValue
     );

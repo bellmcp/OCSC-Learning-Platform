@@ -29,6 +29,12 @@ const CURRICULUM_REGISTRATION_SUCCESS =
   "learning-platform/registrations/CURRICULUM_REGISTRATION_SUCCESS";
 const CURRICULUM_REGISTRATION_FAILURE =
   "learning-platform/registrations/CURRICULUM_REGISTRATION_FAILURE";
+const UPDATE_COURSE_SATISFACTION_SCORE_REQUEST =
+  "learning-platform/registrations/UPDATE_COURSE_SATISFACTION_SCORE_REQUEST";
+const UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS =
+  "learning-platform/registrations/UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS";
+const UPDATE_COURSE_SATISFACTION_SCORE_FAILURE =
+  "learning-platform/registrations/UPDATE_COURSE_SATISFACTION_SCORE_FAILURE";
 const UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST =
   "learning-platform/registrations/UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST";
 const UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS =
@@ -161,7 +167,47 @@ function registerCurriculum(curriculumId) {
   };
 }
 
-function updateSatisfactionScore(registrationId, satisfactionScore) {
+function updateCourseSatisfactionScore(registrationId, satisfactionScore) {
+  return async (dispatch, getState) => {
+    const {
+      user: { items },
+    } = getState();
+    const token = getCookie("token");
+    dispatch({ type: UPDATE_COURSE_SATISFACTION_SCORE_REQUEST });
+    try {
+      const { data } = await axios.put(
+        `/Users/${items.id}/CourseRegistrations/${registrationId}/SatisfactionScore`,
+        {
+          satisfactionScore,
+        },
+        {
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      dispatch({
+        type: UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS,
+        payload: { satisfactionScoreUpdate: data },
+      });
+      dispatch(
+        uiActions.setFlashMessage(
+          "บันทึกข้อมูลเรียบร้อย ขอบคุณที่ให้คะแนน",
+          "success"
+        )
+      );
+    } catch (err) {
+      dispatch({ type: UPDATE_COURSE_SATISFACTION_SCORE_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
+    }
+  };
+}
+
+function updateCurriculumSatisfactionScore(registrationId, satisfactionScore) {
   return async (dispatch, getState) => {
     const {
       user: { items },
@@ -183,7 +229,12 @@ function updateSatisfactionScore(registrationId, satisfactionScore) {
         type: UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
         payload: { satisfactionScoreUpdate: data },
       });
-      dispatch(uiActions.setFlashMessage("บันทึกข้อมูลเรียบร้อย", "success"));
+      dispatch(
+        uiActions.setFlashMessage(
+          "บันทึกข้อมูลเรียบร้อย ขอบคุณที่ให้คะแนน",
+          "success"
+        )
+      );
     } catch (err) {
       dispatch({ type: UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE });
       dispatch(
@@ -209,6 +260,9 @@ export {
   CURRICULUM_REGISTRATION_REQUEST,
   CURRICULUM_REGISTRATION_SUCCESS,
   CURRICULUM_REGISTRATION_FAILURE,
+  UPDATE_COURSE_SATISFACTION_SCORE_REQUEST,
+  UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS,
+  UPDATE_COURSE_SATISFACTION_SCORE_FAILURE,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE,
@@ -216,5 +270,6 @@ export {
   loadCurriculumRegistrations,
   registerCourse,
   registerCurriculum,
-  updateSatisfactionScore,
+  updateCourseSatisfactionScore,
+  updateCurriculumSatisfactionScore,
 };

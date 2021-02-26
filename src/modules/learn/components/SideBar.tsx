@@ -1,34 +1,23 @@
 // @ts-nocheck
-import React from "react";
-import { useLocation } from "react-router-dom";
-import clsx from "clsx";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { Link as RouterLink, useHistory } from "react-router-dom";
 import {
   ListSubheader,
   List,
-  ListItemIcon,
-  ListItemText,
   Typography,
   Divider,
   Box,
-  MenuItem,
   Grid,
-  Badge,
   Button,
   Toolbar,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
-import {
-  PlayCircleFilled as VideoIcon,
-  MenuBook as ReadIcon,
-  LibraryBooks as QuizIcon,
-  ThumbUp as SurveyIcon,
-  CheckCircle as CheckIcon,
-  Language as FileIcon,
-  ArrowBackIos as ArrowBackIcon,
-} from "@material-ui/icons";
-import { green } from "@material-ui/core/colors";
+import { ArrowBackIos as ArrowBackIcon } from "@material-ui/icons";
+
+import * as registrationsActions from "modules/registrations/actions";
+import CourseContentList from "./CourseContentList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,40 +26,38 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
-    nested: {
-      paddingLeft: theme.spacing(4),
-    },
-    completed: {
-      paddingLeft: theme.spacing(2),
-      borderLeft: `8px solid ${green[800]}`,
-    },
   })
 );
 
-export default function SideBar({ id, course, courseContents }: any) {
+export default function SideBar({
+  course,
+  courseContents,
+  courseRegistrationDetails,
+}: any) {
   const classes = useStyles();
   const history = useHistory();
-  const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const path = "/learning-platform";
+  const [value, setValue] = useState(0);
+  const registrationId = courseRegistrationDetails[0]?.id;
+  const satisfactionScore = courseRegistrationDetails[0]?.satisfactionScore;
+
+  useEffect(() => {
+    setValue(satisfactionScore);
+  }, [satisfactionScore]);
+
+  const updateSatisfactionScore = (newValue) => {
+    const satisfaction_score_action = registrationsActions.updateCourseSatisfactionScore(
+      registrationId,
+      newValue
+    );
+    dispatch(satisfaction_score_action);
+    setValue(newValue);
+  };
 
   const linkToLearn = () => {
     history.push(`${path}/learn`);
   };
-
-  function GenerateCourseContentIcon(type: string) {
-    switch (type) {
-      case "c":
-        return <VideoIcon />;
-      case "r":
-        return <ReadIcon />;
-      case "t":
-        return <QuizIcon />;
-      case "e":
-        return <SurveyIcon />;
-      default:
-        return <FileIcon />;
-    }
-  }
 
   return (
     <List
@@ -111,69 +98,7 @@ export default function SideBar({ id, course, courseContents }: any) {
       className={classes.root}
       dense
     >
-      <List component="div">
-        {courseContents.length === 0 ? (
-          <Grid container justify="center" alignItems="center">
-            <Box my={6}>
-              <Typography variant="body2" color="textSecondary">
-                ไม่มีเนื้อหารายวิชา
-              </Typography>
-            </Box>
-          </Grid>
-        ) : (
-          <>
-            {courseContents.map((courseContent) => (
-              <MenuItem
-                button
-                // selected={item.id === id}
-                // className={clsx({
-                //   [classes.nested]: true,
-                //   [classes.completed]: item.completed,
-                // })}
-                className={classes.nested}
-                component={RouterLink}
-                to={`${pathname}?contentId=${courseContent.id}`}
-                // onClick={() => console.log(courseContent.id)}
-                // onClick={linkToContent(1)}
-              >
-                <ListItemIcon>
-                  {GenerateCourseContentIcon(courseContent.type)}
-                </ListItemIcon>
-                {/* <ListItemIcon>
-              {item.completed ? (
-                <Badge
-                  badgeContent={
-                    <CheckIcon
-                      style={{ color: green[800], fontSize: "18px" }}
-                    />
-                  }
-                >
-                  {item.icon}
-                </Badge>
-              ) : (
-                <>{item.icon}</>
-              )}
-            </ListItemIcon> */}
-                <ListItemText
-                  primary={
-                    <Typography variant="body1" color="textPrimary">
-                      {courseContent.name ? courseContent.name : "เนื้อหา"}
-                    </Typography>
-                  }
-                  secondary={
-                    courseContent.minutes && (
-                      <Typography variant="body2" color="textSecondary">
-                        {courseContent.minutes} นาที
-                      </Typography>
-                    )
-                  }
-                />
-              </MenuItem>
-            ))}
-          </>
-        )}
-      </List>
-
+      <CourseContentList courseContents={courseContents} />
       <Divider variant="middle" />
       <Box my={4}>
         <Grid container justify="center" direction="column" alignItems="center">
@@ -191,10 +116,10 @@ export default function SideBar({ id, course, courseContents }: any) {
           <Grid item>
             <Rating
               name="size-large"
-              defaultValue={0}
+              value={value}
               size="large"
               onChange={(event, newValue) => {
-                alert(`Voted: ${newValue} stars`);
+                updateSatisfactionScore(newValue);
               }}
             />
           </Grid>

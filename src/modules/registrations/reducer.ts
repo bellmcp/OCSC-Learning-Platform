@@ -11,6 +11,9 @@ import {
   CURRICULUM_REGISTRATION_REQUEST,
   CURRICULUM_REGISTRATION_SUCCESS,
   CURRICULUM_REGISTRATION_FAILURE,
+  UPDATE_COURSE_SATISFACTION_SCORE_REQUEST,
+  UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS,
+  UPDATE_COURSE_SATISFACTION_SCORE_FAILURE,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE,
@@ -22,7 +25,8 @@ const initialState = {
   myCurriculums: [],
   courseRegister: [],
   curriculumRegister: [],
-  satisfactionScore: [],
+  courseSatisfactionScore: [],
+  curriculumSatisfactionScore: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -35,8 +39,10 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: true, courseRegister: [] };
     case CURRICULUM_REGISTRATION_REQUEST:
       return { ...state, isLoading: true, curriculumRegister: [] };
+    case UPDATE_COURSE_SATISFACTION_SCORE_REQUEST:
+      return { ...state, isLoading: true, courseSatisfactionScore: [] };
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST:
-      return { ...state, isLoading: true, satisfactionScore: [] };
+      return { ...state, isLoading: true, curriculumSatisfactionScore: [] };
     case LOAD_COURSE_REGISTRATIONS_SUCCESS:
       return {
         ...state,
@@ -61,16 +67,23 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         curriculumRegister: action.payload.curriculumRegister,
       };
+    case UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        courseSatisfactionScore: action.payload.satisfactionScoreUpdate,
+      };
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        satisfactionScore: action.payload.satisfactionScoreUpdate,
+        curriculumSatisfactionScore: action.payload.satisfactionScoreUpdate,
       };
     case LOAD_COURSE_REGISTRATIONS_FAILURE:
     case LOAD_CURRICULUM_REGISTRATIONS_FAILURE:
     case COURSE_REGISTRATION_FAILURE:
     case CURRICULUM_REGISTRATION_FAILURE:
+    case UPDATE_COURSE_SATISFACTION_SCORE_FAILURE:
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE:
       return { ...state, isLoading: false };
     default:
