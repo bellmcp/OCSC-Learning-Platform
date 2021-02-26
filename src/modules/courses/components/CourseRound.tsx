@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import DayJS from "react-dayjs";
 import {
   Typography,
@@ -27,10 +28,20 @@ export default function CourseRound({
   myCourses,
 }: any) {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const path = "/learning-platform";
 
   if (myCourses === "") {
     myCourses = [];
   }
+
+  const linkToLogin = () => {
+    history.push(`${path}/login`);
+  };
+
+  const linkToLearn = () => {
+    history.push(`${path}/learn`);
+  };
 
   const registerCourse = () => {
     const registration_action = registrationsActions.registerCourse(id);
@@ -42,8 +53,13 @@ export default function CourseRound({
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">
-            โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
+            โปรดเข้าสู่ระบบเพื่อลงทะเบียนรายวิชา
           </Typography>
+          <Box my={1}>
+            <Button color="secondary" variant="contained" onClick={linkToLogin}>
+              เข้าสู่ระบบ
+            </Button>
+          </Box>
         </Grid>
       );
     } else if (
@@ -54,8 +70,18 @@ export default function CourseRound({
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">
-            คุณลงทะเบียนรอบนี้แล้ว เริ่มเรียนได้เลย
+            คุณลงทะเบียนรายวิชานี้แล้ว เข้าเรียนได้เลย
           </Typography>
+          <Box my={2}>
+            <Button
+              color="secondary"
+              variant="contained"
+              endIcon={<ArrowForwardIcon />}
+              onClick={linkToLearn}
+            >
+              เข้าเรียน
+            </Button>
+          </Box>
         </Grid>
       );
     } else {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import {
   createStyles,
   makeStyles,
@@ -76,6 +76,8 @@ export default function CurriculumDetails() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { id }: any = useParams();
+  const history = useHistory();
+  const path = "/learning-platform";
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
@@ -114,6 +116,14 @@ export default function CurriculumDetails() {
     const categories_action = categoriesActions.loadCategories();
     dispatch(categories_action);
   }, [dispatch]);
+
+  const linkToLogin = () => {
+    history.push(`${path}/login`);
+  };
+
+  const linkToLearn = () => {
+    history.push(`${path}/learn`);
+  };
 
   const registerCurriculum = () => {
     const registration_action = registrationsActions.registerCurriculum(id);
@@ -201,8 +211,13 @@ export default function CurriculumDetails() {
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">
-            โปรดเข้าสู่ระบบเพื่อดำเนินการต่อ
+            โปรดเข้าสู่ระบบเพื่อลงทะเบียนหลักสูตร
           </Typography>
+          <Box my={2}>
+            <Button color="secondary" variant="contained" onClick={linkToLogin}>
+              เข้าสู่ระบบ
+            </Button>
+          </Box>
         </Grid>
       );
     } else if (
@@ -214,8 +229,18 @@ export default function CurriculumDetails() {
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">
-            คุณลงทะเบียนหลักสูตรนี้แล้ว เริ่มเรียนได้เลย
+            คุณลงทะเบียนหลักสูตรนี้แล้ว เข้าเรียนได้เลย
           </Typography>
+          <Box my={2}>
+            <Button
+              color="secondary"
+              variant="contained"
+              endIcon={<ArrowForwardIcon />}
+              onClick={linkToLearn}
+            >
+              เข้าเรียน
+            </Button>
+          </Box>
         </Grid>
       );
     } else {
