@@ -6,6 +6,7 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import contentType from "utils/contentType";
 
 import VideoPlayer from "./VideoPlayer";
+import PdfViewer from "./PdfViewer";
 
 export default function ContentView({ activeContentView }) {
   const [activeSource, setActiveSource] = useState("");
@@ -30,7 +31,7 @@ export default function ContentView({ activeContentView }) {
       case "video":
         return <VideoPlayer url={activeSource} />;
       case "pdf":
-        return <h1>Render pdf</h1>;
+        return <PdfViewer pdf={activeSource} />;
       case "iframe":
         return (
           <Iframe
