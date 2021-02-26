@@ -77,7 +77,7 @@ export default function CourseDetails() {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const { id }: any = useParams();
+  const { id: courseId }: any = useParams();
 
   const dispatch = useDispatch();
   const [course] = useSelector((state) => state.courses.items);
@@ -87,9 +87,9 @@ export default function CourseDetails() {
   const { myCourses } = useSelector((state) => state.registrations);
 
   useEffect(() => {
-    const courses_action = coursesActions.loadCourse(id);
+    const courses_action = coursesActions.loadCourse(courseId);
     dispatch(courses_action);
-  }, [dispatch, id]);
+  }, [dispatch, courseId]);
 
   useEffect(() => {
     const course_registrations_action = registrationsActions.loadCourseRegistrations();
@@ -97,14 +97,14 @@ export default function CourseDetails() {
   }, [dispatch]);
 
   useEffect(() => {
-    const course_round_action = coursesActions.loadCourseRounds(id);
+    const course_round_action = coursesActions.loadCourseRounds(courseId);
     dispatch(course_round_action);
-  }, [dispatch, id]);
+  }, [dispatch, courseId]);
 
   useEffect(() => {
-    const course_content_action = coursesActions.loadCourseContents(id);
+    const course_content_action = coursesActions.loadCourseContents(courseId);
     dispatch(course_content_action);
-  }, [dispatch, id]);
+  }, [dispatch, courseId]);
 
   useEffect(() => {
     const categories_action = categoriesActions.loadCategories();
@@ -274,7 +274,7 @@ export default function CourseDetails() {
                           <CourseRound
                             {...round}
                             myCourses={myCourses}
-                            courseId={id}
+                            courseId={courseId}
                           />
                         </Box>
                       </>

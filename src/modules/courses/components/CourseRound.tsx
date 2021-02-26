@@ -49,16 +49,6 @@ export default function CourseRound({
     dispatch(registration_action);
   };
 
-  console.log(id);
-  console.log(courseId);
-  console.log(
-    myCourses.filter(
-      (myCourse) =>
-        myCourse.courseId === parseInt(courseId) &&
-        myCourse.courseRoundId === parseInt(id)
-    )
-  );
-
   function renderRegisterButton() {
     if (!isLogin()) {
       return (
