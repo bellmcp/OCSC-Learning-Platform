@@ -1,6 +1,5 @@
-import Container from "@material-ui/core/Container";
-import { makeStyles } from "@material-ui/core/styles";
 import React, { useRef, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import ReactPlayer from "react-player";
 import screenfull from "screenfull";
 import Control from "./Control";
@@ -10,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "500px",
     position: "relative",
+    backgroundColor: "black",
   },
   controlsWrapper: {
     visibility: "hidden",
@@ -212,62 +212,77 @@ export default function Player(props) {
   const totalDuration = format(duration);
 
   return (
-    <React.Fragment>
-      <Container maxWidth="md">
-        <div
-          onMouseMove={handleMouseMove}
-          onMouseLeave={hanldeMouseLeave}
-          ref={playerContainerRef}
-          className={classes.playerWrapper}
-        >
-          <ReactPlayer
-            ref={playerRef}
-            width="100%"
-            height="100%"
-            url={props.url}
-            pip={pip}
-            playing={playing}
-            controls={false}
-            light={light}
-            loop={loop}
-            playbackRate={playbackRate}
-            volume={volume}
-            muted={muted}
-            onProgress={handleProgress}
-            config={{
-              file: {
-                attributes: {
-                  crossorigin: "anonymous",
-                },
-              },
-            }}
-          />
-
-          <Control
-            ref={controlsRef}
-            onSeek={handleSeekChange}
-            onSeekMouseDown={handleSeekMouseDown}
-            onSeekMouseUp={handleSeekMouseUp}
-            onDuration={handleDuration}
-            onRewind={handleRewind}
-            onPlayPause={handlePlayPause}
-            onFastForward={handleFastForward}
-            playing={playing}
-            played={played}
-            elapsedTime={elapsedTime}
-            totalDuration={totalDuration}
-            onMute={hanldeMute}
-            muted={muted}
-            onVolumeChange={handleVolumeChange}
-            onVolumeSeekDown={handleVolumeSeekDown}
-            onChangeDispayFormat={handleDisplayFormat}
-            playbackRate={playbackRate}
-            onPlaybackRateChange={handlePlaybackRate}
-            onToggleFullScreen={toggleFullScreen}
-            volume={volume}
-          />
-        </div>
-      </Container>
-    </React.Fragment>
+    <div
+      style={{
+        position: "relative",
+        paddingTop: "56.25%",
+      }}
+    >
+      <ReactPlayer
+        url={props.url}
+        controls
+        className="react-player"
+        playing
+        width="100%"
+        height="100%"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
+      />
+    </div>
+    // <div
+    //   onMouseMove={handleMouseMove}
+    //   onMouseLeave={hanldeMouseLeave}
+    //   ref={playerContainerRef}
+    //   className={classes.playerWrapper}
+    // >
+    //   <ReactPlayer
+    //     ref={playerRef}
+    //     width="100%"
+    //     height="100%"
+    //     url={props.url}
+    //     pip={pip}
+    //     playing={playing}
+    //     controls={false}
+    //     light={light}
+    //     loop={loop}
+    //     playbackRate={playbackRate}
+    //     volume={volume}
+    //     muted={muted}
+    //     onProgress={handleProgress}
+    //     config={{
+    //       file: {
+    //         attributes: {
+    //           crossorigin: "anonymous",
+    //         },
+    //       },
+    //     }}
+    //   />
+    //   <Control
+    //     ref={controlsRef}
+    //     onSeek={handleSeekChange}
+    //     onSeekMouseDown={handleSeekMouseDown}
+    //     onSeekMouseUp={handleSeekMouseUp}
+    //     onDuration={handleDuration}
+    //     onRewind={handleRewind}
+    //     onPlayPause={handlePlayPause}
+    //     onFastForward={handleFastForward}
+    //     playing={playing}
+    //     played={played}
+    //     elapsedTime={elapsedTime}
+    //     totalDuration={totalDuration}
+    //     onMute={hanldeMute}
+    //     muted={muted}
+    //     onVolumeChange={handleVolumeChange}
+    //     onVolumeSeekDown={handleVolumeSeekDown}
+    //     onChangeDispayFormat={handleDisplayFormat}
+    //     playbackRate={playbackRate}
+    //     onPlaybackRateChange={handlePlaybackRate}
+    //     onToggleFullScreen={toggleFullScreen}
+    //     volume={volume}
+    //   />
+    // </div>
   );
 }
