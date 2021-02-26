@@ -123,7 +123,7 @@ export default function CourseRound({
           }}
           gutterBottom
         >
-          {name}
+          รอบที่ {id} {name}
         </Typography>
         <Box mb={3}>
           <Box display="flex" alignItems="center">
