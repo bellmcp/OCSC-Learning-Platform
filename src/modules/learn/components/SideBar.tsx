@@ -17,7 +17,7 @@ import Rating from "@material-ui/lab/Rating";
 import { ArrowBackIos as ArrowBackIcon } from "@material-ui/icons";
 
 import * as registrationsActions from "modules/registrations/actions";
-import CourseContentList from "./CourseContentList";
+import CourseContentList from "./ContentList";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

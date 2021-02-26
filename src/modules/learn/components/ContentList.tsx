@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CourseContentList({ courseContents }: any) {
+export default function ContentList({ courseContents }: any) {
   const classes = useStyles();
   const { pathname, search } = useLocation();
   const { contentId } = queryString.parse(search);
