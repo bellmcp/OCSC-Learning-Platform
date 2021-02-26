@@ -18,8 +18,9 @@ import {
 
 import * as coursesActions from "modules/courses/actions";
 import * as registrationsActions from "modules/registrations/actions";
-import Timer from "./Timer";
 import SideBar from "./SideBar";
+import ContentView from "./ContentView";
+import Timer from "./Timer";
 import SideBarMobile from "./SideBarMobile";
 
 const drawerWidth = 300;
@@ -91,12 +92,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface LectureProps {
-  content: any;
-  id: number;
-}
-
-export default function Lecture({ content, id }: LectureProps) {
+export default function Learn() {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("xs"));
@@ -145,7 +141,7 @@ export default function Lecture({ content, id }: LectureProps) {
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        {/* {content} */}
+        <ContentView />
       </main>
       {/* <div className={classes.mobileSidebarContainer}>
         <SideBarMobile id={id} />
