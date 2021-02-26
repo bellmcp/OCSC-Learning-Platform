@@ -118,8 +118,7 @@ export default function MyCurriculumItem({
                     <Typography
                       variant="h6"
                       component="h2"
-                      style={{ lineHeight: "1.1" }}
-                      gutterBottom
+                      style={{ lineHeight: "1.1", marginBottom: 4 }}
                     >
                       {name}
                     </Typography>
@@ -144,6 +143,7 @@ export default function MyCurriculumItem({
                         component="p"
                         variant="body2"
                         align="center"
+                        color="textSecondary"
                       >
                         โปรดให้คะแนนหลักสูตร
                       </Typography>
@@ -176,8 +176,13 @@ export default function MyCurriculumItem({
                 wrap="nowrap"
               >
                 <Grid item>
-                  <Typography component="p" variant="body2" align="center">
-                    โปรดให้คะแนนหลักสูตรนี้
+                  <Typography
+                    component="p"
+                    variant="body2"
+                    align="center"
+                    color="textSecondary"
+                  >
+                    โปรดให้คะแนนหลักสูตร
                   </Typography>
                 </Grid>
                 <Grid item>

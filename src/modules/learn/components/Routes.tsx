@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
-import Lecture from "./Lecture";
+import Lecture from "./Learn";
 import Video from "./Video";
 import Read from "./Read";
 import Exam from "./Exam";
@@ -27,6 +27,9 @@ export default function Routes() {
         <Lecture content={<Survey />} id={7} />
       </Route>
       <Route path={`${path}/demo`}>
+        <Lecture content={<Video />} id={3} />
+      </Route>
+      <Route path={`${path}/courses/:id`}>
         <Lecture content={<Video />} id={3} />
       </Route>
       <Route path={path}>

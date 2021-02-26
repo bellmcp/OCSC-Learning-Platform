@@ -136,7 +136,7 @@ export default function Layout() {
           {flashMessage}
         </Alert>
       </Snackbar>
-      {!pathname.includes(`${path}/learn/demo`) && <Footer />}
+      {!pathname.includes(`${path}/learn/courses`) && <Footer />}
     </ThemeProvider>
   );
 }

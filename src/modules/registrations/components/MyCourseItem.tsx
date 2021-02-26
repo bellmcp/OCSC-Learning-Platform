@@ -68,8 +68,8 @@ export default function MyCourseItem({
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
   const history = useHistory();
 
-  const linkToDemoLecture = () => {
-    history.push(`${path}/learn/demo`);
+  const linkToLecture = () => {
+    history.push(`${path}/learn/courses/${courseId}`);
   };
 
   return (
@@ -142,7 +142,7 @@ export default function MyCourseItem({
                       variant="outlined"
                       color="primary"
                       startIcon={<PlayIcon />}
-                      onClick={linkToDemoLecture}
+                      onClick={linkToLecture}
                     >
                       เข้าเรียน
                     </Button>
@@ -162,7 +162,7 @@ export default function MyCourseItem({
               color="primary"
               startIcon={<PlayIcon />}
               fullWidth
-              onClick={linkToDemoLecture}
+              onClick={linkToLecture}
             >
               เข้าเรียน
             </Button>

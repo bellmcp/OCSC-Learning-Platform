@@ -1,5 +1,7 @@
-import React from "react";
-import Box from "@material-ui/core/Box";
+// @ts-nocheck
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
   useMediaQuery,
   Divider,
@@ -12,6 +14,7 @@ import {
   LinearProgressProps,
   Hidden,
   Toolbar,
+  Box,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -19,10 +22,11 @@ import {
   Theme,
   useTheme,
 } from "@material-ui/core/styles";
-import { amber } from "@material-ui/core/colors/";
-import SideBar from "../SideBar";
+import { amber } from "@material-ui/core/colors";
 
-import SideBarMobile from "../SideBarMobile";
+import * as coursesActions from "modules/courses/actions";
+import SideBar from "./SideBar";
+import SideBarMobile from "./SideBarMobile";
 
 const drawerWidth = 300;
 const footerHeight = 60;
@@ -149,29 +153,44 @@ export default function Lecture({ content, id }: LectureProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("xs"));
+  const { id: courseId }: any = useParams();
 
-  const [timer, setTimer] = React.useState(1);
-  const [progress, setProgress] = React.useState(0);
+  const dispatch = useDispatch();
+  const [course] = useSelector((state) => state.courses.items);
+  const { contents: courseContents } = useSelector((state) => state.courses);
 
-  React.useEffect(() => {
-    const round = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
-    }, 1000);
-    return () => {
-      clearInterval(round);
-    };
-  }, []);
+  useEffect(() => {
+    const courses_action = coursesActions.loadCourse(courseId);
+    dispatch(courses_action);
+  }, [dispatch, courseId]);
 
-  React.useEffect(() => {
-    const sequence = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress >= 15 ? 0 : prevProgress + 1
-      );
-    }, 60000);
-    return () => {
-      clearTimeout(sequence);
-    };
-  }, []);
+  useEffect(() => {
+    const course_content_action = coursesActions.loadCourseContents(courseId);
+    dispatch(course_content_action);
+  }, [dispatch, courseId]);
+
+  // const [timer, setTimer] = React.useState(1);
+  // const [progress, setProgress] = React.useState(0);
+
+  // React.useEffect(() => {
+  //   const round = setInterval(() => {
+  //     setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(round);
+  //   };
+  // }, []);
+
+  // React.useEffect(() => {
+  //   const sequence = setInterval(() => {
+  //     setProgress((prevProgress) =>
+  //       prevProgress >= 15 ? 0 : prevProgress + 1
+  //     );
+  //   }, 60000);
+  //   return () => {
+  //     clearTimeout(sequence);
+  //   };
+  // }, []);
 
   return (
     <div className={classes.root}>
@@ -185,16 +204,16 @@ export default function Lecture({ content, id }: LectureProps) {
         anchor="left"
       >
         <Divider />
-        <SideBar id={id} />
+        <SideBar id={id} course={course} courseContents={courseContents} />
       </Drawer>
       <main className={classes.content}>
         <Toolbar />
-        {content}
+        {/* {content} */}
       </main>
-      <div className={classes.mobileSidebarContainer}>
+      {/* <div className={classes.mobileSidebarContainer}>
         <SideBarMobile id={id} />
-      </div>
-      <div className={classes.timerContainer}>
+      </div> */}
+      {/* <div className={classes.timerContainer}>
         <Box mx={2} mt={1}>
           <Grid
             container
@@ -227,7 +246,7 @@ export default function Lecture({ content, id }: LectureProps) {
             </Grid>
           </Grid>
         </Box>
-      </div>
+      </div> */}
     </div>
   );
 }
