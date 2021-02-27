@@ -119,12 +119,21 @@ function registerCourse(courseRoundId) {
       dispatch(push(`${path}/learn`));
     } catch (err) {
       dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
-      dispatch(
-        uiActions.setFlashMessage(
-          `ลงทะเบียนรายวิชาไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
-          "error"
-        )
-      );
+      if (err.response.status === 403) {
+        dispatch(
+          uiActions.setFlashMessage(
+            "คุณได้ลงทะเบียนรายวิชานี้แล้ว โปรดตรวจสอบอีกครั้ง",
+            "error"
+          )
+        );
+      } else {
+        dispatch(
+          uiActions.setFlashMessage(
+            `ลงทะเบียนรายวิชาไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+            "error"
+          )
+        );
+      }
     }
   };
 }
@@ -157,12 +166,21 @@ function registerCurriculum(curriculumId) {
       dispatch(push(`${path}/learn`));
     } catch (err) {
       dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
-      dispatch(
-        uiActions.setFlashMessage(
-          `ลงทะเบียนหลักสูตรไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
-          "error"
-        )
-      );
+      if (err.response.status === 403) {
+        dispatch(
+          uiActions.setFlashMessage(
+            "คุณได้ลงทะเบียนหลักสูตร หรือรายวิชาในหลักสูตรนี้ทั้งหมดแล้ว โปรดตรวจสอบอีกครั้ง",
+            "error"
+          )
+        );
+      } else {
+        dispatch(
+          uiActions.setFlashMessage(
+            `ลงทะเบียนหลักสูตรไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+            "error"
+          )
+        );
+      }
     }
   };
 }
