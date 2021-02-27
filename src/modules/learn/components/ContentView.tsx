@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
+import { isFirefox, isMobile } from "react-device-detect";
 import Iframe from "react-iframe";
 import {
   Box,
@@ -16,6 +17,7 @@ import { getContentType } from "utils/contentType";
 import VideoPlayer from "./VideoPlayer";
 import PdfViewer from "./PdfViewer";
 import FlashAlert from "./FlashAlert";
+import MobileAlert from "./MobileAlert";
 
 export default function ContentView({ contentId, activeContentView }) {
   const theme = useTheme();
@@ -35,6 +37,16 @@ export default function ContentView({ contentId, activeContentView }) {
     }
   };
 
+  function renderUnsupportedAlert() {
+    if (isMobile) {
+      return <MobileAlert />;
+    } else {
+      if (!isFirefox) {
+        return <FlashAlert />;
+      }
+    }
+  }
+
   function renderContentView() {
     switch (getContentType(activeSource)) {
       case "video":
@@ -44,7 +56,7 @@ export default function ContentView({ contentId, activeContentView }) {
       case "iframe":
         return (
           <>
-            <FlashAlert />
+            {renderUnsupportedAlert()}
             <Iframe
               url={activeSource}
               width="100%"

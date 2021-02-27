@@ -33,6 +33,7 @@
     "react": "^16.13.1",
     "react-app-rewired": "^2.1.8",
     "react-dayjs": "^0.3.2",
+    "react-device-detect": "^1.15.0",
     "react-dom": "^16.13.1",
     "react-helmet-async": "^1.0.7",
     "react-hook-form": "5.7.2",
