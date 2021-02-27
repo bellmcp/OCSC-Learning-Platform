@@ -60,7 +60,7 @@ export default function ContentView({ contentId, activeContentView }) {
             <Iframe
               url={activeSource}
               width="100%"
-              height="800px"
+              height="600px"
               allowFullScreen
               frameBorder={0}
               scrolling="auto"

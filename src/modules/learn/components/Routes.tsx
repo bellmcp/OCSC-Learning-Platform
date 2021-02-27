@@ -9,7 +9,9 @@ export default function Routes() {
   return (
     <Switch>
       <Route path={`${path}/courses/:id`}>
-        <Learn />
+        <div style={{ overflowX: "hidden" }}>
+          <Learn />
+        </div>
       </Route>
       <Route path={path}>
         <RegistrationList />
