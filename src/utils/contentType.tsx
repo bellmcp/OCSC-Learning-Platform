@@ -8,16 +8,20 @@ import {
 } from "@material-ui/icons";
 
 export function getContentType(url: string) {
-  if (url === null || url === undefined) {
+  const lowerCaseUrl = url?.toLowerCase();
+  if (lowerCaseUrl === null || lowerCaseUrl === undefined) {
     return "unknown";
   }
-  if (url.includes(".mp4")) {
+  if (lowerCaseUrl.includes(".mp4")) {
     return "video";
-  } else if (url.includes(".pdf")) {
+  } else if (lowerCaseUrl.includes(".pdf")) {
     return "pdf";
-  } else if (url.includes(".htm") || url.includes(".html")) {
+  } else if (lowerCaseUrl.includes(".htm") || lowerCaseUrl.includes(".html")) {
     return "iframe";
-  } else if (url.includes("youtube") || url.includes("youtu.be")) {
+  } else if (
+    lowerCaseUrl.includes("youtube") ||
+    lowerCaseUrl.includes("youtu.be")
+  ) {
     return "video";
   } else {
     return "unknown";

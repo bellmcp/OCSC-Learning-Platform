@@ -28,10 +28,6 @@ import {
   Create as CreateIcon,
   Info as InfoIcon,
   People as PeopleIcon,
-  PlayCircleFilled as VideoIcon,
-  LibraryBooks as QuizIcon,
-  ThumbUp as SurveyIcon,
-  Language as FileIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
 import {
