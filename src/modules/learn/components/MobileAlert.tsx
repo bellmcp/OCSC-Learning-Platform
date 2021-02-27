@@ -28,8 +28,8 @@ export default function MobileAlert() {
             </IconButton>
           }
         >
-          <AlertTitle>โปรดทราบ</AlertTitle>
-          หากเนื้อหาไม่สามารถแสดงผลได้อย่างสมบูรณ์
+          <AlertTitle>ไม่รองรับอุปกรณ์พกพา</AlertTitle>
+          หากอุปกรณ์ของคุณไม่สามารถแสดงเนื้อหานี้ได้
           โปรดเข้าสู่บทเรียนอีกครั้งด้วยคอมพิวเตอร์ ขออภัยในความไม่สะดวก
         </Alert>
       </Collapse>

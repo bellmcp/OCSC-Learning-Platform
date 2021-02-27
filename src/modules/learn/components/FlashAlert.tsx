@@ -44,8 +44,8 @@ export default function FlashAlert() {
             </>
           }
         >
-          <AlertTitle>โปรดทราบ</AlertTitle>
-          โปรแกรม Abode Flash Player ซึ่งใช้ในการเปิดบทเรียน
+          <AlertTitle>เบราว์เซอร์ของคุณไม่รองรับ Abode Flash Player</AlertTitle>
+          โปรแกรม Abode Flash Player ซึ่งใช้ในการแสดงเนื้อหานี้
           ได้ถูกยกเลิกการใช้งานโดยผู้ผลิต
           โปรดเข้าสู่บทเรียนอีกครั้งด้วยเบราว์เชอร์ Firefox ขออภัยในความไม่สะดวก
         </Alert>
