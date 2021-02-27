@@ -167,7 +167,8 @@ export default function SupportItem({
                   align="right"
                   color="textSecondary"
                 >
-                  <b>ตอบกลับเมื่อ:</b> {replyDate}
+                  <b>ตอบกลับเมื่อ</b>{" "}
+                  <DayJS format="DD/MM/YYYY">{replyDate}</DayJS>
                 </Typography>
               </Box>
             </>

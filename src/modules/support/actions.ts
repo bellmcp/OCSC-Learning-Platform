@@ -27,7 +27,7 @@ function loadSupports() {
   };
 }
 
-function sendSupport(supportInfo) {
+function sendSupport(supportInfo, attachedFile) {
   return async (dispatch) => {
     const token = getCookie("token");
     const userId = parseJwt(token).unique_name;
@@ -37,7 +37,7 @@ function sendSupport(supportInfo) {
     bodyFormData.append("subject", supportInfo?.subject);
     bodyFormData.append("message", supportInfo?.message);
     bodyFormData.append("contact", supportInfo?.contact);
-    // bodyFormData.append("file", supportInfo.attachment);
+    bodyFormData.append("file", attachedFile);
 
     axios({
       method: "post",
@@ -53,20 +53,25 @@ function sendSupport(supportInfo) {
           type: SEND_SUPPORT_SUCCESS,
           payload: { support: response },
         });
-        dispatch(
-          uiActions.setFlashMessage(
-            "ได้รับข้อมูลเรียบร้อย โปรดรอการติดต่อกลับจากเจ้าหน้าที่",
-            "success"
-          )
-        );
+        dispatch(uiActions.setFlashMessage("ได้รับข้อมูลเรียบร้อย", "success"));
+        window.location.reload();
       })
       .catch(function (err) {
-        dispatch(
-          uiActions.setFlashMessage(
-            `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
-            "error"
-          )
-        );
+        if (err.response.status === 413) {
+          dispatch(
+            uiActions.setFlashMessage(
+              `ไฟล์แนบมีขนาดใหญ่เกินไป โปรดเลือกไฟล์ใหม่อีกครั้ง`,
+              "error"
+            )
+          );
+        } else {
+          dispatch(
+            uiActions.setFlashMessage(
+              `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+              "error"
+            )
+          );
+        }
       });
   };
 }
