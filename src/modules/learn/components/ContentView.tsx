@@ -7,6 +7,7 @@ import { getContentType } from "utils/contentType";
 
 import VideoPlayer from "./VideoPlayer";
 import PdfViewer from "./PdfViewer";
+import FlashAlert from "./FlashAlert";
 
 export default function ContentView({ contentId, activeContentView }) {
   const [activeSource, setActiveSource] = useState("");
@@ -32,14 +33,17 @@ export default function ContentView({ contentId, activeContentView }) {
         return <PdfViewer url={activeSource} />;
       case "iframe":
         return (
-          <Iframe
-            url={activeSource}
-            width="100%"
-            height="800px"
-            allowFullScreen
-            frameBorder={0}
-            scrolling="auto"
-          />
+          <>
+            <FlashAlert />
+            <Iframe
+              url={activeSource}
+              width="100%"
+              height="800px"
+              allowFullScreen
+              frameBorder={0}
+              scrolling="auto"
+            />
+          </>
         );
       default:
         return (
@@ -131,7 +135,8 @@ export default function ContentView({ contentId, activeContentView }) {
           </Box>
           <Divider />
           <Box my={4}>
-            <Box mb={4}>
+            {renderContentView()}
+            <Box my={4}>
               <Typography variant="body2" color="textSecondary">
                 FOR DEVELOPMENT
               </Typography>
@@ -139,7 +144,6 @@ export default function ContentView({ contentId, activeContentView }) {
                 Current content url: {activeSource}
               </Typography>
             </Box>
-            {renderContentView()}
           </Box>
         </Container>
       )}
