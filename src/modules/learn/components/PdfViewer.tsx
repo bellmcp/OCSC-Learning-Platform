@@ -1,8 +1,16 @@
 //@ts-nocheck
 import React, { useState } from "react";
+import styled from "styled-components";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Grid, Box, Typography, Button, ButtonGroup } from "@material-ui/core";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
+const PDFDocumentWrapper = styled.div`
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+`;
 
 export default function PdfViewer({ url }) {
   const [numPages, setNumPages] = useState(null);
@@ -37,9 +45,11 @@ export default function PdfViewer({ url }) {
         wrap="nowrap"
       >
         <Grid item>
-          <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} />
-          </Document>
+          <PDFDocumentWrapper>
+            <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+              <Page pageNumber={pageNumber} />
+            </Document>
+          </PDFDocumentWrapper>
         </Grid>
         <Grid item>
           <Box mt={2} mb={1}>

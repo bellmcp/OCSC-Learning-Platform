@@ -78,7 +78,7 @@ export default function ContentView({ contentId, activeContentView }) {
           </Grid>
         </Box>
       ) : (
-        <Container maxWidth="lg">
+        <Container maxWidth="md">
           <Box mt={4} mb={3}>
             <Grid
               container
