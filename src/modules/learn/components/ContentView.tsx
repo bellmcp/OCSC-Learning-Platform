@@ -38,13 +38,8 @@ export default function ContentView({ contentId, activeContentView }) {
   };
 
   function renderUnsupportedAlert() {
-    if (isMobile) {
-      return <MobileAlert />;
-    } else {
-      if (!isFirefox) {
-        return <FlashAlert />;
-      }
-    }
+    if (isMobile) return <MobileAlert />;
+    if (!isFirefox) return <FlashAlert />;
   }
 
   function renderContentView() {
