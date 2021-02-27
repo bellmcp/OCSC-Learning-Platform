@@ -1,8 +1,16 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
 import Iframe from "react-iframe";
-import { Box, Container, Divider, Grid, Typography } from "@material-ui/core";
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
+import { useTheme } from "@material-ui/core/styles";
 import { getContentType } from "utils/contentType";
 
 import VideoPlayer from "./VideoPlayer";
@@ -10,6 +18,8 @@ import PdfViewer from "./PdfViewer";
 import FlashAlert from "./FlashAlert";
 
 export default function ContentView({ contentId, activeContentView }) {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const [activeSource, setActiveSource] = useState("");
 
   useEffect(() => {
@@ -86,50 +96,55 @@ export default function ContentView({ contentId, activeContentView }) {
           <Box mt={4} mb={3}>
             <Grid
               container
-              direction="row"
+              spacing={1}
+              direction={matches ? "row" : "column"}
               justify="space-between"
               alignItems="center"
             >
-              <Typography
-                variant="h6"
-                color="initial"
-                style={{ fontSize: "1.6rem", fontWeight: 600 }}
-              >
-                {activeContentView?.name}
-              </Typography>
-              {activeContentView?.type === "c" && (
-                <ToggleButtonGroup
-                  value={activeSource}
-                  exclusive
-                  onChange={handleSource}
-                  aria-label="สลับลิงก์"
-                  size="small"
+              <Grid item>
+                <Typography
+                  variant="h6"
+                  color="initial"
+                  style={{ fontSize: "1.6rem", fontWeight: 600 }}
                 >
-                  <ToggleButton
-                    value={activeContentView?.content1}
-                    aria-label="ลิงก์หลัก"
+                  {activeContentView?.name}
+                </Typography>
+              </Grid>
+              {activeContentView?.type === "c" && (
+                <Grid item>
+                  <ToggleButtonGroup
+                    value={activeSource}
+                    exclusive
+                    onChange={handleSource}
+                    aria-label="สลับลิงก์"
+                    size="small"
                   >
-                    <Typography
-                      variant="body2"
-                      color="primary"
-                      style={{ fontWeight: 500, padding: "0 6px" }}
+                    <ToggleButton
+                      value={activeContentView?.content1}
+                      aria-label="ลิงก์หลัก"
                     >
-                      ลิงก์หลัก
-                    </Typography>
-                  </ToggleButton>
-                  <ToggleButton
-                    value={activeContentView?.content2}
-                    aria-label="ลิงก์สำรอง"
-                  >
-                    <Typography
-                      variant="body2"
-                      color="primary"
-                      style={{ fontWeight: 500, padding: "0 6px" }}
+                      <Typography
+                        variant="body2"
+                        color="primary"
+                        style={{ fontWeight: 500, padding: "0 6px" }}
+                      >
+                        ลิงก์หลัก
+                      </Typography>
+                    </ToggleButton>
+                    <ToggleButton
+                      value={activeContentView?.content2}
+                      aria-label="ลิงก์สำรอง"
                     >
-                      ลิงก์สำรอง
-                    </Typography>
-                  </ToggleButton>
-                </ToggleButtonGroup>
+                      <Typography
+                        variant="body2"
+                        color="primary"
+                        style={{ fontWeight: 500, padding: "0 6px" }}
+                      >
+                        ลิงก์สำรอง
+                      </Typography>
+                    </ToggleButton>
+                  </ToggleButtonGroup>
+                </Grid>
               )}
             </Grid>
           </Box>
