@@ -14,12 +14,10 @@ import {
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
 import {
-  PlayCircleFilled as VideoIcon,
-  LibraryBooks as QuizIcon,
-  ThumbUp as SurveyIcon,
-  Language as FileIcon,
-} from "@material-ui/icons";
-import contentType from "utils/contentType";
+  getContentType,
+  getContentTypeText,
+  getContentTypeIcon,
+} from "utils/contentType";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -42,34 +40,6 @@ export default function ContentList({ courseContents }: any) {
   const classes = useStyles();
   const { pathname, search } = useLocation();
   const { contentId } = queryString.parse(search);
-
-  function GenerateCourseContentIcon(type: string) {
-    switch (type) {
-      case "c":
-        return <VideoIcon />;
-      case "t":
-        return <QuizIcon />;
-      case "e":
-        return <SurveyIcon />;
-      default:
-        return <FileIcon />;
-    }
-  }
-
-  function GenerateCourseContentType(type: string) {
-    switch (type) {
-      case "video":
-        return "วิดีโอ";
-      case "youtube":
-        return "วิดีโอ";
-      case "pdf":
-        return "เนื้อหา";
-      case "iframe":
-        return "เนื้อหา";
-      default:
-        return "";
-    }
-  }
 
   return (
     <List component="div">
@@ -96,7 +66,10 @@ export default function ContentList({ courseContents }: any) {
               to={`${pathname}?contentId=${courseContent?.id}`}
             >
               <ListItemIcon>
-                {GenerateCourseContentIcon(courseContent?.type)}
+                {getContentTypeIcon(
+                  courseContent?.type,
+                  getContentType(courseContent.content1)
+                )}
                 {/* {item.completed ? (
                 <Badge
                   badgeContent={
@@ -120,8 +93,8 @@ export default function ContentList({ courseContents }: any) {
                 secondary={
                   courseContent?.minutes && (
                     <Typography variant="body2" color="textSecondary">
-                      {`${GenerateCourseContentType(
-                        contentType(courseContent.content1)
+                      {`${getContentTypeText(
+                        getContentType(courseContent.content1)
                       )}${
                         courseContent.minutes
                           ? `, ${courseContent.minutes} นาที`

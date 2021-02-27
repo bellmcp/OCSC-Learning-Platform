@@ -34,7 +34,11 @@ import {
   Language as FileIcon,
 } from "@material-ui/icons";
 import { amber } from "@material-ui/core/colors";
-import contentType from "utils/contentType";
+import {
+  getContentType,
+  getContentTypeText,
+  getContentTypeIcon,
+} from "utils/contentType";
 
 import * as coursesActions from "../actions";
 import * as registrationsActions from "modules/registrations/actions";
@@ -142,34 +146,6 @@ export default function CourseDetails() {
       icon: <InfoIcon />,
     },
   ];
-
-  function GenerateCourseContentIcon(type: string) {
-    switch (type) {
-      case "c":
-        return <VideoIcon />;
-      case "t":
-        return <QuizIcon />;
-      case "e":
-        return <SurveyIcon />;
-      default:
-        return <FileIcon />;
-    }
-  }
-
-  function GenerateCourseContentType(type: string) {
-    switch (type) {
-      case "video":
-        return "วิดีโอ";
-      case "youtube":
-        return "วิดีโอ";
-      case "pdf":
-        return "เนื้อหา";
-      case "iframe":
-        return "เนื้อหา";
-      default:
-        return "";
-    }
-  }
 
   function RenderCourseInfo({ index, title, info, icon }: any) {
     return (
@@ -322,12 +298,15 @@ export default function CourseDetails() {
                             {id !== 0 && <Divider variant="middle" />}
                             <ListItem>
                               <ListItemIcon>
-                                {GenerateCourseContentIcon(content.type)}
+                                {getContentTypeIcon(
+                                  content.type,
+                                  getContentType(content.content1)
+                                )}
                               </ListItemIcon>
                               <ListItemText
                                 primary={content.name}
-                                secondary={`${GenerateCourseContentType(
-                                  contentType(content.content1)
+                                secondary={`${getContentTypeText(
+                                  getContentType(content.content1)
                                 )}${
                                   content.minutes
                                     ? `, ${content.minutes} นาที`

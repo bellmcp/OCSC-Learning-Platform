@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Iframe from "react-iframe";
 import { Box, Container, Divider, Grid, Typography } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
-import contentType from "utils/contentType";
+import { getContentType } from "utils/contentType";
 
 import VideoPlayer from "./VideoPlayer";
 import PdfViewer from "./PdfViewer";
@@ -25,7 +25,7 @@ export default function ContentView({ contentId, activeContentView }) {
   };
 
   function renderContentView() {
-    switch (contentType(activeSource)) {
+    switch (getContentType(activeSource)) {
       case "video":
         return <VideoPlayer url={activeSource} />;
       case "pdf":
