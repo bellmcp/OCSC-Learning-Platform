@@ -42,11 +42,9 @@
     "react-redux-loading-bar": "^5.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-sizeme": "^3.0.1",
     "react-swipeable-views": "^0.13.9",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "screenfull": "^5.0.2",
     "styled-components": "^5.2.1",
     "typescript": "~3.7.2",
     "yup": "0.29.3"
