@@ -1,4 +1,6 @@
+//@ts-nocheck
 import React from "react";
+import DayJS from "react-dayjs";
 import {
   Typography,
   Grid,
@@ -68,9 +70,14 @@ export default function SupportItem({
       return (
         <>
           <Divider />
-          <Box m={3}>
-            <Typography variant="body1" component="p" align="center">
-              รอการตอบกลับจากเจ้าหน้าที่
+          <Box m={2}>
+            <Typography
+              variant="body2"
+              component="p"
+              align="center"
+              color="textSecondary"
+            >
+              โปรดรอการตอบกลับจากเจ้าหน้าที่
             </Typography>
           </Box>
         </>
@@ -109,10 +116,10 @@ export default function SupportItem({
               </Typography>
             ) : null}
             <Typography variant="caption" component="p" color="textSecondary">
-              <b>ช่องทางติดต่อกลับ:</b> {contact}
+              <b>ช่องทางติดต่อกลับ</b> {contact}
             </Typography>
             <Typography variant="caption" component="p" color="textSecondary">
-              <b>ส่งเมื่อ:</b> {createDate}
+              <b>ส่งเมื่อ</b> <DayJS format="DD/MM/YYYY">{createDate}</DayJS>
               {attachFile ? (
                 <>
                   <AttachmentIcon

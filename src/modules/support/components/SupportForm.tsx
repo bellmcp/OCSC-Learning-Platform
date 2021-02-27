@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
@@ -16,7 +17,7 @@ import {
 } from "@material-ui/core/styles";
 import { Send as SendIcon } from "@material-ui/icons";
 
-import * as actions from "../actions";
+import * as supportActions from "../actions";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,9 +36,9 @@ export default function SupportForm() {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data: any) => {
-    const action = actions.sendSupport(data);
-    dispatch(action);
+  const onSubmit = (data) => {
+    const support_action = supportActions.sendSupport(data);
+    dispatch(support_action);
   };
 
   return (
