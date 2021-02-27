@@ -1,6 +1,12 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
-import { isFirefox, isMobile } from "react-device-detect";
+import {
+  isFirefox,
+  isMobile,
+  browserName,
+  osName,
+  fullBrowserVersion,
+} from "react-device-detect";
 import Iframe from "react-iframe";
 import {
   Box,
@@ -38,8 +44,11 @@ export default function ContentView({ contentId, activeContentView }) {
   };
 
   function renderUnsupportedAlert() {
-    if (isMobile) return <MobileAlert />;
-    if (!isFirefox) return <FlashAlert />;
+    if (isMobile) {
+      return <MobileAlert />;
+    } else {
+      if (!isFirefox) return <FlashAlert />;
+    }
   }
 
   function renderContentView() {
@@ -164,6 +173,10 @@ export default function ContentView({ contentId, activeContentView }) {
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 Current content url: {activeSource}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                You are currently viewing this content via {browserName}{" "}
+                {fullBrowserVersion} on {osName}
               </Typography>
             </Box>
           </Box>
