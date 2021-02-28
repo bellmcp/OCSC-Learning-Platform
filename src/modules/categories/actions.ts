@@ -10,9 +10,12 @@ function loadCategories() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CATEGORIES_REQUEST });
     try {
-      const { data } = await axios.get("/CourseCategories", {
+      var { data } = await axios.get("/CourseCategories", {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
       });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_CATEGORIES_SUCCESS,
         payload: {

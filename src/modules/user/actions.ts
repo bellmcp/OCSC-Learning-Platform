@@ -1,3 +1,4 @@
+//@ts-nocheck
 import axios from "axios";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
@@ -10,15 +11,15 @@ function loadUser() {
     dispatch({ type: LOAD_USER_REQUEST });
     try {
       const token = getCookie("token");
-      const { data } = await axios.get(
-        `/Users/${parseJwt(token).unique_name}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-        }
-      );
+      var { data } = await axios.get(`/Users/${parseJwt(token).unique_name}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
+      });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_USER_SUCCESS,
         payload: {

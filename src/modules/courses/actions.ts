@@ -29,7 +29,7 @@ function loadCourses(courseCategoryId: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSES_REQUEST });
     try {
-      const { data } = await axios.get(
+      var { data } = await axios.get(
         courseCategoryId === undefined
           ? `/Courses`
           : `/CourseCategories/${courseCategoryId}/Courses`,
@@ -37,6 +37,9 @@ function loadCourses(courseCategoryId: string) {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
         }
       );
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_COURSES_SUCCESS,
         payload: {
@@ -53,9 +56,12 @@ function loadRecommendedCourses() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_RECOMMENDED_COURSES_REQUEST });
     try {
-      const { data } = await axios.get("/Courses/Recommended?max=5", {
+      var { data } = await axios.get("/Courses/Recommended?max=5", {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
       });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_RECOMMENDED_COURSES_SUCCESS,
         payload: {
@@ -72,9 +78,12 @@ function loadCourse(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_REQUEST });
     try {
-      const { data } = await axios.get(`/Courses/${id}`, {
+      var { data } = await axios.get(`/Courses/${id}`, {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
       });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_COURSE_SUCCESS,
         payload: {
@@ -91,9 +100,12 @@ function loadCourseRounds(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_ROUND_REQUEST });
     try {
-      const { data } = await axios.get(`/Courses/${id}/CourseRounds`, {
+      var { data } = await axios.get(`/Courses/${id}/CourseRounds`, {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
       });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_COURSE_ROUND_SUCCESS,
         payload: {
@@ -110,9 +122,12 @@ function loadCourseContents(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_CONTENT_REQUEST });
     try {
-      const { data } = await axios.get(`/Courses/${id}/CourseContents`, {
+      var { data } = await axios.get(`/Courses/${id}/CourseContents`, {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
       });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_COURSE_CONTENT_SUCCESS,
         payload: {

@@ -50,10 +50,12 @@ function loadCourseRegistrations() {
     const userId = parseJwt(token).unique_name;
     dispatch({ type: LOAD_COURSE_REGISTRATIONS_REQUEST });
     try {
-      const { data } = await axios.get(`/Users/${userId}/CourseRegistrations`, {
+      var { data } = await axios.get(`/Users/${userId}/CourseRegistrations`, {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
       });
-
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_COURSE_REGISTRATIONS_SUCCESS,
         payload: {
@@ -72,13 +74,15 @@ function loadCurriculumRegistrations() {
     const userId = parseJwt(token).unique_name;
     dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_REQUEST });
     try {
-      const { data } = await axios.get(
+      var { data } = await axios.get(
         `/Users/${userId}/CurriculumRegistrations`,
         {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
         }
       );
-
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_CURRICULUM_REGISTRATIONS_SUCCESS,
         payload: {
@@ -99,7 +103,7 @@ function registerCourse(courseRoundId) {
     const token = getCookie("token");
     dispatch({ type: CURRICULUM_REGISTRATION_REQUEST });
     try {
-      const { data } = await axios.post(
+      var { data } = await axios.post(
         `/Users/${items.id}/CourseRegistrations`,
         {
           courseRoundId: parseInt(courseRoundId),
@@ -109,6 +113,9 @@ function registerCourse(courseRoundId) {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: CURRICULUM_REGISTRATION_SUCCESS,
         payload: { courseRegister: data },
@@ -146,7 +153,7 @@ function registerCurriculum(curriculumId) {
     const token = getCookie("token");
 
     try {
-      const { data } = await axios.post(
+      var { data } = await axios.post(
         `/Users/${items.id}/CurriculumRegistrations`,
         {
           curriculumId: parseInt(curriculumId),
@@ -156,6 +163,9 @@ function registerCurriculum(curriculumId) {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: CURRICULUM_REGISTRATION_SUCCESS,
         payload: { curriculumRegister: data },
@@ -193,7 +203,7 @@ function updateCourseSatisfactionScore(registrationId, satisfactionScore) {
     const token = getCookie("token");
     dispatch({ type: UPDATE_COURSE_SATISFACTION_SCORE_REQUEST });
     try {
-      const { data } = await axios.put(
+      var { data } = await axios.put(
         `/Users/${items.id}/CourseRegistrations/${registrationId}/SatisfactionScore`,
         {
           satisfactionScore,
@@ -203,6 +213,9 @@ function updateCourseSatisfactionScore(registrationId, satisfactionScore) {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS,
         payload: { satisfactionScoreUpdate: data },
@@ -233,7 +246,7 @@ function updateCurriculumSatisfactionScore(registrationId, satisfactionScore) {
     const token = getCookie("token");
     dispatch({ type: UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST });
     try {
-      const { data } = await axios.put(
+      var { data } = await axios.put(
         `/Users/${items.id}/CurriculumRegistrations/${registrationId}/SatisfactionScore`,
         {
           satisfactionScore,
@@ -243,6 +256,9 @@ function updateCurriculumSatisfactionScore(registrationId, satisfactionScore) {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
         payload: { satisfactionScoreUpdate: data },
