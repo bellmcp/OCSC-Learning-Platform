@@ -205,11 +205,12 @@ export default function Learn() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"ออกจากห้องเรียน?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"คุณต้องการออกจากห้องเรียนหรือไม่ ?"}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            คุณแน่ใจนะว่าต้องการออกจากห้องเรียน นาฬิกาจะหยุดจับเวลา
-            และเวลาเรียนสะสมทั้งหมดจะถูกบันทึก
+            นาฬิกาจับเวลาจะหยุดเดิน และเวลาเรียนสะสมของคุณจะถูกบันทึก
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -223,7 +224,7 @@ export default function Learn() {
             disableElevation
             onClick={linkToLearn}
           >
-            ตกลง
+            ออกจากห้องเรียน
           </Button>
         </DialogActions>
       </Dialog>
