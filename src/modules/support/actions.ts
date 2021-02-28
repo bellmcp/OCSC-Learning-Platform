@@ -63,7 +63,7 @@ function sendSupport(supportInfo, attachedFile) {
         if (err.response.status === 413) {
           dispatch(
             uiActions.setFlashMessage(
-              `ไฟล์แนบมีขนาดใหญ่เกินไป โปรดเลือกไฟล์ใหม่อีกครั้ง`,
+              `ไฟล์แนบมีขนาดใหญ่เกิน 20 MB โปรดเลือกไฟล์ใหม่อีกครั้ง`,
               "error"
             )
           );

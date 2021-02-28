@@ -96,7 +96,7 @@ export default function SupportForm() {
           required
           multiline
         />
-        <Grid container alignItems="center">
+        <Grid container alignItems="center" style={{ marginBottom: 0 }}>
           <Grid item style={{ marginRight: 20 }}>
             <Typography variant="body1" color="textSecondary">
               ไฟล์แนบ (ถ้ามี)
@@ -112,6 +112,9 @@ export default function SupportForm() {
             />
           </Grid>
         </Grid>
+        <Typography variant="caption" color="textSecondary">
+          รองรับไฟล์ .jpg .png .pdf .zip หรือ .mp4 ขนาดไม่เกิน 20 MB
+        </Typography>
         <Button
           type="submit"
           color="primary"
