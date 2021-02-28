@@ -247,7 +247,7 @@ export default function CourseDetails() {
                   </Grid>
                 </Box>
 
-                {rounds && (
+                {rounds.length !== 0 && (
                   <>
                     <Box mt={2} mb={3}>
                       <Divider />
@@ -267,7 +267,7 @@ export default function CourseDetails() {
                   </>
                 )}
 
-                {contents && (
+                {contents.length !== 0 && (
                   <>
                     <Box mt={2} mb={3}>
                       <Divider />
