@@ -28,8 +28,8 @@ import CourseContentList from "./ContentList";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "relative",
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
   },
   grow: {
     flexGrow: 1,
@@ -106,7 +106,12 @@ export default function SideBarMobile({
         subheader={
           <ListSubheader
             component="div"
-            style={{ zIndex: 2, marginLeft: 8, marginRight: 8 }}
+            style={{
+              zIndex: 2,
+              marginLeft: 8,
+              marginRight: 8,
+              backgroundColor: "white",
+            }}
           >
             <Box mt={4} mb={3}>
               <Typography
