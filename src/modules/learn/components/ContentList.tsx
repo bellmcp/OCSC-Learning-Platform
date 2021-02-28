@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ContentList({ courseContents }: any) {
+export default function ContentList({ courseContents, handleClose }: any) {
   const classes = useStyles();
   const { pathname, search } = useLocation();
   const { contentId } = queryString.parse(search);
@@ -64,6 +64,7 @@ export default function ContentList({ courseContents }: any) {
               className={classes.nested}
               component={RouterLink}
               to={`${pathname}?contentId=${courseContent?.id}`}
+              onClick={handleClose && handleClose}
             >
               <ListItemIcon>
                 {getContentTypeIcon(

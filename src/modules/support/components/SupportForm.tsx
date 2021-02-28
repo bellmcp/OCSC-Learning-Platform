@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core/styles";
 import { Send as SendIcon } from "@material-ui/icons";
 
-import FileUploader from "./FileUploader";
 import * as supportActions from "../actions";
 
 const useStyles = makeStyles((theme: Theme) =>

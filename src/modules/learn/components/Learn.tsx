@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
@@ -9,6 +9,7 @@ import {
   Drawer,
   Toolbar,
   Box,
+  Fab,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -16,13 +17,14 @@ import {
   Theme,
   useTheme,
 } from "@material-ui/core/styles";
+import { Bookmarks as ArrowUpIcon } from "@material-ui/icons";
 
 import * as coursesActions from "modules/courses/actions";
 import * as registrationsActions from "modules/registrations/actions";
 import SideBar from "./SideBar";
+import SideBarMobile from "./SideBarMobile";
 import ContentView from "./ContentView";
 import Timer from "./Timer";
-import SideBarMobile from "./SideBarMobile";
 
 const drawerWidth = 300;
 const footerHeight = 60;
@@ -73,21 +75,15 @@ const useStyles = makeStyles((theme: Theme) =>
         marginLeft: "0",
       },
     },
-    mobileSidebarContainer: {
-      position: "fixed",
+    fab: {
       display: "none",
-      height: "25vh",
-      width: "100%",
-      bottom: 0,
-      borderTop: "1px solid rgba(0, 0, 0, 0.12)",
-      backgroundColor: theme.palette.background.paper,
-      marginLeft: "0",
-      marginBottom: footerHeight,
-      zIndex: 1201,
-      overflow: "auto",
-      boxShadow: "0 -5px 5px -5px rgba(0, 0, 0, 0.342)",
+      position: "fixed",
+      bottom: footerHeight + theme.spacing(3),
+      right: theme.spacing(3),
+      // left: "calc(50% - 24px)",
+      zIndex: 1202,
       [theme.breakpoints.down("xs")]: {
-        display: "unset",
+        display: "inherit",
       },
     },
   })
@@ -130,6 +126,14 @@ export default function Learn() {
     dispatch(course_registrations_action);
   }, [dispatch]);
 
+  const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
+  const handleClickOpen = () => {
+    setMobileDialogOpen(true);
+  };
+  const handleClose = () => {
+    setMobileDialogOpen(false);
+  };
+
   return (
     <div className={classes.root}>
       <Toolbar />
@@ -155,9 +159,21 @@ export default function Learn() {
           activeContentView={activeContentView[0]}
         />
       </main>
-      {/* <div className={classes.mobileSidebarContainer}>
-        <SideBarMobile id={id} />
-      </div> */}
+      <Fab
+        color="primary"
+        aria-label="สารบัญ"
+        className={classes.fab}
+        onClick={handleClickOpen}
+      >
+        <ArrowUpIcon />
+      </Fab>
+      <SideBarMobile
+        mobileDialogOpen={mobileDialogOpen}
+        handleClose={handleClose}
+        course={course}
+        courseContents={courseContents}
+        courseRegistrationDetails={courseRegistrationDetails}
+      />
       <div className={classes.timerContainer}>
         <Box mx={2} mt={1}>
           <Timer />
