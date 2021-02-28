@@ -119,7 +119,8 @@ export default function SupportItem({
               <b>ช่องทางติดต่อกลับ</b> {contact}
             </Typography>
             <Typography variant="caption" component="p" color="textSecondary">
-              <b>ส่งเมื่อ</b> <DayJS format="DD/MM/YYYY">{createDate}</DayJS>
+              <b>ส่งเมื่อ</b>{" "}
+              <DayJS format="DD/MM/YYYY HH:mm">{createDate}</DayJS>
               {attachFile ? (
                 <>
                   <AttachmentIcon
