@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useHistory } from "react-router-dom";
 import {
   useMediaQuery,
   Divider,
@@ -10,6 +10,12 @@ import {
   Toolbar,
   Box,
   Fab,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -92,6 +98,8 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Learn() {
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
+  const path = "/learning-platform";
   const matches = useMediaQuery(theme.breakpoints.up("xs"));
   const { id: courseId }: any = useParams();
   const { search } = useLocation();
@@ -127,11 +135,24 @@ export default function Learn() {
   }, [dispatch]);
 
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
-  const handleClickOpen = () => {
+  const handleMobileDialogOpen = () => {
     setMobileDialogOpen(true);
   };
-  const handleClose = () => {
+  const handleMobileDialogClose = () => {
     setMobileDialogOpen(false);
+  };
+
+  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
+  const handleConfirmDialogOpen = () => {
+    setConfirmDialogOpen(true);
+  };
+  const handleConfirmDialogClose = () => {
+    setConfirmDialogOpen(false);
+  };
+
+  const linkToLearn = () => {
+    handleConfirmDialogClose();
+    history.push(`${path}/learn`);
   };
 
   return (
@@ -150,6 +171,7 @@ export default function Learn() {
           course={course}
           courseContents={courseContents}
           courseRegistrationDetails={courseRegistrationDetails}
+          handleConfirmDialogOpen={handleConfirmDialogOpen}
         />
       </Drawer>
       <main className={classes.content}>
@@ -159,21 +181,52 @@ export default function Learn() {
           activeContentView={activeContentView[0]}
         />
       </main>
+      {/* MOBILE NAVIGATION */}
       <Fab
         color="primary"
         aria-label="สารบัญ"
         className={classes.fab}
-        onClick={handleClickOpen}
+        onClick={handleMobileDialogOpen}
       >
         <ArrowUpIcon />
       </Fab>
       <SideBarMobile
         mobileDialogOpen={mobileDialogOpen}
-        handleClose={handleClose}
+        handleMobileDialogClose={handleMobileDialogClose}
         course={course}
         courseContents={courseContents}
         courseRegistrationDetails={courseRegistrationDetails}
+        handleConfirmDialogOpen={handleConfirmDialogOpen}
       />
+      {/* CONFIRM DIALOG */}
+      <Dialog
+        open={confirmDialogOpen}
+        onClose={handleConfirmDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"ออกจากห้องเรียน?"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            คุณแน่ใจนะว่าต้องการออกจากห้องเรียน นาฬิกาจะหยุดจับเวลา
+            และเวลาเรียนสะสมทั้งหมดจะถูกบันทึก
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleConfirmDialogClose} color="primary">
+            ยกเลิก
+          </Button>
+          <Button
+            color="secondary"
+            autoFocus
+            variant="contained"
+            disableElevation
+            onClick={linkToLearn}
+          >
+            ตกลง
+          </Button>
+        </DialogActions>
+      </Dialog>
       <div className={classes.timerContainer}>
         <Box mx={2} mt={1}>
           <Timer />

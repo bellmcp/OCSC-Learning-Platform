@@ -1,7 +1,6 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
@@ -42,15 +41,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function SideBarMobile({
   mobileDialogOpen,
-  handleClose,
+  handleMobileDialogClose,
   course,
   courseContents,
   courseRegistrationDetails,
+  handleConfirmDialogOpen,
 }) {
   const classes = useStyles();
-  const history = useHistory();
   const dispatch = useDispatch();
-  const path = "/learning-platform";
   const [value, setValue] = useState(0);
   const registrationId = courseRegistrationDetails[0]?.id;
   const satisfactionScore = courseRegistrationDetails[0]?.satisfactionScore;
@@ -68,16 +66,15 @@ export default function SideBarMobile({
     setValue(newValue);
   };
 
-  const linkToLearn = () => {
-    handleClose();
-    history.push(`${path}/learn`);
+  const openConfirmDialog = () => {
+    handleConfirmDialogOpen();
   };
 
   return (
     <Dialog
       fullScreen
       open={mobileDialogOpen}
-      onClose={handleClose}
+      onClose={handleMobileDialogClose}
       TransitionComponent={Transition}
     >
       <AppBar className={classes.appBar}>
@@ -86,7 +83,7 @@ export default function SideBarMobile({
             autoFocus
             color="inherit"
             startIcon={<ArrowBackIcon />}
-            onClick={linkToLearn}
+            onClick={openConfirmDialog}
           >
             ออกจากห้องเรียน
           </Button>
@@ -94,7 +91,7 @@ export default function SideBarMobile({
           <IconButton
             edge="end"
             color="inherit"
-            onClick={handleClose}
+            onClick={handleMobileDialogClose}
             aria-label="close"
           >
             <CloseIcon />
@@ -137,7 +134,7 @@ export default function SideBarMobile({
       >
         <CourseContentList
           courseContents={courseContents}
-          handleClose={handleClose}
+          handleMobileDialogClose={handleMobileDialogClose}
         />
         <Divider variant="middle" />
         <Box my={4}>

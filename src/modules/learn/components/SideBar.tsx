@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
   ListSubheader,
@@ -33,11 +32,10 @@ export default function SideBar({
   course,
   courseContents,
   courseRegistrationDetails,
+  handleConfirmDialogOpen,
 }: any) {
   const classes = useStyles();
-  const history = useHistory();
   const dispatch = useDispatch();
-  const path = "/learning-platform";
   const [value, setValue] = useState(0);
   const registrationId = courseRegistrationDetails[0]?.id;
   const satisfactionScore = courseRegistrationDetails[0]?.satisfactionScore;
@@ -55,8 +53,8 @@ export default function SideBar({
     setValue(newValue);
   };
 
-  const linkToLearn = () => {
-    history.push(`${path}/learn`);
+  const openConfirmDialog = () => {
+    handleConfirmDialogOpen();
   };
 
   return (
@@ -71,7 +69,7 @@ export default function SideBar({
               color="default"
               size="small"
               startIcon={<ArrowBackIcon />}
-              onClick={linkToLearn}
+              onClick={openConfirmDialog}
             >
               ออกจากห้องเรียน
             </Button>
