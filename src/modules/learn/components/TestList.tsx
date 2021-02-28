@@ -1,9 +1,8 @@
+//@ts-nocheck
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import ItemComponent from "../ItemComponent";
-
-import { TestProps } from "./types";
+import { Paper } from "@material-ui/core";
+import TestItem from "./TestItem";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -19,22 +18,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TestComponent({ items }: TestProps) {
+const items = [
+  {
+    id: 1,
+    question: "ตัวอย่างข้อสอบ 1",
+    options: ["ตัวเลือก 1", "ตัวเลือก 2", "ตัวเลือก 3", "ตัวเลือก 4"],
+    answer: 1,
+  },
+];
+
+export default function TestList() {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       {items.map((item, index) => (
         <Paper className={classes.paper} elevation={1}>
-          <ItemComponent
-            key={index}
-            id={item.id}
-            question={item.question}
-            options={item.options}
-            answer={item.answer}
-          />
+          <TestItem {...item} />
         </Paper>
       ))}
-    </React.Fragment>
+    </>
   );
 }

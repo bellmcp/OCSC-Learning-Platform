@@ -1,3 +1,5 @@
+//@ts-nocheck
+import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import amber from "@material-ui/core/colors/amber";
 import Divider from "@material-ui/core/Divider";
@@ -8,8 +10,6 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import React from "react";
-import { ItemProps } from "./types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,16 +26,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function ItemComponent({
-  id,
-  question,
-  options,
-  answer,
-}: ItemProps) {
+export default function TestItem({ id, question, options }) {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <Grid container direction="row" alignItems="center" spacing={2}>
         <Grid item>
           <Avatar className={classes.amber}>{id}</Avatar>
@@ -47,7 +42,7 @@ export default function ItemComponent({
             align="center"
             style={{ fontSize: "1rem", fontWeight: 600 }}
           >
-            {question}?
+            {question}
           </Typography>
         </Grid>
       </Grid>
@@ -73,6 +68,6 @@ export default function ItemComponent({
           </RadioGroup>
         </FormControl>
       </form>
-    </React.Fragment>
+    </>
   );
 }
