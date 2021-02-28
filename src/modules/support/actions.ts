@@ -12,9 +12,12 @@ function loadSupports() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_SUPPORT_REQUEST });
     try {
-      const { data } = await axios.get("/Supports", {
+      var { data } = await axios.get("/Supports", {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
       });
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch({
         type: LOAD_SUPPORT_SUCCESS,
         payload: {
