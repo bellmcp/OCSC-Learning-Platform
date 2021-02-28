@@ -13,6 +13,8 @@ import {
   Toolbar,
 } from "@material-ui/core";
 
+const HeroImage = require("assets/images/hero.jpg");
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Header(props: any) {
+export default function Header({ title, subtitle, icon }: any) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
@@ -41,7 +43,7 @@ export default function Header(props: any) {
       alignItems="center"
       className={classes.header}
       style={{
-        backgroundImage: `url(${props.imageUrl})`,
+        backgroundImage: `url(${HeroImage})`,
       }}
     >
       <Toolbar />
@@ -58,7 +60,7 @@ export default function Header(props: any) {
             alignItems="center"
           >
             <Grid item style={{ marginTop: 8 }}>
-              {props.icon}
+              {icon}
             </Grid>
             <Grid item>
               <Typography
@@ -67,11 +69,11 @@ export default function Header(props: any) {
                 align={matches ? "center" : "left"}
                 color="inherit"
               >
-                {props.title}
+                {title}
               </Typography>
             </Grid>
           </Grid>
-          {props.subtitle && (
+          {subtitle && (
             <Grid
               container
               justify="flex-start"
@@ -85,7 +87,7 @@ export default function Header(props: any) {
                   align={matches ? "center" : "left"}
                   color="inherit"
                 >
-                  {props.subtitle}
+                  {subtitle}
                 </Typography>
               </Grid>
             </Grid>

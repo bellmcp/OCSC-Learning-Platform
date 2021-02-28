@@ -52,8 +52,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const TITLE = "OCSC Learning Platform";
 const SUBTITLE =
   "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
-const HERO_IMAGE_URL =
-  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
 
 export default function Home() {
   const classes = useStyles();
@@ -119,7 +117,6 @@ export default function Home() {
       <Header
         title={users.firstname ? `สวัสดี ${users.firstname}` : TITLE}
         subtitle={SUBTITLE}
-        imageUrl={HERO_IMAGE_URL}
       />
       <Container maxWidth="lg" className={classes.content}>
         <PressCarousel presses={presses} isLoading={isPressesLoading} />

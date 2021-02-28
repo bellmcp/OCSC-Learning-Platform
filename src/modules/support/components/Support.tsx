@@ -24,10 +24,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TITLE = "ช่วยเหลือ";
-const HERO_IMAGE_URL =
-  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
-
 export default function Support() {
   const classes = useStyles();
   const theme = useTheme();
@@ -36,9 +32,8 @@ export default function Support() {
   return (
     <>
       <Header
-        title={TITLE}
+        title="ช่วยเหลือ"
         icon={<HelpIcon fontSize="large" style={{ marginRight: "24px" }} />}
-        imageUrl={HERO_IMAGE_URL}
       />
       <Container>
         <div className={classes.main}>

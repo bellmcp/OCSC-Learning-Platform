@@ -25,7 +25,7 @@ import PdfViewer from "./PdfViewer";
 import FlashAlert from "./FlashAlert";
 import MobileAlert from "./MobileAlert";
 
-import HeroImage from "assets/images/Hero_Learn.svg";
+import HeroImage from "assets/images/hero-learn.svg";
 
 export default function ContentView({ contentId, activeContentView }) {
   const theme = useTheme();

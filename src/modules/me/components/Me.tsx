@@ -20,10 +20,6 @@ import {
   FolderSpecial as FolderIcon,
 } from "@material-ui/icons";
 
-const TITLE = "โปรไฟล์";
-const HERO_IMAGE_URL =
-  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(5, 3),
@@ -61,9 +57,8 @@ export default function Me() {
   return (
     <>
       <Header
-        title={TITLE}
+        title="โปรไฟล์"
         icon={<PersonIcon fontSize="large" style={{ marginRight: "24px" }} />}
-        imageUrl={HERO_IMAGE_URL}
       />
       <Container component="main" maxWidth="md">
         <Paper className={classes.paper} style={{ textAlign: "center" }}>

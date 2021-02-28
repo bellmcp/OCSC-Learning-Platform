@@ -43,10 +43,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TITLE = "หลักสูตร";
-const HERO_IMAGE_URL =
-  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
-
 export default function CurriculumList() {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -65,11 +61,10 @@ export default function CurriculumList() {
   return (
     <>
       <Header
-        title={TITLE}
+        title="หลักสูตร"
         icon={
           <CurriculumIcon fontSize="large" style={{ marginRight: "24px" }} />
         }
-        imageUrl={HERO_IMAGE_URL}
       />
       <Container>
         <div className={classes.main}>

@@ -194,7 +194,7 @@ export default function NavBar(props: NavigationBarProps) {
     setMobileMoreAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
 
-  const logo = require("assets/images/root/logo-min.png");
+  const LogoImage = require("assets/images/logo.png");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -327,7 +327,7 @@ export default function NavBar(props: NavigationBarProps) {
             </Hidden>
             {/* SITE LOGO */}
             <img
-              src={logo}
+              src={LogoImage}
               alt="OCSC Logo"
               className={classes.logo}
               onClick={linkToHome}

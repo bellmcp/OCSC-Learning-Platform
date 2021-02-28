@@ -45,10 +45,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TITLE = "รายวิชา";
-const HERO_IMAGE_URL =
-  "https://raw.githubusercontent.com/bellmcp/OCSC-Learning-Platform/master/src/assets/images/root/hero-min.jpg";
-
 export default function CourseList() {
   const classes = useStyles();
   const theme = useTheme();
@@ -111,9 +107,8 @@ export default function CourseList() {
   return (
     <>
       <Header
-        title={TITLE}
+        title="รายวิชา"
         icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
-        imageUrl={HERO_IMAGE_URL}
       />
       <Container maxWidth="lg">
         <main className={classes.content}>
