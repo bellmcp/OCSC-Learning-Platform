@@ -81,7 +81,7 @@ export default function SideBar({
                 style={{
                   fontSize: "1.3rem",
                   fontWeight: 600,
-                  lineHeight: "1.1",
+                  lineHeight: "1.2",
                 }}
                 gutterBottom
               >

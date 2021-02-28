@@ -25,6 +25,8 @@ import PdfViewer from "./PdfViewer";
 import FlashAlert from "./FlashAlert";
 import MobileAlert from "./MobileAlert";
 
+import HeroImage from "assets/images/Hero_Learn.svg";
+
 export default function ContentView({ contentId, activeContentView }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -94,11 +96,26 @@ export default function ContentView({ contentId, activeContentView }) {
             justify="center"
             alignItems="center"
           >
+            <Grid
+              item
+              style={{
+                width: "50%",
+                minWidth: 280,
+                maxWidth: 500,
+                marginBottom: 24,
+              }}
+            >
+              <img
+                src={HeroImage}
+                alt="ยินดีต้อนรับ"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Grid>
             <Typography
               variant="h6"
               color="textPrimary"
               gutterBottom
-              style={{ fontSize: "1.6rem", fontWeight: 600 }}
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
             >
               ยินดีต้อนรับ
             </Typography>
