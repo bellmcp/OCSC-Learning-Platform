@@ -206,7 +206,7 @@ export default function Learn() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {"คุณต้องการออกจากห้องเรียนหรือไม่ ?"}
+          {"คุณต้องการออกจากห้องเรียนใช่ไหม?"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -224,7 +224,7 @@ export default function Learn() {
             disableElevation
             onClick={linkToLearn}
           >
-            ออกจากห้องเรียน
+            ตกลง
           </Button>
         </DialogActions>
       </Dialog>
