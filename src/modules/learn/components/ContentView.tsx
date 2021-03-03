@@ -19,6 +19,7 @@ import {
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
 import { getContentType } from "utils/contentType";
+import { generateContentSourceUrl } from "utils/soureceUrl";
 
 import VideoPlayer from "./VideoPlayer";
 import PdfViewer from "./PdfViewer";
@@ -34,8 +35,10 @@ export default function ContentView({ contentId, activeContentView }) {
   const [activeSource, setActiveSource] = useState("");
 
   useEffect(() => {
-    setActiveSource(activeContentView?.content1);
-  }, [activeContentView]);
+    setActiveSource(
+      generateContentSourceUrl(!matches, activeContentView?.content1)
+    );
+  }, [matches, activeContentView]);
 
   const handleSource = (
     event: React.MouseEvent<HTMLElement>,
@@ -154,7 +157,10 @@ export default function ContentView({ contentId, activeContentView }) {
                     size="small"
                   >
                     <ToggleButton
-                      value={activeContentView?.content1}
+                      value={generateContentSourceUrl(
+                        !matches,
+                        activeContentView?.content1
+                      )}
                       aria-label="ลิงก์หลัก"
                     >
                       <Typography
@@ -166,7 +172,10 @@ export default function ContentView({ contentId, activeContentView }) {
                       </Typography>
                     </ToggleButton>
                     <ToggleButton
-                      value={activeContentView?.content2}
+                      value={generateContentSourceUrl(
+                        !matches,
+                        activeContentView?.content2
+                      )}
                       aria-label="ลิงก์สำรอง"
                     >
                       <Typography
