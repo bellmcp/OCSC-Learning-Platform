@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React from "react";
+import { useDispatch } from "react-redux";
 import DayJS from "react-dayjs";
 import {
   Typography,
@@ -20,6 +21,8 @@ import {
   AttachFile as AttachmentIcon,
 } from "@material-ui/icons";
 
+import * as supportActions from "modules/support/actions";
+
 export default function SupportItem({
   id,
   subject,
@@ -31,8 +34,11 @@ export default function SupportItem({
   replyDate,
   isAcknowledged,
 }: any) {
-  const onRead = () => {
-    alert(`{"id": ${id}, "isAcknowledged": true}`);
+  const dispatch = useDispatch();
+
+  const markSupportAsRead = () => {
+    const mark_as_read_action = supportActions.markSupportAsRead(id);
+    dispatch(mark_as_read_action);
   };
 
   const renderReadButton = () => {
@@ -41,7 +47,7 @@ export default function SupportItem({
         return (
           <CardActions>
             <Button
-              onClick={onRead}
+              onClick={markSupportAsRead}
               color="secondary"
               variant="contained"
               startIcon={<CheckIcon />}
@@ -169,7 +175,7 @@ export default function SupportItem({
                   color="textSecondary"
                 >
                   <b>ตอบกลับเมื่อ</b>{" "}
-                  <DayJS format="DD/MM/YYYY">{replyDate}</DayJS>
+                  <DayJS format="DD/MM/YYYY HH:mm">{replyDate}</DayJS>
                 </Typography>
               </Box>
             </>

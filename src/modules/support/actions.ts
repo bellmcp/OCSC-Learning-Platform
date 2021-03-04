@@ -7,6 +7,8 @@ const LOAD_SUPPORT_REQUEST = "learning-platform/support/LOAD_SUPPORT_REQUEST";
 const LOAD_SUPPORT_SUCCESS = "learning-platform/support/LOAD_SUPPORT_SUCCESS";
 const LOAD_SUPPORT_FAILURE = "learning-platform/support/LOAD_SUPPORT_FAILURE";
 const SEND_SUPPORT_SUCCESS = "learning-platform/support/SEND_SUPPORT_SUCCESS";
+const MARK_SUPPORT_AS_READ_SUCCESS =
+  "learning-platform/support/MARK_SUPPORT_AS_READ_SUCCESS";
 
 function loadSupports() {
   return async (dispatch: any) => {
@@ -79,11 +81,44 @@ function sendSupport(supportInfo, attachedFile) {
   };
 }
 
+function markSupportAsRead(supportId) {
+  return async (dispatch) => {
+    const token = getCookie("token");
+    try {
+      var { data } = await axios.patch(
+        `/Supports/${supportId}`,
+        {
+          isAcknowledged: true,
+        },
+        {
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(uiActions.setFlashMessage("บันทึกข้อมูลเรียบร้อย", "success"));
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        uiActions.setFlashMessage(
+          `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          "error"
+        )
+      );
+    }
+  };
+}
+
 export {
   LOAD_SUPPORT_REQUEST,
   LOAD_SUPPORT_SUCCESS,
   LOAD_SUPPORT_FAILURE,
   SEND_SUPPORT_SUCCESS,
+  MARK_SUPPORT_AS_READ_SUCCESS,
   loadSupports,
   sendSupport,
+  markSupportAsRead,
 };

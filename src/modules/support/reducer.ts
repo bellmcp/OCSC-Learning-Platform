@@ -3,6 +3,7 @@ import {
   LOAD_SUPPORT_SUCCESS,
   LOAD_SUPPORT_FAILURE,
   SEND_SUPPORT_SUCCESS,
+  MARK_SUPPORT_AS_READ_SUCCESS,
 } from "./actions";
 
 const initialState = {
@@ -19,6 +20,7 @@ export default function (state = initialState, action: any) {
     case LOAD_SUPPORT_FAILURE:
       return { ...state, isLoading: false };
     case SEND_SUPPORT_SUCCESS:
+    case MARK_SUPPORT_AS_READ_SUCCESS:
       return {
         ...state,
         isLoading: false,
