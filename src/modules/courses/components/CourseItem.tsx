@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
   },
   actionArea: {
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 5,
   },
   focusHighlight: {},
   cardMedia: {
@@ -101,7 +101,14 @@ export default function CourseItem({
   };
 
   return (
-    <CardActionArea component={RouterLink} to={getCourseDetailsTargetUrl}>
+    <CardActionArea
+      component={RouterLink}
+      to={getCourseDetailsTargetUrl}
+      classes={{
+        root: classes.actionArea,
+        focusHighlight: classes.focusHighlight,
+      }}
+    >
       <Card className={classes.card}>
         <CardMedia
           key={id}

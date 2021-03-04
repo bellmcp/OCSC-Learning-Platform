@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
   },
   actionArea: {
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: 5,
   },
   focusHighlight: {},
   cardMedia: {
