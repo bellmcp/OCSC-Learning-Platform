@@ -48,7 +48,7 @@ export default function SupportList() {
   }, [dispatch]);
 
   const UNREAD_NOTIFICATION_COUNT = mySupportList.filter((support: any) => {
-    return support.ReplyMessage !== null && support.IsAcknowledged === false;
+    return support.replyMessage !== null && support.isAcknowledged === false;
   }).length;
 
   function renderSupportList() {

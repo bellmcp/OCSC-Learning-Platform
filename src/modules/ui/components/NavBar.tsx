@@ -221,16 +221,19 @@ export default function NavBar(props: NavigationBarProps) {
     }
     return false;
   };
-
+  const userId = parseJwt(token).unique_name;
   const { items: supports } = useSelector((state) => state.support);
+  const mySupportList = supports.filter((support) => {
+    return support.userId === userId;
+  });
 
   useEffect(() => {
     const action = supportActions.loadSupports();
     dispatch(action);
   }, [dispatch]);
 
-  const UNREAD_NOTIFICATION_COUNT = supports.filter((support: any) => {
-    return support.ReplyMessage !== null && support.IsAcknowledged === false;
+  const UNREAD_NOTIFICATION_COUNT = mySupportList.filter((support: any) => {
+    return support.replyMessage !== null && support.isAcknowledged === false;
   }).length;
 
   const navigationItem = [
