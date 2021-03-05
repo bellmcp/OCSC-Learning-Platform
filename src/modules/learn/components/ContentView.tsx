@@ -1,5 +1,7 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
+import DayJS from "react-dayjs";
+import { useSelector, useDispatch } from "react-redux";
 import {
   isFirefox,
   isMobile,
@@ -27,18 +29,28 @@ import FlashAlert from "./FlashAlert";
 import MobileAlert from "./MobileAlert";
 import TestList from "./TestList";
 
+import * as learnActions from "../actions";
 import HeroImage from "assets/images/hero-learn.svg";
 
 export default function ContentView({ contentId, activeContentView }) {
   const theme = useTheme();
+  const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const [activeSource, setActiveSource] = useState("");
+  var { isLoading: isSessionLoading, sessions: mySession } = useSelector(
+    (state) => state.learn
+  );
 
   useEffect(() => {
     setActiveSource(
       generateContentSourceUrl(!matches, activeContentView?.content1)
     );
   }, [matches, activeContentView]);
+
+  useEffect(() => {
+    const create_session_action = learnActions.createSession();
+    dispatch(create_session_action);
+  }, [dispatch, activeSource]);
 
   const handleSource = (
     event: React.MouseEvent<HTMLElement>,
@@ -205,6 +217,11 @@ export default function ContentView({ contentId, activeContentView }) {
               <Typography variant="body2" color="textSecondary">
                 You are currently viewing this content via {browserName}{" "}
                 {fullBrowserVersion} on {osName}
+              </Typography>
+              <Typography variant="body2" color="error">
+                Current session id: {mySession.id} and key: {mySession.key},
+                created at{" "}
+                <DayJS format="DD/MM/YYYY HH:mm">{mySession.createDate}</DayJS>
               </Typography>
             </Box>
           </Box>

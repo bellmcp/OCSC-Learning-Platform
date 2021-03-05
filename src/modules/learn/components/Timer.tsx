@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Typography,
@@ -11,11 +11,11 @@ import {
 } from "@material-ui/core";
 import { amber } from "@material-ui/core/colors";
 
-export default function Timer() {
+export default function Timer({ contentLength }: any) {
   const [timer, setTimer] = useState(1);
   const [progress, setProgress] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const round = setInterval(() => {
       setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
     }, 1000);
@@ -24,7 +24,7 @@ export default function Timer() {
     };
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const sequence = setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 15 ? 0 : prevProgress + 1
@@ -98,12 +98,12 @@ export default function Timer() {
           <Hidden only={["xs"]}>
             <b>เวลาเรียนสะสม:</b>
           </Hidden>{" "}
-          {progress}/15 นาที
+          {progress}/{contentLength ? contentLength : "0"} นาที
         </Typography>
       </Grid>
       <Grid item style={{ width: "100px" }}>
         <LinearProgressWithLabel
-          value={(progress / 15) * 100}
+          value={(progress / contentLength) * 100}
           color="secondary"
         />
       </Grid>

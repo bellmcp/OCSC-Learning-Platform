@@ -8,6 +8,7 @@ import categories from "modules/categories/reducer";
 import courses from "modules/courses/reducer";
 import curriculums from "modules/curriculums/reducer";
 import registrations from "modules/registrations/reducer";
+import learn from "modules/learn/reducer";
 import press from "modules/press/reducer";
 import support from "modules/support/reducer";
 import ui from "modules/ui/reducer";
@@ -22,6 +23,7 @@ export default (history: any) =>
     courses,
     curriculums,
     registrations,
+    learn,
     press,
     support,
     ui,

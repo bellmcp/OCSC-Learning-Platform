@@ -32,8 +32,8 @@ import SideBarMobile from "./SideBarMobile";
 import ContentView from "./ContentView";
 import Timer from "./Timer";
 
-const drawerWidth = 300;
-const footerHeight = 60;
+const DRAWER_WIDTH = 300;
+const FOOTER_HEIGHT = 60;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -41,40 +41,40 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
     },
     appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
+      width: `calc(100% - ${DRAWER_WIDTH}px)`,
+      marginLeft: DRAWER_WIDTH,
     },
     drawer: {
       display: "unset",
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
       flexShrink: 0,
       [theme.breakpoints.down("xs")]: {
         display: "none",
       },
     },
     drawerPaper: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
     },
     content: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(1),
       position: "relative",
-      marginBottom: footerHeight,
+      marginBottom: FOOTER_HEIGHT,
     },
     bottom: {
       position: "sticky",
       bottom: 0,
       width: "100%",
     },
-    timerContainer: {
+    timerWrapper: {
       position: "fixed",
-      height: footerHeight,
+      height: FOOTER_HEIGHT,
       bottom: 0,
-      width: `calc(100% - ${drawerWidth}px)`,
+      width: `calc(100% - ${DRAWER_WIDTH}px)`,
       borderTop: "1px solid rgba(0, 0, 0, 0.12)",
       backgroundColor: theme.palette.background.paper,
-      marginLeft: drawerWidth,
+      marginLeft: DRAWER_WIDTH,
       zIndex: 1201,
       [theme.breakpoints.down("xs")]: {
         width: "100%",
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) =>
     fab: {
       display: "none",
       position: "fixed",
-      bottom: footerHeight + theme.spacing(3),
+      bottom: FOOTER_HEIGHT + theme.spacing(3),
       right: theme.spacing(3),
       // left: "calc(50% - 24px)",
       zIndex: 1202,
@@ -228,9 +228,10 @@ export default function Learn() {
           </Button>
         </DialogActions>
       </Dialog>
-      <div className={classes.timerContainer}>
+      {/* TIMER */}
+      <div className={classes.timerWrapper}>
         <Box mx={2} mt={1}>
-          <Timer />
+          <Timer contentLength={activeContentView[0]?.minutes} />
         </Box>
       </div>
     </div>
