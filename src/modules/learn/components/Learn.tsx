@@ -231,7 +231,7 @@ export default function Learn() {
       {/* TIMER */}
       <div className={classes.timerWrapper}>
         <Box mx={2} mt={1}>
-          <Timer contentLength={activeContentView[0]?.minutes} />
+          <Timer contentId={contentId} activeContentView={activeContentView} />
         </Box>
       </div>
     </div>

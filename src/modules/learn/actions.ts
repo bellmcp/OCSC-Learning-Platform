@@ -29,12 +29,9 @@ function createSession() {
         type: CREATE_SESSION_SUCCESS,
         payload: { session: data },
       });
-      dispatch(
-        uiActions.setFlashMessage(
-          "สร้างเซสชันสำเร็จ เริ่มจับเวลาเข้าเรียนของคุณแล้ว",
-          "success"
-        )
-      );
+      // dispatch(
+      //   uiActions.setFlashMessage("เริ่มจับเวลาเข้าเรียนของคุณแล้ว", "info")
+      // );
     } catch (err) {
       console.log(err);
       dispatch({ type: CREATE_SESSION_FAILURE });

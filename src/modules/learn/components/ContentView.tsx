@@ -49,8 +49,10 @@ export default function ContentView({ contentId, activeContentView }) {
 
   useEffect(() => {
     const create_session_action = learnActions.createSession();
-    dispatch(create_session_action);
-  }, [dispatch, activeSource]);
+    if (contentId !== undefined) {
+      dispatch(create_session_action);
+    }
+  }, [dispatch, contentId]);
 
   const handleSource = (
     event: React.MouseEvent<HTMLElement>,

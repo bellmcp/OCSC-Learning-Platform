@@ -11,29 +11,49 @@ import {
 } from "@material-ui/core";
 import { amber } from "@material-ui/core/colors";
 
-export default function Timer({ contentLength }: any) {
+export default function Timer({ contentId, activeContentView }: any) {
   const [timer, setTimer] = useState(1);
   const [progress, setProgress] = useState(0);
+  const contentLength = activeContentView[0]?.minutes;
+
+  // CLOCK
+  useEffect(() => {
+    if (contentId !== undefined) {
+      const round = setInterval(() => {
+        setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
+      }, 1000);
+      return () => {
+        clearInterval(round);
+      };
+    }
+  }, [contentId]);
+
+  // MINUTE PROGRESS
+  useEffect(() => {
+    if (contentId !== undefined) {
+      const sequence = setInterval(() => {
+        setProgress((prevProgress) =>
+          prevProgress >= contentLength ? 0 : prevProgress + 1
+        );
+      }, 60000);
+      return () => {
+        clearTimeout(sequence);
+      };
+    }
+  }, [contentLength, contentId]);
 
   useEffect(() => {
-    const round = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
-    }, 1000);
-    return () => {
-      clearInterval(round);
-    };
-  }, []);
+    setTimer(0);
+    setProgress(0);
+  }, [activeContentView]);
 
   useEffect(() => {
-    const sequence = setInterval(() => {
-      setProgress((prevProgress) =>
-        prevProgress >= 15 ? 0 : prevProgress + 1
-      );
-    }, 60000);
-    return () => {
-      clearTimeout(sequence);
-    };
-  }, []);
+    console.log(progress);
+  }, [progress]);
+
+  useEffect(() => {
+    console.log(timer);
+  }, [timer]);
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
@@ -43,7 +63,7 @@ export default function Timer({ contentLength }: any) {
         <CircularProgress
           variant="static"
           {...props}
-          value={props.value * 1.66666666667}
+          value={props.value * (100 / 60)}
         />
         <Box
           top={0}
@@ -96,9 +116,11 @@ export default function Timer({ contentLength }: any) {
       <Grid item>
         <Typography variant="h6" style={{ fontSize: "1rem" }}>
           <Hidden only={["xs"]}>
-            <b>เวลาเรียนสะสม:</b>
+            <b>เวลาเรียนสะสม</b>
           </Hidden>{" "}
-          {progress}/{contentLength ? contentLength : "0"} นาที
+          {progress}
+          {"/"}
+          {contentLength ? contentLength : "0"} นาที
         </Typography>
       </Grid>
       <Grid item style={{ width: "100px" }}>
