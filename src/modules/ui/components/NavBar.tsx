@@ -488,6 +488,7 @@ export default function NavBar(props: NavigationBarProps) {
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
         active={props.active}
+        unreadNotificationCount={UNREAD_NOTIFICATION_COUNT}
       />
     </div>
   );
