@@ -25,6 +25,7 @@ import {
 } from "@material-ui/core/styles";
 import { Bookmarks as ArrowUpIcon } from "@material-ui/icons";
 
+import * as learnActions from "../actions";
 import * as coursesActions from "modules/courses/actions";
 import * as registrationsActions from "modules/registrations/actions";
 import SideBar from "./SideBar";
@@ -104,19 +105,26 @@ export default function Learn() {
   const { id: courseId }: any = useParams();
   const { search } = useLocation();
   const { contentId } = queryString.parse(search);
-
   const dispatch = useDispatch();
+
   const [course] = useSelector((state) => state.courses.items);
   var { contents: courseContents } = useSelector((state) => state.courses);
   const { myCourses } = useSelector((state) => state.registrations);
-  const courseRegistrationDetails = myCourses.filter(
-    (myCourse) => myCourse.courseId === parseInt(courseId)
-  );
+  const { contentViews } = useSelector((state) => state.learn);
   if (courseContents.length === 0) {
     courseContents = [];
   }
+  const { sessions: currentSession } = useSelector((state) => state.learn);
+
+  const courseRegistrationDetails = myCourses.filter(
+    (myCourse) => myCourse.courseId === parseInt(courseId)
+  );
+  const courseRegistrationId = courseRegistrationDetails[0]?.id;
   const activeContentView = courseContents.filter(
     (courseContent) => courseContent.id === parseInt(contentId)
+  );
+  const currentContentView = contentViews.filter(
+    (contentView) => contentView.courseContentId === parseInt(contentId)
   );
 
   useEffect(() => {
@@ -133,6 +141,13 @@ export default function Learn() {
     const course_registrations_action = registrationsActions.loadCourseRegistrations();
     dispatch(course_registrations_action);
   }, [dispatch]);
+
+  useEffect(() => {
+    const content_view_action = learnActions.loadContentViews(
+      courseRegistrationId
+    );
+    dispatch(content_view_action);
+  }, [dispatch, courseRegistrationId]);
 
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const handleMobileDialogOpen = () => {
@@ -179,6 +194,9 @@ export default function Learn() {
         <ContentView
           contentId={contentId}
           activeContentView={activeContentView[0]}
+          currentContentView={currentContentView[0]}
+          courseRegistrationDetails={courseRegistrationDetails}
+          currentSession={currentSession}
         />
       </main>
       {/* MOBILE NAVIGATION */}
@@ -229,11 +247,21 @@ export default function Learn() {
         </DialogActions>
       </Dialog>
       {/* TIMER */}
-      <div className={classes.timerWrapper}>
-        <Box mx={2} mt={1}>
-          <Timer contentId={contentId} activeContentView={activeContentView} />
-        </Box>
-      </div>
+      {contentId !== undefined ? (
+        <div className={classes.timerWrapper}>
+          <Box mx={2} mt={1}>
+            <Timer
+              contentId={contentId}
+              activeContentView={activeContentView}
+              currentContentView={currentContentView[0]}
+              courseRegistrationId={courseRegistrationId}
+              currentSession={currentSession}
+            />
+          </Box>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

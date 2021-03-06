@@ -1,4 +1,6 @@
+//@ts-nocheck
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   Grid,
   Typography,
@@ -11,16 +13,34 @@ import {
 } from "@material-ui/core";
 import { amber } from "@material-ui/core/colors";
 
-export default function Timer({ contentId, activeContentView }: any) {
-  const [timer, setTimer] = useState(1);
+import * as learnActions from "../actions";
+
+export default function Timer({
+  contentId,
+  activeContentView,
+  currentContentView,
+  courseRegistrationId,
+  currentSession,
+}: any) {
+  const dispatch = useDispatch();
+  const [timer, setTimer] = useState(0);
   const [progress, setProgress] = useState(0);
   const contentLength = activeContentView[0]?.minutes;
+  const contentViewId = currentContentView?.id;
+  var initialContentMinutes = currentContentView?.contentSeconds / 60;
+  if (
+    initialContentMinutes == null ||
+    initialContentMinutes === undefined ||
+    isNaN(initialContentMinutes)
+  ) {
+    initialContentMinutes = 0;
+  }
 
   // CLOCK
   useEffect(() => {
     if (contentId !== undefined) {
       const round = setInterval(() => {
-        setTimer((prevTimer) => (prevTimer >= 60 ? 0 : prevTimer + 1));
+        setTimer((prevTimer) => (prevTimer >= 59 ? 0 : prevTimer + 1));
       }, 1000);
       return () => {
         clearInterval(round);
@@ -33,27 +53,39 @@ export default function Timer({ contentId, activeContentView }: any) {
     if (contentId !== undefined) {
       const sequence = setInterval(() => {
         setProgress((prevProgress) =>
-          prevProgress >= contentLength ? 0 : prevProgress + 1
+          prevProgress >= contentLength ? contentLength : prevProgress + 1
         );
+        console.log("Dispatch content seconds update +60");
       }, 60000);
       return () => {
         clearTimeout(sequence);
       };
     }
-  }, [contentLength, contentId]);
+  }, [contentId]);
+
+  console.log(progress);
 
   useEffect(() => {
     setTimer(0);
-    setProgress(0);
-  }, [activeContentView]);
+    setProgress(initialContentMinutes);
+  }, [contentId]);
 
-  useEffect(() => {
-    console.log(progress);
-  }, [progress]);
+  // useEffect(() => {
+  //   if (progress >= initialContentMinutes) {
+  //     console.log("Dispatch content seconds update +60");
+  //   }
+  // }, [timer]);
 
-  useEffect(() => {
-    console.log(timer);
-  }, [timer]);
+  const updateContentViewSeconds = (contentSeconds) => {
+    const update_content_view_action = learnActions.updateContentView(
+      courseRegistrationId,
+      contentViewId,
+      currentSession.id,
+      currentSession.key,
+      contentSeconds
+    );
+    dispatch(update_content_view_action);
+  };
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
@@ -105,29 +137,52 @@ export default function Timer({ contentId, activeContentView }: any) {
   return (
     <Grid container direction="row" justify="space-between" alignItems="center">
       <Grid item>
-        <CircularProgressWithLabel
-          value={timer}
-          style={{
-            backgroundColor: `${amber[500]}`,
-            borderRadius: "50%",
-          }}
-        />
+        {progress <= contentLength ? (
+          <CircularProgressWithLabel
+            value={timer}
+            style={{
+              backgroundColor: `${amber[500]}`,
+              borderRadius: "50%",
+            }}
+          />
+        ) : (
+          <CircularProgress
+            value={100}
+            variant="determinate"
+            style={{
+              backgroundColor: `${amber[500]}`,
+              borderRadius: "50%",
+            }}
+          ></CircularProgress>
+        )}
       </Grid>
       <Grid item>
         <Typography variant="h6" style={{ fontSize: "1rem" }}>
           <Hidden only={["xs"]}>
             <b>เวลาเรียนสะสม</b>
           </Hidden>{" "}
-          {progress}
-          {"/"}
-          {contentLength ? contentLength : "0"} นาที
+          {progress <= contentLength ? (
+            <>
+              {progress}
+              {"/"}
+              {contentLength ? contentLength : "0"} นาที
+            </>
+          ) : (
+            <>{`${contentLength ? contentLength : "0"}/${
+              contentLength ? contentLength : "0"
+            } นาที`}</>
+          )}
         </Typography>
       </Grid>
       <Grid item style={{ width: "100px" }}>
-        <LinearProgressWithLabel
-          value={(progress / contentLength) * 100}
-          color="secondary"
-        />
+        {progress <= contentLength ? (
+          <LinearProgressWithLabel
+            value={(progress / contentLength) * 100}
+            color="secondary"
+          />
+        ) : (
+          <LinearProgress value={100} color="secondary"></LinearProgress>
+        )}
       </Grid>
     </Grid>
   );

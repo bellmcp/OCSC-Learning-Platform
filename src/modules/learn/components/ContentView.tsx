@@ -32,14 +32,18 @@ import TestList from "./TestList";
 import * as learnActions from "../actions";
 import HeroImage from "assets/images/hero-learn.svg";
 
-export default function ContentView({ contentId, activeContentView }) {
+export default function ContentView({
+  contentId,
+  activeContentView,
+  currentContentView,
+  courseRegistrationDetails,
+  currentSession,
+}) {
   const theme = useTheme();
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const registrationId = courseRegistrationDetails[0]?.id;
   const [activeSource, setActiveSource] = useState("");
-  var { isLoading: isSessionLoading, sessions: mySession } = useSelector(
-    (state) => state.learn
-  );
 
   useEffect(() => {
     setActiveSource(
@@ -221,9 +225,25 @@ export default function ContentView({ contentId, activeContentView }) {
                 {fullBrowserVersion} on {osName}
               </Typography>
               <Typography variant="body2" color="error">
-                Current session id: {mySession.id} and key: {mySession.key},
-                created at{" "}
-                <DayJS format="DD/MM/YYYY HH:mm">{mySession.createDate}</DayJS>
+                Current session id: {currentSession.id}, key:{" "}
+                {currentSession.key}, created at{" "}
+                <DayJS format="DD/MM/YYYY HH:mm">
+                  {currentSession.createDate}
+                </DayJS>
+              </Typography>
+              <Typography variant="body2" color="error">
+                Current course registration id: {registrationId}
+              </Typography>
+              <Typography variant="body2" color="error">
+                Current content id: {contentId}
+              </Typography>
+              <Typography variant="body2" color="error">
+                Current content view id: {currentContentView?.id}, User
+                cumulative content view seconds at start:{" "}
+                {currentContentView?.contentSeconds
+                  ? currentContentView?.contentSeconds
+                  : 0}
+                {" seconds "}({currentContentView?.contentSeconds / 60} minutes)
               </Typography>
             </Box>
           </Box>
