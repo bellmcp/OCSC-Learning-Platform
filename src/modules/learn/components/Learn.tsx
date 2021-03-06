@@ -262,7 +262,6 @@ export default function Learn() {
               activeContentView={activeContentView}
               currentContentView={currentContentView[0]}
               courseRegistrationId={courseRegistrationId}
-              currentSession={currentSession}
             />
           </Box>
         </div>

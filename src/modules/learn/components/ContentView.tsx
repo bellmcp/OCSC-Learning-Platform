@@ -1,7 +1,6 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
 import DayJS from "react-dayjs";
-import { useSelector, useDispatch } from "react-redux";
 import {
   isFirefox,
   isMobile,
@@ -29,7 +28,6 @@ import FlashAlert from "./FlashAlert";
 import MobileAlert from "./MobileAlert";
 import TestList from "./TestList";
 
-import * as learnActions from "../actions";
 import HeroImage from "assets/images/hero-learn.svg";
 
 export default function ContentView({
@@ -40,7 +38,6 @@ export default function ContentView({
   currentSession,
 }) {
   const theme = useTheme();
-  const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const registrationId = courseRegistrationDetails[0]?.id;
   const [activeSource, setActiveSource] = useState("");

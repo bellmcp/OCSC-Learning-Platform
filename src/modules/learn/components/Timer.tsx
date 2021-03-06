@@ -20,7 +20,6 @@ export default function Timer({
   activeContentView,
   currentContentView,
   courseRegistrationId,
-  currentSession,
 }: any) {
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
@@ -52,10 +51,7 @@ export default function Timer({
   useEffect(() => {
     if (contentId !== undefined) {
       const sequence = setInterval(() => {
-        setProgress((prevProgress) =>
-          prevProgress >= contentLength ? contentLength : prevProgress + 1
-        );
-        console.log("Dispatch content seconds update +60");
+        setProgress((prevProgress) => prevProgress + 1);
         updateContentViewSeconds(courseRegistrationId, contentViewId, 60);
       }, 60000);
       return () => {
@@ -64,18 +60,10 @@ export default function Timer({
     }
   }, [contentId]);
 
-  console.log(progress);
-
   useEffect(() => {
     setTimer(0);
     setProgress(initialContentMinutes);
   }, [contentId]);
-
-  // useEffect(() => {
-  //   if (progress >= initialContentMinutes) {
-  //     console.log("Dispatch content seconds update +60");
-  //   }
-  // }, [timer]);]
 
   const updateContentViewSeconds = (
     courseRegistrationId,

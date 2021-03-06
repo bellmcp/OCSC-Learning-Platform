@@ -42,7 +42,7 @@ function createSession() {
       });
       dispatch(
         uiActions.setFlashMessage(
-          "สร้างเซสชันสำเร็จ เริ่มจับเวลาเข้าเรียนแล้ว",
+          "สร้างเซสชันสำเร็จ เริ่มจับเวลาเข้าเรียน",
           "success"
         )
       );
@@ -112,12 +112,12 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
         type: UPDATE_CONTENT_VIEW_SUCCESS,
         payload: { contentSeconds: data },
       });
-      dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม + 1 นาที", "info"));
+      dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม +1 นาที", "info"));
     } catch (err) {
       dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `บันทึกเวลาเข้าเรียนไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          `บันทึกเวลาเรียนสะสมไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
