@@ -44,6 +44,7 @@ export default function SideBarMobile({
   handleMobileDialogClose,
   course,
   courseContents,
+  contentViews,
   courseRegistrationDetails,
   handleConfirmDialogOpen,
 }) {
@@ -134,6 +135,7 @@ export default function SideBarMobile({
       >
         <CourseContentList
           courseContents={courseContents}
+          contentViews={contentViews}
           handleMobileDialogClose={handleMobileDialogClose}
         />
         <Divider variant="middle" />

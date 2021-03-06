@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SideBar({
   course,
   courseContents,
+  contentViews,
   courseRegistrationDetails,
   handleConfirmDialogOpen,
 }: any) {
@@ -96,7 +97,10 @@ export default function SideBar({
       className={classes.root}
       dense
     >
-      <CourseContentList courseContents={courseContents} />
+      <CourseContentList
+        courseContents={courseContents}
+        contentViews={contentViews}
+      />
       <Divider variant="middle" />
       <Box my={4}>
         <Grid container justify="center" direction="column" alignItems="center">

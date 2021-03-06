@@ -192,6 +192,7 @@ export default function Learn() {
         <SideBar
           course={course}
           courseContents={courseContents}
+          contentViews={contentViews}
           courseRegistrationDetails={courseRegistrationDetails}
           handleConfirmDialogOpen={handleConfirmDialogOpen}
         />
@@ -220,6 +221,7 @@ export default function Learn() {
         handleMobileDialogClose={handleMobileDialogClose}
         course={course}
         courseContents={courseContents}
+        contentViews={contentViews}
         courseRegistrationDetails={courseRegistrationDetails}
         handleConfirmDialogOpen={handleConfirmDialogOpen}
       />

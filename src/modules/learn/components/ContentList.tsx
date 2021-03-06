@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import clsx from "clsx";
 import queryString from "query-string";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
@@ -10,9 +11,11 @@ import {
   Box,
   MenuItem,
   Grid,
+  Badge,
 } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { green } from "@material-ui/core/colors";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import {
   getContentType,
   getContentTypeText,
@@ -30,19 +33,27 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingLeft: theme.spacing(4),
     },
     completed: {
-      paddingLeft: theme.spacing(2),
-      borderLeft: `8px solid ${green[800]}`,
+      paddingLeft: 26,
+      borderLeft: `6px solid ${green[800]}`,
     },
   })
 );
 
 export default function ContentList({
   courseContents,
+  contentViews,
   handleMobileDialogClose,
 }: any) {
   const classes = useStyles();
   const { pathname, search } = useLocation();
   const { contentId } = queryString.parse(search);
+
+  function getContentViewById(contentId: any) {
+    const result = contentViews.filter(
+      (contentView) => contentView.courseContentId === contentId
+    );
+    return result;
+  }
 
   return (
     <List component="div">
@@ -60,33 +71,30 @@ export default function ContentList({
             <MenuItem
               button
               selected={parseInt(contentId) === courseContent?.id}
-              // className={clsx({
-              //   [classes.nested]: true,
-              //   [classes.completed]: item.completed,
-              // })}
-              className={classes.nested}
+              className={clsx({
+                [classes.nested]: true,
+                [classes.completed]: getContentViewById(courseContent?.id)[0]
+                  ?.isCompleted,
+              })}
               component={RouterLink}
               to={`${pathname}?contentId=${courseContent?.id}`}
               onClick={handleMobileDialogClose && handleMobileDialogClose}
             >
               <ListItemIcon>
-                {getContentTypeIcon(
-                  courseContent?.type,
-                  getContentType(courseContent.content1)
-                )}
-                {/* {item.completed ? (
                 <Badge
                   badgeContent={
-                    <CheckIcon
-                      style={{ color: green[800], fontSize: "18px" }}
-                    />
+                    getContentViewById(courseContent?.id)[0]?.isCompleted ? (
+                      <CheckCircleIcon
+                        style={{ color: green[800], fontSize: "18px" }}
+                      />
+                    ) : null
                   }
                 >
-                  {item.icon}
+                  {getContentTypeIcon(
+                    courseContent?.type,
+                    getContentType(courseContent.content1)
+                  )}
                 </Badge>
-              ) : (
-                <>{item.icon}</>
-              )} */}
               </ListItemIcon>
               <ListItemText
                 primary={
