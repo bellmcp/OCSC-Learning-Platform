@@ -56,6 +56,7 @@ export default function Timer({
           prevProgress >= contentLength ? contentLength : prevProgress + 1
         );
         console.log("Dispatch content seconds update +60");
+        updateContentViewSeconds(courseRegistrationId, contentViewId, 60);
       }, 60000);
       return () => {
         clearTimeout(sequence);
@@ -74,14 +75,16 @@ export default function Timer({
   //   if (progress >= initialContentMinutes) {
   //     console.log("Dispatch content seconds update +60");
   //   }
-  // }, [timer]);
+  // }, [timer]);]
 
-  const updateContentViewSeconds = (contentSeconds) => {
+  const updateContentViewSeconds = (
+    courseRegistrationId,
+    contentViewId,
+    contentSeconds
+  ) => {
     const update_content_view_action = learnActions.updateContentView(
       courseRegistrationId,
       contentViewId,
-      currentSession.id,
-      currentSession.key,
       contentSeconds
     );
     dispatch(update_content_view_action);
@@ -123,7 +126,11 @@ export default function Timer({
     return (
       <Box display="flex" alignItems="center">
         <Box width="100%" mr={1}>
-          <LinearProgress variant="determinate" {...props} />
+          <LinearProgress
+            variant="determinate"
+            value={props.value > 100 ? 100 : props.value}
+            color="secondary"
+          />
         </Box>
         <Box minWidth={35}>
           <Typography variant="body2" color="textPrimary">{`${Math.round(
@@ -137,52 +144,29 @@ export default function Timer({
   return (
     <Grid container direction="row" justify="space-between" alignItems="center">
       <Grid item>
-        {progress <= contentLength ? (
-          <CircularProgressWithLabel
-            value={timer}
-            style={{
-              backgroundColor: `${amber[500]}`,
-              borderRadius: "50%",
-            }}
-          />
-        ) : (
-          <CircularProgress
-            value={100}
-            variant="determinate"
-            style={{
-              backgroundColor: `${amber[500]}`,
-              borderRadius: "50%",
-            }}
-          ></CircularProgress>
-        )}
+        <CircularProgressWithLabel
+          value={timer}
+          style={{
+            backgroundColor: `${amber[500]}`,
+            borderRadius: "50%",
+          }}
+        />
       </Grid>
       <Grid item>
         <Typography variant="h6" style={{ fontSize: "1rem" }}>
           <Hidden only={["xs"]}>
             <b>เวลาเรียนสะสม</b>
           </Hidden>{" "}
-          {progress <= contentLength ? (
-            <>
-              {progress}
-              {"/"}
-              {contentLength ? contentLength : "0"} นาที
-            </>
-          ) : (
-            <>{`${contentLength ? contentLength : "0"}/${
-              contentLength ? contentLength : "0"
-            } นาที`}</>
-          )}
+          {progress}
+          {"/"}
+          {contentLength ? contentLength : "0"} นาที
         </Typography>
       </Grid>
       <Grid item style={{ width: "100px" }}>
-        {progress <= contentLength ? (
-          <LinearProgressWithLabel
-            value={(progress / contentLength) * 100}
-            color="secondary"
-          />
-        ) : (
-          <LinearProgress value={100} color="secondary"></LinearProgress>
-        )}
+        <LinearProgressWithLabel
+          value={(progress / contentLength) * 100}
+          color="secondary"
+        />
       </Grid>
     </Grid>
   );

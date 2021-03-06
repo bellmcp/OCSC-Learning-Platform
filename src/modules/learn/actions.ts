@@ -86,20 +86,17 @@ function loadContentViews(registrationId) {
   };
 }
 
-function updateContentView(
-  registrationId,
-  contentId,
-  sessionId,
-  sessionKey,
-  contentSeconds
-) {
-  return async (dispatch) => {
+function updateContentView(registrationId, contentViewId, contentSeconds) {
+  return async (dispatch, getState) => {
     const token = getCookie("token");
     const userId = parseJwt(token).unique_name;
+    const {
+      learn: { sessions },
+    } = getState();
     dispatch({ type: UPDATE_CONTENT_VIEW_REQUEST });
     try {
       var { data } = await axios.put(
-        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentId}?sessionId=${sessionId}&key=${sessionKey}`,
+        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}?sessionId=${sessions.id}&key=${sessions.key}`,
         {
           contentSeconds: contentSeconds,
         },
@@ -115,12 +112,7 @@ function updateContentView(
         type: UPDATE_CONTENT_VIEW_SUCCESS,
         payload: { contentSeconds: data },
       });
-      dispatch(
-        uiActions.setFlashMessage(
-          "FOR DEV: Successfully updated contentSeconds +60",
-          "info"
-        )
-      );
+      dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม + 1 นาที", "info"));
     } catch (err) {
       dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
       dispatch(

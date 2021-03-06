@@ -149,6 +149,13 @@ export default function Learn() {
     dispatch(content_view_action);
   }, [dispatch, courseRegistrationId]);
 
+  useEffect(() => {
+    const create_session_action = learnActions.createSession();
+    if (contentId !== undefined) {
+      dispatch(create_session_action);
+    }
+  }, [dispatch, contentId]);
+
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const handleMobileDialogOpen = () => {
     setMobileDialogOpen(true);
