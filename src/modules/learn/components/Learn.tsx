@@ -237,7 +237,7 @@ export default function Learn() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            เวลาเรียนสะสมปัจจุบันของคุณจะถูกบันทึก
+            เวลาเรียนสะสมของคุณจะถูกบันทึก
           </DialogContentText>
         </DialogContent>
         <DialogActions>

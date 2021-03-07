@@ -1,5 +1,6 @@
 // @ts-nocheck
 import axios from "axios";
+import { push } from "connected-react-router";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import * as uiActions from "modules/ui/actions";
@@ -18,6 +19,8 @@ const UPDATE_CONTENT_VIEW_SUCCESS =
   "learning-platform/learn/UPDATE_CONTENT_VIEW_SUCCESS";
 const UPDATE_CONTENT_VIEW_FAILURE =
   "learning-platform/learn/UPDATE_CONTENT_VIEW_FAILURE";
+
+const path = "/learning-platform";
 
 function createSession() {
   return async (dispatch) => {
@@ -42,12 +45,11 @@ function createSession() {
       });
       dispatch(
         uiActions.setFlashMessage(
-          "สร้างเซสชันสำเร็จ เริ่มจับเวลาเข้าเรียน",
+          "สร้างเซสชันสำเร็จ เริ่มจับเวลาเข้าเรียนแล้ว",
           "success"
         )
       );
     } catch (err) {
-      console.log(err);
       dispatch({ type: CREATE_SESSION_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
@@ -115,12 +117,22 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
       dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม +1 นาที", "info"));
     } catch (err) {
       dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
-      dispatch(
-        uiActions.setFlashMessage(
-          `บันทึกเวลาเรียนสะสมไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
-        )
-      );
+      if (err.response.status === 401) {
+        dispatch(push(`${path}/learn`));
+        dispatch(
+          uiActions.setFlashMessage(
+            `ระบบตรวจพบการใช้งานจากหลายอุปกรณ์ โปรดตรวจสอบและเข้าเรียนอีกครั้ง`,
+            "error"
+          )
+        );
+      } else {
+        dispatch(
+          uiActions.setFlashMessage(
+            `บันทึกเวลาเรียนสะสมไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
+      }
     }
   };
 }
