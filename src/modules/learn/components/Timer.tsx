@@ -19,13 +19,14 @@ export default function Timer({
   contentId,
   activeContentView,
   currentContentView,
-  courseRegistrationId,
+  courseRegistrationDetails,
 }: any) {
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
   const [progress, setProgress] = useState(0);
   const contentLength = activeContentView[0]?.minutes;
   const contentViewId = currentContentView?.id;
+  const courseRegistrationId = courseRegistrationDetails[0]?.id;
   var initialContentMinutes = currentContentView?.contentSeconds / 60;
   if (
     initialContentMinutes == null ||
@@ -62,8 +63,10 @@ export default function Timer({
 
   useEffect(() => {
     setTimer(0);
-    setProgress(initialContentMinutes);
-  }, [contentId]);
+    if (initialContentMinutes !== 0) {
+      setProgress(initialContentMinutes);
+    }
+  }, [contentId, initialContentMinutes]);
 
   const updateContentViewSeconds = (
     courseRegistrationId,

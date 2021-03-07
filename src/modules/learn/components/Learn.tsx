@@ -263,7 +263,7 @@ export default function Learn() {
               contentId={contentId}
               activeContentView={activeContentView}
               currentContentView={currentContentView[0]}
-              courseRegistrationId={courseRegistrationId}
+              courseRegistrationDetails={courseRegistrationDetails}
             />
           </Box>
         </div>
