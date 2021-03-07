@@ -268,7 +268,11 @@ export default function Learn() {
           </Box>
         </div>
       ) : (
-        <></>
+        <div className={classes.timerWrapper}>
+          <Box mx={2} mt={1}>
+            <></>
+          </Box>
+        </div>
       )}
     </div>
   );
