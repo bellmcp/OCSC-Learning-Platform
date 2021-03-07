@@ -138,7 +138,7 @@ export default function MyCourseItem({
                     color="textSecondary"
                     style={{ lineHeight: "1.2" }}
                   >
-                    <b>เข้าเรียนได้ตั้งแต่ </b>
+                    <b>เข้าเรียนได้ </b>
                     <DayJS format="DD/MM/YYYY">{courseStart}</DayJS> ถึง{" "}
                     <DayJS format="DD/MM/YYYY">{courseEnd}</DayJS>
                   </Typography>
