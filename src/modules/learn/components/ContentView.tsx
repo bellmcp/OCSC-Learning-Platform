@@ -27,6 +27,7 @@ import PdfViewer from "./PdfViewer";
 import FlashAlert from "./FlashAlert";
 import MobileAlert from "./MobileAlert";
 import TestList from "./TestList";
+import EvaluationList from "./EvaluationList";
 
 import HeroImage from "assets/images/hero-learn.svg";
 
@@ -203,6 +204,7 @@ export default function ContentView({
           <Box my={4}>
             {activeContentView?.type === "c" && <>{renderContentView()}</>}
             {activeContentView?.type === "t" && <TestList />}
+            {activeContentView?.type === "e" && <EvaluationList />}
             <Box my={4}>
               <Typography variant="body2" color="textSecondary">
                 FOR DEVELOPMENT

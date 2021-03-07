@@ -3,7 +3,7 @@ import React from "react";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import TestItem from "./TestItem";
+import EvaluationItem from "./EvaluationItem";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,20 +22,30 @@ const useStyles = makeStyles((theme) => ({
 const items = [
   {
     id: 1,
-    question: "ตัวอย่างข้อสอบ 1",
-    options: ["ตัวเลือก 1", "ตัวเลือก 2", "ตัวเลือก 3", "ตัวเลือก 4"],
+    question: "ตัวอย่างแบบประเมิน",
+    options: [
+      "ตัวเลือก 1",
+      "ตัวเลือก 2",
+      "ตัวเลือก 3",
+      "ตัวเลือก 4",
+      "ตัวเลือก 5",
+    ],
     answer: 1,
+  },
+  {
+    id: 2,
+    question: "ข้อเสนอแนะเพิ่มเติม",
   },
 ];
 
-export default function TestList() {
+export default function EvaluationList() {
   const classes = useStyles();
 
   return (
     <>
       {items.map((item, index) => (
         <Paper className={classes.paper} elevation={1}>
-          <TestItem {...item} />
+          <EvaluationItem {...item} />
         </Paper>
       ))}
     </>
