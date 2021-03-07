@@ -11,11 +11,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     player: {
       position: "absolute",
-      top: 0,
-      left: 0,
-      "&:focus": {
-        outline: "none !important",
-      },
+      top: "0 !important",
+      left: "0 !important",
     },
   })
 );
@@ -23,6 +20,15 @@ const useStyles = makeStyles((theme: Theme) =>
 const ReactPlayerWrapper = styled.div`
   video {
     outline: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  iframe {
+    outline: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 `;
 
@@ -33,12 +39,12 @@ export default function VideoPlayer({ url }: any) {
     <div className={classes.playerWrapper}>
       <ReactPlayerWrapper>
         <ReactPlayer
+          className={classes.player}
+          width="100%"
+          height="100%"
           url={url}
           controls
           playing
-          width="100%"
-          height="100%"
-          className={classes.player}
         />
       </ReactPlayerWrapper>
     </div>

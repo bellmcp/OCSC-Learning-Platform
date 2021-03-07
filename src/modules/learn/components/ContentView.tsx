@@ -41,12 +41,18 @@ export default function ContentView({
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const registrationId = courseRegistrationDetails[0]?.id;
   const [activeSource, setActiveSource] = useState("");
+  const contentSourceUrl1 = generateContentSourceUrl(
+    isMobile,
+    activeContentView?.content1
+  );
+  const contentSourceUrl2 = generateContentSourceUrl(
+    isMobile,
+    activeContentView?.content2
+  );
 
   useEffect(() => {
-    setActiveSource(
-      generateContentSourceUrl(!matches, activeContentView?.content1)
-    );
-  }, [matches, activeContentView]);
+    setActiveSource(contentSourceUrl1);
+  }, [isMobile, activeContentView]);
 
   const handleSource = (
     event: React.MouseEvent<HTMLElement>,
@@ -165,10 +171,7 @@ export default function ContentView({
                     size="small"
                   >
                     <ToggleButton
-                      value={generateContentSourceUrl(
-                        !matches,
-                        activeContentView?.content1
-                      )}
+                      value={contentSourceUrl1}
                       aria-label="ลิงก์หลัก"
                     >
                       <Typography
@@ -180,10 +183,7 @@ export default function ContentView({
                       </Typography>
                     </ToggleButton>
                     <ToggleButton
-                      value={generateContentSourceUrl(
-                        !matches,
-                        activeContentView?.content2
-                      )}
+                      value={contentSourceUrl2}
                       aria-label="ลิงก์สำรอง"
                     >
                       <Typography
