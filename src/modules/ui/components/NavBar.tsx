@@ -430,6 +430,7 @@ export default function NavBar(props: NavigationBarProps) {
               </Tooltip>
               <IconButton
                 edge="end"
+                aria-label="Toggle user dropdown menu"
                 aria-controls={menuId}
                 onClick={handleProfileMenuOpen}
                 color="inherit"

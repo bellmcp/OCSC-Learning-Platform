@@ -88,6 +88,7 @@ export default function SupportList() {
     <>
       <Typography
         gutterBottom
+        component="h2"
         variant="h6"
         style={{ fontSize: "1.7rem", fontWeight: 600 }}
         align={matches ? "left" : "center"}

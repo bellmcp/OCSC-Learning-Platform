@@ -216,6 +216,7 @@ export default function RegistrationList() {
             <Box my={4}>
               <Typography
                 gutterBottom
+                component="h2"
                 variant="h6"
                 style={{ fontSize: "1.7rem", fontWeight: 600 }}
                 align={matches ? "left" : "center"}
@@ -230,6 +231,7 @@ export default function RegistrationList() {
             <Box my={3}>
               <Typography
                 gutterBottom
+                component="h2"
                 variant="h6"
                 style={{ fontSize: "1.7rem", fontWeight: 600 }}
                 align={matches ? "left" : "center"}

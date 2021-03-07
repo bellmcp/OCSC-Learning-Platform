@@ -136,7 +136,7 @@ export default function SupportItem({
                       marginRight: "4px",
                     }}
                   />
-                  <Link href={attachFile} target="_blank">
+                  <Link href={attachFile} target="_blank" rel="noreferrer">
                     ไฟล์แนบ
                   </Link>
                 </>

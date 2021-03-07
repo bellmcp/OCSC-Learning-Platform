@@ -155,6 +155,7 @@ export default function Home() {
           >
             <Typography
               gutterBottom
+              component="h2"
               variant="h6"
               className={classes.sectionTitle}
             >
@@ -185,6 +186,7 @@ export default function Home() {
           >
             <Typography
               gutterBottom
+              component="h2"
               variant="h6"
               className={classes.sectionTitle}
             >
@@ -220,6 +222,7 @@ export default function Home() {
           >
             <Typography
               gutterBottom
+              component="h2"
               variant="h6"
               className={classes.sectionTitle}
             >

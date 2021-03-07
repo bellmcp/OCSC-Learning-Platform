@@ -139,7 +139,10 @@ export default function CurriculumCarousel({ curriculums, isLoading }) {
             <div className={classes.slider}>
               <div className={classes.growButtonBack} />
               <div className={classes.growButtonNext} />
-              <Slider className={classes.slide}>
+              <Slider
+                className={classes.slide}
+                aria-label="Curriculums carousel"
+              >
                 {curriculums.map((curriculum: any) => (
                   <Slide key={curriculum.id} index={curriculum.id}>
                     <div className={classes.curriculum}>
