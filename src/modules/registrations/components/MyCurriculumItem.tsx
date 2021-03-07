@@ -96,8 +96,15 @@ export default function MyCurriculumItem({
             className={classes.cardImage}
           />
           <div className={classes.controls}>
-            <Grid container direction="column">
-              <Box my={2} mx={3}>
+            <Grid container direction="column" justify="center">
+              <Box
+                my={2}
+                mx={3}
+                flex
+                style={{
+                  display: "flex",
+                }}
+              >
                 <Grid
                   container
                   direction="row"
@@ -111,7 +118,11 @@ export default function MyCurriculumItem({
                       variant="body2"
                       component="p"
                       color="secondary"
-                      style={{ fontWeight: "bold" }}
+                      style={{
+                        fontWeight: "bold",
+                        lineHeight: "1.1",
+                        marginBottom: 4,
+                      }}
                     >
                       หลักสูตร
                     </Typography>

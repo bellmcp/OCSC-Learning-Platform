@@ -86,8 +86,15 @@ export default function MyCourseItem({
           className={classes.cardImage}
         />
         <div className={classes.controls}>
-          <Grid container direction="column">
-            <Box my={2} mx={3}>
+          <Grid container direction="column" justify="center">
+            <Box
+              my={2}
+              mx={3}
+              flex
+              style={{
+                display: "flex",
+              }}
+            >
               <Grid
                 container
                 direction="row"

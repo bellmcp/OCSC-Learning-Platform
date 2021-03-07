@@ -121,7 +121,7 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
         dispatch(push(`${path}/learn`));
         dispatch(
           uiActions.setFlashMessage(
-            `ระบบตรวจพบการใช้งานจากหลายอุปกรณ์ โปรดตรวจสอบและเข้าเรียนอีกครั้ง`,
+            `ระบบตรวจพบการใช้งานจากหลายอุปกรณ์ โปรดตรวจสอบและเข้าเรียนใหม่อีกครั้ง`,
             "error"
           )
         );
