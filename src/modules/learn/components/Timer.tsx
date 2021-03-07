@@ -24,9 +24,9 @@ export default function Timer({
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [contentViewId, setContentViewId] = useState(0);
+  const [courseRegistrationId, setCourseRegistrationId] = useState(0);
   const contentLength = activeContentView[0]?.minutes;
-  const contentViewId = currentContentView?.id;
-  const courseRegistrationId = courseRegistrationDetails[0]?.id;
   var initialContentMinutes = currentContentView?.contentSeconds / 60;
   if (
     initialContentMinutes == null ||
@@ -35,6 +35,14 @@ export default function Timer({
   ) {
     initialContentMinutes = 0;
   }
+
+  useEffect(() => {
+    setContentViewId(currentContentView?.id);
+  }, [currentContentView]);
+
+  useEffect(() => {
+    setCourseRegistrationId(courseRegistrationDetails[0]?.id);
+  }, [courseRegistrationDetails]);
 
   // CLOCK
   useEffect(() => {
@@ -53,13 +61,18 @@ export default function Timer({
     if (contentId !== undefined) {
       const sequence = setInterval(() => {
         setProgress((prevProgress) => prevProgress + 1);
-        updateContentViewSeconds(courseRegistrationId, contentViewId, 60);
+        const update_content_view_action = learnActions.updateContentView(
+          courseRegistrationId,
+          contentViewId,
+          60
+        );
+        dispatch(update_content_view_action);
       }, 60000);
       return () => {
         clearTimeout(sequence);
       };
     }
-  }, [contentId]);
+  }, [contentId, courseRegistrationId, contentViewId, dispatch]);
 
   useEffect(() => {
     setTimer(0);
@@ -67,19 +80,6 @@ export default function Timer({
       setProgress(initialContentMinutes);
     }
   }, [contentId, initialContentMinutes]);
-
-  const updateContentViewSeconds = (
-    courseRegistrationId,
-    contentViewId,
-    contentSeconds
-  ) => {
-    const update_content_view_action = learnActions.updateContentView(
-      courseRegistrationId,
-      contentViewId,
-      contentSeconds
-    );
-    dispatch(update_content_view_action);
-  };
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
