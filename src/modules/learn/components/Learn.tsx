@@ -154,7 +154,12 @@ export default function Learn() {
   useEffect(() => {
     const create_session_action = learnActions.createSession();
     if (contentId !== undefined) {
-      dispatch(create_session_action);
+      if (
+        activeContentView[0]?.type !== "e" &&
+        activeContentView[0]?.type !== "t"
+      ) {
+        dispatch(create_session_action);
+      }
     }
   }, [dispatch, contentId]);
 
@@ -178,6 +183,44 @@ export default function Learn() {
     handleConfirmDialogClose();
     history.push(`${path}/learn`);
   };
+
+  function renderTimer() {
+    if (contentId !== undefined) {
+      if (
+        activeContentView[0]?.type !== "e" &&
+        activeContentView[0]?.type !== "t"
+      ) {
+        return (
+          <div className={classes.timerWrapper}>
+            <Box mx={2} mt={1}>
+              <Timer
+                contentId={contentId}
+                activeContentView={activeContentView}
+                currentContentView={currentContentView[0]}
+                courseRegistrationDetails={courseRegistrationDetails}
+              />
+            </Box>
+          </div>
+        );
+      } else {
+        return (
+          <div className={classes.timerWrapper}>
+            <Box mx={2} mt={1}>
+              <></>
+            </Box>
+          </div>
+        );
+      }
+    } else {
+      return (
+        <div className={classes.timerWrapper}>
+          <Box mx={2} mt={1}>
+            <></>
+          </Box>
+        </div>
+      );
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -258,24 +301,7 @@ export default function Learn() {
         </DialogActions>
       </Dialog>
       {/* TIMER */}
-      {contentId !== undefined ? (
-        <div className={classes.timerWrapper}>
-          <Box mx={2} mt={1}>
-            <Timer
-              contentId={contentId}
-              activeContentView={activeContentView}
-              currentContentView={currentContentView[0]}
-              courseRegistrationDetails={courseRegistrationDetails}
-            />
-          </Box>
-        </div>
-      ) : (
-        <div className={classes.timerWrapper}>
-          <Box mx={2} mt={1}>
-            <></>
-          </Box>
-        </div>
-      )}
+      {renderTimer()}
     </div>
   );
 }

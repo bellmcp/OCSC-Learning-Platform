@@ -68,8 +68,6 @@ export default function EvaluationList({ activeContentView }: any) {
     dispatch(load_evaluation_items_action);
   }, [dispatch, evaluationId]);
 
-  console.log(evaluationItems);
-
   return (
     <>
       <Typography variant="body1" color="textSecondary">
