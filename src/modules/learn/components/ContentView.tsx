@@ -20,11 +20,11 @@ import { useTheme } from "@material-ui/core/styles";
 import { getContentType } from "utils/contentType";
 import { generateContentSourceUrl } from "utils/soureceUrl";
 
-import VideoPlayer from "./VideoPlayer";
-import PdfViewer from "./PdfViewer";
-import IframeViewer from "./IframeViewer";
-import TestList from "./TestList";
-import EvaluationList from "./EvaluationList";
+import VideoPlayer from "./Content/VideoPlayer";
+import PdfViewer from "./Content/PdfViewer";
+import IframeViewer from "./Content/IframeViewer";
+import TestList from "./Test/TestList";
+import EvaluationList from "./Evaluation/EvaluationList";
 
 import HeroImage from "assets/images/hero-learn.svg";
 
