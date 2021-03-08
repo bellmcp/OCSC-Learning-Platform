@@ -125,7 +125,7 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
       dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม +1 นาที", "info"));
     } catch (err) {
       dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
-      if (err.response.status === 401) {
+      if (err?.response?.status === 401) {
         dispatch(push(`${path}/learn`));
         dispatch(
           uiActions.setFlashMessage(

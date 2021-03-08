@@ -40,7 +40,7 @@ function loadCurriculums(query: string) {
       dispatch({ type: LOAD_CURRICULUMS_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -68,7 +68,7 @@ function loadCurriculum(id: string) {
       dispatch({ type: LOAD_CURRICULUM_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลหลักสูตร ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลหลักสูตร ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -96,7 +96,7 @@ function loadCurriculumChild(id: string) {
       dispatch({ type: LOAD_CURRICULUM_CHILD_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลรายวิชาของหลักสูตร ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลรายวิชาของหลักสูตร ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );

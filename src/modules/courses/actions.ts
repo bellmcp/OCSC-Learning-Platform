@@ -52,7 +52,7 @@ function loadCourses(courseCategoryId: string) {
       dispatch({ type: LOAD_COURSES_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -80,7 +80,7 @@ function loadRecommendedCourses() {
       dispatch({ type: LOAD_RECOMMENDED_COURSES_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดรายวิชาแนะนำไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดรายวิชาแนะนำไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -108,7 +108,7 @@ function loadCourse(id: string) {
       dispatch({ type: LOAD_COURSE_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -136,7 +136,7 @@ function loadCourseRounds(id: string) {
       dispatch({ type: LOAD_COURSE_ROUND_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลรอบของรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลรอบของรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -164,7 +164,7 @@ function loadCourseContents(id: string) {
       dispatch({ type: LOAD_COURSE_CONTENT_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลเนื้อหาของรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลเนื้อหาของรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );

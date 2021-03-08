@@ -32,7 +32,7 @@ function loadUser() {
       dispatch({ type: LOAD_USER_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลผู้ใช้ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลผู้ใช้ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );

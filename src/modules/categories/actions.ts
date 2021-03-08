@@ -28,7 +28,7 @@ function loadCategories() {
       dispatch({ type: LOAD_CATEGORIES_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลหมวดหมู่ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลหมวดหมู่ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );

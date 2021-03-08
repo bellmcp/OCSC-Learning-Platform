@@ -66,7 +66,7 @@ function loadCourseRegistrations() {
       dispatch({ type: LOAD_COURSE_REGISTRATIONS_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลการลงทะเบียนรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลการลงทะเบียนรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -99,7 +99,7 @@ function loadCurriculumRegistrations() {
       dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลการลงทะเบียนหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลการลงทะเบียนหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -138,7 +138,7 @@ function registerCourse(courseRoundId) {
       dispatch(push(`${path}/learn`));
     } catch (err) {
       dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
-      if (err.response.status === 403) {
+      if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
             "คุณได้ลงทะเบียนรายวิชานี้แล้ว โปรดตรวจสอบอีกครั้ง",
@@ -148,7 +148,7 @@ function registerCourse(courseRoundId) {
       } else {
         dispatch(
           uiActions.setFlashMessage(
-            `ลงทะเบียนรายวิชาไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+            `ลงทะเบียนรายวิชาไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
             "error"
           )
         );
@@ -188,7 +188,7 @@ function registerCurriculum(curriculumId) {
       dispatch(push(`${path}/learn`));
     } catch (err) {
       dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
-      if (err.response.status === 403) {
+      if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
             "คุณได้ลงทะเบียนหลักสูตร หรือรายวิชาในหลักสูตรนี้ทั้งหมดแล้ว โปรดตรวจสอบอีกครั้ง",
@@ -198,7 +198,7 @@ function registerCurriculum(curriculumId) {
       } else {
         dispatch(
           uiActions.setFlashMessage(
-            `ลงทะเบียนหลักสูตรไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+            `ลงทะเบียนหลักสูตรไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
             "error"
           )
         );
@@ -242,7 +242,7 @@ function updateCourseSatisfactionScore(registrationId, satisfactionScore) {
       dispatch({ type: UPDATE_COURSE_SATISFACTION_SCORE_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -285,7 +285,7 @@ function updateCurriculumSatisfactionScore(registrationId, satisfactionScore) {
       dispatch({ type: UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );

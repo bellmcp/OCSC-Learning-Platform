@@ -2,6 +2,7 @@ import axios from "axios";
 import { push } from "connected-react-router";
 import { setCookie } from "utils/cookies";
 import * as uiActions from "modules/ui/actions";
+
 const LOAD_LOGIN_REQUEST = "learning-platform/login/LOAD_LOGIN_REQUEST";
 const LOAD_LOGIN_SUCCESS = "learning-platform/login/LOAD_LOGIN_SUCCESS";
 const LOAD_LOGIN_FAILURE = "learning-platform/login/LOAD_LOGIN_FAILURE";
@@ -36,32 +37,44 @@ function loadLogin(userInfo: any) {
         uiActions.setFlashMessage("เข้าสู่ระบบเรียบร้อยแล้ว", "success")
       );
     } catch (err) {
-      if (err.response.status === 401) {
+      if (err?.response?.status === 401) {
         dispatch({
           type: LOAD_LOGIN_FAILURE,
           payload: {
-            status: err.response.status,
+            status: err?.response?.status,
             messageLogin: `รหัสผ่านไม่ถูกต้อง`,
           },
         });
-      }
-      if (err.response.status === 404) {
+      } else if (err?.response?.status === 404) {
         dispatch({
           type: LOAD_LOGIN_FAILURE,
           payload: {
-            status: err.response.status,
+            status: err?.response?.status,
             messageLogin: `ไม่พบบัญชีผู้ใช้งานนี้ โปรดลองใหม่อีกครั้ง`,
           },
         });
-      }
-      if (err.response.status === 500) {
+      } else if (err?.response?.status === 500) {
         dispatch({
           type: LOAD_LOGIN_FAILURE,
           payload: {
-            status: err.response.status,
-            messageLogin: `เกิดข้อผิดพลาด ${err.response.status} โปรดลองใหม่อีกครั้ง`,
+            status: err?.response?.status,
+            messageLogin: `เกิดข้อผิดพลาด ${err?.response?.status} โปรดลองใหม่อีกครั้ง`,
           },
         });
+      } else {
+        dispatch({
+          type: LOAD_LOGIN_FAILURE,
+          payload: {
+            status: err?.response?.status,
+            messageLogin: `เกิดข้อผิดพลาด ${err?.response?.status} โปรดลองใหม่อีกครั้ง`,
+          },
+        });
+        dispatch(
+          uiActions.setFlashMessage(
+            `เข้าสู่ระบบไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
       }
     }
   };

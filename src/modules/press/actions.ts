@@ -25,7 +25,7 @@ function loadPresses() {
       dispatch({ type: LOAD_PRESS_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดข้อมูลประชาสัมพันธ์ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดข้อมูลประชาสัมพันธ์ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );

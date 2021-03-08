@@ -31,7 +31,7 @@ function loadSupports() {
       dispatch({ type: LOAD_SUPPORT_FAILURE });
       dispatch(
         uiActions.setFlashMessage(
-          `โหลดประวัติการติดต่อเจ้าหน้าที่ทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          `โหลดประวัติการติดต่อเจ้าหน้าที่ทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           "error"
         )
       );
@@ -69,7 +69,7 @@ function sendSupport(supportInfo, attachedFile) {
         window.location.reload();
       })
       .catch(function (err) {
-        if (err.response.status === 413) {
+        if (err?.response?.status === 413) {
           dispatch(
             uiActions.setFlashMessage(
               `ไฟล์แนบมีขนาดใหญ่เกิน 20 MB โปรดเลือกไฟล์ใหม่อีกครั้ง`,
@@ -79,7 +79,7 @@ function sendSupport(supportInfo, attachedFile) {
         } else {
           dispatch(
             uiActions.setFlashMessage(
-              `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+              `บันทึกข้อมูลไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
               "error"
             )
           );
