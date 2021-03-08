@@ -24,9 +24,7 @@ function loadCurriculums(query: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUMS_REQUEST });
     try {
-      var { data } = await axios.get(`/Curriculums${query}`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get(`/Curriculums${query}`);
       if (data.length === 0) {
         data = [];
       }
@@ -52,9 +50,7 @@ function loadCurriculum(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUM_REQUEST });
     try {
-      var { data } = await axios.get(`/Curriculums/${id}`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get(`/Curriculums/${id}`);
       if (data.length === 0) {
         data = [];
       }
@@ -80,9 +76,7 @@ function loadCurriculumChild(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_CURRICULUM_CHILD_REQUEST });
     try {
-      var { data } = await axios.get(`/Curriculums/${id}/Courses`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get(`/Curriculums/${id}/Courses`);
       if (data.length === 0) {
         data = [];
       }

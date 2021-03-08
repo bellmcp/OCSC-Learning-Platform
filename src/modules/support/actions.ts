@@ -15,9 +15,7 @@ function loadSupports() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_SUPPORT_REQUEST });
     try {
-      var { data } = await axios.get("/Supports", {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get("/Supports");
       if (data.length === 0) {
         data = [];
       }

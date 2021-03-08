@@ -20,9 +20,7 @@ function loadLogin(userInfo: any) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_LOGIN_REQUEST });
     try {
-      const result = await axios.post("/Tokens", userInfo, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      const result = await axios.post("/Tokens", userInfo);
       dispatch({
         type: LOAD_LOGIN_SUCCESS,
         payload: {

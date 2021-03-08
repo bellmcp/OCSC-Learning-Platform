@@ -34,10 +34,7 @@ function loadCourses(courseCategoryId: string) {
       var { data } = await axios.get(
         courseCategoryId === undefined
           ? `/Courses`
-          : `/CourseCategories/${courseCategoryId}/Courses`,
-        {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-        }
+          : `/CourseCategories/${courseCategoryId}/Courses`
       );
       if (data.length === 0) {
         data = [];
@@ -65,7 +62,6 @@ function loadRecommendedCourses() {
     dispatch({ type: LOAD_RECOMMENDED_COURSES_REQUEST });
     try {
       var { data } = await axios.get("/Courses/Recommended", {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
         params: {
           max: 5,
         },
@@ -95,9 +91,7 @@ function loadCourse(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_REQUEST });
     try {
-      var { data } = await axios.get(`/Courses/${id}`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get(`/Courses/${id}`);
       if (data.length === 0) {
         data = [];
       }
@@ -123,9 +117,7 @@ function loadCourseRounds(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_ROUND_REQUEST });
     try {
-      var { data } = await axios.get(`/Courses/${id}/CourseRounds`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get(`/Courses/${id}/CourseRounds`);
       if (data.length === 0) {
         data = [];
       }
@@ -151,9 +143,7 @@ function loadCourseContents(id: string) {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_COURSE_CONTENT_REQUEST });
     try {
-      var { data } = await axios.get(`/Courses/${id}/CourseContents`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
-      });
+      var { data } = await axios.get(`/Courses/${id}/CourseContents`);
       if (data.length === 0) {
         data = [];
       }
