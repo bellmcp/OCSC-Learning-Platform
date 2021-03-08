@@ -102,7 +102,7 @@ export default function RegistrationList() {
   };
 
   function renderRegisteredCurriculumsList() {
-    if (false) {
+    if (isRegistrationsLoading) {
       return (
         <Grid
           container
@@ -113,7 +113,17 @@ export default function RegistrationList() {
           <CircularProgress color="secondary" />
         </Grid>
       );
-    } else if (myCurriculums.length === 0) {
+    } else if (myCurriculums.length !== 0) {
+      return (
+        <Grid container direction="column" spacing={2}>
+          {myCurriculums.map((myCurriculum) => (
+            <Grid item key={myCurriculum.id}>
+              <MyCurriculumItem {...myCurriculum} myCourses={myCourses} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    } else {
       return (
         <Grid
           container
@@ -137,16 +147,6 @@ export default function RegistrationList() {
           </Box>
         </Grid>
       );
-    } else {
-      return (
-        <Grid container direction="column" spacing={2}>
-          {myCurriculums.map((myCurriculum) => (
-            <Grid item key={myCurriculum.id}>
-              <MyCurriculumItem {...myCurriculum} myCourses={myCourses} />
-            </Grid>
-          ))}
-        </Grid>
-      );
     }
   }
 
@@ -164,8 +164,20 @@ export default function RegistrationList() {
       );
     } else if (
       myCourses.filter((myCourse) => myCourse.curriculumRegistrationId === null)
-        .length === 0
+        .length !== 0
     ) {
+      return (
+        <Grid container direction="column" spacing={2}>
+          {myCourses
+            .filter((myCourse) => myCourse.curriculumRegistrationId === null)
+            .map((myCourse) => (
+              <Grid item key={myCourse.id}>
+                <MyCourseItem {...myCourse} />
+              </Grid>
+            ))}
+        </Grid>
+      );
+    } else {
       return (
         <Grid
           container
@@ -187,18 +199,6 @@ export default function RegistrationList() {
               ดูรายวิชาทั้งหมด
             </Button>
           </Box>
-        </Grid>
-      );
-    } else {
-      return (
-        <Grid container direction="column" spacing={2}>
-          {myCourses
-            .filter((myCourse) => myCourse.curriculumRegistrationId === null)
-            .map((myCourse) => (
-              <Grid item key={myCourse.id}>
-                <MyCourseItem {...myCourse} />
-              </Grid>
-            ))}
         </Grid>
       );
     }
