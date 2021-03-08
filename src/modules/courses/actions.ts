@@ -64,8 +64,11 @@ function loadRecommendedCourses() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_RECOMMENDED_COURSES_REQUEST });
     try {
-      var { data } = await axios.get("/Courses/Recommended?max=5", {
+      var { data } = await axios.get("/Courses/Recommended", {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api/",
+        params: {
+          max: 5,
+        },
       });
       if (data.length === 0) {
         data = [];

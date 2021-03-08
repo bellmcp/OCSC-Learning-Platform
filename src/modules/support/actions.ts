@@ -76,6 +76,13 @@ function sendSupport(supportInfo, attachedFile) {
               "error"
             )
           );
+        } else if (err?.response?.status === 403) {
+          dispatch(
+            uiActions.setFlashMessage(
+              `นามสกุลไฟล์ไม่รองรับ โปรดเลือกไฟล์ใหม่อีกครั้ง`,
+              "error"
+            )
+          );
         } else {
           dispatch(
             uiActions.setFlashMessage(
@@ -105,6 +112,9 @@ function markSupportAsRead(supportId) {
           },
         }
       );
+      if (data.length === 0) {
+        data = [];
+      }
       dispatch(uiActions.setFlashMessage("บันทึกข้อมูลเรียบร้อย", "success"));
       window.location.reload();
     } catch (err) {

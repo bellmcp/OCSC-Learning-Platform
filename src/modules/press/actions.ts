@@ -9,8 +9,11 @@ function loadPresses() {
   return async (dispatch: any) => {
     dispatch({ type: LOAD_PRESS_REQUEST });
     try {
-      var { data } = await axios.get("/PressReleases?max=5", {
+      var { data } = await axios.get("/PressReleases", {
         baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+        params: {
+          max: 5,
+        },
       });
       if (data.length === 0) {
         data = [];

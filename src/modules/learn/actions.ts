@@ -106,13 +106,17 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
     dispatch({ type: UPDATE_CONTENT_VIEW_REQUEST });
     try {
       var { data } = await axios.put(
-        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}?sessionId=${sessions.id}&key=${sessions.key}`,
+        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
         {
           contentSeconds: contentSeconds,
         },
         {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
+          params: {
+            sessionId: sessions.id,
+            key: sessions.key,
+          },
         }
       );
       if (data.length === 0) {

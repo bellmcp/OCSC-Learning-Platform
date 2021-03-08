@@ -10,10 +10,12 @@ const LOAD_USER_FAILURE = "learning-platform/user/LOAD_USER_FAILURE";
 
 function loadUser() {
   return async (dispatch: any) => {
+    const token = getCookie("token");
+    const userId = parseJwt(token).unique_name;
     dispatch({ type: LOAD_USER_REQUEST });
     try {
       const token = getCookie("token");
-      var { data } = await axios.get(`/Users/${parseJwt(token).unique_name}`, {
+      var { data } = await axios.get(`/Users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
