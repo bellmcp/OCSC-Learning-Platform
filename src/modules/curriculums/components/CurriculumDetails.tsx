@@ -214,7 +214,12 @@ export default function CurriculumDetails() {
             โปรดเข้าสู่ระบบเพื่อลงทะเบียนหลักสูตร
           </Typography>
           <Box my={2}>
-            <Button color="secondary" variant="contained" onClick={linkToLogin}>
+            <Button
+              color="secondary"
+              variant="contained"
+              onClick={linkToLogin}
+              fullWidth={!matches}
+            >
               เข้าสู่ระบบ
             </Button>
           </Box>
@@ -237,6 +242,7 @@ export default function CurriculumDetails() {
               variant="contained"
               endIcon={<ArrowForwardIcon />}
               onClick={linkToLearn}
+              fullWidth={!matches}
             >
               เข้าเรียน
             </Button>
@@ -357,7 +363,13 @@ export default function CurriculumDetails() {
                   </Typography>
                 </Grid>
                 <Box my={3}>
-                  <Grid container spacing={3} alignItems="center">
+                  <Grid
+                    container
+                    spacing={3}
+                    alignItems="center"
+                    direction="row"
+                    justify={matches ? "flex-start" : "center"}
+                  >
                     {renderRegisterButton()}
                   </Grid>
                 </Box>
