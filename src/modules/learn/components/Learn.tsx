@@ -239,7 +239,7 @@ export default function Learn() {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            เวลาเรียนสะสมของคุณจะถูกบันทึก
+            เซสชันปัจจุบันจะจบลง และเวลาเรียนสะสมของคุณจะถูกบันทึก
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -253,7 +253,7 @@ export default function Learn() {
             disableElevation
             onClick={linkToLearn}
           >
-            ยืนยัน
+            ตกลง
           </Button>
         </DialogActions>
       </Dialog>
