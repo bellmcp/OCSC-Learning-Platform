@@ -45,7 +45,6 @@ function createSession() {
         `/Users/${userId}/Sessions`,
         {},
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
         }
       );
@@ -81,10 +80,7 @@ function loadContentViews(registrationId) {
     dispatch({ type: LOAD_CONTENT_VIEWS_REQUEST });
     try {
       var { data } = await axios.get(
-        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews`,
-        {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
-        }
+        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews`
       );
 
       if (data.length === 0) {
@@ -123,7 +119,6 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
           contentSeconds: contentSeconds,
         },
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
           params: {
             sessionId: sessions.id,
@@ -165,9 +160,7 @@ function loadEvaluation(evaluationId) {
   return async (dispatch: any, getState) => {
     dispatch({ type: LOAD_EVALUATION_REQUEST });
     try {
-      var { data } = await axios.get(`/Evaluations/${evaluationId}`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
-      });
+      var { data } = await axios.get(`/Evaluations/${evaluationId}`);
       if (data.length === 0) {
         data = [];
       }
@@ -194,10 +187,7 @@ function loadEvaluationItems(evaluationId) {
     dispatch({ type: LOAD_EVALUATION_ITEMS_REQUEST });
     try {
       var { data } = await axios.get(
-        `/Evaluations/${evaluationId}/EvaluationItems`,
-        {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
-        }
+        `/Evaluations/${evaluationId}/EvaluationItems`
       );
       if (data.length === 0) {
         data = [];

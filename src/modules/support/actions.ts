@@ -103,7 +103,6 @@ function markSupportAsRead(supportId) {
           isAcknowledged: true,
         },
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

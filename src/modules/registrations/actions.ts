@@ -50,9 +50,7 @@ function loadCourseRegistrations() {
     const userId = parseJwt(token).unique_name;
     dispatch({ type: LOAD_COURSE_REGISTRATIONS_REQUEST });
     try {
-      var { data } = await axios.get(`/Users/${userId}/CourseRegistrations`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
-      });
+      var { data } = await axios.get(`/Users/${userId}/CourseRegistrations`);
       if (data.length === 0) {
         data = [];
       }
@@ -81,10 +79,7 @@ function loadCurriculumRegistrations() {
     dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_REQUEST });
     try {
       var { data } = await axios.get(
-        `/Users/${userId}/CurriculumRegistrations`,
-        {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
-        }
+        `/Users/${userId}/CurriculumRegistrations`
       );
       if (data.length === 0) {
         data = [];
@@ -121,7 +116,6 @@ function registerCourse(courseRoundId) {
           courseRoundId: parseInt(courseRoundId),
         },
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
         }
       );
@@ -171,7 +165,6 @@ function registerCurriculum(curriculumId) {
           curriculumId: parseInt(curriculumId),
         },
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
         }
       );
@@ -221,7 +214,6 @@ function updateCourseSatisfactionScore(registrationId, satisfactionScore) {
           satisfactionScore,
         },
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
         }
       );
@@ -264,7 +256,6 @@ function updateCurriculumSatisfactionScore(registrationId, satisfactionScore) {
           satisfactionScore,
         },
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
           headers: { Authorization: `Bearer ${token}` },
         }
       );

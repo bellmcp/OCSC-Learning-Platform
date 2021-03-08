@@ -10,7 +10,6 @@ function loadPresses() {
     dispatch({ type: LOAD_PRESS_REQUEST });
     try {
       var { data } = await axios.get("/PressReleases", {
-        baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
         params: {
           max: 5,
         },
