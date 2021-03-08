@@ -2,13 +2,11 @@
 import React, { useState, useEffect } from "react";
 import DayJS from "react-dayjs";
 import {
-  isFirefox,
   isMobile,
   browserName,
   osName,
   fullBrowserVersion,
 } from "react-device-detect";
-import Iframe from "react-iframe";
 import {
   Box,
   Container,
@@ -24,8 +22,7 @@ import { generateContentSourceUrl } from "utils/soureceUrl";
 
 import VideoPlayer from "./VideoPlayer";
 import PdfViewer from "./PdfViewer";
-import FlashAlert from "./FlashAlert";
-import MobileAlert from "./MobileAlert";
+import IframeViewer from "./IframeViewer";
 import TestList from "./TestList";
 import EvaluationList from "./EvaluationList";
 
@@ -64,14 +61,6 @@ export default function ContentView({
     }
   };
 
-  function renderUnsupportedAlert() {
-    if (isMobile) {
-      return <MobileAlert />;
-    } else {
-      if (!isFirefox) return <FlashAlert />;
-    }
-  }
-
   function renderContentView() {
     switch (getContentType(activeSource)) {
       case "video":
@@ -79,19 +68,7 @@ export default function ContentView({
       case "pdf":
         return <PdfViewer url={activeSource} />;
       case "iframe":
-        return (
-          <>
-            {renderUnsupportedAlert()}
-            <Iframe
-              url={activeSource}
-              width="100%"
-              height="600px"
-              allowFullScreen
-              frameBorder={0}
-              scrolling="auto"
-            />
-          </>
-        );
+        return <IframeViewer url={activeSource} />;
       default:
         return (
           <Grid container justify="center" alignItems="center">
