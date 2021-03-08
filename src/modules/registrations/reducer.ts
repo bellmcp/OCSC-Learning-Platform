@@ -40,9 +40,9 @@ export default function (state = initialState, action: any) {
     case CURRICULUM_REGISTRATION_REQUEST:
       return { ...state, isLoading: true, curriculumRegister: [] };
     case UPDATE_COURSE_SATISFACTION_SCORE_REQUEST:
-      return { ...state, isLoading: true, courseSatisfactionScore: [] };
+      return { ...state, courseSatisfactionScore: [] };
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST:
-      return { ...state, isLoading: true, curriculumSatisfactionScore: [] };
+      return { ...state, curriculumSatisfactionScore: [] };
     case LOAD_COURSE_REGISTRATIONS_SUCCESS:
       return {
         ...state,
@@ -70,13 +70,11 @@ export default function (state = initialState, action: any) {
     case UPDATE_COURSE_SATISFACTION_SCORE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         courseSatisfactionScore: action.payload.satisfactionScoreUpdate,
       };
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
         curriculumSatisfactionScore: action.payload.satisfactionScoreUpdate,
       };
     case LOAD_COURSE_REGISTRATIONS_FAILURE:
