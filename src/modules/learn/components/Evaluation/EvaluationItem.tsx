@@ -9,8 +9,6 @@ import {
   Radio,
   RadioGroup,
   Typography,
-  Box,
-  TextField,
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { amber } from "@material-ui/core/colors";
@@ -30,8 +28,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function EvaluationItem({ id, question, options }) {
+export default function EvaluationItem({
+  id,
+  question,
+  choice1,
+  choice2,
+  choice3,
+  choice4,
+  choice5,
+}) {
   const classes = useStyles();
+  const choices = [choice1, choice2, choice3, choice4, choice5];
 
   return (
     <>
@@ -52,38 +59,25 @@ export default function EvaluationItem({ id, question, options }) {
       </Grid>
       <Divider className={classes.divider} />
       <form>
-        {options ? (
-          <FormControl component="fieldset">
-            <RadioGroup aria-label={question} name={question}>
-              <Grid className={classes.options} container spacing={0}>
-                {options.map((option) => (
-                  <Grid item xs={12}>
-                    <FormControlLabel
-                      value={option}
-                      control={<Radio />}
-                      label={
-                        <Typography style={{ fontSize: "0.9rem" }}>
-                          {option}
-                        </Typography>
-                      }
-                    />
-                  </Grid>
-                ))}
-              </Grid>
-            </RadioGroup>
-          </FormControl>
-        ) : (
-          <Box mt={3} mb={2}>
-            <TextField
-              label="แสดงความคิดเห็น"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              multiline
-              rows={4}
-            />
-          </Box>
-        )}
+        <FormControl component="fieldset">
+          <RadioGroup aria-label={question} name={question}>
+            <Grid className={classes.options} container spacing={0}>
+              {choices.map((choice) => (
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    value={choice}
+                    control={<Radio />}
+                    label={
+                      <Typography style={{ fontSize: "0.9rem" }}>
+                        {choice}
+                      </Typography>
+                    }
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </RadioGroup>
+        </FormControl>
       </form>
     </>
   );

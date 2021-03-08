@@ -181,7 +181,9 @@ export default function ContentView({
           <Box my={4}>
             {activeContentView?.type === "c" && <>{renderContentView()}</>}
             {activeContentView?.type === "t" && <TestList />}
-            {activeContentView?.type === "e" && <EvaluationList />}
+            {activeContentView?.type === "e" && (
+              <EvaluationList activeContentView={activeContentView} />
+            )}
             <Box my={4}>
               <Typography variant="body2" color="textSecondary">
                 FOR DEVELOPMENT

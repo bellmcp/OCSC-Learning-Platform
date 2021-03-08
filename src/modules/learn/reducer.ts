@@ -8,6 +8,12 @@ import {
   UPDATE_CONTENT_VIEW_REQUEST,
   UPDATE_CONTENT_VIEW_SUCCESS,
   UPDATE_CONTENT_VIEW_FAILURE,
+  LOAD_EVALUATION_REQUEST,
+  LOAD_EVALUATION_SUCCESS,
+  LOAD_EVALUATION_FAILURE,
+  LOAD_EVALUATION_ITEMS_REQUEST,
+  LOAD_EVALUATION_ITEMS_SUCCESS,
+  LOAD_EVALUATION_ITEMS_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -15,6 +21,8 @@ const initialState = {
   sessions: [],
   contentViews: [],
   contentSeconds: [],
+  evaluation: [],
+  evaluationItems: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -25,6 +33,10 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: true, contentViews: [] };
     case UPDATE_CONTENT_VIEW_REQUEST:
       return { ...state, isLoading: true, contentSeconds: [] };
+    case LOAD_EVALUATION_REQUEST:
+      return { ...state, isLoading: true, evaluation: [] };
+    case LOAD_EVALUATION_ITEMS_REQUEST:
+      return { ...state, isLoading: true, evaluationItems: [] };
     case CREATE_SESSION_SUCCESS:
       return {
         ...state,
@@ -43,9 +55,23 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         contentSeconds: action.payload.contentSeconds,
       };
+    case LOAD_EVALUATION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        evaluation: action.payload.evaluation,
+      };
+    case LOAD_EVALUATION_ITEMS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        evaluationItems: action.payload.evaluationItems,
+      };
     case CREATE_SESSION_FAILURE:
     case LOAD_CONTENT_VIEWS_FAILURE:
     case UPDATE_CONTENT_VIEW_FAILURE:
+    case LOAD_EVALUATION_FAILURE:
+    case LOAD_EVALUATION_ITEMS_FAILURE:
       return { ...state, isLoading: false };
     default:
       return state;

@@ -20,6 +20,18 @@ const UPDATE_CONTENT_VIEW_SUCCESS =
   "learning-platform/learn/UPDATE_CONTENT_VIEW_SUCCESS";
 const UPDATE_CONTENT_VIEW_FAILURE =
   "learning-platform/learn/UPDATE_CONTENT_VIEW_FAILURE";
+const LOAD_EVALUATION_REQUEST =
+  "learning-platform/learn/LOAD_EVALUATION_REQUEST";
+const LOAD_EVALUATION_SUCCESS =
+  "learning-platform/learn/LOAD_EVALUATION_SUCCESS";
+const LOAD_EVALUATION_FAILURE =
+  "learning-platform/learn/LOAD_EVALUATION_FAILURE";
+const LOAD_EVALUATION_ITEMS_REQUEST =
+  "learning-platform/learn/LOAD_EVALUATION_ITEMS_REQUEST";
+const LOAD_EVALUATION_ITEMS_SUCCESS =
+  "learning-platform/learn/LOAD_EVALUATION_ITEMS_SUCCESS";
+const LOAD_EVALUATION_ITEMS_FAILURE =
+  "learning-platform/learn/LOAD_EVALUATION_ITEMS_FAILURE";
 
 const path = "/learning-platform";
 
@@ -149,6 +161,65 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
   };
 }
 
+function loadEvaluation(evaluationId) {
+  return async (dispatch: any, getState) => {
+    dispatch({ type: LOAD_EVALUATION_REQUEST });
+    try {
+      var { data } = await axios.get(`/Evaluations/${evaluationId}`, {
+        baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+      });
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: LOAD_EVALUATION_SUCCESS,
+        payload: {
+          evaluation: data,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: LOAD_EVALUATION_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลแบบประเมิน ${evaluationId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          "error"
+        )
+      );
+    }
+  };
+}
+
+function loadEvaluationItems(evaluationId) {
+  return async (dispatch: any, getState) => {
+    dispatch({ type: LOAD_EVALUATION_ITEMS_REQUEST });
+    try {
+      var { data } = await axios.get(
+        `/Evaluations/${evaluationId}/EvaluationItems`,
+        {
+          baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
+        }
+      );
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: LOAD_EVALUATION_ITEMS_SUCCESS,
+        payload: {
+          evaluationItems: data,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: LOAD_EVALUATION_ITEMS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดแบบประเมิน ${evaluationId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          "error"
+        )
+      );
+    }
+  };
+}
+
 export {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
@@ -159,7 +230,15 @@ export {
   UPDATE_CONTENT_VIEW_REQUEST,
   UPDATE_CONTENT_VIEW_SUCCESS,
   UPDATE_CONTENT_VIEW_FAILURE,
+  LOAD_EVALUATION_REQUEST,
+  LOAD_EVALUATION_SUCCESS,
+  LOAD_EVALUATION_FAILURE,
+  LOAD_EVALUATION_ITEMS_REQUEST,
+  LOAD_EVALUATION_ITEMS_SUCCESS,
+  LOAD_EVALUATION_ITEMS_FAILURE,
   createSession,
   loadContentViews,
   updateContentView,
+  loadEvaluation,
+  loadEvaluationItems,
 };
