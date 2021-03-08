@@ -1,4 +1,6 @@
 import axios from "axios";
+import * as uiActions from "modules/ui/actions";
+
 const LOAD_PRESS_REQUEST = "learning-platform/press/LOAD_PRESS_REQUEST";
 const LOAD_PRESS_SUCCESS = "learning-platform/press/LOAD_PRESS_SUCCESS";
 const LOAD_PRESS_FAILURE = "learning-platform/press/LOAD_PRESS_FAILURE";
@@ -21,6 +23,12 @@ function loadPresses() {
       });
     } catch (err) {
       dispatch({ type: LOAD_PRESS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลประชาสัมพันธ์ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }

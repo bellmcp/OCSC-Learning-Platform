@@ -4,6 +4,7 @@ import { push } from "connected-react-router";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import * as uiActions from "modules/ui/actions";
+
 const CREATE_SESSION_REQUEST = "learning-platform/learn/CREATE_SESSION_REQUEST";
 const CREATE_SESSION_SUCCESS = "learning-platform/learn/CREATE_SESSION_SUCCESS";
 const CREATE_SESSION_FAILURE = "learning-platform/learn/CREATE_SESSION_FAILURE";
@@ -73,6 +74,7 @@ function loadContentViews(registrationId) {
           baseURL: "https://welearn.ocsc.go.th/learning-platform-api",
         }
       );
+
       if (data.length === 0) {
         data = [];
       }
@@ -84,6 +86,12 @@ function loadContentViews(registrationId) {
       });
     } catch (err) {
       dispatch({ type: LOAD_CONTENT_VIEWS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลการเข้าเรียนไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -121,7 +129,7 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
         dispatch(push(`${path}/learn`));
         dispatch(
           uiActions.setFlashMessage(
-            `ระบบตรวจพบการใช้งานจากหลายอุปกรณ์ โปรดตรวจสอบและเข้าเรียนใหม่อีกครั้ง`,
+            `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
             "error"
           )
         );

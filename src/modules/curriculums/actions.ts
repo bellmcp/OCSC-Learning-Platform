@@ -1,4 +1,6 @@
 import axios from "axios";
+import * as uiActions from "modules/ui/actions";
+
 const LOAD_CURRICULUMS_REQUEST =
   "learning-platform/curriculums/LOAD_CURRICULUMS_REQUEST";
 const LOAD_CURRICULUMS_SUCCESS =
@@ -36,6 +38,12 @@ function loadCurriculums(query: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_CURRICULUMS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -58,6 +66,12 @@ function loadCurriculum(id: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_CURRICULUM_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลหลักสูตร ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -80,6 +94,12 @@ function loadCurriculumChild(id: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_CURRICULUM_CHILD_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลรายวิชาของหลักสูตร ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }

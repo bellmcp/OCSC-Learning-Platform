@@ -2,6 +2,8 @@
 import axios from "axios";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
+import * as uiActions from "modules/ui/actions";
+
 const LOAD_USER_REQUEST = "learning-platform/user/LOAD_USER_REQUEST";
 const LOAD_USER_SUCCESS = "learning-platform/user/LOAD_USER_SUCCESS";
 const LOAD_USER_FAILURE = "learning-platform/user/LOAD_USER_FAILURE";
@@ -28,6 +30,12 @@ function loadUser() {
       });
     } catch (err) {
       dispatch({ type: LOAD_USER_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลผู้ใช้ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }

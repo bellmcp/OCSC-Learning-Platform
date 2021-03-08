@@ -146,7 +146,9 @@ export default function Learn() {
     const content_view_action = learnActions.loadContentViews(
       courseRegistrationId
     );
-    dispatch(content_view_action);
+    if (courseRegistrationId !== undefined) {
+      dispatch(content_view_action);
+    }
   }, [dispatch, courseRegistrationId]);
 
   useEffect(() => {

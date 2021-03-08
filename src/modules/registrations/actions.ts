@@ -64,6 +64,12 @@ function loadCourseRegistrations() {
       });
     } catch (err) {
       dispatch({ type: LOAD_COURSE_REGISTRATIONS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลการลงทะเบียนรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -91,6 +97,12 @@ function loadCurriculumRegistrations() {
       });
     } catch (err) {
       dispatch({ type: LOAD_CURRICULUM_REGISTRATIONS_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลการลงทะเบียนหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }

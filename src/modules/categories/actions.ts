@@ -1,4 +1,6 @@
 import axios from "axios";
+import * as uiActions from "modules/ui/actions";
+
 const LOAD_CATEGORIES_REQUEST =
   "learning-platform/categories/LOAD_CATEGORIES_REQUEST";
 const LOAD_CATEGORIES_SUCCESS =
@@ -24,6 +26,12 @@ function loadCategories() {
       });
     } catch (err) {
       dispatch({ type: LOAD_CATEGORIES_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลหมวดหมู่ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }

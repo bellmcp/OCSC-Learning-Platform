@@ -1,4 +1,6 @@
 import axios from "axios";
+import * as uiActions from "modules/ui/actions";
+
 const LOAD_COURSES_REQUEST = "learning-platform/courses/LOAD_COURSES_REQUEST";
 const LOAD_COURSES_SUCCESS = "learning-platform/courses/LOAD_COURSES_SUCCESS";
 const LOAD_COURSES_FAILURE = "learning-platform/courses/LOAD_COURSES_FAILURE";
@@ -48,6 +50,12 @@ function loadCourses(courseCategoryId: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_COURSES_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -70,6 +78,12 @@ function loadRecommendedCourses() {
       });
     } catch (err) {
       dispatch({ type: LOAD_RECOMMENDED_COURSES_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดรายวิชาแนะนำไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -92,6 +106,12 @@ function loadCourse(id: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_COURSE_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -114,6 +134,12 @@ function loadCourseRounds(id: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_COURSE_ROUND_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลรอบของรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
@@ -136,6 +162,12 @@ function loadCourseContents(id: string) {
       });
     } catch (err) {
       dispatch({ type: LOAD_COURSE_CONTENT_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลเนื้อหาของรายวิชา ${id} ไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }

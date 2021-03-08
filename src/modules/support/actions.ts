@@ -3,6 +3,7 @@ import axios from "axios";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import * as uiActions from "modules/ui/actions";
+
 const LOAD_SUPPORT_REQUEST = "learning-platform/support/LOAD_SUPPORT_REQUEST";
 const LOAD_SUPPORT_SUCCESS = "learning-platform/support/LOAD_SUPPORT_SUCCESS";
 const LOAD_SUPPORT_FAILURE = "learning-platform/support/LOAD_SUPPORT_FAILURE";
@@ -28,6 +29,12 @@ function loadSupports() {
       });
     } catch (err) {
       dispatch({ type: LOAD_SUPPORT_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดประวัติการติดต่อเจ้าหน้าที่ทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err.response.status}`,
+          "error"
+        )
+      );
     }
   };
 }
