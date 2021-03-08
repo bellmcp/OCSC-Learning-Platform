@@ -108,7 +108,7 @@ export default function CurriculumDetails() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    const courses_action = coursesActions.loadCourses("/");
+    const courses_action = coursesActions.loadCourses();
     dispatch(courses_action);
   }, [dispatch]);
 
