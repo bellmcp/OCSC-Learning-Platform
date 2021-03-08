@@ -119,13 +119,13 @@ export default function Timer({
         <Box width="100%" mr={1}>
           <LinearProgress
             variant="determinate"
-            value={props.value > 100 ? 100 : props.value}
+            value={props.value > 100 || isNaN(props.value) ? 100 : props.value}
             color="secondary"
           />
         </Box>
         <Box minWidth={35}>
           <Typography variant="body2" color="textPrimary">{`${Math.round(
-            props.value
+            props.value > 100 || isNaN(props.value) ? 100 : props.value
           )}%`}</Typography>
         </Box>
       </Box>
