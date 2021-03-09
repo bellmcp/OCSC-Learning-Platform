@@ -126,7 +126,9 @@ export default function SupportItem({
             </Typography>
             <Typography variant="caption" component="p" color="textSecondary">
               <b>ส่งเมื่อ</b>{" "}
-              <DayJS format="DD/MM/YYYY HH:mm">{createDate}</DayJS>
+              <DayJS format="D/M/YYYY HH:mm" add={{ years: 543 }}>
+                {createDate}
+              </DayJS>
               {attachFile ? (
                 <>
                   <AttachmentIcon
@@ -175,7 +177,9 @@ export default function SupportItem({
                   color="textSecondary"
                 >
                   <b>ตอบกลับเมื่อ</b>{" "}
-                  <DayJS format="DD/MM/YYYY HH:mm">{replyDate}</DayJS>
+                  <DayJS format="D/M/YYYY HH:mm" add={{ years: 543 }}>
+                    {replyDate}
+                  </DayJS>
                 </Typography>
               </Box>
             </>

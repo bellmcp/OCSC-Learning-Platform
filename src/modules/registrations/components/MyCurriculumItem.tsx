@@ -144,7 +144,9 @@ export default function MyCurriculumItem({
                       gutterBottom
                     >
                       <b>ลงทะเบียนเมื่อ </b>
-                      <DayJS format="DD/MM/YYYY">{registrationDate}</DayJS>
+                      <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                        {registrationDate}
+                      </DayJS>
                     </Typography>
                   </Grid>
                   {!matches && (

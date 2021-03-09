@@ -198,7 +198,7 @@ export default function ContentView({
               <Typography variant="body2" color="error">
                 Current session id: {currentSession.id}, key:{" "}
                 {currentSession.key}, created at{" "}
-                <DayJS format="DD/MM/YYYY HH:mm">
+                <DayJS format="D/M/YYYY HH:mm" add={{ years: 543 }}>
                   {currentSession.createDate}
                 </DayJS>
               </Typography>

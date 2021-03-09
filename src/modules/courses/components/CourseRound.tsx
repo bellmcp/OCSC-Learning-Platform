@@ -141,8 +141,13 @@ export default function CourseRound({
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
-              <DayJS format="DD/MM/YYYY">{registrationStart}</DayJS> ถึง{" "}
-              <DayJS format="DD/MM/YYYY">{registrationEnd}</DayJS>
+              <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                {registrationStart}
+              </DayJS>{" "}
+              ถึง{" "}
+              <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                {registrationEnd}
+              </DayJS>
             </Typography>
           </Grid>
         </Grid>
@@ -166,8 +171,13 @@ export default function CourseRound({
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
-              <DayJS format="DD/MM/YYYY">{courseStart}</DayJS> ถึง{" "}
-              <DayJS format="DD/MM/YYYY">{courseEnd}</DayJS>
+              <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                {courseStart}
+              </DayJS>{" "}
+              ถึง{" "}
+              <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                {courseEnd}
+              </DayJS>
             </Typography>
           </Grid>
         </Grid>

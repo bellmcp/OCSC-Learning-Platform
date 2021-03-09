@@ -130,7 +130,9 @@ export default function MyCourseItem({
                     gutterBottom
                   >
                     <b>ลงทะเบียนเมื่อ </b>
-                    <DayJS format="DD/MM/YYYY">{registrationDate}</DayJS>
+                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                      {registrationDate}
+                    </DayJS>
                   </Typography>
                   <Typography
                     variant="caption"
@@ -139,8 +141,13 @@ export default function MyCourseItem({
                     style={{ lineHeight: "1.2" }}
                   >
                     <b>เข้าเรียนได้ </b>
-                    <DayJS format="DD/MM/YYYY">{courseStart}</DayJS> ถึง{" "}
-                    <DayJS format="DD/MM/YYYY">{courseEnd}</DayJS>
+                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                      {courseStart}
+                    </DayJS>{" "}
+                    ถึง{" "}
+                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                      {courseEnd}
+                    </DayJS>
                   </Typography>
                 </Grid>
                 {!matches && (
