@@ -180,7 +180,9 @@ export default function ContentView({
           <Divider />
           <Box my={4}>
             {activeContentView?.type === "c" && <>{renderContentView()}</>}
-            {activeContentView?.type === "t" && <TestList />}
+            {activeContentView?.type === "t" && (
+              <TestList activeContentView={activeContentView} />
+            )}
             {activeContentView?.type === "e" && (
               <EvaluationList
                 activeContentView={activeContentView}

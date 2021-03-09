@@ -1,8 +1,10 @@
 //@ts-nocheck
-import React from "react";
-import { Paper } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import * as learnActions from "modules/learn/actions";
 import TestItem from "./TestItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -28,11 +30,34 @@ const items = [
   },
 ];
 
-export default function TestList() {
+export default function TestList({ activeContentView }: any) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const testId = activeContentView.testId1;
+
+  const { isLoading: isTestLoading, test } = useSelector(
+    (state) => state.learn
+  );
+
+  console.log(test);
+
+  useEffect(() => {
+    const load_test_action = learnActions.loadTest(testId);
+    dispatch(load_test_action);
+  }, [dispatch, testId]);
 
   return (
     <>
+      <Typography variant="body1" color="textSecondary">
+        <b>แบบทดสอบ</b> {test?.name}
+        <br />
+        <b>คำชี้แจง</b> {test?.instruction}
+        <br />
+        <b>เกณฑ์ผ่าน</b> {test?.minScore} คะแนน
+        <br />
+        <b>ทำแบบทดสอบได้ไม่เกิน</b> {test?.maxTries} ครั้ง
+        <br />
+      </Typography>
       {items.map((item, index) => (
         <Paper className={classes.paper} elevation={1}>
           <TestItem {...item} />

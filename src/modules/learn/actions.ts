@@ -38,6 +38,9 @@ const UPDATE_EVALUATION_SUCCESS =
   "learning-platform/learn/UPDATE_EVALUATION_SUCCESS";
 const UPDATE_EVALUATION_FAILURE =
   "learning-platform/learn/UPDATE_EVALUATION_FAILURE";
+const LOAD_TEST_REQUEST = "learning-platform/learn/LOAD_TEST_REQUEST";
+const LOAD_TEST_SUCCESS = "learning-platform/learn/LOAD_TEST_SUCCESS";
+const LOAD_TEST_FAILURE = "learning-platform/learn/LOAD_TEST_FAILURE";
 
 const path = "/learning-platform";
 
@@ -277,6 +280,32 @@ function updateEvaluation(
   };
 }
 
+function loadTest(testId) {
+  return async (dispatch: any, getState) => {
+    dispatch({ type: LOAD_TEST_REQUEST });
+    try {
+      var { data } = await axios.get(`/Tests/${testId}`);
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: LOAD_TEST_SUCCESS,
+        payload: {
+          test: data,
+        },
+      });
+    } catch (err) {
+      dispatch({ type: LOAD_TEST_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลแบบทดสอบ ${testId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          "error"
+        )
+      );
+    }
+  };
+}
+
 export {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
@@ -296,10 +325,14 @@ export {
   UPDATE_EVALUATION_REQUEST,
   UPDATE_EVALUATION_SUCCESS,
   UPDATE_EVALUATION_FAILURE,
+  LOAD_TEST_REQUEST,
+  LOAD_TEST_SUCCESS,
+  LOAD_TEST_FAILURE,
   createSession,
   loadContentViews,
   updateContentView,
   loadEvaluation,
   loadEvaluationItems,
   updateEvaluation,
+  loadTest,
 };

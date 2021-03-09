@@ -57,8 +57,10 @@ export default function EvaluationList({
   const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
+
   const evaluationId = activeContentView.evaluationId;
   const isCompleted = currentContentView?.isCompleted;
+
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
   const {
