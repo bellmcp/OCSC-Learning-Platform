@@ -44,6 +44,8 @@ export default function TestItem({
   imgUrl3,
   imgUrl4,
   imgUrl5,
+  register,
+  errors,
 }) {
   const classes = useStyles();
   const choices = [
@@ -80,10 +82,10 @@ export default function TestItem({
                 <Grid item xs={12}>
                   {choice.option && (
                     <FormControlLabel
-                      // name={`evaluationAnswer${id}`}
-                      // id={`evaluationAnswer${id}`}
+                      name={`testAnswer${id}`}
+                      id={`testAnswer${id}`}
                       value={choice.id.toString()}
-                      // inputRef={register()}
+                      inputRef={register()}
                       control={<Radio />}
                       label={choice.option}
                     />
