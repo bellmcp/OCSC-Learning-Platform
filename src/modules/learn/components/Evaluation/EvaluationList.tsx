@@ -78,16 +78,21 @@ export default function EvaluationList({ activeContentView }: any) {
       .slice(1)
       .map((id) => `${id}`)
       .join("");
-    console.log(evaluationOpinion);
-    console.log(evaluationAnswer);
 
-    const update_evaluation_action = learnActions.updateEvaluation(
-      courseRegistrationId,
-      contentViewId,
-      evaluationAnswer,
-      evaluationOpinion
+    alert(
+      " evaluationAnswer: " +
+        evaluationAnswer +
+        ", evaluationOpinion: " +
+        evaluationOpinion
     );
-    dispatch(update_evaluation_action);
+
+    // const update_evaluation_action = learnActions.updateEvaluation(
+    //   courseRegistrationId,
+    //   contentViewId,
+    //   evaluationAnswer,
+    //   evaluationOpinion
+    // );
+    // dispatch(update_evaluation_action);
   };
 
   return (
