@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 import {
   Paper,
   Typography,
@@ -49,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EvaluationList({ activeContentView }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { register, handleSubmit, errors } = useForm();
   const evaluationId = activeContentView.evaluationId;
   const {
     isLoading: isEvaluationLoading,
@@ -68,6 +70,26 @@ export default function EvaluationList({ activeContentView }: any) {
     dispatch(load_evaluation_items_action);
   }, [dispatch, evaluationId]);
 
+  const onSubmit = (data, event) => {
+    event.preventDefault();
+    const values = Object.values(data);
+    const evaluationOpinion = values[0];
+    const evaluationAnswer = values
+      .slice(1)
+      .map((id) => `${id}`)
+      .join("");
+    console.log(evaluationOpinion);
+    console.log(evaluationAnswer);
+
+    const update_evaluation_action = learnActions.updateEvaluation(
+      courseRegistrationId,
+      contentViewId,
+      evaluationAnswer,
+      evaluationOpinion
+    );
+    dispatch(update_evaluation_action);
+  };
+
   return (
     <>
       <Typography variant="body1" color="textSecondary">
@@ -86,14 +108,18 @@ export default function EvaluationList({ activeContentView }: any) {
           <CircularProgress color="secondary" />
         </Grid>
       ) : (
-        <>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
           {evaluationItems.map((evaluationItem) => (
             <Paper
               key={evaluationItem.id}
               className={classes.paper}
               elevation={1}
             >
-              <EvaluationItem {...evaluationItem} />
+              <EvaluationItem
+                {...evaluationItem}
+                register={register}
+                errors={errors}
+              />
             </Paper>
           ))}
           <Paper className={classes.paper} elevation={1}>
@@ -117,6 +143,9 @@ export default function EvaluationList({ activeContentView }: any) {
             <Divider className={classes.divider} />
             <Box mt={3} mb={2}>
               <TextField
+                inputRef={register}
+                name="evaluationOpinion"
+                id="evaluationOpinion"
                 label="แสดงความคิดเห็น"
                 placeholder={evaluation?.opinion}
                 variant="outlined"
@@ -134,14 +163,11 @@ export default function EvaluationList({ activeContentView }: any) {
               variant="contained"
               startIcon={<SendIcon />}
               fullWidth
-              onClick={() => {
-                alert("Submitted");
-              }}
             >
               ส่งแบบประเมิน
             </Button>
           </Box>
-        </>
+        </form>
       )}
     </>
   );

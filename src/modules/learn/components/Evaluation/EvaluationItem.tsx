@@ -36,9 +36,17 @@ export default function EvaluationItem({
   choice3,
   choice4,
   choice5,
+  register,
+  errors,
 }) {
   const classes = useStyles();
-  const choices = [choice1, choice2, choice3, choice4, choice5];
+  const choices = [
+    { id: 1, option: choice1 },
+    { id: 2, option: choice2 },
+    { id: 3, option: choice3 },
+    { id: 4, option: choice4 },
+    { id: 5, option: choice5 },
+  ];
 
   return (
     <>
@@ -49,36 +57,34 @@ export default function EvaluationItem({
         <Grid item>
           <Typography
             component="h1"
-            variant="h6"
-            align="center"
-            style={{ fontSize: "1rem", fontWeight: 600 }}
+            variant="body1"
+            color="textPrimary"
+            style={{ fontWeight: 600 }}
           >
             {question}
           </Typography>
         </Grid>
       </Grid>
       <Divider className={classes.divider} />
-      <form>
-        <FormControl component="fieldset">
-          <RadioGroup aria-label={question} name={question}>
-            <Grid className={classes.options} container spacing={0}>
-              {choices.map((choice) => (
-                <Grid item xs={12}>
-                  <FormControlLabel
-                    value={choice}
-                    control={<Radio />}
-                    label={
-                      <Typography style={{ fontSize: "0.9rem" }}>
-                        {choice}
-                      </Typography>
-                    }
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </RadioGroup>
-        </FormControl>
-      </form>
+
+      <FormControl component="fieldset">
+        <RadioGroup aria-label={question} name={question}>
+          <Grid className={classes.options} container spacing={0}>
+            {choices.map((choice) => (
+              <Grid item xs={12}>
+                <FormControlLabel
+                  name={`evaluationAnswer${id}`}
+                  id={`evaluationAnswer${id}`}
+                  value={choice.id.toString()}
+                  inputRef={register()}
+                  control={<Radio />}
+                  label={choice.option}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </RadioGroup>
+      </FormControl>
     </>
   );
 }

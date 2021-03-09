@@ -32,6 +32,12 @@ const LOAD_EVALUATION_ITEMS_SUCCESS =
   "learning-platform/learn/LOAD_EVALUATION_ITEMS_SUCCESS";
 const LOAD_EVALUATION_ITEMS_FAILURE =
   "learning-platform/learn/LOAD_EVALUATION_ITEMS_FAILURE";
+const UPDATE_EVALUATION_REQUEST =
+  "learning-platform/learn/UPDATE_EVALUATION_REQUEST";
+const UPDATE_EVALUATION_SUCCESS =
+  "learning-platform/learn/UPDATE_EVALUATION_SUCCESS";
+const UPDATE_EVALUATION_FAILURE =
+  "learning-platform/learn/UPDATE_EVALUATION_FAILURE";
 
 const path = "/learning-platform";
 
@@ -210,6 +216,66 @@ function loadEvaluationItems(evaluationId) {
   };
 }
 
+function updateEvaluation(
+  registrationId,
+  contentViewId,
+  evaluationAnswer,
+  evaluationOpinion
+) {
+  return async (dispatch, getState) => {
+    const token = getCookie("token");
+    const userId = parseJwt(token).unique_name;
+    const {
+      learn: { sessions },
+    } = getState();
+    dispatch({ type: UPDATE_EVALUATION_REQUEST });
+    try {
+      var { data } = await axios.put(
+        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
+        {
+          evaluationAnswer: evaluationAnswer,
+          evaluationOpinion: evaluationOpinion,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          params: {
+            sessionId: sessions.id,
+            key: sessions.key,
+          },
+        }
+      );
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: UPDATE_EVALUATION_SUCCESS,
+        payload: { evaluationAnswer: data },
+      });
+      dispatch(
+        uiActions.setFlashMessage("บันทึกแบบประเมินเรียบร้อยแล้ว", "success")
+      );
+    } catch (err) {
+      dispatch({ type: UPDATE_EVALUATION_FAILURE });
+      if (err?.response?.status === 401) {
+        dispatch(push(`${path}/learn`));
+        dispatch(
+          uiActions.setFlashMessage(
+            `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
+            "error"
+          )
+        );
+      } else {
+        dispatch(
+          uiActions.setFlashMessage(
+            `บันทึกแบบประเมินไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
+      }
+    }
+  };
+}
+
 export {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
@@ -226,9 +292,13 @@ export {
   LOAD_EVALUATION_ITEMS_REQUEST,
   LOAD_EVALUATION_ITEMS_SUCCESS,
   LOAD_EVALUATION_ITEMS_FAILURE,
+  UPDATE_EVALUATION_REQUEST,
+  UPDATE_EVALUATION_SUCCESS,
+  UPDATE_EVALUATION_FAILURE,
   createSession,
   loadContentViews,
   updateContentView,
   loadEvaluation,
   loadEvaluationItems,
+  updateEvaluation,
 };
