@@ -30,15 +30,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const items = [
-  {
-    id: 1,
-    question: "ตัวอย่างข้อสอบ 1",
-    options: ["ตัวเลือก 1", "ตัวเลือก 2", "ตัวเลือก 3", "ตัวเลือก 4"],
-    answer: 1,
-  },
-];
-
 export default function TestList({ activeContentView }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
