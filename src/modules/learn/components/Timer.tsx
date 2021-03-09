@@ -125,7 +125,7 @@ export default function Timer({
         </Box>
         <Box minWidth={35}>
           <Typography variant="body2" color="textPrimary">{`${Math.round(
-            props.value > 100 || isNaN(props.value) ? 100 : props.value
+            isNaN(props.value) ? 100 : props.value
           )}%`}</Typography>
         </Box>
       </Box>
