@@ -35,15 +35,19 @@ export default function TestList({ activeContentView }: any) {
   const dispatch = useDispatch();
   const testId = activeContentView.testId1;
 
-  const { isLoading: isTestLoading, test } = useSelector(
+  const { isLoading: isTestLoading, test, testItems } = useSelector(
     (state) => state.learn
   );
-
-  console.log(test);
+  console.log(testItems);
 
   useEffect(() => {
     const load_test_action = learnActions.loadTest(testId);
     dispatch(load_test_action);
+  }, [dispatch, testId]);
+
+  useEffect(() => {
+    const load_test_items_action = learnActions.loadTestItems(testId);
+    dispatch(load_test_items_action);
   }, [dispatch, testId]);
 
   return (
@@ -58,9 +62,9 @@ export default function TestList({ activeContentView }: any) {
         <b>ทำแบบทดสอบได้ไม่เกิน</b> {test?.maxTries} ครั้ง
         <br />
       </Typography>
-      {items.map((item, index) => (
-        <Paper className={classes.paper} elevation={1}>
-          <TestItem {...item} />
+      {testItems.map((testItem) => (
+        <Paper key={testItem.id} className={classes.paper} elevation={1}>
+          <TestItem {...testItem} />
         </Paper>
       ))}
     </>

@@ -17,6 +17,9 @@ import {
   LOAD_TEST_REQUEST,
   LOAD_TEST_SUCCESS,
   LOAD_TEST_FAILURE,
+  LOAD_TEST_ITEMS_REQUEST,
+  LOAD_TEST_ITEMS_SUCCESS,
+  LOAD_TEST_ITEMS_FAILURE,
 } from "./actions";
 
 const initialState = {
@@ -27,6 +30,7 @@ const initialState = {
   evaluation: [],
   evaluationItems: [],
   test: [],
+  testItems: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -43,6 +47,8 @@ export default function (state = initialState, action: any) {
       return { ...state, isLoading: true, evaluationItems: [] };
     case LOAD_TEST_REQUEST:
       return { ...state, isLoading: true, test: [] };
+    case LOAD_TEST_ITEMS_REQUEST:
+      return { ...state, isLoading: true, testItems: [] };
     case CREATE_SESSION_SUCCESS:
       return {
         ...state,
@@ -79,12 +85,19 @@ export default function (state = initialState, action: any) {
         isLoading: false,
         test: action.payload.test,
       };
+    case LOAD_TEST_ITEMS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        testItems: action.payload.testItems,
+      };
     case CREATE_SESSION_FAILURE:
     case LOAD_CONTENT_VIEWS_FAILURE:
     case UPDATE_CONTENT_VIEW_FAILURE:
     case LOAD_EVALUATION_FAILURE:
     case LOAD_EVALUATION_ITEMS_FAILURE:
     case LOAD_TEST_FAILURE:
+    case LOAD_TEST_ITEMS_FAILURE:
       return { ...state, isLoading: false };
     default:
       return state;

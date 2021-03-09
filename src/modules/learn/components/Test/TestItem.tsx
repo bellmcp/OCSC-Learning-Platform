@@ -28,8 +28,31 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function TestItem({ id, question, options }) {
+export default function TestItem({
+  id,
+  solution,
+  question,
+  numChoices,
+  choice1,
+  choice2,
+  choice3,
+  choice4,
+  choice5,
+  imgUrl,
+  imgUrl1,
+  imgUrl2,
+  imgUrl3,
+  imgUrl4,
+  imgUrl5,
+}) {
   const classes = useStyles();
+  const choices = [
+    { id: 1, option: choice1 !== "" ? choice1 : null },
+    { id: 2, option: choice2 !== "" ? choice2 : null },
+    { id: 3, option: choice3 !== "" ? choice3 : null },
+    { id: 4, option: choice4 !== "" ? choice4 : null },
+    { id: 5, option: choice5 !== "" ? choice5 : null },
+  ];
 
   return (
     <>
@@ -53,17 +76,18 @@ export default function TestItem({ id, question, options }) {
         <FormControl component="fieldset">
           <RadioGroup aria-label={question} name={question}>
             <Grid className={classes.options} container spacing={0}>
-              {options.map((option) => (
+              {choices.map((choice) => (
                 <Grid item xs={12}>
-                  <FormControlLabel
-                    value={option}
-                    control={<Radio />}
-                    label={
-                      <Typography style={{ fontSize: "0.9rem" }}>
-                        {option}
-                      </Typography>
-                    }
-                  />
+                  {choice.option && (
+                    <FormControlLabel
+                      // name={`evaluationAnswer${id}`}
+                      // id={`evaluationAnswer${id}`}
+                      value={choice.id.toString()}
+                      // inputRef={register()}
+                      control={<Radio />}
+                      label={choice.option}
+                    />
+                  )}
                 </Grid>
               ))}
             </Grid>
