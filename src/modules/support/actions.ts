@@ -112,8 +112,8 @@ function markSupportAsRead(supportId) {
       if (data.length === 0) {
         data = [];
       }
-      dispatch(uiActions.setFlashMessage("บันทึกข้อมูลเรียบร้อย", "success"));
       window.location.reload();
+      dispatch(uiActions.setFlashMessage("บันทึกข้อมูลเรียบร้อย", "success"));
     } catch (err) {
       dispatch(
         uiActions.setFlashMessage(

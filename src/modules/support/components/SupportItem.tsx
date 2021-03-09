@@ -105,9 +105,14 @@ export default function SupportItem({
             >
               เลขที่อ้างอิง: {id}
             </Typography>
-            <Grid container alignItems="center">
+            <Grid container alignItems="center" style={{ marginBottom: 4 }}>
               <ChatBubbleIcon style={{ marginRight: 10 }} />
-              <Typography variant="h6" component="h1" gutterBottom>
+              <Typography
+                variant="h6"
+                component="h2"
+                gutterBottom
+                style={{ lineHeight: "1.2" }}
+              >
                 {subject}
               </Typography>
             </Grid>
@@ -116,12 +121,17 @@ export default function SupportItem({
                 variant="body1"
                 component="p"
                 gutterBottom
-                style={{ marginBottom: 16 }}
+                style={{ marginBottom: 16, lineHeight: "1.3" }}
               >
                 {message}
               </Typography>
             ) : null}
-            <Typography variant="caption" component="p" color="textSecondary">
+            <Typography
+              variant="caption"
+              component="p"
+              color="textSecondary"
+              style={{ lineHeight: "1.3", marginBottom: 2 }}
+            >
               <b>ช่องทางติดต่อกลับ</b> {contact}
             </Typography>
             <Typography variant="caption" component="p" color="textSecondary">
@@ -167,6 +177,7 @@ export default function SupportItem({
                   component="p"
                   gutterBottom
                   align="right"
+                  style={{ lineHeight: "1.3", marginBottom: 16 }}
                 >
                   {replyMessage}
                 </Typography>
