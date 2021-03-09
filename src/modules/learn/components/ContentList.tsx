@@ -85,7 +85,7 @@ export default function ContentList({
                   badgeContent={
                     getContentViewById(courseContent?.id)[0]?.isCompleted ? (
                       <CheckCircleIcon
-                        style={{ color: green[800], fontSize: "18px" }}
+                        style={{ color: green[800], fontSize: "16px" }}
                       />
                     ) : null
                   }
