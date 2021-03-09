@@ -251,6 +251,7 @@ function updateEvaluation(
         type: UPDATE_EVALUATION_SUCCESS,
         payload: { evaluationAnswer: data },
       });
+      window.location.reload();
       dispatch(
         uiActions.setFlashMessage("บันทึกแบบประเมินเรียบร้อยแล้ว", "success")
       );
