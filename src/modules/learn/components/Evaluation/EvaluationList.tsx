@@ -139,7 +139,7 @@ export default function EvaluationList({
             >
               <img
                 src={HeroImage}
-                alt="ยินดีต้อนรับ"
+                alt="บันทึกข้อมูลแล้ว"
                 style={{ width: "100%", height: "auto" }}
               />
             </Grid>
