@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
@@ -9,9 +9,11 @@ import {
   Button,
   Grid,
   CircularProgress,
+  Divider,
+  Collapse,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Send as SendIcon } from "@material-ui/icons";
+import { Send as SendIcon, Timer as TimerIcon } from "@material-ui/icons";
 
 import * as learnActions from "modules/learn/actions";
 import TestItem from "./TestItem";
@@ -34,6 +36,7 @@ export default function TestList({ activeContentView }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
+  const [start, setStart] = useState(false);
   const testId = activeContentView.testId1;
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
@@ -71,34 +74,74 @@ export default function TestList({ activeContentView }: any) {
         </Grid>
       ) : (
         <>
+          <Typography
+            variant="h6"
+            color="textPrimary"
+            gutterBottom
+            style={{ fontWeight: 600, marginBottom: 16 }}
+          >
+            {test?.name}
+          </Typography>
           <Typography variant="body1" color="textSecondary">
-            <b>แบบทดสอบ</b> {test?.name}
-            <br />
             <b>คำชี้แจง</b> {test?.instruction}
             <br />
             <b>เกณฑ์ผ่าน</b> {test?.minScore} คะแนน
             <br />
-            <b>ทำแบบทดสอบได้ไม่เกิน</b> {test?.maxTries} ครั้ง
+            <b>เวลาที่ใช้ทำแบบทดสอบ</b> {test?.minutes} นาที
             <br />
+            <b>ทำแบบทดสอบได้ไม่เกิน</b> {test?.maxTries} ครั้ง
           </Typography>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
-            {testItems.map((testItem) => (
-              <Paper key={testItem.id} className={classes.paper} elevation={1}>
-                <TestItem {...testItem} register={register} errors={errors} />
-              </Paper>
-            ))}
-            <Box my={6}>
-              <Button
-                type="submit"
-                color="secondary"
-                variant="contained"
-                startIcon={<SendIcon />}
-                fullWidth
-              >
-                ส่งแบบทดสอบ
-              </Button>
-            </Box>
-          </form>
+          <Box my={3}>
+            <Divider />
+          </Box>
+          <Typography variant="body1" color="textPrimary">
+            <b>คะแนนสูงสุดที่ทำได้</b> 0 คะแนน
+            <br />
+            <b>ทำแบบทดสอบแล้ว</b> 0 ครั้ง
+          </Typography>
+          <Box my={3}>
+            <Button
+              color="secondary"
+              variant="contained"
+              disabled={start}
+              startIcon={<TimerIcon />}
+              onClick={() => {
+                setStart(true);
+              }}
+              fullWidth
+            >
+              เริ่มทำแบบทดสอบ
+            </Button>
+          </Box>
+
+          <Collapse in={start}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              noValidate
+              autoComplete="off"
+            >
+              {testItems.map((testItem) => (
+                <Paper
+                  key={testItem.id}
+                  className={classes.paper}
+                  elevation={1}
+                >
+                  <TestItem {...testItem} register={register} errors={errors} />
+                </Paper>
+              ))}
+              <Box my={6}>
+                <Button
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
+                  startIcon={<SendIcon />}
+                  fullWidth
+                >
+                  ส่งแบบทดสอบ
+                </Button>
+              </Box>
+            </form>
+          </Collapse>
         </>
       )}
     </>

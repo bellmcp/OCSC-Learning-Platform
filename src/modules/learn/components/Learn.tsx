@@ -32,6 +32,7 @@ import SideBar from "./SideBar";
 import SideBarMobile from "./SideBarMobile";
 import ContentView from "./ContentView";
 import Timer from "./Timer";
+import TimerCountdown from "./TimerCountdown";
 
 const DRAWER_WIDTH = 300;
 const FOOTER_HEIGHT = 60;
@@ -186,39 +187,22 @@ export default function Learn() {
 
   function renderTimer() {
     if (contentId !== undefined) {
-      if (
-        activeContentView[0]?.type !== "e" &&
-        activeContentView[0]?.type !== "t"
-      ) {
+      if (activeContentView[0]?.type === "c") {
         return (
-          <div className={classes.timerWrapper}>
-            <Box mx={2} mt={1}>
-              <Timer
-                contentId={contentId}
-                activeContentView={activeContentView}
-                currentContentView={currentContentView[0]}
-                courseRegistrationDetails={courseRegistrationDetails}
-              />
-            </Box>
-          </div>
+          <Timer
+            contentId={contentId}
+            activeContentView={activeContentView}
+            currentContentView={currentContentView[0]}
+            courseRegistrationDetails={courseRegistrationDetails}
+          />
         );
+      } else if (activeContentView[0]?.type === "t") {
+        return <TimerCountdown />;
       } else {
-        return (
-          <div className={classes.timerWrapper}>
-            <Box mx={2} mt={1}>
-              <></>
-            </Box>
-          </div>
-        );
+        return null;
       }
     } else {
-      return (
-        <div className={classes.timerWrapper}>
-          <Box mx={2} mt={1}>
-            <></>
-          </Box>
-        </div>
-      );
+      return null;
     }
   }
 
@@ -301,7 +285,11 @@ export default function Learn() {
         </DialogActions>
       </Dialog>
       {/* TIMER */}
-      {renderTimer()}
+      <div className={classes.timerWrapper}>
+        <Box mx={2} mt={1}>
+          {renderTimer()}
+        </Box>
+      </div>
     </div>
   );
 }
