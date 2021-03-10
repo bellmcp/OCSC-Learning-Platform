@@ -17,6 +17,7 @@ import {
   withStyles,
   useTheme,
 } from "@material-ui/core/styles";
+import { Inbox as InboxIcon } from "@material-ui/icons";
 
 import * as actions from "../actions";
 import SupportItem from "./SupportItem";
@@ -67,9 +68,20 @@ export default function SupportList() {
       return (
         <Grid container direction="row" justify="center" alignItems="center">
           <Box my={10}>
-            <Typography variant="body2" color="textSecondary">
-              ไม่พบประวัติการติดต่อเจ้าหน้าที่
-            </Typography>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <InboxIcon
+                color="disabled"
+                style={{ fontSize: 54, marginBottom: 14 }}
+              />
+              <Typography variant="body2" color="textSecondary">
+                ไม่พบประวัติการติดต่อเจ้าหน้าที่
+              </Typography>
+            </Grid>
           </Box>
         </Grid>
       );
