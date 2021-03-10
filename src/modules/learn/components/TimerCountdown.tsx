@@ -20,7 +20,7 @@ export default function TimerCountdown({}: any) {
   // CLOCK
   useEffect(() => {
     const round = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer >= 59 ? 0 : prevTimer - 1));
+      setTimer((prevTimer) => (prevTimer >= 180 ? 0 : prevTimer - 1));
     }, 1000);
     return () => {
       clearInterval(round);
@@ -35,7 +35,7 @@ export default function TimerCountdown({}: any) {
         <CircularProgress
           variant="static"
           {...props}
-          value={props.value * (100 / 60)}
+          value={props.value * (100 / 180)}
         />
       </Box>
     );
@@ -59,11 +59,11 @@ export default function TimerCountdown({}: any) {
           <Hidden only={["xs"]}>
             <b>คงเหลือ </b>
           </Hidden>
-          2 นาที 59 วินาที
+          0 นาที 0 วินาที
         </Typography>
       </Grid>
       <Grid item style={{ width: "100px" }}>
-        สิ้นสุด 16:25 น.
+        สิ้นสุด 00:00 น.
       </Grid>
     </Grid>
   );

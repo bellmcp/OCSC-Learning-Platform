@@ -180,6 +180,8 @@ export default function Learn() {
     setConfirmDialogOpen(false);
   };
 
+  const [testStart, setTestStart] = useState(false);
+
   const linkToLearn = () => {
     handleConfirmDialogClose();
     history.push(`${path}/learn`);
@@ -197,7 +199,11 @@ export default function Learn() {
           />
         );
       } else if (activeContentView[0]?.type === "t") {
-        return <TimerCountdown />;
+        if (testStart) {
+          return <TimerCountdown />;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
@@ -234,6 +240,8 @@ export default function Learn() {
           currentContentView={currentContentView[0]}
           courseRegistrationDetails={courseRegistrationDetails}
           currentSession={currentSession}
+          testStart={testStart}
+          setTestStart={setTestStart}
         />
       </main>
       {/* MOBILE NAVIGATION */}

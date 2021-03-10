@@ -32,11 +32,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TestList({ activeContentView }: any) {
+export default function TestList({
+  activeContentView,
+  testStart,
+  setTestStart,
+}: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
-  const [start, setStart] = useState(false);
   const testId = activeContentView.testId1;
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
@@ -103,10 +106,10 @@ export default function TestList({ activeContentView }: any) {
             <Button
               color="secondary"
               variant="contained"
-              disabled={start}
+              disabled={testStart}
               startIcon={<TimerIcon />}
               onClick={() => {
-                setStart(true);
+                setTestStart(true);
               }}
               fullWidth
             >
@@ -114,7 +117,7 @@ export default function TestList({ activeContentView }: any) {
             </Button>
           </Box>
 
-          <Collapse in={start}>
+          <Collapse in={testStart}>
             <form
               onSubmit={handleSubmit(onSubmit)}
               noValidate

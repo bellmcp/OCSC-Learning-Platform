@@ -34,6 +34,8 @@ export default function ContentView({
   currentContentView,
   courseRegistrationDetails,
   currentSession,
+  testStart,
+  setTestStart,
 }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -181,7 +183,11 @@ export default function ContentView({
           <Box my={4}>
             {activeContentView?.type === "c" && <>{renderContentView()}</>}
             {activeContentView?.type === "t" && (
-              <TestList activeContentView={activeContentView} />
+              <TestList
+                activeContentView={activeContentView}
+                testStart={testStart}
+                setTestStart={setTestStart}
+              />
             )}
             {activeContentView?.type === "e" && (
               <EvaluationList
