@@ -18,6 +18,7 @@ import {
   Edit as EditIcon,
   Lock as LockIcon,
   FolderSpecial as FolderIcon,
+  Print as PrintIcon,
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -87,43 +88,61 @@ export default function Me() {
           >
             {users.id}
           </Typography>
-          <Box mt={3} style={{ width: !matches ? "100%" : "500px" }}>
+          <Box mt={3} style={{ width: matches ? "500px" : "100%" }}>
             <Grid
               container
               direction="row"
               justify="center"
               alignItems="center"
-              spacing={2}
+              spacing={matches ? 1 : 2}
             >
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6}>
                 <Button
                   variant="outlined"
                   color="primary"
                   startIcon={<FolderIcon />}
                   onClick={linkToCertificate}
-                  fullWidth={!matches}
+                  fullWidth
                 >
-                  ประกาศนียบัตร
+                  ประกาศนียบัตรของฉัน
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6}>
                 <Button
                   variant="outlined"
                   color="primary"
+                  startIcon={<PrintIcon />}
+                  onClick={() => alert("Navigate to print certificate")}
+                  fullWidth
+                >
+                  พิมพ์ประกาศนียบัตร
+                </Button>
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                spacing={1}
+              ></Grid>
+              <Grid item xs={12} sm={6}>
+                <Button
+                  variant="contained"
+                  color="primary"
                   startIcon={<EditIcon />}
                   onClick={linkToEditProfile}
-                  fullWidth={!matches}
+                  fullWidth
                 >
                   แก้ไขโปรไฟล์
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid item xs={12} sm={6}>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   color="primary"
                   startIcon={<LockIcon />}
                   onClick={linkToChangePassword}
-                  fullWidth={!matches}
+                  fullWidth
                 >
                   เปลี่ยนรหัสผ่าน
                 </Button>
