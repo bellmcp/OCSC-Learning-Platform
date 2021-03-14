@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Header from "modules/ui/components/Header";
 import {
   Container,
@@ -18,6 +18,8 @@ import {
   Inbox as InboxIcon,
 } from "@material-ui/icons";
 
+import * as uiActions from "modules/ui/actions";
+
 const useStyles = makeStyles((theme) => ({
   main: {
     display: "flex",
@@ -31,9 +33,19 @@ const useStyles = makeStyles((theme) => ({
 export default function CertificateList() {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
   const { items: users } = useSelector((state: any) => state.user);
+
+  useEffect(() => {
+    dispatch(
+      uiActions.setFlashMessage(
+        "FOR DEVELOPMENT: This feature is currently in development process",
+        "error"
+      )
+    );
+  }, [dispatch]);
 
   return (
     <>

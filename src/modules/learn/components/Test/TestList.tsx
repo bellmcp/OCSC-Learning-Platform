@@ -16,6 +16,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Send as SendIcon, Timer as TimerIcon } from "@material-ui/icons";
 
 import * as learnActions from "modules/learn/actions";
+import * as uiActions from "modules/ui/actions";
 import TestItem from "./TestItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,12 @@ export default function TestList({
   useEffect(() => {
     const load_test_action = learnActions.loadTest(testId);
     dispatch(load_test_action);
+    dispatch(
+      uiActions.setFlashMessage(
+        "FOR DEVELOPMENT: This feature is currently in development process",
+        "error"
+      )
+    );
   }, [dispatch, testId]);
 
   useEffect(() => {
