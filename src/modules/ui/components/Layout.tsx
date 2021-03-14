@@ -21,7 +21,9 @@ export default function Layout() {
   const { pathname } = useLocation();
   const path = "/learning-platform";
   const dispatch = useDispatch();
-  const { flashMessage, alertType } = useSelector((state) => state.ui);
+  const { isSnackbarOpen, flashMessage, alertType } = useSelector(
+    (state) => state.ui
+  );
 
   const closeFlashMessage = () => dispatch(actions.clearFlashMessage());
 
@@ -108,7 +110,7 @@ export default function Layout() {
       <NavBar active={activePage} setActivePage={setActivePage} />
       <Routes />
       <Snackbar
-        open={flashMessage}
+        open={isSnackbarOpen}
         onClose={closeFlashMessage}
         message={flashMessage}
         autoHideDuration={6000}
