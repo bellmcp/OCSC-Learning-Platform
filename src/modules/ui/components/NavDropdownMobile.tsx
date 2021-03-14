@@ -6,6 +6,7 @@ import {
   Divider,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@material-ui/core";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import {
@@ -63,7 +64,15 @@ export default function NavDropdownMobile({
         </ListItemIcon>
         <ListItemText
           className={classes.bold}
-          primary={login() ? users.firstname : "เข้าสู่ระบบ"}
+          primary={
+            login() ? (
+              <Typography style={{ fontWeight: 600 }}>
+                {users.firstname}
+              </Typography>
+            ) : (
+              <Typography style={{ fontWeight: 600 }}>เข้าสู่ระบบ</Typography>
+            )
+          }
           secondary={login() && "ดูโปรไฟล์ >"}
         />
       </MenuItem>
