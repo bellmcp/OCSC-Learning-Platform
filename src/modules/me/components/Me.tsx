@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "modules/ui/components/Header";
 import {
@@ -35,13 +36,21 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: amber[500],
     color: "black",
   },
+  buttonGroupWrapper: {
+    width: 500,
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+  },
 }));
 
 export default function Me() {
   const classes = useStyles();
-  const { items: users } = useSelector((state: any) => state.user);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const path = "/learning-platform";
+  const history = useHistory();
+  const { items: users } = useSelector((state: any) => state.user);
 
   const linkToCertificate = () => {
     window.open("https://welearn.ocsc.go.th/learning-portal/history", "_blank");
@@ -53,6 +62,10 @@ export default function Me() {
 
   const linkToChangePassword = () => {
     window.open("https://welearn.ocsc.go.th/learning-portal/reset", "_blank");
+  };
+
+  const linkToPrintCertificate = () => {
+    history.push(`${path}/me/certificate`);
   };
 
   return (
@@ -88,13 +101,13 @@ export default function Me() {
           >
             {users.id}
           </Typography>
-          <Box mt={3} style={{ width: matches ? "500px" : "100%" }}>
+          <Box mt={3} className={classes.buttonGroupWrapper}>
             <Grid
               container
               direction="row"
               justify="center"
               alignItems="center"
-              spacing={matches ? 1 : 2}
+              spacing={2}
             >
               <Grid item xs={12} sm={6}>
                 <Button
@@ -104,7 +117,7 @@ export default function Me() {
                   onClick={linkToCertificate}
                   fullWidth
                 >
-                  ประกาศนียบัตรของฉัน
+                  ประกาศนียบัตรทั้งหมด
                 </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -112,10 +125,10 @@ export default function Me() {
                   variant="outlined"
                   color="primary"
                   startIcon={<PrintIcon />}
-                  onClick={() => alert("Navigate to print certificate")}
+                  onClick={linkToPrintCertificate}
                   fullWidth
                 >
-                  พิมพ์ประกาศนียบัตร
+                  พิมพ์ประกาศนียบัตร ก.พ.
                 </Button>
               </Grid>
               <Grid
