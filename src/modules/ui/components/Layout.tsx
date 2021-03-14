@@ -124,6 +124,11 @@ export default function Layout() {
             <CloseIcon fontSize="small" />
           </IconButton>
         }
+        style={{
+          marginBottom: pathname.includes(`${path}/learn/courses`)
+            ? 60
+            : "unset",
+        }}
       >
         <Alert
           onClose={closeFlashMessage}
