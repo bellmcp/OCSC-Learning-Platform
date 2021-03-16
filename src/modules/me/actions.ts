@@ -36,13 +36,17 @@ function loadCourseCertificates() {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_COURSE_CERTIFICATES_FAILURE });
-      dispatch(
-        uiActions.setFlashMessage(
-          `โหลดประกาศนียบัตรรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
-        )
-      );
+      if (err?.response?.status === 404) {
+        dispatch({ type: LOAD_CURRICULUM_CERTIFICATES_FAILURE });
+      } else {
+        dispatch({ type: LOAD_COURSE_CERTIFICATES_FAILURE });
+        dispatch(
+          uiActions.setFlashMessage(
+            `โหลดประกาศนียบัตรรายวิชาทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
+      }
     }
   };
 }
@@ -69,13 +73,17 @@ function loadCurriculumCertificates() {
         },
       });
     } catch (err) {
-      dispatch({ type: LOAD_CURRICULUM_CERTIFICATES_FAILURE });
-      dispatch(
-        uiActions.setFlashMessage(
-          `โหลดประกาศนียบัตรหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
-        )
-      );
+      if (err?.response?.status === 404) {
+        dispatch({ type: LOAD_CURRICULUM_CERTIFICATES_FAILURE });
+      } else {
+        dispatch({ type: LOAD_CURRICULUM_CERTIFICATES_FAILURE });
+        dispatch(
+          uiActions.setFlashMessage(
+            `โหลดประกาศนียบัตรหลักสูตรทั้งหมดไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
+      }
     }
   };
 }
