@@ -105,9 +105,9 @@ export default function TestList({
             <Divider />
           </Box>
           <Typography variant="body1" color="textPrimary">
-            <b>คะแนนสูงสุดที่ทำได้</b> 0 คะแนน
+            <b>ทำแบบทดสอบแล้ว</b> 0 / {test?.maxTries} ครั้ง
             <br />
-            <b>ทำแบบทดสอบแล้ว</b> 0 ครั้ง
+            <b>คะแนนสูงสุดที่ทำได้</b> 0 / {testItems.length} คะแนน
           </Typography>
           <Box my={3}>
             <Button
