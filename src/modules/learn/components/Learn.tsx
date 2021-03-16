@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation, useHistory } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import {
   useMediaQuery,
   Divider,
@@ -10,12 +10,6 @@ import {
   Toolbar,
   Box,
   Fab,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Button,
 } from "@material-ui/core";
 import {
   createStyles,
@@ -100,8 +94,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Learn() {
   const classes = useStyles();
   const theme = useTheme();
-  const history = useHistory();
-  const path = "/learning-platform";
   const matches = useMediaQuery(theme.breakpoints.up("xs"));
   const { id: courseId }: any = useParams();
   const { search } = useLocation();
@@ -172,20 +164,7 @@ export default function Learn() {
     setMobileDialogOpen(false);
   };
 
-  const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-  const handleConfirmDialogOpen = () => {
-    setConfirmDialogOpen(true);
-  };
-  const handleConfirmDialogClose = () => {
-    setConfirmDialogOpen(false);
-  };
-
   const [testStart, setTestStart] = useState(false);
-
-  const linkToLearn = () => {
-    handleConfirmDialogClose();
-    history.push(`${path}/learn`);
-  };
 
   function renderTimer() {
     if (contentId !== undefined) {
@@ -229,7 +208,6 @@ export default function Learn() {
           courseContents={courseContents}
           contentViews={contentViews}
           courseRegistrationDetails={courseRegistrationDetails}
-          handleConfirmDialogOpen={handleConfirmDialogOpen}
         />
       </Drawer>
       <main className={classes.content}>
@@ -260,38 +238,7 @@ export default function Learn() {
         courseContents={courseContents}
         contentViews={contentViews}
         courseRegistrationDetails={courseRegistrationDetails}
-        handleConfirmDialogOpen={handleConfirmDialogOpen}
       />
-      {/* CONFIRM DIALOG */}
-      <Dialog
-        open={confirmDialogOpen}
-        onClose={handleConfirmDialogClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"คุณต้องการออกจากห้องเรียนใช่ไหม?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            เซสชันปัจจุบันจะจบลง และเวลาเรียนสะสมของคุณจะถูกบันทึก
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleConfirmDialogClose} color="primary">
-            ยกเลิก
-          </Button>
-          <Button
-            color="secondary"
-            autoFocus
-            variant="contained"
-            disableElevation
-            onClick={linkToLearn}
-          >
-            ตกลง
-          </Button>
-        </DialogActions>
-      </Dialog>
       {/* TIMER */}
       <div className={classes.timerWrapper}>
         <Box mx={2} mt={1}>

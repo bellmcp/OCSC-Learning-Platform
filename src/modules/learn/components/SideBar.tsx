@@ -16,6 +16,7 @@ import Rating from "@material-ui/lab/Rating";
 import { ArrowBackIos as ArrowBackIcon } from "@material-ui/icons";
 
 import * as registrationsActions from "modules/registrations/actions";
+import * as uiActions from "modules/ui/actions";
 import CourseContentList from "./ContentList";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -33,7 +34,6 @@ export default function SideBar({
   courseContents,
   contentViews,
   courseRegistrationDetails,
-  handleConfirmDialogOpen,
 }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -55,7 +55,8 @@ export default function SideBar({
   };
 
   const openConfirmDialog = () => {
-    handleConfirmDialogOpen();
+    const learn_exit_dialog_action = uiActions.setLearnExitDialog(true);
+    dispatch(learn_exit_dialog_action);
   };
 
   return (

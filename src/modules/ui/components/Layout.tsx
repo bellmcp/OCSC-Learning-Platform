@@ -1,9 +1,19 @@
 // @ts-nocheck
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
-import { CssBaseline, Snackbar, IconButton } from "@material-ui/core";
+import {
+  CssBaseline,
+  Snackbar,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+} from "@material-ui/core";
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
   ThemeProvider,
@@ -19,9 +29,10 @@ import Footer from "./Footer";
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const history = useHistory();
   const path = "/learning-platform";
   const dispatch = useDispatch();
-  const { isSnackbarOpen, flashMessage, alertType } = useSelector(
+  const { isSnackbarOpen, isDialogOpen, flashMessage, alertType } = useSelector(
     (state) => state.ui
   );
 
@@ -94,6 +105,14 @@ export default function Layout() {
     },
   });
 
+  const handleDialogClose = () => {
+    dispatch(actions.setLearnExitDialog(false));
+  };
+  const linkToLearn = () => {
+    handleDialogClose();
+    history.push(`${path}/learn`);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -109,6 +128,35 @@ export default function Layout() {
       />
       <NavBar active={activePage} setActivePage={setActivePage} />
       <Routes />
+      <Dialog
+        open={isDialogOpen}
+        onClose={handleDialogClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"คุณต้องการออกจากห้องเรียนใช่ไหม?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            เซสชันปัจจุบันจะจบลง และเวลาเรียนสะสมของคุณจะถูกบันทึก
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            ยกเลิก
+          </Button>
+          <Button
+            color="secondary"
+            autoFocus
+            variant="contained"
+            disableElevation
+            onClick={linkToLearn}
+          >
+            ตกลง
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Snackbar
         open={isSnackbarOpen}
         onClose={closeFlashMessage}
