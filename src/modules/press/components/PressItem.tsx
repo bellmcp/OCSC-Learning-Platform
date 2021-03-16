@@ -10,6 +10,10 @@ const useStyles = makeStyles((theme: Theme) =>
       height: "100%",
       display: "flex",
       flexDirection: "column",
+      transition: "0.3s",
+      "&:hover": {
+        transform: "translateY(-4px)",
+      },
     },
     cardMediaSmall: {
       paddingTop: "75%", // 4:3

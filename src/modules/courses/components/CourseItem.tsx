@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     background: "none",
     boxShadow: "none",
+    transition: "0.3s",
+    "&:hover": {
+      transform: "translateY(-4px)",
+    },
   },
   actionArea: {
     borderRadius: 5,
