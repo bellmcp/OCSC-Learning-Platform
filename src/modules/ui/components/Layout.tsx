@@ -111,6 +111,9 @@ export default function Layout() {
   const linkToLearn = () => {
     handleDialogClose();
     history.push(`${path}/learn`);
+    dispatch(
+      actions.setFlashMessage("บันทึกเวลาเรียนสะสมเรียบร้อยแล้ว", "success")
+    );
   };
 
   return (

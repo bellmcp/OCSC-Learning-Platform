@@ -1,6 +1,7 @@
 //@ts-nocheck
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {
   makeStyles,
@@ -28,6 +29,7 @@ import {
 } from "@material-ui/icons";
 
 import { NavigationDrawerProps } from "../types";
+import * as uiActions from "modules/ui/actions";
 
 const DRAWER_WIDTH = 200;
 const path = "/learning-platform";
@@ -96,9 +98,12 @@ export default function NavDrawer({
   mobileOpen,
   active,
   unreadNotificationCount,
+  isUserCurrentlyInLearn,
 }: NavigationDrawerProps) {
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const container =
     window !== undefined ? () => window().document.body : undefined;
 
@@ -145,9 +150,15 @@ export default function NavDrawer({
               <MenuItem
                 button
                 selected={index === active ? true : false}
-                component={RouterLink}
-                to={navigationItem.url}
-                onClick={handleDrawerToggle}
+                onClick={() => {
+                  if (!isUserCurrentlyInLearn) {
+                    history.push(`${navigationItem.url}`);
+                    handleDrawerToggle();
+                  } else {
+                    dispatch(uiActions.setLearnExitDialog(true));
+                    handleDrawerToggle();
+                  }
+                }}
               >
                 <ListItem className={classes.listItem} key={index} dense>
                   <ListItemIcon className={classes.listItemIcon}>

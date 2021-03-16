@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import {
@@ -252,19 +252,33 @@ export default function NavBar(props: NavigationBarProps) {
     },
   ];
 
+  const isUserCurrentlyInLearn = pathname.includes(`${path}/learn/courses`);
+
   const linkToHome = () => {
     handleMenuClose();
-    history.push(`${path}`);
+    if (!isUserCurrentlyInLearn) {
+      history.push(`${path}`);
+    } else {
+      dispatch(uiActions.setLearnExitDialog(true));
+    }
   };
 
   const linkToLogin = () => {
     handleMenuClose();
-    history.push(`${path}/login`);
+    if (!isUserCurrentlyInLearn) {
+      history.push(`${path}/login`);
+    } else {
+      dispatch(uiActions.setLearnExitDialog(true));
+    }
   };
 
   const linkToProfile = () => {
     handleMenuClose();
-    history.push(`${path}/me`);
+    if (!isUserCurrentlyInLearn) {
+      history.push(`${path}/me`);
+    } else {
+      dispatch(uiActions.setLearnExitDialog(true));
+    }
   };
 
   const linkToPortal = () => {
@@ -278,12 +292,16 @@ export default function NavBar(props: NavigationBarProps) {
 
   const logout = () => {
     handleMenuClose();
-    eraseCookie("token");
-    dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว", "success"));
-    setTimeout(() => {
-      history.push(`${path}`);
-      window.location.reload();
-    }, 1000);
+    if (!isUserCurrentlyInLearn) {
+      eraseCookie("token");
+      dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว", "success"));
+      setTimeout(() => {
+        history.push(`${path}`);
+        window.location.reload();
+      }, 1000);
+    } else {
+      dispatch(uiActions.setLearnExitDialog(true));
+    }
   };
 
   const handleDrawerToggle = () => {
@@ -374,32 +392,34 @@ export default function NavBar(props: NavigationBarProps) {
                   className={classes.navMenu}
                 >
                   {navigationItem.map((item) => (
-                    <NavLink
-                      to={item.url}
-                      className={classes.noDecorationLink}
-                      onClick={() => props.setActivePage(item.id)}
-                    >
-                      <NavItem
-                        active={props.active === item.id}
-                        className={
-                          props.active === item.id
-                            ? classes.navItemActive
-                            : classes.navItem
+                    <NavItem
+                      active={props.active === item.id}
+                      className={
+                        props.active === item.id
+                          ? classes.navItemActive
+                          : classes.navItem
+                      }
+                      onClick={() => {
+                        if (!isUserCurrentlyInLearn) {
+                          history.push(`${item.url}`);
+                          props.setActivePage(item.id);
+                        } else {
+                          dispatch(uiActions.setLearnExitDialog(true));
                         }
-                      >
-                        {login() && item.notification !== 0 ? (
-                          <Badge
-                            className={classes.badge}
-                            variant="dot"
-                            color="error"
-                          >
-                            <Typography noWrap>{item.title}</Typography>
-                          </Badge>
-                        ) : (
+                      }}
+                    >
+                      {login() && item.notification !== 0 ? (
+                        <Badge
+                          className={classes.badge}
+                          variant="dot"
+                          color="error"
+                        >
                           <Typography noWrap>{item.title}</Typography>
-                        )}
-                      </NavItem>
-                    </NavLink>
+                        </Badge>
+                      ) : (
+                        <Typography noWrap>{item.title}</Typography>
+                      )}
+                    </NavItem>
                   ))}
                 </NavMenu>
               </ThemeProvider>
@@ -490,6 +510,7 @@ export default function NavBar(props: NavigationBarProps) {
         handleDrawerToggle={handleDrawerToggle}
         active={props.active}
         unreadNotificationCount={UNREAD_NOTIFICATION_COUNT}
+        isUserCurrentlyInLearn={isUserCurrentlyInLearn}
       />
     </div>
   );
