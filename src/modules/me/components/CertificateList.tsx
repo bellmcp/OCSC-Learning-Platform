@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +10,7 @@ import {
   Grid,
   Box,
   Link,
+  Divider,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -18,6 +20,7 @@ import {
   Inbox as InboxIcon,
 } from "@material-ui/icons";
 
+import CertificateItem from "./CertificateItem";
 import * as meActions from "../actions";
 import * as uiActions from "modules/ui/actions";
 
@@ -31,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CertificateList() {
+export default function Certificate() {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -72,7 +75,7 @@ export default function CertificateList() {
               <Grid
                 container
                 direction="row"
-                justify={!matches ? "center" : "flex-start"}
+                justify={matches ? "flex-start" : "center"}
                 alignItems="center"
               >
                 <Breadcrumbs
@@ -92,15 +95,25 @@ export default function CertificateList() {
                 </Breadcrumbs>
               </Grid>
             </Box>
-            <Typography
-              gutterBottom
-              component="h2"
-              variant="h6"
-              style={{ fontSize: "1.7rem", fontWeight: 600 }}
-              align={matches ? "left" : "center"}
-            >
-              ประกาศนียบัตรสำนักงาน ก.พ.
-            </Typography>
+            <Divider />
+            <Box mt={4} mb={3}>
+              <Typography
+                gutterBottom
+                component="h2"
+                variant="h6"
+                style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                align={matches ? "left" : "center"}
+              >
+                ประกาศนียบัตรสำนักงาน ก.พ.
+              </Typography>
+            </Box>
+            <Grid container direction="column" spacing={2}>
+              {courseCertificates.map((courseCertificate) => (
+                <Grid item key={courseCertificate.id}>
+                  <CertificateItem {...courseCertificate} />
+                </Grid>
+              ))}
+            </Grid>
             <Grid
               container
               direction="column"
