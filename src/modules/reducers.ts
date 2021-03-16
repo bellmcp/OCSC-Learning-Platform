@@ -11,6 +11,7 @@ import registrations from "modules/registrations/reducer";
 import learn from "modules/learn/reducer";
 import press from "modules/press/reducer";
 import support from "modules/support/reducer";
+import me from "modules/me/reducer";
 import ui from "modules/ui/reducer";
 
 export default (history: any) =>
@@ -26,5 +27,6 @@ export default (history: any) =>
     learn,
     press,
     support,
+    me,
     ui,
   });

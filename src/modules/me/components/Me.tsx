@@ -107,7 +107,7 @@ export default function Me() {
               direction="row"
               justify="center"
               alignItems="center"
-              spacing={2}
+              spacing={1}
             >
               <Grid item xs={12} sm={6}>
                 <Button

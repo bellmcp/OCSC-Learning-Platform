@@ -18,6 +18,7 @@ import {
   Inbox as InboxIcon,
 } from "@material-ui/icons";
 
+import * as meActions from "../actions";
 import * as uiActions from "modules/ui/actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +37,16 @@ export default function CertificateList() {
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
-  const { items: users } = useSelector((state: any) => state.user);
+  const { isLoading, courseCertificates } = useSelector(
+    (state: any) => state.me
+  );
+
+  useEffect(() => {
+    const course_certificates_action = meActions.loadCourseCertificates();
+    dispatch(course_certificates_action);
+  }, [dispatch]);
+
+  console.log(courseCertificates);
 
   useEffect(() => {
     dispatch(
