@@ -21,7 +21,8 @@ import {
   Inbox as InboxIcon,
 } from "@material-ui/icons";
 
-import CertificateItem from "./CertificateItem";
+import CourseCertificateItem from "./CourseCertificateItem";
+import CurriculumCertificateItem from "./CurriculumCertificateItem";
 import * as meActions from "../actions";
 import * as uiActions from "modules/ui/actions";
 
@@ -41,7 +42,7 @@ export default function Certificate() {
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
-  const { isLoading, courseCertificates } = useSelector(
+  const { isLoading, courseCertificates, curriculumCertificates } = useSelector(
     (state: any) => state.me
   );
 
@@ -50,7 +51,10 @@ export default function Certificate() {
     dispatch(course_certificates_action);
   }, [dispatch]);
 
-  console.log(courseCertificates);
+  useEffect(() => {
+    const curriculum_certificates_action = meActions.loadCurriculumCertificates();
+    dispatch(curriculum_certificates_action);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(
@@ -61,7 +65,7 @@ export default function Certificate() {
     );
   }, [dispatch]);
 
-  function renderCertificateList() {
+  function renderCourseCertificateList() {
     if (isLoading) {
       return (
         <Grid
@@ -96,7 +100,50 @@ export default function Certificate() {
         <Grid container direction="column" spacing={2}>
           {courseCertificates.map((courseCertificate) => (
             <Grid item key={courseCertificate.id}>
-              <CertificateItem {...courseCertificate} />
+              <CourseCertificateItem {...courseCertificate} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    }
+  }
+
+  function renderCurriculumCertificateList() {
+    if (isLoading) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 307 }}
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      );
+    } else if (courseCertificates.length === 0) {
+      return (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ height: 295 }}
+        >
+          <InboxIcon
+            color="disabled"
+            style={{ fontSize: 54, marginBottom: 14 }}
+          />
+          <Typography component="h2" variant="body1" color="textSecondary">
+            ไม่มีรายการ
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid container direction="column" spacing={2}>
+          {curriculumCertificates.map((curriculumCertificate) => (
+            <Grid item key={curriculumCertificate.id}>
+              <CurriculumCertificateItem {...curriculumCertificate} />
             </Grid>
           ))}
         </Grid>
@@ -140,19 +187,7 @@ export default function Certificate() {
               </Grid>
             </Box>
             <Divider />
-            <Box mt={4} mb={3}>
-              <Typography
-                gutterBottom
-                component="h2"
-                variant="h6"
-                style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                align={matches ? "left" : "center"}
-              >
-                ประกาศนียบัตรรายวิชา
-              </Typography>
-            </Box>
-            {renderCertificateList()}
-            <Box mt={4} mb={3}>
+            <Box my={4}>
               <Typography
                 gutterBottom
                 component="h2"
@@ -163,6 +198,19 @@ export default function Certificate() {
                 ประกาศนียบัตรหลักสูตร
               </Typography>
             </Box>
+            {renderCurriculumCertificateList()}
+            <Box mt={5} mb={3}>
+              <Typography
+                gutterBottom
+                component="h2"
+                variant="h6"
+                style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                align={matches ? "left" : "center"}
+              >
+                ประกาศนียบัตรรายวิชา
+              </Typography>
+            </Box>
+            {renderCourseCertificateList()}
           </main>
         </div>
       </Container>

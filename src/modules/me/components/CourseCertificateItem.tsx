@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const path = "/learning-platform";
 
-export default function Certificate({
+export default function CourseCertificateItem({
   id,
   courseid,
   course,
@@ -117,7 +117,7 @@ export default function Certificate({
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
                     {pass ? (
-                      <span style={{ color: theme.palette.secondary.main }}>
+                      <span style={{ color: theme.palette.success.main }}>
                         ยินดีด้วย คุณผ่านเกณฑ์แล้ว
                       </span>
                     ) : (
