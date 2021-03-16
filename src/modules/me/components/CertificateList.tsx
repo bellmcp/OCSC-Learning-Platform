@@ -11,6 +11,7 @@ import {
   Box,
   Link,
   Divider,
+  CircularProgress,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
@@ -60,6 +61,49 @@ export default function Certificate() {
     );
   }, [dispatch]);
 
+  function renderCertificateList() {
+    if (isLoading) {
+      return (
+        <Grid
+          container
+          justify="center"
+          alignItems="center"
+          style={{ height: 307 }}
+        >
+          <CircularProgress color="secondary" />
+        </Grid>
+      );
+    } else if (courseCertificates.length === 0) {
+      return (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ height: 295 }}
+        >
+          <InboxIcon
+            color="disabled"
+            style={{ fontSize: 54, marginBottom: 14 }}
+          />
+          <Typography component="h2" variant="body1" color="textSecondary">
+            ไม่มีรายการ
+          </Typography>
+        </Grid>
+      );
+    } else {
+      return (
+        <Grid container direction="column" spacing={2}>
+          {courseCertificates.map((courseCertificate) => (
+            <Grid item key={courseCertificate.id}>
+              <CertificateItem {...courseCertificate} />
+            </Grid>
+          ))}
+        </Grid>
+      );
+    }
+  }
+
   return (
     <>
       <Header
@@ -104,31 +148,21 @@ export default function Certificate() {
                 style={{ fontSize: "1.7rem", fontWeight: 600 }}
                 align={matches ? "left" : "center"}
               >
-                ประกาศนียบัตรสำนักงาน ก.พ.
+                ประกาศนียบัตรรายวิชา
               </Typography>
             </Box>
-            <Grid container direction="column" spacing={2}>
-              {courseCertificates.map((courseCertificate) => (
-                <Grid item key={courseCertificate.id}>
-                  <CertificateItem {...courseCertificate} />
-                </Grid>
-              ))}
-            </Grid>
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              style={{ height: 295 }}
-            >
-              <InboxIcon
-                color="disabled"
-                style={{ fontSize: 54, marginBottom: 14 }}
-              />
-              <Typography component="h2" variant="body1" color="textSecondary">
-                ไม่มีรายการ
+            {renderCertificateList()}
+            <Box mt={4} mb={3}>
+              <Typography
+                gutterBottom
+                component="h2"
+                variant="h6"
+                style={{ fontSize: "1.7rem", fontWeight: 600 }}
+                align={matches ? "left" : "center"}
+              >
+                ประกาศนียบัตรหลักสูตร
               </Typography>
-            </Grid>
+            </Box>
           </main>
         </div>
       </Container>

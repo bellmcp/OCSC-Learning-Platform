@@ -20,6 +20,8 @@ import {
 } from "@material-ui/core";
 import { Print as PrintIcon } from "@material-ui/icons/";
 
+import ThumbnailImage from "assets/images/thumb-certificate.jpg";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
@@ -67,16 +69,17 @@ export default function Certificate({
   return (
     <Card>
       <div className={classes.details}>
-        {/* <CardMedia
-          image={thumbnail}
+        <CardMedia
+          image={ThumbnailImage}
           style={{
-            background: `url('${thumbnail}')`,
+            background: `url('${ThumbnailImage}')`,
             backgroundSize: "cover",
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
+            filter: pass ? "" : "brightness(0.6)",
           }}
           className={classes.cardImage}
-        /> */}
+        />
         <div className={classes.controls}>
           <Grid container direction="column" justify="center">
             <Box
@@ -111,9 +114,15 @@ export default function Certificate({
                     component="p"
                     color="textSecondary"
                     gutterBottom
-                    style={{ marginBottom: 8 }}
+                    style={{ marginBottom: 8, fontWeight: 600 }}
                   >
-                    {pass ? "ผ่านเกณฑ์" : "ไม่ผ่านเกณฑ์"}
+                    {pass ? (
+                      <span style={{ color: theme.palette.secondary.main }}>
+                        ยินดีด้วย คุณผ่านเกณฑ์แล้ว
+                      </span>
+                    ) : (
+                      "ไม่ผ่านเกณฑ์"
+                    )}
                   </Typography>
                   {pass ? (
                     <Typography
