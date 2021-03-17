@@ -11,8 +11,11 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       flexDirection: "column",
       transition: "0.3s",
-      "&:hover": {
-        transform: "translateY(-4px)",
+      // eslint-disable-next-line no-useless-computed-key
+      ["@media (hover: hover) and (pointer: fine)"]: {
+        "&:hover": {
+          transform: "translateY(-4px)",
+        },
       },
     },
     cardMediaSmall: {
