@@ -19,6 +19,8 @@ import * as learnActions from "modules/learn/actions";
 import * as uiActions from "modules/ui/actions";
 import TestItem from "./TestItem";
 
+import HeroImage from "assets/images/hero-evaluation.svg";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -37,26 +39,36 @@ export default function TestList({
   activeContentView,
   testStart,
   setTestStart,
+  currentContentView,
+  courseRegistrationDetails,
 }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
+
   const testId = activeContentView.testId1;
+  const isCompleted = currentContentView?.isCompleted;
+
+  const [contentViewId, setContentViewId] = useState(0);
+  const [courseRegistrationId, setCourseRegistrationId] = useState(0);
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
     (state) => state.learn
   );
-  console.log(testItems);
+
+  useEffect(() => {
+    setContentViewId(currentContentView?.id);
+  }, [currentContentView]);
+
+  console.log(currentContentView);
+
+  useEffect(() => {
+    setCourseRegistrationId(courseRegistrationDetails[0]?.id);
+  }, [courseRegistrationDetails]);
 
   useEffect(() => {
     const load_test_action = learnActions.loadTest(testId);
     dispatch(load_test_action);
-    dispatch(
-      uiActions.setFlashMessage(
-        "FOR DEVELOPMENT: This feature is currently in development process",
-        "error"
-      )
-    );
   }, [dispatch, testId]);
 
   useEffect(() => {
@@ -68,19 +80,22 @@ export default function TestList({
     event.preventDefault();
     const values = Object.values(data);
     const testAnswer = values.map((id) => `${id}`).join("");
-    alert("testAnswer: " + testAnswer);
+    const update_test_action = learnActions.updateTest(
+      courseRegistrationId,
+      contentViewId,
+      testAnswer
+    );
+    dispatch(update_test_action);
   };
 
   const handleTimerStart = () => {
     setTestStart(true);
-    dispatch(
-      uiActions.setFlashMessage("เริ่มจับเวลาทำแบบทดสอบแล้ว", "warning")
-    );
+    dispatch(uiActions.setFlashMessage("เริ่มจับเวลาทำแบบทดสอบแล้ว", "info"));
   };
 
-  return (
-    <>
-      {isTestLoading ? (
+  function renderTestList() {
+    if (isTestLoading) {
+      return (
         <Grid
           container
           justify="center"
@@ -89,16 +104,52 @@ export default function TestList({
         >
           <CircularProgress color="secondary" />
         </Grid>
-      ) : (
-        <>
-          <Typography
-            variant="h6"
-            color="textPrimary"
-            gutterBottom
-            style={{ fontWeight: 600, marginBottom: 16 }}
+      );
+    } else if (isCompleted) {
+      return (
+        <Box my={10}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
           >
-            {test?.name}
-          </Typography>
+            <Grid
+              item
+              style={{
+                width: "50%",
+                minWidth: 220,
+                maxWidth: 350,
+                marginBottom: 24,
+              }}
+            >
+              <img
+                src={HeroImage}
+                alt="บันทึกข้อมูลแล้ว"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Grid>
+            <Typography
+              variant="h6"
+              color="textPrimary"
+              gutterBottom
+              style={{ fontSize: "1.7rem", fontWeight: 600 }}
+            >
+              คุณผ่านเกณฑ์แล้ว
+            </Typography>
+            <Typography variant="body1" color="textSecondary" align="center">
+              <b>ทำแบบทดสอบแล้ว</b> {currentContentView?.testTries} จาก{" "}
+              {test?.maxTries} ครั้ง
+              <br />
+              <b>คะแนนสูงสุดที่ทำได้</b> {currentContentView?.testScore} เต็ม{" "}
+              {testItems.length} คะแนน
+            </Typography>
+          </Grid>
+        </Box>
+      );
+    } else {
+      return (
+        <>
           <Typography variant="body1" color="textSecondary">
             <b>คำชี้แจง</b> {test?.instruction}
             <br />
@@ -112,9 +163,13 @@ export default function TestList({
             <Divider />
           </Box>
           <Typography variant="body1" color="textPrimary">
-            <b>ทำแบบทดสอบแล้ว</b> 0 / {test?.maxTries} ครั้ง
+            <b>ทำแบบทดสอบแล้ว</b>{" "}
+            {currentContentView?.testTries ? currentContentView?.testTries : 0}{" "}
+            จาก {test?.maxTries} ครั้ง
             <br />
-            <b>คะแนนสูงสุดที่ทำได้</b> 0 / {testItems.length} คะแนน
+            <b>คะแนนสูงสุดที่ทำได้</b>{" "}
+            {currentContentView?.testScore ? currentContentView?.testScore : 0}{" "}
+            เต็ม {testItems.length} คะแนน
           </Typography>
           <Box my={3}>
             <Typography
@@ -123,9 +178,9 @@ export default function TestList({
               align="center"
               style={{ fontWeight: 600 }}
             >
-              โปรดส่งแบบทดสอบให้เรียบร้อยก่อนออกจากห้องสอบ
+              โปรดส่งแบบทดสอบก่อนออกจากห้องสอบ
               <br />
-              คำตอบของคุณจะถูกบันทึกโดยอัตโนมัติเมื่อหมดเวลาเท่านั้น
+              คำตอบของคุณจะถูกบันทึกโดยอัตโนมัติเมื่อหมดเวลา
             </Typography>
           </Box>
           <Box my={3}>
@@ -137,10 +192,9 @@ export default function TestList({
               onClick={handleTimerStart}
               fullWidth
             >
-              จับเวลา และ เริ่มทำแบบทดสอบ
+              เริ่มจับเวลา และ ทำแบบทดสอบ
             </Button>
           </Box>
-
           <Collapse in={testStart}>
             <form
               onSubmit={handleSubmit(onSubmit)}
@@ -170,7 +224,22 @@ export default function TestList({
             </form>
           </Collapse>
         </>
-      )}
+      );
+    }
+  }
+
+  return (
+    <>
+      <Typography
+        variant="h6"
+        color="textPrimary"
+        gutterBottom
+        style={{ fontWeight: 600, marginBottom: 16 }}
+      >
+        {test?.name}
+      </Typography>
+
+      {renderTestList()}
     </>
   );
 }

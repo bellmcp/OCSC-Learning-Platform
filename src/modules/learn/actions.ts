@@ -47,6 +47,9 @@ const LOAD_TEST_ITEMS_SUCCESS =
   "learning-platform/learn/LOAD_TEST_ITEMS_SUCCESS";
 const LOAD_TEST_ITEMS_FAILURE =
   "learning-platform/learn/LOAD_TEST_ITEMS_FAILURE";
+const UPDATE_TEST_REQUEST = "learning-platform/learn/UPDATE_TEST_REQUEST";
+const UPDATE_TEST_SUCCESS = "learning-platform/learn/UPDATE_TEST_SUCCESS";
+const UPDATE_TEST_FAILURE = "learning-platform/learn/UPDATE_TEST_FAILURE";
 
 const path = "/learning-platform";
 
@@ -338,6 +341,61 @@ function loadTestItems(testId) {
   };
 }
 
+function updateTest(registrationId, contentViewId, testAnswer) {
+  return async (dispatch, getState) => {
+    const token = getCookie("token");
+    const userId = parseJwt(token).unique_name;
+    const {
+      learn: { sessions },
+    } = getState();
+    dispatch({ type: UPDATE_EVALUATION_REQUEST });
+    try {
+      var { data } = await axios.put(
+        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
+        {
+          testAnswer: testAnswer,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          params: {
+            sessionId: sessions.id,
+            key: sessions.key,
+          },
+        }
+      );
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: UPDATE_EVALUATION_SUCCESS,
+        payload: { testAnswer: data },
+      });
+      window.location.reload();
+      dispatch(
+        uiActions.setFlashMessage("บันทึกแบบทดสอบเรียบร้อยแล้ว", "success")
+      );
+    } catch (err) {
+      dispatch({ type: UPDATE_EVALUATION_FAILURE });
+      if (err?.response?.status === 401) {
+        dispatch(push(`${path}/learn`));
+        dispatch(
+          uiActions.setFlashMessage(
+            `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
+            "error"
+          )
+        );
+      } else {
+        dispatch(
+          uiActions.setFlashMessage(
+            `บันทึกแบบทดสอบไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
+      }
+    }
+  };
+}
+
 export {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
@@ -363,6 +421,9 @@ export {
   LOAD_TEST_ITEMS_REQUEST,
   LOAD_TEST_ITEMS_SUCCESS,
   LOAD_TEST_ITEMS_FAILURE,
+  UPDATE_TEST_REQUEST,
+  UPDATE_TEST_SUCCESS,
+  UPDATE_TEST_FAILURE,
   createSession,
   loadContentViews,
   updateContentView,
@@ -371,4 +432,5 @@ export {
   updateEvaluation,
   loadTest,
   loadTestItems,
+  updateTest,
 };

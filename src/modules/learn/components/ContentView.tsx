@@ -187,6 +187,8 @@ export default function ContentView({
                 activeContentView={activeContentView}
                 testStart={testStart}
                 setTestStart={setTestStart}
+                currentContentView={currentContentView}
+                courseRegistrationDetails={courseRegistrationDetails}
               />
             )}
             {activeContentView?.type === "e" && (
