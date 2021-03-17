@@ -154,6 +154,7 @@ export default function Learn() {
         dispatch(create_session_action);
       }
     }
+    setTestStart(false);
   }, [dispatch, contentId]);
 
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
