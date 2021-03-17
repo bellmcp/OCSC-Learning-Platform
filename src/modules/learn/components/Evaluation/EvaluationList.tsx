@@ -161,8 +161,6 @@ export default function EvaluationList({
       return (
         <>
           <Typography variant="body1" color="textSecondary">
-            <b>แบบประเมิน</b> {evaluation?.name}
-            <br />
             <b>คำชี้แจง</b> {evaluation?.instruction}
             <br />
           </Typography>
@@ -231,5 +229,17 @@ export default function EvaluationList({
     }
   }
 
-  return <>{renderEvaluationList()}</>;
+  return (
+    <>
+      <Typography
+        variant="h6"
+        color="textPrimary"
+        gutterBottom
+        style={{ fontWeight: 600, marginBottom: 16 }}
+      >
+        แบบประเมิน {evaluation?.name}
+      </Typography>
+      {renderEvaluationList()}
+    </>
+  );
 }

@@ -277,6 +277,13 @@ function updateEvaluation(
             "error"
           )
         );
+      } else if (err?.response?.status === 403) {
+        dispatch(
+          uiActions.setFlashMessage(
+            "คุณทำแบบประเมินไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง",
+            "error"
+          )
+        );
       } else {
         dispatch(
           uiActions.setFlashMessage(
@@ -381,6 +388,13 @@ function updateTest(registrationId, contentViewId, testAnswer) {
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
+            "error"
+          )
+        );
+      } else if (err?.response?.status === 403) {
+        dispatch(
+          uiActions.setFlashMessage(
+            "คุณทำแบบทดสอบไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง",
             "error"
           )
         );
