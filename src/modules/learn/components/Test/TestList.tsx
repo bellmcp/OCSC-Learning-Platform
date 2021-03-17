@@ -71,6 +71,13 @@ export default function TestList({
     alert("testAnswer: " + testAnswer);
   };
 
+  const handleTimerStart = () => {
+    setTestStart(true);
+    dispatch(
+      uiActions.setFlashMessage("เริ่มจับเวลาทำแบบทดสอบแล้ว", "warning")
+    );
+  };
+
   return (
     <>
       {isTestLoading ? (
@@ -110,17 +117,27 @@ export default function TestList({
             <b>คะแนนสูงสุดที่ทำได้</b> 0 / {testItems.length} คะแนน
           </Typography>
           <Box my={3}>
+            <Typography
+              variant="body2"
+              color="error"
+              align="center"
+              style={{ fontWeight: 600 }}
+            >
+              โปรดส่งแบบทดสอบให้เรียบร้อยก่อนออกจากห้องสอบ
+              <br />
+              คำตอบของคุณจะถูกบันทึกโดยอัตโนมัติเมื่อหมดเวลาเท่านั้น
+            </Typography>
+          </Box>
+          <Box my={3}>
             <Button
               color="secondary"
               variant="contained"
               disabled={testStart}
               startIcon={<TimerIcon />}
-              onClick={() => {
-                setTestStart(true);
-              }}
+              onClick={handleTimerStart}
               fullWidth
             >
-              เริ่มทำแบบทดสอบ
+              จับเวลา และ เริ่มทำแบบทดสอบ
             </Button>
           </Box>
 
