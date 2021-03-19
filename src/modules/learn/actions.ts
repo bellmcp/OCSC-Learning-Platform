@@ -73,12 +73,7 @@ function createSession() {
         type: CREATE_SESSION_SUCCESS,
         payload: { session: data },
       });
-      dispatch(
-        uiActions.setFlashMessage(
-          "สร้างเซสชันสำเร็จ เริ่มจับเวลาเข้าเรียนแล้ว",
-          "success"
-        )
-      );
+      // dispatch(uiActions.setFlashMessage("สร้างเซสชันสำเร็จ", "success"));
     } catch (err) {
       dispatch({ type: CREATE_SESSION_FAILURE });
       dispatch(

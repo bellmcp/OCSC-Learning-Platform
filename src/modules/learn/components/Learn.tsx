@@ -147,12 +147,7 @@ export default function Learn() {
   useEffect(() => {
     const create_session_action = learnActions.createSession();
     if (contentId !== undefined) {
-      if (
-        activeContentView[0]?.type !== "e" &&
-        activeContentView[0]?.type !== "t"
-      ) {
-        dispatch(create_session_action);
-      }
+      dispatch(create_session_action);
     }
     setTestStart(false);
   }, [dispatch, contentId]);

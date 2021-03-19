@@ -14,6 +14,7 @@ import {
 import { amber } from "@material-ui/core/colors";
 
 import * as learnActions from "../actions";
+import * as uiActions from "modules/ui/actions";
 
 export default function Timer({
   contentId,
@@ -80,6 +81,10 @@ export default function Timer({
       setProgress(initialContentMinutes);
     }
   }, [contentId, initialContentMinutes]);
+
+  useEffect(() => {
+    dispatch(uiActions.setFlashMessage("เริ่มจับเวลาเข้าเรียนแล้ว", "info"));
+  }, [dispatch, contentId]);
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
