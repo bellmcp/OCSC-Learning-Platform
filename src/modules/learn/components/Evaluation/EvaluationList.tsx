@@ -192,7 +192,7 @@ export default function EvaluationList({
                     align="center"
                     style={{ fontSize: "1rem", fontWeight: 600 }}
                   >
-                    ข้อคิดเห็น และ ข้อเสนอแนะ
+                    ข้อคิดเห็น และ ข้อเสนอแนะ (ถ้ามี)
                   </Typography>
                 </Grid>
               </Grid>

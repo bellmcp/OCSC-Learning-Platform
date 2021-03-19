@@ -67,6 +67,12 @@ export default function TestList({
   useEffect(() => {
     const load_test_action = learnActions.loadTest(testId);
     dispatch(load_test_action);
+    dispatch(
+      uiActions.setFlashMessage(
+        "FOR DEVELOPMENT: This feature is currently in development process",
+        "error"
+      )
+    );
   }, [dispatch, testId]);
 
   useEffect(() => {
