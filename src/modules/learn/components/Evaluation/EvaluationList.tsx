@@ -132,8 +132,8 @@ export default function EvaluationList({
               item
               style={{
                 width: "50%",
-                minWidth: 220,
-                maxWidth: 350,
+                minWidth: 200,
+                maxWidth: 300,
                 marginBottom: 24,
               }}
             >
@@ -147,11 +147,11 @@ export default function EvaluationList({
               variant="h6"
               color="textPrimary"
               gutterBottom
-              style={{ fontSize: "1.7rem", fontWeight: 600 }}
+              style={{ fontWeight: 600 }}
             >
               บันทึกข้อมูลแล้ว
             </Typography>
-            <Typography variant="body1" color="textSecondary">
+            <Typography variant="body2" color="textSecondary">
               ขอบคุณสำหรับความคิดเห็นของคุณ
             </Typography>
           </Grid>
