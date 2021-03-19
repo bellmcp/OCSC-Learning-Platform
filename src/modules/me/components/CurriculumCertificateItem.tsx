@@ -148,7 +148,7 @@ export default function CurriculumCertificateItem({
                       style={{ lineHeight: "1.2" }}
                       gutterBottom
                     >
-                      <b>วันที่สำเร็จการศึกษา </b>
+                      <b>สำเร็จการศึกษา </b>
                       <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                         {enddate}
                       </DayJS>
