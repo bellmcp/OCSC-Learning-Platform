@@ -18,7 +18,11 @@ import {
   Button,
   Divider,
 } from "@material-ui/core";
-import { PlayArrow as PlayIcon } from "@material-ui/icons/";
+import {
+  CheckCircle as CheckIcon,
+  PlayArrow as PlayIcon,
+} from "@material-ui/icons/";
+import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -129,7 +133,7 @@ export default function MyCourseItem({
                     style={{ lineHeight: "1.2" }}
                     gutterBottom
                   >
-                    <b>ลงทะเบียนเมื่อ </b>
+                    <b>ลงทะเบียน </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                       {registrationDate}
                     </DayJS>
@@ -160,6 +164,22 @@ export default function MyCourseItem({
                     >
                       เข้าเรียน
                     </Button>
+                    {isCompleted && (
+                      <Typography
+                        variant="caption"
+                        component="p"
+                        color="textSecondary"
+                        align="center"
+                        style={{ lineHeight: "1.2", marginTop: 16 }}
+                      >
+                        <span style={{ color: theme.palette.success.main }}>
+                          <b>ผ่านเกณฑ์แล้ว</b> <br />
+                          <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                            {completeDate}
+                          </DayJS>
+                        </span>
+                      </Typography>
+                    )}
                   </Grid>
                 )}
               </Grid>
@@ -180,6 +200,22 @@ export default function MyCourseItem({
             >
               เข้าเรียน
             </Button>
+            {isCompleted && (
+              <Typography
+                variant="caption"
+                component="p"
+                color="textSecondary"
+                align="center"
+                style={{ lineHeight: "1.2", marginTop: 8, marginBottom: 16 }}
+              >
+                <span style={{ color: theme.palette.success.main }}>
+                  <b>ผ่านเกณฑ์แล้ว</b>{" "}
+                  <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                    {completeDate}
+                  </DayJS>
+                </span>
+              </Typography>
+            )}
           </Box>
         </>
       )}
