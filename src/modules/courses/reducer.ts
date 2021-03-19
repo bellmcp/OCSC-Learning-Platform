@@ -41,6 +41,7 @@ export default function (state = initialState, action: any) {
     case LOAD_RECOMMENDED_COURSES_REQUEST:
       return {
         ...state,
+        isLoading: true,
         recommended: [],
       };
     case LOAD_COURSES_SUCCESS:

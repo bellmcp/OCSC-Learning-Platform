@@ -106,7 +106,7 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
           container
           justify="center"
           alignItems="center"
-          style={{ height: 411 }}
+          style={{ height: 410 }}
         >
           <CircularProgress color="secondary" />
         </Grid>
@@ -117,7 +117,7 @@ export default function CourseCarousel({ courses, categories, isLoading }) {
           container
           justify="center"
           alignItems="center"
-          style={{ height: 411 }}
+          style={{ height: 410 }}
         >
           <Typography component="h2" variant="body1" color="textSecondary">
             ไม่พบผลลัพธ์การค้นหา

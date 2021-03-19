@@ -165,7 +165,7 @@ export default function Home() {
           <CourseCarousel
             courses={recommendedCourses}
             categories={categories}
-            isLoading={isRecommendedCoursesLoading}
+            isLoading={false}
           />
         </Box>
 
