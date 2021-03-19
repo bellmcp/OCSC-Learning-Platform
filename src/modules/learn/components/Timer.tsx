@@ -68,17 +68,38 @@ export default function Timer({
           60
         );
         dispatch(update_content_view_action);
+
+        if (progress + 1 === contentLength) {
+          dispatch(
+            uiActions.setFlashMessage(
+              "ยินดีด้วย คุณเรียนเนื้อหาครบเวลาท่ีกำหนดแล้ว",
+              "success"
+            )
+          );
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
+        }
       }, 60000);
       return () => {
         clearTimeout(sequence);
       };
     }
-  }, [contentId, courseRegistrationId, contentViewId, dispatch]);
+  }, [
+    contentId,
+    courseRegistrationId,
+    contentViewId,
+    progress,
+    contentLength,
+    dispatch,
+  ]);
 
   useEffect(() => {
     setTimer(0);
     if (initialContentMinutes !== 0) {
       setProgress(initialContentMinutes);
+    } else {
+      setProgress(0);
     }
   }, [contentId, initialContentMinutes]);
 

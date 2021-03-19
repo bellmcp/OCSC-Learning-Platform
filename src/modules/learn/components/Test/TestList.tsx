@@ -60,8 +60,6 @@ export default function TestList({
     setContentViewId(currentContentView?.id);
   }, [currentContentView]);
 
-  console.log(currentContentView);
-
   useEffect(() => {
     setCourseRegistrationId(courseRegistrationDetails[0]?.id);
   }, [courseRegistrationDetails]);
