@@ -84,14 +84,14 @@ export default function Certificate() {
           direction="column"
           justify="center"
           alignItems="center"
-          style={{ height: 295 }}
+          style={{ height: 150 }}
         >
           <InboxIcon
             color="disabled"
             style={{ fontSize: 54, marginBottom: 14 }}
           />
-          <Typography component="h2" variant="body1" color="textSecondary">
-            ไม่มีรายการ
+          <Typography component="h2" variant="body2" color="textSecondary">
+            ไม่พบประกาศนียบัตร
           </Typography>
         </Grid>
       );
@@ -127,14 +127,14 @@ export default function Certificate() {
           direction="column"
           justify="center"
           alignItems="center"
-          style={{ height: 295 }}
+          style={{ height: 150 }}
         >
           <InboxIcon
             color="disabled"
             style={{ fontSize: 54, marginBottom: 14 }}
           />
-          <Typography component="h2" variant="body1" color="textSecondary">
-            ไม่มีรายการ
+          <Typography component="h2" variant="body2" color="textSecondary">
+            ไม่พบประกาศนียบัตร
           </Typography>
         </Grid>
       );
