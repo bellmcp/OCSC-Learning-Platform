@@ -17,7 +17,8 @@ import {
   Button,
   Divider,
 } from "@material-ui/core";
-import { Print as PrintIcon } from "@material-ui/icons/";
+import { Print as PrintIcon } from "@material-ui/icons";
+import { green } from "@material-ui/core/colors";
 
 import ThumbnailImage from "assets/images/thumb-certificate.jpg";
 
@@ -64,8 +65,11 @@ export default function CourseCertificateItem({
 
   return (
     <Card>
-      <div className={classes.details}>
-        <CardMedia
+      <div
+        className={classes.details}
+        style={{ borderLeft: pass ? `6px solid ${green[800]}` : "" }}
+      >
+        {/* <CardMedia
           image={ThumbnailImage}
           style={{
             background: `url('${ThumbnailImage}')`,
@@ -73,9 +77,10 @@ export default function CourseCertificateItem({
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
             filter: pass ? "" : "brightness(0.6)",
+            borderLeft: pass ? `6px solid ${green[800]}` : "",
           }}
           className={classes.cardImage}
-        />
+        /> */}
         <div className={classes.controls}>
           <Grid container direction="column" justify="center">
             <Box
@@ -103,17 +108,17 @@ export default function CourseCertificateItem({
                     {course}
                   </Typography>
                   <Typography variant="body1" component="p" gutterBottom>
-                    {courseid}
+                    รายวิชา {courseid}
                   </Typography>
                   <Typography
                     variant="body2"
                     component="p"
-                    color="textSecondary"
+                    color="textPrimary"
                     gutterBottom
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
                     {pass ? (
-                      <span style={{ color: theme.palette.success.main }}>
+                      <span style={{ color: green[800] }}>
                         ยินดีด้วย คุณผ่านเกณฑ์แล้ว
                       </span>
                     ) : (
@@ -142,7 +147,7 @@ export default function CourseCertificateItem({
                       gutterBottom
                     >
                       <b>หมายเหตุ </b>
-                      {note}
+                      {note ? note : "ไม่มี"}
                     </Typography>
                   )}
                   <Typography

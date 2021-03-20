@@ -18,6 +18,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import { Print as PrintIcon } from "@material-ui/icons/";
+import { green } from "@material-ui/core/colors";
 
 import ThumbnailImage from "assets/images/thumb-certificate.jpg";
 
@@ -37,10 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
     cardImage: {
       width: "150px",
       borderRadius: "4 0 0 0",
-    },
-    stack: {
-      boxShadow:
-        "0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)",
     },
   })
 );
@@ -67,9 +64,12 @@ export default function CurriculumCertificateItem({
   };
 
   return (
-    <Card className={classes.stack}>
-      <div className={classes.details}>
-        <CardMedia
+    <Card>
+      <div
+        className={classes.details}
+        style={{ borderLeft: pass ? `6px solid ${green[800]}` : "" }}
+      >
+        {/* <CardMedia
           image={ThumbnailImage}
           style={{
             background: `url('${ThumbnailImage}')`,
@@ -77,9 +77,10 @@ export default function CurriculumCertificateItem({
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
             filter: pass ? "" : "brightness(0.6)",
+            borderLeft: pass ? `6px solid ${green[800]}` : "",
           }}
           className={classes.cardImage}
-        />
+        /> */}
         <div className={classes.controls}>
           <Grid container direction="column" justify="center">
             <Box
@@ -100,18 +101,6 @@ export default function CurriculumCertificateItem({
               >
                 <Grid item>
                   <Typography
-                    variant="body2"
-                    component="p"
-                    color="secondary"
-                    style={{
-                      fontWeight: "bold",
-                      lineHeight: "1.1",
-                      marginBottom: 4,
-                    }}
-                  >
-                    หลักสูตร
-                  </Typography>
-                  <Typography
                     variant="h6"
                     component="h2"
                     style={{ lineHeight: "1.1", marginBottom: 4 }}
@@ -119,17 +108,17 @@ export default function CurriculumCertificateItem({
                     {curriculum}
                   </Typography>
                   <Typography variant="body1" component="p" gutterBottom>
-                    {curriculumid}
+                    หลักสูตร {curriculumid}
                   </Typography>
                   <Typography
                     variant="body2"
                     component="p"
-                    color="textSecondary"
+                    color="textPrimary"
                     gutterBottom
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
                     {pass ? (
-                      <span style={{ color: theme.palette.success.main }}>
+                      <span style={{ color: green[800] }}>
                         ยินดีด้วย คุณผ่านเกณฑ์แล้ว
                       </span>
                     ) : (

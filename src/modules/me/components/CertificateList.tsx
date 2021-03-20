@@ -162,7 +162,7 @@ export default function Certificate() {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <Box mt={4} mb={2}>
+            <Box mt={4} mb={3}>
               <Grid
                 container
                 direction="row"
@@ -187,7 +187,7 @@ export default function Certificate() {
               </Grid>
             </Box>
             <Divider />
-            <Box my={4}>
+            <Box my={3}>
               <Typography
                 gutterBottom
                 component="h2"
