@@ -11,15 +11,15 @@ import {
   Link,
   Divider,
   Button,
+  Toolbar,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
-  LocalActivity as CertificateIcon,
   NavigateNext as NavigateNextIcon,
+  Print as PrintIcon,
 } from "@material-ui/icons";
 
-import Header from "modules/ui/components/Header";
 import CertificateRenderer from "./CertificateRenderer";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,12 +88,7 @@ export default function CertificateView() {
 
   return (
     <>
-      <Header
-        title="ประกาศนียบัตร"
-        icon={
-          <CertificateIcon fontSize="large" style={{ marginRight: "24px" }} />
-        }
-      />
+      <Toolbar />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
@@ -130,19 +125,38 @@ export default function CertificateView() {
             <Box my={3}>
               <Typography
                 gutterBottom
-                component="h2"
                 variant="h6"
-                style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                align={matches ? "left" : "center"}
+                style={{
+                  fontSize: "1.7rem",
+                  marginBottom: 0,
+                  fontWeight: 600,
+                }}
               >
-                ประกาศนียบัตร
+                วิชา กระบวนการวิเคราะห์ปัญหา และการแก้ปัญหา
               </Typography>
             </Box>
-            {loading && <p className="indicator">กำลังโหลด...</p>}
-            <Button variant="contained" onClick={handlePrint}>
-              สั่งพิมพ์
-            </Button>
-            <CertificateRenderer ref={componentRef} text={text} />
+            <Box my={3}>
+              <Typography variant="body1" color="textSecondary" gutterBottom>
+                <b>ผู้สำเร็จการศึกษา</b> นายรักเรียน ขยันเรียน
+                <br />
+                <b>วันที่สำเร็จการศึกษา</b> 1 เดือน เมษายน พ.ศ. 2556
+              </Typography>
+            </Box>
+            <Box my={6}>
+              <CertificateRenderer ref={componentRef} text={text} />
+            </Box>
+            <Box my={3}>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<PrintIcon />}
+                onClick={handlePrint}
+                size="large"
+                fullWidth
+              >
+                {loading ? "กำลังโหลด..." : "สั่งพิมพ์"}
+              </Button>
+            </Box>
           </main>
         </div>
       </Container>
