@@ -11,7 +11,6 @@ import {
   useMediaQuery,
   Typography,
   Card,
-  CardMedia,
   Grid,
   Box,
   Button,
@@ -19,8 +18,6 @@ import {
 } from "@material-ui/core";
 import { Print as PrintIcon } from "@material-ui/icons";
 import { green } from "@material-ui/core/colors";
-
-import ThumbnailImage from "assets/images/thumb-certificate.jpg";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,10 +31,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: "flex",
       alignItems: "center",
       flex: 1,
-    },
-    cardImage: {
-      width: "150px",
-      borderRadius: "4 0 0 0",
     },
   })
 );
@@ -69,18 +62,6 @@ export default function CourseCertificateItem({
         className={classes.details}
         style={{ borderLeft: pass ? `6px solid ${green[800]}` : "" }}
       >
-        {/* <CardMedia
-          image={ThumbnailImage}
-          style={{
-            background: `url('${ThumbnailImage}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat",
-            filter: pass ? "" : "brightness(0.6)",
-            borderLeft: pass ? `6px solid ${green[800]}` : "",
-          }}
-          className={classes.cardImage}
-        /> */}
         <div className={classes.controls}>
           <Grid container direction="column" justify="center">
             <Box

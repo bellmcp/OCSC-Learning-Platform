@@ -4,12 +4,7 @@ import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import { Divider, Drawer, Toolbar, Box, Fab } from "@material-ui/core";
-import {
-  createStyles,
-  makeStyles,
-  Theme,
-  useTheme,
-} from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Bookmarks as ArrowUpIcon } from "@material-ui/icons";
 
 import * as learnActions from "../actions";
