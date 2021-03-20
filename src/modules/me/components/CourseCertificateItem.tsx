@@ -1,5 +1,6 @@
 // @ts-nocheck
 import React from "react";
+import { useHistory } from "react-router-dom";
 import DayJS from "react-dayjs";
 import {
   createStyles,
@@ -48,12 +49,13 @@ export default function CourseCertificateItem({
   lastname,
 }: any) {
   const classes = useStyles();
+  const history = useHistory();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const path = "/learning-platform";
 
-  const linkToLecture = () => {
-    // history.push(`${path}/learn/courses/${courseId}`);
-    alert("Redirect to print");
+  const linkToCourseCertificate = () => {
+    history.push(`${path}/me/certificate/${courseid}`);
   };
 
   return (
@@ -159,7 +161,7 @@ export default function CourseCertificateItem({
                       variant="outlined"
                       color="primary"
                       startIcon={<PrintIcon />}
-                      onClick={linkToLecture}
+                      onClick={linkToCourseCertificate}
                     >
                       พิมพ์ประกาศนียบัตร
                     </Button>

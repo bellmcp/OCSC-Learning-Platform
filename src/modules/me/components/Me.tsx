@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Header from "modules/ui/components/Header";
 import {
   Container,
   Typography,
@@ -20,6 +19,8 @@ import {
   FolderSpecial as FolderIcon,
   Print as PrintIcon,
 } from "@material-ui/icons";
+
+import Header from "modules/ui/components/Header";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
