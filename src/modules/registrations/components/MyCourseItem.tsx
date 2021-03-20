@@ -154,6 +154,7 @@ export default function MyCourseItem({
                       direction="row"
                       justify="center"
                       alignItems="center"
+                      wrap="nowrap"
                     >
                       {isCompleted && (
                         <Grid item>

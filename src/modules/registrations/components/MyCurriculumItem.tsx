@@ -160,6 +160,7 @@ export default function MyCurriculumItem({
                         direction="row"
                         justify="center"
                         alignItems="center"
+                        wrap="nowrap"
                       >
                         <Grid item>
                           <CheckIcon
