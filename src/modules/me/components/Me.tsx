@@ -11,8 +11,7 @@ import {
   Box,
   Button,
 } from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { makeStyles } from "@material-ui/core/styles";
 import { amber } from "@material-ui/core/colors";
 import {
   Person as PersonIcon,
@@ -46,8 +45,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Me() {
   const classes = useStyles();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
   const history = useHistory();
   const { items: users } = useSelector((state: any) => state.user);

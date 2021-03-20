@@ -3,14 +3,7 @@ import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
-import {
-  useMediaQuery,
-  Divider,
-  Drawer,
-  Toolbar,
-  Box,
-  Fab,
-} from "@material-ui/core";
+import { Divider, Drawer, Toolbar, Box, Fab } from "@material-ui/core";
 import {
   createStyles,
   makeStyles,
@@ -93,8 +86,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Learn() {
   const classes = useStyles();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("xs"));
   const { id: courseId }: any = useParams();
   const { search } = useLocation();
   const { contentId } = queryString.parse(search);

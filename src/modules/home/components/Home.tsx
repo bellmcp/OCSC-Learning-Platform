@@ -78,10 +78,9 @@ export default function Home() {
   const { isLoading: isCoursesLoading, items: courses } = useSelector(
     (state) => state.courses
   );
-  const {
-    isLoading: isRecommendedCoursesLoading,
-    recommended: recommendedCourses,
-  } = useSelector((state) => state.courses);
+  const { recommended: recommendedCourses } = useSelector(
+    (state) => state.courses
+  );
   const { isLoading: isCurriculumsLoading, items: curriculums } = useSelector(
     (state) => state.curriculums
   );

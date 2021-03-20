@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React from "react";
 import DayJS from "react-dayjs";
-import { useHistory } from "react-router-dom";
 import {
   createStyles,
   makeStyles,
@@ -42,8 +41,6 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const path = "/learning-platform";
-
 export default function CourseCertificateItem({
   id,
   courseid,
@@ -59,7 +56,6 @@ export default function CourseCertificateItem({
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
-  const history = useHistory();
 
   const linkToLecture = () => {
     // history.push(`${path}/learn/courses/${courseId}`);
