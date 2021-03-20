@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "modules/ui/components/Header";
 import {
   Container,
   Typography,
@@ -12,15 +11,16 @@ import {
   Link,
   Divider,
   CircularProgress,
+  useMediaQuery,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   LocalActivity as CertificateIcon,
   NavigateNext as NavigateNextIcon,
   Inbox as InboxIcon,
 } from "@material-ui/icons";
 
+import Header from "modules/ui/components/Header";
 import CourseCertificateItem from "./CourseCertificateItem";
 import CurriculumCertificateItem from "./CurriculumCertificateItem";
 import * as meActions from "../actions";

@@ -183,7 +183,7 @@ export default function CourseCertificateItem({
               color="primary"
               startIcon={<PrintIcon />}
               fullWidth
-              onClick={linkToLecture}
+              onClick={linkToCourseCertificate}
             >
               พิมพ์ประกาศนียบัตร
             </Button>
