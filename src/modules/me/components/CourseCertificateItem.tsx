@@ -17,7 +17,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import { Print as PrintIcon } from "@material-ui/icons";
-import { green } from "@material-ui/core/colors";
+import { green, grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,7 +60,11 @@ export default function CourseCertificateItem({
     <Card>
       <div
         className={classes.details}
-        style={{ borderLeft: pass ? `6px solid ${green[800]}` : "" }}
+        style={{
+          borderLeft: pass
+            ? `6px solid ${green[800]}`
+            : `6px solid ${grey[500]}`,
+        }}
       >
         <div className={classes.controls}>
           <Grid container direction="column" justify="center">
@@ -94,7 +98,7 @@ export default function CourseCertificateItem({
                   <Typography
                     variant="body2"
                     component="p"
-                    color="textPrimary"
+                    color="textSecondary"
                     gutterBottom
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
