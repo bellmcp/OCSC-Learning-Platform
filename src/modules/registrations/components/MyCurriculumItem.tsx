@@ -17,7 +17,9 @@ import {
   Box,
   Divider,
 } from "@material-ui/core";
-import { Rating } from "@material-ui/lab/";
+import { Rating } from "@material-ui/lab";
+import { green } from "@material-ui/core/colors";
+import { CheckCircle as CheckIcon } from "@material-ui/icons";
 
 import MyCourseItem from "./MyCourseItem";
 import * as registrationsActions from "../actions";
@@ -92,6 +94,7 @@ export default function MyCurriculumItem({
               background: `url('${thumbnail}')`,
               backgroundSize: "cover",
               backgroundPosition: "center center",
+              borderLeft: isCompleted ? `6px solid ${green[800]}` : "",
             }}
             className={classes.cardImage}
           />
@@ -151,39 +154,57 @@ export default function MyCurriculumItem({
                   </Grid>
                   {!matches && (
                     <Grid item>
-                      <Typography
-                        gutterBottom
-                        component="p"
-                        variant="body2"
-                        align="center"
-                        color="textSecondary"
+                      <Grid
+                        container
+                        spacing={1}
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
                       >
-                        โปรดให้คะแนนหลักสูตร
-                      </Typography>
-                      <Rating
-                        name="size-large"
-                        value={value}
-                        size="large"
-                        onChange={(event, newValue) => {
-                          updateSatisfactionScore(newValue);
-                        }}
-                      />
-                      {isCompleted && (
-                        <Typography
-                          variant="caption"
-                          component="p"
-                          color="textSecondary"
-                          align="center"
-                          style={{ lineHeight: "1.2", marginTop: 8 }}
-                        >
-                          <span style={{ color: theme.palette.success.main }}>
-                            <b>ผ่านเกณฑ์แล้ว</b>{" "}
-                            <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                              {completeDate}
-                            </DayJS>
-                          </span>
-                        </Typography>
-                      )}
+                        <Grid item>
+                          <CheckIcon
+                            style={{
+                              color: green[800],
+                              marginTop: 6,
+                            }}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Typography
+                            gutterBottom
+                            component="p"
+                            variant="body2"
+                            align="center"
+                            color="textSecondary"
+                          >
+                            โปรดให้คะแนนหลักสูตร
+                          </Typography>
+                          <Rating
+                            name="size-large"
+                            value={value}
+                            size="large"
+                            onChange={(event, newValue) => {
+                              updateSatisfactionScore(newValue);
+                            }}
+                          />
+                          {isCompleted && (
+                            <Typography
+                              variant="caption"
+                              component="p"
+                              color="textSecondary"
+                              align="center"
+                              style={{ lineHeight: "1.2", marginTop: 8 }}
+                            >
+                              <span style={{ color: green[800] }}>
+                                <b>สำเร็จการศึกษา </b>
+                                <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                                  {completeDate}
+                                </DayJS>
+                              </span>
+                            </Typography>
+                          )}
+                        </Grid>
+                      </Grid>
                     </Grid>
                   )}
                 </Grid>
@@ -226,20 +247,38 @@ export default function MyCurriculumItem({
                 </Grid>
               </Grid>
               {isCompleted && (
-                <Typography
-                  variant="caption"
-                  component="p"
-                  color="textSecondary"
-                  align="center"
-                  style={{ lineHeight: "1.2", marginTop: 8, marginBottom: 16 }}
+                <Grid
+                  container
+                  spacing={1}
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  style={{ marginTop: 8, marginBottom: 16 }}
                 >
-                  <span style={{ color: theme.palette.success.main }}>
-                    <b>ผ่านเกณฑ์แล้ว</b>{" "}
-                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {completeDate}
-                    </DayJS>
-                  </span>
-                </Typography>
+                  <CheckIcon
+                    style={{
+                      color: green[800],
+                      fontSize: 16,
+                      marginRight: 8,
+                    }}
+                  />
+                  <Typography
+                    variant="caption"
+                    component="p"
+                    color="textSecondary"
+                    align="center"
+                    style={{
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    <span style={{ color: green[800] }}>
+                      <b>สำเร็จการศึกษา </b>
+                      <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                        {completeDate}
+                      </DayJS>
+                    </span>
+                  </Typography>
+                </Grid>
               )}
             </Box>
           </>

@@ -21,7 +21,7 @@ import {
 import {
   CheckCircle as CheckIcon,
   PlayArrow as PlayIcon,
-} from "@material-ui/icons/";
+} from "@material-ui/icons";
 import { green } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -47,25 +47,16 @@ const useStyles = makeStyles((theme: Theme) =>
 const path = "/learning-platform";
 
 export default function MyCourseItem({
-  id,
-  userId,
-  curriculumRegistrationId,
   courseRoundId,
   courseStart,
   courseEnd,
   registrationDate,
-  satisfactionScore,
   isCompleted,
   completeDate,
   courseId,
   code,
   name,
-  categoryId,
-  learningObjective,
-  learningTopic,
-  targetGroup,
   thumbnail,
-  seqFlow,
 }: any) {
   const classes = useStyles();
   const theme = useTheme();
@@ -86,6 +77,7 @@ export default function MyCourseItem({
             backgroundSize: "cover",
             backgroundPosition: "center center",
             backgroundRepeat: "no-repeat",
+            borderLeft: isCompleted ? `6px solid ${green[800]}` : "",
           }}
           className={classes.cardImage}
         />
@@ -156,14 +148,36 @@ export default function MyCourseItem({
                 </Grid>
                 {!matches && (
                   <Grid item>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      startIcon={<PlayIcon />}
-                      onClick={linkToLecture}
+                    <Grid
+                      container
+                      spacing={1}
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
                     >
-                      เข้าเรียน
-                    </Button>
+                      {isCompleted && (
+                        <Grid item>
+                          <CheckIcon
+                            style={{
+                              color: green[800],
+                              marginTop: 6,
+                              marginRight: 4,
+                            }}
+                          />
+                        </Grid>
+                      )}
+                      <Grid item>
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          startIcon={<PlayIcon />}
+                          onClick={linkToLecture}
+                          fullWidth
+                        >
+                          เข้าเรียน
+                        </Button>
+                      </Grid>
+                    </Grid>
                     {isCompleted && (
                       <Typography
                         variant="caption"
@@ -172,8 +186,8 @@ export default function MyCourseItem({
                         align="center"
                         style={{ lineHeight: "1.2", marginTop: 16 }}
                       >
-                        <span style={{ color: theme.palette.success.main }}>
-                          <b>ผ่านเกณฑ์แล้ว</b> <br />
+                        <span style={{ color: green[800] }}>
+                          <b>สำเร็จการศึกษา </b>
                           <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                             {completeDate}
                           </DayJS>
@@ -201,20 +215,36 @@ export default function MyCourseItem({
               เข้าเรียน
             </Button>
             {isCompleted && (
-              <Typography
-                variant="caption"
-                component="p"
-                color="textSecondary"
-                align="center"
-                style={{ lineHeight: "1.2", marginTop: 8, marginBottom: 16 }}
+              <Grid
+                container
+                spacing={1}
+                direction="row"
+                justify="center"
+                alignItems="center"
+                style={{ marginTop: 8, marginBottom: 16 }}
               >
-                <span style={{ color: theme.palette.success.main }}>
-                  <b>ผ่านเกณฑ์แล้ว</b>{" "}
-                  <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                    {completeDate}
-                  </DayJS>
-                </span>
-              </Typography>
+                <CheckIcon
+                  style={{
+                    color: green[800],
+                    fontSize: 16,
+                    marginRight: 8,
+                  }}
+                />
+                <Typography
+                  variant="caption"
+                  component="p"
+                  color="textSecondary"
+                  align="center"
+                  style={{ lineHeight: "1.2" }}
+                >
+                  <span style={{ color: green[800] }}>
+                    <b>สำเร็จการศึกษา </b>
+                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                      {completeDate}
+                    </DayJS>
+                  </span>
+                </Typography>
+              </Grid>
             )}
           </Box>
         </>
