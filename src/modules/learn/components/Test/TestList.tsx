@@ -45,16 +45,22 @@ export default function TestList({
   const classes = useStyles();
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm();
+  const isFormError = Object.keys(errors).length !== 0;
 
   const testId = activeContentView.testId1;
   const isCompleted = currentContentView?.isCompleted;
 
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
+  const [initialTestTries, setInitialTestTries] = useState(0);
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
     (state) => state.learn
   );
+
+  useEffect(() => {
+    setInitialTestTries(currentContentView?.testTries);
+  }, [currentContentView]);
 
   useEffect(() => {
     setContentViewId(currentContentView?.id);
@@ -67,12 +73,6 @@ export default function TestList({
   useEffect(() => {
     const load_test_action = learnActions.loadTest(testId);
     dispatch(load_test_action);
-    dispatch(
-      uiActions.setFlashMessage(
-        "FOR DEVELOPMENT: This feature is currently in development process",
-        "error"
-      )
-    );
   }, [dispatch, testId]);
 
   useEffect(() => {
@@ -80,21 +80,30 @@ export default function TestList({
     dispatch(load_test_items_action);
   }, [dispatch, testId]);
 
+  const handleTimerStart = () => {
+    setTestStart(true);
+    setInitialTestTries(initialTestTries + 1);
+    // const update_test_tries_action = learnActions.updateTestTries(
+    //   courseRegistrationId,
+    //   contentViewId
+    // );
+    // dispatch(update_test_tries_action);
+  };
+
   const onSubmit = (data, event) => {
     event.preventDefault();
     const values = Object.values(data);
-    const testAnswer = values.map((id) => `${id}`).join("");
-    const update_test_action = learnActions.updateTest(
-      courseRegistrationId,
-      contentViewId,
-      testAnswer
-    );
-    dispatch(update_test_action);
-  };
-
-  const handleTimerStart = () => {
-    setTestStart(true);
-    dispatch(uiActions.setFlashMessage("เริ่มจับเวลาทำแบบทดสอบแล้ว", "info"));
+    const answerValues = values.map((val) => (val ? val : "0"));
+    const testAnswer = answerValues.map((id) => `${id}`).join("");
+    console.log(testAnswer);
+    if (!isFormError) {
+      const update_test_action = learnActions.updateTest(
+        courseRegistrationId,
+        contentViewId,
+        testAnswer
+      );
+      dispatch(update_test_action);
+    }
   };
 
   function renderTestList() {
@@ -142,8 +151,7 @@ export default function TestList({
               คุณผ่านเกณฑ์แล้ว
             </Typography>
             <Typography variant="body2" color="textSecondary" align="center">
-              <b>ทำแบบทดสอบ</b> {currentContentView?.testTries} จาก{" "}
-              {test?.maxTries} ครั้ง
+              <b>ทำแบบทดสอบ</b> {initialTestTries} จาก {test?.maxTries} ครั้ง
               <br />
               <b>คะแนนสูงสุดที่ทำได้</b> {currentContentView?.testScore} เต็ม{" "}
               {testItems.length} คะแนน
@@ -167,9 +175,8 @@ export default function TestList({
             <Divider />
           </Box>
           <Typography variant="body1" color="textPrimary">
-            <b>ทำแบบทดสอบแล้ว</b>{" "}
-            {currentContentView?.testTries ? currentContentView?.testTries : 0}{" "}
-            จาก {test?.maxTries} ครั้ง
+            <b>ทำแบบทดสอบแล้ว</b> {initialTestTries ? initialTestTries : 0} จาก{" "}
+            {test?.maxTries} ครั้ง
             <br />
             <b>คะแนนสูงสุดที่ทำได้</b>{" "}
             {currentContentView?.testScore ? currentContentView?.testScore : 0}{" "}

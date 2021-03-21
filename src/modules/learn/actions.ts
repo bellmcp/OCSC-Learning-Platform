@@ -50,6 +50,12 @@ const LOAD_TEST_ITEMS_FAILURE =
 const UPDATE_TEST_REQUEST = "learning-platform/learn/UPDATE_TEST_REQUEST";
 const UPDATE_TEST_SUCCESS = "learning-platform/learn/UPDATE_TEST_SUCCESS";
 const UPDATE_TEST_FAILURE = "learning-platform/learn/UPDATE_TEST_FAILURE";
+const UPDATE_TEST_TRIES_REQUEST =
+  "learning-platform/learn/UPDATE_TEST_TRIES_REQUEST";
+const UPDATE_TEST_TRIES_SUCCESS =
+  "learning-platform/learn/UPDATE_TEST_TRIES_SUCCESS";
+const UPDATE_TEST_TRIES_FAILURE =
+  "learning-platform/learn/UPDATE_TEST_TRIES_FAILURE";
 
 const path = "/learning-platform";
 
@@ -405,6 +411,64 @@ function updateTest(registrationId, contentViewId, testAnswer) {
   };
 }
 
+function updateTestTries(registrationId, contentViewId) {
+  return async (dispatch, getState) => {
+    const token = getCookie("token");
+    const userId = parseJwt(token).unique_name;
+    const {
+      learn: { sessions },
+    } = getState();
+    dispatch({ type: UPDATE_TEST_TRIES_REQUEST });
+    try {
+      var { data } = await axios.post(
+        `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}/TestTries`,
+        {
+          testTries: 1,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          params: {
+            sessionId: sessions.id,
+            key: sessions.key,
+          },
+        }
+      );
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: UPDATE_TEST_TRIES_SUCCESS,
+      });
+      dispatch(uiActions.setFlashMessage("เริ่มจับเวลาทำแบบทดสอบแล้ว", "info"));
+    } catch (err) {
+      dispatch({ type: UPDATE_TEST_TRIES_FAILURE });
+      if (err?.response?.status === 401) {
+        dispatch(push(`${path}/learn`));
+        dispatch(
+          uiActions.setFlashMessage(
+            `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
+            "error"
+          )
+        );
+      } else if (err?.response?.status === 403) {
+        dispatch(
+          uiActions.setFlashMessage(
+            "คุณทำแบบทดสอบเกินจำนวนครั้งที่กำหนดแล้ว โปรดตรวจสอบอีกครั้ง",
+            "error"
+          )
+        );
+      } else {
+        dispatch(
+          uiActions.setFlashMessage(
+            `บันทึกจำนวนครั้งการทำแบบทดสอบไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            "error"
+          )
+        );
+      }
+    }
+  };
+}
+
 export {
   CREATE_SESSION_REQUEST,
   CREATE_SESSION_SUCCESS,
@@ -433,6 +497,9 @@ export {
   UPDATE_TEST_REQUEST,
   UPDATE_TEST_SUCCESS,
   UPDATE_TEST_FAILURE,
+  UPDATE_TEST_TRIES_REQUEST,
+  UPDATE_TEST_TRIES_SUCCESS,
+  UPDATE_TEST_TRIES_FAILURE,
   createSession,
   loadContentViews,
   updateContentView,
@@ -442,4 +509,5 @@ export {
   loadTest,
   loadTestItems,
   updateTest,
+  updateTestTries,
 };
