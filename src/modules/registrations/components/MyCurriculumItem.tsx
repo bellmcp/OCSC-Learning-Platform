@@ -162,14 +162,16 @@ export default function MyCurriculumItem({
                         alignItems="center"
                         wrap="nowrap"
                       >
-                        <Grid item>
-                          <CheckIcon
-                            style={{
-                              color: green[800],
-                              marginTop: 6,
-                            }}
-                          />
-                        </Grid>
+                        {isCompleted && (
+                          <Grid item>
+                            <CheckIcon
+                              style={{
+                                color: green[800],
+                                marginTop: 6,
+                              }}
+                            />
+                          </Grid>
+                        )}
                         <Grid item>
                           <Typography
                             gutterBottom
