@@ -128,7 +128,7 @@ export default function Learn() {
     if (courseRegistrationId !== undefined) {
       dispatch(content_view_action);
     }
-  }, [dispatch, courseRegistrationId]);
+  }, [dispatch, courseRegistrationId, contentId]);
 
   useEffect(() => {
     const create_session_action = learnActions.createSession();

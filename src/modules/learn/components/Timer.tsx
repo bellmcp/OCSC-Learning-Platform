@@ -27,14 +27,23 @@ export default function Timer({
   const [progress, setProgress] = useState(0);
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
-  const contentLength = activeContentView[0]?.minutes;
-  var initialContentMinutes = currentContentView?.contentSeconds / 60;
+  const [initialContentMinutes, setInitialContentMinutes] = useState(0);
+  const [contentLength, setContentLength] = useState(0);
+
+  useEffect(() => {
+    setContentLength(activeContentView[0]?.minutes);
+  }, [activeContentView]);
+
+  useEffect(() => {
+    setInitialContentMinutes(currentContentView?.contentSeconds / 60);
+  }, [contentId, initialContentMinutes, currentContentView]);
+
   if (
     initialContentMinutes == null ||
     initialContentMinutes === undefined ||
     isNaN(initialContentMinutes)
   ) {
-    initialContentMinutes = 0;
+    setInitialContentMinutes(0);
   }
 
   useEffect(() => {
