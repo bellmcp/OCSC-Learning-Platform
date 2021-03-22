@@ -143,7 +143,7 @@ export default function TimerCountdown({
     <Grid container direction="row" justify="space-between" alignItems="center">
       <Grid item>
         <CircularProgressWithLabel
-          value={timer > -initialTestMinutes ? timer : 0}
+          value={timer > -initialTestMinutes ? timer : -initialTestMinutes}
           style={{
             color: "white",
             backgroundColor: `${amber[500]}`,
