@@ -193,6 +193,7 @@ export default function ContentView({
                 courseRegistrationDetails={courseRegistrationDetails}
                 userTestAnswers={userTestAnswers}
                 setUserTestAnswers={setUserTestAnswers}
+                contentId={contentId}
               />
             )}
             {activeContentView?.type === "e" && (

@@ -43,6 +43,7 @@ export default function TestList({
   courseRegistrationDetails,
   userTestAnswers,
   setUserTestAnswers,
+  contentId,
 }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ export default function TestList({
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
   const [initialTestTries, setInitialTestTries] = useState(0);
+  const [initialTestScore, setInitialTestScore] = useState(0);
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
     (state) => state.learn
@@ -62,7 +64,11 @@ export default function TestList({
 
   useEffect(() => {
     setInitialTestTries(currentContentView?.testTries);
-  }, [currentContentView]);
+  }, [currentContentView, contentId]);
+
+  useEffect(() => {
+    setInitialTestScore(currentContentView?.testScore);
+  }, [currentContentView, contentId]);
 
   useEffect(() => {
     setContentViewId(currentContentView?.id);
@@ -159,7 +165,7 @@ export default function TestList({
             <Typography variant="body2" color="textSecondary" align="center">
               <b>ทำแบบทดสอบ</b> {initialTestTries} จาก {test?.maxTries} ครั้ง
               <br />
-              <b>คะแนนสูงสุดที่ทำได้</b> {currentContentView?.testScore} เต็ม{" "}
+              <b>คะแนนสูงสุดที่ทำได้</b> {initialTestScore} เต็ม{" "}
               {testItems.length} คะแนน
             </Typography>
           </Grid>
@@ -184,8 +190,7 @@ export default function TestList({
             <b>ทำแบบทดสอบแล้ว</b> {initialTestTries ? initialTestTries : 0} จาก{" "}
             {test?.maxTries} ครั้ง
             <br />
-            <b>คะแนนสูงสุดที่ทำได้</b>{" "}
-            {currentContentView?.testScore ? currentContentView?.testScore : 0}{" "}
+            <b>คะแนนสูงสุดที่ทำได้</b> {initialTestScore ? initialTestScore : 0}{" "}
             เต็ม {testItems.length} คะแนน
           </Typography>
           <Box my={3}>
