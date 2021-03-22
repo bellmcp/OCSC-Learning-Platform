@@ -70,7 +70,7 @@ export default function CertificateView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: "AwesomeFileName",
+    documentTitle: "ประกาศนียบัตรรายวิชา-000-รักเรียน-ขยันเรียน",
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
