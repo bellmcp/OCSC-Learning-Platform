@@ -14,9 +14,17 @@ import { amber } from "@material-ui/core/colors";
 
 import * as learnActions from "../actions";
 
-export default function TimerCountdown({ activeContentView }: any) {
+export default function TimerCountdown({
+  currentContentView,
+  courseRegistrationDetails,
+  userTestAnswers,
+}: any) {
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
+  const [contentViewId, setContentViewId] = useState(0);
+  const [courseRegistrationId, setCourseRegistrationId] = useState(0);
+  const [FinalUserTestAnswers, setFinalUserTestAnswers] = useState("0");
+
   const { test } = useSelector((state) => state.learn);
   const [initialTestMinutes, setInitialTestMinutes] = useState(
     test?.minutes * 60
@@ -25,6 +33,18 @@ export default function TimerCountdown({ activeContentView }: any) {
   useEffect(() => {
     setInitialTestMinutes(test?.minutes * 60);
   }, [test]);
+
+  useEffect(() => {
+    setContentViewId(currentContentView?.id);
+  }, [currentContentView]);
+
+  useEffect(() => {
+    setCourseRegistrationId(courseRegistrationDetails[0]?.id);
+  }, [courseRegistrationDetails]);
+
+  useEffect(() => {
+    setFinalUserTestAnswers(userTestAnswers);
+  }, [userTestAnswers]);
 
   // CLOCK
   useEffect(() => {
@@ -70,9 +90,40 @@ export default function TimerCountdown({ activeContentView }: any) {
   }, []);
 
   //AUTO SUBMIT WHEN TIME OUT
-  setTimeout(() => {
-    console.log("Test time is out");
-  }, initialTestMinutes * 1000);
+  // if (minutes === 0 && seconds === 0) {
+  //   var forceSubmitTest = (function () {
+  //     var executed = false;
+  //     return function () {
+  //       if (!executed) {
+  //         executed = true;
+  //         console.log("Test time is out");
+  //         console.log(courseRegistrationId);
+  //         console.log(contentViewId);
+  //         console.log(FinalUserTestAnswers);
+  //         console.log("End");
+  //       }
+  //     };
+  //   })();
+  //   forceSubmitTest();
+  // }
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      const update_test_action = learnActions.updateTest(
+        courseRegistrationId,
+        contentViewId,
+        FinalUserTestAnswers
+      );
+      dispatch(update_test_action);
+    }, initialTestMinutes * 1000);
+    return () => clearTimeout(timeout);
+  }, [
+    dispatch,
+    FinalUserTestAnswers,
+    contentViewId,
+    courseRegistrationId,
+    initialTestMinutes,
+  ]);
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }

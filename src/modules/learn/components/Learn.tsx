@@ -147,6 +147,7 @@ export default function Learn() {
   };
 
   const [testStart, setTestStart] = useState(false);
+  const [userTestAnswers, setUserTestAnswers] = useState("0");
 
   function renderTimer() {
     if (contentId !== undefined) {
@@ -161,7 +162,13 @@ export default function Learn() {
         );
       } else if (activeContentView[0]?.type === "t") {
         if (testStart) {
-          return <TimerCountdown activeContentView={activeContentView} />;
+          return (
+            <TimerCountdown
+              currentContentView={currentContentView[0]}
+              courseRegistrationDetails={courseRegistrationDetails}
+              userTestAnswers={userTestAnswers}
+            />
+          );
         } else {
           return null;
         }
@@ -202,6 +209,8 @@ export default function Learn() {
           currentSession={currentSession}
           testStart={testStart}
           setTestStart={setTestStart}
+          userTestAnswers={userTestAnswers}
+          setUserTestAnswers={setUserTestAnswers}
         />
       </main>
       {/* MOBILE NAVIGATION */}

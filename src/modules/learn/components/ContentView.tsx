@@ -36,6 +36,8 @@ export default function ContentView({
   currentSession,
   testStart,
   setTestStart,
+  userTestAnswers,
+  setUserTestAnswers,
 }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
@@ -189,6 +191,8 @@ export default function ContentView({
                 setTestStart={setTestStart}
                 currentContentView={currentContentView}
                 courseRegistrationDetails={courseRegistrationDetails}
+                userTestAnswers={userTestAnswers}
+                setUserTestAnswers={setUserTestAnswers}
               />
             )}
             {activeContentView?.type === "e" && (

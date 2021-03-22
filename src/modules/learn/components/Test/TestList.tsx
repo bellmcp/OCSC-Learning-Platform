@@ -41,6 +41,8 @@ export default function TestList({
   setTestStart,
   currentContentView,
   courseRegistrationDetails,
+  userTestAnswers,
+  setUserTestAnswers,
 }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -53,7 +55,6 @@ export default function TestList({
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
   const [initialTestTries, setInitialTestTries] = useState(0);
-  const [userTestAnswers, setUserTestAnswers] = useState("0");
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
     (state) => state.learn
@@ -84,11 +85,11 @@ export default function TestList({
   const handleTimerStart = () => {
     setTestStart(true);
     setInitialTestTries(initialTestTries + 1);
-    // const update_test_tries_action = learnActions.updateTestTries(
-    //   courseRegistrationId,
-    //   contentViewId
-    // );
-    // dispatch(update_test_tries_action);
+    const update_test_tries_action = learnActions.updateTestTries(
+      courseRegistrationId,
+      contentViewId
+    );
+    dispatch(update_test_tries_action);
   };
 
   const handleFormChange = () => {
@@ -103,12 +104,12 @@ export default function TestList({
   const handleFormSubmit = (event) => {
     event.preventDefault();
     console.log(userTestAnswers);
-    // const update_test_action = learnActions.updateTest(
-    //   courseRegistrationId,
-    //   contentViewId,
-    //   userTestAnswers
-    // );
-    // dispatch(update_test_action);
+    const update_test_action = learnActions.updateTest(
+      courseRegistrationId,
+      contentViewId,
+      userTestAnswers
+    );
+    dispatch(update_test_action);
   };
 
   function renderTestList() {
