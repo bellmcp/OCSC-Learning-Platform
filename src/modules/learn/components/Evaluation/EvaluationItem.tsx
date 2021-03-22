@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function EvaluationItem({
   id,
+  no,
   question,
   choice1,
   choice2,
@@ -52,7 +53,7 @@ export default function EvaluationItem({
     <>
       <Grid container direction="row" alignItems="center" spacing={2}>
         <Grid item>
-          <Avatar className={classes.amber}>{id}</Avatar>
+          <Avatar className={classes.amber}>{no}</Avatar>
         </Grid>
         <Grid item>
           <Typography
@@ -73,8 +74,8 @@ export default function EvaluationItem({
             {choices.map((choice) => (
               <Grid item xs={12}>
                 <FormControlLabel
-                  name={`evaluationAnswer${id}`}
-                  id={`evaluationAnswer${id}`}
+                  name={`evaluationAnswer${no}`}
+                  id={`evaluationAnswer${no}`}
                   value={choice.id.toString()}
                   inputRef={register()}
                   control={<Radio />}
