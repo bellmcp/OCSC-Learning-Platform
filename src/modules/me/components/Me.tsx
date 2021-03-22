@@ -87,7 +87,7 @@ export default function Me() {
             }}
           >
             {users.firstname
-              ? `${users.title} ${users.firstname} ${users.lastname}`
+              ? `${users.title}${users.firstname} ${users.lastname}`
               : "คุณยังไม่ได้เข้าสู่ระบบ"}
           </Typography>
           <Typography
