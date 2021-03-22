@@ -86,7 +86,7 @@ export default function CertificateView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: "ประกาศนียบัตรรายวิชา-000-รักเรียน-ขยันเรียน",
+    documentTitle: `ประกาศนียบัตรวิชา-${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
@@ -133,7 +133,9 @@ export default function CertificateView() {
                   >
                     พิมพ์ประกาศนียบัตร ก.พ.
                   </Link>
-                  <Typography color="textPrimary">ประกาศนียบัตร</Typography>
+                  <Typography color="textPrimary">
+                    ประกาศนียบัตรรายวิชา
+                  </Typography>
                 </Breadcrumbs>
               </Grid>
             </Box>
