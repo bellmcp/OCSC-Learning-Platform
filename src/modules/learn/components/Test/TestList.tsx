@@ -15,9 +15,8 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Send as SendIcon, Timer as TimerIcon } from "@material-ui/icons";
 
-import * as learnActions from "modules/learn/actions";
-import * as uiActions from "modules/ui/actions";
 import TestItem from "./TestItem";
+import * as learnActions from "modules/learn/actions";
 
 import HeroImage from "assets/images/hero-evaluation.svg";
 
