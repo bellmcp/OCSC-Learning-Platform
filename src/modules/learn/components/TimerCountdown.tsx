@@ -1,7 +1,7 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
 import DayJS from "react-dayjs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
   Typography,
@@ -14,19 +14,29 @@ import { amber } from "@material-ui/core/colors";
 
 import * as learnActions from "../actions";
 
-export default function TimerCountdown({}: any) {
+export default function TimerCountdown({ activeContentView }: any) {
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
+  const { test } = useSelector((state) => state.learn);
+  const [initialTestMinutes, setInitialTestMinutes] = useState(
+    test?.minutes * 60
+  );
+
+  useEffect(() => {
+    setInitialTestMinutes(test?.minutes * 60);
+  }, [test]);
 
   // CLOCK
   useEffect(() => {
     const round = setInterval(() => {
-      setTimer((prevTimer) => (prevTimer >= 180 ? 0 : prevTimer - 1));
+      setTimer((prevTimer) =>
+        prevTimer >= initialTestMinutes ? 0 : prevTimer - 1
+      );
     }, 1000);
     return () => {
       clearInterval(round);
     };
-  }, []);
+  }, [initialTestMinutes]);
 
   //COUNTDOWN TIMER
   const initialMinute = 3;
@@ -55,10 +65,14 @@ export default function TimerCountdown({}: any) {
 
   //ENDTIME
   const [currentTime, setCurrentTime] = useState();
-
   useEffect(() => {
     setCurrentTime(new Date().toISOString());
   }, []);
+
+  //AUTO SUBMIT WHEN TIME OUT
+  setTimeout(() => {
+    console.log("Test time is out");
+  }, initialTestMinutes * 1000);
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
@@ -68,7 +82,7 @@ export default function TimerCountdown({}: any) {
         <CircularProgress
           variant="static"
           {...props}
-          value={props.value * (100 / 180)}
+          value={props.value * (100 / initialTestMinutes)}
         />
       </Box>
     );
@@ -78,7 +92,7 @@ export default function TimerCountdown({}: any) {
     <Grid container direction="row" justify="space-between" alignItems="center">
       <Grid item>
         <CircularProgressWithLabel
-          value={timer}
+          value={timer > -initialTestMinutes ? timer : 0}
           style={{
             color: "white",
             backgroundColor: `${amber[500]}`,
@@ -99,7 +113,7 @@ export default function TimerCountdown({}: any) {
       </Grid>
       <Grid item style={{ width: "100px" }}>
         <b>สิ้นสุด </b>
-        <DayJS format="HH:mm" add={{ minutes: 3 }}>
+        <DayJS format="HH:mm" add={{ seconds: initialTestMinutes }}>
           {currentTime}
         </DayJS>{" "}
         น.

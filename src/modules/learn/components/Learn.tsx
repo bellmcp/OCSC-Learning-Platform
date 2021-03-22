@@ -161,7 +161,7 @@ export default function Learn() {
         );
       } else if (activeContentView[0]?.type === "t") {
         if (testStart) {
-          return <TimerCountdown />;
+          return <TimerCountdown activeContentView={activeContentView} />;
         } else {
           return null;
         }

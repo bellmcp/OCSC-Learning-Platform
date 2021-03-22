@@ -44,8 +44,8 @@ export default function TestList({
 }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const { register, handleSubmit, errors } = useForm();
-  const isFormError = Object.keys(errors).length !== 0;
+  const { register, handleSubmit, errors, getValues } = useForm();
+  // const isFormError = Object.keys(errors).length !== 0;
 
   const testId = activeContentView.testId1;
   const isCompleted = currentContentView?.isCompleted;
@@ -53,6 +53,7 @@ export default function TestList({
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
   const [initialTestTries, setInitialTestTries] = useState(0);
+  const [userTestAnswers, setUserTestAnswers] = useState("0");
 
   const { isLoading: isTestLoading, test, testItems } = useSelector(
     (state) => state.learn
@@ -90,20 +91,24 @@ export default function TestList({
     // dispatch(update_test_tries_action);
   };
 
-  const onSubmit = (data, event) => {
+  const handleFormChange = () => {
+    const formValues = Object.values(getValues());
+    const answerValues = formValues.map((answer) => (answer ? answer : "0"));
+    const testAnswers = answerValues
+      .map((testAnswer) => `${testAnswer}`)
+      .join("");
+    setUserTestAnswers(testAnswers);
+  };
+
+  const handleFormSubmit = (event) => {
     event.preventDefault();
-    const values = Object.values(data);
-    const answerValues = values.map((val) => (val ? val : "0"));
-    const testAnswer = answerValues.map((id) => `${id}`).join("");
-    console.log(testAnswer);
-    if (!isFormError) {
-      const update_test_action = learnActions.updateTest(
-        courseRegistrationId,
-        contentViewId,
-        testAnswer
-      );
-      dispatch(update_test_action);
-    }
+    console.log(userTestAnswers);
+    // const update_test_action = learnActions.updateTest(
+    //   courseRegistrationId,
+    //   contentViewId,
+    //   userTestAnswers
+    // );
+    // dispatch(update_test_action);
   };
 
   function renderTestList() {
@@ -208,7 +213,8 @@ export default function TestList({
           </Box>
           <Collapse in={testStart}>
             <form
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit}
+              onChange={handleFormChange}
               noValidate
               autoComplete="off"
             >
@@ -223,6 +229,8 @@ export default function TestList({
               ))}
               <Box my={6}>
                 <Button
+                  onClick={handleFormSubmit}
+                  disabled={userTestAnswers.includes("0")}
                   type="submit"
                   color="secondary"
                   variant="contained"

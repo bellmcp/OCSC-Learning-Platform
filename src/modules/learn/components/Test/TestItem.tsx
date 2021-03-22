@@ -83,7 +83,7 @@ export default function TestItem({
                   {choice.option && (
                     <FormControlLabel
                       name={`testAnswer${id}`}
-                      id="testAnswer"
+                      id={`testAnswer${id}`}
                       value={choice.id.toString()}
                       inputRef={register({ required: true })}
                       control={<Radio />}
