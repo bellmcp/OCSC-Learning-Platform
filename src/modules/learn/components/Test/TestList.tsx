@@ -1,5 +1,6 @@
 //@ts-nocheck
 import React, { useEffect, useState } from "react";
+import { Prompt } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import {
@@ -254,6 +255,10 @@ export default function TestList({
 
   return (
     <>
+      <Prompt
+        when={testStart}
+        message="คุณแน่ใจใช่ไหมว่าต้องการออกจากห้องสอบ หากคุณเริ่มจับเวลาแล้ว จำนวนครั้งที่ทำแบบทดสอบจะถูกนับ"
+      />
       <Typography
         variant="h6"
         color="textPrimary"
