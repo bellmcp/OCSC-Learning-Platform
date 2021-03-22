@@ -24,7 +24,6 @@ import Header from "modules/ui/components/Header";
 import CourseCertificateItem from "./CourseCertificateItem";
 import CurriculumCertificateItem from "./CurriculumCertificateItem";
 import * as meActions from "../actions";
-import * as uiActions from "modules/ui/actions";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -54,15 +53,6 @@ export default function Certificate() {
   useEffect(() => {
     const curriculum_certificates_action = meActions.loadCurriculumCertificates();
     dispatch(curriculum_certificates_action);
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(
-      uiActions.setFlashMessage(
-        "FOR DEVELOPMENT: This feature is currently in development process",
-        "error"
-      )
-    );
   }, [dispatch]);
 
   function renderCourseCertificateList() {

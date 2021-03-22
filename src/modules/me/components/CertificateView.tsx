@@ -1,7 +1,9 @@
 //@ts-nocheck
 import React, { useRef, useState, useCallback, useEffect } from "react";
+import DayJS from "react-dayjs";
+import { useSelector, useDispatch } from "react-redux";
 import { useReactToPrint } from "react-to-print";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -21,6 +23,7 @@ import {
 } from "@material-ui/icons";
 
 import CertificateRenderer from "./CertificateRenderer";
+import * as meActions from "../actions";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -35,9 +38,22 @@ const useStyles = makeStyles((theme) => ({
 export default function CertificateView() {
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { id: certificateId }: any = useParams();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
 
+  const { courseCertificates } = useSelector((state: any) => state.me);
+  const currentCertificate = courseCertificates.filter(
+    (courseCertificate) => courseCertificate.courseid === `${certificateId}`
+  )[0];
+
+  useEffect(() => {
+    const course_certificates_action = meActions.loadCourseCertificates();
+    dispatch(course_certificates_action);
+  }, [dispatch]);
+
+  //PRINT
   const componentRef = useRef(null);
   const onBeforeGetContentResolve = useRef<(() => void) | null>(null);
   const [loading, setLoading] = useState(false);
@@ -132,18 +148,33 @@ export default function CertificateView() {
                   fontWeight: 600,
                 }}
               >
-                วิชา กระบวนการวิเคราะห์ปัญหา และการแก้ปัญหา
+                วิชา {currentCertificate?.course}
               </Typography>
             </Box>
             <Box my={3}>
               <Typography variant="body1" color="textSecondary" gutterBottom>
-                <b>ผู้สำเร็จการศึกษา</b> นายรักเรียน ขยันเรียน
+                <b>ผู้สำเร็จการศึกษา</b> {currentCertificate?.title}
+                {currentCertificate?.firstname} {currentCertificate?.lastname}
                 <br />
-                <b>วันที่สำเร็จการศึกษา</b> 1 เดือน เมษายน พ.ศ. 2556
+                <b>วันที่สำเร็จการศึกษา</b>{" "}
+                <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                  {currentCertificate?.enddate}
+                </DayJS>
+                <br />
+                <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
               </Typography>
             </Box>
             <Box my={6}>
-              <CertificateRenderer ref={componentRef} text={text} />
+              <CertificateRenderer
+                ref={componentRef}
+                text={text}
+                title={currentCertificate?.title}
+                firstName={currentCertificate?.firstname}
+                lastName={currentCertificate?.lastname}
+                courseName={currentCertificate?.course}
+                hour={currentCertificate?.hour}
+                endDate={currentCertificate?.enddate}
+              />
             </Box>
             <Box my={3}>
               <Button

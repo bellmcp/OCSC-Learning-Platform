@@ -1,5 +1,6 @@
 //@ts-nocheck
 import * as React from "react";
+import DayJS from "react-dayjs";
 import { Typography, Grid, Paper, Container } from "@material-ui/core";
 
 import image from "assets/images/logo.png";
@@ -61,7 +62,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontWeight: 600 }}
               >
-                นายรักเรียน ขยันเรียน
+                {this.props.title}
+                {this.props.firstName} {this.props.lastName}
               </Typography>
             </Grid>
             <Grid item>
@@ -71,15 +73,20 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
             </Grid>
             <Grid item>
               <Typography variant="h6" color="textPrimary" align="center">
-                วิชา กระบวนการวิเคราะห์ปัญหา และการแก้ปัญหา
+                วิชา {this.props.courseName}
               </Typography>
             </Grid>
             <Grid item>
               <Typography variant="body1" color="textPrimary" align="center">
-                {"["}รวมระยะเวลาทั้งสิ้น 3 ชั่วโมง{"]"}
+                {"["}รวมระยะเวลาทั้งสิ้น{" "}
+                {this.props.hour ? this.props.hour : "0"} ชั่วโมง{"]"}
               </Typography>
               <Typography variant="body1" color="textPrimary" align="center">
-                ให้ไว้ ณ วันที่ 1 เดือน เมษายน พ.ศ. 2556
+                ให้ไว้ ณ วันที่ <DayJS format="D">{this.props.endDate}</DayJS>{" "}
+                เดือน <DayJS format="M">{this.props.endDate}</DayJS> พ.ศ.{" "}
+                <DayJS format="YYYY" add={{ years: 543 }}>
+                  {this.props.endDate}
+                </DayJS>
               </Typography>
             </Grid>
             <Grid item>
