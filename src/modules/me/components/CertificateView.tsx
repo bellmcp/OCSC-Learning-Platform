@@ -159,9 +159,14 @@ export default function CertificateView() {
                 {currentCertificate?.firstname} {currentCertificate?.lastname}
                 <br />
                 <b>วันที่สำเร็จการศึกษา</b>{" "}
-                <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                  {currentCertificate?.enddate}
-                </DayJS>
+                {new Date(currentCertificate?.enddate).toLocaleDateString(
+                  "th-TH",
+                  {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  }
+                )}
                 <br />
                 <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
               </Typography>

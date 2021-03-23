@@ -83,7 +83,11 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
               </Typography>
               <Typography variant="body1" color="textPrimary" align="center">
                 ให้ไว้ ณ วันที่ <DayJS format="D">{this.props.endDate}</DayJS>{" "}
-                เดือน <DayJS format="M">{this.props.endDate}</DayJS> พ.ศ.{" "}
+                เดือน{" "}
+                {new Date(this.props.endDate).toLocaleDateString("th-TH", {
+                  month: "long",
+                })}{" "}
+                พ.ศ.{" "}
                 <DayJS format="YYYY" add={{ years: 543 }}>
                   {this.props.endDate}
                 </DayJS>
