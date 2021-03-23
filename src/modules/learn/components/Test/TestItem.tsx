@@ -9,6 +9,7 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  Box,
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { amber } from "@material-ui/core/colors";
@@ -50,11 +51,11 @@ export default function TestItem({
 }) {
   const classes = useStyles();
   const choices = [
-    { id: 1, option: choice1 !== "" ? choice1 : null },
-    { id: 2, option: choice2 !== "" ? choice2 : null },
-    { id: 3, option: choice3 !== "" ? choice3 : null },
-    { id: 4, option: choice4 !== "" ? choice4 : null },
-    { id: 5, option: choice5 !== "" ? choice5 : null },
+    { id: 1, option: choice1 !== "" ? choice1 : null, image: imgUrl1 },
+    { id: 2, option: choice2 !== "" ? choice2 : null, image: imgUrl2 },
+    { id: 3, option: choice3 !== "" ? choice3 : null, image: imgUrl3 },
+    { id: 4, option: choice4 !== "" ? choice4 : null, image: imgUrl4 },
+    { id: 5, option: choice5 !== "" ? choice5 : null, image: imgUrl5 },
   ];
 
   return (
@@ -75,6 +76,25 @@ export default function TestItem({
         </Grid>
       </Grid>
       <Divider className={classes.divider} />
+      {imgUrl && (
+        <Box my={2}>
+          <Grid
+            container
+            spacing={1}
+            direction="row"
+            justify="center"
+            alignItems="center"
+            alignContent="center"
+            wrap="nowrap"
+          >
+            <img
+              alt="รูปภาพโจทย์"
+              src={imgUrl}
+              style={{ width: "50%", minWidth: 250, height: "auto" }}
+            />
+          </Grid>
+        </Box>
+      )}
       <form>
         <FormControl component="fieldset">
           <RadioGroup aria-label={question} name={question}>
@@ -82,14 +102,35 @@ export default function TestItem({
               {choices.map((choice) => (
                 <Grid item xs={12}>
                   {choice.option && (
-                    <FormControlLabel
-                      name={`testAnswer${no}`}
-                      id={`testAnswer${no}`}
-                      value={choice.id.toString()}
-                      inputRef={register({ required: true })}
-                      control={<Radio />}
-                      label={choice.option}
-                    />
+                    <Grid
+                      container
+                      spacing={1}
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="center"
+                      alignContent="center"
+                      wrap="nowrap"
+                    >
+                      <FormControlLabel
+                        name={`testAnswer${no}`}
+                        id={`testAnswer${no}`}
+                        value={choice.id.toString()}
+                        inputRef={register({ required: true })}
+                        control={<Radio />}
+                        label={choice.option}
+                      />
+                      {choice.image && (
+                        <img
+                          alt={choice.option}
+                          src={choice.image}
+                          style={{
+                            width: "25%",
+                            minWidth: 180,
+                            height: "auto",
+                          }}
+                        />
+                      )}
+                    </Grid>
                   )}
                 </Grid>
               ))}
