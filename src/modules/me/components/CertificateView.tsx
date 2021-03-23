@@ -20,6 +20,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {
   NavigateNext as NavigateNextIcon,
   Print as PrintIcon,
+  Inbox as InboxIcon,
 } from "@material-ui/icons";
 
 import CertificateRenderer from "./CertificateRenderer";
@@ -102,6 +103,90 @@ export default function CertificateView() {
     }
   }, [onBeforeGetContentResolve.current, text]);
 
+  function renderCertificateView() {
+    if (!currentCertificate?.pass) {
+      return (
+        <Box my={15}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            style={{ height: 150 }}
+          >
+            <InboxIcon
+              color="disabled"
+              style={{ fontSize: 54, marginBottom: 14 }}
+            />
+            <Typography component="h2" variant="body2" color="textSecondary">
+              ไม่พบประกาศนียบัตร
+            </Typography>
+          </Grid>
+        </Box>
+      );
+    } else {
+      return (
+        <>
+          <Box my={3}>
+            <Typography
+              gutterBottom
+              variant="h6"
+              style={{
+                fontSize: "1.7rem",
+                marginBottom: 0,
+                fontWeight: 600,
+              }}
+            >
+              วิชา {currentCertificate?.course}
+            </Typography>
+          </Box>
+          <Box my={3}>
+            <Typography variant="body1" color="textSecondary" gutterBottom>
+              <b>ผู้สำเร็จการศึกษา</b> {currentCertificate?.title}
+              {currentCertificate?.firstname} {currentCertificate?.lastname}
+              <br />
+              <b>วันที่สำเร็จการศึกษา</b>{" "}
+              {new Date(currentCertificate?.enddate).toLocaleDateString(
+                "th-TH",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }
+              )}
+              <br />
+              <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
+            </Typography>
+          </Box>
+          <Box my={6}>
+            <CertificateRenderer
+              ref={componentRef}
+              text={text}
+              title={currentCertificate?.title}
+              firstName={currentCertificate?.firstname}
+              lastName={currentCertificate?.lastname}
+              courseName={currentCertificate?.course}
+              hour={currentCertificate?.hour}
+              endDate={currentCertificate?.enddate}
+            />
+          </Box>
+          <Box my={3}>
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<PrintIcon />}
+              onClick={handlePrint}
+              size="large"
+              fullWidth
+            >
+              {loading ? "กำลังโหลด..." : "สั่งพิมพ์"}
+            </Button>
+          </Box>
+        </>
+      );
+    }
+  }
+
   return (
     <>
       <Toolbar />
@@ -140,61 +225,7 @@ export default function CertificateView() {
               </Grid>
             </Box>
             <Divider />
-            <Box my={3}>
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{
-                  fontSize: "1.7rem",
-                  marginBottom: 0,
-                  fontWeight: 600,
-                }}
-              >
-                วิชา {currentCertificate?.course}
-              </Typography>
-            </Box>
-            <Box my={3}>
-              <Typography variant="body1" color="textSecondary" gutterBottom>
-                <b>ผู้สำเร็จการศึกษา</b> {currentCertificate?.title}
-                {currentCertificate?.firstname} {currentCertificate?.lastname}
-                <br />
-                <b>วันที่สำเร็จการศึกษา</b>{" "}
-                {new Date(currentCertificate?.enddate).toLocaleDateString(
-                  "th-TH",
-                  {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  }
-                )}
-                <br />
-                <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
-              </Typography>
-            </Box>
-            <Box my={6}>
-              <CertificateRenderer
-                ref={componentRef}
-                text={text}
-                title={currentCertificate?.title}
-                firstName={currentCertificate?.firstname}
-                lastName={currentCertificate?.lastname}
-                courseName={currentCertificate?.course}
-                hour={currentCertificate?.hour}
-                endDate={currentCertificate?.enddate}
-              />
-            </Box>
-            <Box my={3}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<PrintIcon />}
-                onClick={handlePrint}
-                size="large"
-                fullWidth
-              >
-                {loading ? "กำลังโหลด..." : "สั่งพิมพ์"}
-              </Button>
-            </Box>
+            {renderCertificateView()}
           </main>
         </div>
       </Container>
