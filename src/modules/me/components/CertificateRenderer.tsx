@@ -36,8 +36,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
       <ThemeProvider theme={theme}>
         <Container
           style={{
-            width: "21cm",
-            minHeight: "29.7cm",
+            width: "210mm",
+            minHeight: "297mm",
             background: `url(${background})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
