@@ -133,7 +133,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontSize: 28, marginBottom: 38, lineHeight: "1.2" }}
               >
-                วิชา {this.props.courseName}
+                {this.props.isCurriculum ? "หลักสูตร" : "วิชา"}{" "}
+                {this.props.contentName}
               </Typography>
 
               {/* LENGTH AND DATE */}

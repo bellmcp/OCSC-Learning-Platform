@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CertificateView() {
+export default function CurriculumCertificateView() {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -43,14 +43,15 @@ export default function CertificateView() {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const path = "/learning-platform";
 
-  const { courseCertificates } = useSelector((state: any) => state.me);
-  const currentCertificate = courseCertificates.filter(
-    (courseCertificate) => courseCertificate.courseid === `${certificateId}`
+  const { curriculumCertificates } = useSelector((state: any) => state.me);
+  const currentCertificate = curriculumCertificates.filter(
+    (curriculumCertificate) =>
+      curriculumCertificate.curriculumid === `${certificateId}`
   )[0];
 
   useEffect(() => {
-    const course_certificates_action = meActions.loadCourseCertificates();
-    dispatch(course_certificates_action);
+    const curriculum_certificates_action = meActions.loadCurriculumCertificates();
+    dispatch(curriculum_certificates_action);
   }, [dispatch]);
 
   //PRINT
@@ -86,7 +87,7 @@ export default function CertificateView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: `ประกาศนียบัตร-วิชา${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
+    documentTitle: `ประกาศนียบัตร-หลักสูตร${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
@@ -138,7 +139,7 @@ export default function CertificateView() {
                 fontWeight: 600,
               }}
             >
-              วิชา {currentCertificate?.course}
+              หลักสูตร {currentCertificate?.curriculum}
             </Typography>
           </Box>
           <Box my={3}>
@@ -161,12 +162,13 @@ export default function CertificateView() {
           </Box>
           <Box my={6}>
             <CertificateRenderer
+              isCurriculum
               ref={componentRef}
               text={text}
               title={currentCertificate?.title}
               firstName={currentCertificate?.firstname}
               lastName={currentCertificate?.lastname}
-              courseName={currentCertificate?.course}
+              contentName={currentCertificate?.curriculum}
               hour={currentCertificate?.hour}
               endDate={currentCertificate?.enddate}
             />
@@ -220,7 +222,7 @@ export default function CertificateView() {
                     พิมพ์ประกาศนียบัตร ก.พ.
                   </Link>
                   <Typography color="textPrimary">
-                    ประกาศนียบัตรรายวิชา
+                    ประกาศนียบัตรหลักสูตร
                   </Typography>
                 </Breadcrumbs>
               </Grid>

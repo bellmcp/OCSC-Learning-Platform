@@ -55,7 +55,7 @@ export default function CourseCertificateItem({
   const path = "/learning-platform";
 
   const linkToCourseCertificate = () => {
-    history.push(`${path}/me/certificate/${courseid}`);
+    history.push(`${path}/me/certificate/course/${courseid}`);
   };
 
   return (

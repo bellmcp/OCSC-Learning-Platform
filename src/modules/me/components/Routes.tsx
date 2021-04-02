@@ -3,15 +3,19 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 import Me from "./Me";
 import CertificateList from "./CertificateList";
-import CertificateView from "./CertificateView";
+import CourseCertificateView from "./CourseCertificateView";
+import CurriculumCertificateView from "./CurriculumCertificateView";
 
 export default function Routes() {
   const { path } = useRouteMatch();
 
   return (
     <Switch>
-      <Route path={`${path}/certificate/:id`}>
-        <CertificateView />
+      <Route path={`${path}/certificate/course/:id`}>
+        <CourseCertificateView />
+      </Route>
+      <Route path={`${path}/certificate/curriculum/:id`}>
+        <CurriculumCertificateView />
       </Route>
       <Route path={`${path}/certificate`}>
         <CertificateList />
