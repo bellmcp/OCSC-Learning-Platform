@@ -1,6 +1,5 @@
 //@ts-nocheck
 import React, { useRef, useState, useCallback, useEffect } from "react";
-import DayJS from "react-dayjs";
 import { useSelector, useDispatch } from "react-redux";
 import { useReactToPrint } from "react-to-print";
 import { Link as RouterLink, useParams } from "react-router-dom";
@@ -87,11 +86,13 @@ export default function CertificateView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: `ประกาศนียบัตรวิชา-${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
+    documentTitle: `ประกาศนียบัตร-วิชา${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
     removeAfterPrint: true,
+    pageStyle:
+      "@page { size: 210mm 297mm; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
   });
 
   useEffect(() => {
