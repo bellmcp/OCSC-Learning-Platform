@@ -98,6 +98,7 @@ export default function CourseItem({
 
   const getCourseDetailsTargetUrl = () => {
     switch (path) {
+      case `${basePath}/search`:
       case `${basePath}/curriculums/:id`:
         return `${basePath}/courses/${id}`;
       case `${basePath}/courses`:

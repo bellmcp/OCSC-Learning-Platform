@@ -196,7 +196,9 @@ export default function SearchResult() {
                     fontWeight: 600,
                   }}
                 >
-                  รายวิชาที่เกี่ยวข้องกับ '{query}'
+                  {query
+                    ? `รายวิชาที่เกี่ยวข้องกับ '${query}'`
+                    : "รายวิชาทั้งหมด"}
                 </Typography>
               </Grid>
             </Grid>
@@ -222,7 +224,9 @@ export default function SearchResult() {
                     fontWeight: 600,
                   }}
                 >
-                  หลักสูตรที่เกี่ยวข้องกับ '{query}'
+                  {query
+                    ? `หลักสูตรที่เกี่ยวข้องกับ '${query}'`
+                    : "หลักสูตรทั้งหมด"}
                 </Typography>
               </Grid>
             </Grid>

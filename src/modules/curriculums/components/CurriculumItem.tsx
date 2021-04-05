@@ -90,15 +90,24 @@ export default function CurriculumItem({
 }: any) {
   const classes = useStyles();
   const { path } = useRouteMatch();
+  const basePath = "/learning-platform";
+
+  const getCurriculumDetailsTargetUrl = () => {
+    switch (path) {
+      case `${basePath}/search`:
+      case `${basePath}/curriculums/:id`:
+        return `${basePath}/curriculums/${id}`;
+      case `${basePath}/curriculums`:
+        return `${path}/${id}`;
+      default:
+        return `${path}/curriculums/${id}`;
+    }
+  };
 
   return (
     <CardActionArea
       component={RouterLink}
-      to={
-        path === "/learning-platform/curriculums"
-          ? `${path}/${id}`
-          : `${path}/curriculums/${id}`
-      }
+      to={getCurriculumDetailsTargetUrl}
       classes={{
         root: classes.actionArea,
         focusHighlight: classes.focusHighlight,
