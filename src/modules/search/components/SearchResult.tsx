@@ -201,7 +201,26 @@ export default function SearchResult() {
                     : "รายวิชาทั้งหมด"}
                 </Typography>
               </Grid>
+              {matches && (
+                <Grid item>
+                  <Typography variant="body2" color="textSecondary">
+                    ผลการค้นหา {filteredCourseResults.length} รายการ
+                  </Typography>
+                </Grid>
+              )}
             </Grid>
+            {!matches && (
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Typography variant="body2" color="textSecondary">
+                  ผลการค้นหา {filteredCourseResults.length} รายการ
+                </Typography>
+              </Grid>
+            )}
           </Box>
           {renderFilteredCoursesResult()}
           <Box my={5}>
@@ -229,7 +248,26 @@ export default function SearchResult() {
                     : "หลักสูตรทั้งหมด"}
                 </Typography>
               </Grid>
+              {matches && (
+                <Grid item>
+                  <Typography variant="body2" color="textSecondary">
+                    ผลการค้นหา {filteredCurriculumResults.length} รายการ
+                  </Typography>
+                </Grid>
+              )}
             </Grid>
+            {!matches && (
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Typography variant="body2" color="textSecondary">
+                  ผลการค้นหา {filteredCurriculumResults.length} รายการ
+                </Typography>
+              </Grid>
+            )}
           </Box>
           {renderFilteredCurriculumsResult()}
         </main>
