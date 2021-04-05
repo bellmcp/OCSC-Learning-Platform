@@ -88,6 +88,14 @@ export default function CourseRound({
           </Box>
         </Grid>
       );
+    } else if (numStudents >= maxStudents) {
+      return (
+        <Grid item>
+          <Typography variant="body2" color="textSecondary">
+            จำนวนผู้เรียนเต็มแล้ว
+          </Typography>
+        </Grid>
+      );
     } else {
       return (
         <Button
