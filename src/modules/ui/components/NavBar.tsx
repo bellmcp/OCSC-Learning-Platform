@@ -38,6 +38,7 @@ import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu
 import * as uiActions from "modules/ui/actions";
 import * as userActions from "modules/user/actions";
 import * as supportActions from "modules/support/actions";
+import useSearchInputState from "../hooks/useSearchInputState";
 import NavDrawer from "./NavDrawer";
 import NavDropdownMobile from "./NavDropdownMobile";
 import NavDropdownDesktop from "./NavDropdownDesktop";
@@ -325,6 +326,10 @@ export default function NavBar(props: NavigationBarProps) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const [searchValue, setSearchValue] = useSearchInputState(() => {
+    history.push(`${path}/search?query=${searchValue}`);
+  });
+
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
 
@@ -376,9 +381,7 @@ export default function NavBar(props: NavigationBarProps) {
                     input: classes.inputInput,
                   }}
                   inputProps={{ "aria-label": "search" }}
-                  onBlur={(event) => {
-                    alert(`Search query: ${event.target.value}`);
-                  }}
+                  onChange={(e) => setSearchValue(e?.target?.value ?? null)}
                 />
               </div>
             </div>

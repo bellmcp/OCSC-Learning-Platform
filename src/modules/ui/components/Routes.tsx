@@ -7,6 +7,7 @@ import LearnRoutes from "modules/learn/components/Routes";
 import SupportRoutes from "modules/support/components/Routes";
 import LoginRoutes from "modules/login/components/Routes";
 import MeRoutes from "modules/me/components/Routes";
+import SearchRoutes from "modules/search/components/Routes";
 import PrivateRoute from "modules/routes/PrivateRoute";
 import NotFound from "./NotFound";
 
@@ -20,6 +21,9 @@ export default function Routes() {
       </Route>
       <Route path={`${PATH}/curriculums`}>
         <CurriculumRoutes></CurriculumRoutes>
+      </Route>
+      <Route path={`${PATH}/search`}>
+        <SearchRoutes></SearchRoutes>
       </Route>
       <PrivateRoute component={LearnRoutes} path={`${PATH}/learn`} />
       <PrivateRoute component={SupportRoutes} path={`${PATH}/support`} />
