@@ -8,7 +8,7 @@ export function generateContentSourceUrl(isMobile: boolean, url: string) {
     } else if (isMobile) {
       return lowerCaseUrl?.replace(".mp4", "-480.mp4");
     } else {
-      return lowerCaseUrl?.replace(".mp4", "-720.mp4");
+      return lowerCaseUrl;
     }
   }
 }

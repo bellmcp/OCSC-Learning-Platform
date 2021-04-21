@@ -203,7 +203,7 @@ export default function ContentView({
                 courseRegistrationDetails={courseRegistrationDetails}
               />
             )}
-            <Box my={4}>
+            {/* <Box my={4}>
               <Typography variant="body2" color="textSecondary">
                 FOR DEVELOPMENT
               </Typography>
@@ -235,7 +235,7 @@ export default function ContentView({
                   : 0}
                 {" seconds "}({currentContentView?.contentSeconds / 60} minutes)
               </Typography>
-            </Box>
+            </Box> */}
           </Box>
         </Container>
       )}
