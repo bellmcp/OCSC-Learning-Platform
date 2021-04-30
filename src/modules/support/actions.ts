@@ -51,7 +51,7 @@ function sendSupport(supportInfo, attachedFile) {
 
     axios({
       method: "post",
-      url: "https://welearn.ocsc.go.th/learning-platform-api/Supports",
+      url: "https://learningspace.ocsc.go.th/learning-platform-api/Supports",
       data: bodyFormData,
       headers: {
         "Content-Type": "multipart/form-data",

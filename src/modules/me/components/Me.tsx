@@ -51,15 +51,24 @@ export default function Me() {
   const { items: users } = useSelector((state: any) => state.user);
 
   const linkToCertificate = () => {
-    window.open("https://welearn.ocsc.go.th/learning-portal/history", "_blank");
+    window.open(
+      "https://learningspace.ocsc.go.th/learning-portal/history",
+      "_blank"
+    );
   };
 
   const linkToEditProfile = () => {
-    window.open("https://welearn.ocsc.go.th/learning-portal/edit", "_blank");
+    window.open(
+      "https://learningspace.ocsc.go.th/learning-portal/edit",
+      "_blank"
+    );
   };
 
   const linkToChangePassword = () => {
-    window.open("https://welearn.ocsc.go.th/learning-portal/reset", "_blank");
+    window.open(
+      "https://learningspace.ocsc.go.th/learning-portal/reset",
+      "_blank"
+    );
   };
 
   const linkToPrintCertificate = () => {

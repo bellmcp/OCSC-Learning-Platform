@@ -76,11 +76,17 @@ export default function LoginForm() {
   };
 
   const linkToForgotPassword = () => {
-    window.open("https://welearn.ocsc.go.th/learning-portal/forget", "_blank");
+    window.open(
+      "https://learningspace.ocsc.go.th/learning-portal/forget",
+      "_blank"
+    );
   };
 
   const linkToSignUp = () => {
-    window.open("https://welearn.ocsc.go.th/learning-portal/signup", "_blank");
+    window.open(
+      "https://learningspace.ocsc.go.th/learning-portal/signup",
+      "_blank"
+    );
   };
 
   const { register, handleSubmit, errors } = useForm({

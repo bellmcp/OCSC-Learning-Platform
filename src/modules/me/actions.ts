@@ -24,7 +24,7 @@ function loadCourseCertificates() {
     dispatch({ type: LOAD_COURSE_CERTIFICATES_REQUEST });
     try {
       var { data } = await axios.get(`/Users/${userId}/CourseCertificates`, {
-        baseURL: "https://welearn.ocsc.go.th/learning-portal-api/",
+        baseURL: "https://learningspace.ocsc.go.th/learning-portal-api/",
       });
       if (data.length === 0) {
         data = [];
@@ -60,7 +60,7 @@ function loadCurriculumCertificates() {
       var { data } = await axios.get(
         `/Users/${userId}/CurriculumCertificates`,
         {
-          baseURL: "https://welearn.ocsc.go.th/learning-portal-api/",
+          baseURL: "https://learningspace.ocsc.go.th/learning-portal-api/",
         }
       );
       if (data.length === 0) {

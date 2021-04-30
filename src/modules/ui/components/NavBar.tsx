@@ -284,7 +284,7 @@ export default function NavBar(props: NavigationBarProps) {
 
   const linkToPortal = () => {
     handleMenuClose();
-    window.open("https://welearn.ocsc.go.th/learning-portal", "_blank");
+    window.open("https://learningspace.ocsc.go.th/learning-portal", "_blank");
   };
 
   const toggleSearchBar = () => {
