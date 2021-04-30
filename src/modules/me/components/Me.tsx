@@ -101,8 +101,8 @@ export default function Me() {
           </Typography>
           <Typography
             component="h2"
+            color="primary"
             variant="body1"
-            color="textSecondary"
             gutterBottom
             style={{ fontWeight: 800 }}
           >

@@ -147,7 +147,7 @@ const useStyles = makeStyles((theme: Theme) =>
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: grey[500],
+      backgroundColor: grey[700],
     },
     loggedIn: {
       color: theme.palette.common.white,
@@ -174,7 +174,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 2,
       height: 32,
       margin: theme.spacing(2),
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: "#A7A8AB",
     },
     bold: {
       fontWeight: 600,

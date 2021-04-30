@@ -59,7 +59,7 @@ export default function NotFound() {
           <Box mt={4}>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               style={{ width: 200 }}
               onClick={linkToHome}
             >

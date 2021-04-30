@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme: Theme) =>
         margin: "0 4px",
       },
       "& .carousel__dot--selected": {
-        backgroundColor: amber[500],
+        backgroundColor: theme.palette.primary.main,
       },
     },
     buttonBack: {

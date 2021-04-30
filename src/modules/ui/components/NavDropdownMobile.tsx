@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: grey[700],
     },
     loggedIn: {
-      color: "black",
+      color: theme.palette.common.white,
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: amber[500],
+      backgroundColor: "#00A69C",
     },
     bold: {
       fontWeight: 600,
