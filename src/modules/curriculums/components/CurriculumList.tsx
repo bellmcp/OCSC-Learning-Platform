@@ -69,7 +69,7 @@ export default function CurriculumList() {
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>
-            <Box mb={2}>
+            <Box mt={3} mb={2}>
               <Grid
                 container
                 direction={matches ? "row" : "column"}

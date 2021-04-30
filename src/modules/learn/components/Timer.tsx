@@ -35,7 +35,9 @@ export default function Timer({
   }, [activeContentView]);
 
   useEffect(() => {
-    setInitialContentMinutes(currentContentView?.contentSeconds / 60);
+    setInitialContentMinutes(
+      Math.round(currentContentView?.contentSeconds / 60)
+    );
   }, [contentId, initialContentMinutes, currentContentView]);
 
   if (
