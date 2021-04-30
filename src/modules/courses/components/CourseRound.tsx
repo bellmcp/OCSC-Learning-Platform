@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
 import { isLogin } from "utils/isLogin";
+import isBetween from "utils/isBetween";
 
 import * as registrationsActions from "modules/registrations/actions";
 
@@ -93,6 +94,14 @@ export default function CourseRound({
         <Grid item>
           <Typography variant="body2" color="textSecondary">
             จำนวนผู้เรียนเต็มแล้ว
+          </Typography>
+        </Grid>
+      );
+    } else if (!isBetween(registrationStart, registrationEnd)) {
+      return (
+        <Grid item>
+          <Typography variant="body2" color="textSecondary">
+            ยังไม่เปิดให้ลงทะเบียน
           </Typography>
         </Grid>
       );
