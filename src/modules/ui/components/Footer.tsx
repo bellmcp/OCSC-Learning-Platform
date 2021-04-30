@@ -8,6 +8,7 @@ import {
   Grid,
   Box,
 } from "@material-ui/core";
+import { amber } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#183A7C",
   },
   link: {
-    color: theme.palette.primary.main,
+    color: amber[500],
   },
 }));
 
@@ -56,7 +57,7 @@ export default function Footer() {
           </Typography>
           <Typography variant="body2" color="inherit" align="left">
             {"Copyright © "} {new Date().getFullYear()}{" "}
-            <Link color="primary" href={OCSC_URL}>
+            <Link className={classes.link} href={OCSC_URL}>
               {OCSC_NAME_EN}
             </Link>
           </Typography>
@@ -67,7 +68,7 @@ export default function Footer() {
           </Typography>
           <Typography variant="body2" color="inherit" align="right">
             E-mail:{" "}
-            <Link href="mailto:ocsc.hrd@gmail.com" color="primary">
+            <Link href="mailto:ocsc.hrd@gmail.com" className={classes.link}>
               {OCSC_EMAIL}
             </Link>
           </Typography>
@@ -99,7 +100,7 @@ export default function Footer() {
           </Box>
           <Box lineHeight={1.2} fontSize={12} textAlign="center" mb={1}>
             E-mail:{" "}
-            <Link href="mailto:ocsc.hrd@gmail.com" color="primary">
+            <Link href="mailto:ocsc.hrd@gmail.com" className={classes.link}>
               {OCSC_EMAIL}
             </Link>
           </Box>

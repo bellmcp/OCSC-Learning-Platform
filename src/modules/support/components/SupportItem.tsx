@@ -48,7 +48,7 @@ export default function SupportItem({
           <CardActions>
             <Button
               onClick={markSupportAsRead}
-              color="secondary"
+              color="primary"
               variant="contained"
               startIcon={<CheckIcon />}
               fullWidth
@@ -62,7 +62,7 @@ export default function SupportItem({
           <CardActions>
             <Button
               disabled
-              color="secondary"
+              color="primary"
               variant="contained"
               startIcon={<CheckIcon />}
               fullWidth

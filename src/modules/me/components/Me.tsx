@@ -103,8 +103,7 @@ export default function Me() {
             component="h2"
             variant="body1"
             gutterBottom
-            color="secondary"
-            style={{ fontWeight: 800 }}
+            style={{ fontWeight: 800, color: amber[500] }}
           >
             {users.id}
           </Typography>
@@ -119,7 +118,7 @@ export default function Me() {
               <Grid item xs={12} sm={6}>
                 <Button
                   variant="outlined"
-                  color="primary"
+                  color="secondary"
                   startIcon={<FolderIcon />}
                   onClick={linkToCertificate}
                   fullWidth
@@ -130,7 +129,7 @@ export default function Me() {
               <Grid item xs={12} sm={6}>
                 <Button
                   variant="outlined"
-                  color="primary"
+                  color="secondary"
                   startIcon={<PrintIcon />}
                   onClick={linkToPrintCertificate}
                   fullWidth
@@ -148,7 +147,7 @@ export default function Me() {
               <Grid item xs={12} sm={6}>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   startIcon={<EditIcon />}
                   onClick={linkToEditProfile}
                   fullWidth
@@ -159,7 +158,7 @@ export default function Me() {
               <Grid item xs={12} sm={6}>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   startIcon={<LockIcon />}
                   onClick={linkToChangePassword}
                   fullWidth

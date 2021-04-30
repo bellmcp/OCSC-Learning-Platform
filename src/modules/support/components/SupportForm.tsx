@@ -118,7 +118,7 @@ export default function SupportForm() {
         </Typography>
         <Button
           type="submit"
-          color="primary"
+          color="secondary"
           variant="contained"
           startIcon={<SendIcon />}
           style={{ marginTop: 34 }}
