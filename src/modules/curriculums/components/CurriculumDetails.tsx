@@ -237,7 +237,7 @@ export default function CurriculumDetails() {
           </Typography>
           <Box my={2}>
             <Button
-              color="primary"
+              color="secondary"
               variant="contained"
               endIcon={<ArrowForwardIcon />}
               onClick={linkToLearn}

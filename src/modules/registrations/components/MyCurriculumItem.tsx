@@ -18,7 +18,7 @@ import {
   Divider,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import { green } from "@material-ui/core/colors";
+import { green, amber } from "@material-ui/core/colors";
 import { CheckCircle as CheckIcon } from "@material-ui/icons";
 
 import MyCourseItem from "./MyCourseItem";
@@ -120,8 +120,8 @@ export default function MyCurriculumItem({
                     <Typography
                       variant="body2"
                       component="p"
-                      color="secondary"
                       style={{
+                        color: amber[500],
                         fontWeight: "bold",
                         lineHeight: "1.1",
                         marginBottom: 4,

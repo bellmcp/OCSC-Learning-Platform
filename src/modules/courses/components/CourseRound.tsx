@@ -78,7 +78,7 @@ export default function CourseRound({
           </Typography>
           <Box my={2}>
             <Button
-              color="primary"
+              color="secondary"
               variant="contained"
               endIcon={<ArrowForwardIcon />}
               onClick={linkToLearn}
@@ -100,7 +100,7 @@ export default function CourseRound({
       return (
         <Button
           variant="contained"
-          color="secondary"
+          color="primary"
           endIcon={<ArrowForwardIcon />}
           onClick={registerCourse}
         >

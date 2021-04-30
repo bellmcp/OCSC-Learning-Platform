@@ -170,7 +170,7 @@ export default function MyCourseItem({
                       <Grid item>
                         <Button
                           variant="outlined"
-                          color="primary"
+                          color="secondary"
                           startIcon={<PlayIcon />}
                           onClick={linkToLecture}
                           fullWidth

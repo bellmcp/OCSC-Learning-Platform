@@ -158,7 +158,7 @@ export default function ContentView({
                     >
                       <Typography
                         variant="body2"
-                        color="primary"
+                        color="textPrimary"
                         style={{ fontWeight: 500, padding: "0 6px" }}
                       >
                         ลิงก์หลัก
@@ -170,7 +170,7 @@ export default function ContentView({
                     >
                       <Typography
                         variant="body2"
-                        color="primary"
+                        color="textPrimary"
                         style={{ fontWeight: 500, padding: "0 6px" }}
                       >
                         ลิงก์สำรอง

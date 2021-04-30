@@ -136,16 +136,14 @@ export default function Layout() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"คุณต้องการออกจากห้องเรียนใช่ไหม?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"ออกจากห้องเรียน?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             เซสชันปัจจุบันจะจบลง และเวลาเรียนสะสมของคุณจะถูกบันทึก
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
+          <Button onClick={handleDialogClose} color="secondary">
             ยกเลิก
           </Button>
           <Button
