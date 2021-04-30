@@ -24,6 +24,8 @@ import {
 } from "@material-ui/icons";
 import { green } from "@material-ui/core/colors";
 
+import isBetween from "utils/isBetween";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
@@ -169,6 +171,7 @@ export default function MyCourseItem({
                       )}
                       <Grid item>
                         <Button
+                          disabled={!isBetween(courseStart, courseEnd)}
                           variant="outlined"
                           color="secondary"
                           startIcon={<PlayIcon />}
@@ -207,6 +210,7 @@ export default function MyCourseItem({
           <Divider />
           <Box m={1}>
             <Button
+              disabled={!isBetween(courseStart, courseEnd)}
               variant="text"
               color="secondary"
               startIcon={<PlayIcon />}

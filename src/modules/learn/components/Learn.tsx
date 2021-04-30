@@ -3,9 +3,17 @@ import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
-import { Divider, Drawer, Toolbar, Box, Fab } from "@material-ui/core";
+import {
+  Divider,
+  Drawer,
+  Toolbar,
+  Box,
+  Fab,
+  Grid,
+  Typography,
+} from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Bookmarks as ArrowUpIcon } from "@material-ui/icons";
+import { Bookmarks as ArrowUpIcon, Lock as LockIcon } from "@material-ui/icons";
 
 import * as learnActions from "../actions";
 import * as coursesActions from "modules/courses/actions";
@@ -15,6 +23,8 @@ import SideBarMobile from "./SideBarMobile";
 import ContentView from "./ContentView";
 import Timer from "./Timer";
 import TimerCountdown from "./TimerCountdown";
+
+import isBetween from "utils/isBetween";
 
 const DRAWER_WIDTH = 300;
 const FOOTER_HEIGHT = 60;
@@ -85,6 +95,9 @@ export default function Learn() {
   const { search } = useLocation();
   const { contentId } = queryString.parse(search);
   const dispatch = useDispatch();
+  const [accessible, setAccessible] = useState(true);
+  const [courseStart, setCourseStart] = useState("");
+  const [courseEnd, setCourseEnd] = useState("");
 
   const [course] = useSelector((state) => state.courses.items);
   var { contents: courseContents } = useSelector((state) => state.courses);
@@ -99,6 +112,7 @@ export default function Learn() {
     (myCourse) => myCourse.courseId === parseInt(courseId)
   );
   const courseRegistrationId = courseRegistrationDetails[0]?.id;
+
   const activeContentView = courseContents.filter(
     (courseContent) => courseContent.id === parseInt(contentId)
   );
@@ -137,6 +151,22 @@ export default function Learn() {
     }
     setTestStart(false);
   }, [dispatch, contentId]);
+
+  useEffect(() => {
+    setCourseStart(courseRegistrationDetails[0]?.courseStart);
+    setCourseEnd(courseRegistrationDetails[0]?.courseEnd);
+  }, [courseRegistrationDetails]);
+
+  useEffect(() => {
+    if (courseStart && courseEnd) {
+      let check = isBetween(courseStart, courseEnd);
+      setAccessible(check);
+    }
+  }, [courseStart, courseEnd]);
+
+  console.log(courseStart);
+  console.log(courseEnd);
+  console.log(accessible);
 
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const handleMobileDialogOpen = () => {
@@ -183,59 +213,79 @@ export default function Learn() {
   return (
     <div className={classes.root}>
       <Toolbar />
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
-        <Divider />
-        <SideBar
-          course={course}
-          courseContents={courseContents}
-          contentViews={contentViews}
-          courseRegistrationDetails={courseRegistrationDetails}
-        />
-      </Drawer>
-      <main className={classes.content}>
-        <Toolbar />
-        <ContentView
-          contentId={contentId}
-          activeContentView={activeContentView[0]}
-          currentContentView={currentContentView[0]}
-          courseRegistrationDetails={courseRegistrationDetails}
-          currentSession={currentSession}
-          testStart={testStart}
-          setTestStart={setTestStart}
-          userTestAnswers={userTestAnswers}
-          setUserTestAnswers={setUserTestAnswers}
-        />
-      </main>
-      {/* MOBILE NAVIGATION */}
-      <Fab
-        color="secondary"
-        aria-label="สารบัญ"
-        className={classes.fab}
-        onClick={handleMobileDialogOpen}
-      >
-        <ArrowUpIcon />
-      </Fab>
-      <SideBarMobile
-        mobileDialogOpen={mobileDialogOpen}
-        handleMobileDialogClose={handleMobileDialogClose}
-        course={course}
-        courseContents={courseContents}
-        contentViews={contentViews}
-        courseRegistrationDetails={courseRegistrationDetails}
-      />
-      {/* TIMER */}
-      <div className={classes.timerWrapper}>
-        <Box mx={2} mt={1}>
-          {renderTimer()}
-        </Box>
-      </div>
+      {!accessible ? (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ height: 500 }}
+        >
+          <LockIcon
+            color="disabled"
+            style={{ fontSize: 54, marginBottom: 14 }}
+          />
+          <Typography component="h2" variant="body2" color="textSecondary">
+            ไม่สามารถเข้าสู่บทเรียนได้
+          </Typography>
+        </Grid>
+      ) : (
+        <>
+          <Drawer
+            className={classes.drawer}
+            variant="permanent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            anchor="left"
+          >
+            <Divider />
+            <SideBar
+              course={course}
+              courseContents={courseContents}
+              contentViews={contentViews}
+              courseRegistrationDetails={courseRegistrationDetails}
+            />
+          </Drawer>
+          <main className={classes.content}>
+            <Toolbar />
+            <ContentView
+              contentId={contentId}
+              activeContentView={activeContentView[0]}
+              currentContentView={currentContentView[0]}
+              courseRegistrationDetails={courseRegistrationDetails}
+              currentSession={currentSession}
+              testStart={testStart}
+              setTestStart={setTestStart}
+              userTestAnswers={userTestAnswers}
+              setUserTestAnswers={setUserTestAnswers}
+            />
+          </main>
+          {/* MOBILE NAVIGATION */}
+          <Fab
+            color="secondary"
+            aria-label="สารบัญ"
+            className={classes.fab}
+            onClick={handleMobileDialogOpen}
+          >
+            <ArrowUpIcon />
+          </Fab>
+          <SideBarMobile
+            mobileDialogOpen={mobileDialogOpen}
+            handleMobileDialogClose={handleMobileDialogClose}
+            course={course}
+            courseContents={courseContents}
+            contentViews={contentViews}
+            courseRegistrationDetails={courseRegistrationDetails}
+          />
+          {/* TIMER */}
+          <div className={classes.timerWrapper}>
+            <Box mx={2} mt={1}>
+              {renderTimer()}
+            </Box>
+          </div>
+        </>
+      )}
     </div>
   );
 }

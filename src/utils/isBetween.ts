@@ -1,7 +1,7 @@
 //@ts-nocheck
 export default function isBetween(min, max) {
-  var d1 = min.slice(0, 10).split("-");
-  var d2 = max.slice(0, 10).split("-");
+  var d1 = min?.slice(0, 10)?.split("-");
+  var d2 = max?.slice(0, 10)?.split("-");
   var c = new Date().toISOString().slice(0, 10).split("-");
 
   var from = new Date(d1[0], parseInt(d1[1]) - 1, d1[2]);
