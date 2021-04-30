@@ -103,7 +103,7 @@ export default function CurriculumList() {
                 ))}
               </Grid>
             )}
-            <Grid
+            {/* <Grid
               container
               direction="row"
               justify="center"
@@ -121,7 +121,7 @@ export default function CurriculumList() {
                   ดูเพิ่มเติม
                 </Button>
               </Box>
-            </Grid>
+            </Grid> */}
           </main>
         </div>
       </Container>

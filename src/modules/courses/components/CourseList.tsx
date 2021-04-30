@@ -150,7 +150,7 @@ export default function CourseList() {
             )}
           </Box>
           {renderFilteredResult()}
-          <Grid container direction="row" justify="center" alignItems="center">
+          {/* <Grid container direction="row" justify="center" alignItems="center">
             <Box mt={6} mb={4}>
               <Button
                 disabled
@@ -163,7 +163,7 @@ export default function CourseList() {
                 ดูเพิ่มเติม
               </Button>
             </Box>
-          </Grid>
+          </Grid> */}
         </main>
       </Container>
     </>

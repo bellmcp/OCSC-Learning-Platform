@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@material-ui/core/";
 import { makeStyles } from "@material-ui/core/styles";
+import { amber } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -130,8 +131,7 @@ export default function CurriculumItem({
           <Box my={2}>
             <Typography
               variant="body2"
-              color="secondary"
-              style={{ fontWeight: "bold" }}
+              style={{ fontWeight: "bold", color: amber[500] }}
             >
               หลักสูตร
             </Typography>

@@ -124,7 +124,7 @@ export default function Layout() {
         style={{
           zIndex: 9999999999,
           height: 2,
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.primary.main,
           transition: "all 5s ease 3s",
         }}
       />

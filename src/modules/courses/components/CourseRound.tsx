@@ -126,13 +126,13 @@ export default function CourseRound({
         <Box mb={3}>
           <Box display="flex" alignItems="center">
             <Box width="100%">
-              <Typography variant="body2" color="primary" align="right">
+              <Typography variant="body2" color="textSecondary" align="right">
                 {numStudents} / {maxStudents} คน
               </Typography>
               <LinearProgress
                 variant="determinate"
                 value={(numStudents / maxStudents) * 100}
-                color="secondary"
+                color="primary"
               />
             </Box>
             <Box></Box>

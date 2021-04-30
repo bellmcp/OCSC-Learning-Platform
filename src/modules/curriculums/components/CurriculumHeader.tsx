@@ -6,6 +6,7 @@ import {
   useTheme,
 } from "@material-ui/core/styles";
 import { useMediaQuery, Container, Typography, Grid } from "@material-ui/core";
+import { amber } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,8 +50,8 @@ export default function CurriculumHeader({ title, code, imageUrl }: any) {
               component="h2"
               variant={matches ? "h6" : "body1"}
               align="center"
-              color="secondary"
               gutterBottom
+              style={{ color: amber[500] }}
             >
               หลักสูตร
             </Typography>

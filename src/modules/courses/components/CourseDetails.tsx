@@ -29,7 +29,6 @@ import {
   Info as InfoIcon,
   People as PeopleIcon,
 } from "@material-ui/icons";
-import { amber } from "@material-ui/core/colors";
 import {
   getContentType,
   getContentTypeText,
@@ -53,8 +52,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     amber: {
-      color: theme.palette.getContrastText(amber[500]),
-      backgroundColor: amber[500],
+      color: theme.palette.common.white,
+      backgroundColor: theme.palette.secondary.main,
     },
     small: {
       width: theme.spacing(12),
