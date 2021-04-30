@@ -111,12 +111,7 @@ export default function LoginForm() {
   return (
     <Paper className={classes.paper} elevation={0}>
       <Toolbar />
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="center"
-      >
+      <Grid container direction="row" justify="center" alignItems="center">
         <Typography
           component="h1"
           variant="h4"
@@ -124,19 +119,6 @@ export default function LoginForm() {
           gutterBottom
         >
           เข้าสู่ระบบ
-        </Typography>
-        <Typography
-          component="p"
-          color="textSecondary"
-          variant="caption"
-          style={{ textAlign: "right", lineHeight: "1.2" }}
-          gutterBottom
-        >
-          FOR DEVELOPMENT
-          <br />
-          ID: 3329900271574
-          <br />
-          PW: 12345678
         </Typography>
       </Grid>
       <Typography

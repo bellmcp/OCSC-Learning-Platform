@@ -46,7 +46,7 @@ import NavDropdownDesktop from "./NavDropdownDesktop";
 const darkTheme = createMuiTheme({
   palette: {
     primary: {
-      main: amber[500],
+      main: "#2e9ab6",
     },
   },
   typography: {
@@ -60,8 +60,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      backgroundColor: "rgba(0,0,0,0.8)",
-      backdropFilter: "blur(6px)",
+      backgroundColor: "rgba(255, 255, 255, 0.80)",
+      backdropFilter: "saturate(180%) blur(20px)",
+      boxShadow: "rgb(0 0 0 / 15%) 0px 0px 10px",
       [theme.breakpoints.up("sm")]: {
         zIndex: theme.zIndex.drawer + 1,
       },
@@ -93,11 +94,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     link: {
       textDecoration: "none !important",
-      color: theme.palette.common.white,
     },
     search: {
       position: "relative",
-      backgroundColor: fade(theme.palette.common.black, 0.9),
+      backgroundColor: fade(theme.palette.common.white, 0.9),
       borderRadius: theme.shape.borderRadius,
       width: "100%",
       marginLeft: theme.spacing(2),
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "center",
     },
     inputRoot: {
-      color: "inherit",
+      color: theme.palette.text.primary,
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
@@ -123,9 +123,9 @@ const useStyles = makeStyles((theme: Theme) =>
       transition: theme.transitions.create("width"),
       width: "100%",
       borderRadius: theme.shape.borderRadius,
-      border: `1px solid ${theme.palette.grey[800]}`,
+      border: `1px solid ${theme.palette.grey[300]}`,
       "&:focus": {
-        border: `1px solid ${amber[500]}`,
+        border: `1px solid ${theme.palette.primary.main}`,
       },
     },
     sectionDesktop: {
@@ -143,10 +143,10 @@ const useStyles = makeStyles((theme: Theme) =>
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: grey[700],
+      backgroundColor: grey[800],
     },
     loggedIn: {
-      color: "black",
+      color: grey[800],
       width: theme.spacing(4),
       height: theme.spacing(4),
       backgroundColor: amber[500],
@@ -158,10 +158,10 @@ const useStyles = makeStyles((theme: Theme) =>
       minWidth: "270px",
     },
     navItem: {
-      color: theme.palette.common.white,
+      color: theme.palette.text.primary,
     },
     navItemActive: {
-      color: amber[500],
+      color: theme.palette.primary.main,
     },
     badge: {
       zIndex: 10,
@@ -170,7 +170,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 2,
       height: 32,
       margin: theme.spacing(2),
-      backgroundColor: theme.palette.grey[800],
+      backgroundColor: theme.palette.primary.main,
     },
     bold: {
       fontWeight: 600,
@@ -195,7 +195,7 @@ export default function NavBar(props: NavigationBarProps) {
     setMobileMoreAnchorEl,
   ] = React.useState<null | HTMLElement>(null);
 
-  const LogoImage = require("assets/images/logo.png");
+  const LogoImage = require("assets/images/logo.svg");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -335,7 +335,7 @@ export default function NavBar(props: NavigationBarProps) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar} elevation={0}>
         <Container
           maxWidth={!pathname.includes(`${path}/learn/courses`) ? "lg" : false}
         >
@@ -345,7 +345,6 @@ export default function NavBar(props: NavigationBarProps) {
               <IconButton
                 edge="start"
                 className={classes.menuButton}
-                color="inherit"
                 onClick={handleDrawerToggle}
               >
                 <MenuIcon />
@@ -360,6 +359,7 @@ export default function NavBar(props: NavigationBarProps) {
             />
             <Hidden mdDown implementation="css">
               <Typography
+                color="textPrimary"
                 variant="h6"
                 noWrap
                 className={classes.title}
@@ -432,8 +432,8 @@ export default function NavBar(props: NavigationBarProps) {
               <Divider orientation="vertical" className={classes.divider} />
               <Tooltip title={login() ? "ดูโปรไฟล์" : ""}>
                 <Button
+                  color="primary"
                   onClick={login() ? linkToProfile : linkToLogin}
-                  color="inherit"
                   size="small"
                   style={{
                     borderRadius: 50,
@@ -446,17 +446,21 @@ export default function NavBar(props: NavigationBarProps) {
                     />
                   }
                 >
-                  <Typography className={classes.bold} noWrap>
+                  <Typography
+                    color="textPrimary"
+                    className={classes.bold}
+                    noWrap
+                  >
                     {login() ? users.firstname : "เข้าสู่ระบบ"}
                   </Typography>
                 </Button>
               </Tooltip>
               <IconButton
+                color="primary"
                 edge="end"
                 aria-label="Toggle user dropdown menu"
                 aria-controls={menuId}
                 onClick={handleProfileMenuOpen}
-                color="inherit"
                 style={{
                   margin: "6px 0",
                 }}
@@ -469,7 +473,7 @@ export default function NavBar(props: NavigationBarProps) {
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
-              <IconButton color="inherit" onClick={toggleSearchBar}>
+              <IconButton onClick={toggleSearchBar}>
                 <SearchIcon />
               </IconButton>
               <IconButton

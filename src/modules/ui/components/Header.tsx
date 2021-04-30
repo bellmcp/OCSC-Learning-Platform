@@ -13,7 +13,7 @@ import {
   Toolbar,
 } from "@material-ui/core";
 
-const HeroImage = require("assets/images/hero.jpg");
+const HeroImage = require("assets/images/hero.svg");
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundSize: "cover",
       backgroundPosition: "center center",
       minHeight: "370px",
-      textShadow: "0px 3px 3px rgba(0, 0, 0, 0.4)",
+      textShadow: "0px 3px 3px rgba(0, 0, 0, 0.1)",
     },
     subtitle: {
       marginTop: theme.spacing(4),
@@ -36,64 +36,64 @@ export default function Header({ title, subtitle, icon }: any) {
   const matches = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Grid
-      container
-      direction="column"
-      justify="center"
-      alignItems="center"
-      className={classes.header}
-      style={{
-        backgroundImage: `url(${HeroImage})`,
-      }}
-    >
+    <>
       <Toolbar />
-      <Container maxWidth="lg">
-        <Grid
-          container
-          direction="column"
-          justify="space-between"
-          alignItems={matches ? "center" : "flex-start"}
-        >
+      <Grid
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+        className={classes.header}
+        style={{
+          backgroundImage: `url(${HeroImage})`,
+        }}
+      >
+        <Container maxWidth="lg">
           <Grid
             container
-            justify={matches ? "center" : "flex-start"}
+            direction="column"
+            justify="space-between"
             alignItems="center"
           >
-            <Grid item style={{ marginTop: 8 }}>
-              {icon}
-            </Grid>
-            <Grid item>
-              <Typography
-                component="h1"
-                variant={matches ? "h4" : "h3"}
-                align={matches ? "center" : "left"}
-                color="inherit"
-              >
-                {title}
-              </Typography>
-            </Grid>
-          </Grid>
-          {subtitle && (
-            <Grid
-              container
-              justify="flex-start"
-              className={classes.subtitle}
-              style={{ maxWidth: matches ? 300 : 480 }}
-            >
+            <Grid container justify="center" alignItems="center">
+              <Grid item style={{ marginTop: 8 }}>
+                {icon}
+              </Grid>
               <Grid item>
                 <Typography
-                  component="p"
-                  variant={matches ? "body2" : "body1"}
-                  align={matches ? "center" : "left"}
-                  color="inherit"
+                  component="h1"
+                  variant={matches ? "h4" : "h3"}
+                  align="center"
+                  style={{
+                    fontWeight: 500,
+                  }}
                 >
-                  {subtitle}
+                  {title}
                 </Typography>
               </Grid>
             </Grid>
-          )}
-        </Grid>
-      </Container>
-    </Grid>
+            {subtitle && (
+              <Grid
+                container
+                justify="center"
+                className={classes.subtitle}
+                style={{ maxWidth: matches ? 300 : "unset" }}
+              >
+                <Grid item>
+                  <Typography
+                    component="p"
+                    variant={matches ? "body2" : "body1"}
+                    align="center"
+                    color="inherit"
+                  >
+                    {subtitle}
+                  </Typography>
+                </Grid>
+              </Grid>
+            )}
+          </Grid>
+        </Container>
+      </Grid>
+    </>
   );
 }

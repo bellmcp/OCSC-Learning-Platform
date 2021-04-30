@@ -11,7 +11,7 @@ import META_IMAGE from "./meta.jpg";
 const TITLE = "OCSC Learning Platform";
 const URL = "https://ocsc-learning-platform.vercel.app/";
 const DESCRIPTION =
-  "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+  "โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา";
 
 const store = configureStore();
 

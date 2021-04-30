@@ -23,7 +23,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     padding: theme.spacing(6, 2),
     marginTop: "auto",
-    backgroundColor: theme.palette.grey[900],
+    backgroundColor: "#183A7C",
+  },
+  link: {
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -53,7 +56,7 @@ export default function Footer() {
           </Typography>
           <Typography variant="body2" color="inherit" align="left">
             {"Copyright © "} {new Date().getFullYear()}{" "}
-            <Link color="secondary" href={OCSC_URL}>
+            <Link color="primary" href={OCSC_URL}>
               {OCSC_NAME_EN}
             </Link>
           </Typography>
@@ -64,7 +67,7 @@ export default function Footer() {
           </Typography>
           <Typography variant="body2" color="inherit" align="right">
             E-mail:{" "}
-            <Link href="mailto:ocsc.hrd@gmail.com" color="secondary">
+            <Link href="mailto:ocsc.hrd@gmail.com" color="primary">
               {OCSC_EMAIL}
             </Link>
           </Typography>
@@ -96,7 +99,7 @@ export default function Footer() {
           </Box>
           <Box lineHeight={1.2} fontSize={12} textAlign="center" mb={1}>
             E-mail:{" "}
-            <Link href="mailto:ocsc.hrd@gmail.com" color="secondary">
+            <Link href="mailto:ocsc.hrd@gmail.com" color="primary">
               {OCSC_EMAIL}
             </Link>
           </Box>

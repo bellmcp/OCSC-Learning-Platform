@@ -19,7 +19,6 @@ import {
   ThemeProvider,
 } from "@material-ui/core/styles";
 import { Close as CloseIcon } from "@material-ui/icons";
-import { grey, amber } from "@material-ui/core/colors";
 import Alert from "@material-ui/lab/Alert";
 
 import * as actions from "../actions";
@@ -97,10 +96,10 @@ export default function Layout() {
     },
     palette: {
       primary: {
-        main: `${grey[900]}`,
+        main: "#2e9ab6",
       },
       secondary: {
-        main: `${amber[500]}`,
+        main: "#183A7C",
       },
     },
   });

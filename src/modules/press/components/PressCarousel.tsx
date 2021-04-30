@@ -153,9 +153,9 @@ export default function PressCarousel({ presses, isLoading }) {
               <ArrowForward fontSize={isSmUp ? "default" : "small"} />
             </ButtonNext>
           </div>
-          {/* <div className={classes.dotGroup}>
+          <div className={classes.dotGroup}>
             <DotGroup className={classes.styledDot} />
-          </div> */}
+          </div>
         </CarouselProvider>
       )}
     </>

@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const TITLE = "OCSC Learning Platform";
 const SUBTITLE =
-  "เรียนออนไลน์ฟรี ที่สำนักงาน ก.พ. เพราะเราเชื่อว่าทุกคนมีสิทธิที่จะเรียนรู้ มาร่วมกันฝึกทักษะทางความคิด ความสามารถ และสติปัญญา เพื่อพัฒนาศักยภาพ ของตนเองได้ที่ OCSC Learning Platform";
+  "โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา";
 
 export default function Home() {
   const classes = useStyles();
