@@ -83,10 +83,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     logo: {
       display: "block",
-      maxWidth: 120,
+      maxWidth: 110,
       marginRight: theme.spacing(2),
       [theme.breakpoints.down("xs")]: {
-        maxWidth: 110,
+        maxWidth: 100,
       },
       "&:hover": {
         cursor: "pointer",
@@ -344,6 +344,7 @@ export default function NavBar(props: NavigationBarProps) {
             <Hidden smUp implementation="css">
               <IconButton
                 edge="start"
+                color="primary"
                 className={classes.menuButton}
                 onClick={handleDrawerToggle}
               >
@@ -473,7 +474,7 @@ export default function NavBar(props: NavigationBarProps) {
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
-              <IconButton onClick={toggleSearchBar}>
+              <IconButton onClick={toggleSearchBar} color="primary">
                 <SearchIcon />
               </IconButton>
               <IconButton

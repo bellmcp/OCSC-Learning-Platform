@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { isFirefox, isMobile } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import Iframe from "react-iframe";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-import FlashAlert from "./FlashAlert";
 import MobileAlert from "./MobileAlert";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,8 +35,6 @@ export default function IframeViewer({ url }: any) {
   function renderUnsupportedAlert() {
     if (isMobile) {
       return <MobileAlert />;
-    } else {
-      if (!isFirefox) return <FlashAlert />;
     }
   }
 

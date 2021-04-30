@@ -202,7 +202,7 @@ export default function Home() {
             </Button>
           </Grid>
           <CourseCarousel
-            courses={courses.slice(0, 10)}
+            courses={courses}
             categories={categories}
             isLoading={isCoursesLoading}
           />

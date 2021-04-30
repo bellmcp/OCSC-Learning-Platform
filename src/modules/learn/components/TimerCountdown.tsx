@@ -10,7 +10,8 @@ import {
   Hidden,
   Box,
 } from "@material-ui/core";
-import { amber } from "@material-ui/core/colors";
+import { useTheme } from "@material-ui/core/styles";
+import { grey } from "@material-ui/core/colors";
 
 import * as learnActions from "../actions";
 
@@ -19,6 +20,7 @@ export default function TimerCountdown({
   courseRegistrationDetails,
   userTestAnswers,
 }: any) {
+  const theme = useTheme();
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
   const [contentViewId, setContentViewId] = useState(0);
@@ -145,8 +147,8 @@ export default function TimerCountdown({
         <CircularProgressWithLabel
           value={timer > -initialTestMinutes ? timer : -initialTestMinutes}
           style={{
-            color: "white",
-            backgroundColor: `${amber[500]}`,
+            color: grey[300],
+            backgroundColor: theme.palette.primary.main,
             borderRadius: "50%",
           }}
           thickness={22}

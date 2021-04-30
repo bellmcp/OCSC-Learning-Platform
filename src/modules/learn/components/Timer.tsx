@@ -11,7 +11,7 @@ import {
   Hidden,
   Box,
 } from "@material-ui/core";
-import { amber } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 
 import * as learnActions from "../actions";
 import * as uiActions from "modules/ui/actions";
@@ -155,12 +155,12 @@ export default function Timer({
           <LinearProgress
             variant="determinate"
             value={props.value > 100 || isNaN(props.value) ? 100 : props.value}
-            color="secondary"
+            color="primary"
           />
         </Box>
         <Box minWidth={35}>
           <Typography variant="body2" color="textPrimary">{`${Math.round(
-            isNaN(props.value) ? 100 : props.value
+            isNaN(props.value) || props.value >= 100 ? 100 : props.value
           )}%`}</Typography>
         </Box>
       </Box>
@@ -173,7 +173,7 @@ export default function Timer({
         <CircularProgressWithLabel
           value={timer}
           style={{
-            backgroundColor: `${amber[500]}`,
+            backgroundColor: `${grey[300]}`,
             borderRadius: "50%",
           }}
         />
@@ -191,7 +191,7 @@ export default function Timer({
       <Grid item style={{ width: "100px" }}>
         <LinearProgressWithLabel
           value={(progress / contentLength) * 100}
-          color="secondary"
+          color="primary"
         />
       </Grid>
     </Grid>

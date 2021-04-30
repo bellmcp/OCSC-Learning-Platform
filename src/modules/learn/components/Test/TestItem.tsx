@@ -12,13 +12,12 @@ import {
   Box,
 } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { amber } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     amber: {
-      color: theme.palette.getContrastText(amber[500]),
-      backgroundColor: amber[500],
+      color: theme.palette.common.white,
+      backgroundColor: theme.palette.primary.main,
     },
     divider: {
       marginTop: theme.spacing(2),
@@ -104,7 +103,7 @@ export default function TestItem({
                   {choice.option && (
                     <Grid
                       container
-                      spacing={1}
+                      spacing={0}
                       direction="row"
                       justify="flex-start"
                       alignItems="center"

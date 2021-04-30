@@ -14,7 +14,6 @@ import {
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { amber } from "@material-ui/core/colors";
 import {
   MoreHoriz as QuestionIcon,
   Send as SendIcon,
@@ -44,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1.5),
   },
   amber: {
-    color: theme.palette.getContrastText(amber[500]),
-    backgroundColor: amber[500],
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 

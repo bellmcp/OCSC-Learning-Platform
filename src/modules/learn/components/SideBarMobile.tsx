@@ -79,7 +79,7 @@ export default function SideBarMobile({
       onClose={handleMobileDialogClose}
       TransitionComponent={Transition}
     >
-      <AppBar className={classes.appBar}>
+      <AppBar className={classes.appBar} color="secondary">
         <Toolbar>
           <Button
             autoFocus

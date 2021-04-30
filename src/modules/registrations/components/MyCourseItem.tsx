@@ -208,7 +208,7 @@ export default function MyCourseItem({
           <Box m={1}>
             <Button
               variant="text"
-              color="primary"
+              color="secondary"
               startIcon={<PlayIcon />}
               fullWidth
               onClick={linkToLecture}

@@ -215,7 +215,7 @@ export default function Learn() {
       </main>
       {/* MOBILE NAVIGATION */}
       <Fab
-        color="primary"
+        color="secondary"
         aria-label="สารบัญ"
         className={classes.fab}
         onClick={handleMobileDialogOpen}
