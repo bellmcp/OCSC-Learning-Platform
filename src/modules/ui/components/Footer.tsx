@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#183A7C",
   },
   link: {
-    color: amber[500],
+    color: "#00A69C",
   },
 }));
 

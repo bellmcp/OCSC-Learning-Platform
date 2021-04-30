@@ -98,7 +98,7 @@ export default function SupportItem({
           <Box m={3}>
             <Typography
               variant="body2"
-              color="secondary"
+              color="primary"
               component="p"
               style={{ fontWeight: "bold" }}
               gutterBottom

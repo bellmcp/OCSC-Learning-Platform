@@ -204,7 +204,7 @@ export default function EvaluationList({
                   label="แสดงความคิดเห็น"
                   placeholder={evaluation?.opinion}
                   variant="outlined"
-                  color="secondary"
+                  color="primary"
                   fullWidth
                   multiline
                   rows={6}

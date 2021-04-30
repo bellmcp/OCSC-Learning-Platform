@@ -104,10 +104,10 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(2),
     },
     searchIcon: {
+      color: grey[400],
       padding: theme.spacing(0, 2),
       height: "100%",
       position: "absolute",
-      right: "0",
       pointerEvents: "none",
       display: "flex",
       alignItems: "center",
@@ -118,12 +118,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em)`,
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       paddingRight: `calc(3em)`,
       transition: theme.transitions.create("width"),
       width: "100%",
       borderRadius: theme.shape.borderRadius,
       border: `1px solid ${theme.palette.grey[300]}`,
+      "&:hover": {
+        border: `1px solid ${theme.palette.grey[400]}`,
+      },
       "&:focus": {
         border: `1px solid ${theme.palette.primary.main}`,
       },
@@ -143,13 +147,13 @@ const useStyles = makeStyles((theme: Theme) =>
     small: {
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: grey[800],
+      backgroundColor: grey[500],
     },
     loggedIn: {
-      color: grey[800],
+      color: theme.palette.common.white,
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: amber[500],
+      backgroundColor: "#00A69C",
     },
     noDecorationLink: {
       textDecoration: "none",

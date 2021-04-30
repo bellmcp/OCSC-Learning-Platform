@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 80,
     height: 80,
-    backgroundColor: amber[500],
-    color: "black",
+    backgroundColor: "#00A69C",
+    color: theme.palette.common.white,
   },
   buttonGroupWrapper: {
     width: 500,
@@ -102,7 +102,7 @@ export default function Me() {
           <Typography
             component="h2"
             variant="body1"
-            color="primary"
+            color="textSecondary"
             gutterBottom
             style={{ fontWeight: 800 }}
           >
