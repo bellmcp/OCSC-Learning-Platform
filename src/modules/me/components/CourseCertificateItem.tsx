@@ -159,7 +159,7 @@ export default function CourseCertificateItem({
                     <Button
                       disabled={!pass}
                       variant="outlined"
-                      color="primary"
+                      color="secondary"
                       startIcon={<PrintIcon />}
                       onClick={linkToCourseCertificate}
                     >
@@ -179,7 +179,7 @@ export default function CourseCertificateItem({
             <Button
               disabled={!pass}
               variant="text"
-              color="primary"
+              color="secondary"
               startIcon={<PrintIcon />}
               fullWidth
               onClick={linkToCourseCertificate}

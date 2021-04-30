@@ -159,7 +159,7 @@ export default function CurriculumCertificateItem({
                     <Button
                       disabled={!pass}
                       variant="outlined"
-                      color="primary"
+                      color="secondary"
                       startIcon={<PrintIcon />}
                       onClick={linkToLecture}
                     >
@@ -179,7 +179,7 @@ export default function CurriculumCertificateItem({
             <Button
               disabled={!pass}
               variant="text"
-              color="primary"
+              color="secondary"
               startIcon={<PrintIcon />}
               fullWidth
               onClick={linkToLecture}

@@ -114,7 +114,7 @@ export default function Home() {
   return (
     <>
       <Header
-        title={users.firstname ? `สวัสดี ${users.firstname}` : TITLE}
+        title={users.firstname ? `สวัสดี คุณ${users.firstname}` : TITLE}
         subtitle={SUBTITLE}
       />
       <Container maxWidth="lg" className={classes.content}>

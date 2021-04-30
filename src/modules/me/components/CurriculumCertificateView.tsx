@@ -176,7 +176,7 @@ export default function CurriculumCertificateView() {
           <Box my={3}>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<PrintIcon />}
               onClick={handlePrint}
               size="large"

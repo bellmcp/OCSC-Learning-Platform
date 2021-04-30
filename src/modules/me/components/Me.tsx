@@ -102,8 +102,9 @@ export default function Me() {
           <Typography
             component="h2"
             variant="body1"
+            color="primary"
             gutterBottom
-            style={{ fontWeight: 800, color: amber[500] }}
+            style={{ fontWeight: 800 }}
           >
             {users.id}
           </Typography>
