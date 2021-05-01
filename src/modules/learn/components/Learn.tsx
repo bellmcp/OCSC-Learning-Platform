@@ -164,10 +164,6 @@ export default function Learn() {
     }
   }, [courseStart, courseEnd]);
 
-  console.log(courseStart);
-  console.log(courseEnd);
-  console.log(accessible);
-
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const handleMobileDialogOpen = () => {
     setMobileDialogOpen(true);

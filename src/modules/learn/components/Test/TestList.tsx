@@ -109,7 +109,6 @@ export default function TestList({
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(userTestAnswers);
     const update_test_action = learnActions.updateTest(
       courseRegistrationId,
       contentViewId,

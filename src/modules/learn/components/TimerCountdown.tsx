@@ -93,24 +93,7 @@ export default function TimerCountdown({
     setCurrentTime(new Date().toISOString());
   }, []);
 
-  //AUTO SUBMIT WHEN TIME OUT
-  // if (minutes === 0 && seconds === 0) {
-  //   var forceSubmitTest = (function () {
-  //     var executed = false;
-  //     return function () {
-  //       if (!executed) {
-  //         executed = true;
-  //         console.log("Test time is out");
-  //         console.log(courseRegistrationId);
-  //         console.log(contentViewId);
-  //         console.log(FinalUserTestAnswers);
-  //         console.log("End");
-  //       }
-  //     };
-  //   })();
-  //   forceSubmitTest();
-  // }
-
+  //AUTO SUBMIT TEST WHEN TIME OUT
   useEffect(() => {
     const timeout = setTimeout(() => {
       const update_test_action = learnActions.updateTest(
