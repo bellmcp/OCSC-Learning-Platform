@@ -20,7 +20,7 @@ import {
   ArrowBackIosRounded as ArrowBack,
   ArrowForwardIosRounded as ArrowForward,
 } from "@material-ui/icons";
-import { amber, grey } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 
 import PressItem from "./PressItem";
 

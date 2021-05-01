@@ -13,7 +13,7 @@ import {
   ExitToApp as LogoutIcon,
   ViewCarousel as PortalIcon,
 } from "@material-ui/icons";
-import { amber, grey } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

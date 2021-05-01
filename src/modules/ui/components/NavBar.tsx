@@ -31,7 +31,7 @@ import {
   Search as SearchIcon,
   KeyboardArrowDown as ArrowDownIcon,
 } from "@material-ui/icons";
-import { amber, grey } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
 import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
 

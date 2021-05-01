@@ -13,15 +13,11 @@ import {
   useMediaQuery,
   Typography,
   Box,
-  Button,
   Container,
   Grid,
   CircularProgress,
 } from "@material-ui/core";
-import {
-  KeyboardArrowDownRounded as ArrowDownIcon,
-  MenuBook as CourseIcon,
-} from "@material-ui/icons";
+import { MenuBook as CourseIcon } from "@material-ui/icons";
 
 import * as coursesActions from "../actions";
 import * as categoriesActions from "modules/categories/actions";

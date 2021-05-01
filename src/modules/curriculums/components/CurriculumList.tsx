@@ -11,12 +11,10 @@ import {
   useMediaQuery,
   Typography,
   Box,
-  Button,
   Container,
   Grid,
   CircularProgress,
 } from "@material-ui/core";
-import { KeyboardArrowDownRounded as ArrowDownIcon } from "@material-ui/icons";
 import CurriculumItem from "./CurriculumItem";
 import { CollectionsBookmark as CurriculumIcon } from "@material-ui/icons";
 

@@ -8,7 +8,6 @@ import {
   Grid,
   Box,
 } from "@material-ui/core";
-import { amber } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
