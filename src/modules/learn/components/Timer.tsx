@@ -29,6 +29,11 @@ export default function Timer({
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
   const [initialContentMinutes, setInitialContentMinutes] = useState(0);
   const [contentLength, setContentLength] = useState(0);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  useEffect(() => {
+    setIsCompleted(currentContentView?.isCompleted);
+  }, [currentContentView]);
 
   useEffect(() => {
     setContentLength(activeContentView[0]?.minutes);
@@ -80,7 +85,7 @@ export default function Timer({
         );
         dispatch(update_content_view_action);
 
-        if (progress + 1 === contentLength) {
+        if (progress + 1 >= contentLength && !isCompleted) {
           dispatch(
             uiActions.setFlashMessage(
               "ยินดีด้วย คุณเรียนเนื้อหาครบเวลาท่ีกำหนดแล้ว",

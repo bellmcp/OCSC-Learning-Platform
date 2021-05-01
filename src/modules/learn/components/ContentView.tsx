@@ -19,6 +19,7 @@ import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
 import { getContentType } from "utils/contentType";
 import { generateContentSourceUrl } from "utils/soureceUrl";
+import { Hd as HdIcon } from "@material-ui/icons";
 
 import VideoPlayer from "./Content/VideoPlayer";
 import PdfViewer from "./Content/PdfViewer";
@@ -64,6 +65,14 @@ export default function ContentView({
       setActiveSource(newSource);
     }
   };
+
+  function checkVideoQuality() {
+    if (!isMobile) {
+      return (
+        <HdIcon color="disabled" style={{ marginLeft: 16, marginBottom: 2 }} />
+      );
+    }
+  }
 
   function renderContentView() {
     switch (getContentType(activeSource)) {
@@ -135,13 +144,25 @@ export default function ContentView({
               alignItems="center"
             >
               <Grid item>
-                <Typography
-                  variant="h6"
-                  color="initial"
-                  style={{ fontSize: "1.6rem", fontWeight: 600 }}
+                <Grid
+                  container
+                  spacing={1}
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                  alignContent="center"
+                  wrap="nowrap"
                 >
-                  {activeContentView?.name}
-                </Typography>
+                  <Typography
+                    variant="h6"
+                    color="initial"
+                    style={{ fontSize: "1.6rem", fontWeight: 600 }}
+                  >
+                    {activeContentView?.name}
+                  </Typography>
+                  {getContentType(activeSource) === "video" &&
+                    checkVideoQuality()}
+                </Grid>
               </Grid>
               {activeContentView?.type === "c" && (
                 <Grid item>
