@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { getCookie, eraseCookie } from "utils/cookies";
@@ -25,6 +25,8 @@ import {
   Divider,
   Container,
   Tooltip,
+  Dialog,
+  Box,
 } from "@material-ui/core";
 import {
   Menu as MenuIcon,
@@ -42,6 +44,7 @@ import useSearchInputState from "../hooks/useSearchInputState";
 import NavDrawer from "./NavDrawer";
 import NavDropdownMobile from "./NavDropdownMobile";
 import NavDropdownDesktop from "./NavDropdownDesktop";
+import MobileSearch from "modules/search/components/MobileSearch";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -72,8 +75,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       display: "none",
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(4),
       [theme.breakpoints.up("sm")]: {
         display: "block",
       },
@@ -84,7 +86,7 @@ const useStyles = makeStyles((theme: Theme) =>
     logo: {
       display: "block",
       maxWidth: 110,
-      marginRight: theme.spacing(2),
+      marginRight: theme.spacing(3),
       [theme.breakpoints.down("xs")]: {
         maxWidth: 100,
       },
@@ -100,8 +102,6 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: fade(theme.palette.common.white, 0.9),
       borderRadius: theme.shape.borderRadius,
       width: "100%",
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(2),
     },
     searchIcon: {
       color: grey[400],
@@ -193,17 +193,18 @@ export default function NavBar(props: NavigationBarProps) {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const path = "/learning-platform";
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [
     mobileMoreAnchorEl,
     setMobileMoreAnchorEl,
-  ] = React.useState<null | HTMLElement>(null);
+  ] = useState<null | HTMLElement>(null);
 
   const LogoImage = require("assets/images/logo.svg");
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileSearchDialogOpen, setMobileSearchDialogOpen] = useState(false);
 
   const token = getCookie("token");
   const id = parseJwt(token).unique_name;
@@ -292,7 +293,11 @@ export default function NavBar(props: NavigationBarProps) {
   };
 
   const toggleSearchBar = () => {
-    alert(`Toggle Search Bar`);
+    setMobileSearchDialogOpen(true);
+  };
+
+  const toggleSearchBarClose = () => {
+    setMobileSearchDialogOpen(false);
   };
 
   const logout = () => {
@@ -524,6 +529,25 @@ export default function NavBar(props: NavigationBarProps) {
         unreadNotificationCount={UNREAD_NOTIFICATION_COUNT}
         isUserCurrentlyInLearn={isUserCurrentlyInLearn}
       />
+      <Dialog open={mobileSearchDialogOpen} onClose={toggleSearchBarClose}>
+        <Box m={2}>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              defaultValue={searchValue}
+              placeholder="ค้นหา"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ "aria-label": "search" }}
+              onChange={(e) => setSearchValue(e?.target?.value ?? null)}
+            />
+          </div>
+        </Box>
+      </Dialog>
     </div>
   );
 }

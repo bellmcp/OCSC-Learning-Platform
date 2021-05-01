@@ -190,9 +190,11 @@ export default function SearchResult() {
                 <Typography
                   gutterBottom
                   variant="h6"
+                  align="center"
                   style={{
                     fontSize: "1.7rem",
-                    marginBottom: 0,
+                    marginBottom: matches ? 0 : 16,
+                    lineHeight: 1,
                     fontWeight: 600,
                   }}
                 >
@@ -237,9 +239,11 @@ export default function SearchResult() {
                 <Typography
                   gutterBottom
                   variant="h6"
+                  align="center"
                   style={{
                     fontSize: "1.7rem",
-                    marginBottom: 0,
+                    marginBottom: matches ? 0 : 16,
+                    lineHeight: 1,
                     fontWeight: 600,
                   }}
                 >
