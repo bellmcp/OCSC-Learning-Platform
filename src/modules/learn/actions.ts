@@ -356,7 +356,7 @@ function updateTest(registrationId, contentViewId, testAnswer) {
     const {
       learn: { sessions },
     } = getState();
-    dispatch({ type: UPDATE_EVALUATION_REQUEST });
+    dispatch({ type: UPDATE_TEST_REQUEST });
     try {
       var { data } = await axios.put(
         `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
@@ -375,7 +375,7 @@ function updateTest(registrationId, contentViewId, testAnswer) {
         data = [];
       }
       dispatch({
-        type: UPDATE_EVALUATION_SUCCESS,
+        type: UPDATE_TEST_SUCCESS,
         payload: { testAnswer: data },
       });
       window.location.reload();
@@ -383,7 +383,7 @@ function updateTest(registrationId, contentViewId, testAnswer) {
         uiActions.setFlashMessage("บันทึกแบบทดสอบเรียบร้อยแล้ว", "success")
       );
     } catch (err) {
-      dispatch({ type: UPDATE_EVALUATION_FAILURE });
+      dispatch({ type: UPDATE_TEST_FAILURE });
       if (err?.response?.status === 401) {
         dispatch(push(`${path}/learn`));
         dispatch(
@@ -458,6 +458,7 @@ function updateTestTries(registrationId, contentViewId) {
           )
         );
       } else {
+        window.location.reload();
         dispatch(
           uiActions.setFlashMessage(
             `บันทึกจำนวนครั้งการทำแบบทดสอบไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,

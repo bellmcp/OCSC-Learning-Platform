@@ -61,10 +61,12 @@ export default function TimerCountdown({
   }, [initialTestMinutes]);
 
   //COUNTDOWN TIMER
-  const initialMinute = 3;
-  const initialSeconds = 0;
-  const [minutes, setMinutes] = useState(initialMinute);
-  const [seconds, setSeconds] = useState(initialSeconds);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    setMinutes(test?.minutes);
+  }, [test]);
 
   useEffect(() => {
     let myInterval = setInterval(() => {
