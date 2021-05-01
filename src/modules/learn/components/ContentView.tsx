@@ -160,8 +160,9 @@ export default function ContentView({
                   >
                     {activeContentView?.name}
                   </Typography>
-                  {getContentType(activeSource) === "video" &&
-                    checkVideoQuality()}
+                  {matches && getContentType(activeSource) === "video"
+                    ? checkVideoQuality()
+                    : null}
                 </Grid>
               </Grid>
               {activeContentView?.type === "c" && (
