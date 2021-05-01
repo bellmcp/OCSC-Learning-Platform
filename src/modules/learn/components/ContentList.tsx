@@ -43,6 +43,7 @@ export default function ContentList({
   courseContents,
   contentViews,
   handleMobileDialogClose,
+  isSeqentialFlow,
 }: any) {
   const classes = useStyles();
   const { pathname, search } = useLocation();
@@ -53,6 +54,14 @@ export default function ContentList({
       (contentView) => contentView.courseContentId === contentId
     );
     return result;
+  }
+
+  //SEQUENTIAL FLOW
+  function isDisableContentViewItem(itemId) {
+    if (isSeqentialFlow && itemId !== 0) {
+      return !contentViews[itemId - 1]?.isCompleted;
+    }
+    return false;
   }
 
   return (
@@ -67,9 +76,10 @@ export default function ContentList({
         </Grid>
       ) : (
         <>
-          {courseContents.map((courseContent) => (
+          {courseContents.map((courseContent, id) => (
             <MenuItem
               button
+              disabled={isDisableContentViewItem(id)}
               selected={parseInt(contentId) === courseContent?.id}
               className={clsx({
                 [classes.nested]: true,

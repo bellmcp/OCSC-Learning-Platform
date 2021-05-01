@@ -38,12 +38,18 @@ export default function SideBar({
   const classes = useStyles();
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
+  const [isSeqentialFlow, setIsSeqentialFlow] = useState(false);
   const registrationId = courseRegistrationDetails[0]?.id;
   const satisfactionScore = courseRegistrationDetails[0]?.satisfactionScore;
+  const seqFlow = courseRegistrationDetails[0]?.seqFlow;
 
   useEffect(() => {
     setValue(satisfactionScore);
   }, [satisfactionScore]);
+
+  useEffect(() => {
+    setIsSeqentialFlow(seqFlow);
+  }, [seqFlow]);
 
   const updateSatisfactionScore = (newValue) => {
     const satisfaction_score_action = registrationsActions.updateCourseSatisfactionScore(
@@ -101,6 +107,7 @@ export default function SideBar({
       <CourseContentList
         courseContents={courseContents}
         contentViews={contentViews}
+        isSeqentialFlow={isSeqentialFlow}
       />
       <Divider variant="middle" />
       <Box my={4}>
