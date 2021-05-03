@@ -287,7 +287,7 @@ export default function CourseDetails() {
                         ประมวลรายวิชา
                       </Typography>
                     </Grid>
-                    <Box my={1} style={{ maxWidth: 800 }}>
+                    <Box my={1} style={{ maxWidth: 720 }}>
                       <List>
                         {contents.map((content, id) => (
                           <>

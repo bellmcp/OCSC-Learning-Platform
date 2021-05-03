@@ -176,7 +176,13 @@ export default function CourseRound({
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
-              {registrationCondition}
+              {registrationCondition ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: registrationCondition,
+                  }}
+                ></div>
+              ) : null}
             </Typography>
           </Grid>
         </Grid>
