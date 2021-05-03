@@ -35,8 +35,9 @@ const OCSC_NAME_EN = "Office of the Civil Service Commission (OCSC)";
 const OCSC_URL = "https://www.ocsc.go.th/";
 const OCSC_ADDRESS =
   "47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี 11000";
-const OCSC_EMAIL = "ocsc.hrd@gmail.com";
-const OCSC_PHONE = "โทร. 02-547-1795 , 02-547-1807 (ภายในเวลาราชการ)";
+const OCSC_EMAIL = "learningspace@ocsc.go.th";
+const OCSC_PHONE =
+  "โทรศัพท์ 02 547 1000 ต่อ 1795, 1807 และ 6942 (ภายในเวลาราชการ)";
 
 export default function Footer() {
   const classes = useStyles();
@@ -66,8 +67,8 @@ export default function Footer() {
             {OCSC_ADDRESS}
           </Typography>
           <Typography variant="body2" color="inherit" align="right">
-            E-mail:{" "}
-            <Link href="mailto:ocsc.hrd@gmail.com" className={classes.link}>
+            อีเมล{" "}
+            <Link href={`mailto:${OCSC_EMAIL}`} className={classes.link}>
               {OCSC_EMAIL}
             </Link>
           </Typography>
@@ -98,8 +99,8 @@ export default function Footer() {
             {OCSC_ADDRESS}
           </Box>
           <Box lineHeight={1.2} fontSize={12} textAlign="center" mb={1}>
-            E-mail:{" "}
-            <Link href="mailto:ocsc.hrd@gmail.com" className={classes.link}>
+            อีเมล{" "}
+            <Link href={`mailto:${OCSC_EMAIL}`} className={classes.link}>
               {OCSC_EMAIL}
             </Link>
           </Box>
