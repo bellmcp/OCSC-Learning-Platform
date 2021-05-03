@@ -50,7 +50,13 @@ export default function EvaluationItem({
 
   return (
     <>
-      <Grid container direction="row" alignItems="center" spacing={2}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        spacing={2}
+        wrap="nowrap"
+      >
         <Grid item>
           <Avatar className={classes.amber}>{no}</Avatar>
         </Grid>

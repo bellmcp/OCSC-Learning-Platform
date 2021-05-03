@@ -68,9 +68,7 @@ export default function ContentView({
 
   function checkVideoQuality() {
     if (!isMobile) {
-      return (
-        <HdIcon color="disabled" style={{ marginLeft: 16, marginBottom: 2 }} />
-      );
+      return <HdIcon color="disabled" style={{ margin: "0 16px 2px" }} />;
     }
   }
 
@@ -142,6 +140,7 @@ export default function ContentView({
               direction={matches ? "row" : "column"}
               justify="space-between"
               alignItems="center"
+              wrap="nowrap"
             >
               <Grid item>
                 <Grid
@@ -156,9 +155,17 @@ export default function ContentView({
                   <Typography
                     variant="h6"
                     color="initial"
-                    style={{ fontSize: "1.6rem", fontWeight: 600 }}
+                    style={{
+                      fontSize: "1.6rem",
+                      fontWeight: 600,
+                      lineHeight: "1.2",
+                    }}
+                    gutterBottom={matches ? false : true}
+                    align={matches ? "left" : "center"}
                   >
-                    {activeContentView?.name}
+                    {activeContentView?.name
+                      ? activeContentView?.name
+                      : "ไม่มีชื่อ"}
                   </Typography>
                   {matches && getContentType(activeSource) === "video"
                     ? checkVideoQuality()
@@ -166,7 +173,7 @@ export default function ContentView({
                 </Grid>
               </Grid>
               {activeContentView?.type === "c" && (
-                <Grid item>
+                <Grid item style={{ minWidth: 185 }}>
                   <ToggleButtonGroup
                     value={activeSource}
                     exclusive

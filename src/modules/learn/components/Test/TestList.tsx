@@ -262,7 +262,7 @@ export default function TestList({
         variant="h6"
         color="textPrimary"
         gutterBottom
-        style={{ fontWeight: 600, marginBottom: 16 }}
+        style={{ fontWeight: 600, marginBottom: 16, lineHeight: "1.3" }}
       >
         {test?.name}
       </Typography>

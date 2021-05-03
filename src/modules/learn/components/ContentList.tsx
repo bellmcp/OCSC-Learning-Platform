@@ -89,6 +89,7 @@ export default function ContentList({
               component={RouterLink}
               to={`${pathname}?contentId=${courseContent?.id}`}
               onClick={handleMobileDialogClose && handleMobileDialogClose}
+              style={{ whiteSpace: "normal" }}
             >
               <ListItemIcon>
                 <Badge
@@ -109,7 +110,7 @@ export default function ContentList({
               <ListItemText
                 primary={
                   <Typography variant="body1" color="textPrimary">
-                    {courseContent?.name ? courseContent?.name : "เนื้อหา"}
+                    {courseContent?.name ? courseContent?.name : "ไม่มีชื่อ"}
                   </Typography>
                 }
                 secondary={

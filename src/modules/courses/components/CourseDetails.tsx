@@ -286,7 +286,7 @@ export default function CourseDetails() {
                         ประมวลรายวิชา
                       </Typography>
                     </Grid>
-                    <Box my={1} style={{ maxWidth: 500 }}>
+                    <Box my={1} style={{ maxWidth: 800 }}>
                       <List>
                         {contents.map((content, id) => (
                           <>
@@ -299,7 +299,14 @@ export default function CourseDetails() {
                                 )}
                               </ListItemIcon>
                               <ListItemText
-                                primary={content.name}
+                                primary={
+                                  content.name ? content.name : "ไม่มีชื่อ"
+                                }
+                                primaryTypographyProps={{
+                                  style: {
+                                    lineHeight: "1.3",
+                                  },
+                                }}
                                 secondary={`${getContentTypeText(
                                   getContentType(content.content1)
                                 )}${
