@@ -56,3 +56,17 @@ export function getContentTypeIcon(type: string, subType: string) {
       return <FileIcon />;
   }
 }
+
+export function getContentTypeTitle(type: string, subType: string) {
+  switch (type) {
+    case "c":
+      if (subType === "video") return "วิดีโอ";
+      else return "เนื้อหา";
+    case "t":
+      return "แบบทดสอบ";
+    case "e":
+      return "แบบประเมิน";
+    default:
+      return "ไม่มีชื่อ";
+  }
+}

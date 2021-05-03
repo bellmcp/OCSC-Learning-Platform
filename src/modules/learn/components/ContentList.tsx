@@ -20,7 +20,9 @@ import {
   getContentType,
   getContentTypeText,
   getContentTypeIcon,
+  getContentTypeTitle,
 } from "utils/contentType";
+import { LineWeight } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -109,13 +111,26 @@ export default function ContentList({
               </ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography variant="body1" color="textPrimary">
-                    {courseContent?.name ? courseContent?.name : "ไม่มีชื่อ"}
+                  <Typography
+                    variant="body1"
+                    color="textPrimary"
+                    style={{ lineHeight: "1.4" }}
+                  >
+                    {courseContent?.name
+                      ? courseContent?.name
+                      : getContentTypeTitle(
+                          courseContent?.type,
+                          getContentType(courseContent?.content1)
+                        )}
                   </Typography>
                 }
                 secondary={
                   courseContent?.minutes && (
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      style={{ marginTop: 2 }}
+                    >
                       {`${getContentTypeText(
                         getContentType(courseContent.content1)
                       )}${

@@ -33,6 +33,7 @@ import {
   getContentType,
   getContentTypeText,
   getContentTypeIcon,
+  getContentTypeTitle,
 } from "utils/contentType";
 
 import * as coursesActions from "../actions";
@@ -300,7 +301,12 @@ export default function CourseDetails() {
                               </ListItemIcon>
                               <ListItemText
                                 primary={
-                                  content.name ? content.name : "ไม่มีชื่อ"
+                                  content.name
+                                    ? content.name
+                                    : getContentTypeTitle(
+                                        content.type,
+                                        getContentType(content.content1)
+                                      )
                                 }
                                 primaryTypographyProps={{
                                   style: {
@@ -314,6 +320,11 @@ export default function CourseDetails() {
                                     ? `, ${content.minutes} นาที`
                                     : ""
                                 }`}
+                                secondaryTypographyProps={{
+                                  style: {
+                                    marginTop: 2,
+                                  },
+                                }}
                               />
                             </ListItem>
                           </>

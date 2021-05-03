@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
-import { getContentType } from "utils/contentType";
+import { getContentType, getContentTypeTitle } from "utils/contentType";
 import { generateContentSourceUrl } from "utils/soureceUrl";
 import { Hd as HdIcon } from "@material-ui/icons";
 
@@ -165,7 +165,10 @@ export default function ContentView({
                   >
                     {activeContentView?.name
                       ? activeContentView?.name
-                      : "ไม่มีชื่อ"}
+                      : getContentTypeTitle(
+                          activeContentView?.type,
+                          getContentType(activeContentView?.content1)
+                        )}
                   </Typography>
                   {matches && getContentType(activeSource) === "video"
                     ? checkVideoQuality()
