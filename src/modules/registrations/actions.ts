@@ -184,7 +184,7 @@ function registerCurriculum(curriculumId) {
       if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
-            "คุณได้ลงทะเบียนหลักสูตร หรือรายวิชาในหลักสูตรนี้ทั้งหมดแล้ว โปรดตรวจสอบอีกครั้ง",
+            "คุณได้ลงทะเบียนหลักสูตร หรือรายวิชาในหลักสูตรนี้แล้ว โปรดตรวจสอบอีกครั้ง",
             "error"
           )
         );
