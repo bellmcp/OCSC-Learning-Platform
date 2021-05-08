@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import DayJS from "react-dayjs";
@@ -32,6 +32,12 @@ export default function CourseRound({
   const dispatch = useDispatch();
   const history = useHistory();
   const path = "/learning-platform";
+  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] = useState(
+    false
+  );
+  const [registerButtonLabel, setRegisterButtonLabel] = useState(
+    "ลงทะเบียนเรียน"
+  );
 
   if (myCourses === "") {
     myCourses = [];
@@ -48,6 +54,13 @@ export default function CourseRound({
   const registerCourse = () => {
     const registration_action = registrationsActions.registerCourse(id);
     dispatch(registration_action);
+    setIsRegisterButtonDisabled(true);
+    setRegisterButtonLabel("กำลังโหลด...");
+    //PREVENT MULTIPLE REQUEST
+    setTimeout(() => {
+      setIsRegisterButtonDisabled(false);
+      setRegisterButtonLabel("ลงทะเบียนเรียน");
+    }, 3000);
   };
 
   function renderRegisterButton() {
@@ -112,8 +125,9 @@ export default function CourseRound({
           color="primary"
           endIcon={<ArrowForwardIcon />}
           onClick={registerCourse}
+          disabled={isRegisterButtonDisabled}
         >
-          ลงทะเบียนเรียน
+          {registerButtonLabel}
         </Button>
       );
     }

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import {
@@ -77,6 +77,12 @@ export default function CurriculumDetails() {
   const { id }: any = useParams();
   const history = useHistory();
   const path = "/learning-platform";
+  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] = useState(
+    false
+  );
+  const [registerButtonLabel, setRegisterButtonLabel] = useState(
+    "ลงทะเบียนหลักสูตร"
+  );
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
@@ -127,6 +133,13 @@ export default function CurriculumDetails() {
   const registerCurriculum = () => {
     const registration_action = registrationsActions.registerCurriculum(id);
     dispatch(registration_action);
+    setIsRegisterButtonDisabled(true);
+    setRegisterButtonLabel("กำลังโหลด...");
+    //PREVENT MULTIPLE REQUEST
+    setTimeout(() => {
+      setIsRegisterButtonDisabled(false);
+      setRegisterButtonLabel("ลงทะเบียนหลักสูตร");
+    }, 3000);
   };
 
   const curriculumInfoPlaceholder = [
@@ -256,8 +269,9 @@ export default function CurriculumDetails() {
             color="secondary"
             endIcon={<ArrowForwardIcon />}
             onClick={registerCurriculum}
+            disabled={isRegisterButtonDisabled}
           >
-            ลงทะเบียนหลักสูตร
+            {registerButtonLabel}
           </Button>
         </Grid>
       );
