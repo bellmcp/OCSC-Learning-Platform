@@ -182,7 +182,9 @@ export default function CourseRound({
                     __html: registrationCondition,
                   }}
                 ></div>
-              ) : null}
+              ) : (
+                "ไม่มีเงื่อนไข"
+              )}
             </Typography>
           </Grid>
         </Grid>

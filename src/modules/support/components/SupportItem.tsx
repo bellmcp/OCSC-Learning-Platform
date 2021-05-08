@@ -105,7 +105,12 @@ export default function SupportItem({
             >
               เลขที่อ้างอิง: {id}
             </Typography>
-            <Grid container alignItems="center" style={{ marginBottom: 4 }}>
+            <Grid
+              container
+              alignItems="center"
+              style={{ marginBottom: 4 }}
+              wrap="nowrap"
+            >
               <ChatBubbleIcon style={{ marginRight: 10 }} />
               <Typography
                 variant="h6"
