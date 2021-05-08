@@ -78,17 +78,19 @@ export default function Timer({
     if (contentId !== undefined) {
       const sequence = setInterval(() => {
         setProgress((prevProgress) => prevProgress + 1);
+        const isGoingToComplete = progress + 1 >= contentLength && !isCompleted;
         const update_content_view_action = learnActions.updateContentView(
           courseRegistrationId,
           contentViewId,
-          60
+          60,
+          isGoingToComplete ? false : true
         );
         dispatch(update_content_view_action);
 
-        if (progress + 1 >= contentLength && !isCompleted) {
+        if (isGoingToComplete) {
           dispatch(
             uiActions.setFlashMessage(
-              "ยินดีด้วย คุณเรียนเนื้อหาครบเวลาท่ีกำหนดแล้ว",
+              "ยินดีด้วย คุณเรียนเนื้อหาครบเวลาที่กำหนดแล้ว",
               "success"
             )
           );

@@ -123,7 +123,12 @@ function loadContentViews(registrationId) {
   };
 }
 
-function updateContentView(registrationId, contentViewId, contentSeconds) {
+function updateContentView(
+  registrationId,
+  contentViewId,
+  contentSeconds,
+  showFlashMessage
+) {
   return async (dispatch, getState) => {
     const token = getCookie("token");
     const userId = parseJwt(token).unique_name;
@@ -152,7 +157,9 @@ function updateContentView(registrationId, contentViewId, contentSeconds) {
         type: UPDATE_CONTENT_VIEW_SUCCESS,
         payload: { contentSeconds: data },
       });
-      dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม +1 นาที", "info"));
+      if (showFlashMessage) {
+        dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม +1 นาที", "info"));
+      }
     } catch (err) {
       dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
       if (err?.response?.status === 401) {
