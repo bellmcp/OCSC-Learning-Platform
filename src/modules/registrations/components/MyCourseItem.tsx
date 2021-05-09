@@ -50,6 +50,7 @@ const path = "/learning-platform";
 
 export default function MyCourseItem({
   courseRoundId,
+  courseRoundName,
   courseStart,
   courseEnd,
   registrationDate,
@@ -118,7 +119,7 @@ export default function MyCourseItem({
                     color="textSecondary"
                     gutterBottom
                   >
-                    รอบที่ {courseRoundId ? courseRoundId : "ไม่มีข้อมูล"}
+                    {courseRoundName ? courseRoundName : "ไม่มีข้อมูล"}
                   </Typography>
                   <Typography
                     variant="caption"
