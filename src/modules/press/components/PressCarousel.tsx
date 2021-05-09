@@ -128,7 +128,7 @@ export default function PressCarousel({ presses, isLoading }) {
           totalSlides={presses.length}
           visibleSlides={isMdUp ? 3 : isSmUp ? 2 : 1}
           interval={6000}
-          isPlaying
+          isPlaying={presses.length <= 3 ? false : true}
           className={classes.carousel}
         >
           <div className={classes.slider}>
