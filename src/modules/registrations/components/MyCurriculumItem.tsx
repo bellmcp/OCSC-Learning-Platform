@@ -134,10 +134,10 @@ export default function MyCurriculumItem({
                       component="h2"
                       style={{ lineHeight: "1.1", marginBottom: 4 }}
                     >
-                      {name}
+                      {name ? name : "หลักสูตร"}
                     </Typography>
                     <Typography variant="body1" component="p" gutterBottom>
-                      {code}
+                      {code ? code : "รหัสหลักสูตร"}
                     </Typography>
                     <Typography
                       variant="caption"
@@ -148,7 +148,7 @@ export default function MyCurriculumItem({
                     >
                       <b>ลงทะเบียน </b>
                       <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                        {registrationDate}
+                        {registrationDate ? registrationDate : "ไม่มีข้อมูล"}
                       </DayJS>
                     </Typography>
                   </Grid>
@@ -201,7 +201,7 @@ export default function MyCurriculumItem({
                               <span style={{ color: green[800] }}>
                                 <b>สำเร็จการศึกษา </b>
                                 <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                                  {completeDate}
+                                  {completeDate ? completeDate : "ไม่มีข้อมูล"}
                                 </DayJS>
                               </span>
                             </Typography>
@@ -277,7 +277,7 @@ export default function MyCurriculumItem({
                     <span style={{ color: green[800] }}>
                       <b>สำเร็จการศึกษา </b>
                       <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                        {completeDate}
+                        {completeDate ? completeDate : "ไม่มีข้อมูล"}
                       </DayJS>
                     </span>
                   </Typography>

@@ -107,10 +107,10 @@ export default function MyCourseItem({
                     component="h2"
                     style={{ lineHeight: "1.1", marginBottom: 4 }}
                   >
-                    {name}
+                    {name ? name : "รายวิชา"}
                   </Typography>
                   <Typography variant="body1" component="p" gutterBottom>
-                    {code}
+                    {code ? code : "รหัสรายวิชา"}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -118,7 +118,7 @@ export default function MyCourseItem({
                     color="textSecondary"
                     gutterBottom
                   >
-                    รอบที่ {courseRoundId}
+                    รอบที่ {courseRoundId ? courseRoundId : "ไม่มีข้อมูล"}
                   </Typography>
                   <Typography
                     variant="caption"
@@ -129,7 +129,7 @@ export default function MyCourseItem({
                   >
                     <b>ลงทะเบียน </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {registrationDate}
+                      {registrationDate ? registrationDate : "ไม่มีข้อมูล"}
                     </DayJS>
                   </Typography>
                   <Typography
@@ -140,11 +140,11 @@ export default function MyCourseItem({
                   >
                     <b>เข้าเรียนได้ </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {courseStart}
+                      {courseStart ? courseStart : "ไม่มีข้อมูล"}
                     </DayJS>{" "}
                     ถึง{" "}
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {courseEnd}
+                      {courseEnd ? courseEnd : "ไม่มีข้อมูล"}
                     </DayJS>
                   </Typography>
                 </Grid>
@@ -193,7 +193,7 @@ export default function MyCourseItem({
                         <span style={{ color: green[800] }}>
                           <b>สำเร็จการศึกษา </b>
                           <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                            {completeDate}
+                            {completeDate ? completeDate : "ไม่มีข้อมูล"}
                           </DayJS>
                         </span>
                       </Typography>
@@ -245,7 +245,7 @@ export default function MyCourseItem({
                   <span style={{ color: green[800] }}>
                     <b>สำเร็จการศึกษา </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {completeDate}
+                      {completeDate ? completeDate : "ไม่มีข้อมูล"}
                     </DayJS>
                   </span>
                 </Typography>
