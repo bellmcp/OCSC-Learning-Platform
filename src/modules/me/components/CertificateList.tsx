@@ -51,7 +51,8 @@ export default function Certificate() {
   }, [dispatch]);
 
   useEffect(() => {
-    const curriculum_certificates_action = meActions.loadCurriculumCertificates();
+    const curriculum_certificates_action =
+      meActions.loadCurriculumCertificates();
     dispatch(curriculum_certificates_action);
   }, [dispatch]);
 
@@ -110,7 +111,7 @@ export default function Certificate() {
           <CircularProgress color="secondary" />
         </Grid>
       );
-    } else if (courseCertificates.length === 0) {
+    } else if (curriculumCertificates.length === 0) {
       return (
         <Grid
           container
