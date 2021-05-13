@@ -35,13 +35,13 @@ const useStyles = makeStyles((theme) => ({
   },
   focusHighlight: {},
   cardMedia: {
-    paddingTop: "75%", // 4:3
+    paddingTop: "90%",
     borderRadius: theme.shape.borderRadius,
     boxShadow:
       "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
   },
   cardMediaStack: {
-    paddingTop: "75%", // 4:3
+    paddingTop: "90%",
     marginTop: "8px",
     borderRadius: theme.shape.borderRadius,
     boxShadow:
