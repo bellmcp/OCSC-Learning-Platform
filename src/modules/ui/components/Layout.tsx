@@ -96,10 +96,10 @@ export default function Layout() {
     },
     palette: {
       primary: {
-        main: "#2e9ab6",
+        main: process.env.REACT_APP_PRIMARY_COLOR_HEX,
       },
       secondary: {
-        main: "#183A7C",
+        main: process.env.REACT_APP_SECONDARY_COLOR_HEX,
       },
     },
   });

@@ -23,10 +23,10 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     padding: theme.spacing(6, 2),
     marginTop: "auto",
-    backgroundColor: "#183A7C",
+    backgroundColor: process.env.REACT_APP_SECONDARY_COLOR_HEX,
   },
   link: {
-    color: "#00A69C",
+    color: process.env.REACT_APP_TERTIARY_COLOR_HEX,
   },
 }));
 

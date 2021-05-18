@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     width: 80,
     height: 80,
-    backgroundColor: "#00A69C",
+    backgroundColor: process.env.REACT_APP_TERTIARY_COLOR_HEX,
     color: theme.palette.common.white,
   },
   buttonGroupWrapper: {

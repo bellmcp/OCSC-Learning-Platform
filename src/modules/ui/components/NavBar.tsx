@@ -48,7 +48,7 @@ import NavDropdownDesktop from "./NavDropdownDesktop";
 const darkTheme = createMuiTheme({
   palette: {
     primary: {
-      main: "#2e9ab6",
+      main: process.env.REACT_APP_PRIMARY_COLOR_HEX,
     },
   },
   typography: {
@@ -152,7 +152,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.common.white,
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: "#00A69C",
+      backgroundColor: process.env.REACT_APP_TERTIARY_COLOR_HEX,
     },
     noDecorationLink: {
       textDecoration: "none",

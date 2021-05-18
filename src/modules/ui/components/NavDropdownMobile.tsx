@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.common.white,
       width: theme.spacing(4),
       height: theme.spacing(4),
-      backgroundColor: "#00A69C",
+      backgroundColor: process.env.REACT_APP_TERTIARY_COLOR_HEX,
     },
     bold: {
       fontWeight: 600,
