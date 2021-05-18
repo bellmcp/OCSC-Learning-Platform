@@ -40,7 +40,7 @@ export default function Certificate() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const { isLoading, courseCertificates, curriculumCertificates } = useSelector(
     (state: any) => state.me
   );

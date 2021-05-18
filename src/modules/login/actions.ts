@@ -8,7 +8,7 @@ const LOAD_LOGIN_SUCCESS = "learning-platform/login/LOAD_LOGIN_SUCCESS";
 const LOAD_LOGIN_FAILURE = "learning-platform/login/LOAD_LOGIN_FAILURE";
 const CLEAR_MESSAGE_LOGIN = "learning-platform/login/CLEAR_MESSAGE_LOGIN";
 
-const path = "/learning-platform";
+const path = `${process.env.REACT_APP_BASE_PATH}`;
 
 function clearMessageLogin() {
   return {

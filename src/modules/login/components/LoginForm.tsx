@@ -59,11 +59,10 @@ export default function LoginForm() {
     showPassword: false,
   });
 
-  const handleChange = (prop: keyof State) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
+  const handleChange =
+    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
 
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
@@ -76,17 +75,11 @@ export default function LoginForm() {
   };
 
   const linkToForgotPassword = () => {
-    window.open(
-      "https://learningspace.ocsc.go.th/learning-portal/forget",
-      "_blank"
-    );
+    window.open(`${process.env.REACT_APP_PORTAL_URL}forget`, "_blank");
   };
 
   const linkToSignUp = () => {
-    window.open(
-      "https://learningspace.ocsc.go.th/learning-portal/signup",
-      "_blank"
-    );
+    window.open(`${process.env.REACT_APP_PORTAL_URL}signup`, "_blank");
   };
 
   const { register, handleSubmit, errors } = useForm({

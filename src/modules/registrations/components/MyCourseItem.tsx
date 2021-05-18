@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const path = "/learning-platform";
+const path = `${process.env.REACT_APP_BASE_PATH}`;
 
 export default function MyCourseItem({
   courseRoundName,

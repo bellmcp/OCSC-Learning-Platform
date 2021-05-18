@@ -51,7 +51,7 @@ function sendSupport(supportInfo, attachedFile) {
 
     axios({
       method: "post",
-      url: "https://learningspace.ocsc.go.th/learning-platform-api/Supports",
+      url: `${process.env.REACT_APP_API_URL}Supports`,
       data: bodyFormData,
       headers: {
         "Content-Type": "multipart/form-data",

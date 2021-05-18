@@ -68,7 +68,7 @@ export default function RegistrationList() {
   const history = useHistory();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   var {
     isLoading: isRegistrationsLoading,
     myCourses,

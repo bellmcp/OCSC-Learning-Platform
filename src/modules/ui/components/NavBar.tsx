@@ -191,7 +191,7 @@ export default function NavBar(props: NavigationBarProps) {
   const history = useHistory();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -286,7 +286,7 @@ export default function NavBar(props: NavigationBarProps) {
 
   const linkToPortal = () => {
     handleMenuClose();
-    window.open("https://learningspace.ocsc.go.th/learning-portal", "_blank");
+    window.open(`${process.env.REACT_APP_PORTAL_URL}`, "_blank");
   };
 
   const toggleSearchBar = () => {

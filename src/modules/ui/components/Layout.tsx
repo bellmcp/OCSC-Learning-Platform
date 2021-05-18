@@ -29,7 +29,7 @@ import Footer from "./Footer";
 export default function Layout() {
   const { pathname } = useLocation();
   const history = useHistory();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const dispatch = useDispatch();
   const { isSnackbarOpen, isDialogOpen, flashMessage, alertType } = useSelector(
     (state) => state.ui

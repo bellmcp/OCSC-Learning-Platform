@@ -42,7 +42,7 @@ const UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS =
 const UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE =
   "learning-platform/registrations/UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE";
 
-const path = "/learning-platform";
+const path = `${process.env.REACT_APP_BASE_PATH}`;
 
 function loadCourseRegistrations() {
   return async (dispatch: any, getState) => {

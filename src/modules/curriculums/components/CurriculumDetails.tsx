@@ -83,7 +83,7 @@ export default function CurriculumDetails() {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { id }: any = useParams();
   const history = useHistory();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState(false);
   const [registerButtonLabel, setRegisterButtonLabel] =

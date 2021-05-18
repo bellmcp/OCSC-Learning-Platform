@@ -13,7 +13,7 @@ import HeroImage from "assets/images/hero-notfound.svg";
 
 export default function NotFound() {
   const history = useHistory();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
 
   const linkToHome = () => {
     history.push(`${path}`);

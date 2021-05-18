@@ -31,7 +31,7 @@ import {
 import * as uiActions from "modules/ui/actions";
 
 const DRAWER_WIDTH = 200;
-const path = "/learning-platform";
+const path = `${process.env.REACT_APP_BASE_PATH}`;
 
 interface NavigationDrawerProps {
   window?: () => Window;

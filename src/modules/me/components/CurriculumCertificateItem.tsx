@@ -50,7 +50,7 @@ export default function CurriculumCertificateItem({
   const theme = useTheme();
   const history = useHistory();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
 
   const linkToLecture = () => {
     history.push(`${path}/me/certificate/curriculum/${curriculumid}`);

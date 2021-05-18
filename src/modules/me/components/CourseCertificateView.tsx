@@ -41,7 +41,7 @@ export default function CourseCertificateView() {
   const dispatch = useDispatch();
   const { id: certificateId }: any = useParams();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
 
   const { courseCertificates } = useSelector((state: any) => state.me);
   const currentCertificate = courseCertificates.filter(

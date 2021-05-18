@@ -45,29 +45,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Me() {
   const classes = useStyles();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const history = useHistory();
   const { items: users } = useSelector((state: any) => state.user);
 
   const linkToCertificate = () => {
-    window.open(
-      "https://learningspace.ocsc.go.th/learning-portal/history",
-      "_blank"
-    );
+    window.open(`${process.env.REACT_APP_PORTAL_URL}history`, "_blank");
   };
 
   const linkToEditProfile = () => {
-    window.open(
-      "https://learningspace.ocsc.go.th/learning-portal/edit",
-      "_blank"
-    );
+    window.open(`${process.env.REACT_APP_PORTAL_URL}edit`, "_blank");
   };
 
   const linkToChangePassword = () => {
-    window.open(
-      "https://learningspace.ocsc.go.th/learning-portal/reset",
-      "_blank"
-    );
+    window.open(`${process.env.REACT_APP_PORTAL_URL}reset`, "_blank");
   };
 
   const linkToPrintCertificate = () => {

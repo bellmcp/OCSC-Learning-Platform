@@ -57,7 +57,7 @@ const UPDATE_TEST_TRIES_SUCCESS =
 const UPDATE_TEST_TRIES_FAILURE =
   "learning-platform/learn/UPDATE_TEST_TRIES_FAILURE";
 
-const path = "/learning-platform";
+const path = `${process.env.REACT_APP_BASE_PATH}`;
 
 function createSession() {
   return async (dispatch) => {

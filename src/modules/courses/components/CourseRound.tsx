@@ -47,7 +47,7 @@ export default function CourseRound({
 }: CourseRoundProps) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState(false);
   const [registerButtonLabel, setRegisterButtonLabel] =

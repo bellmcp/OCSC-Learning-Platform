@@ -41,7 +41,7 @@ export default function CurriculumCertificateView() {
   const dispatch = useDispatch();
   const { id: certificateId }: any = useParams();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
 
   const { curriculumCertificates } = useSelector((state: any) => state.me);
   const currentCertificate = curriculumCertificates.filter(
@@ -50,7 +50,8 @@ export default function CurriculumCertificateView() {
   )[0];
 
   useEffect(() => {
-    const curriculum_certificates_action = meActions.loadCurriculumCertificates();
+    const curriculum_certificates_action =
+      meActions.loadCurriculumCertificates();
     dispatch(curriculum_certificates_action);
   }, [dispatch]);
 

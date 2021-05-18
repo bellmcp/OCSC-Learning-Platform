@@ -59,7 +59,7 @@ export default function Home() {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
   const history = useHistory();
-  const path = "/learning-platform";
+  const path = `${process.env.REACT_APP_BASE_PATH}`;
   const { search } = useLocation();
   const { courseCategoryId } = queryString.parse(search);
 
