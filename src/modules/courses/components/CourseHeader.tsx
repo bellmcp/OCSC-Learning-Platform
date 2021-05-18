@@ -15,6 +15,14 @@ import {
 import { FiberManualRecord as CourseGenreIcon } from "@material-ui/icons";
 import categoryColor from "utils/categoryColor";
 
+interface CourseHeaderProps {
+  title: string;
+  code: string;
+  imageUrl: string;
+  category: string;
+  categoryId: number;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -37,7 +45,7 @@ export default function CourseHeader({
   imageUrl,
   category,
   categoryId,
-}: any) {
+}: CourseHeaderProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));

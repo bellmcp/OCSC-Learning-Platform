@@ -13,6 +13,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import { FiberManualRecord as Circle } from "@material-ui/icons";
 import categoryColor from "utils/categoryColor";
 
+import { CategoryProps } from "modules/categories/types";
+
+interface CourseItemProps {
+  categories: CategoryProps[];
+  id: number;
+  code: string;
+  name: string;
+  courseCategoryId: number;
+  learningObjective: string;
+  thumbnail: string;
+}
+
 const useStyles = makeStyles((theme) => ({
   card: {
     height: "100%",
@@ -91,7 +103,7 @@ export default function CourseItem({
   courseCategoryId,
   learningObjective,
   thumbnail,
-}: any) {
+}: CourseItemProps) {
   const classes = useStyles();
   const { path } = useRouteMatch();
   const basePath = "/learning-platform";

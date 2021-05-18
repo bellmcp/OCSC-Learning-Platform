@@ -16,6 +16,22 @@ import isBetween from "utils/isBetween";
 
 import * as registrationsActions from "modules/registrations/actions";
 
+import { CourseProps } from "../types";
+
+interface CourseRoundProps {
+  id: number;
+  name: string;
+  registrationStart: string;
+  registrationEnd: string;
+  registrationCondition: string;
+  courseStart: string;
+  courseEnd: string;
+  maxStudents: number;
+  numStudents: number;
+  myCourses: CourseProps[];
+  courseId: number;
+}
+
 export default function CourseRound({
   id,
   name,
@@ -28,16 +44,14 @@ export default function CourseRound({
   numStudents,
   myCourses,
   courseId,
-}: any) {
+}: CourseRoundProps) {
   const dispatch = useDispatch();
   const history = useHistory();
   const path = "/learning-platform";
-  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] = useState(
-    false
-  );
-  const [registerButtonLabel, setRegisterButtonLabel] = useState(
-    "ลงทะเบียนเรียน"
-  );
+  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
+    useState(false);
+  const [registerButtonLabel, setRegisterButtonLabel] =
+    useState("ลงทะเบียนเรียน");
 
   if (myCourses === "") {
     myCourses = [];

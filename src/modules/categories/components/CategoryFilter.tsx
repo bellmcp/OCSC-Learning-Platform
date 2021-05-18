@@ -7,6 +7,12 @@ import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 import { FiberManualRecord as Circle } from "@material-ui/icons";
 import categoryColor from "utils/categoryColor";
 
+import { CategoryProps } from "../types";
+
+interface CategoryFilterProps {
+  categories: CategoryProps[];
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: theme.spacing(2),
@@ -17,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CategoryFilter({ categories }) {
+export default function CategoryFilter({ categories }: CategoryFilterProps) {
   const classes = useStyles();
   const { search } = useLocation();
   const history = useHistory();

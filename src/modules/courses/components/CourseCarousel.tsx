@@ -18,8 +18,16 @@ import {
   ArrowForwardIosRounded as ArrowForward,
   ArrowBackIosRounded as ArrowBack,
 } from "@material-ui/icons";
-
 import CourseItem from "./CourseItem";
+
+import { CategoryProps } from "modules/categories/types";
+import { CourseProps } from "../types";
+
+interface CourseCarouselProps {
+  courses: CourseProps;
+  categories: CategoryProps;
+  isLoading: boolean;
+}
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -93,7 +101,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CourseCarousel({ courses, categories, isLoading }) {
+export default function CourseCarousel({
+  courses,
+  categories,
+  isLoading,
+}: CourseCarouselProps) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
