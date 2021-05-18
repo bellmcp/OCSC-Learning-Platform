@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import {
   MenuItem,
@@ -12,6 +13,17 @@ import {
   ViewCarousel as PortalIcon,
   Person as ProfileIcon,
 } from "@material-ui/icons";
+
+interface NavDropdownDesktopProps {
+  login: () => void;
+  logout: () => void;
+  linkToProfile: () => void;
+  linkToPortal: () => void;
+  anchorEl: any;
+  menuId: number;
+  isMenuOpen: boolean;
+  handleMenuClose: () => void;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -30,7 +42,7 @@ export default function NavDropdownDesktop({
   menuId,
   isMenuOpen,
   handleMenuClose,
-}: any) {
+}: NavDropdownDesktopProps) {
   const classes = useStyles();
 
   return (

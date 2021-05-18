@@ -15,6 +15,12 @@ import {
 
 const HeroImage = require("assets/images/hero.svg");
 
+interface HeaderProps {
+  title: string;
+  subtitle?: string;
+  icon: React.ReactElement;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -30,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function Header({ title, subtitle, icon }: any) {
+export default function Header({ title, subtitle, icon }: HeaderProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("sm"));

@@ -28,11 +28,19 @@ import {
   CloseRounded as CloseIcon,
 } from "@material-ui/icons";
 
-import { NavigationDrawerProps } from "../types";
 import * as uiActions from "modules/ui/actions";
 
 const DRAWER_WIDTH = 200;
 const path = "/learning-platform";
+
+interface NavigationDrawerProps {
+  window?: () => Window;
+  handleDrawerToggle: () => void;
+  mobileOpen: boolean;
+  active: number;
+  unreadNotificationCount: number;
+  isUserCurrentlyInLearn: boolean;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

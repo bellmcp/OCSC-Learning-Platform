@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import {
   MenuItem,
@@ -14,6 +15,21 @@ import {
   ViewCarousel as PortalIcon,
 } from "@material-ui/icons";
 import { grey } from "@material-ui/core/colors";
+
+import { UserProps } from "modules/user/types";
+
+interface NavDropdownMobileProps {
+  users: UserProps;
+  login: () => void;
+  logout: () => void;
+  mobileMenuId: number;
+  mobileMoreAnchorEl: any;
+  isMobileMenuOpen: boolean;
+  handleMobileMenuClose: () => void;
+  linkToProfile: () => void;
+  linkToLogin: () => void;
+  linkToPortal: () => void;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -45,7 +61,7 @@ export default function NavDropdownMobile({
   linkToProfile,
   linkToLogin,
   linkToPortal,
-}: any) {
+}: NavDropdownMobileProps) {
   const classes = useStyles();
 
   return (
