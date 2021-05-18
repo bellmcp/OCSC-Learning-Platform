@@ -119,27 +119,6 @@ export default function Home() {
       />
       <Container maxWidth="lg" className={classes.content}>
         <PressCarousel presses={presses} isLoading={isPressesLoading} />
-        {/* <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Typography
-                gutterBottom
-                variant="h6"
-                style={{ fontSize: "1.7rem" }}
-              >
-                วิชาที่เรียนล่าสุด
-              </Typography>
-              <Link
-                to="/learn"
-                style={{ color: "inherit", fontSize: "0.9rem" }}
-              >
-                ดูทั้งหมด {">"}
-              </Link>
-            </Grid>
-            <MyCourseItem isHome /> */}
 
         <Box mt={3} mb={2}>
           <Divider />
@@ -242,86 +221,6 @@ export default function Home() {
             isLoading={isCurriculumsLoading}
           />
         </Box>
-
-        {/* 
-            {courses.map((item, index) => (
-              <React.Fragment key={index}>
-                {index === 0 ? (
-                  <React.Fragment>
-                    <Box mt={3} mb={2}>
-                      <Divider />
-                    </Box>
-                    <Box mb={2}>
-                      <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="center"
-                      >
-                        <CourseFilter />
-                      </Grid>
-                    </Box>
-                  </React.Fragment>
-                ) : null}
-
-                {index === 0 ? null : (
-                  <Box my={3}>
-                    <Divider />
-                  </Box>
-                )}
-
-                <Grid
-                  container
-                  direction="row"
-                  justify="space-between"
-                  alignItems="center"
-                >
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    style={{ fontSize: "1.7rem" }}
-                  >
-                    {item.name}
-                  </Typography>
-                  <Link
-                    to="/courses"
-                    style={{ color: "inherit", fontSize: "0.9rem" }}
-                  >
-                    ดูทั้งหมด {">"}
-                  </Link>
-                </Grid>
-              
-              </React.Fragment>
-            ))} */}
-        {/* 
-            {curriculum.map((item, index) => (
-              <React.Fragment key={index}>
-                <Box my={3}>
-                  <Divider />
-                </Box>
-                <Grid
-                  container
-                  direction="row"
-                  justify="space-between"
-                  alignItems="center"
-                >
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    style={{ fontSize: "1.7rem" }}
-                  >
-                    {item.name}
-                  </Typography>
-                  <Link
-                    to="/curriculum"
-                    style={{ color: "inherit", fontSize: "0.9rem" }}
-                  >
-                    ดูทั้งหมด {">"}
-                  </Link>
-                </Grid>
-            
-              </React.Fragment>
-            ))} */}
       </Container>
     </>
   );

@@ -12,6 +12,14 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { amber } from "@material-ui/core/colors";
 
+interface CurriculumItemProps {
+  id: number;
+  code: string;
+  name: string;
+  learningObjective: string;
+  thumbnail: string;
+}
+
 const useStyles = makeStyles((theme) => ({
   card: {
     height: "100%",
@@ -88,7 +96,7 @@ export default function CurriculumItem({
   name,
   learningObjective,
   thumbnail,
-}: any) {
+}: CurriculumItemProps) {
   const classes = useStyles();
   const { path } = useRouteMatch();
   const basePath = "/learning-platform";

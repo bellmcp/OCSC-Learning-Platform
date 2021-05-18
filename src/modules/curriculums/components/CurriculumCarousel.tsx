@@ -21,6 +21,13 @@ import {
 
 import CurriculumItem from "./CurriculumItem";
 
+import { CurriculumProps } from "modules/curriculums/types";
+
+interface CurriculumCarouselProps {
+  curriculums: CurriculumProps;
+  isLoading: boolean;
+}
+
 const useStyles = makeStyles((theme) => ({
   title: {
     textAlign: "center",
@@ -93,7 +100,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CurriculumCarousel({ curriculums, isLoading }) {
+export default function CurriculumCarousel({
+  curriculums,
+  isLoading,
+}: CurriculumCarouselProps) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));

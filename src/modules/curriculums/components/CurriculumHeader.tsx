@@ -14,6 +14,12 @@ import {
 } from "@material-ui/core";
 import { amber } from "@material-ui/core/colors";
 
+interface CurriculumHeaderProps {
+  title: string;
+  code: string;
+  imageUrl: string;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
@@ -30,7 +36,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function CurriculumHeader({ title, code, imageUrl }: any) {
+export default function CurriculumHeader({
+  title,
+  code,
+  imageUrl,
+}: CurriculumHeaderProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));

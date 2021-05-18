@@ -35,6 +35,13 @@ import * as registrationsActions from "modules/registrations/actions";
 import CurriculumHeader from "modules/curriculums/components/CurriculumHeader";
 import CourseItem from "modules/courses/components/CourseItem";
 
+interface RenderCurriculumInfoProps {
+  index: number;
+  title: string;
+  info: string;
+  icon: React.ReactElement;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
@@ -77,12 +84,10 @@ export default function CurriculumDetails() {
   const { id }: any = useParams();
   const history = useHistory();
   const path = "/learning-platform";
-  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] = useState(
-    false
-  );
-  const [registerButtonLabel, setRegisterButtonLabel] = useState(
-    "ลงทะเบียนหลักสูตร"
-  );
+  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
+    useState(false);
+  const [registerButtonLabel, setRegisterButtonLabel] =
+    useState("ลงทะเบียนหลักสูตร");
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
@@ -103,7 +108,8 @@ export default function CurriculumDetails() {
   }, [dispatch, id]);
 
   useEffect(() => {
-    const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
+    const curriculum_registrations_action =
+      registrationsActions.loadCurriculumRegistrations();
     dispatch(curriculum_registrations_action);
   }, [dispatch]);
 
@@ -169,7 +175,12 @@ export default function CurriculumDetails() {
     },
   ];
 
-  function RenderCurriculumInfo({ index, title, info, icon }: any) {
+  function RenderCurriculumInfo({
+    index,
+    title,
+    info,
+    icon,
+  }: RenderCurriculumInfoProps) {
     return (
       <Box mb={4} key={index}>
         <Grid
