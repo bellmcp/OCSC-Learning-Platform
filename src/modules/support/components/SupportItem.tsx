@@ -23,6 +23,8 @@ import {
 
 import * as supportActions from "modules/support/actions";
 
+import { SupportProps } from "../types";
+
 export default function SupportItem({
   id,
   subject,
@@ -33,7 +35,7 @@ export default function SupportItem({
   replyMessage,
   replyDate,
   isAcknowledged,
-}: any) {
+}: SupportProps) {
   const dispatch = useDispatch();
 
   const markSupportAsRead = () => {

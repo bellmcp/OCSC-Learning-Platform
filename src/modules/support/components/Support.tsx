@@ -37,7 +37,7 @@ export default function Support() {
       />
       <Container>
         <div className={classes.main}>
-          <main className={classes.content}>
+          <div className={classes.content}>
             <Grid
               container
               justify="space-between"
@@ -56,7 +56,7 @@ export default function Support() {
                 <SupportList />
               </Grid>
             </Grid>
-          </main>
+          </div>
         </div>
       </Container>
     </>
