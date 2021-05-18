@@ -66,7 +66,7 @@ export default function CurriculumList() {
       />
       <Container>
         <div className={classes.main}>
-          <main className={classes.content}>
+          <div className={classes.content}>
             <Box mt={3} mb={2}>
               <Grid
                 container
@@ -101,26 +101,7 @@ export default function CurriculumList() {
                 ))}
               </Grid>
             )}
-            {/* <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Box mt={6} mb={4}>
-                <Button
-                  disabled
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                  startIcon={<ArrowDownIcon />}
-                  style={{ borderRadius: 25 }}
-                >
-                  ดูเพิ่มเติม
-                </Button>
-              </Box>
-            </Grid> */}
-          </main>
+          </div>
         </div>
       </Container>
     </>

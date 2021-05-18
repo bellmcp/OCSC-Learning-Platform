@@ -107,7 +107,7 @@ export default function CourseList() {
         icon={<CourseIcon fontSize="large" style={{ marginRight: "24px" }} />}
       />
       <Container maxWidth="lg">
-        <main className={classes.content}>
+        <div className={classes.content}>
           <Box mb={2}>
             <Grid
               container
@@ -146,21 +146,7 @@ export default function CourseList() {
             )}
           </Box>
           {renderFilteredResult()}
-          {/* <Grid container direction="row" justify="center" alignItems="center">
-            <Box mt={6} mb={4}>
-              <Button
-                disabled
-                variant="contained"
-                color="primary"
-                size="large"
-                startIcon={<ArrowDownIcon />}
-                style={{ borderRadius: 25 }}
-              >
-                ดูเพิ่มเติม
-              </Button>
-            </Box>
-          </Grid> */}
-        </main>
+        </div>
       </Container>
     </>
   );
