@@ -3,14 +3,7 @@ import React, { useEffect } from "react";
 import { getCookie } from "utils/cookies";
 import parseJwt from "utils/parseJwt";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useMediaQuery,
-  Typography,
-  Badge,
-  Grid,
-  CircularProgress,
-  Box,
-} from "@material-ui/core";
+import { useMediaQuery, Typography, Badge, Grid, Box } from "@material-ui/core";
 import {
   createStyles,
   Theme,
@@ -21,6 +14,7 @@ import { Inbox as InboxIcon } from "@material-ui/icons";
 
 import * as actions from "../actions";
 import SupportItem from "./SupportItem";
+import Loading from "modules/ui/components/Loading";
 
 const StyledBadge = withStyles((theme: Theme) =>
   createStyles({
@@ -54,16 +48,7 @@ export default function SupportList() {
 
   function renderSupportList() {
     if (isLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 307 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={307} />;
     } else if (mySupportList.length === 0) {
       return (
         <Grid container direction="row" justify="center" alignItems="center">

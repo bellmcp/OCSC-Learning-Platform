@@ -10,7 +10,6 @@ import {
   Box,
   Link,
   Divider,
-  CircularProgress,
   useMediaQuery,
 } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -20,10 +19,11 @@ import {
   Inbox as InboxIcon,
 } from "@material-ui/icons";
 
+import * as meActions from "../actions";
 import Header from "modules/ui/components/Header";
 import CourseCertificateItem from "./CourseCertificateItem";
 import CurriculumCertificateItem from "./CurriculumCertificateItem";
-import * as meActions from "../actions";
+import Loading from "modules/ui/components/Loading";
 
 const useStyles = makeStyles((theme) => ({
   main: {
@@ -58,16 +58,7 @@ export default function Certificate() {
 
   function renderCourseCertificateList() {
     if (isLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 307 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={307} />;
     } else if (courseCertificates.length === 0) {
       return (
         <Grid
@@ -101,16 +92,7 @@ export default function Certificate() {
 
   function renderCurriculumCertificateList() {
     if (isLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 307 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={307} />;
     } else if (curriculumCertificates.length === 0) {
       return (
         <Grid

@@ -15,7 +15,6 @@ import {
   Grid,
   Divider,
   Avatar,
-  CircularProgress,
   Button,
   useMediaQuery,
 } from "@material-ui/core";
@@ -34,6 +33,7 @@ import * as categoriesActions from "modules/categories/actions";
 import * as registrationsActions from "modules/registrations/actions";
 import CurriculumHeader from "modules/curriculums/components/CurriculumHeader";
 import CourseItem from "modules/courses/components/CourseItem";
+import Loading from "modules/ui/components/Loading";
 
 interface RenderCurriculumInfoProps {
   index: number;
@@ -301,14 +301,7 @@ export default function CurriculumDetails() {
         <div className={classes.main}>
           <main className={classes.content}>
             {isCurriculumLoading ? (
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: 500 }}
-              >
-                <CircularProgress color="secondary" />
-              </Grid>
+              <Loading height={500} />
             ) : (
               <>
                 <Box mt={2}>

@@ -16,7 +16,6 @@ import {
   Grid,
   Divider,
   Avatar,
-  CircularProgress,
   List,
   ListItem,
   ListItemIcon,
@@ -41,6 +40,7 @@ import * as registrationsActions from "modules/registrations/actions";
 import * as categoriesActions from "modules/categories/actions";
 import CourseHeader from "./CourseHeader";
 import CourseRound from "./CourseRound";
+import Loading from "modules/ui/components/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -92,7 +92,8 @@ export default function CourseDetails() {
   }, [dispatch, courseId]);
 
   useEffect(() => {
-    const course_registrations_action = registrationsActions.loadCourseRegistrations();
+    const course_registrations_action =
+      registrationsActions.loadCourseRegistrations();
     dispatch(course_registrations_action);
   }, [dispatch]);
 
@@ -206,14 +207,7 @@ export default function CourseDetails() {
         <div className={classes.main}>
           <div className={classes.content}>
             {isCourseLoading ? (
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: 350 }}
-              >
-                <CircularProgress color="secondary" />
-              </Grid>
+              <Loading height={350} />
             ) : (
               <>
                 <Box mt={2}>

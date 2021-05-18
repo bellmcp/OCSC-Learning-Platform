@@ -6,7 +6,7 @@ import {
   makeStyles,
   Theme,
 } from "@material-ui/core/styles";
-import { useMediaQuery, Grid, CircularProgress } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import {
   CarouselProvider,
   Slider,
@@ -23,6 +23,7 @@ import {
 import { grey } from "@material-ui/core/colors";
 
 import PressItem from "./PressItem";
+import Loading from "modules/ui/components/Loading";
 
 import { PressProps } from "../types";
 
@@ -119,14 +120,7 @@ export default function PressCarousel({ presses, isLoading }: PressCarousel) {
   return (
     <>
       {isLoading ? (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 304 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
+        <Loading height={304} />
       ) : (
         <CarouselProvider
           // infinite

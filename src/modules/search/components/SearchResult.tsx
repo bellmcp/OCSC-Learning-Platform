@@ -15,7 +15,6 @@ import {
   Box,
   Container,
   Grid,
-  CircularProgress,
   Divider,
 } from "@material-ui/core";
 import { Search as SearchIcon } from "@material-ui/icons";
@@ -26,6 +25,7 @@ import * as categoriesActions from "modules/categories/actions";
 import CourseItem from "modules/courses/components/CourseItem";
 import CurriculumItem from "modules/curriculums/components/CurriculumItem";
 import Header from "modules/ui/components/Header";
+import Loading from "modules/ui/components/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -97,16 +97,7 @@ export default function SearchResult() {
 
   function renderFilteredCoursesResult() {
     if (isCoursesLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 400 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={400} />;
     } else if (filteredCourseResults.length === 0) {
       return (
         <Grid
@@ -135,16 +126,7 @@ export default function SearchResult() {
 
   function renderFilteredCurriculumsResult() {
     if (isCurriculumsLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 400 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={400} />;
     } else if (filteredCurriculumResults.length === 0) {
       return (
         <Grid

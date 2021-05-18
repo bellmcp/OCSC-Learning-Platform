@@ -15,7 +15,6 @@ import {
   Box,
   Container,
   Grid,
-  CircularProgress,
 } from "@material-ui/core";
 import { MenuBook as CourseIcon } from "@material-ui/icons";
 
@@ -24,6 +23,7 @@ import * as categoriesActions from "modules/categories/actions";
 import CourseItem from "./CourseItem";
 import CategoryFilter from "modules/categories/components/CategoryFilter";
 import Header from "modules/ui/components/Header";
+import Loading from "modules/ui/components/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -64,16 +64,7 @@ export default function CourseList() {
 
   function renderFilteredResult() {
     if (isLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 400 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={400} />;
     } else if (courses.length === 0) {
       return (
         <Grid

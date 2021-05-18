@@ -9,7 +9,6 @@ import {
   Grid,
   Box,
   Divider,
-  CircularProgress,
   Button,
 } from "@material-ui/core";
 import {
@@ -24,6 +23,7 @@ import * as registrationsActions from "../actions";
 import Header from "modules/ui/components/Header";
 import MyCurriculumItem from "./MyCurriculumItem";
 import MyCourseItem from "./MyCourseItem";
+import Loading from "modules/ui/components/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -105,16 +105,7 @@ export default function RegistrationList() {
 
   function renderRegisteredCurriculumsList() {
     if (isRegistrationsLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 380 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={380} />;
     } else if (myCurriculums.length !== 0) {
       return (
         <Grid container direction="column" spacing={2}>
@@ -154,16 +145,7 @@ export default function RegistrationList() {
 
   function renderRegisteredCoursesList() {
     if (isRegistrationsLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 380 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={380} />;
     } else if (
       myCourses.filter((myCourse) => myCourse.curriculumRegistrationId === null)
         .length !== 0

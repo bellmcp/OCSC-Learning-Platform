@@ -7,12 +7,7 @@ import {
   ButtonBack,
   ButtonNext,
 } from "pure-react-carousel";
-import {
-  useMediaQuery,
-  Grid,
-  CircularProgress,
-  Typography,
-} from "@material-ui/core/";
+import { useMediaQuery, Grid, Typography } from "@material-ui/core/";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   ArrowForwardIosRounded as ArrowForward,
@@ -20,6 +15,7 @@ import {
 } from "@material-ui/icons";
 
 import CurriculumItem from "./CurriculumItem";
+import Loading from "modules/ui/components/Loading";
 
 import { CurriculumProps } from "modules/curriculums/types";
 
@@ -111,16 +107,7 @@ export default function CurriculumCarousel({
 
   function renderFilteredResult() {
     if (isLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 411 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={411} />;
     } else if (curriculums.length === 0) {
       return (
         <Grid

@@ -10,7 +10,6 @@ import {
   Grid,
   Avatar,
   Divider,
-  CircularProgress,
   Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,6 +20,7 @@ import {
 
 import * as learnActions from "modules/learn/actions";
 import EvaluationItem from "./EvaluationItem";
+import Loading from "modules/ui/components/Loading";
 
 import HeroImage from "assets/images/hero-evaluation.svg";
 
@@ -82,9 +82,8 @@ export default function EvaluationList({
   }, [dispatch, evaluationId]);
 
   useEffect(() => {
-    const load_evaluation_items_action = learnActions.loadEvaluationItems(
-      evaluationId
-    );
+    const load_evaluation_items_action =
+      learnActions.loadEvaluationItems(evaluationId);
     dispatch(load_evaluation_items_action);
   }, [dispatch, evaluationId]);
 
@@ -108,16 +107,7 @@ export default function EvaluationList({
 
   function renderEvaluationList() {
     if (isEvaluationLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 380 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={380} />;
     } else if (isCompleted) {
       return (
         <Box my={10}>

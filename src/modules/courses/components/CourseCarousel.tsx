@@ -7,18 +7,14 @@ import {
   ButtonBack,
   ButtonNext,
 } from "pure-react-carousel";
-import {
-  useMediaQuery,
-  Grid,
-  CircularProgress,
-  Typography,
-} from "@material-ui/core/";
+import { useMediaQuery, Grid, Typography } from "@material-ui/core/";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   ArrowForwardIosRounded as ArrowForward,
   ArrowBackIosRounded as ArrowBack,
 } from "@material-ui/icons";
 import CourseItem from "./CourseItem";
+import Loading from "modules/ui/components/Loading";
 
 import { CategoryProps } from "modules/categories/types";
 import { CourseProps } from "../types";
@@ -113,16 +109,7 @@ export default function CourseCarousel({
 
   function renderFilteredResult() {
     if (isLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 410 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={410} />;
     } else if (courses.length === 0) {
       return (
         <Grid

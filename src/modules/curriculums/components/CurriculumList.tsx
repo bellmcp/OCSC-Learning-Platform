@@ -13,13 +13,13 @@ import {
   Box,
   Container,
   Grid,
-  CircularProgress,
 } from "@material-ui/core";
 import CurriculumItem from "./CurriculumItem";
 import { CollectionsBookmark as CurriculumIcon } from "@material-ui/icons";
 
 import * as curriculumsActions from "../actions";
 import Header from "modules/ui/components/Header";
+import Loading from "modules/ui/components/Loading";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -84,14 +84,7 @@ export default function CurriculumList() {
               </Grid>
             </Box>
             {isLoading ? (
-              <Grid
-                container
-                justify="center"
-                alignItems="center"
-                style={{ height: 407 }}
-              >
-                <CircularProgress color="secondary" />
-              </Grid>
+              <Loading height={407} />
             ) : (
               <Grid container spacing={1}>
                 {curriculums.map((curriculum) => (

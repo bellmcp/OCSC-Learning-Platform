@@ -9,15 +9,15 @@ import {
   Box,
   Button,
   Grid,
-  CircularProgress,
   Divider,
   Collapse,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Send as SendIcon, Timer as TimerIcon } from "@material-ui/icons";
 
-import TestItem from "./TestItem";
 import * as learnActions from "modules/learn/actions";
+import TestItem from "./TestItem";
+import Loading from "modules/ui/components/Loading";
 
 import HeroImage from "assets/images/hero-evaluation.svg";
 
@@ -58,9 +58,11 @@ export default function TestList({
   const [initialTestTries, setInitialTestTries] = useState(0);
   const [initialTestScore, setInitialTestScore] = useState(0);
 
-  const { isLoading: isTestLoading, test, testItems } = useSelector(
-    (state) => state.learn
-  );
+  const {
+    isLoading: isTestLoading,
+    test,
+    testItems,
+  } = useSelector((state) => state.learn);
 
   useEffect(() => {
     setInitialTestTries(currentContentView?.testTries);
@@ -119,16 +121,7 @@ export default function TestList({
 
   function renderTestList() {
     if (isTestLoading) {
-      return (
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-          style={{ height: 380 }}
-        >
-          <CircularProgress color="secondary" />
-        </Grid>
-      );
+      return <Loading height={380} />;
     } else if (isCompleted) {
       return (
         <Box my={10}>
