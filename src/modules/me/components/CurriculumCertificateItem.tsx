@@ -20,6 +20,8 @@ import {
 import { Print as PrintIcon } from "@material-ui/icons/";
 import { green, grey } from "@material-ui/core/colors";
 
+import { CurriculumCertificateProps } from "../types";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
@@ -37,17 +39,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CurriculumCertificateItem({
-  id,
   curriculumid,
   curriculum,
   startdate,
   enddate,
   pass,
   note,
-  title,
-  firstname,
-  lastname,
-}: any) {
+}: CurriculumCertificateProps) {
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();

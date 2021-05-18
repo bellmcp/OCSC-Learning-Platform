@@ -20,6 +20,8 @@ import {
 import { Print as PrintIcon } from "@material-ui/icons";
 import { green, grey } from "@material-ui/core/colors";
 
+import { CourseCertificateProps } from "../types";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
@@ -37,17 +39,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CourseCertificateItem({
-  id,
   courseid,
   course,
   startdate,
   enddate,
   pass,
   note,
-  title,
-  firstname,
-  lastname,
-}: any) {
+}: CourseCertificateProps) {
   const classes = useStyles();
   const history = useHistory();
   const theme = useTheme();
