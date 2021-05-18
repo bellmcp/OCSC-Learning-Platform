@@ -47,7 +47,7 @@ export default function CourseRound({
 }: CourseRoundProps) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState(false);
   const [registerButtonLabel, setRegisterButtonLabel] =
@@ -58,11 +58,11 @@ export default function CourseRound({
   }
 
   const linkToLogin = () => {
-    history.push(`${path}/login`);
+    history.push(`${PATH}/login`);
   };
 
   const linkToLearn = () => {
-    history.push(`${path}/learn`);
+    history.push(`${PATH}/learn`);
   };
 
   const registerCourse = () => {

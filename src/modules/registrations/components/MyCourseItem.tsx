@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const path = `${process.env.REACT_APP_BASE_PATH}`;
+const PATH = process.env.REACT_APP_BASE_PATH;
 
 export default function MyCourseItem({
   courseRoundName,
@@ -68,7 +68,7 @@ export default function MyCourseItem({
   const history = useHistory();
 
   const linkToLecture = () => {
-    history.push(`${path}/learn/courses/${courseId}`);
+    history.push(`${PATH}/learn/courses/${courseId}`);
   };
 
   return (

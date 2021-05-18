@@ -57,7 +57,7 @@ const UPDATE_TEST_TRIES_SUCCESS =
 const UPDATE_TEST_TRIES_FAILURE =
   "learning-platform/learn/UPDATE_TEST_TRIES_FAILURE";
 
-const path = `${process.env.REACT_APP_BASE_PATH}`;
+const PATH = process.env.REACT_APP_BASE_PATH;
 
 function createSession() {
   return async (dispatch) => {
@@ -163,7 +163,7 @@ function updateContentView(
     } catch (err) {
       dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
       if (err?.response?.status === 401) {
-        dispatch(push(`${path}/learn`));
+        dispatch(push(`${PATH}/learn`));
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
@@ -278,7 +278,7 @@ function updateEvaluation(
     } catch (err) {
       dispatch({ type: UPDATE_EVALUATION_FAILURE });
       if (err?.response?.status === 401) {
-        dispatch(push(`${path}/learn`));
+        dispatch(push(`${PATH}/learn`));
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
@@ -392,7 +392,7 @@ function updateTest(registrationId, contentViewId, testAnswer) {
     } catch (err) {
       dispatch({ type: UPDATE_TEST_FAILURE });
       if (err?.response?.status === 401) {
-        dispatch(push(`${path}/learn`));
+        dispatch(push(`${PATH}/learn`));
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
@@ -450,7 +450,7 @@ function updateTestTries(registrationId, contentViewId) {
     } catch (err) {
       dispatch({ type: UPDATE_TEST_TRIES_FAILURE });
       if (err?.response?.status === 401) {
-        dispatch(push(`${path}/learn`));
+        dispatch(push(`${PATH}/learn`));
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,

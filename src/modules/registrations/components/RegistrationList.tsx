@@ -68,7 +68,7 @@ export default function RegistrationList() {
   const history = useHistory();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   var {
     isLoading: isRegistrationsLoading,
     myCourses,
@@ -96,11 +96,11 @@ export default function RegistrationList() {
   }, [dispatch]);
 
   const linkToCourses = () => {
-    history.push(`${path}/courses`);
+    history.push(`${PATH}/courses`);
   };
 
   const linkToCurriculums = () => {
-    history.push(`${path}/curriculums`);
+    history.push(`${PATH}/curriculums`);
   };
 
   function renderRegisteredCurriculumsList() {

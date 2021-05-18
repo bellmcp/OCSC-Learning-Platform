@@ -29,7 +29,7 @@ import Footer from "./Footer";
 export default function Layout() {
   const { pathname } = useLocation();
   const history = useHistory();
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   const dispatch = useDispatch();
   const { isSnackbarOpen, isDialogOpen, flashMessage, alertType } = useSelector(
     (state) => state.ui
@@ -40,13 +40,13 @@ export default function Layout() {
   useEffect(() => {
     const setInitialActivePage = () => {
       switch (pathname) {
-        case `${path}`:
+        case `${PATH}`:
           setActivePage(0);
           break;
-        case `${path}/learn`:
+        case `${PATH}/learn`:
           setActivePage(1);
           break;
-        case `${path}/support`:
+        case `${PATH}/support`:
           setActivePage(2);
           break;
         default:
@@ -109,7 +109,7 @@ export default function Layout() {
   };
   const linkToLearn = () => {
     handleDialogClose();
-    history.push(`${path}/learn`);
+    history.push(`${PATH}/learn`);
     dispatch(
       actions.setFlashMessage("บันทึกเวลาเรียนสะสมเรียบร้อยแล้ว", "success")
     );
@@ -173,7 +173,7 @@ export default function Layout() {
           </IconButton>
         }
         style={{
-          marginBottom: pathname.includes(`${path}/learn/courses`)
+          marginBottom: pathname.includes(`${PATH}/learn/courses`)
             ? 60
             : "unset",
         }}
@@ -187,7 +187,7 @@ export default function Layout() {
           {flashMessage}
         </Alert>
       </Snackbar>
-      {!pathname.includes(`${path}/learn/courses`) && <Footer />}
+      {!pathname.includes(`${PATH}/learn/courses`) && <Footer />}
     </ThemeProvider>
   );
 }

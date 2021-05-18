@@ -50,10 +50,10 @@ export default function CourseCertificateItem({
   const history = useHistory();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
 
   const linkToCourseCertificate = () => {
-    history.push(`${path}/me/certificate/course/${courseid}`);
+    history.push(`${PATH}/me/certificate/course/${courseid}`);
   };
 
   return (

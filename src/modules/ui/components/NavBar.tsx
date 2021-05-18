@@ -191,7 +191,7 @@ export default function NavBar(props: NavigationBarProps) {
   const history = useHistory();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -243,24 +243,24 @@ export default function NavBar(props: NavigationBarProps) {
     {
       id: 0,
       title: "หน้าหลัก",
-      url: `${path}`,
+      url: `${PATH}`,
       notification: 0,
     },
-    { id: 1, title: "เข้าเรียน", url: `${path}/learn`, notification: 0 },
+    { id: 1, title: "เข้าเรียน", url: `${PATH}/learn`, notification: 0 },
     {
       id: 2,
       title: "ช่วยเหลือ",
-      url: `${path}/support`,
+      url: `${PATH}/support`,
       notification: UNREAD_NOTIFICATION_COUNT,
     },
   ];
 
-  const isUserCurrentlyInLearn = pathname.includes(`${path}/learn/courses`);
+  const isUserCurrentlyInLearn = pathname.includes(`${PATH}/learn/courses`);
 
   const linkToHome = () => {
     handleMenuClose();
     if (!isUserCurrentlyInLearn) {
-      history.push(`${path}`);
+      history.push(`${PATH}`);
     } else {
       dispatch(uiActions.setLearnExitDialog(true));
     }
@@ -269,7 +269,7 @@ export default function NavBar(props: NavigationBarProps) {
   const linkToLogin = () => {
     handleMenuClose();
     if (!isUserCurrentlyInLearn) {
-      history.push(`${path}/login`);
+      history.push(`${PATH}/login`);
     } else {
       dispatch(uiActions.setLearnExitDialog(true));
     }
@@ -278,7 +278,7 @@ export default function NavBar(props: NavigationBarProps) {
   const linkToProfile = () => {
     handleMenuClose();
     if (!isUserCurrentlyInLearn) {
-      history.push(`${path}/me`);
+      history.push(`${PATH}/me`);
     } else {
       dispatch(uiActions.setLearnExitDialog(true));
     }
@@ -303,7 +303,7 @@ export default function NavBar(props: NavigationBarProps) {
       eraseCookie("token");
       dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว", "success"));
       setTimeout(() => {
-        history.push(`${path}`);
+        history.push(`${PATH}`);
         window.location.reload();
       }, 1000);
     } else {
@@ -333,7 +333,7 @@ export default function NavBar(props: NavigationBarProps) {
   };
 
   const [searchValue, setSearchValue] = useSearchInputState(() => {
-    history.push(`${path}/search?query=${searchValue}`);
+    history.push(`${PATH}/search?query=${searchValue}`);
   });
 
   const menuId = "primary-search-account-menu";
@@ -343,7 +343,7 @@ export default function NavBar(props: NavigationBarProps) {
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar} elevation={0}>
         <Container
-          maxWidth={!pathname.includes(`${path}/learn/courses`) ? "lg" : false}
+          maxWidth={!pathname.includes(`${PATH}/learn/courses`) ? "lg" : false}
         >
           <Toolbar>
             {/* DRAWER TOGGLE */}

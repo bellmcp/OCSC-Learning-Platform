@@ -40,7 +40,7 @@ export default function Certificate() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   const { isLoading, courseCertificates, curriculumCertificates } = useSelector(
     (state: any) => state.me
   );
@@ -167,7 +167,7 @@ export default function Certificate() {
                   <Link
                     component={RouterLink}
                     color="inherit"
-                    to={`${path}/me`}
+                    to={`${PATH}/me`}
                   >
                     โปรไฟล์
                   </Link>

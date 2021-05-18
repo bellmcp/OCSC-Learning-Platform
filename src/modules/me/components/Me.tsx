@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Me() {
   const classes = useStyles();
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   const history = useHistory();
   const { items: users } = useSelector((state: any) => state.user);
 
@@ -62,7 +62,7 @@ export default function Me() {
   };
 
   const linkToPrintCertificate = () => {
-    history.push(`${path}/me/certificate`);
+    history.push(`${PATH}/me/certificate`);
   };
 
   return (

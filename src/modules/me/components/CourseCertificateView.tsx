@@ -41,7 +41,7 @@ export default function CourseCertificateView() {
   const dispatch = useDispatch();
   const { id: certificateId }: any = useParams();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
 
   const { courseCertificates } = useSelector((state: any) => state.me);
   const currentCertificate = courseCertificates.filter(
@@ -208,14 +208,14 @@ export default function CourseCertificateView() {
                   <Link
                     component={RouterLink}
                     color="inherit"
-                    to={`${path}/me`}
+                    to={`${PATH}/me`}
                   >
                     โปรไฟล์
                   </Link>
                   <Link
                     component={RouterLink}
                     color="inherit"
-                    to={`${path}/me/certificate`}
+                    to={`${PATH}/me/certificate`}
                   >
                     พิมพ์ประกาศนียบัตร ก.พ.
                   </Link>

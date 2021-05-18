@@ -59,16 +59,16 @@ export default function Home() {
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const dispatch = useDispatch();
   const history = useHistory();
-  const path = `${process.env.REACT_APP_BASE_PATH}`;
+  const PATH = process.env.REACT_APP_BASE_PATH;
   const { search } = useLocation();
   const { courseCategoryId } = queryString.parse(search);
 
   const linkToCourses = () => {
-    history.push(`${path}/courses`);
+    history.push(`${PATH}/courses`);
   };
 
   const linkToCurriculums = () => {
-    history.push(`${path}/curriculums`);
+    history.push(`${PATH}/curriculums`);
   };
 
   const { items: users } = useSelector((state) => state.user);

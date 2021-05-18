@@ -42,7 +42,7 @@ const UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS =
 const UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE =
   "learning-platform/registrations/UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE";
 
-const path = `${process.env.REACT_APP_BASE_PATH}`;
+const PATH = process.env.REACT_APP_BASE_PATH;
 
 function loadCourseRegistrations() {
   return async (dispatch: any, getState) => {
@@ -129,7 +129,7 @@ function registerCourse(courseRoundId) {
       dispatch(
         uiActions.setFlashMessage("ลงทะเบียนรายวิชาเรียบร้อยแล้ว", "success")
       );
-      dispatch(push(`${path}/learn`));
+      dispatch(push(`${PATH}/learn`));
     } catch (err) {
       dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
       if (err?.response?.status === 403) {
@@ -178,7 +178,7 @@ function registerCurriculum(curriculumId) {
       dispatch(
         uiActions.setFlashMessage("ลงทะเบียนหลักสูตรเรียบร้อยแล้ว", "success")
       );
-      dispatch(push(`${path}/learn`));
+      dispatch(push(`${PATH}/learn`));
     } catch (err) {
       dispatch({ type: CURRICULUM_REGISTRATION_FAILURE });
       if (err?.response?.status === 403) {

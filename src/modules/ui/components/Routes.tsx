@@ -11,7 +11,7 @@ import SearchRoutes from "modules/search/components/Routes";
 import PrivateRoute from "modules/routes/PrivateRoute";
 import NotFound from "./NotFound";
 
-const PATH = `${process.env.REACT_APP_BASE_PATH}`;
+const PATH = process.env.REACT_APP_BASE_PATH;
 
 export default function Routes() {
   return (

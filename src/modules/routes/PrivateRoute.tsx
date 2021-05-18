@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isLogin } from "utils/isLogin";
 
-const path = `${process.env.REACT_APP_BASE_PATH}`;
+const PATH = process.env.REACT_APP_BASE_PATH;
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (

@@ -31,7 +31,7 @@ import {
 import * as uiActions from "modules/ui/actions";
 
 const DRAWER_WIDTH = 200;
-const path = `${process.env.REACT_APP_BASE_PATH}`;
+const PATH = process.env.REACT_APP_BASE_PATH;
 
 interface NavigationDrawerProps {
   window?: () => Window;
@@ -119,21 +119,21 @@ export default function NavDrawer({
     {
       id: 0,
       title: "หน้าหลัก",
-      url: `${path}`,
+      url: `${PATH}`,
       icon: <HomeIcon />,
       notification: 0,
     },
     {
       id: 1,
       title: "เข้าเรียน",
-      url: `${path}/learn`,
+      url: `${PATH}/learn`,
       icon: <LearnIcon />,
       notification: 0,
     },
     {
       id: 2,
       title: "ช่วยเหลือ",
-      url: `${path}/support`,
+      url: `${PATH}/support`,
       icon: <HelpIcon />,
       notification: unreadNotificationCount,
     },
