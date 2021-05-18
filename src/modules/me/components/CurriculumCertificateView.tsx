@@ -138,6 +138,7 @@ export default function CurriculumCertificateView() {
                 fontSize: "1.7rem",
                 marginBottom: 0,
                 fontWeight: 600,
+                lineHeight: "1.3",
               }}
             >
               หลักสูตร {currentCertificate?.curriculum}
@@ -161,7 +162,7 @@ export default function CurriculumCertificateView() {
               <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
             </Typography>
           </Box>
-          <Box my={6}>
+          <Box my={6} style={{ overflow: "auto" }}>
             <CertificateRenderer
               isCurriculum
               ref={componentRef}

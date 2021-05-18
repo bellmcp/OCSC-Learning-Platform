@@ -136,6 +136,7 @@ export default function CourseCertificateView() {
                 fontSize: "1.7rem",
                 marginBottom: 0,
                 fontWeight: 600,
+                lineHeight: "1.3",
               }}
             >
               วิชา {currentCertificate?.course}
@@ -159,7 +160,7 @@ export default function CourseCertificateView() {
               <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
             </Typography>
           </Box>
-          <Box my={6}>
+          <Box my={6} style={{ overflow: "auto" }}>
             <CertificateRenderer
               ref={componentRef}
               text={text}
