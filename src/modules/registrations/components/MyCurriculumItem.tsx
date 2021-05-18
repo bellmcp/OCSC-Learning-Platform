@@ -24,6 +24,8 @@ import { CheckCircle as CheckIcon } from "@material-ui/icons";
 import MyCourseItem from "./MyCourseItem";
 import * as registrationsActions from "../actions";
 
+import { MyCurriculumProps } from "../types";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
@@ -50,21 +52,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function MyCurriculumItem({
   id,
-  userId,
-  curriculumId,
   registrationDate,
   satisfactionScore,
   isCompleted,
   completeDate,
   code,
   name,
-  learningObjective,
-  learningTopic,
-  targetGroup,
-  assessment,
   thumbnail,
   myCourses,
-}: any) {
+}: MyCurriculumProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));
@@ -76,10 +72,8 @@ export default function MyCurriculumItem({
   }, [satisfactionScore]);
 
   const updateSatisfactionScore = (newValue) => {
-    const satisfaction_score_action = registrationsActions.updateCurriculumSatisfactionScore(
-      id,
-      newValue
-    );
+    const satisfaction_score_action =
+      registrationsActions.updateCurriculumSatisfactionScore(id, newValue);
     dispatch(satisfaction_score_action);
     setValue(newValue);
   };

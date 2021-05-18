@@ -26,6 +26,8 @@ import { green } from "@material-ui/core/colors";
 
 import isBetween from "utils/isBetween";
 
+import { MyCourseProps } from "../types";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
@@ -49,7 +51,6 @@ const useStyles = makeStyles((theme: Theme) =>
 const path = "/learning-platform";
 
 export default function MyCourseItem({
-  courseRoundId,
   courseRoundName,
   courseStart,
   courseEnd,
@@ -60,7 +61,7 @@ export default function MyCourseItem({
   code,
   name,
   thumbnail,
-}: any) {
+}: MyCourseProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("xs"));

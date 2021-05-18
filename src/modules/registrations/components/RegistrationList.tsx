@@ -84,12 +84,14 @@ export default function RegistrationList() {
   }
 
   useEffect(() => {
-    const course_registrations_action = registrationsActions.loadCourseRegistrations();
+    const course_registrations_action =
+      registrationsActions.loadCourseRegistrations();
     dispatch(course_registrations_action);
   }, [dispatch]);
 
   useEffect(() => {
-    const curriculum_registrations_action = registrationsActions.loadCurriculumRegistrations();
+    const curriculum_registrations_action =
+      registrationsActions.loadCurriculumRegistrations();
     dispatch(curriculum_registrations_action);
   }, [dispatch]);
 
@@ -212,7 +214,7 @@ export default function RegistrationList() {
       />
       <Container>
         <div className={classes.main}>
-          <main className={classes.content}>
+          <div className={classes.content}>
             <Box my={4}>
               <Typography
                 gutterBottom
@@ -240,7 +242,7 @@ export default function RegistrationList() {
               </Typography>
             </Box>
             {renderRegisteredCoursesList()}
-          </main>
+          </div>
         </div>
       </Container>
     </>
