@@ -1,12 +1,6 @@
 //@ts-nocheck
 import React, { useState, useEffect } from "react";
-import DayJS from "react-dayjs";
-import {
-  isMobile,
-  browserName,
-  osName,
-  fullBrowserVersion,
-} from "react-device-detect";
+import { isMobile } from "react-device-detect";
 import {
   Box,
   Container,
@@ -42,7 +36,7 @@ export default function ContentView({
 }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const registrationId = courseRegistrationDetails[0]?.id;
+  // const registrationId = courseRegistrationDetails[0]?.id;
   const [activeSource, setActiveSource] = useState("");
   const contentSourceUrl1 = generateContentSourceUrl(
     isMobile,

@@ -44,7 +44,6 @@ import useSearchInputState from "../hooks/useSearchInputState";
 import NavDrawer from "./NavDrawer";
 import NavDropdownMobile from "./NavDropdownMobile";
 import NavDropdownDesktop from "./NavDropdownDesktop";
-import MobileSearch from "modules/search/components/MobileSearch";
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -194,10 +193,8 @@ export default function NavBar(props: NavigationBarProps) {
   const dispatch = useDispatch();
   const path = "/learning-platform";
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [
-    mobileMoreAnchorEl,
-    setMobileMoreAnchorEl,
-  ] = useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
+    useState<null | HTMLElement>(null);
 
   const LogoImage = require("assets/images/logo.svg");
 

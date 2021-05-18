@@ -22,7 +22,6 @@ import {
   getContentTypeIcon,
   getContentTypeTitle,
 } from "utils/contentType";
-import { LineWeight } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
