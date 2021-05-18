@@ -4,6 +4,8 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Link from "@material-ui/core/Link";
 
+import { PressProps } from "../types";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     cardSmall: {
@@ -32,7 +34,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function PressItem({ id, headline, imageUrl, targetUrl }: any) {
+export default function PressItem({
+  id,
+  headline,
+  imageUrl,
+  targetUrl,
+}: PressProps) {
   const classes = useStyles();
 
   return (

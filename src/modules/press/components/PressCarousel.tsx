@@ -24,6 +24,13 @@ import { grey } from "@material-ui/core/colors";
 
 import PressItem from "./PressItem";
 
+import { PressProps } from "../types";
+
+interface PressCarousel {
+  presses: PressProps;
+  isLoading: string;
+}
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     carousel: {
@@ -103,7 +110,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function PressCarousel({ presses, isLoading }) {
+export default function PressCarousel({ presses, isLoading }: PressCarousel) {
   const classes = useStyles();
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
