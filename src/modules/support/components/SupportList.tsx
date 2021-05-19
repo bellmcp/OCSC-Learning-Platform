@@ -73,7 +73,7 @@ export default function SupportList() {
     } else {
       return (
         <>
-          {mySupportList.reverse().map((support: any) => (
+          {mySupportList.map((support: any) => (
             <SupportItem key={support.id} {...support} />
           ))}
         </>
