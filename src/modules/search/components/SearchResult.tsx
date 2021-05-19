@@ -48,7 +48,11 @@ export default function SearchResult() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("sm"));
   const { search } = useLocation();
-  const { query } = queryString.parse(search);
+  var { query } = queryString.parse(search);
+
+  if (query === undefined) {
+    query = "";
+  }
 
   const dispatch = useDispatch();
   const { isLoading: isCoursesLoading, items: courses } = useSelector(
