@@ -110,22 +110,22 @@ export default function Me() {
                 <Button
                   variant="outlined"
                   color="secondary"
-                  startIcon={<FolderIcon />}
-                  onClick={linkToCertificate}
+                  startIcon={<PrintIcon />}
+                  onClick={linkToPrintCertificate}
                   fullWidth
                 >
-                  ประกาศนียบัตรทั้งหมด
+                  พิมพ์ประกาศนียบัตร ก.พ.
                 </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Button
                   variant="outlined"
                   color="secondary"
-                  startIcon={<PrintIcon />}
-                  onClick={linkToPrintCertificate}
+                  startIcon={<FolderIcon />}
+                  onClick={linkToCertificate}
                   fullWidth
                 >
-                  พิมพ์ประกาศนียบัตร ก.พ.
+                  ประกาศนียบัตรทั้งหมด
                 </Button>
               </Grid>
               <Grid
@@ -137,7 +137,7 @@ export default function Me() {
               ></Grid>
               <Grid item xs={12} sm={6}>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
                   startIcon={<EditIcon />}
                   onClick={linkToEditProfile}
@@ -148,7 +148,7 @@ export default function Me() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Button
-                  variant="contained"
+                  variant="outlined"
                   color="secondary"
                   startIcon={<LockIcon />}
                   onClick={linkToChangePassword}
