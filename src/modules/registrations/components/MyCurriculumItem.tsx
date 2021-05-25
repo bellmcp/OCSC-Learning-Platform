@@ -80,7 +80,7 @@ export default function MyCurriculumItem({
 
   return (
     <>
-      <Card className={classes.stack}>
+      <Card className={classes.stack} style={{ marginTop: 28 }}>
         <div className={classes.details}>
           <CardMedia
             image={thumbnail}

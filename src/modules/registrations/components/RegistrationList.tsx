@@ -197,7 +197,7 @@ export default function RegistrationList() {
       <Container>
         <div className={classes.main}>
           <div className={classes.content}>
-            <Box my={4}>
+            <Box mt={4}>
               <Typography
                 gutterBottom
                 component="h2"
