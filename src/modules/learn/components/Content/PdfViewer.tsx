@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Grid, Box, Typography, Button, ButtonGroup } from "@material-ui/core";
+import { OpenInNew as NewTab } from "@material-ui/icons";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const PDFDocumentWrapper = styled.div`
@@ -33,6 +34,10 @@ export default function PdfViewer({ url }) {
     changePage(1);
   }
 
+  const linkToTargetFile = () => {
+    window.open(`${url}`, "_blank");
+  };
+
   return (
     <>
       <Grid
@@ -54,19 +59,30 @@ export default function PdfViewer({ url }) {
         <Grid item>
           <Box mt={2} mb={1}>
             <Typography variant="body2" color="textSecondary">
-              หน้า {pageNumber || (numPages ? 1 : "")} จาก {numPages || ""}
+              หน้า {pageNumber || (numPages ? 1 : "")} จาก {numPages || 1}
             </Typography>
           </Box>
         </Grid>
-        <Grid item>
-          <ButtonGroup variant="outlined" color="default">
-            <Button disabled={pageNumber <= 1} onClick={previousPage}>
-              {"<"}
+        <Grid container item direction="row" spacing={2} justify="center">
+          <Grid item>
+            <ButtonGroup variant="outlined" color="default">
+              <Button disabled={pageNumber <= 1} onClick={previousPage}>
+                {"<"}
+              </Button>
+              <Button disabled={pageNumber >= numPages} onClick={nextPage}>
+                {">"}
+              </Button>
+            </ButtonGroup>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="outlined"
+              startIcon={<NewTab />}
+              onClick={linkToTargetFile}
+            >
+              เปิดในแท็บใหม่
             </Button>
-            <Button disabled={pageNumber >= numPages} onClick={nextPage}>
-              {">"}
-            </Button>
-          </ButtonGroup>
+          </Grid>
         </Grid>
       </Grid>
     </>
