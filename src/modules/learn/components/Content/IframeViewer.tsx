@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { isMobile } from "react-device-detect";
 import Iframe from "react-iframe";
+import { Grid, Box, Button } from "@material-ui/core";
+import { OpenInNew as NewTab } from "@material-ui/icons";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import MobileAlert from "./MobileAlert";
@@ -38,6 +40,10 @@ export default function IframeViewer({ url }: any) {
     }
   }
 
+  const linkToTargetUrl = () => {
+    window.open(`${url}`, "_blank");
+  };
+
   return (
     <>
       {renderUnsupportedAlert()}
@@ -46,7 +52,7 @@ export default function IframeViewer({ url }: any) {
           <Iframe
             url={url}
             width="100%"
-            height="600px"
+            height="100%"
             allowFullScreen
             frameBorder={0}
             scrolling="auto"
@@ -54,6 +60,27 @@ export default function IframeViewer({ url }: any) {
           />
         </IframeWrapper>
       </div>
+      <Box mt={2} mb={1}>
+        <Grid
+          container
+          spacing={1}
+          direction="column"
+          justify="center"
+          alignItems="center"
+          alignContent="center"
+          wrap="nowrap"
+        >
+          <Grid item>
+            <Button
+              variant="outlined"
+              startIcon={<NewTab />}
+              onClick={linkToTargetUrl}
+            >
+              เปิดในแท็บใหม่
+            </Button>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }
