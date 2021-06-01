@@ -131,18 +131,18 @@ export default function Learn() {
   }, [dispatch, courseId]);
 
   useEffect(() => {
-    const course_registrations_action = registrationsActions.loadCourseRegistrations();
+    const course_registrations_action =
+      registrationsActions.loadCourseRegistrations();
     dispatch(course_registrations_action);
   }, [dispatch]);
 
   useEffect(() => {
-    const content_view_action = learnActions.loadContentViews(
-      courseRegistrationId
-    );
+    const content_view_action =
+      learnActions.loadContentViews(courseRegistrationId);
     if (courseRegistrationId !== undefined) {
       dispatch(content_view_action);
     }
-  }, [dispatch, courseRegistrationId]);
+  }, [dispatch, courseRegistrationId, contentId]);
 
   useEffect(() => {
     const create_session_action = learnActions.createSession();

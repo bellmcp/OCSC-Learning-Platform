@@ -114,11 +114,7 @@ export default function Timer({
 
   useEffect(() => {
     setTimer(0);
-    if (initialContentMinutes !== 0) {
-      setProgress(initialContentMinutes);
-    } else {
-      setProgress(0);
-    }
+    setProgress(initialContentMinutes);
   }, [contentId, initialContentMinutes]);
 
   useEffect(() => {
