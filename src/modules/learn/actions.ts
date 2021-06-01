@@ -460,7 +460,7 @@ function updateTestTries(registrationId, contentViewId) {
       } else if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
-            "คุณทำแบบทดสอบเกินจำนวนครั้งที่กำหนดแล้ว โปรดตรวจสอบอีกครั้ง",
+            "คุณทำแบบทดสอบครบจำนวนครั้งที่กำหนดแล้ว โปรดตรวจสอบอีกครั้ง",
             "error"
           )
         );

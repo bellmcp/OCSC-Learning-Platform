@@ -25,9 +25,9 @@ export default function TimerCountdown({
   const [timer, setTimer] = useState(0);
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
-  const [FinalUserTestAnswers, setFinalUserTestAnswers] = useState("0");
+  const [FinalUserTestAnswers, setFinalUserTestAnswers] = useState(null);
 
-  const { test } = useSelector((state) => state.learn);
+  const { test, testItems } = useSelector((state) => state.learn);
   const [initialTestMinutes, setInitialTestMinutes] = useState(
     test?.minutes * 60
   );
@@ -45,7 +45,12 @@ export default function TimerCountdown({
   }, [courseRegistrationDetails]);
 
   useEffect(() => {
-    setFinalUserTestAnswers(userTestAnswers);
+    if (userTestAnswers == null) {
+      var filledWithZeroAnswers = new Array(testItems.length + 1).join("0");
+      setFinalUserTestAnswers(filledWithZeroAnswers);
+    } else {
+      setFinalUserTestAnswers(userTestAnswers);
+    }
   }, [userTestAnswers]);
 
   // CLOCK

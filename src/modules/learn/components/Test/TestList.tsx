@@ -15,6 +15,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Send as SendIcon, Timer as TimerIcon } from "@material-ui/icons";
 
+import * as uiActions from "modules/ui/actions";
 import * as learnActions from "modules/learn/actions";
 import TestItem from "./TestItem";
 import Loading from "modules/ui/components/Loading";
@@ -55,8 +56,10 @@ export default function TestList({
 
   const [contentViewId, setContentViewId] = useState(0);
   const [courseRegistrationId, setCourseRegistrationId] = useState(0);
+  const [testMaxTries, setTestMaxTries] = useState(0);
   const [initialTestTries, setInitialTestTries] = useState(0);
   const [initialTestScore, setInitialTestScore] = useState(0);
+  const [conditionCheck, setConditionCheck] = useState(0);
 
   const {
     isLoading: isTestLoading,
@@ -67,6 +70,10 @@ export default function TestList({
   useEffect(() => {
     setInitialTestTries(currentContentView?.testTries);
   }, [currentContentView, contentId]);
+
+  useEffect(() => {
+    setTestMaxTries(test?.maxTries);
+  }, [currentContentView, contentId, test]);
 
   useEffect(() => {
     setInitialTestScore(currentContentView?.testScore);
@@ -91,13 +98,22 @@ export default function TestList({
   }, [dispatch, testId]);
 
   const handleTimerStart = () => {
-    setTestStart(true);
-    setInitialTestTries(initialTestTries + 1);
-    const update_test_tries_action = learnActions.updateTestTries(
-      courseRegistrationId,
-      contentViewId
-    );
-    dispatch(update_test_tries_action);
+    if (initialTestTries + 1 <= testMaxTries) {
+      setTestStart(true);
+      setInitialTestTries(initialTestTries + 1);
+      const update_test_tries_action = learnActions.updateTestTries(
+        courseRegistrationId,
+        contentViewId
+      );
+      dispatch(update_test_tries_action);
+    } else {
+      dispatch(
+        uiActions.setFlashMessage(
+          "คุณทำแบบทดสอบครบจำนวนครั้งที่กำหนดแล้ว โปรดตรวจสอบอีกครั้ง",
+          "error"
+        )
+      );
+    }
   };
 
   const handleFormChange = () => {
@@ -155,7 +171,7 @@ export default function TestList({
               คุณผ่านเกณฑ์แล้ว
             </Typography>
             <Typography variant="body2" color="textSecondary" align="center">
-              <b>ทำแบบทดสอบ</b> {initialTestTries} จาก {test?.maxTries} ครั้ง
+              <b>ทำแบบทดสอบ</b> {initialTestTries} จาก {testMaxTries} ครั้ง
               <br />
               <b>คะแนนสูงสุดที่ทำได้</b> {initialTestScore} เต็ม{" "}
               {testItems.length} คะแนน
@@ -173,14 +189,14 @@ export default function TestList({
             <br />
             <b>เวลาที่ใช้ทำแบบทดสอบ</b> {test?.minutes} นาที
             <br />
-            <b>ทำแบบทดสอบได้ไม่เกิน</b> {test?.maxTries} ครั้ง
+            <b>ทำแบบทดสอบได้ไม่เกิน</b> {testMaxTries} ครั้ง
           </Typography>
           <Box my={3}>
             <Divider />
           </Box>
           <Typography variant="body1" color="textPrimary">
             <b>ทำแบบทดสอบแล้ว</b> {initialTestTries ? initialTestTries : 0} จาก{" "}
-            {test?.maxTries} ครั้ง
+            {testMaxTries} ครั้ง
             <br />
             <b>คะแนนสูงสุดที่ทำได้</b> {initialTestScore ? initialTestScore : 0}{" "}
             เต็ม {testItems.length} คะแนน
