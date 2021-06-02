@@ -73,8 +73,8 @@ export default function TestItem({
           <Typography
             component="h1"
             variant="h6"
-            align="center"
-            style={{ fontSize: "1rem", fontWeight: 600 }}
+            align="left"
+            style={{ fontSize: "1rem", fontWeight: 600, lineHeight: "1.3" }}
           >
             {question}
           </Typography>
@@ -122,7 +122,17 @@ export default function TestItem({
                         value={choice.id.toString()}
                         inputRef={register({ required: true })}
                         control={<Radio />}
-                        label={choice.option}
+                        label={
+                          <Typography
+                            style={{
+                              lineHeight: "1.3",
+                              marginTop: 10,
+                              marginBottom: 10,
+                            }}
+                          >
+                            {choice.option}
+                          </Typography>
+                        }
                       />
                       {choice.image && (
                         <img

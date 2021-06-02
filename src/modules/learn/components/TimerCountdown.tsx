@@ -44,14 +44,15 @@ export default function TimerCountdown({
     setCourseRegistrationId(courseRegistrationDetails[0]?.id);
   }, [courseRegistrationDetails]);
 
+  // FILLED INCOMPLETED TEST ANSWER WITH ZEROS
   useEffect(() => {
-    if (userTestAnswers == null) {
+    if (userTestAnswers === "0") {
       var filledWithZeroAnswers = new Array(testItems.length + 1).join("0");
       setFinalUserTestAnswers(filledWithZeroAnswers);
     } else {
       setFinalUserTestAnswers(userTestAnswers);
     }
-  }, [userTestAnswers]);
+  }, [userTestAnswers, testItems.length]);
 
   // CLOCK
   useEffect(() => {
@@ -101,6 +102,7 @@ export default function TimerCountdown({
   //AUTO SUBMIT TEST WHEN TIME OUT
   useEffect(() => {
     const timeout = setTimeout(() => {
+      console.log("User Test Answers" + FinalUserTestAnswers);
       const update_test_action = learnActions.updateTest(
         courseRegistrationId,
         contentViewId,
