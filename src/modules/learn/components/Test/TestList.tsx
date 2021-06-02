@@ -59,7 +59,6 @@ export default function TestList({
   const [testMaxTries, setTestMaxTries] = useState(0);
   const [initialTestTries, setInitialTestTries] = useState(0);
   const [initialTestScore, setInitialTestScore] = useState(0);
-  const [conditionCheck, setConditionCheck] = useState(0);
 
   const {
     isLoading: isTestLoading,

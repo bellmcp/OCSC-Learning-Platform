@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
+import useKonami from "use-konami";
 import {
   CssBaseline,
   Snackbar,
@@ -21,10 +22,15 @@ import {
 import { Close as CloseIcon } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 
+import * as uiActions from "modules/ui/actions";
 import * as actions from "../actions";
 import NavBar from "./NavBar";
 import Routes from "./Routes";
 import Footer from "./Footer";
+
+const REACT_APP_NAME = "OCSC Learning Platform";
+const REACT_APP_RELEASE_VERSION = "1.0.0";
+const REACT_APP_SECRET_KEY = "nisnaunmahK%tapituW%yb%depoleveD";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -104,6 +110,22 @@ export default function Layout() {
     },
   });
 
+  // DEBUG MESSAGE
+  useKonami({
+    onUnlock: () =>
+      dispatch(
+        uiActions.setFlashMessage(
+          `${REACT_APP_NAME} Version ${REACT_APP_RELEASE_VERSION}, ${REACT_APP_SECRET_KEY.replaceAll(
+            "%",
+            " "
+          )
+            .split("")
+            .reverse()
+            .join("")}`,
+          "info"
+        )
+      ),
+  });
   const handleDialogClose = () => {
     dispatch(actions.setLearnExitDialog(false));
   };

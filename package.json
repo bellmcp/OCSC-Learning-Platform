@@ -1,6 +1,6 @@
 {
   "name": "ocsc-learning-platform",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "index.js",
   "homepage": "https://learningspace.ocsc.go.th/learning-platform",
   "dependencies": {
@@ -50,6 +50,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",
     "typescript": "~3.7.2",
+    "use-konami": "^1.0.0",
     "yup": "0.29.3"
   },
   "scripts": {

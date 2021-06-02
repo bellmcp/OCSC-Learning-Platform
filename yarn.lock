@@ -11335,6 +11335,11 @@ use-deep-compare-effect@^1.3.0:
     "@types/use-deep-compare-effect" "^1.2.0"
     dequal "^2.0.2"
 
+use-konami@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/use-konami/-/use-konami-1.0.0.tgz#037af2a9703139f7c31e12981efe52673483ad50"
+  integrity sha512-owBNqNp6sdozddob4w9Jp0YTguM8N9INTIDJkX2Lyy36j1YIMEDAM3+4oJ6XXiJJLmhltYPMVu0+YPYkiQlrSg==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
