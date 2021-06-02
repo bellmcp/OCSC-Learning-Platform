@@ -10,7 +10,6 @@ import {
   Box,
   Grid,
   Button,
-  Toolbar,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { ArrowBackIos as ArrowBackIcon } from "@material-ui/icons";
@@ -52,10 +51,11 @@ export default function SideBar({
   }, [seqFlow]);
 
   const updateSatisfactionScore = (newValue) => {
-    const satisfaction_score_action = registrationsActions.updateCourseSatisfactionScore(
-      registrationId,
-      newValue
-    );
+    const satisfaction_score_action =
+      registrationsActions.updateCourseSatisfactionScore(
+        registrationId,
+        newValue
+      );
     dispatch(satisfaction_score_action);
     setValue(newValue);
   };
@@ -70,7 +70,7 @@ export default function SideBar({
       component="nav"
       subheader={
         <ListSubheader component="div" style={{ zIndex: 2 }}>
-          <Toolbar />
+          <Divider style={{ visibility: "hidden" }} />
           <Box mt={1} mb={3}>
             <Button
               variant="text"

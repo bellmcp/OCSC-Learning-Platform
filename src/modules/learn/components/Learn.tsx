@@ -3,15 +3,7 @@ import React, { useEffect, useState } from "react";
 import queryString from "query-string";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
-import {
-  Divider,
-  Drawer,
-  Toolbar,
-  Box,
-  Fab,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Drawer, Toolbar, Box, Fab, Grid, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Bookmarks as ArrowUpIcon, Lock as LockIcon } from "@material-ui/icons";
 
@@ -48,6 +40,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       width: DRAWER_WIDTH,
+      marginTop: 64,
+      height: "calc(100% - 64px) !important",
     },
     content: {
       flexGrow: 1,
@@ -235,7 +229,6 @@ export default function Learn() {
             }}
             anchor="left"
           >
-            <Divider />
             <SideBar
               course={course}
               courseContents={courseContents}
