@@ -13,6 +13,7 @@ import {
 import { useTheme } from "@material-ui/core/styles";
 import { grey } from "@material-ui/core/colors";
 
+import * as uiActions from "modules/ui/actions";
 import * as learnActions from "../actions";
 
 export default function TimerCountdown({
@@ -82,6 +83,19 @@ export default function TimerCountdown({
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(myInterval);
+          dispatch(
+            uiActions.setFlashMessage(
+              "กำลังบันทึกคำตอบ โปรดรอสักครู่...",
+              "info"
+            )
+          );
+          // AUTO SUBMIT TEST WHEN TIME OUT
+          const update_test_action = learnActions.updateTest(
+            courseRegistrationId,
+            contentViewId,
+            FinalUserTestAnswers
+          );
+          dispatch(update_test_action);
         } else {
           setMinutes(minutes - 1);
           setSeconds(59);
@@ -98,26 +112,6 @@ export default function TimerCountdown({
   useEffect(() => {
     setCurrentTime(new Date().toISOString());
   }, []);
-
-  //AUTO SUBMIT TEST WHEN TIME OUT
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      console.log("User Test Answers" + FinalUserTestAnswers);
-      const update_test_action = learnActions.updateTest(
-        courseRegistrationId,
-        contentViewId,
-        FinalUserTestAnswers
-      );
-      dispatch(update_test_action);
-    }, initialTestMinutes * 1000);
-    return () => clearTimeout(timeout);
-  }, [
-    dispatch,
-    FinalUserTestAnswers,
-    contentViewId,
-    courseRegistrationId,
-    initialTestMinutes,
-  ]);
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
