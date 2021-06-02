@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CurriculumCertificateItem({
+  id,
   curriculumid,
   curriculum,
   startdate,
@@ -53,7 +54,7 @@ export default function CurriculumCertificateItem({
   const PATH = process.env.REACT_APP_BASE_PATH;
 
   const linkToLecture = () => {
-    history.push(`${PATH}/me/certificate/curriculum/${curriculumid}`);
+    history.push(`${PATH}/me/certificate/curriculum/${id}`);
   };
 
   return (

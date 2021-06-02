@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function CourseCertificateItem({
+  id,
   courseid,
   course,
   startdate,
@@ -53,7 +54,7 @@ export default function CourseCertificateItem({
   const PATH = process.env.REACT_APP_BASE_PATH;
 
   const linkToCourseCertificate = () => {
-    history.push(`${PATH}/me/certificate/course/${courseid}`);
+    history.push(`${PATH}/me/certificate/course/${id}`);
   };
 
   return (

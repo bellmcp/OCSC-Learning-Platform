@@ -45,7 +45,7 @@ export default function CourseCertificateView() {
 
   const { courseCertificates } = useSelector((state: any) => state.me);
   const currentCertificate = courseCertificates.filter(
-    (courseCertificate) => courseCertificate.courseid === `${certificateId}`
+    (courseCertificate) => courseCertificate.id === parseInt(certificateId)
   )[0];
 
   useEffect(() => {

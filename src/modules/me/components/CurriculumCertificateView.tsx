@@ -46,7 +46,7 @@ export default function CurriculumCertificateView() {
   const { curriculumCertificates } = useSelector((state: any) => state.me);
   const currentCertificate = curriculumCertificates.filter(
     (curriculumCertificate) =>
-      curriculumCertificate.curriculumid === `${certificateId}`
+      curriculumCertificate.id === parseInt(certificateId)
   )[0];
 
   useEffect(() => {
