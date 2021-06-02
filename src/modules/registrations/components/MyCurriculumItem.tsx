@@ -88,7 +88,9 @@ export default function MyCurriculumItem({
               background: `url('${thumbnail}')`,
               backgroundSize: "cover",
               backgroundPosition: "center center",
-              borderLeft: isCompleted ? `6px solid ${green[800]}` : "",
+              borderLeft: isCompleted
+                ? `6px solid ${green[800]}`
+                : `6px solid ${amber[500]}`,
             }}
             className={classes.cardImage}
           />
@@ -126,12 +128,29 @@ export default function MyCurriculumItem({
                     <Typography
                       variant="h6"
                       component="h2"
-                      style={{ lineHeight: "1.1", marginBottom: 4 }}
+                      style={{
+                        lineHeight: "1.1",
+                        marginBottom: 4,
+                        fontWeight: 600,
+                      }}
                     >
                       {name ? name : "หลักสูตร"}
                     </Typography>
                     <Typography variant="body1" component="p" gutterBottom>
                       {code ? code : "รหัสหลักสูตร"}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      component="p"
+                      color="textSecondary"
+                      gutterBottom
+                    >
+                      {
+                        myCourses.filter(
+                          (myCourse) => myCourse.curriculumRegistrationId === id
+                        ).length
+                      }{" "}
+                      รายวิชา
                     </Typography>
                     <Typography
                       variant="caption"
