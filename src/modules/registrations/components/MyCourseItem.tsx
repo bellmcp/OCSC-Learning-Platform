@@ -179,6 +179,7 @@ export default function MyCourseItem({
                           startIcon={<PlayIcon />}
                           onClick={linkToLecture}
                           fullWidth
+                          style={{ whiteSpace: "nowrap" }}
                         >
                           เข้าเรียน
                         </Button>
