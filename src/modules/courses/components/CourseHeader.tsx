@@ -72,7 +72,7 @@ export default function CourseHeader({
               <Typography
                 component="h1"
                 variant={matches ? "h3" : "h4"}
-                align="center"
+                align={matches ? "left" : "center"}
                 color="inherit"
                 gutterBottom
               >
