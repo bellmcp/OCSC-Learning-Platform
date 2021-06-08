@@ -1,6 +1,12 @@
 {
   "name": "ocsc-learning-platform",
   "version": "1.0.0",
+  "license": "GPL-3.0",
+  "author": {
+    "email": "learningspace@ocsc.go.th",
+    "name": "Office of the Civil Service Commission (OCSC)",
+    "url": "https://www.ocsc.go.th/"
+  },
   "main": "index.js",
   "homepage": "https://learningspace.ocsc.go.th/learning-platform",
   "dependencies": {
