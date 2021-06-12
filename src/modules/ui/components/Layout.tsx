@@ -14,6 +14,9 @@ import {
   DialogContentText,
   DialogTitle,
   Button,
+  Typography,
+  Divider,
+  Link,
 } from "@material-ui/core";
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
@@ -22,15 +25,10 @@ import {
 import { Close as CloseIcon } from "@material-ui/icons";
 import Alert from "@material-ui/lab/Alert";
 
-import * as uiActions from "modules/ui/actions";
 import * as actions from "../actions";
 import NavBar from "./NavBar";
 import Routes from "./Routes";
 import Footer from "./Footer";
-
-const REACT_APP_NAME = "OCSC Learning Platform";
-const REACT_APP_RELEASE_VERSION = "1.0.0";
-const REACT_APP_SECRET_KEY = "nisnaunmahK%tapituW%yb%depoleveD";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -40,8 +38,20 @@ export default function Layout() {
   const { isSnackbarOpen, isDialogOpen, flashMessage, alertType } = useSelector(
     (state) => state.ui
   );
-
   const closeFlashMessage = () => dispatch(actions.clearFlashMessage());
+
+  // //GET STATE FOR DEBUG
+  // const loginState = useSelector((state) => state.login);
+  // const userState = useSelector((state) => state.user);
+  // const categoriesState = useSelector((state) => state.categories);
+  // const coursesState = useSelector((state) => state.courses);
+  // const curriculumsState = useSelector((state) => state.curriculums);
+  // const registrationsState = useSelector((state) => state.registrations);
+  // const learnState = useSelector((state) => state.learn);
+  // const pressState = useSelector((state) => state.press);
+  // const supportState = useSelector((state) => state.support);
+  // const meState = useSelector((state) => state.me);
+  // const uiState = useSelector((state) => state.ui);
 
   useEffect(() => {
     const setInitialActivePage = () => {
@@ -110,22 +120,15 @@ export default function Layout() {
     },
   });
 
-  // DEBUG MESSAGE
+  // DEBUG DIALOG
   useKonami({
-    onUnlock: () =>
-      dispatch(
-        uiActions.setFlashMessage(
-          `${REACT_APP_NAME} Version ${REACT_APP_RELEASE_VERSION}, ${REACT_APP_SECRET_KEY.replaceAll(
-            "%",
-            " "
-          )
-            .split("")
-            .reverse()
-            .join("")}`,
-          "info"
-        )
-      ),
+    onUnlock: () => setDebugDialogOpen(true),
   });
+  const [debugDialogOpen, setDebugDialogOpen] = useState(false);
+  const handleDebugDialogClose = () => {
+    setDebugDialogOpen(false);
+  };
+
   const handleDialogClose = () => {
     dispatch(actions.setLearnExitDialog(false));
   };
@@ -152,6 +155,64 @@ export default function Layout() {
       />
       <NavBar active={activePage} setActivePage={setActivePage} />
       <Routes />
+      {/* DEBUG DIALOG */}
+      <Dialog open={debugDialogOpen} onClose={handleDebugDialogClose}>
+        <DialogTitle onClose={handleDebugDialogClose}>เกี่ยวกับ</DialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom style={{ fontWeight: 600 }} variant="body1">
+            OCSC LEARNING PLATFORM (LEARNER PART)
+            <br />
+            Version 1.0.0
+          </Typography>
+          <Divider style={{ margin: "16px 0" }} />
+          <Typography gutterBottom style={{ fontWeight: 600 }}>
+            Developer
+          </Typography>
+          <Typography gutterBottom variant="body2">
+            WUTIPAT KHAMNUANSIN (Front-End)
+            <br />
+            ANUNYA PRASONGKIAT (Back-End)
+          </Typography>
+          <Divider style={{ margin: "16px 0" }} />
+          <Typography gutterBottom style={{ fontWeight: 600 }}>
+            Advisor
+          </Typography>
+          <Typography gutterBottom variant="body2">
+            ASSOC. PROF. CHATCHAWIT APORNTEWAN, Ph.D.
+          </Typography>
+          <Divider style={{ margin: "16px 0" }} />
+          <Typography gutterBottom variant="caption" color="textSecondary">
+            Licensed under{" "}
+            <Link
+              href="https://github.com/bellmcp/OCSC-Learning-Platform/blob/master/LICENSE"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              The GNU General Public License v3.0 License
+            </Link>
+            .
+            <br />
+            Copyright © {new Date().getFullYear()}{" "}
+            <Link
+              href="https://www.ocsc.go.th/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Office of the Civil Service Commission (OCSC)
+            </Link>
+            , All rights reserved.
+          </Typography>
+        </DialogContent>
+        {/* <DialogActions>
+          <Button
+            color="secondary"
+            onClick={() => console.log(JSON.stringify(loginState, null, "\t"))}
+          >
+            Log Login State
+          </Button>
+        </DialogActions> */}
+      </Dialog>
+      {/* LEARN EXIT DIALOG */}
       <Dialog
         open={isDialogOpen}
         onClose={handleDialogClose}
