@@ -59,10 +59,11 @@ export default function SideBarMobile({
   }, [satisfactionScore]);
 
   const updateSatisfactionScore = (newValue) => {
-    const satisfaction_score_action = registrationsActions.updateCourseSatisfactionScore(
-      registrationId,
-      newValue
-    );
+    const satisfaction_score_action =
+      registrationsActions.updateCourseSatisfactionScore(
+        registrationId,
+        newValue
+      );
     dispatch(satisfaction_score_action);
     setValue(newValue);
   };
@@ -79,7 +80,11 @@ export default function SideBarMobile({
       onClose={handleMobileDialogClose}
       TransitionComponent={Transition}
     >
-      <AppBar className={classes.appBar} color="secondary">
+      <AppBar
+        className={classes.appBar}
+        color="secondary"
+        style={{ position: "fixed" }}
+      >
         <Toolbar>
           <Button
             autoFocus
@@ -107,9 +112,8 @@ export default function SideBarMobile({
             component="div"
             style={{
               zIndex: 2,
-              marginLeft: 8,
-              marginRight: 8,
               backgroundColor: "white",
+              paddingTop: 54,
             }}
           >
             <Box mt={4} mb={3}>
