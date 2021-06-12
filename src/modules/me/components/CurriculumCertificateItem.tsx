@@ -83,7 +83,6 @@ export default function CurriculumCertificateItem({
                 justify="space-between"
                 alignItems="center"
                 wrap="nowrap"
-                spacing={2}
               >
                 <Grid item>
                   <Typography

@@ -104,7 +104,6 @@ export default function MyCourseItem({
                 justify="space-between"
                 alignItems="center"
                 wrap="nowrap"
-                spacing={2}
               >
                 <Grid item>
                   <Typography

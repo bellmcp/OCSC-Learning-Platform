@@ -110,7 +110,6 @@ export default function MyCurriculumItem({
                   justify="space-between"
                   alignItems="center"
                   wrap="nowrap"
-                  spacing={2}
                 >
                   <Grid item>
                     <Typography
