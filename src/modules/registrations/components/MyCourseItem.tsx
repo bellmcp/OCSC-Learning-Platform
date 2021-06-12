@@ -45,6 +45,9 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "150px",
       borderRadius: "4 0 0 0",
     },
+    noWrapButton: {
+      whiteSpace: "nowrap !important",
+    },
   })
 );
 
@@ -179,7 +182,7 @@ export default function MyCourseItem({
                           startIcon={<PlayIcon />}
                           onClick={linkToLecture}
                           fullWidth
-                          style={{ whiteSpace: "nowrap" }}
+                          className={classes.noWrapButton}
                         >
                           เข้าเรียน
                         </Button>

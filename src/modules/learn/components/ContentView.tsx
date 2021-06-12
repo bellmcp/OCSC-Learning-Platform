@@ -62,7 +62,12 @@ export default function ContentView({
 
   function checkVideoQuality() {
     if (!isMobile) {
-      return <HdIcon color="disabled" style={{ margin: "0 16px 2px" }} />;
+      return (
+        <HdIcon
+          color="disabled"
+          style={{ marginLeft: 12, marginBottom: "-4px" }}
+        />
+      );
     }
   }
 
@@ -137,15 +142,7 @@ export default function ContentView({
               wrap="nowrap"
             >
               <Grid item>
-                <Grid
-                  container
-                  spacing={1}
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  alignContent="center"
-                  wrap="nowrap"
-                >
+                <Grid container wrap="nowrap">
                   <Typography
                     variant="h6"
                     color="initial"
@@ -163,10 +160,10 @@ export default function ContentView({
                           activeContentView?.type,
                           getContentType(activeContentView?.content1)
                         )}
+                    {matches && getContentType(activeSource) === "video"
+                      ? checkVideoQuality()
+                      : null}
                   </Typography>
-                  {matches && getContentType(activeSource) === "video"
-                    ? checkVideoQuality()
-                    : null}
                 </Grid>
               </Grid>
               {activeContentView?.type === "c" && (
