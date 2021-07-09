@@ -1,19 +1,19 @@
-import React from "react";
+import React from 'react';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Container,
   Typography,
   Grid,
   Toolbar,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-const HeroImage = require("assets/images/hero.svg");
+const HeroImage = require('assets/images/hero.jpg');
 
 interface HeaderProps {
   title: string;
@@ -25,13 +25,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       color: theme.palette.common.white,
-      backgroundSize: "cover",
-      backgroundPosition: "center center",
-      minHeight: "370px",
-      textShadow: "0px 3px 3px rgba(0, 0, 0, 0.1)",
+      minHeight: '400px',
+      textShadow: '0px 3px 3px rgba(0, 0, 0, 0.25)',
     },
     subtitle: {
-      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(5),
     },
   })
 );
@@ -39,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Header({ title, subtitle, icon }: HeaderProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("sm"));
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
@@ -47,11 +45,13 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
       <Grid
         container
         direction="column"
-        justify="center"
+        justify="flex-end"
         alignItems="center"
         className={classes.header}
         style={{
-          backgroundImage: `url(${HeroImage})`,
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(${HeroImage}) no-repeat`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
         }}
       >
         <Container maxWidth="lg">
@@ -61,14 +61,19 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
             justify="space-between"
             alignItems="center"
           >
-            <Grid container justify="center" alignItems="center">
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              style={{ marginBottom: subtitle ? 8 : 48 }}
+            >
               <Grid item style={{ marginTop: 8 }}>
                 {icon}
               </Grid>
               <Grid item>
                 <Typography
                   component="h1"
-                  variant={matches ? "h4" : "h3"}
+                  variant={matches ? 'h5' : 'h4'}
                   align="center"
                   style={{
                     fontWeight: 500,
@@ -83,12 +88,12 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
                 container
                 justify="center"
                 className={classes.subtitle}
-                style={{ maxWidth: matches ? 300 : "unset" }}
+                style={{ maxWidth: matches ? 300 : 'unset' }}
               >
                 <Grid item>
                   <Typography
                     component="p"
-                    variant={matches ? "body2" : "body1"}
+                    variant={matches ? 'body2' : 'body1'}
                     align="center"
                     color="inherit"
                   >
