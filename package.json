@@ -8,7 +8,7 @@
     "url": "https://www.ocsc.go.th/"
   },
   "main": "index.js",
-  "homepage": "https://learningspace.ocsc.go.th/learning-platform",
+  "homepage": "https://learningportal.ocsc.go.th/learningspace",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
