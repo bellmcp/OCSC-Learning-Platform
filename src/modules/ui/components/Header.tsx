@@ -23,13 +23,21 @@ interface HeaderProps {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    header: {
-      color: theme.palette.common.white,
-      minHeight: '400px',
-      textShadow: '0px 3px 3px rgba(0, 0, 0, 0.25)',
+    container: {
+      margin: '24px 0',
+      minHeight: 57,
     },
-    subtitle: {
-      marginBottom: theme.spacing(5),
+    background: {
+      minHeight: '400px',
+    },
+    icon: {
+      marginTop: 8,
+      color: process.env.REACT_APP_SECONDARY_COLOR_HEX,
+    },
+    title: {
+      color: process.env.REACT_APP_SECONDARY_COLOR_HEX,
+      fontSize: '1.7rem',
+      fontWeight: 600,
     },
   })
 );
@@ -44,15 +52,12 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
       <Toolbar />
       <Grid
         container
-        direction="column"
-        justify="flex-end"
+        direction="row"
+        justify="center"
         alignItems="center"
-        className={classes.header}
-        style={{
-          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(${HeroImage}) no-repeat`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-        }}
+        alignContent="center"
+        wrap="nowrap"
+        className={classes.container}
       >
         <Container maxWidth="lg">
           <Grid
@@ -61,13 +66,8 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
             justify="space-between"
             alignItems="center"
           >
-            <Grid
-              container
-              justify="center"
-              alignItems="center"
-              style={{ marginBottom: subtitle ? 8 : 48 }}
-            >
-              <Grid item style={{ marginTop: 8 }}>
+            <Grid container justify="center" alignItems="center">
+              <Grid item className={classes.icon}>
                 {icon}
               </Grid>
               <Grid item>
@@ -75,9 +75,7 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
                   component="h1"
                   variant={matches ? 'h5' : 'h4'}
                   align="center"
-                  style={{
-                    fontWeight: 500,
-                  }}
+                  className={classes.title}
                 >
                   {title}
                 </Typography>
@@ -87,15 +85,17 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
               <Grid
                 container
                 justify="center"
-                className={classes.subtitle}
-                style={{ maxWidth: matches ? 300 : 'unset' }}
+                style={{
+                  maxWidth: matches ? 300 : 'unset',
+                  marginTop: 4,
+                }}
               >
                 <Grid item>
                   <Typography
                     component="p"
-                    variant={matches ? 'body2' : 'body1'}
+                    variant={matches ? 'caption' : 'body2'}
                     align="center"
-                    color="inherit"
+                    color="textPrimary"
                   >
                     {subtitle}
                   </Typography>
@@ -105,6 +105,18 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
           </Grid>
         </Container>
       </Grid>
+      <Grid
+        container
+        direction="column"
+        justify="flex-end"
+        alignItems="center"
+        className={classes.background}
+        style={{
+          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(${HeroImage}) no-repeat`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+        }}
+      ></Grid>
     </>
   );
 }
