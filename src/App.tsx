@@ -1,17 +1,17 @@
 //@ts-nocheck
-import React from "react";
-import { Provider } from "react-redux";
-import { ConnectedRouter } from "connected-react-router";
-import configureStore, { history } from "store/configureStore";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import ScrollToTop from "utils/ScrollToTop";
-import Layout from "modules/ui/components/Layout";
-import META_IMAGE from "./meta.jpg";
+import React from 'react';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router';
+import configureStore, { history } from 'store/configureStore';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
+import ScrollToTop from 'utils/ScrollToTop';
+import Layout from 'modules/ui/components/Layout';
+import META_IMAGE from './meta.jpg';
 
-const TITLE = "OCSC Learning Platform";
-const URL = "https://ocsc-learning-platform.vercel.app/";
+const TITLE = 'OCSC Learning Space';
+const URL = process.env.REACT_APP_PLATFORM_URL;
 const DESCRIPTION =
-  "โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา";
+  'โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา';
 
 const store = configureStore();
 

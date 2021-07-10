@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const TITLE = "OCSC Learning Platform";
+const TITLE = "OCSC Learning Space";
 const SUBTITLE =
   "โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา";
 

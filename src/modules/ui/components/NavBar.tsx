@@ -372,7 +372,7 @@ export default function NavBar(props: NavigationBarProps) {
                 className={classes.title}
                 onClick={linkToHome}
               >
-                Learning Platform
+                Learning Space
               </Typography>
             </Hidden>
             {/* SEARCH */}

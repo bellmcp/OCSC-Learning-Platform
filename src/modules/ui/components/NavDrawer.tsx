@@ -1,14 +1,14 @@
 //@ts-nocheck
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import {
   makeStyles,
   useTheme,
   Theme,
   createStyles,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   Divider,
   Drawer,
@@ -20,15 +20,15 @@ import {
   ListItemText,
   Badge,
   IconButton,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   Home as HomeIcon,
   PlayArrow as LearnIcon,
   Help as HelpIcon,
   CloseRounded as CloseIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import * as uiActions from "modules/ui/actions";
+import * as uiActions from 'modules/ui/actions';
 
 const DRAWER_WIDTH = 200;
 const PATH = process.env.REACT_APP_BASE_PATH;
@@ -45,16 +45,16 @@ interface NavigationDrawerProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: 'flex',
     },
     drawer: {
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up('sm')]: {
         width: DRAWER_WIDTH,
         flexShrink: 0,
       },
     },
     appBar: {
-      [theme.breakpoints.up("sm")]: {
+      [theme.breakpoints.up('sm')]: {
         zIndex: theme.zIndex.drawer + 1,
       },
     },
@@ -72,8 +72,8 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     menuButton: {
       marginRight: theme.spacing(2),
-      [theme.breakpoints.up("sm")]: {
-        display: "none",
+      [theme.breakpoints.up('sm')]: {
+        display: 'none',
       },
     },
     closeButton: {
@@ -87,12 +87,12 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),
     },
     copyright: {
-      fontSize: "12px",
+      fontSize: '12px',
       color: theme.palette.grey[500],
       padding: theme.spacing(2, 3),
     },
     title: {
-      fontSize: "24px",
+      fontSize: '24px',
       fontWeight: 600,
       padding: theme.spacing(0, 3),
       marginTop: 0,
@@ -118,21 +118,21 @@ export default function NavDrawer({
   const navigationItems = [
     {
       id: 0,
-      title: "หน้าหลัก",
+      title: 'หน้าหลัก',
       url: `${PATH}`,
       icon: <HomeIcon />,
       notification: 0,
     },
     {
       id: 1,
-      title: "เข้าเรียน",
+      title: 'เข้าเรียน',
       url: `${PATH}/learn`,
       icon: <LearnIcon />,
       notification: 0,
     },
     {
       id: 2,
-      title: "ช่วยเหลือ",
+      title: 'ช่วยเหลือ',
       url: `${PATH}/support`,
       icon: <HelpIcon />,
       notification: unreadNotificationCount,
@@ -150,7 +150,7 @@ export default function NavDrawer({
         >
           <CloseIcon />
         </IconButton>
-        <p className={classes.title}>Learning Platform</p>
+        <p className={classes.title}>Learning Space</p>
         <List>
           {navigationItems.map((navigationItem, index) => (
             <React.Fragment>
@@ -202,7 +202,7 @@ export default function NavDrawer({
           <Drawer
             container={container}
             variant="temporary"
-            anchor={theme.direction === "rtl" ? "right" : "left"}
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={handleDrawerToggle}
             classes={{

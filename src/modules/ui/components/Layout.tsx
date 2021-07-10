@@ -160,7 +160,7 @@ export default function Layout() {
         <DialogTitle onClose={handleDebugDialogClose}>เกี่ยวกับ</DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom style={{ fontWeight: 600 }} variant="body1">
-            OCSC LEARNING PLATFORM (LEARNER PART)
+            OCSC LEARNING SPACE (LEARNER PART)
             <br />
             Version 1.0.0
           </Typography>
