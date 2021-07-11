@@ -1,6 +1,6 @@
-# OCSC Learning Platform
+# OCSC Learning Space (Formerly OCSC Learning Platform)
 
-An e-Learning platform for the Office of the Civil Service Commission (OCSC). Students which are more than 250k government personnel can learn in an online, accessible, and adaptive learning environment. Developed by using TypeScript, React, Material-UI, .NET Core, MariaDB, and more.
+An e-Learning web application for the Office of the Civil Service Commission (OCSC). Students which are more than 250k government personnel can learn in an online, accessible, and adaptive learning environment. Developed by using TypeScript, React, Material-UI, .NET Core, MariaDB, and more.
 
 <br>
 <p align="center">
@@ -9,7 +9,7 @@ An e-Learning platform for the Office of the Civil Service Commission (OCSC). St
 
 # Demo
 
-- [https://learningspace.ocsc.go.th/learning-platform](https://learningspace.ocsc.go.th/learning-platform) (Production)
+- [https://learningportal.ocsc.go.th/learningspace](https://learningportal.ocsc.go.th/learningspace) (Production)
 - [https://ocsc-learning-platform.vercel.app/](https://ocsc-learning-platform.vercel.app/) (Beta)
 - [http://ocsc-learning-platform.herokuapp.com/](http://ocsc-learning-platform.herokuapp.com/) (Development)
 
