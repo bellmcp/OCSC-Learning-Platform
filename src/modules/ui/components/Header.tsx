@@ -112,7 +112,7 @@ export default function Header({ title, subtitle, icon }: HeaderProps) {
         alignItems="center"
         className={classes.background}
         style={{
-          background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 59%, rgba(0, 0, 0, 0.65) 100%), url(${HeroImage}) no-repeat`,
+          background: `url(${HeroImage}) no-repeat`,
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
         }}
