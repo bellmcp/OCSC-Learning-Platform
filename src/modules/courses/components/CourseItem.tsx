@@ -1,6 +1,6 @@
 // @ts-nocheck
-import React from "react";
-import { Link as RouterLink, useRouteMatch } from "react-router-dom";
+import React from 'react';
+import { Link as RouterLink, useRouteMatch } from 'react-router-dom';
 import {
   Box,
   Card,
@@ -8,12 +8,12 @@ import {
   CardContent,
   CardMedia,
   Typography,
-} from "@material-ui/core/";
-import { makeStyles } from "@material-ui/core/styles";
-import { FiberManualRecord as Circle } from "@material-ui/icons";
-import categoryColor from "utils/categoryColor";
+} from '@material-ui/core/';
+import { makeStyles } from '@material-ui/core/styles';
+import { FiberManualRecord as Circle } from '@material-ui/icons';
+import categoryColor from 'utils/categoryColor';
 
-import { CategoryProps } from "modules/categories/types";
+import { CategoryProps } from 'modules/categories/types';
 
 interface CourseItemProps {
   categories: CategoryProps[];
@@ -27,19 +27,19 @@ interface CourseItemProps {
 
 const useStyles = makeStyles((theme) => ({
   card: {
-    height: "100%",
-    display: "flex",
-    padding: "15px",
+    height: '100%',
+    display: 'flex',
+    padding: '15px',
     paddingBottom: 0,
-    flexDirection: "column",
-    position: "relative",
-    background: "none",
-    boxShadow: "none",
-    transition: "0.3s",
+    flexDirection: 'column',
+    position: 'relative',
+    background: 'none',
+    boxShadow: 'none',
+    transition: '0.3s',
     // eslint-disable-next-line no-useless-computed-key
-    ["@media (hover: hover) and (pointer: fine)"]: {
-      "&:hover": {
-        transform: "translateY(-4px)",
+    ['@media (hover: hover) and (pointer: fine)']: {
+      '&:hover': {
+        transform: 'translateY(-4px)',
       },
     },
   },
@@ -48,50 +48,50 @@ const useStyles = makeStyles((theme) => ({
   },
   focusHighlight: {},
   cardMedia: {
-    paddingTop: "90%",
+    paddingTop: '90%',
     borderRadius: theme.shape.borderRadius,
     boxShadow:
-      "0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)",
+      '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
   },
   cardMediaStack: {
-    paddingTop: "90%",
-    marginTop: "8px",
+    paddingTop: '90%',
+    marginTop: '8px',
     borderRadius: theme.shape.borderRadius,
     boxShadow:
-      "0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)",
+      '0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)',
   },
   cardDetail: {
-    position: "absolute",
-    color: "white",
-    textAlign: "center",
-    bottom: "15px",
-    left: "50%",
-    transform: "translateX(-50%)",
+    position: 'absolute',
+    color: 'white',
+    textAlign: 'center',
+    bottom: '15px',
+    left: '50%',
+    transform: 'translateX(-50%)',
   },
   cardContent: {
     flexGrow: 1,
     padding: 0,
   },
   title: {
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
     WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
+    WebkitBoxOrient: 'vertical',
   },
   genre: {
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
     WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
+    WebkitBoxOrient: 'vertical',
   },
   detail: {
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    display: "-webkit-box",
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: '-webkit-box',
     WebkitLineClamp: 3,
-    WebkitBoxOrient: "vertical",
+    WebkitBoxOrient: 'vertical',
   },
 }));
 
@@ -106,7 +106,7 @@ export default function CourseItem({
 }: CourseItemProps) {
   const classes = useStyles();
   const { path } = useRouteMatch();
-  const basePath = "/learning-platform";
+  const basePath = process.env.REACT_APP_BASE_PATH;
 
   const getCourseDetailsTargetUrl = () => {
     switch (path) {
@@ -137,18 +137,18 @@ export default function CourseItem({
           title={name}
           style={{
             background: `url('${thumbnail}')`,
-            backgroundColor: "lightgray",
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
+            backgroundColor: 'lightgray',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
           }}
         />
         <CardContent className={classes.cardContent}>
           <Box my={2}>
             <Typography className={classes.title} variant="h6" component="h2">
-              {name ? name : "รายวิชา"}
+              {name ? name : 'รายวิชา'}
             </Typography>
             <Typography variant="body2">
-              <div className={classes.genre}>{code ? code : "รหัสรายวิชา"}</div>
+              <div className={classes.genre}>{code ? code : 'รหัสรายวิชา'}</div>
             </Typography>
             <Box my={1}>
               <Typography
@@ -162,7 +162,7 @@ export default function CourseItem({
                   dangerouslySetInnerHTML={{
                     __html: learningObjective
                       ? learningObjective
-                      : "ไม่มีข้อมูล",
+                      : 'ไม่มีข้อมูล',
                   }}
                 ></div>
               </Typography>
