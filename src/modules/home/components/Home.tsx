@@ -1,14 +1,14 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
-import queryString from "query-string";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import React, { useEffect } from 'react';
+import queryString from 'query-string';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useHistory } from 'react-router-dom';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Container,
@@ -17,19 +17,19 @@ import {
   Box,
   Divider,
   Button,
-} from "@material-ui/core";
-import { ArrowForwardIos as ArrowForwardIcon } from "@material-ui/icons";
-import CategoryFilter from "modules/categories/components/CategoryFilter";
-import "pure-react-carousel/dist/react-carousel.es.css";
+} from '@material-ui/core';
+import { ArrowForwardIos as ArrowForwardIcon } from '@material-ui/icons';
+import CategoryFilter from 'modules/categories/components/CategoryFilter';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 
-import * as pressesActions from "modules/press/actions";
-import * as coursesActions from "modules/courses/actions";
-import * as categoriesActions from "modules/categories/actions";
-import * as curriculumsActions from "modules/curriculums/actions";
-import Header from "modules/ui/components/Header";
-import PressCarousel from "modules/press/components/PressCarousel";
-import CourseCarousel from "modules/courses/components/CourseCarousel";
-import CurriculumCarousel from "modules/curriculums/components/CurriculumCarousel";
+import * as pressesActions from 'modules/press/actions';
+import * as coursesActions from 'modules/courses/actions';
+import * as categoriesActions from 'modules/categories/actions';
+import * as curriculumsActions from 'modules/curriculums/actions';
+import Header from 'modules/ui/components/Header';
+import PressCarousel from 'modules/press/components/PressCarousel';
+import CourseCarousel from 'modules/courses/components/CourseCarousel';
+import CurriculumCarousel from 'modules/curriculums/components/CurriculumCarousel';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,25 +38,25 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: theme.spacing(3),
     },
     sectionTitle: {
-      fontSize: "1.7rem",
+      fontSize: '1.7rem',
       fontWeight: 600,
       zIndex: 3,
     },
     seeAllButton: {
-      marginBottom: "0.35em",
+      marginBottom: '0.35em',
       zIndex: 3,
     },
   })
 );
 
-const TITLE = "OCSC Learning Space";
+const TITLE = 'OCSC Learning Space';
 const SUBTITLE =
-  "โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา";
+  'โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ ยิ่งเพิ่มพลังทางปัญญา';
 
 export default function Home() {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const dispatch = useDispatch();
   const history = useHistory();
   const PATH = process.env.REACT_APP_BASE_PATH;
@@ -107,7 +107,7 @@ export default function Home() {
   }, [dispatch]);
 
   useEffect(() => {
-    const curriculums_action = curriculumsActions.loadCurriculums("");
+    const curriculums_action = curriculumsActions.loadCurriculums('');
     dispatch(curriculums_action);
   }, [dispatch]);
 
@@ -128,7 +128,7 @@ export default function Home() {
           <Grid
             container
             direction="row"
-            justify={matches ? "space-between" : "center"}
+            justify={matches ? 'space-between' : 'center'}
             alignItems="center"
           >
             <Typography

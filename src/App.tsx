@@ -11,7 +11,7 @@ import META_IMAGE from './meta.jpg';
 const TITLE = 'OCSC Learning Space';
 const URL = process.env.REACT_APP_PLATFORM_URL;
 const DESCRIPTION =
-  'โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ อาหารทางสมอง เพิ่มพลังทางปัญญา';
+  'โลกแห่งการเรียนรู้ ไม่มีวันจบสิ้น ยิ่งเรียนยิ่งรู้ ยิ่งเพิ่มพลังทางปัญญา';
 
 const store = configureStore();
 
