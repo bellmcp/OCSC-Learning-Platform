@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: 57,
     },
     background: {
-      minHeight: '400px',
+      paddingBottom: '25%',
     },
     icon: {
       marginTop: 8,
