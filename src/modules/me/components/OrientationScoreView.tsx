@@ -175,7 +175,6 @@ export default function OrientationScoreView() {
             <ScoreRenderer
               ref={componentRef}
               text={text}
-              citizenId={citizenId}
               {...orientationScore}
             />
           </Box>

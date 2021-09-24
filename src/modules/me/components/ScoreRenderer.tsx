@@ -177,7 +177,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   align="left"
                   style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
-                  <b>เลขประจำตัวประชาชน :</b> {this.props.citizenId}
+                  <b>เลขประจำตัวประชาชน :</b> {this.props.id}
                 </Typography>
               </Grid>
               <Typography
