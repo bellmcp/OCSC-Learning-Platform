@@ -1,8 +1,8 @@
 //@ts-nocheck
-import React, { useRef, useState, useCallback, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useReactToPrint } from "react-to-print";
-import { Link as RouterLink, useParams } from "react-router-dom";
+import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useReactToPrint } from 'react-to-print';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 import {
   Container,
   Typography,
@@ -13,25 +13,28 @@ import {
   Divider,
   Button,
   Toolbar,
-} from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+} from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {
   NavigateNext as NavigateNextIcon,
   Print as PrintIcon,
   Inbox as InboxIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import CertificateRenderer from "./CertificateRenderer";
-import * as meActions from "../actions";
+import CertificateRenderer from './CertificateRenderer';
+import * as meActions from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    display: "flex",
+    display: 'flex',
   },
   content: {
-    width: "100%",
+    width: '100%',
     marginBottom: 50,
+  },
+  mr8: {
+    marginRight: 8,
   },
 }));
 
@@ -40,7 +43,7 @@ export default function CourseCertificateView() {
   const theme = useTheme();
   const dispatch = useDispatch();
   const { id: certificateId }: any = useParams();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
   const { courseCertificates } = useSelector((state: any) => state.me);
@@ -57,24 +60,24 @@ export default function CourseCertificateView() {
   const componentRef = useRef(null);
   const onBeforeGetContentResolve = useRef<(() => void) | null>(null);
   const [loading, setLoading] = useState(false);
-  const [text, setText] = useState("old boring text");
+  const [text, setText] = useState('old boring text');
   const handleAfterPrint = useCallback(() => {
-    console.log("`onAfterPrint` called"); // tslint:disable-line no-console
+    console.log('`onAfterPrint` called'); // tslint:disable-line no-console
   }, []);
   const handleBeforePrint = useCallback(() => {
-    console.log("`onBeforePrint` called"); // tslint:disable-line no-console
+    console.log('`onBeforePrint` called'); // tslint:disable-line no-console
   }, []);
   const handleOnBeforeGetContent = useCallback(() => {
-    console.log("`onBeforeGetContent` called"); // tslint:disable-line no-console
+    console.log('`onBeforeGetContent` called'); // tslint:disable-line no-console
     setLoading(true);
-    setText("Loading new text...");
+    setText('Loading new text...');
 
     return new Promise<void>((resolve) => {
       onBeforeGetContentResolve.current = resolve;
 
       setTimeout(() => {
         setLoading(false);
-        setText("New, Updated Text!");
+        setText('New, Updated Text!');
         resolve();
       }, 2000);
     });
@@ -92,13 +95,13 @@ export default function CourseCertificateView() {
     onAfterPrint: handleAfterPrint,
     removeAfterPrint: true,
     pageStyle:
-      "@page { size: 210mm 297mm; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }",
+      '@page { size: 210mm 297mm; margin: 0mm; } @media print { body { -webkit-print-color-adjust: exact; } }',
   });
 
   useEffect(() => {
     if (
-      text === "New, Updated Text!" &&
-      typeof onBeforeGetContentResolve.current === "function"
+      text === 'New, Updated Text!' &&
+      typeof onBeforeGetContentResolve.current === 'function'
     ) {
       onBeforeGetContentResolve.current();
     }
@@ -133,10 +136,10 @@ export default function CourseCertificateView() {
               gutterBottom
               variant="h6"
               style={{
-                fontSize: "1.7rem",
+                fontSize: '1.7rem',
                 marginBottom: 0,
                 fontWeight: 600,
-                lineHeight: "1.3",
+                lineHeight: '1.3',
               }}
             >
               วิชา {currentCertificate?.course}
@@ -144,23 +147,25 @@ export default function CourseCertificateView() {
           </Box>
           <Box my={3}>
             <Typography variant="body1" color="textSecondary" gutterBottom>
-              <b>ผู้สำเร็จการศึกษา</b> {currentCertificate?.title}
+              <b className={classes.mr8}>ผู้สำเร็จการศึกษา</b>{' '}
+              {currentCertificate?.title}
               {currentCertificate?.firstname} {currentCertificate?.lastname}
               <br />
-              <b>วันที่สำเร็จการศึกษา</b>{" "}
+              <b className={classes.mr8}>วันที่สำเร็จการศึกษา</b>{' '}
               {new Date(currentCertificate?.enddate).toLocaleDateString(
-                "th-TH",
+                'th-TH',
                 {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
                 }
               )}
               <br />
-              <b>หน่วยงานรับรอง</b> {currentCertificate?.platform}
+              <b className={classes.mr8}>หน่วยงานรับรอง</b>{' '}
+              {currentCertificate?.platform}
             </Typography>
           </Box>
-          <Box my={6} style={{ overflow: "auto" }}>
+          <Box my={6} style={{ overflow: 'auto' }}>
             <CertificateRenderer
               ref={componentRef}
               text={text}
@@ -181,7 +186,7 @@ export default function CourseCertificateView() {
               size="large"
               fullWidth
             >
-              {loading ? "กำลังโหลด..." : "สั่งพิมพ์"}
+              {loading ? 'กำลังโหลด...' : 'สั่งพิมพ์'}
             </Button>
           </Box>
         </>
@@ -199,7 +204,7 @@ export default function CourseCertificateView() {
               <Grid
                 container
                 direction="row"
-                justify={matches ? "flex-start" : "center"}
+                justify={matches ? 'flex-start' : 'center'}
                 alignItems="center"
               >
                 <Breadcrumbs

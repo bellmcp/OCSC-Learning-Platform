@@ -2,7 +2,7 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useReactToPrint } from 'react-to-print';
-import { Link as RouterLink, useParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Container,
   Typography,
@@ -22,7 +22,7 @@ import {
   Inbox as InboxIcon,
 } from '@material-ui/icons';
 
-import CertificateRenderer from './CertificateRenderer';
+import ScoreRenderer from './ScoreRenderer';
 import * as meActions from '../actions';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,24 +38,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CurriculumCertificateView() {
+export default function OrientationScoreView() {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
-  const { id: certificateId }: any = useParams();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
-  const { curriculumCertificates } = useSelector((state: any) => state.me);
-  const currentCertificate = curriculumCertificates.filter(
-    (curriculumCertificate) =>
-      curriculumCertificate.id === parseInt(certificateId)
-  )[0];
+  const { id: citizenId } = useSelector((state: any) => state.user.items);
+  const { orientationScore } = useSelector((state: any) => state.me);
 
   useEffect(() => {
-    const curriculum_certificates_action =
-      meActions.loadCurriculumCertificates();
-    dispatch(curriculum_certificates_action);
+    const orientation_score_action = meActions.loadOrientationScore();
+    dispatch(orientation_score_action);
   }, [dispatch]);
 
   //PRINT
@@ -91,7 +86,8 @@ export default function CurriculumCertificateView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: `ประกาศนียบัตร-หลักสูตร${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
+    documentTitle: 'test',
+    // documentTitle: `ประกาศนียบัตร-วิชา${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
@@ -110,7 +106,7 @@ export default function CurriculumCertificateView() {
   }, [onBeforeGetContentResolve.current, text]);
 
   function renderCertificateView() {
-    if (!currentCertificate?.pass) {
+    if (!orientationScore) {
       return (
         <Box my={15}>
           <Grid
@@ -125,7 +121,7 @@ export default function CurriculumCertificateView() {
               style={{ fontSize: 54, marginBottom: 14 }}
             />
             <Typography component="h2" variant="body2" color="textSecondary">
-              ไม่พบประกาศนียบัตร
+              ไม่พบคะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
             </Typography>
           </Grid>
         </Box>
@@ -144,40 +140,38 @@ export default function CurriculumCertificateView() {
                 lineHeight: '1.3',
               }}
             >
-              หลักสูตร {currentCertificate?.curriculum}
+              คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
             </Typography>
           </Box>
           <Box my={3}>
             <Typography variant="body1" color="textSecondary" gutterBottom>
-              <b className={classes.mr8}>ผู้สำเร็จการศึกษา</b>{' '}
-              {currentCertificate?.title}
-              {currentCertificate?.firstname} {currentCertificate?.lastname}
+              <b className={classes.mr8}>ชื่อ - สกุล</b>{' '}
+              {orientationScore?.title}
+              {orientationScore?.firstName} {orientationScore?.lastName}
               <br />
-              <b className={classes.mr8}>วันที่สำเร็จการศึกษา</b>{' '}
-              {new Date(currentCertificate?.enddate).toLocaleDateString(
-                'th-TH',
-                {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }
-              )}
+              <b className={classes.mr8}>ตำแหน่ง</b>{' '}
+              {orientationScore?.jobTitle} {orientationScore?.jobLevel}
               <br />
-              <b className={classes.mr8}>หน่วยงานรับรอง</b>{' '}
-              {currentCertificate?.platform}
+              <b className={classes.mr8}>หน่วยงาน</b>{' '}
+              {orientationScore?.division} {orientationScore?.department}
+              <br />
+              <b className={classes.mr8}>
+                วันที่สำเร็จการศึกษาตามหลักสูตร
+              </b>{' '}
+              {new Date(orientationScore?.date).toLocaleDateString('th-TH', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+              <br />
             </Typography>
           </Box>
           <Box my={6} style={{ overflow: 'auto' }}>
-            <CertificateRenderer
-              isCurriculum
+            <ScoreRenderer
               ref={componentRef}
               text={text}
-              title={currentCertificate?.title}
-              firstName={currentCertificate?.firstname}
-              lastName={currentCertificate?.lastname}
-              contentName={currentCertificate?.curriculum}
-              hour={currentCertificate?.hour}
-              endDate={currentCertificate?.enddate}
+              citizenId={citizenId}
+              {...orientationScore}
             />
           </Box>
           <Box my={3}>
@@ -221,15 +215,8 @@ export default function CurriculumCertificateView() {
                   >
                     โปรไฟล์
                   </Link>
-                  <Link
-                    component={RouterLink}
-                    color="inherit"
-                    to={`${PATH}/me/certificate`}
-                  >
-                    พิมพ์ประกาศนียบัตร ก.พ.
-                  </Link>
                   <Typography color="textPrimary">
-                    ประกาศนียบัตรหลักสูตร
+                    คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                   </Typography>
                 </Breadcrumbs>
               </Grid>

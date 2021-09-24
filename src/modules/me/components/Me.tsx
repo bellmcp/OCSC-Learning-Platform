@@ -1,6 +1,6 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   Container,
   Typography,
@@ -9,25 +9,26 @@ import {
   Grid,
   Box,
   Button,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Person as PersonIcon,
   Edit as EditIcon,
   Lock as LockIcon,
   FolderSpecial as FolderIcon,
   Print as PrintIcon,
-} from "@material-ui/icons";
+  Flag as FlagIcon,
+} from '@material-ui/icons';
 
-import Header from "modules/ui/components/Header";
+import Header from 'modules/ui/components/Header';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(5, 3),
     margin: theme.spacing(7, 1),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   avatar: {
     width: 80,
@@ -37,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonGroupWrapper: {
     width: 500,
-    [theme.breakpoints.down("xs")]: {
-      width: "100%",
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
     },
   },
 }));
@@ -50,29 +51,33 @@ export default function Me() {
   const { items: users } = useSelector((state: any) => state.user);
 
   const linkToCertificate = () => {
-    window.open(`${process.env.REACT_APP_PORTAL_URL}history`, "_blank");
+    window.open(`${process.env.REACT_APP_PORTAL_URL}history`, '_blank');
   };
 
   const linkToEditProfile = () => {
-    window.open(`${process.env.REACT_APP_PORTAL_URL}edit`, "_blank");
+    window.open(`${process.env.REACT_APP_PORTAL_URL}edit`, '_blank');
   };
 
   const linkToChangePassword = () => {
-    window.open(`${process.env.REACT_APP_PORTAL_URL}reset`, "_blank");
+    window.open(`${process.env.REACT_APP_PORTAL_URL}reset`, '_blank');
   };
 
   const linkToPrintCertificate = () => {
     history.push(`${PATH}/me/certificate`);
   };
 
+  const linkToOrientationScore = () => {
+    history.push(`${PATH}/me/score`);
+  };
+
   return (
     <>
       <Header
         title="โปรไฟล์"
-        icon={<PersonIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        icon={<PersonIcon fontSize="large" style={{ marginRight: '24px' }} />}
       />
       <Container component="main" maxWidth="md">
-        <Paper className={classes.paper} style={{ textAlign: "center" }}>
+        <Paper className={classes.paper} style={{ textAlign: 'center' }}>
           <Avatar className={classes.avatar} />
           <Typography
             component="h1"
@@ -80,14 +85,14 @@ export default function Me() {
             gutterBottom
             style={{
               marginTop: 14,
-              fontSize: "1.7rem",
+              fontSize: '1.7rem',
               fontWeight: 600,
-              lineHeight: "1.2",
+              lineHeight: '1.2',
             }}
           >
             {users.firstname
               ? `${users.title}${users.firstname} ${users.lastname}`
-              : "คุณยังไม่ได้เข้าสู่ระบบ"}
+              : 'คุณยังไม่ได้เข้าสู่ระบบ'}
           </Typography>
           <Typography
             component="h2"
@@ -106,6 +111,17 @@ export default function Me() {
               alignItems="center"
               spacing={1}
             >
+              <Grid item xs={12}>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  startIcon={<FlagIcon />}
+                  onClick={linkToOrientationScore}
+                  fullWidth
+                >
+                  คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+                </Button>
+              </Grid>
               <Grid item xs={12} sm={6}>
                 <Button
                   variant="outlined"
