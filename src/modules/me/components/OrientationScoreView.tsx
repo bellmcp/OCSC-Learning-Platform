@@ -50,7 +50,6 @@ export default function OrientationScoreView() {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
-  const { id: citizenId } = useSelector((state: any) => state.user.items);
   const { isOrientationScoreLoading, orientationScore } = useSelector(
     (state: any) => state.me
   );
