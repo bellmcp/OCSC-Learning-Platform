@@ -124,8 +124,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
           style={{
             width: '210mm',
             minHeight: '297mm',
-            border: `1px solid lightgrey`,
             display: 'flex',
+            background: '#fff',
           }}
         >
           <Grid
@@ -147,7 +147,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 style={{ fontSize: 15, marginTop: 50, marginBottom: 10 }}
               >
                 <b>
-                  คะแนนการเรียนรู้ด้วยตนเองหลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+                  คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                   (e-Learning)
                 </b>
               </Typography>
@@ -168,7 +168,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   align="left"
                   style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
-                  <b>ชื่อ - สกุล :</b> {this.props.title}
+                  <b style={{ marginRight: 20 }}>ชื่อ - สกุล</b> :{' '}
+                  {this.props.title}
                   {this.props.firstName} {this.props.lastName}
                 </Typography>
                 <Typography
@@ -177,7 +178,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   align="left"
                   style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
-                  <b>เลขประจำตัวประชาชน :</b> {this.props.id}
+                  <b>เลขประจำตัวประชาชน</b> : {this.props.id}
                 </Typography>
               </Grid>
               <Typography
@@ -186,7 +187,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="left"
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
-                <b>ตำแหน่ง :</b> {this.props.jobTitle} {this.props.jobLevel}
+                <b style={{ marginRight: 25 }}>ตำแหน่ง</b> :{' '}
+                {this.props.jobTitle} {this.props.jobLevel}
               </Typography>
               <Typography
                 variant="h5"
@@ -194,7 +196,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="left"
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
-                <b>หน่วยงาน :</b> {this.props.division} {this.props.department}
+                <b style={{ marginRight: 18 }}>หน่วยงาน</b> :{' '}
+                {this.props.division} {this.props.department}
               </Typography>
               <Typography
                 variant="h5"
@@ -202,7 +205,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="right"
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
-                <b>วันที่สำเร็จการศึกษาหลักสูตร</b>{' '}
+                <b>วันที่สำเร็จการศึกษาหลักสูตร</b> :{' '}
                 {new Date(this.props.date).toLocaleDateString('th-TH', {
                   year: 'numeric',
                   month: 'long',
@@ -216,7 +219,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   width: '100%',
                   color: '#BCBEC0',
                   backgroundColor: '#BCBEC0',
-                  margin: '10px 0',
+                  margin: '10px 0 20px',
                 }}
               />
               <table
@@ -290,7 +293,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 style={{ fontSize: 13, marginTop: 5 }}
               >
                 * หมายเหตุ ​: คะแนน Post-test
-                ที่ผู้รับการฝึกอบรมทำได้ในแต่ละชุดวิชา จำต้องไม่ต่ำกว่า 60%
+                ที่ผู้รับการฝึกอบรมทำได้ในแต่ละชุดวิชา จะต้องไม่ต่ำกว่า 60%
                 ของคะแนนเต็มในแต่ละชุดวิชานั้น ๆ
               </Typography>
             </Grid>

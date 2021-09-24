@@ -21,6 +21,7 @@ import {
   Print as PrintIcon,
   Inbox as InboxIcon,
 } from '@material-ui/icons';
+import { isEmpty } from 'lodash';
 
 import Loading from 'modules/ui/components/Loading';
 import ScoreRenderer from './ScoreRenderer';
@@ -36,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
   mr8: {
     marginRight: 8,
+  },
+  mr17: {
+    marginRight: 17,
   },
 }));
 
@@ -89,8 +93,7 @@ export default function OrientationScoreView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: 'test',
-    // documentTitle: `ประกาศนียบัตร-วิชา${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
+    documentTitle: `คะแนนการเรียนรู้ด้วยตนเอง-หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่-${orientationScore?.firstName}-${orientationScore?.lastName}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
@@ -111,7 +114,7 @@ export default function OrientationScoreView() {
   function renderCertificateView() {
     if (isOrientationScoreLoading) {
       return <Loading height={307} />;
-    } else if (!orientationScore) {
+    } else if (isEmpty(orientationScore)) {
       return (
         <Box my={15}>
           <Grid
@@ -154,7 +157,7 @@ export default function OrientationScoreView() {
               {orientationScore?.title}
               {orientationScore?.firstName} {orientationScore?.lastName}
               <br />
-              <b className={classes.mr8}>ตำแหน่ง</b>{' '}
+              <b className={classes.mr17}>ตำแหน่ง</b>{' '}
               {orientationScore?.jobTitle} {orientationScore?.jobLevel}
               <br />
               <b className={classes.mr8}>หน่วยงาน</b>{' '}

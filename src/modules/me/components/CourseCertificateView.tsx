@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
   mr8: {
     marginRight: 8,
   },
+  mr27: {
+    marginRight: 27,
+  },
 }));
 
 export default function CourseCertificateView() {
@@ -152,7 +155,7 @@ export default function CourseCertificateView() {
           </Box>
           <Box my={3}>
             <Typography variant="body1" color="textSecondary" gutterBottom>
-              <b className={classes.mr8}>ผู้สำเร็จการศึกษา</b>{' '}
+              <b className={classes.mr27}>ผู้สำเร็จการศึกษา</b>{' '}
               {currentCertificate?.title}
               {currentCertificate?.firstname} {currentCertificate?.lastname}
               <br />
@@ -166,7 +169,7 @@ export default function CourseCertificateView() {
                 }
               )}
               <br />
-              <b className={classes.mr8}>หน่วยงานรับรอง</b>{' '}
+              <b className={classes.mr27}>หน่วยงานรับรอง</b>{' '}
               {currentCertificate?.platform}
             </Typography>
           </Box>
