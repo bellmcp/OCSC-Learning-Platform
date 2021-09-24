@@ -11,7 +11,9 @@ import {
 } from './actions';
 
 const initialState = {
-  isLoading: false,
+  isCourseCertificatesLoading: false,
+  isCurriculumCertificatesLoading: false,
+  isOrientationScoreLoading: false,
   courseCertificates: [],
   curriculumCertificates: [],
   orientationScore: {},
@@ -20,33 +22,47 @@ const initialState = {
 export default function (state = initialState, action: any) {
   switch (action.type) {
     case LOAD_COURSE_CERTIFICATES_REQUEST:
-      return { ...state, isLoading: true, courseCertificates: [] };
+      return {
+        ...state,
+        isCourseCertificatesLoading: true,
+        courseCertificates: [],
+      };
     case LOAD_CURRICULUM_CERTIFICATES_REQUEST:
-      return { ...state, isLoading: true, curriculumCertificates: [] };
+      return {
+        ...state,
+        isCurriculumCertificatesLoading: true,
+        curriculumCertificates: [],
+      };
     case LOAD_ORIENTATION_SCORE_REQUEST:
-      return { ...state, isLoading: true, orientationScore: {} };
+      return {
+        ...state,
+        isOrientationScoreLoading: true,
+        orientationScore: {},
+      };
     case LOAD_COURSE_CERTIFICATES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isCourseCertificatesLoading: false,
         courseCertificates: action.payload.courseCertificates,
       };
     case LOAD_CURRICULUM_CERTIFICATES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isCurriculumCertificatesLoading: false,
         curriculumCertificates: action.payload.curriculumCertificates,
       };
     case LOAD_ORIENTATION_SCORE_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isOrientationScoreLoading: false,
         orientationScore: action.payload.orientationScore,
       };
     case LOAD_COURSE_CERTIFICATES_FAILURE:
+      return { ...state, isCourseCertificatesLoading: false };
     case LOAD_CURRICULUM_CERTIFICATES_FAILURE:
+      return { ...state, isCurriculumCertificatesLoading: false };
     case LOAD_ORIENTATION_SCORE_FAILURE:
-      return { ...state, isLoading: false };
+      return { ...state, isOrientationScoreLoading: false };
     default:
       return state;
   }

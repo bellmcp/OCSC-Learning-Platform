@@ -22,6 +22,7 @@ import {
   Inbox as InboxIcon,
 } from '@material-ui/icons';
 
+import Loading from 'modules/ui/components/Loading';
 import ScoreRenderer from './ScoreRenderer';
 import * as meActions from '../actions';
 
@@ -46,7 +47,9 @@ export default function OrientationScoreView() {
   const PATH = process.env.REACT_APP_BASE_PATH;
 
   const { id: citizenId } = useSelector((state: any) => state.user.items);
-  const { orientationScore } = useSelector((state: any) => state.me);
+  const { isOrientationScoreLoading, orientationScore } = useSelector(
+    (state: any) => state.me
+  );
 
   useEffect(() => {
     const orientation_score_action = meActions.loadOrientationScore();
@@ -106,7 +109,9 @@ export default function OrientationScoreView() {
   }, [onBeforeGetContentResolve.current, text]);
 
   function renderCertificateView() {
-    if (!orientationScore) {
+    if (isOrientationScoreLoading) {
+      return <Loading height={307} />;
+    } else if (!orientationScore) {
       return (
         <Box my={15}>
           <Grid

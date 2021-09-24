@@ -1,7 +1,7 @@
 //@ts-nocheck
-import React, { useEffect } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Container,
   Typography,
@@ -11,26 +11,26 @@ import {
   Link,
   Divider,
   useMediaQuery,
-} from "@material-ui/core";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   LocalActivity as CertificateIcon,
   NavigateNext as NavigateNextIcon,
   Inbox as InboxIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 
-import * as meActions from "../actions";
-import Header from "modules/ui/components/Header";
-import CourseCertificateItem from "./CourseCertificateItem";
-import CurriculumCertificateItem from "./CurriculumCertificateItem";
-import Loading from "modules/ui/components/Loading";
+import * as meActions from '../actions';
+import Header from 'modules/ui/components/Header';
+import CourseCertificateItem from './CourseCertificateItem';
+import CurriculumCertificateItem from './CurriculumCertificateItem';
+import Loading from 'modules/ui/components/Loading';
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    display: "flex",
+    display: 'flex',
   },
   content: {
-    width: "100%",
+    width: '100%',
     marginBottom: 50,
   },
 }));
@@ -39,11 +39,14 @@ export default function Certificate() {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
-  const { isLoading, courseCertificates, curriculumCertificates } = useSelector(
-    (state: any) => state.me
-  );
+  const {
+    isCourseCertificatesLoading,
+    isCurriculumCertificatesLoading,
+    courseCertificates,
+    curriculumCertificates,
+  } = useSelector((state: any) => state.me);
 
   useEffect(() => {
     const course_certificates_action = meActions.loadCourseCertificates();
@@ -57,7 +60,7 @@ export default function Certificate() {
   }, [dispatch]);
 
   function renderCourseCertificateList() {
-    if (isLoading) {
+    if (isCourseCertificatesLoading) {
       return <Loading height={307} />;
     } else if (courseCertificates.length === 0) {
       return (
@@ -91,7 +94,7 @@ export default function Certificate() {
   }
 
   function renderCurriculumCertificateList() {
-    if (isLoading) {
+    if (isCurriculumCertificatesLoading) {
       return <Loading height={307} />;
     } else if (curriculumCertificates.length === 0) {
       return (
@@ -129,7 +132,7 @@ export default function Certificate() {
       <Header
         title="ประกาศนียบัตร"
         icon={
-          <CertificateIcon fontSize="large" style={{ marginRight: "24px" }} />
+          <CertificateIcon fontSize="large" style={{ marginRight: '24px' }} />
         }
       />
       <Container>
@@ -139,7 +142,7 @@ export default function Certificate() {
               <Grid
                 container
                 direction="row"
-                justify={matches ? "flex-start" : "center"}
+                justify={matches ? 'flex-start' : 'center'}
                 alignItems="center"
               >
                 <Breadcrumbs
@@ -165,8 +168,8 @@ export default function Certificate() {
                 gutterBottom
                 component="h2"
                 variant="h6"
-                style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                align={matches ? "left" : "center"}
+                style={{ fontSize: '1.7rem', fontWeight: 600 }}
+                align={matches ? 'left' : 'center'}
               >
                 ประกาศนียบัตรหลักสูตร
               </Typography>
@@ -177,8 +180,8 @@ export default function Certificate() {
                 gutterBottom
                 component="h2"
                 variant="h6"
-                style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                align={matches ? "left" : "center"}
+                style={{ fontSize: '1.7rem', fontWeight: 600 }}
+                align={matches ? 'left' : 'center'}
               >
                 ประกาศนียบัตรรายวิชา
               </Typography>

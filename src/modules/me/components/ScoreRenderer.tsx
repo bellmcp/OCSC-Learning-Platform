@@ -1,7 +1,10 @@
 //@ts-nocheck
 import * as React from 'react';
+import { get } from 'lodash';
 import { Typography, Grid, Container } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+import ScoreTableRow from './ScoreTableRow';
 
 const theme = createMuiTheme({
   typography: {
@@ -26,6 +29,95 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
   }
 
   public render() {
+    const tableData = [
+      {
+        title: 'หมวดที่ 1: ปลูกฝังปรัชญาการเป็นข้าราชการที่ดี',
+        isHeader: true,
+      },
+      {
+        title: 'ชุดวิชาที่ 1: การเป็นข้าราชการ',
+        value: this.props.s1,
+      },
+      {
+        title: 'ชุดวิชาที่ 2: การเรียนรู้ตามรอยพระยุคลบาท',
+        value: this.props.s2,
+      },
+      {
+        title: 'หมวดที่ 2: ระบบราชการและการบริหารภาครัฐแนวใหม่',
+      },
+      {
+        title: 'ชุดวิชาที่ 1: ระบบราชการไทย',
+        value: this.props.s3,
+      },
+      {
+        title: 'ชุดวิชาที่ 2: การบริหารงานภาครัฐแนวใหม่',
+        value: this.props.s4,
+      },
+      {
+        title: 'ชุดวิชาที่ 3: การบริหารกิจการบ้านเมืองที่ดี',
+        value: this.props.s5,
+      },
+      {
+        title: 'หมวดที่ 3: ความรู้พื้นฐานสำหรับข้าราชการ',
+      },
+      {
+        title: 'ชุดวิชาที่ 1: วินัยและจรรยาบรรณข้าราชการ',
+        value: this.props.s6,
+      },
+      {
+        title: 'ชุดวิชาที่ 2: ระเบียบแบบแผนของทางราชการ',
+        value: this.props.s7,
+      },
+      {
+        title: 'ชุดวิชาที่ 3: กฎหมายพื้นฐานสำหรับข้าราชการ',
+        value: this.props.s8,
+      },
+      {
+        title: 'หมวดที่ 4: เสริมสร้างสมรรถนะหลักและทักษะที่จำเป็น',
+      },
+      {
+        title: 'ชุดวิชาที่ 1: การพัฒนาการคิด',
+        value: this.props.s9,
+      },
+      {
+        title: 'ชุดวิชาที่ 2: การสื่อสารที่มีประสิทธิภาพ',
+        value: this.props.s10,
+      },
+      {
+        title: 'ชุดวิชาที่ 3: มนุษยสัมพันธ์ในการทำงาน',
+        value: this.props.s11,
+      },
+      {
+        title: 'ชุดวิชาที่ 4: สมรรถนะหลักสำหรับข้าราชการพลเรือน',
+        value: this.props.s12,
+      },
+      {
+        title: 'ชุดวิชาที่ 5: การวางแผนปฏิบัติงานโครงการ และการดำเนินการตามแผน',
+        value: this.props.s13,
+      },
+    ];
+
+    const getTotalItem = () => {
+      let sum = 0;
+      for (let i = 0; i < 13; i++) {
+        sum += parseInt(get(this.props, `s${i}`, 0));
+      }
+      return sum;
+    };
+
+    const renderFillIn = () => {
+      let string = '';
+      for (let i = 0; i < 100; i++) {
+        string += '.';
+      }
+      return string;
+    };
+
+    const getPassStatus = () => {
+      if (this.props.pass) return <span style={{ color: 'green' }}>ผ่าน</span>;
+      else return <span style={{ color: 'red' }}>ไม่ผ่าน</span>;
+    };
+
     return (
       <ThemeProvider theme={theme}>
         <Container
@@ -45,14 +137,14 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
           >
             <Grid
               item
-              style={{ display: 'flex', width: '100%' }}
+              style={{ display: 'flex', width: '97%' }}
               direction="column"
             >
               <Typography
                 variant="h5"
                 color="textPrimary"
                 align="center"
-                style={{ fontSize: 18, marginBottom: 5 }}
+                style={{ fontSize: 15, marginTop: 50, marginBottom: 10 }}
               >
                 <b>
                   คะแนนการเรียนรู้ด้วยตนเองหลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
@@ -66,7 +158,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   width: '100%',
                   color: '#BCBEC0',
                   backgroundColor: '#BCBEC0',
-                  margin: '10px 0',
+                  margin: '5px 0',
                 }}
               />
               <Grid container justify="space-between">
@@ -74,7 +166,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   variant="h5"
                   color="textPrimary"
                   align="left"
-                  style={{ fontSize: 13, marginBottom: 5 }}
+                  style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
                   <b>ชื่อ - สกุล :</b> {this.props.title}
                   {this.props.firstName} {this.props.lastName}
@@ -83,17 +175,16 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   variant="h5"
                   color="textPrimary"
                   align="left"
-                  style={{ fontSize: 13, marginBottom: 5 }}
+                  style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
                   <b>เลขประจำตัวประชาชน :</b> {this.props.citizenId}
                 </Typography>
               </Grid>
-
               <Typography
                 variant="h5"
                 color="textPrimary"
                 align="left"
-                style={{ fontSize: 13, marginBottom: 5 }}
+                style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b>ตำแหน่ง :</b> {this.props.jobTitle} {this.props.jobLevel}
               </Typography>
@@ -101,7 +192,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 variant="h5"
                 color="textPrimary"
                 align="left"
-                style={{ fontSize: 13, marginBottom: 5 }}
+                style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b>หน่วยงาน :</b> {this.props.division} {this.props.department}
               </Typography>
@@ -109,7 +200,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 variant="h5"
                 color="textPrimary"
                 align="right"
-                style={{ fontSize: 13, marginBottom: 5 }}
+                style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b>วันที่สำเร็จการศึกษาหลักสูตร</b>{' '}
                 {new Date(this.props.date).toLocaleDateString('th-TH', {
@@ -133,50 +224,64 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   border: '1px solid #000',
                   fontFamily: `'Sarabun', 'sans-serif'`,
                   fontSize: 13,
-                  textAlign: 'left',
-                  padding: 4,
+                  textAlign: 'center',
+                  borderSpacing: 0,
                 }}
               >
-                <tr style={{ fontWeight: 'bold' }}>
-                  <td>หมวดที่ 1: ปลูกฝังปรัชญาการเป็นข้าราชการที่ดี</td>
-                  <td>จำนวนข้อ</td>
-                  <td>60%</td>
-                  <td>คะแนน Pre-test</td>
-                  <td>คะแนน Post-test</td>
-                </tr>
+                {tableData.map((item: any) => (
+                  <ScoreTableRow {...item} />
+                ))}
                 <tr>
-                  <td>ชุดวิชาที่ 1: การเป็นข้าราชการ</td>
-                  <td>{this.props.s1}</td>
-                  <td>Germany</td>
-                </tr>
-                <tr>
-                  <td>ชุดวิชาที่ 2: การเรียนรู้ตามรอยพระยุคลบาท</td>
-                  <td>Francisco Chang</td>
-                  <td>Mexico</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>หมวดที่ 2: ระบบราชการและการบริหารภาครัฐแนวใหม่</b>
+                  <td
+                    style={{
+                      padding: 6,
+                      borderBottom: '1px solid #000',
+                      borderRight: '1px solid #000',
+                    }}
+                  >
+                    -รวม-
                   </td>
+                  <td
+                    style={{
+                      borderBottom: '1px solid #000',
+                      borderRight: '1px solid #000',
+                    }}
+                  >
+                    {getTotalItem()}
+                  </td>
+                  <td
+                    style={{
+                      borderBottom: '1px solid #000',
+                    }}
+                  ></td>
+                  <td
+                    style={{
+                      borderBottom: '1px solid #000',
+                    }}
+                  ></td>
+                  <td
+                    style={{
+                      borderBottom: '1px solid #000',
+                    }}
+                  ></td>
                 </tr>
                 <tr>
-                  <td>ชุดวิชาที่ 1: ระบบราชการไทย</td>
-                </tr>
-                <tr>
-                  <td>ชุดวิชาที่ 2: การบริหารงานภาครัฐแนวใหม่</td>
-                </tr>
-                <tr>
-                  <td>ชุดวิชาที่ 3: การบริหารกิจการบ้านเมืองที่ดี</td>
+                  <td
+                    colspan="3"
+                    style={{ padding: 6, borderRight: '1px solid #000' }}
+                  >
+                    สรุปผลการฝึกอบรม
+                  </td>
+                  <td colspan="2">{getPassStatus()}</td>
                 </tr>
               </table>
               <Typography
                 variant="h5"
                 color="textPrimary"
                 align="left"
-                style={{ fontSize: 13, marginTop: 10, marginBottom: 5 }}
+                style={{ fontSize: 13, marginTop: 20, marginBottom: 5 }}
               >
-                ผู้บันทึกคะแนน
-                ........................................................................................................
+                ผู้บันทึกคะแนน {renderFillIn()}
               </Typography>
               <Typography
                 variant="h5"

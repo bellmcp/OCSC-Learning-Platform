@@ -22,6 +22,7 @@ import {
   Inbox as InboxIcon,
 } from '@material-ui/icons';
 
+import Loading from 'modules/ui/components/Loading';
 import CertificateRenderer from './CertificateRenderer';
 import * as meActions from '../actions';
 
@@ -46,7 +47,8 @@ export default function CurriculumCertificateView() {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
-  const { curriculumCertificates } = useSelector((state: any) => state.me);
+  const { isCurriculumCertificatesLoading, curriculumCertificates } =
+    useSelector((state: any) => state.me);
   const currentCertificate = curriculumCertificates.filter(
     (curriculumCertificate) =>
       curriculumCertificate.id === parseInt(certificateId)
@@ -110,7 +112,9 @@ export default function CurriculumCertificateView() {
   }, [onBeforeGetContentResolve.current, text]);
 
   function renderCertificateView() {
-    if (!currentCertificate?.pass) {
+    if (isCurriculumCertificatesLoading) {
+      return <Loading height={307} />;
+    } else if (!currentCertificate?.pass) {
       return (
         <Box my={15}>
           <Grid
