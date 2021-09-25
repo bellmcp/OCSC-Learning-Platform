@@ -9,7 +9,7 @@ export default class ScoreTableRow extends React.PureComponent<Props> {
 
   public render() {
     const getMinimumScore = (value: number) => {
-      return value * 0.6;
+      return Math.floor(value * 0.6);
     };
 
     const getPassStatus = (value: number) => {

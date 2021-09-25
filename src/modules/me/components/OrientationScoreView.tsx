@@ -127,8 +127,16 @@ export default function OrientationScoreView() {
               color="disabled"
               style={{ fontSize: 54, marginBottom: 14 }}
             />
-            <Typography component="h2" variant="body2" color="textSecondary">
-              ไม่พบคะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+            <Typography
+              component="h2"
+              variant="body2"
+              color="textSecondary"
+              align="center"
+            >
+              ไม่มีข้อมูล หรือยังเรียนไม่จบหลักสูตร
+              <br />
+              ระบบจะออกใบคะแนนฯ ให้เมื่อท่านเรียนจบหลักสูตร
+              และได้ประกาศนียบัตรหลักสูตรแล้ว
             </Typography>
           </Grid>
         </Box>
