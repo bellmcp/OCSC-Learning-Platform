@@ -197,7 +197,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b style={{ marginRight: 18 }}>หน่วยงาน</b> :{' '}
-                {this.props.division} {this.props.department}
+                {this.props.division} {this.props.department}{' '}
+                {this.props.ministry}
               </Typography>
               <Typography
                 variant="h5"
