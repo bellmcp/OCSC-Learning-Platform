@@ -1,27 +1,27 @@
 //@ts-nocheck
-import * as React from "react";
-import DayJS from "react-dayjs";
-import { Typography, Grid, Container } from "@material-ui/core";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import * as React from 'react';
+import DayJS from 'react-dayjs';
+import { Typography, Grid, Container } from '@material-ui/core';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-import logo from "assets/images/cert-logo.png";
-import garuda from "assets/images/cert-garuda.png";
-import signature from "assets/images/cert-signature.png";
-import background from "assets/images/cert-background.svg";
+import logo from 'assets/images/cert-logo.png';
+import garuda from 'assets/images/cert-garuda.png';
+import signature from 'assets/images/cert-signature.png';
+import background from 'assets/images/cert-background.svg';
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ['"Athiti"', "sans-serif"].join(","),
+    fontFamily: ['"Athiti"', 'sans-serif'].join(','),
     caption: {
-      fontFamily: "Prompt", // Change a specific variant
+      fontFamily: 'Prompt', // Change a specific variant
     },
   },
   palette: {
     primary: {
-      main: "#414042",
+      main: '#414042',
     },
     secondary: {
-      main: "#EFAA1F",
+      main: '#EFAA1F',
     },
   },
 });
@@ -36,13 +36,13 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
       <ThemeProvider theme={theme}>
         <Container
           style={{
-            width: "210mm",
-            minHeight: "297mm",
+            width: '210mm',
+            minHeight: '297mm',
             background: `url(${background})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center center",
-            display: "flex",
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center center',
+            display: 'flex',
           }}
         >
           <Grid
@@ -54,7 +54,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
           >
             <Grid
               item
-              style={{ display: "flex", padding: "0 50px" }}
+              style={{ display: 'flex', padding: '0 50px' }}
               direction="column"
             >
               <img
@@ -62,8 +62,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 src={garuda}
                 style={{
                   width: 160,
-                  height: "auto",
-                  alignSelf: "center",
+                  height: 'auto',
+                  alignSelf: 'center',
                   marginBottom: 25,
                 }}
               />
@@ -72,8 +72,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 src={logo}
                 style={{
                   width: 180,
-                  height: "auto",
-                  alignSelf: "center",
+                  height: 'auto',
+                  alignSelf: 'center',
                   marginBottom: 25,
                 }}
               />
@@ -95,11 +95,11 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
               </Typography>
               <hr
                 style={{
-                  border: "none",
+                  border: 'none',
                   height: 1,
                   width: 470,
-                  color: "#BCBEC0",
-                  backgroundColor: "#BCBEC0",
+                  color: '#BCBEC0',
+                  backgroundColor: '#BCBEC0',
                   marginBottom: 50,
                 }}
               />
@@ -131,9 +131,9 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 variant="h6"
                 color="textPrimary"
                 align="center"
-                style={{ fontSize: 28, marginBottom: 38, lineHeight: "1.2" }}
+                style={{ fontSize: 28, marginBottom: 38, lineHeight: '1.2' }}
               >
-                {this.props.isCurriculum ? "หลักสูตร" : "วิชา"}{" "}
+                {this.props.isCurriculum ? 'หลักสูตร' : 'วิชา'}{' '}
                 {this.props.contentName}
               </Typography>
 
@@ -144,8 +144,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontSize: 20 }}
               >
-                {"["}รวมระยะเวลาทั้งสิ้น{" "}
-                {this.props.hour ? this.props.hour : "0"} ชั่วโมง{"]"}
+                {'['}รวมระยะเวลาทั้งสิ้น{' '}
+                {this.props.hour ? this.props.hour : '-'} ชั่วโมง{']'}
               </Typography>
               <Typography
                 variant="body1"
@@ -153,12 +153,12 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontSize: 20, marginBottom: 25 }}
               >
-                ให้ไว้ ณ วันที่ <DayJS format="D">{this.props.endDate}</DayJS>{" "}
-                เดือน{" "}
-                {new Date(this.props.endDate).toLocaleDateString("th-TH", {
-                  month: "long",
-                })}{" "}
-                พ.ศ.{" "}
+                ให้ไว้ ณ วันที่ <DayJS format="D">{this.props.endDate}</DayJS>{' '}
+                เดือน{' '}
+                {new Date(this.props.endDate).toLocaleDateString('th-TH', {
+                  month: 'long',
+                })}{' '}
+                พ.ศ.{' '}
                 <DayJS format="YYYY" add={{ years: 543 }}>
                   {this.props.endDate}
                 </DayJS>
@@ -170,8 +170,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 src={signature}
                 style={{
                   width: 180,
-                  height: "auto",
-                  alignSelf: "center",
+                  height: 'auto',
+                  alignSelf: 'center',
                   marginBottom: 10,
                 }}
               />
@@ -179,7 +179,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 variant="body2"
                 color="textPrimary"
                 align="center"
-                style={{ fontSize: 15, marginBottom: 0, lineHeight: "1.2" }}
+                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
               >
                 [หม่อมหลวงพัชรภากร เทวกุล]
                 <br />
