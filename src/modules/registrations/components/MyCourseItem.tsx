@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React from "react";
-import DayJS from "react-dayjs";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import DayJS from 'react-dayjs';
+import { useHistory } from 'react-router-dom';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Typography,
@@ -17,36 +17,36 @@ import {
   Box,
   Button,
   Divider,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   CheckCircle as CheckIcon,
   PlayArrow as PlayIcon,
-} from "@material-ui/icons";
-import { green } from "@material-ui/core/colors";
+} from '@material-ui/icons';
+import { green } from '@material-ui/core/colors';
 
-import isBetween from "utils/isBetween";
+import isBetween from 'utils/isBetween';
 
-import { MyCourseProps } from "../types";
+import { MyCourseProps } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "row",
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
       padding: theme.spacing(0),
     },
     controls: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
       flex: 1,
     },
     cardImage: {
-      width: "150px",
-      borderRadius: "4 0 0 0",
+      width: '150px',
+      borderRadius: '4 0 0 0',
     },
     noWrapButton: {
-      whiteSpace: "nowrap !important",
+      whiteSpace: 'nowrap !important',
     },
   })
 );
@@ -67,12 +67,23 @@ export default function MyCourseItem({
 }: MyCourseProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const history = useHistory();
 
   const linkToLecture = () => {
     history.push(`${PATH}/learn/courses/${courseId}`);
   };
+
+  let formatter = new Intl.DateTimeFormat('sv-SE', {
+    timeZone: 'Asia/Jakarta',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
 
   return (
     <Card>
@@ -81,10 +92,10 @@ export default function MyCourseItem({
           image={thumbnail}
           style={{
             background: `url('${thumbnail}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "no-repeat",
-            borderLeft: isCompleted ? `6px solid ${green[800]}` : "",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
+            borderLeft: isCompleted ? `6px solid ${green[800]}` : '',
           }}
           className={classes.cardImage}
         />
@@ -95,7 +106,7 @@ export default function MyCourseItem({
               mx={3}
               flex
               style={{
-                display: "flex",
+                display: 'flex',
               }}
             >
               <Grid
@@ -109,12 +120,12 @@ export default function MyCourseItem({
                   <Typography
                     variant="h6"
                     component="h2"
-                    style={{ lineHeight: "1.1", marginBottom: 4 }}
+                    style={{ lineHeight: '1.1', marginBottom: 4 }}
                   >
-                    {name ? name : "รายวิชา"}
+                    {name ? name : 'รายวิชา'}
                   </Typography>
                   <Typography variant="body1" component="p" gutterBottom>
-                    {code ? code : "รหัสรายวิชา"}
+                    {code ? code : 'รหัสรายวิชา'}
                   </Typography>
                   <Typography
                     variant="body2"
@@ -122,33 +133,33 @@ export default function MyCourseItem({
                     color="textSecondary"
                     gutterBottom
                   >
-                    {courseRoundName ? courseRoundName : "ไม่มีข้อมูล"}
+                    {courseRoundName ? courseRoundName : 'ไม่มีข้อมูล'}
                   </Typography>
                   <Typography
                     variant="caption"
                     component="p"
                     color="textSecondary"
-                    style={{ lineHeight: "1.2" }}
+                    style={{ lineHeight: '1.2' }}
                     gutterBottom
                   >
                     <b>ลงทะเบียน </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {registrationDate ? registrationDate : "ไม่มีข้อมูล"}
+                      {registrationDate ? registrationDate : 'ไม่มีข้อมูล'}
                     </DayJS>
                   </Typography>
                   <Typography
                     variant="caption"
                     component="p"
                     color="textSecondary"
-                    style={{ lineHeight: "1.2" }}
+                    style={{ lineHeight: '1.2' }}
                   >
                     <b>เข้าเรียนได้ </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {courseStart ? courseStart : "ไม่มีข้อมูล"}
-                    </DayJS>{" "}
-                    ถึง{" "}
+                      {courseStart ? courseStart : 'ไม่มีข้อมูล'}
+                    </DayJS>{' '}
+                    ถึง{' '}
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {courseEnd ? courseEnd : "ไม่มีข้อมูล"}
+                      {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
                     </DayJS>
                   </Typography>
                 </Grid>
@@ -185,6 +196,19 @@ export default function MyCourseItem({
                         >
                           เข้าเรียน
                         </Button>
+                        {/* <Typography variant="caption" color="error">
+                          <b>FOR DEVELOPMENT</b>
+                          <br />
+                          courseStart: {courseStart}
+                          <br />
+                          current:{' '}
+                          {formatter.format(new Date()).replaceAll(' ', 'T')}
+                          <br />
+                          courseEnd: {courseEnd}
+                          <br />
+                          isEligibleForAccess:{' '}
+                          {isBetween(courseStart, courseEnd).toString()}
+                        </Typography> */}
                       </Grid>
                     </Grid>
                     {isCompleted && (
@@ -193,12 +217,12 @@ export default function MyCourseItem({
                         component="p"
                         color="textSecondary"
                         align="center"
-                        style={{ lineHeight: "1.2", marginTop: 16 }}
+                        style={{ lineHeight: '1.2', marginTop: 16 }}
                       >
                         <span style={{ color: green[800] }}>
                           <b>สำเร็จการศึกษา </b>
                           <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                            {completeDate ? completeDate : "ไม่มีข้อมูล"}
+                            {completeDate ? completeDate : 'ไม่มีข้อมูล'}
                           </DayJS>
                         </span>
                       </Typography>
@@ -245,12 +269,12 @@ export default function MyCourseItem({
                   component="p"
                   color="textSecondary"
                   align="center"
-                  style={{ lineHeight: "1.2" }}
+                  style={{ lineHeight: '1.2' }}
                 >
                   <span style={{ color: green[800] }}>
                     <b>สำเร็จการศึกษา </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                      {completeDate ? completeDate : "ไม่มีข้อมูล"}
+                      {completeDate ? completeDate : 'ไม่มีข้อมูล'}
                     </DayJS>
                   </span>
                 </Typography>
