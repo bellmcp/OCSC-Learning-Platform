@@ -116,7 +116,7 @@ export default function Me() {
                   variant="outlined"
                   color="secondary"
                   startIcon={<FlagIcon />}
-                  // onClick={linkToOrientationScore}
+                  onClick={linkToOrientationScore}
                   fullWidth
                 >
                   คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
