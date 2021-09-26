@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Typography,
@@ -20,34 +20,34 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   Assignment as AssignmentIcon,
   Equalizer as AssessmentIcon,
   Create as CreateIcon,
   Info as InfoIcon,
   People as PeopleIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
 import {
   getContentType,
   getContentTypeText,
   getContentTypeIcon,
   getContentTypeTitle,
-} from "utils/contentType";
+} from 'utils/contentType';
 
-import * as coursesActions from "../actions";
-import * as registrationsActions from "modules/registrations/actions";
-import * as categoriesActions from "modules/categories/actions";
-import CourseHeader from "./CourseHeader";
-import CourseRound from "./CourseRound";
-import Loading from "modules/ui/components/Loading";
+import * as coursesActions from '../actions';
+import * as registrationsActions from 'modules/registrations/actions';
+import * as categoriesActions from 'modules/categories/actions';
+import CourseHeader from './CourseHeader';
+import CourseRound from './CourseRound';
+import Loading from 'modules/ui/components/Loading';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(1),
         paddingRight: theme.spacing(1),
       },
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme: Theme) =>
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightMedium,
-      flexBasis: "100%",
+      flexBasis: '100%',
       flexShrink: 0,
     },
     secondaryHeading: {
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CourseDetails() {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const { id: courseId }: any = useParams();
 
   const dispatch = useDispatch();
@@ -84,7 +84,14 @@ export default function CourseDetails() {
   const { rounds, contents } = useSelector((state) => state.courses);
   const { isLoading: isCourseLoading } = useSelector((state) => state.courses);
   const { items: categories } = useSelector((state) => state.categories);
-  const { myCourses } = useSelector((state) => state.registrations);
+  const { myCourses, localDateTime } = useSelector(
+    (state) => state.registrations
+  );
+
+  useEffect(() => {
+    const load_local_date_time = registrationsActions.loadLocalDateTime();
+    dispatch(load_local_date_time);
+  }, [dispatch]);
 
   useEffect(() => {
     const courses_action = coursesActions.loadCourse(courseId);
@@ -114,32 +121,32 @@ export default function CourseDetails() {
 
   const courseInfoPlaceholder = [
     {
-      title: "เป้าหมายการเรียนรู้",
+      title: 'เป้าหมายการเรียนรู้',
       detail: course?.learningObjective
         ? course?.learningObjective
-        : "ไม่มีข้อมูล",
+        : 'ไม่มีข้อมูล',
       icon: <AssignmentIcon />,
     },
     {
-      title: "ประเด็นการเรียนรู้",
-      detail: course?.learningTopic ? course?.learningTopic : "ไม่มีข้อมูล",
+      title: 'ประเด็นการเรียนรู้',
+      detail: course?.learningTopic ? course?.learningTopic : 'ไม่มีข้อมูล',
       icon: <CreateIcon />,
     },
     {
-      title: "วิธีการประเมินผล",
-      detail: course?.assessment ? course?.assessment : "ไม่มีข้อมูล",
+      title: 'วิธีการประเมินผล',
+      detail: course?.assessment ? course?.assessment : 'ไม่มีข้อมูล',
       icon: <AssessmentIcon />,
     },
     {
-      title: "กลุ่มเป้าหมาย",
-      detail: course?.targetGroup ? course?.targetGroup : "ไม่มีข้อมูล",
+      title: 'กลุ่มเป้าหมาย',
+      detail: course?.targetGroup ? course?.targetGroup : 'ไม่มีข้อมูล',
       icon: <PeopleIcon />,
     },
     {
-      title: "หมายเหตุ",
+      title: 'หมายเหตุ',
       detail: course?.seqFlow
-        ? "บังคับเรียนตามลำดับเนื้อหา"
-        : "ไม่บังคับเรียนตามลำดับเนื้อหา",
+        ? 'บังคับเรียนตามลำดับเนื้อหา'
+        : 'ไม่บังคับเรียนตามลำดับเนื้อหา',
       icon: <InfoIcon />,
     },
   ];
@@ -165,8 +172,8 @@ export default function CourseDetails() {
             <Typography
               variant="h6"
               style={{
-                fontSize: "1.7rem",
-                lineHeight: "1.1",
+                fontSize: '1.7rem',
+                lineHeight: '1.1',
                 fontWeight: 600,
               }}
             >
@@ -196,9 +203,9 @@ export default function CourseDetails() {
   return (
     <>
       <CourseHeader
-        title={course?.name ? course?.name : "รายวิชา"}
-        code={course?.code ? course?.code : "รหัสรายวิชา"}
-        icon={<PeopleIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        title={course?.name ? course?.name : 'รายวิชา'}
+        code={course?.code ? course?.code : 'รหัสรายวิชา'}
+        icon={<PeopleIcon fontSize="large" style={{ marginRight: '24px' }} />}
         imageUrl={course?.thumbnail}
         categoryId={course?.courseCategoryId}
         category={categories[course?.courseCategoryId - 1]?.courseCategory}
@@ -254,6 +261,7 @@ export default function CourseDetails() {
                             {...round}
                             myCourses={myCourses}
                             courseId={courseId}
+                            localDateTime={localDateTime}
                           />
                         </Box>
                       </>
@@ -269,12 +277,12 @@ export default function CourseDetails() {
                     <Grid
                       container
                       direction="row"
-                      justify={matches ? "flex-start" : "center"}
+                      justify={matches ? 'flex-start' : 'center'}
                       alignItems="center"
                     >
                       <Typography
                         style={{
-                          fontSize: "1.7rem",
+                          fontSize: '1.7rem',
                           fontWeight: 600,
                         }}
                       >
@@ -304,7 +312,7 @@ export default function CourseDetails() {
                                 }
                                 primaryTypographyProps={{
                                   style: {
-                                    lineHeight: "1.3",
+                                    lineHeight: '1.3',
                                   },
                                 }}
                                 secondary={`${getContentTypeText(
@@ -312,7 +320,7 @@ export default function CourseDetails() {
                                 )}${
                                   content.minutes
                                     ? `, ${content.minutes} นาที`
-                                    : ""
+                                    : ''
                                 }`}
                                 secondaryTypographyProps={{
                                   style: {

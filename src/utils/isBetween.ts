@@ -1,5 +1,5 @@
 //@ts-nocheck
-export default function isBetween(min, max) {
+export default function isBetween(min, max, current) {
   let formatter = new Intl.DateTimeFormat('sv-SE', {
     timeZone: 'Asia/Jakarta',
     year: 'numeric',
@@ -11,13 +11,22 @@ export default function isBetween(min, max) {
     hour12: false,
   });
 
-  var d1 = min?.slice(0, 10)?.split('-');
-  var d2 = max?.slice(0, 10)?.split('-');
-  var c = formatter
-    .format(new Date())
-    .replaceAll(' ', 'T')
-    .slice(0, 10)
-    .split('-');
+  var d1 = '';
+  var d2 = '';
+  var c = '';
+
+  d1 = min?.slice(0, 10)?.split('-');
+  d2 = max?.slice(0, 10)?.split('-');
+
+  if (current) {
+    c = current;
+  } else {
+    c = formatter
+      .format(new Date())
+      .replaceAll(' ', 'T')
+      .slice(0, 10)
+      .split('-');
+  }
 
   var from = new Date(d1[0], parseInt(d1[1]) - 1, d1[2]);
   var to = new Date(d2[0], parseInt(d2[1]) - 1, d2[2]);

@@ -13,6 +13,7 @@ export interface MyCurriculumProps {
   targetGroup: string;
   assessment: string;
   thumbnail: string;
+  localDateTime: string[];
 }
 
 export interface MyCourseProps {
@@ -37,4 +38,5 @@ export interface MyCourseProps {
   assessment: string;
   thumbnail: string;
   seqFlow: boolean;
+  localDateTime: string[];
 }

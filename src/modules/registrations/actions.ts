@@ -41,6 +41,12 @@ const UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS =
   'learning-platform/registrations/UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS';
 const UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE =
   'learning-platform/registrations/UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE';
+const LOAD_LOCAL_DATE_TIME_REQUEST =
+  'learning-platform/registrations/LOAD_LOCAL_DATE_TIME_REQUEST';
+const LOAD_LOCAL_DATE_TIME_SUCCESS =
+  'learning-platform/registrations/LOAD_LOCAL_DATE_TIME_SUCCESS';
+const LOAD_LOCAL_DATE_TIME_FAILURE =
+  'learning-platform/registrations/LOAD_LOCAL_DATE_TIME_FAILURE';
 
 const PATH = process.env.REACT_APP_BASE_PATH;
 
@@ -284,6 +290,33 @@ function updateCurriculumSatisfactionScore(registrationId, satisfactionScore) {
   };
 }
 
+function loadLocalDateTime() {
+  return async (dispatch: any, getState) => {
+    dispatch({ type: LOAD_LOCAL_DATE_TIME_REQUEST });
+    try {
+      var { data } = await axios.get('/LocalDateTime');
+      if (data.length === 0) {
+        data = {};
+      }
+      const { datetime } = data;
+      dispatch({
+        type: LOAD_LOCAL_DATE_TIME_SUCCESS,
+        payload: {
+          localDateTime: datetime?.slice(0, 10)?.split('-'),
+        },
+      });
+    } catch (err) {
+      dispatch({ type: LOAD_LOCAL_DATE_TIME_FAILURE });
+      dispatch(
+        uiActions.setFlashMessage(
+          `โหลดข้อมูลวันและเวลาปัจจุบันไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          'error'
+        )
+      );
+    }
+  };
+}
+
 export {
   LOAD_COURSE_REGISTRATIONS_REQUEST,
   LOAD_COURSE_REGISTRATIONS_SUCCESS,
@@ -303,10 +336,14 @@ export {
   UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE,
+  LOAD_LOCAL_DATE_TIME_REQUEST,
+  LOAD_LOCAL_DATE_TIME_SUCCESS,
+  LOAD_LOCAL_DATE_TIME_FAILURE,
   loadCourseRegistrations,
   loadCurriculumRegistrations,
   registerCourse,
   registerCurriculum,
   updateCourseSatisfactionScore,
   updateCurriculumSatisfactionScore,
+  loadLocalDateTime,
 };

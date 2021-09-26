@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import DayJS from "react-dayjs";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import DayJS from 'react-dayjs';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Typography,
@@ -16,36 +16,36 @@ import {
   Grid,
   Box,
   Divider,
-} from "@material-ui/core";
-import { Rating } from "@material-ui/lab";
-import { green, amber } from "@material-ui/core/colors";
-import { CheckCircle as CheckIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
+import { green, amber } from '@material-ui/core/colors';
+import { CheckCircle as CheckIcon } from '@material-ui/icons';
 
-import MyCourseItem from "./MyCourseItem";
-import * as registrationsActions from "../actions";
+import MyCourseItem from './MyCourseItem';
+import * as registrationsActions from '../actions';
 
-import { MyCurriculumProps } from "../types";
+import { MyCurriculumProps } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "row",
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
       padding: theme.spacing(0),
     },
     controls: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
       flex: 1,
     },
     cardImage: {
-      width: "166px",
-      borderRadius: "4 0 0 0",
+      width: '166px',
+      borderRadius: '4 0 0 0',
     },
     stack: {
       boxShadow:
-        "0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)",
+        '0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)',
     },
   })
 );
@@ -60,10 +60,11 @@ export default function MyCurriculumItem({
   name,
   thumbnail,
   myCourses,
+  localDateTime,
 }: MyCurriculumProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const [value, setValue] = useState(0);
 
@@ -86,8 +87,8 @@ export default function MyCurriculumItem({
             image={thumbnail}
             style={{
               background: `url('${thumbnail}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center center",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
               borderLeft: isCompleted
                 ? `6px solid ${green[800]}`
                 : `6px solid ${amber[500]}`,
@@ -101,7 +102,7 @@ export default function MyCurriculumItem({
                 mx={3}
                 flex
                 style={{
-                  display: "flex",
+                  display: 'flex',
                 }}
               >
                 <Grid
@@ -117,8 +118,8 @@ export default function MyCurriculumItem({
                       component="p"
                       style={{
                         color: amber[500],
-                        fontWeight: "bold",
-                        lineHeight: "1.1",
+                        fontWeight: 'bold',
+                        lineHeight: '1.1',
                         marginBottom: 4,
                       }}
                     >
@@ -128,15 +129,15 @@ export default function MyCurriculumItem({
                       variant="h6"
                       component="h2"
                       style={{
-                        lineHeight: "1.1",
+                        lineHeight: '1.1',
                         marginBottom: 4,
                         fontWeight: 600,
                       }}
                     >
-                      {name ? name : "หลักสูตร"}
+                      {name ? name : 'หลักสูตร'}
                     </Typography>
                     <Typography variant="body1" component="p" gutterBottom>
-                      {code ? code : "รหัสหลักสูตร"}
+                      {code ? code : 'รหัสหลักสูตร'}
                     </Typography>
                     <Typography
                       variant="body2"
@@ -148,19 +149,19 @@ export default function MyCurriculumItem({
                         myCourses.filter(
                           (myCourse) => myCourse.curriculumRegistrationId === id
                         ).length
-                      }{" "}
+                      }{' '}
                       รายวิชา
                     </Typography>
                     <Typography
                       variant="caption"
                       component="p"
                       color="textSecondary"
-                      style={{ lineHeight: "1.2" }}
+                      style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>ลงทะเบียน </b>
                       <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                        {registrationDate ? registrationDate : "ไม่มีข้อมูล"}
+                        {registrationDate ? registrationDate : 'ไม่มีข้อมูล'}
                       </DayJS>
                     </Typography>
                   </Grid>
@@ -208,12 +209,12 @@ export default function MyCurriculumItem({
                               component="p"
                               color="textSecondary"
                               align="center"
-                              style={{ lineHeight: "1.2", marginTop: 8 }}
+                              style={{ lineHeight: '1.2', marginTop: 8 }}
                             >
                               <span style={{ color: green[800] }}>
                                 <b>สำเร็จการศึกษา </b>
                                 <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                                  {completeDate ? completeDate : "ไม่มีข้อมูล"}
+                                  {completeDate ? completeDate : 'ไม่มีข้อมูล'}
                                 </DayJS>
                               </span>
                             </Typography>
@@ -283,13 +284,13 @@ export default function MyCurriculumItem({
                     color="textSecondary"
                     align="center"
                     style={{
-                      lineHeight: "1.2",
+                      lineHeight: '1.2',
                     }}
                   >
                     <span style={{ color: green[800] }}>
                       <b>สำเร็จการศึกษา </b>
                       <DayJS format="D/M/YYYY" add={{ years: 543 }}>
-                        {completeDate ? completeDate : "ไม่มีข้อมูล"}
+                        {completeDate ? completeDate : 'ไม่มีข้อมูล'}
                       </DayJS>
                     </span>
                   </Typography>
@@ -307,7 +308,10 @@ export default function MyCurriculumItem({
               .filter((myCourse) => myCourse.curriculumRegistrationId === id)
               .map((childCourse) => (
                 <Grid item key={childCourse.id}>
-                  <MyCourseItem {...childCourse} />
+                  <MyCourseItem
+                    {...childCourse}
+                    localDateTime={localDateTime}
+                  />
                 </Grid>
               ))}
           </Grid>

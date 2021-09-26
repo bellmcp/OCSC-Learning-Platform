@@ -64,26 +64,18 @@ export default function MyCourseItem({
   code,
   name,
   thumbnail,
+  localDateTime,
 }: MyCourseProps) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const history = useHistory();
 
+  const isEligibleForAccess = isBetween(courseStart, courseEnd, localDateTime);
+
   const linkToLecture = () => {
     history.push(`${PATH}/learn/courses/${courseId}`);
   };
-
-  let formatter = new Intl.DateTimeFormat('sv-SE', {
-    timeZone: 'Asia/Jakarta',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  });
 
   return (
     <Card>
@@ -186,7 +178,7 @@ export default function MyCourseItem({
                       )}
                       <Grid item>
                         <Button
-                          disabled={!isBetween(courseStart, courseEnd)}
+                          disabled={!isEligibleForAccess}
                           variant="outlined"
                           color="secondary"
                           startIcon={<PlayIcon />}
@@ -196,19 +188,17 @@ export default function MyCourseItem({
                         >
                           เข้าเรียน
                         </Button>
-                        {/* <Typography variant="caption" color="error">
-                          <b>FOR DEVELOPMENT</b>
+                        <Typography variant="caption" color="error">
+                          {/* <b>FOR DEVELOPMENT</b>
                           <br />
-                          courseStart: {courseStart}
+                          courseStart: {courseStart.slice(0, 10)}
                           <br />
-                          current:{' '}
-                          {formatter.format(new Date()).replaceAll(' ', 'T')}
+                          current: {localDateTime.toString()}
                           <br />
-                          courseEnd: {courseEnd}
+                          courseEnd: {courseEnd.slice(0, 10)}
                           <br />
-                          isEligibleForAccess:{' '}
-                          {isBetween(courseStart, courseEnd).toString()}
-                        </Typography> */}
+                          isEligibleForAccess: {isEligibleForAccess.toString()} */}
+                        </Typography>
                       </Grid>
                     </Grid>
                     {isCompleted && (
@@ -239,7 +229,7 @@ export default function MyCourseItem({
           <Divider />
           <Box m={1}>
             <Button
-              disabled={!isBetween(courseStart, courseEnd)}
+              disabled={!isEligibleForAccess}
               variant="text"
               color="secondary"
               startIcon={<PlayIcon />}

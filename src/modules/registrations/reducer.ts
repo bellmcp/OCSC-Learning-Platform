@@ -17,16 +17,21 @@ import {
   UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_SUCCESS,
   UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE,
-} from "./actions";
+  LOAD_LOCAL_DATE_TIME_REQUEST,
+  LOAD_LOCAL_DATE_TIME_SUCCESS,
+  LOAD_LOCAL_DATE_TIME_FAILURE,
+} from './actions';
 
 const initialState = {
   isLoading: false,
+  isLocalDateTimeLoading: false,
   myCourses: [],
   myCurriculums: [],
   courseRegister: [],
   curriculumRegister: [],
   courseSatisfactionScore: [],
   curriculumSatisfactionScore: [],
+  localDateTime: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -43,6 +48,8 @@ export default function (state = initialState, action: any) {
       return { ...state, courseSatisfactionScore: [] };
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_REQUEST:
       return { ...state, curriculumSatisfactionScore: [] };
+    case LOAD_LOCAL_DATE_TIME_REQUEST:
+      return { ...state, isLocalDateTimeLoading: true, localDateTime: [] };
     case LOAD_COURSE_REGISTRATIONS_SUCCESS:
       return {
         ...state,
@@ -77,6 +84,12 @@ export default function (state = initialState, action: any) {
         ...state,
         curriculumSatisfactionScore: action.payload.satisfactionScoreUpdate,
       };
+    case LOAD_LOCAL_DATE_TIME_SUCCESS:
+      return {
+        ...state,
+        isLocalDateTimeLoading: false,
+        localDateTime: action.payload.localDateTime,
+      };
     case LOAD_COURSE_REGISTRATIONS_FAILURE:
     case LOAD_CURRICULUM_REGISTRATIONS_FAILURE:
     case COURSE_REGISTRATION_FAILURE:
@@ -84,6 +97,8 @@ export default function (state = initialState, action: any) {
     case UPDATE_COURSE_SATISFACTION_SCORE_FAILURE:
     case UPDATE_CURRICULUM_SATISFACTION_SCORE_FAILURE:
       return { ...state, isLoading: false };
+    case LOAD_LOCAL_DATE_TIME_FAILURE:
+      return { ...state, isLocalDateTimeLoading: false };
     default:
       return state;
   }

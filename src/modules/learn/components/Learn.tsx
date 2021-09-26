@@ -1,22 +1,23 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import queryString from "query-string";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useLocation } from "react-router-dom";
-import { Drawer, Toolbar, Box, Fab, Grid, Typography } from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Bookmarks as ArrowUpIcon, Lock as LockIcon } from "@material-ui/icons";
+import React, { useEffect, useState } from 'react';
+import queryString from 'query-string';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useLocation } from 'react-router-dom';
+import { Drawer, Toolbar, Box, Fab, Grid, Typography } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Bookmarks as ArrowUpIcon, Lock as LockIcon } from '@material-ui/icons';
 
-import * as learnActions from "../actions";
-import * as coursesActions from "modules/courses/actions";
-import * as registrationsActions from "modules/registrations/actions";
-import SideBar from "./SideBar";
-import SideBarMobile from "./SideBarMobile";
-import ContentView from "./ContentView";
-import Timer from "./Timer";
-import TimerCountdown from "./TimerCountdown";
+import * as learnActions from '../actions';
+import * as coursesActions from 'modules/courses/actions';
+import * as registrationsActions from 'modules/registrations/actions';
+import SideBar from './SideBar';
+import SideBarMobile from './SideBarMobile';
+import ContentView from './ContentView';
+import Timer from './Timer';
+import TimerCountdown from './TimerCountdown';
+import Loading from 'modules/ui/components/Loading';
 
-import isBetween from "utils/isBetween";
+import isBetween from 'utils/isBetween';
 
 const DRAWER_WIDTH = 300;
 const FOOTER_HEIGHT = 60;
@@ -24,60 +25,60 @@ const FOOTER_HEIGHT = 60;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: 'flex',
     },
     appBar: {
       width: `calc(100% - ${DRAWER_WIDTH}px)`,
       marginLeft: DRAWER_WIDTH,
     },
     drawer: {
-      display: "unset",
+      display: 'unset',
       width: DRAWER_WIDTH,
       flexShrink: 0,
-      [theme.breakpoints.down("xs")]: {
-        display: "none",
+      [theme.breakpoints.down('xs')]: {
+        display: 'none',
       },
     },
     drawerPaper: {
       width: DRAWER_WIDTH,
       marginTop: 64,
-      height: "calc(100% - 64px) !important",
+      height: 'calc(100% - 64px) !important',
     },
     content: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.default,
       padding: theme.spacing(1),
-      position: "relative",
+      position: 'relative',
       marginBottom: FOOTER_HEIGHT,
     },
     bottom: {
-      position: "sticky",
+      position: 'sticky',
       bottom: 0,
-      width: "100%",
+      width: '100%',
     },
     timerWrapper: {
-      position: "fixed",
+      position: 'fixed',
       height: FOOTER_HEIGHT,
       bottom: 0,
       width: `calc(100% - ${DRAWER_WIDTH}px)`,
-      borderTop: "1px solid rgba(0, 0, 0, 0.12)",
+      borderTop: '1px solid rgba(0, 0, 0, 0.12)',
       backgroundColor: theme.palette.background.paper,
       marginLeft: DRAWER_WIDTH,
       zIndex: 1201,
-      [theme.breakpoints.down("xs")]: {
-        width: "100%",
-        marginLeft: "0",
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        marginLeft: '0',
       },
     },
     fab: {
-      display: "none",
-      position: "fixed",
+      display: 'none',
+      position: 'fixed',
       bottom: FOOTER_HEIGHT + theme.spacing(3),
       right: theme.spacing(3),
       // left: "calc(50% - 24px)",
       zIndex: 1202,
-      [theme.breakpoints.down("xs")]: {
-        display: "inherit",
+      [theme.breakpoints.down('xs')]: {
+        display: 'inherit',
       },
     },
   })
@@ -90,12 +91,14 @@ export default function Learn() {
   const { contentId } = queryString.parse(search);
   const dispatch = useDispatch();
   const [accessible, setAccessible] = useState(true);
-  const [courseStart, setCourseStart] = useState("");
-  const [courseEnd, setCourseEnd] = useState("");
+  const [courseStart, setCourseStart] = useState('');
+  const [courseEnd, setCourseEnd] = useState('');
 
   const [course] = useSelector((state) => state.courses.items);
   var { contents: courseContents } = useSelector((state) => state.courses);
-  const { myCourses } = useSelector((state) => state.registrations);
+  const { myCourses, localDateTime, isLocalDateTimeLoading } = useSelector(
+    (state) => state.registrations
+  );
   const { contentViews } = useSelector((state) => state.learn);
   if (courseContents.length === 0) {
     courseContents = [];
@@ -113,6 +116,11 @@ export default function Learn() {
   const currentContentView = contentViews.filter(
     (contentView) => contentView.courseContentId === parseInt(contentId)
   );
+
+  useEffect(() => {
+    const load_local_date_time = registrationsActions.loadLocalDateTime();
+    dispatch(load_local_date_time);
+  }, [dispatch]);
 
   useEffect(() => {
     const courses_action = coursesActions.loadCourse(courseId);
@@ -153,10 +161,10 @@ export default function Learn() {
 
   useEffect(() => {
     if (courseStart && courseEnd) {
-      let check = isBetween(courseStart, courseEnd);
+      let check = isBetween(courseStart, courseEnd, localDateTime);
       setAccessible(check);
     }
-  }, [courseStart, courseEnd]);
+  }, [courseStart, courseEnd, localDateTime]);
 
   const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
   const handleMobileDialogOpen = () => {
@@ -167,11 +175,11 @@ export default function Learn() {
   };
 
   const [testStart, setTestStart] = useState(false);
-  const [userTestAnswers, setUserTestAnswers] = useState("0");
+  const [userTestAnswers, setUserTestAnswers] = useState('0');
 
   function renderTimer() {
     if (contentId !== undefined) {
-      if (activeContentView[0]?.type === "c") {
+      if (activeContentView[0]?.type === 'c') {
         return (
           <Timer
             contentId={contentId}
@@ -180,7 +188,7 @@ export default function Learn() {
             courseRegistrationDetails={courseRegistrationDetails}
           />
         );
-      } else if (activeContentView[0]?.type === "t") {
+      } else if (activeContentView[0]?.type === 't') {
         if (testStart) {
           return (
             <TimerCountdown
@@ -200,26 +208,11 @@ export default function Learn() {
     }
   }
 
-  return (
-    <div className={classes.root}>
-      <Toolbar />
-      {!accessible ? (
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          style={{ height: 500 }}
-        >
-          <LockIcon
-            color="disabled"
-            style={{ fontSize: 54, marginBottom: 14 }}
-          />
-          <Typography component="h2" variant="body2" color="textSecondary">
-            ไม่สามารถเข้าสู่บทเรียนได้
-          </Typography>
-        </Grid>
-      ) : (
+  function renderLearnModule() {
+    if (isLocalDateTimeLoading) {
+      return <Loading height={380} />;
+    } else if (accessible) {
+      return (
         <>
           <Drawer
             className={classes.drawer}
@@ -274,7 +267,32 @@ export default function Learn() {
             </Box>
           </div>
         </>
-      )}
+      );
+    } else {
+      return (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ height: 500 }}
+        >
+          <LockIcon
+            color="disabled"
+            style={{ fontSize: 54, marginBottom: 14 }}
+          />
+          <Typography component="h2" variant="body2" color="textSecondary">
+            ไม่สามารถเข้าสู่บทเรียนได้
+          </Typography>
+        </Grid>
+      );
+    }
+  }
+
+  return (
+    <div className={classes.root}>
+      <Toolbar />
+      {renderLearnModule()}
     </div>
   );
 }

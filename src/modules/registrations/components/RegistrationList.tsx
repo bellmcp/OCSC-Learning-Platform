@@ -1,7 +1,7 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   useMediaQuery,
   Typography,
@@ -10,53 +10,53 @@ import {
   Box,
   Divider,
   Button,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
-import { PlayArrow as LearnIcon } from "@material-ui/icons";
+} from '@material-ui/core/styles';
+import { PlayArrow as LearnIcon } from '@material-ui/icons';
 
-import * as registrationsActions from "../actions";
-import Header from "modules/ui/components/Header";
-import MyCurriculumItem from "./MyCurriculumItem";
-import MyCourseItem from "./MyCourseItem";
-import Loading from "modules/ui/components/Loading";
+import * as registrationsActions from '../actions';
+import Header from 'modules/ui/components/Header';
+import MyCurriculumItem from './MyCurriculumItem';
+import MyCourseItem from './MyCourseItem';
+import Loading from 'modules/ui/components/Loading';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      display: "flex",
+      display: 'flex',
     },
     root: {
-      display: "flex",
+      display: 'flex',
     },
     details: {
-      height: "100px",
-      width: "100%",
-      display: "flex",
-      flexDirection: "row",
+      height: '100px',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
       padding: theme.spacing(0),
     },
     content: {
-      width: "100%",
+      width: '100%',
       marginBottom: 50,
     },
     cover: {
-      width: "25%",
+      width: '25%',
     },
     controls: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
       flex: 1,
     },
     cardImage: {
-      width: "150px",
-      borderRadius: "4 0 0 0",
-      [theme.breakpoints.down("xs")]: {
-        display: "none",
+      width: '150px',
+      borderRadius: '4 0 0 0',
+      [theme.breakpoints.down('xs')]: {
+        display: 'none',
       },
     },
   })
@@ -67,19 +67,20 @@ export default function RegistrationList() {
   const dispatch = useDispatch();
   const history = useHistory();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
   var {
     isLoading: isRegistrationsLoading,
     myCourses,
     myCurriculums,
+    localDateTime,
   } = useSelector((state) => state.registrations);
 
-  if (myCourses === "") {
+  if (myCourses === '') {
     myCourses = [];
   }
 
-  if (myCurriculums === "") {
+  if (myCurriculums === '') {
     myCurriculums = [];
   }
 
@@ -93,6 +94,11 @@ export default function RegistrationList() {
     const curriculum_registrations_action =
       registrationsActions.loadCurriculumRegistrations();
     dispatch(curriculum_registrations_action);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const load_local_date_time = registrationsActions.loadLocalDateTime();
+    dispatch(load_local_date_time);
   }, [dispatch]);
 
   const linkToCourses = () => {
@@ -111,7 +117,11 @@ export default function RegistrationList() {
         <Grid container direction="column" spacing={2}>
           {myCurriculums.map((myCurriculum) => (
             <Grid item key={myCurriculum.id}>
-              <MyCurriculumItem {...myCurriculum} myCourses={myCourses} />
+              <MyCurriculumItem
+                {...myCurriculum}
+                myCourses={myCourses}
+                localDateTime={localDateTime}
+              />
             </Grid>
           ))}
         </Grid>
@@ -156,7 +166,7 @@ export default function RegistrationList() {
             .filter((myCourse) => myCourse.curriculumRegistrationId === null)
             .map((myCourse) => (
               <Grid item key={myCourse.id}>
-                <MyCourseItem {...myCourse} />
+                <MyCourseItem {...myCourse} localDateTime={localDateTime} />
               </Grid>
             ))}
         </Grid>
@@ -192,7 +202,7 @@ export default function RegistrationList() {
     <>
       <Header
         title="เข้าเรียน"
-        icon={<LearnIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        icon={<LearnIcon fontSize="large" style={{ marginRight: '24px' }} />}
       />
       <Container>
         <div className={classes.main}>
@@ -202,8 +212,8 @@ export default function RegistrationList() {
                 gutterBottom
                 component="h2"
                 variant="h6"
-                style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                align={matches ? "left" : "center"}
+                style={{ fontSize: '1.7rem', fontWeight: 600 }}
+                align={matches ? 'left' : 'center'}
               >
                 หลักสูตรของฉัน
               </Typography>
@@ -217,8 +227,8 @@ export default function RegistrationList() {
                 gutterBottom
                 component="h2"
                 variant="h6"
-                style={{ fontSize: "1.7rem", fontWeight: 600 }}
-                align={matches ? "left" : "center"}
+                style={{ fontSize: '1.7rem', fontWeight: 600 }}
+                align={matches ? 'left' : 'center'}
               >
                 รายวิชาของฉัน
               </Typography>
