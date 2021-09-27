@@ -168,8 +168,7 @@ export default function OrientationScoreView() {
               {orientationScore?.jobTitle} {orientationScore?.jobLevel}
               <br />
               <b className={classes.mr8}>หน่วยงาน</b>{' '}
-              {orientationScore?.division} {orientationScore?.department}{' '}
-              {orientationScore?.ministry}
+              {orientationScore?.department} {orientationScore?.ministry}
               <br />
               <b className={classes.mr8}>
                 วันที่สำเร็จการศึกษาตามหลักสูตร

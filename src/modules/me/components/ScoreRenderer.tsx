@@ -105,14 +105,6 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
       return sum;
     };
 
-    const renderFillIn = () => {
-      let string = '';
-      for (let i = 0; i < 100; i++) {
-        string += '.';
-      }
-      return string;
-    };
-
     const getPassStatus = () => {
       if (this.props.pass) return <span style={{ color: 'green' }}>ผ่าน</span>;
       else return <span style={{ color: 'red' }}>ไม่ผ่าน</span>;
@@ -147,7 +139,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 style={{ fontSize: 15, marginTop: 50, marginBottom: 10 }}
               >
                 <b>
-                  คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+                  ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                   (e-Learning)
                 </b>
               </Typography>
@@ -197,8 +189,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b style={{ marginRight: 18 }}>หน่วยงาน</b> :{' '}
-                {this.props.division} {this.props.department}{' '}
-                {this.props.ministry}
+                {this.props.department} {this.props.ministry}
               </Typography>
               <Typography
                 variant="h5"
@@ -274,7 +265,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                     colspan="3"
                     style={{ padding: 6, borderRight: '1px solid #000' }}
                   >
-                    สรุปผลการฝึกอบรม
+                    สรุปผลการเรียนรู้
                   </td>
                   <td colspan="2">{getPassStatus()}</td>
                 </tr>
@@ -285,7 +276,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="left"
                 style={{ fontSize: 13, marginTop: 20, marginBottom: 5 }}
               >
-                ผู้บันทึกคะแนน {renderFillIn()}
+                <b>ผู้บันทึกคะแนน</b> : สำนักงาน ก.พ.
               </Typography>
               <Typography
                 variant="h5"
@@ -293,9 +284,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="left"
                 style={{ fontSize: 13, marginTop: 5 }}
               >
-                * หมายเหตุ ​: คะแนน Post-test
-                ที่ผู้รับการฝึกอบรมทำได้ในแต่ละชุดวิชา จะต้องไม่ต่ำกว่า 60%
-                ของคะแนนเต็มในแต่ละชุดวิชานั้น ๆ
+                * หมายเหตุ ​: คะแนน Post-test ที่ผู้เรียนทำได้ในแต่ละชุดวิชา
+                จะต้องไม่ต่ำกว่า 60% ของคะแนนเต็มในแต่ละวิชานั้น ๆ
               </Typography>
             </Grid>
           </Grid>
