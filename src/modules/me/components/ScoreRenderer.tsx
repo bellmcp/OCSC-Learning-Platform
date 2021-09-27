@@ -61,7 +61,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
         title: 'หมวดที่ 3: ความรู้พื้นฐานสำหรับข้าราชการ',
       },
       {
-        title: 'ชุดวิชาที่ 1: วินัยและจรรยาบรรณข้าราชการ',
+        title: 'ชุดวิชาที่ 1: วินัยและจรรยาข้าราชการ',
         value: this.props.s6,
       },
       {

@@ -120,7 +120,7 @@ function loadOrientationScore() {
         dispatch({ type: LOAD_ORIENTATION_SCORE_FAILURE });
         dispatch(
           uiActions.setFlashMessage(
-            `โหลดคะแนนการเรียนรู้ด้วยตนเองไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            `โหลดผลการเรียนรู้ด้วยตนเองไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
             'error'
           )
         );

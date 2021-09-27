@@ -92,7 +92,7 @@ export default function OrientationScoreView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: `คะแนนการเรียนรู้ด้วยตนเอง-หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่-${orientationScore?.firstName}-${orientationScore?.lastName}`,
+    documentTitle: `ผลการเรียนรู้ด้วยตนเอง-หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่-${orientationScore?.firstName}-${orientationScore?.lastName}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
@@ -155,7 +155,7 @@ export default function OrientationScoreView() {
                 lineHeight: '1.3',
               }}
             >
-              คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+              ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
             </Typography>
           </Box>
           <Box my={3}>
@@ -230,7 +230,7 @@ export default function OrientationScoreView() {
                     โปรไฟล์
                   </Link>
                   <Typography color="textPrimary">
-                    คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+                    ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                   </Typography>
                 </Breadcrumbs>
               </Grid>

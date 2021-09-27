@@ -119,7 +119,7 @@ export default function Me() {
                   onClick={linkToOrientationScore}
                   fullWidth
                 >
-                  คะแนนการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
+                  ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                 </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
