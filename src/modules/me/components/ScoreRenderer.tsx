@@ -197,7 +197,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="right"
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
-                <b>วันที่สำเร็จการศึกษาหลักสูตร</b> :{' '}
+                <b>วันที่จบหลักสูตร</b> :{' '}
                 {new Date(this.props.date).toLocaleDateString('th-TH', {
                   year: 'numeric',
                   month: 'long',

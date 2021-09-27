@@ -171,7 +171,7 @@ export default function OrientationScoreView() {
               {orientationScore?.department} {orientationScore?.ministry}
               <br />
               <b className={classes.mr8}>
-                วันที่สำเร็จการศึกษาตามหลักสูตร
+              วันที่จบหลักสูตร
               </b>{' '}
               {new Date(orientationScore?.date).toLocaleDateString('th-TH', {
                 year: 'numeric',
