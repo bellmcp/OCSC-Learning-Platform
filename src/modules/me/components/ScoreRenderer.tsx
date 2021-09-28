@@ -284,8 +284,8 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 align="left"
                 style={{ fontSize: 13, marginTop: 5 }}
               >
-                * หมายเหตุ ​: คะแนน Post-test ที่ผู้เรียนทำได้ในแต่ละชุดวิชา
-                จะต้องไม่ต่ำกว่า 60% ของคะแนนเต็มในแต่ละวิชานั้น ๆ
+                * หมายเหตุ ​: คะแนน Post-test ที่ผู้เรียนทำได้ในแต่ละวิชา
+                จะต้องไม่ต่ำกว่า 60% ของคะแนนเต็มในวิชานั้น
               </Typography>
             </Grid>
           </Grid>
