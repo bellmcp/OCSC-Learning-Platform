@@ -99,7 +99,7 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
 
     const getTotalItem = () => {
       let sum = 0;
-      for (let i = 0; i < 13; i++) {
+      for (let i = 0; i <= 13; i++) {
         sum += parseInt(get(this.props, `s${i}`, 0));
       }
       return sum;
