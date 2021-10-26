@@ -27,6 +27,8 @@ import {
   Create as CreateIcon,
   Info as InfoIcon,
   People as PeopleIcon,
+  GpsFixed as TargetIcon,
+  PeopleAlt as InstructorIcon,
 } from '@material-ui/icons';
 import {
   getContentType,
@@ -128,6 +130,11 @@ export default function CourseDetails() {
       icon: <AssignmentIcon />,
     },
     {
+      title: 'วิทยากร',
+      detail: course?.instructor ? course?.instructor : 'ไม่มีข้อมูล',
+      icon: <InstructorIcon />,
+    },
+    {
       title: 'ประเด็นการเรียนรู้',
       detail: course?.learningTopic ? course?.learningTopic : 'ไม่มีข้อมูล',
       icon: <CreateIcon />,
@@ -140,7 +147,7 @@ export default function CourseDetails() {
     {
       title: 'กลุ่มเป้าหมาย',
       detail: course?.targetGroup ? course?.targetGroup : 'ไม่มีข้อมูล',
-      icon: <PeopleIcon />,
+      icon: <TargetIcon />,
     },
     {
       title: 'หมายเหตุ',
@@ -224,7 +231,7 @@ export default function CourseDetails() {
                     alignItems="flex-start"
                   >
                     <Grid item xs={12} sm={7}>
-                      {courseInfoPlaceholder.slice(0, 2).map((item, index) => (
+                      {courseInfoPlaceholder.slice(0, 3).map((item, index) => (
                         <RenderCourseInfo
                           index={index}
                           title={item.title}
@@ -235,7 +242,7 @@ export default function CourseDetails() {
                     </Grid>
                     <Grid item xs={12} sm={5}>
                       {courseInfoPlaceholder
-                        .slice(2, courseInfoPlaceholder.length)
+                        .slice(3, courseInfoPlaceholder.length)
                         .map((item, index) => (
                           <RenderCourseInfo
                             index={index}
