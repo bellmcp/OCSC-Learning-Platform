@@ -15,9 +15,10 @@ import {
   LOAD_COURSE_CONTENT_SUCCESS,
   LOAD_COURSE_CONTENT_FAILURE,
   CLEAR_COURSES,
-} from "./actions";
+} from './actions';
 
 const initialState = {
+  isRecommendedCoursesLoading: false,
   isLoading: false,
   items: [],
   recommended: [],
@@ -41,7 +42,7 @@ export default function (state = initialState, action: any) {
     case LOAD_RECOMMENDED_COURSES_REQUEST:
       return {
         ...state,
-        isLoading: true,
+        isRecommendedCoursesLoading: true,
         recommended: [],
       };
     case LOAD_COURSES_SUCCESS:
@@ -53,7 +54,7 @@ export default function (state = initialState, action: any) {
     case LOAD_RECOMMENDED_COURSES_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isRecommendedCoursesLoading: false,
         recommended: action.payload.recommendedCourses,
       };
     case LOAD_COURSE_SUCCESS:
@@ -75,9 +76,14 @@ export default function (state = initialState, action: any) {
     case LOAD_COURSE_FAILURE:
     case LOAD_COURSE_ROUND_FAILURE:
     case LOAD_COURSE_CONTENT_FAILURE:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false, isRecommendedCoursesLoading: false };
     case CLEAR_COURSES:
-      return { ...state, isLoading: false, items: [] };
+      return {
+        ...state,
+        isLoading: false,
+        isRecommendedCoursesLoading: false,
+        items: [],
+      };
     default:
       return state;
   }

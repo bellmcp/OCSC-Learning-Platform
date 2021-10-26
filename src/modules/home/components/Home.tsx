@@ -78,9 +78,8 @@ export default function Home() {
   const { isLoading: isCoursesLoading, items: courses } = useSelector(
     (state) => state.courses
   );
-  const { recommended: recommendedCourses } = useSelector(
-    (state) => state.courses
-  );
+  const { isRecommendedCoursesLoading, recommended: recommendedCourses } =
+    useSelector((state) => state.courses);
   const { isLoading: isCurriculumsLoading, items: curriculums } = useSelector(
     (state) => state.curriculums
   );
@@ -143,7 +142,7 @@ export default function Home() {
           <CourseCarousel
             courses={recommendedCourses}
             categories={categories}
-            isLoading={false}
+            isLoading={isRecommendedCoursesLoading}
           />
         </Box>
 

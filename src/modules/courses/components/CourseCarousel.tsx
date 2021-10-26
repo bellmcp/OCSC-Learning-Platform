@@ -1,23 +1,23 @@
 // @ts-nocheck
-import React from "react";
+import React from 'react';
 import {
   CarouselProvider,
   Slider,
   Slide,
   ButtonBack,
   ButtonNext,
-} from "pure-react-carousel";
-import { useMediaQuery, Grid, Typography } from "@material-ui/core/";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+} from 'pure-react-carousel';
+import { useMediaQuery, Grid, Typography } from '@material-ui/core/';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
   ArrowForwardIosRounded as ArrowForward,
   ArrowBackIosRounded as ArrowBack,
-} from "@material-ui/icons";
-import CourseItem from "./CourseItem";
-import Loading from "modules/ui/components/Loading";
+} from '@material-ui/icons';
+import CourseItem from './CourseItem';
+import Loading from 'modules/ui/components/Loading';
 
-import { CategoryProps } from "modules/categories/types";
-import { CourseProps } from "../types";
+import { CategoryProps } from 'modules/categories/types';
+import { CourseProps } from '../types';
 
 interface CourseCarouselProps {
   courses: CourseProps;
@@ -27,71 +27,71 @@ interface CourseCarouselProps {
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    textAlign: "center",
+    textAlign: 'center',
     marginBottom: theme.spacing(2),
   },
   carousel: {
-    width: "100%",
-    maxWidth: "100%",
+    width: '100%',
+    maxWidth: '100%',
   },
   slider: {
-    position: "relative",
+    position: 'relative',
   },
   slide: {
     padding: theme.spacing(0, 0),
-    outline: "none !important",
+    outline: 'none !important',
   },
   course: {
-    width: "100%",
-    padding: "4px",
+    width: '100%',
+    padding: '4px',
     paddingBottom: 0,
-    height: "100%",
+    height: '100%',
   },
   buttonBack: {
-    position: "absolute",
-    top: "47%",
-    left: "-15px",
-    background: "none",
-    border: "none",
+    position: 'absolute',
+    top: '47%',
+    left: '-15px',
+    background: 'none',
+    border: 'none',
     padding: theme.spacing(0, 0),
     zIndex: 2,
-    outline: "none !important",
-    [theme.breakpoints.down("xs")]: {
-      left: "-10px",
+    outline: 'none !important',
+    [theme.breakpoints.down('xs')]: {
+      left: '-10px',
     },
   },
   buttonNext: {
-    position: "absolute",
-    top: "47%",
-    right: "-15px",
-    background: "none",
-    border: "none",
+    position: 'absolute',
+    top: '47%',
+    right: '-15px',
+    background: 'none',
+    border: 'none',
     padding: theme.spacing(0, 0),
     zIndex: 2,
-    outline: "none !important",
-    [theme.breakpoints.down("xs")]: {
-      right: "-10px",
+    outline: 'none !important',
+    [theme.breakpoints.down('xs')]: {
+      right: '-10px',
     },
   },
   growButtonBack: {
-    position: "absolute",
-    top: "50%",
-    left: "-28px",
-    height: "100%",
-    width: "22px",
+    position: 'absolute',
+    top: '50%',
+    left: '-28px',
+    height: '100%',
+    width: '22px',
     backgroundColor: theme.palette.background.default,
-    transform: "translateY(-50%)",
+    transform: 'translateY(-50%)',
     zIndex: 1,
     boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
   },
   growButtonNext: {
-    position: "absolute",
-    top: "50%",
-    right: "-28px",
-    height: "100%",
-    width: "22px",
+    position: 'absolute',
+    top: '50%',
+    right: '-28px',
+    height: '100%',
+    width: '22px',
     backgroundColor: theme.palette.background.default,
-    transform: "translateY(-50%)",
+    transform: 'translateY(-50%)',
     zIndex: 1,
     boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
   },
@@ -104,8 +104,8 @@ export default function CourseCarousel({
 }: CourseCarouselProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
-  const isSmUp = useMediaQuery(theme.breakpoints.up("sm"));
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   function renderFilteredResult() {
     if (isLoading) {
@@ -148,10 +148,10 @@ export default function CourseCarousel({
                 ))}
               </Slider>
               <ButtonBack className={classes.buttonBack}>
-                <ArrowBack fontSize={isSmUp ? "default" : "small"} />
+                <ArrowBack fontSize={isSmUp ? 'default' : 'small'} />
               </ButtonBack>
               <ButtonNext className={classes.buttonNext}>
-                <ArrowForward fontSize={isSmUp ? "default" : "small"} />
+                <ArrowForward fontSize={isSmUp ? 'default' : 'small'} />
               </ButtonNext>
             </div>
           </CarouselProvider>
