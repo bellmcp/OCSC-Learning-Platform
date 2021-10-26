@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   Typography,
   Container,
@@ -17,23 +17,24 @@ import {
   Avatar,
   Button,
   useMediaQuery,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   Assignment as AssignmentIcon,
   Assessment as AssessmentIcon,
   Create as CreateIcon,
   People as PeopleIcon,
+  GpsFixed as TargetIcon,
   ArrowForwardIos as ArrowForwardIcon,
-} from "@material-ui/icons";
-import { isLogin } from "utils/isLogin";
+} from '@material-ui/icons';
+import { isLogin } from 'utils/isLogin';
 
-import * as curriculumsActions from "../actions";
-import * as coursesActions from "modules/courses/actions";
-import * as categoriesActions from "modules/categories/actions";
-import * as registrationsActions from "modules/registrations/actions";
-import CurriculumHeader from "modules/curriculums/components/CurriculumHeader";
-import CourseItem from "modules/courses/components/CourseItem";
-import Loading from "modules/ui/components/Loading";
+import * as curriculumsActions from '../actions';
+import * as coursesActions from 'modules/courses/actions';
+import * as categoriesActions from 'modules/categories/actions';
+import * as registrationsActions from 'modules/registrations/actions';
+import CurriculumHeader from 'modules/curriculums/components/CurriculumHeader';
+import CourseItem from 'modules/courses/components/CourseItem';
+import Loading from 'modules/ui/components/Loading';
 
 interface RenderCurriculumInfoProps {
   index: number;
@@ -45,13 +46,13 @@ interface RenderCurriculumInfoProps {
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     main: {
-      display: "flex",
+      display: 'flex',
     },
     content: {
       flexGrow: 1,
       paddingTop: theme.spacing(3),
       paddingBottom: theme.spacing(3),
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(1),
         paddingRight: theme.spacing(1),
       },
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) =>
     heading: {
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightMedium,
-      flexBasis: "100%",
+      flexBasis: '100%',
       flexShrink: 0,
     },
     secondaryHeading: {
@@ -80,14 +81,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CurriculumDetails() {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const { id }: any = useParams();
   const history = useHistory();
   const PATH = process.env.REACT_APP_BASE_PATH;
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
     useState(false);
   const [registerButtonLabel, setRegisterButtonLabel] =
-    useState("ลงทะเบียนหลักสูตร");
+    useState('ลงทะเบียนหลักสูตร');
 
   const dispatch = useDispatch();
   const [curriculum] = useSelector((state) => state.curriculums.items);
@@ -98,7 +99,7 @@ export default function CurriculumDetails() {
   var { myCurriculums } = useSelector((state) => state.registrations);
   const { child: childCourses } = useSelector((state) => state.curriculums);
 
-  if (myCurriculums === "") {
+  if (myCurriculums === '') {
     myCurriculums = [];
   }
 
@@ -140,38 +141,38 @@ export default function CurriculumDetails() {
     const registration_action = registrationsActions.registerCurriculum(id);
     dispatch(registration_action);
     setIsRegisterButtonDisabled(true);
-    setRegisterButtonLabel("กำลังโหลด...");
+    setRegisterButtonLabel('กำลังโหลด...');
     //PREVENT MULTIPLE REQUEST
     setTimeout(() => {
       setIsRegisterButtonDisabled(false);
-      setRegisterButtonLabel("ลงทะเบียนหลักสูตร");
+      setRegisterButtonLabel('ลงทะเบียนหลักสูตร');
     }, 3000);
   };
 
   const curriculumInfoPlaceholder = [
     {
-      title: "เป้าหมายการเรียนรู้",
+      title: 'เป้าหมายการเรียนรู้',
       detail: curriculum?.learningObjective
         ? curriculum?.learningObjective
-        : "ไม่มีข้อมูล",
+        : 'ไม่มีข้อมูล',
       icon: <AssignmentIcon />,
     },
     {
-      title: "ประเด็นการเรียนรู้",
+      title: 'ประเด็นการเรียนรู้',
       detail: curriculum?.learningTopic
         ? curriculum?.learningTopic
-        : "ไม่มีข้อมูล",
+        : 'ไม่มีข้อมูล',
       icon: <CreateIcon />,
     },
     {
-      title: "วิธีการประเมินผล",
-      detail: curriculum?.assessment ? curriculum?.assessment : "ไม่มีข้อมูล",
+      title: 'วิธีการประเมินผล',
+      detail: curriculum?.assessment ? curriculum?.assessment : 'ไม่มีข้อมูล',
       icon: <AssessmentIcon />,
     },
     {
-      title: "กลุ่มเป้าหมาย",
-      detail: curriculum?.targetGroup ? curriculum?.targetGroup : "ไม่มีข้อมูล",
-      icon: <PeopleIcon />,
+      title: 'กลุ่มเป้าหมาย',
+      detail: curriculum?.targetGroup ? curriculum?.targetGroup : 'ไม่มีข้อมูล',
+      icon: <TargetIcon />,
     },
   ];
 
@@ -201,8 +202,8 @@ export default function CurriculumDetails() {
             <Typography
               variant="h6"
               style={{
-                fontSize: "1.7rem",
-                lineHeight: "1.1",
+                fontSize: '1.7rem',
+                lineHeight: '1.1',
                 fontWeight: 600,
               }}
             >
@@ -292,9 +293,9 @@ export default function CurriculumDetails() {
   return (
     <>
       <CurriculumHeader
-        title={curriculum?.name ? curriculum?.name : "หลักสูตร"}
-        code={curriculum?.code ? curriculum?.code : "รหัสหลักสูตร"}
-        icon={<PeopleIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        title={curriculum?.name ? curriculum?.name : 'หลักสูตร'}
+        code={curriculum?.code ? curriculum?.code : 'รหัสหลักสูตร'}
+        icon={<PeopleIcon fontSize="large" style={{ marginRight: '24px' }} />}
         imageUrl={curriculum?.thumbnail}
       />
       <Container>
@@ -338,12 +339,12 @@ export default function CurriculumDetails() {
                   <Grid
                     container
                     direction="row"
-                    justify={matches ? "flex-start" : "center"}
+                    justify={matches ? 'flex-start' : 'center'}
                     alignItems="center"
                   >
                     <Typography
                       style={{
-                        fontSize: "1.7rem",
+                        fontSize: '1.7rem',
                         fontWeight: 600,
                       }}
                     >
@@ -367,12 +368,12 @@ export default function CurriculumDetails() {
                 <Grid
                   container
                   direction="row"
-                  justify={matches ? "flex-start" : "center"}
+                  justify={matches ? 'flex-start' : 'center'}
                   alignItems="center"
                 >
                   <Typography
                     style={{
-                      fontSize: "1.7rem",
+                      fontSize: '1.7rem',
                       fontWeight: 600,
                     }}
                   >
@@ -385,7 +386,7 @@ export default function CurriculumDetails() {
                     spacing={3}
                     alignItems="center"
                     direction="row"
-                    justify={matches ? "flex-start" : "center"}
+                    justify={matches ? 'flex-start' : 'center'}
                   >
                     {renderRegisterButton()}
                   </Grid>
