@@ -172,7 +172,8 @@ export default function CourseRound({
           <Box display="flex" alignItems="center">
             <Box width="100%">
               <Typography variant="body2" color="textSecondary" align="right">
-                {numStudents} / {maxStudents} คน
+                {numStudents.toLocaleString()} / {maxStudents.toLocaleString()}{' '}
+                คน
               </Typography>
               <LinearProgress
                 variant="determinate"
@@ -250,7 +251,7 @@ export default function CourseRound({
           </Grid>
           <Grid item xs={6}>
             <Typography variant="body2" color="textSecondary">
-              {maxStudents} คน
+              {maxStudents.toLocaleString()} คน
             </Typography>
           </Grid>
         </Grid>
