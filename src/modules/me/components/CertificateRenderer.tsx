@@ -3,10 +3,12 @@ import * as React from 'react';
 import DayJS from 'react-dayjs';
 import { Typography, Grid, Container } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import signatureType from 'utils/signatureType';
 
 import logo from 'assets/images/cert-logo.png';
 import garuda from 'assets/images/cert-garuda.png';
-import signature from 'assets/images/cert-signature.png';
+import signaturePatchara from 'assets/images/cert-signature-patchara.png';
+import signaturePiyawat from 'assets/images/cert-signature-piyawat.png';
 import background from 'assets/images/cert-background.svg';
 
 const theme = createMuiTheme({
@@ -32,6 +34,88 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
   }
 
   public render() {
+    function renderSignature(type: number) {
+      switch (type) {
+        case 1:
+          return (
+            <>
+              <img
+                alt="Signature"
+                src={signaturePatchara}
+                style={{
+                  width: 180,
+                  height: 'auto',
+                  alignSelf: 'center',
+                  marginBottom: 10,
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="textPrimary"
+                align="center"
+                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
+              >
+                [หม่อมหลวงพัชรภากร เทวกุล]
+                <br />
+                เลขาธิการคณะกรรมการข้าราชการพลเรือน
+              </Typography>
+            </>
+          );
+        case 2:
+          return (
+            <>
+              <img
+                alt="Signature"
+                src={signaturePiyawat}
+                style={{
+                  width: 180,
+                  height: 'auto',
+                  alignSelf: 'center',
+                  marginBottom: 10,
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="textPrimary"
+                align="center"
+                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
+              >
+                [นายปิยวัฒน์ ศิวรักษ์]
+                <br />
+                รองเลขาธิการ ก.พ. รักษาราชการแทน
+                <br />
+                เลขาธิการ ก.พ.
+              </Typography>
+            </>
+          );
+        case 3:
+          return (
+            <>
+              <img
+                alt="Signature"
+                src={signaturePiyawat}
+                style={{
+                  width: 180,
+                  height: 'auto',
+                  alignSelf: 'center',
+                  marginBottom: 10,
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="textPrimary"
+                align="center"
+                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
+              >
+                [นายปิยวัฒน์ ศิวรักษ์]
+                <br />
+                เลขาธิการคณะกรรมการข้าราชการพลเรือน
+              </Typography>
+            </>
+          );
+      }
+    }
+
     return (
       <ThemeProvider theme={theme}>
         <Container
@@ -164,26 +248,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
               </Typography>
 
               {/* SIGNATURE */}
-              <img
-                alt="Signature"
-                src={signature}
-                style={{
-                  width: 180,
-                  height: 'auto',
-                  alignSelf: 'center',
-                  marginBottom: 10,
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="textPrimary"
-                align="center"
-                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
-              >
-                [หม่อมหลวงพัชรภากร เทวกุล]
-                <br />
-                เลขาธิการคณะกรรมการข้าราชการพลเรือน
-              </Typography>
+              {renderSignature(signatureType(this.props.endDate))}
             </Grid>
           </Grid>
         </Container>
