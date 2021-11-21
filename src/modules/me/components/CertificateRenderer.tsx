@@ -154,7 +154,6 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 style={{ fontSize: 20, marginBottom: 25 }}
               >
                 ให้ไว้ ณ วันที่ <DayJS format="D">{this.props.endDate}</DayJS>{' '}
-                เดือน{' '}
                 {new Date(this.props.endDate).toLocaleDateString('th-TH', {
                   month: 'long',
                 })}{' '}
