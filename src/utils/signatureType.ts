@@ -22,6 +22,9 @@ export default function signatureType(completeDate) {
     isBetween('2021-10-01T00:00:00', '2021-10-26T00:00:00', completeDate)
   )
     return 2;
-  else isBetween('2021-10-27T00:00:00', '3000-01-01T00:00:00', completeDate);
-  return 3;
+  else if (
+    isBetween('2021-10-27T00:00:00', '3000-01-01T00:00:00', completeDate)
+  )
+    return 3;
+  else return 3;
 }
