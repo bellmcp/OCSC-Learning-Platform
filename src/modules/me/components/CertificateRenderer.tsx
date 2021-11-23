@@ -84,7 +84,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 <br />
                 รองเลขาธิการ ก.พ. รักษาราชการแทน
                 <br />
-                เลขาธิการ ก.พ.
+                เลขาธิการคณะกรรมการข้าราชการพลเรือน
               </Typography>
             </>
           );
