@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from "react";
+import React from 'react';
 import {
   Avatar,
   Divider,
@@ -10,8 +10,8 @@ import {
   RadioGroup,
   Typography,
   Box,
-} from "@material-ui/core";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+} from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -50,11 +50,11 @@ export default function TestItem({
 }) {
   const classes = useStyles();
   const choices = [
-    { id: 1, option: choice1 !== "" ? choice1 : null, image: imgUrl1 },
-    { id: 2, option: choice2 !== "" ? choice2 : null, image: imgUrl2 },
-    { id: 3, option: choice3 !== "" ? choice3 : null, image: imgUrl3 },
-    { id: 4, option: choice4 !== "" ? choice4 : null, image: imgUrl4 },
-    { id: 5, option: choice5 !== "" ? choice5 : null, image: imgUrl5 },
+    { id: 1, option: choice1, image: imgUrl1 },
+    { id: 2, option: choice2, image: imgUrl2 },
+    { id: 3, option: choice3, image: imgUrl3 },
+    { id: 4, option: choice4, image: imgUrl4 },
+    { id: 5, option: choice5, image: imgUrl5 },
   ];
 
   return (
@@ -74,7 +74,7 @@ export default function TestItem({
             component="h1"
             variant="h6"
             align="left"
-            style={{ fontSize: "1rem", fontWeight: 600, lineHeight: "1.3" }}
+            style={{ fontSize: '1rem', fontWeight: 600, lineHeight: '1.3' }}
           >
             {question}
           </Typography>
@@ -95,7 +95,7 @@ export default function TestItem({
             <img
               alt="รูปภาพโจทย์"
               src={imgUrl}
-              style={{ width: "50%", minWidth: 250, height: "auto" }}
+              style={{ width: '50%', minWidth: 250, height: 'auto' }}
             />
           </Grid>
         </Box>
@@ -106,7 +106,7 @@ export default function TestItem({
             <Grid className={classes.options} container spacing={0}>
               {choices.map((choice) => (
                 <Grid item xs={12}>
-                  {choice.option && (
+                  {choice.option || choice.image ? (
                     <Grid
                       container
                       spacing={0}
@@ -125,7 +125,7 @@ export default function TestItem({
                         label={
                           <Typography
                             style={{
-                              lineHeight: "1.3",
+                              lineHeight: '1.3',
                               marginTop: 10,
                               marginBottom: 10,
                             }}
@@ -139,14 +139,14 @@ export default function TestItem({
                           alt={choice.option}
                           src={choice.image}
                           style={{
-                            width: "25%",
+                            width: '25%',
                             minWidth: 180,
-                            height: "auto",
+                            height: 'auto',
                           }}
                         />
                       )}
                     </Grid>
-                  )}
+                  ) : null}
                 </Grid>
               ))}
             </Grid>
