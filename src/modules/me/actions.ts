@@ -22,6 +22,12 @@ const LOAD_COURSE_CERTIFICATE_INFO_SUCCESS =
   'learning-platform/login/LOAD_COURSE_CERTIFICATE_INFO_SUCCESS';
 const LOAD_COURSE_CERTIFICATE_INFO_FAILURE =
   'learning-platform/login/LOAD_COURSE_CERTIFICATE_INFO_FAILURE';
+const LOAD_CURRICULUM_CERTIFICATE_INFO_REQUEST =
+  'learning-platform/login/LOAD_CURRICULUM_CERTIFICATE_INFO_REQUEST';
+const LOAD_CURRICULUM_CERTIFICATE_INFO_SUCCESS =
+  'learning-platform/login/LOAD_CURRICULUM_CERTIFICATE_INFO_SUCCESS';
+const LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE =
+  'learning-platform/login/LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE';
 const LOAD_ORIENTATION_SCORE_REQUEST =
   'learning-platform/login/LOAD_ORIENTATION_SCORE_REQUEST';
 const LOAD_ORIENTATION_SCORE_SUCCESS =
@@ -137,6 +143,43 @@ function loadCourseCertificateInfo(certificateId: string) {
   };
 }
 
+function loadCurriculumCertificateInfo(certificateId: string) {
+  return async (dispatch: any, getState) => {
+    const token = getCookie('token');
+    const userId = parseJwt(token).unique_name;
+    dispatch({ type: LOAD_CURRICULUM_CERTIFICATE_INFO_REQUEST });
+    try {
+      var { data } = await axios.get(
+        `/Users/${userId}/CurriculumCertificates/${certificateId}?print=y`,
+        {
+          baseURL: `${process.env.REACT_APP_PORTAL_API_URL}`,
+        }
+      );
+      if (data.length === 0) {
+        data = [];
+      }
+      dispatch({
+        type: LOAD_CURRICULUM_CERTIFICATE_INFO_SUCCESS,
+        payload: {
+          curriculumCertificateInfo: data,
+        },
+      });
+    } catch (err) {
+      if (err?.response?.status === 404) {
+        dispatch({ type: LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE });
+      } else {
+        dispatch({ type: LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE });
+        dispatch(
+          uiActions.setFlashMessage(
+            `โหลดข้อมูลประกาศนียบัตรไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+            'error'
+          )
+        );
+      }
+    }
+  };
+}
+
 function loadOrientationScore() {
   return async (dispatch: any, getState) => {
     const token = getCookie('token');
@@ -182,11 +225,15 @@ export {
   LOAD_COURSE_CERTIFICATE_INFO_REQUEST,
   LOAD_COURSE_CERTIFICATE_INFO_SUCCESS,
   LOAD_COURSE_CERTIFICATE_INFO_FAILURE,
+  LOAD_CURRICULUM_CERTIFICATE_INFO_REQUEST,
+  LOAD_CURRICULUM_CERTIFICATE_INFO_SUCCESS,
+  LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE,
   LOAD_ORIENTATION_SCORE_REQUEST,
   LOAD_ORIENTATION_SCORE_SUCCESS,
   LOAD_ORIENTATION_SCORE_FAILURE,
   loadCourseCertificates,
   loadCurriculumCertificates,
   loadCourseCertificateInfo,
+  loadCurriculumCertificateInfo,
   loadOrientationScore,
 };

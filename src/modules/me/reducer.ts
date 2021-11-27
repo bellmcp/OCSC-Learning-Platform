@@ -8,6 +8,9 @@ import {
   LOAD_COURSE_CERTIFICATE_INFO_REQUEST,
   LOAD_COURSE_CERTIFICATE_INFO_SUCCESS,
   LOAD_COURSE_CERTIFICATE_INFO_FAILURE,
+  LOAD_CURRICULUM_CERTIFICATE_INFO_REQUEST,
+  LOAD_CURRICULUM_CERTIFICATE_INFO_SUCCESS,
+  LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE,
   LOAD_ORIENTATION_SCORE_REQUEST,
   LOAD_ORIENTATION_SCORE_SUCCESS,
   LOAD_ORIENTATION_SCORE_FAILURE,
@@ -18,10 +21,12 @@ const initialState = {
   isCurriculumCertificatesLoading: false,
   isOrientationScoreLoading: false,
   isCourseCertificateInfoLoading: false,
+  isCurriculumCertificateInfoLoading: false,
   courseCertificates: [],
   curriculumCertificates: [],
   orientationScore: {},
   courseCertificateInfo: [],
+  curriculumCertificateInfo: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -43,6 +48,12 @@ export default function (state = initialState, action: any) {
         ...state,
         isCourseCertificateInfoLoading: true,
         courseCertificateInfo: [],
+      };
+    case LOAD_CURRICULUM_CERTIFICATE_INFO_REQUEST:
+      return {
+        ...state,
+        isCurriculumCertificateInfoLoading: true,
+        curriculumCertificateInfo: [],
       };
     case LOAD_ORIENTATION_SCORE_REQUEST:
       return {
@@ -74,6 +85,12 @@ export default function (state = initialState, action: any) {
         isCourseCertificateInfoLoading: false,
         courseCertificateInfo: action.payload.courseCertificateInfo,
       };
+    case LOAD_CURRICULUM_CERTIFICATE_INFO_SUCCESS:
+      return {
+        ...state,
+        isCurriculumCertificateInfoLoading: false,
+        curriculumCertificateInfo: action.payload.curriculumCertificateInfo,
+      };
     case LOAD_COURSE_CERTIFICATES_FAILURE:
       return { ...state, isCourseCertificatesLoading: false };
     case LOAD_CURRICULUM_CERTIFICATES_FAILURE:
@@ -82,6 +99,8 @@ export default function (state = initialState, action: any) {
       return { ...state, isOrientationScoreLoading: false };
     case LOAD_COURSE_CERTIFICATE_INFO_FAILURE:
       return { ...state, isCourseCertificateInfoLoading: false };
+    case LOAD_CURRICULUM_CERTIFICATE_INFO_FAILURE:
+      return { ...state, isCurriculumCertificateInfoLoading: false };
     default:
       return state;
   }

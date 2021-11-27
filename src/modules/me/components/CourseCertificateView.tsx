@@ -77,9 +77,9 @@ export default function CourseCertificateView() {
 
   useEffect(() => {
     const course_certificate_info_action =
-      meActions.loadCourseCertificateInfo('0');
+      meActions.loadCourseCertificateInfo(certificateId);
     dispatch(course_certificate_info_action);
-  }, [dispatch]);
+  }, [dispatch, certificateId]);
 
   //PRINT
   const componentRef = useRef(null);

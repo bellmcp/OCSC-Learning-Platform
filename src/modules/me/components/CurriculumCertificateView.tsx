@@ -50,18 +50,38 @@ export default function CurriculumCertificateView() {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
-  const { isCurriculumCertificatesLoading, curriculumCertificates } =
-    useSelector((state: any) => state.me);
+  const {
+    isCurriculumCertificatesLoading,
+    curriculumCertificates,
+    isCurriculumCertificateInfoLoading,
+    curriculumCertificateInfo,
+  } = useSelector((state: any) => state.me);
   const currentCertificate = curriculumCertificates.filter(
     (curriculumCertificate) =>
       curriculumCertificate.id === parseInt(certificateId)
   )[0];
+  const {
+    text1,
+    text2,
+    text3,
+    text4,
+    signature,
+    signer,
+    position1,
+    position2,
+  } = curriculumCertificateInfo;
 
   useEffect(() => {
     const curriculum_certificates_action =
       meActions.loadCurriculumCertificates();
     dispatch(curriculum_certificates_action);
   }, [dispatch]);
+
+  useEffect(() => {
+    const curriculum_certificate_info_action =
+      meActions.loadCurriculumCertificateInfo(certificateId);
+    dispatch(curriculum_certificate_info_action);
+  }, [dispatch, certificateId]);
 
   //PRINT
   const componentRef = useRef(null);
@@ -115,7 +135,7 @@ export default function CurriculumCertificateView() {
   }, [onBeforeGetContentResolve.current, text]);
 
   function renderCertificateView() {
-    if (isCurriculumCertificatesLoading) {
+    if (isCurriculumCertificatesLoading || isCurriculumCertificateInfoLoading) {
       return <Loading height={307} />;
     } else if (!currentCertificate?.pass) {
       return (
@@ -185,6 +205,14 @@ export default function CurriculumCertificateView() {
               contentName={currentCertificate?.curriculum}
               hour={currentCertificate?.hour}
               endDate={currentCertificate?.enddate}
+              text1={text1}
+              text2={text2}
+              text3={text3}
+              text4={text4}
+              signature={signature}
+              signer={signer}
+              position1={position1}
+              position2={position2}
             />
           </Box>
           <Box my={3}>

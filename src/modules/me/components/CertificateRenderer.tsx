@@ -151,8 +151,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontSize: 20 }}
               >
-                {'['}รวมระยะเวลาทั้งสิ้น{' '}
-                {this.props.hour ? this.props.hour : '-'} ชั่วโมง{']'}
+                {'('}รวมระยะเวลาทั้งสิ้น{' '}
+                {this.props.hour ? this.props.hour : '-'} ชั่วโมง{')'}
               </Typography>
               <Typography
                 variant="body1"
