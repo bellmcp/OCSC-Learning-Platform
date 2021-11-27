@@ -50,16 +50,35 @@ export default function CourseCertificateView() {
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
-  const { isCourseCertificatesLoading, courseCertificates } = useSelector(
-    (state: any) => state.me
-  );
+  const {
+    isCourseCertificatesLoading,
+    courseCertificates,
+    isCourseCertificateInfoLoading,
+    courseCertificateInfo,
+  } = useSelector((state: any) => state.me);
   const currentCertificate = courseCertificates.filter(
     (courseCertificate) => courseCertificate.id === parseInt(certificateId)
   )[0];
+  const {
+    text1,
+    text2,
+    text3,
+    text4,
+    signature,
+    signer,
+    position1,
+    position2,
+  } = courseCertificateInfo;
 
   useEffect(() => {
     const course_certificates_action = meActions.loadCourseCertificates();
     dispatch(course_certificates_action);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const course_certificate_info_action =
+      meActions.loadCourseCertificateInfo('0');
+    dispatch(course_certificate_info_action);
   }, [dispatch]);
 
   //PRINT
@@ -114,7 +133,7 @@ export default function CourseCertificateView() {
   }, [onBeforeGetContentResolve.current, text]);
 
   function renderCertificateView() {
-    if (isCourseCertificatesLoading) {
+    if (isCourseCertificatesLoading || isCourseCertificateInfoLoading) {
       return <Loading height={307} />;
     } else if (!currentCertificate?.pass) {
       return (
@@ -183,6 +202,14 @@ export default function CourseCertificateView() {
               contentName={currentCertificate?.course}
               hour={currentCertificate?.hour}
               endDate={currentCertificate?.enddate}
+              text1={text1}
+              text2={text2}
+              text3={text3}
+              text4={text4}
+              signature={signature}
+              signer={signer}
+              position1={position1}
+              position2={position2}
             />
           </Box>
           <Box my={3}>

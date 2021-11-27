@@ -3,12 +3,11 @@ import * as React from 'react';
 import DayJS from 'react-dayjs';
 import { Typography, Grid, Container } from '@material-ui/core';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import signatureType from 'utils/signatureType';
+
+import getSignature from 'utils/getSignature';
 
 import logo from 'assets/images/cert-logo.png';
 import garuda from 'assets/images/cert-garuda.png';
-import signaturePatchara from 'assets/images/cert-signature-patchara.png';
-import signaturePiyawat from 'assets/images/cert-signature-piyawat.png';
 import background from 'assets/images/cert-background.svg';
 
 const theme = createMuiTheme({
@@ -34,88 +33,6 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
   }
 
   public render() {
-    function renderSignature(type: number) {
-      switch (type) {
-        case 1:
-          return (
-            <>
-              <img
-                alt="Signature"
-                src={signaturePatchara}
-                style={{
-                  width: 180,
-                  height: 'auto',
-                  alignSelf: 'center',
-                  marginBottom: 10,
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="textPrimary"
-                align="center"
-                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
-              >
-                [หม่อมหลวงพัชรภากร เทวกุล]
-                <br />
-                เลขาธิการคณะกรรมการข้าราชการพลเรือน
-              </Typography>
-            </>
-          );
-        case 2:
-          return (
-            <>
-              <img
-                alt="Signature"
-                src={signaturePiyawat}
-                style={{
-                  width: 180,
-                  height: 'auto',
-                  alignSelf: 'center',
-                  marginBottom: 10,
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="textPrimary"
-                align="center"
-                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
-              >
-                [นายปิยวัฒน์ ศิวรักษ์]
-                <br />
-                รองเลขาธิการ ก.พ. รักษาราชการแทน
-                <br />
-                เลขาธิการคณะกรรมการข้าราชการพลเรือน
-              </Typography>
-            </>
-          );
-        case 3:
-          return (
-            <>
-              <img
-                alt="Signature"
-                src={signaturePiyawat}
-                style={{
-                  width: 180,
-                  height: 'auto',
-                  alignSelf: 'center',
-                  marginBottom: 10,
-                }}
-              />
-              <Typography
-                variant="body2"
-                color="textPrimary"
-                align="center"
-                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
-              >
-                [นายปิยวัฒน์ ศิวรักษ์]
-                <br />
-                เลขาธิการคณะกรรมการข้าราชการพลเรือน
-              </Typography>
-            </>
-          );
-      }
-    }
-
     return (
       <ThemeProvider theme={theme}>
         <Container
@@ -165,9 +82,15 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 variant="h5"
                 color="textPrimary"
                 align="center"
-                style={{ fontSize: 30, marginBottom: 5 }}
+                style={{
+                  fontSize: 30,
+                  marginBottom: this.props.text2 ? 10 : 5,
+                  lineHeight: '1.1',
+                }}
               >
-                สำนักงานคณะกรรมการข้าราชการพลเรือน
+                {this.props.text1}
+                {this.props.text2 && <br />}
+                <span style={{ fontSize: 26 }}>{this.props.text2}</span>
               </Typography>
               <Typography
                 variant="h6"
@@ -175,7 +98,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontSize: 22, marginBottom: 6 }}
               >
-                ขอมอบประกาศนียบัตรฉบับนี้ให้เพื่อแสดงว่า
+                {this.props.text3}
               </Typography>
               <hr
                 style={{
@@ -209,7 +132,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 align="center"
                 style={{ fontSize: 20, marginBottom: 38 }}
               >
-                ได้ผ่านการพัฒนาทางไกลด้วยระบบอิเล็กทรอนิกส์
+                {this.props.text4}
               </Typography>
               <Typography
                 variant="h6"
@@ -248,7 +171,28 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
               </Typography>
 
               {/* SIGNATURE */}
-              {renderSignature(signatureType(this.props.endDate))}
+              <img
+                alt="Signature"
+                src={getSignature(this.props.signature)}
+                style={{
+                  width: 180,
+                  height: 'auto',
+                  alignSelf: 'center',
+                  marginBottom: 10,
+                }}
+              />
+              <Typography
+                variant="body2"
+                color="textPrimary"
+                align="center"
+                style={{ fontSize: 15, marginBottom: 0, lineHeight: '1.2' }}
+              >
+                {this.props.signer}
+                <br />
+                {this.props.position1}
+                {this.props.position2 && <br />}
+                {this.props.position2}
+              </Typography>
             </Grid>
           </Grid>
         </Container>

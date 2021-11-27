@@ -5,6 +5,9 @@ import {
   LOAD_CURRICULUM_CERTIFICATES_REQUEST,
   LOAD_CURRICULUM_CERTIFICATES_SUCCESS,
   LOAD_CURRICULUM_CERTIFICATES_FAILURE,
+  LOAD_COURSE_CERTIFICATE_INFO_REQUEST,
+  LOAD_COURSE_CERTIFICATE_INFO_SUCCESS,
+  LOAD_COURSE_CERTIFICATE_INFO_FAILURE,
   LOAD_ORIENTATION_SCORE_REQUEST,
   LOAD_ORIENTATION_SCORE_SUCCESS,
   LOAD_ORIENTATION_SCORE_FAILURE,
@@ -14,9 +17,11 @@ const initialState = {
   isCourseCertificatesLoading: false,
   isCurriculumCertificatesLoading: false,
   isOrientationScoreLoading: false,
+  isCourseCertificateInfoLoading: false,
   courseCertificates: [],
   curriculumCertificates: [],
   orientationScore: {},
+  courseCertificateInfo: [],
 };
 
 export default function (state = initialState, action: any) {
@@ -32,6 +37,12 @@ export default function (state = initialState, action: any) {
         ...state,
         isCurriculumCertificatesLoading: true,
         curriculumCertificates: [],
+      };
+    case LOAD_COURSE_CERTIFICATE_INFO_REQUEST:
+      return {
+        ...state,
+        isCourseCertificateInfoLoading: true,
+        courseCertificateInfo: [],
       };
     case LOAD_ORIENTATION_SCORE_REQUEST:
       return {
@@ -57,12 +68,20 @@ export default function (state = initialState, action: any) {
         isOrientationScoreLoading: false,
         orientationScore: action.payload.orientationScore,
       };
+    case LOAD_COURSE_CERTIFICATE_INFO_SUCCESS:
+      return {
+        ...state,
+        isCourseCertificateInfoLoading: false,
+        courseCertificateInfo: action.payload.courseCertificateInfo,
+      };
     case LOAD_COURSE_CERTIFICATES_FAILURE:
       return { ...state, isCourseCertificatesLoading: false };
     case LOAD_CURRICULUM_CERTIFICATES_FAILURE:
       return { ...state, isCurriculumCertificatesLoading: false };
     case LOAD_ORIENTATION_SCORE_FAILURE:
       return { ...state, isOrientationScoreLoading: false };
+    case LOAD_COURSE_CERTIFICATE_INFO_FAILURE:
+      return { ...state, isCourseCertificateInfoLoading: false };
     default:
       return state;
   }
