@@ -130,7 +130,11 @@ export default function TestItem({
                               marginBottom: 10,
                             }}
                           >
-                            {choice.option}
+                            <div
+                              dangerouslySetInnerHTML={{
+                                __html: choice.option,
+                              }}
+                            ></div>
                           </Typography>
                         }
                       />
