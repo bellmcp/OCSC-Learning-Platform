@@ -29,7 +29,7 @@ export default function getSignature(type: number) {
       return signaturePatcharapakorn;
     case 9:
       return signaturePiyawat;
-    case 10:
+    case 0:
     default:
       return signatureNull;
   }
