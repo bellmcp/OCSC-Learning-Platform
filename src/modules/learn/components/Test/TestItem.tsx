@@ -131,24 +131,29 @@ export default function TestItem({
                             }}
                           >
                             <div
-                              dangerouslySetInnerHTML={{
-                                __html: choice.option,
-                              }}
-                            ></div>
+                              style={{ display: 'flex', alignItems: 'center' }}
+                            >
+                              {choice.image && (
+                                <img
+                                  alt={choice.option}
+                                  src={choice.image}
+                                  style={{
+                                    width: '25%',
+                                    minWidth: 180,
+                                    height: 'auto',
+                                    marginRight: 16,
+                                  }}
+                                />
+                              )}
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: choice.option,
+                                }}
+                              ></div>
+                            </div>
                           </Typography>
                         }
                       />
-                      {choice.image && (
-                        <img
-                          alt={choice.option}
-                          src={choice.image}
-                          style={{
-                            width: '25%',
-                            minWidth: 180,
-                            height: 'auto',
-                          }}
-                        />
-                      )}
                     </Grid>
                   ) : null}
                 </Grid>
