@@ -14,7 +14,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-  LocalActivity as CertificateIcon,
+  Print as CertificateIcon,
   NavigateNext as NavigateNextIcon,
   Inbox as InboxIcon,
 } from '@material-ui/icons';
@@ -130,7 +130,7 @@ export default function Certificate() {
   return (
     <>
       <Header
-        title="ประกาศนียบัตร"
+        title="พิมพ์ประกาศนียบัตร ก.พ."
         icon={
           <CertificateIcon fontSize="large" style={{ marginRight: '24px' }} />
         }
