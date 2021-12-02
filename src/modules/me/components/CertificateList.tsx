@@ -47,6 +47,13 @@ export default function Certificate() {
     curriculumCertificates,
   } = useSelector((state: any) => state.me);
 
+  const passedCourseCertificates = courseCertificates.filter(
+    (certificate) => certificate.pass === true
+  );
+  const passedCurriculumCertificates = curriculumCertificates.filter(
+    (certificate) => certificate.pass === true
+  );
+
   useEffect(() => {
     const course_certificates_action = meActions.loadCourseCertificates();
     dispatch(course_certificates_action);
@@ -61,7 +68,7 @@ export default function Certificate() {
   function renderCourseCertificateList() {
     if (isCourseCertificatesLoading) {
       return <Loading height={307} />;
-    } else if (courseCertificates.length === 0) {
+    } else if (passedCourseCertificates.length === 0) {
       return (
         <Grid
           container
@@ -82,7 +89,7 @@ export default function Certificate() {
     } else {
       return (
         <Grid container direction="column" spacing={2}>
-          {courseCertificates.map((courseCertificate) => (
+          {passedCourseCertificates.map((courseCertificate) => (
             <Grid item key={courseCertificate.id}>
               <CourseCertificateItem {...courseCertificate} />
             </Grid>
@@ -95,7 +102,7 @@ export default function Certificate() {
   function renderCurriculumCertificateList() {
     if (isCurriculumCertificatesLoading) {
       return <Loading height={307} />;
-    } else if (curriculumCertificates.length === 0) {
+    } else if (passedCurriculumCertificates.length === 0) {
       return (
         <Grid
           container
@@ -116,7 +123,7 @@ export default function Certificate() {
     } else {
       return (
         <Grid container direction="column" spacing={2}>
-          {curriculumCertificates.map((curriculumCertificate) => (
+          {passedCurriculumCertificates.map((curriculumCertificate) => (
             <Grid item key={curriculumCertificate.id}>
               <CurriculumCertificateItem {...curriculumCertificate} />
             </Grid>

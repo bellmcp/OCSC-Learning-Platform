@@ -163,9 +163,7 @@ export default function CurriculumCertificateItem({
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
                     {pass ? (
-                      <span style={{ color: green[800] }}>
-                        ยินดีด้วย คุณผ่านเกณฑ์แล้ว
-                      </span>
+                      <span style={{ color: green[800] }}>ผ่านเกณฑ์แล้ว</span>
                     ) : (
                       'ไม่ผ่านเกณฑ์'
                     )}

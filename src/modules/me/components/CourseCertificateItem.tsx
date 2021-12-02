@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React from "react";
-import { useHistory } from "react-router-dom";
-import DayJS from "react-dayjs";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import DayJS from 'react-dayjs';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Typography,
@@ -16,23 +16,23 @@ import {
   Box,
   Button,
   Divider,
-} from "@material-ui/core";
-import { Print as PrintIcon } from "@material-ui/icons";
-import { green, grey } from "@material-ui/core/colors";
+} from '@material-ui/core';
+import { Print as PrintIcon } from '@material-ui/icons';
+import { green, grey } from '@material-ui/core/colors';
 
-import { CourseCertificateProps } from "../types";
+import { CourseCertificateProps } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "row",
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
       padding: theme.spacing(0),
     },
     controls: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
       flex: 1,
     },
   })
@@ -50,7 +50,7 @@ export default function CourseCertificateItem({
   const classes = useStyles();
   const history = useHistory();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
   const linkToCourseCertificate = () => {
@@ -74,7 +74,7 @@ export default function CourseCertificateItem({
               mx={3}
               flex
               style={{
-                display: "flex",
+                display: 'flex',
               }}
             >
               <Grid
@@ -88,7 +88,7 @@ export default function CourseCertificateItem({
                   <Typography
                     variant="h6"
                     component="h2"
-                    style={{ lineHeight: "1.1", marginBottom: 4 }}
+                    style={{ lineHeight: '1.1', marginBottom: 4 }}
                   >
                     {course}
                   </Typography>
@@ -103,11 +103,9 @@ export default function CourseCertificateItem({
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
                     {pass ? (
-                      <span style={{ color: green[800] }}>
-                        ยินดีด้วย คุณผ่านเกณฑ์แล้ว
-                      </span>
+                      <span style={{ color: green[800] }}>ผ่านเกณฑ์แล้ว</span>
                     ) : (
-                      "ไม่ผ่านเกณฑ์"
+                      'ไม่ผ่านเกณฑ์'
                     )}
                   </Typography>
                   {pass ? (
@@ -115,7 +113,7 @@ export default function CourseCertificateItem({
                       variant="caption"
                       component="p"
                       color="textSecondary"
-                      style={{ lineHeight: "1.2" }}
+                      style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>สำเร็จการศึกษา </b>
@@ -128,25 +126,25 @@ export default function CourseCertificateItem({
                       variant="caption"
                       component="p"
                       color="textSecondary"
-                      style={{ lineHeight: "1.2" }}
+                      style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>หมายเหตุ </b>
-                      {note ? note : "ไม่มี"}
+                      {note ? note : 'ไม่มี'}
                     </Typography>
                   )}
                   <Typography
                     variant="caption"
                     component="p"
                     color="textSecondary"
-                    style={{ lineHeight: "1.2" }}
+                    style={{ lineHeight: '1.2' }}
                     gutterBottom
                   >
                     <b>ระยะเวลาเข้าเรียน </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                       {startdate}
-                    </DayJS>{" "}
-                    ถึง{" "}
+                    </DayJS>{' '}
+                    ถึง{' '}
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                       {enddate}
                     </DayJS>
