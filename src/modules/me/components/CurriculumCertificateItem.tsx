@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React from "react";
-import { useHistory } from "react-router-dom";
-import DayJS from "react-dayjs";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import DayJS from 'react-dayjs';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Typography,
@@ -16,23 +16,23 @@ import {
   Box,
   Button,
   Divider,
-} from "@material-ui/core";
-import { Print as PrintIcon } from "@material-ui/icons/";
-import { green, grey } from "@material-ui/core/colors";
+} from '@material-ui/core';
+import { Print as PrintIcon, Flag as FlagIcon } from '@material-ui/icons/';
+import { green, grey } from '@material-ui/core/colors';
 
-import { CurriculumCertificateProps } from "../types";
+import { CurriculumCertificateProps } from '../types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     details: {
-      width: "100%",
-      display: "flex",
-      flexDirection: "row",
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
       padding: theme.spacing(0),
     },
     controls: {
-      display: "flex",
-      alignItems: "center",
+      display: 'flex',
+      alignItems: 'center',
       flex: 1,
     },
   })
@@ -50,11 +50,71 @@ export default function CurriculumCertificateItem({
   const classes = useStyles();
   const theme = useTheme();
   const history = useHistory();
-  const matches = useMediaQuery(theme.breakpoints.down("xs"));
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const PATH = process.env.REACT_APP_BASE_PATH;
 
   const linkToLecture = () => {
     history.push(`${PATH}/me/certificate/curriculum/${id}`);
+  };
+
+  const linkToOrientationScore = () => {
+    history.push(`${PATH}/me/score`);
+  };
+
+  const renderPrintCertificateButton = () => {
+    if (curriculumid === '001M')
+      return (
+        <Button
+          disabled={!pass}
+          variant="outlined"
+          color="secondary"
+          startIcon={<FlagIcon />}
+          onClick={linkToOrientationScore}
+        >
+          ผลการเรียนรู้ด้วยตนเอง
+        </Button>
+      );
+    else
+      return (
+        <Button
+          disabled={!pass}
+          variant="outlined"
+          color="secondary"
+          startIcon={<PrintIcon />}
+          onClick={linkToLecture}
+        >
+          พิมพ์ประกาศนียบัตร
+        </Button>
+      );
+  };
+
+  const renderPrintCertificateButtonMobile = () => {
+    if (curriculumid === '001M')
+      return (
+        <Button
+          disabled={!pass}
+          variant="text"
+          color="secondary"
+          startIcon={<FlagIcon />}
+          fullWidth
+          onClick={linkToOrientationScore}
+        >
+          ผลการเรียนรู้ด้วยตนเอง
+        </Button>
+      );
+    else
+      return (
+        <Button
+          disabled={!pass}
+          variant="text"
+          color="secondary"
+          startIcon={<PrintIcon />}
+          fullWidth
+          onClick={linkToLecture}
+        >
+          พิมพ์ประกาศนียบัตร
+        </Button>
+      );
   };
 
   return (
@@ -74,7 +134,7 @@ export default function CurriculumCertificateItem({
               mx={3}
               flex
               style={{
-                display: "flex",
+                display: 'flex',
               }}
             >
               <Grid
@@ -88,7 +148,7 @@ export default function CurriculumCertificateItem({
                   <Typography
                     variant="h6"
                     component="h2"
-                    style={{ lineHeight: "1.1", marginBottom: 4 }}
+                    style={{ lineHeight: '1.1', marginBottom: 4 }}
                   >
                     {curriculum}
                   </Typography>
@@ -107,7 +167,7 @@ export default function CurriculumCertificateItem({
                         ยินดีด้วย คุณผ่านเกณฑ์แล้ว
                       </span>
                     ) : (
-                      "ไม่ผ่านเกณฑ์"
+                      'ไม่ผ่านเกณฑ์'
                     )}
                   </Typography>
                   {pass ? (
@@ -115,7 +175,7 @@ export default function CurriculumCertificateItem({
                       variant="caption"
                       component="p"
                       color="textSecondary"
-                      style={{ lineHeight: "1.2" }}
+                      style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>สำเร็จการศึกษา </b>
@@ -128,7 +188,7 @@ export default function CurriculumCertificateItem({
                       variant="caption"
                       component="p"
                       color="textSecondary"
-                      style={{ lineHeight: "1.2" }}
+                      style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>หมายเหตุ </b>
@@ -139,32 +199,20 @@ export default function CurriculumCertificateItem({
                     variant="caption"
                     component="p"
                     color="textSecondary"
-                    style={{ lineHeight: "1.2" }}
+                    style={{ lineHeight: '1.2' }}
                     gutterBottom
                   >
                     <b>ระยะเวลาเข้าเรียน </b>
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                       {startdate}
-                    </DayJS>{" "}
-                    ถึง{" "}
+                    </DayJS>{' '}
+                    ถึง{' '}
                     <DayJS format="D/M/YYYY" add={{ years: 543 }}>
                       {enddate}
                     </DayJS>
                   </Typography>
                 </Grid>
-                {!matches && (
-                  <Grid item>
-                    <Button
-                      disabled={!pass}
-                      variant="outlined"
-                      color="secondary"
-                      startIcon={<PrintIcon />}
-                      onClick={linkToLecture}
-                    >
-                      พิมพ์ประกาศนียบัตร
-                    </Button>
-                  </Grid>
-                )}
+                {!matches && <Grid item>{renderPrintCertificateButton()}</Grid>}
               </Grid>
             </Box>
           </Grid>
@@ -173,18 +221,7 @@ export default function CurriculumCertificateItem({
       {matches && (
         <>
           <Divider />
-          <Box m={1}>
-            <Button
-              disabled={!pass}
-              variant="text"
-              color="secondary"
-              startIcon={<PrintIcon />}
-              fullWidth
-              onClick={linkToLecture}
-            >
-              พิมพ์ประกาศนียบัตร
-            </Button>
-          </Box>
+          <Box m={1}>{renderPrintCertificateButtonMobile()}</Box>
         </>
       )}
     </Card>

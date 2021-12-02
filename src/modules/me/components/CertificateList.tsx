@@ -11,16 +11,15 @@ import {
   Link,
   Divider,
   useMediaQuery,
+  Toolbar,
 } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-  Print as CertificateIcon,
   NavigateNext as NavigateNextIcon,
   Inbox as InboxIcon,
 } from '@material-ui/icons';
 
 import * as meActions from '../actions';
-import Header from 'modules/ui/components/Header';
 import CourseCertificateItem from './CourseCertificateItem';
 import CurriculumCertificateItem from './CurriculumCertificateItem';
 import Loading from 'modules/ui/components/Loading';
@@ -129,12 +128,7 @@ export default function Certificate() {
 
   return (
     <>
-      <Header
-        title="พิมพ์ประกาศนียบัตร ก.พ."
-        icon={
-          <CertificateIcon fontSize="large" style={{ marginRight: '24px' }} />
-        }
-      />
+      <Toolbar />
       <Container>
         <div className={classes.main}>
           <main className={classes.content}>

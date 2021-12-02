@@ -170,9 +170,7 @@ export default function OrientationScoreView() {
               <b className={classes.mr8}>หน่วยงาน</b>{' '}
               {orientationScore?.department} {orientationScore?.ministry}
               <br />
-              <b className={classes.mr8}>
-              วันที่จบหลักสูตร
-              </b>{' '}
+              <b className={classes.mr8}>วันที่จบหลักสูตร</b>{' '}
               {new Date(orientationScore?.date).toLocaleDateString('th-TH', {
                 year: 'numeric',
                 month: 'long',
@@ -228,6 +226,13 @@ export default function OrientationScoreView() {
                     to={`${PATH}/me`}
                   >
                     โปรไฟล์
+                  </Link>
+                  <Link
+                    component={RouterLink}
+                    color="inherit"
+                    to={`${PATH}/me/certificate`}
+                  >
+                    พิมพ์ประกาศนียบัตร ก.พ.
                   </Link>
                   <Typography color="textPrimary">
                     ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่

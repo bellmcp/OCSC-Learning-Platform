@@ -17,7 +17,6 @@ import {
   Lock as LockIcon,
   ChromeReaderMode as FolderIcon,
   Print as PrintIcon,
-  Flag as FlagIcon,
 } from '@material-ui/icons';
 
 import Header from 'modules/ui/components/Header';
@@ -66,10 +65,6 @@ export default function Me() {
     history.push(`${PATH}/me/certificate`);
   };
 
-  const linkToOrientationScore = () => {
-    history.push(`${PATH}/me/score`);
-  };
-
   return (
     <>
       <Header
@@ -111,17 +106,6 @@ export default function Me() {
               alignItems="center"
               spacing={1}
             >
-              {/* <Grid item xs={12}>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  startIcon={<FlagIcon />}
-                  onClick={linkToOrientationScore}
-                  fullWidth
-                >
-                  ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
-                </Button>
-              </Grid> */}
               <Grid item xs={12}>
                 <Button
                   variant="outlined"
