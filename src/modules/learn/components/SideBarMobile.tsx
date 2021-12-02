@@ -1,7 +1,7 @@
 //@ts-nocheck
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Dialog,
@@ -15,19 +15,19 @@ import {
   ListSubheader,
   Divider,
   Grid,
-} from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
+} from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
 import {
-  Close as CloseIcon,
-  ArrowBackIos as ArrowBackIcon,
-} from "@material-ui/icons";
+  KeyboardArrowDown as CloseIcon,
+  ExitToApp as ArrowBackIcon,
+} from '@material-ui/icons';
 
-import * as uiActions from "modules/ui/actions";
-import CourseContentList from "./ContentList";
+import * as uiActions from 'modules/ui/actions';
+import CourseContentList from './ContentList';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: "relative",
+    position: 'relative',
     paddingLeft: theme.spacing(4),
     paddingRight: theme.spacing(4),
   },
@@ -83,12 +83,13 @@ export default function SideBarMobile({
       <AppBar
         className={classes.appBar}
         color="secondary"
-        style={{ position: "fixed" }}
+        style={{ position: 'fixed' }}
       >
         <Toolbar>
           <Button
             autoFocus
             color="inherit"
+            variant="outlined"
             startIcon={<ArrowBackIcon />}
             onClick={openConfirmDialog}
           >
@@ -96,6 +97,7 @@ export default function SideBarMobile({
           </Button>
           <div className={classes.grow} />
           <IconButton
+            size="large"
             edge="end"
             color="inherit"
             onClick={handleMobileDialogClose}
@@ -112,7 +114,7 @@ export default function SideBarMobile({
             component="div"
             style={{
               zIndex: 2,
-              backgroundColor: "white",
+              backgroundColor: 'white',
               paddingTop: 54,
             }}
           >
@@ -121,16 +123,16 @@ export default function SideBarMobile({
                 color="textPrimary"
                 align="center"
                 style={{
-                  fontSize: "1.3rem",
+                  fontSize: '1.3rem',
                   fontWeight: 600,
-                  lineHeight: "1.2",
+                  lineHeight: '1.2',
                 }}
                 gutterBottom
               >
-                {course?.name ? course?.name : "รายวิชา"}
+                {course?.name ? course?.name : 'รายวิชา'}
               </Typography>
               <Typography variant="body1" color="textPrimary" align="center">
-                {course?.code ? course?.code : "รหัสวิชา"}
+                {course?.code ? course?.code : 'รหัสวิชา'}
               </Typography>
             </Box>
             <Divider />

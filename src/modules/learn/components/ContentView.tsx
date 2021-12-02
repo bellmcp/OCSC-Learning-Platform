@@ -1,6 +1,6 @@
 //@ts-nocheck
-import React, { useState, useEffect } from "react";
-import { isMobile } from "react-device-detect";
+import React, { useState, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
 import {
   Box,
   Container,
@@ -8,20 +8,24 @@ import {
   Grid,
   Typography,
   useMediaQuery,
-} from "@material-ui/core";
-import { ToggleButton, ToggleButtonGroup } from "@material-ui/lab";
-import { useTheme } from "@material-ui/core/styles";
-import { getContentType, getContentTypeTitle } from "utils/contentType";
-import { generateContentSourceUrl } from "utils/soureceUrl";
-import { Hd as HdIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
+import { useTheme } from '@material-ui/core/styles';
+import { getContentType, getContentTypeTitle } from 'utils/contentType';
+import { generateContentSourceUrl } from 'utils/soureceUrl';
+import {
+  Hd as HdIcon,
+  ArrowBack as ArrowLeft,
+  ArrowDownward as ArrowBottom,
+} from '@material-ui/icons';
 
-import VideoPlayer from "./Content/VideoPlayer";
-import PdfViewer from "./Content/PdfViewer";
-import IframeViewer from "./Content/IframeViewer";
-import TestList from "./Test/TestList";
-import EvaluationList from "./Evaluation/EvaluationList";
+import VideoPlayer from './Content/VideoPlayer';
+import PdfViewer from './Content/PdfViewer';
+import IframeViewer from './Content/IframeViewer';
+import TestList from './Test/TestList';
+import EvaluationList from './Evaluation/EvaluationList';
 
-import HeroImage from "assets/images/hero-learn.svg";
+import HeroImage from 'assets/images/hero-learn.svg';
 
 export default function ContentView({
   contentId,
@@ -35,9 +39,9 @@ export default function ContentView({
   setUserTestAnswers,
 }) {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   // const registrationId = courseRegistrationDetails[0]?.id;
-  const [activeSource, setActiveSource] = useState("");
+  const [activeSource, setActiveSource] = useState('');
   const contentSourceUrl1 = generateContentSourceUrl(
     isMobile,
     activeContentView?.content1
@@ -65,7 +69,7 @@ export default function ContentView({
       return (
         <HdIcon
           color="disabled"
-          style={{ marginLeft: 12, marginBottom: "-4px" }}
+          style={{ marginLeft: 12, marginBottom: '-4px' }}
         />
       );
     }
@@ -73,11 +77,11 @@ export default function ContentView({
 
   function renderContentView() {
     switch (getContentType(activeSource)) {
-      case "video":
+      case 'video':
         return <VideoPlayer url={activeSource} />;
-      case "pdf":
+      case 'pdf':
         return <PdfViewer url={activeSource} />;
-      case "iframe":
+      case 'iframe':
         return <IframeViewer url={activeSource} />;
       default:
         return (
@@ -105,7 +109,7 @@ export default function ContentView({
             <Grid
               item
               style={{
-                width: "50%",
+                width: '50%',
                 minWidth: 280,
                 maxWidth: 500,
                 marginBottom: 24,
@@ -114,20 +118,29 @@ export default function ContentView({
               <img
                 src={HeroImage}
                 alt="ยินดีต้อนรับ"
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: '100%', height: 'auto' }}
               />
             </Grid>
             <Typography
               variant="h6"
               color="textPrimary"
               gutterBottom
-              style={{ fontSize: "1.7rem", fontWeight: 600 }}
+              style={{ fontSize: '1.7rem', fontWeight: 600 }}
             >
               ยินดีต้อนรับ
             </Typography>
             <Typography variant="body1" color="textSecondary">
               โปรดเลือกเนื้อหาที่ต้องการเรียนจากสารบัญ
             </Typography>
+            {matches ? (
+              <ArrowLeft
+                style={{ marginTop: 16, color: theme.palette.text.secondary }}
+              />
+            ) : (
+              <ArrowBottom
+                style={{ marginTop: 16, color: theme.palette.text.secondary }}
+              />
+            )}
           </Grid>
         </Box>
       ) : (
@@ -136,7 +149,7 @@ export default function ContentView({
             <Grid
               container
               spacing={1}
-              direction={matches ? "row" : "column"}
+              direction={matches ? 'row' : 'column'}
               justify="space-between"
               alignItems="center"
               wrap="nowrap"
@@ -147,12 +160,12 @@ export default function ContentView({
                     variant="h6"
                     color="initial"
                     style={{
-                      fontSize: "1.6rem",
+                      fontSize: '1.6rem',
                       fontWeight: 600,
-                      lineHeight: "1.2",
+                      lineHeight: '1.2',
                     }}
                     gutterBottom={matches ? false : true}
-                    align={matches ? "left" : "center"}
+                    align={matches ? 'left' : 'center'}
                   >
                     {activeContentView?.name
                       ? activeContentView?.name
@@ -160,13 +173,13 @@ export default function ContentView({
                           activeContentView?.type,
                           getContentType(activeContentView?.content1)
                         )}
-                    {matches && getContentType(activeSource) === "video"
+                    {matches && getContentType(activeSource) === 'video'
                       ? checkVideoQuality()
                       : null}
                   </Typography>
                 </Grid>
               </Grid>
-              {activeContentView?.type === "c" && (
+              {activeContentView?.type === 'c' && (
                 <Grid item style={{ minWidth: 185 }}>
                   <ToggleButtonGroup
                     value={activeSource}
@@ -182,7 +195,7 @@ export default function ContentView({
                       <Typography
                         variant="body2"
                         color="textPrimary"
-                        style={{ fontWeight: 500, padding: "0 6px" }}
+                        style={{ fontWeight: 500, padding: '0 6px' }}
                       >
                         ลิงก์หลัก
                       </Typography>
@@ -194,7 +207,7 @@ export default function ContentView({
                       <Typography
                         variant="body2"
                         color="textPrimary"
-                        style={{ fontWeight: 500, padding: "0 6px" }}
+                        style={{ fontWeight: 500, padding: '0 6px' }}
                       >
                         ลิงก์สำรอง
                       </Typography>
@@ -206,8 +219,8 @@ export default function ContentView({
           </Box>
           <Divider />
           <Box my={4}>
-            {activeContentView?.type === "c" && <>{renderContentView()}</>}
-            {activeContentView?.type === "t" && (
+            {activeContentView?.type === 'c' && <>{renderContentView()}</>}
+            {activeContentView?.type === 't' && (
               <TestList
                 activeContentView={activeContentView}
                 testStart={testStart}
@@ -219,7 +232,7 @@ export default function ContentView({
                 contentId={contentId}
               />
             )}
-            {activeContentView?.type === "e" && (
+            {activeContentView?.type === 'e' && (
               <EvaluationList
                 activeContentView={activeContentView}
                 currentContentView={currentContentView}

@@ -74,8 +74,6 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'none',
       position: 'fixed',
       bottom: FOOTER_HEIGHT + theme.spacing(3),
-      right: theme.spacing(3),
-      // left: "calc(50% - 24px)",
       zIndex: 1202,
       [theme.breakpoints.down('xs')]: {
         display: 'inherit',
@@ -247,10 +245,18 @@ export default function Learn() {
           <Fab
             color="secondary"
             aria-label="สารบัญ"
+            variant={contentId === undefined ? 'extended' : 'round'}
             className={classes.fab}
+            style={{
+              left: contentId === undefined && 'calc(50% - 55px)',
+              right: contentId !== undefined && '24px',
+            }}
             onClick={handleMobileDialogOpen}
           >
-            <ArrowUpIcon />
+            <ArrowUpIcon
+              style={{ marginRight: contentId === undefined ? 8 : 0 }}
+            />
+            {contentId === undefined && 'สารบัญ'}
           </Fab>
           <SideBarMobile
             mobileDialogOpen={mobileDialogOpen}
