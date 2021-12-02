@@ -1,9 +1,9 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
-import { getCookie, eraseCookie } from "utils/cookies";
-import parseJwt from "utils/parseJwt";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
+import { getCookie, eraseCookie } from 'utils/cookies';
+import parseJwt from 'utils/parseJwt';
 import {
   fade,
   makeStyles,
@@ -11,7 +11,7 @@ import {
   createStyles,
   createMuiTheme,
   ThemeProvider,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
@@ -27,23 +27,23 @@ import {
   Tooltip,
   Dialog,
   Box,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   Menu as MenuIcon,
   Search as SearchIcon,
   KeyboardArrowDown as ArrowDownIcon,
-} from "@material-ui/icons";
-import { grey } from "@material-ui/core/colors";
-import { NavMenu, NavItem } from "@mui-treasury/components/menu/navigation";
-import { useLineNavigationMenuStyles } from "@mui-treasury/styles/navigationMenu/line";
+} from '@material-ui/icons';
+import { grey } from '@material-ui/core/colors';
+import { NavMenu, NavItem } from '@mui-treasury/components/menu/navigation';
+import { useLineNavigationMenuStyles } from '@mui-treasury/styles/navigationMenu/line';
 
-import * as uiActions from "modules/ui/actions";
-import * as userActions from "modules/user/actions";
-import * as supportActions from "modules/support/actions";
-import useSearchInputState from "../hooks/useSearchInputState";
-import NavDrawer from "./NavDrawer";
-import NavDropdownMobile from "./NavDropdownMobile";
-import NavDropdownDesktop from "./NavDropdownDesktop";
+import * as uiActions from 'modules/ui/actions';
+import * as userActions from 'modules/user/actions';
+import * as supportActions from 'modules/support/actions';
+import useSearchInputState from '../hooks/useSearchInputState';
+import NavDrawer from './NavDrawer';
+import NavDropdownMobile from './NavDropdownMobile';
+import NavDropdownDesktop from './NavDropdownDesktop';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -52,7 +52,7 @@ const darkTheme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ["Prompt", "sans-serif"].join(","),
+    fontFamily: ['Prompt', 'sans-serif'].join(','),
   },
 });
 
@@ -62,10 +62,10 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      backgroundColor: "rgba(255, 255, 255, 0.85)",
-      backdropFilter: "saturate(180%) blur(20px)",
-      boxShadow: "rgb(0 0 0 / 15%) 0px 0px 10px",
-      [theme.breakpoints.up("sm")]: {
+      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+      backdropFilter: 'saturate(180%) blur(20px)',
+      boxShadow: 'rgb(0 0 0 / 15%) 0px 0px 10px',
+      [theme.breakpoints.up('sm')]: {
         zIndex: theme.zIndex.drawer + 1,
       },
     },
@@ -73,44 +73,44 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: theme.spacing(1),
     },
     title: {
-      display: "none",
+      display: 'none',
       marginRight: theme.spacing(4),
-      [theme.breakpoints.up("sm")]: {
-        display: "block",
+      [theme.breakpoints.up('sm')]: {
+        display: 'block',
       },
-      "&:hover": {
-        cursor: "pointer",
+      '&:hover': {
+        cursor: 'pointer',
       },
     },
     logo: {
-      display: "block",
+      display: 'block',
       maxWidth: 110,
       marginRight: theme.spacing(3),
-      [theme.breakpoints.down("xs")]: {
+      [theme.breakpoints.down('xs')]: {
         maxWidth: 100,
       },
-      "&:hover": {
-        cursor: "pointer",
+      '&:hover': {
+        cursor: 'pointer',
       },
     },
     link: {
-      textDecoration: "none !important",
+      textDecoration: 'none !important',
     },
     search: {
-      position: "relative",
+      position: 'relative',
       backgroundColor: fade(theme.palette.common.white, 0.9),
       borderRadius: theme.shape.borderRadius,
-      width: "100%",
+      width: '100%',
     },
     searchIcon: {
       color: grey[400],
       padding: theme.spacing(0, 2),
-      height: "100%",
-      position: "absolute",
-      pointerEvents: "none",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      height: '100%',
+      position: 'absolute',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     inputRoot: {
       color: theme.palette.text.primary,
@@ -120,27 +120,27 @@ const useStyles = makeStyles((theme: Theme) =>
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
       paddingRight: `calc(3em)`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
+      transition: theme.transitions.create('width'),
+      width: '100%',
       borderRadius: theme.shape.borderRadius,
       border: `1px solid ${theme.palette.grey[300]}`,
-      "&:hover": {
+      '&:hover': {
         border: `1px solid ${theme.palette.grey[400]}`,
       },
-      "&:focus": {
+      '&:focus': {
         border: `1px solid ${theme.palette.primary.main}`,
       },
     },
     sectionDesktop: {
-      display: "none",
-      [theme.breakpoints.up("md")]: {
-        display: "flex",
+      display: 'none',
+      [theme.breakpoints.up('md')]: {
+        display: 'flex',
       },
     },
     sectionMobile: {
-      display: "flex",
-      [theme.breakpoints.up("md")]: {
-        display: "none",
+      display: 'flex',
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
       },
     },
     small: {
@@ -155,10 +155,10 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: process.env.REACT_APP_TERTIARY_COLOR_HEX,
     },
     noDecorationLink: {
-      textDecoration: "none",
+      textDecoration: 'none',
     },
     navMenu: {
-      minWidth: "270px",
+      minWidth: '270px',
     },
     navItem: {
       color: theme.palette.text.primary,
@@ -173,7 +173,7 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 2,
       height: 32,
       margin: theme.spacing(2),
-      backgroundColor: "#A7A8AB",
+      backgroundColor: '#A7A8AB',
     },
     bold: {
       fontWeight: 600,
@@ -196,14 +196,14 @@ export default function NavBar(props: NavigationBarProps) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
 
-  const LogoImage = require("assets/images/logo.svg");
+  const LogoImage = require('assets/images/logo.svg');
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSearchDialogOpen, setMobileSearchDialogOpen] = useState(false);
 
-  const token = getCookie("token");
+  const token = getCookie('token');
   const id = parseJwt(token).unique_name;
   useEffect(() => {
     if (login()) {
@@ -217,8 +217,8 @@ export default function NavBar(props: NavigationBarProps) {
       return false;
     }
     if (
-      (token !== "" || token !== undefined) &&
-      parseJwt(token).role === "user"
+      (token !== '' || token !== undefined) &&
+      parseJwt(token).role === 'user'
     ) {
       return true;
     }
@@ -242,14 +242,14 @@ export default function NavBar(props: NavigationBarProps) {
   const navigationItem = [
     {
       id: 0,
-      title: "หน้าหลัก",
+      title: 'หน้าหลัก',
       url: `${PATH}`,
       notification: 0,
     },
-    { id: 1, title: "เข้าเรียน", url: `${PATH}/learn`, notification: 0 },
+    { id: 1, title: 'เข้าเรียน', url: `${PATH}/learn`, notification: 0 },
     {
       id: 2,
-      title: "ช่วยเหลือ",
+      title: 'ช่วยเหลือ',
       url: `${PATH}/support`,
       notification: UNREAD_NOTIFICATION_COUNT,
     },
@@ -284,9 +284,33 @@ export default function NavBar(props: NavigationBarProps) {
     }
   };
 
+  const linkToPrintCertificate = () => {
+    handleMenuClose();
+    if (!isUserCurrentlyInLearn) {
+      history.push(`${PATH}/me/certificate`);
+    } else {
+      dispatch(uiActions.setLearnExitDialog(true));
+    }
+  };
+
+  const linkToCertificate = () => {
+    handleMenuClose();
+    window.open(`${process.env.REACT_APP_PORTAL_URL}history`, '_blank');
+  };
+
+  const linkToEditProfile = () => {
+    handleMenuClose();
+    window.open(`${process.env.REACT_APP_PORTAL_URL}edit`, '_blank');
+  };
+
+  const linkToChangePassword = () => {
+    handleMenuClose();
+    window.open(`${process.env.REACT_APP_PORTAL_URL}reset`, '_blank');
+  };
+
   const linkToPortal = () => {
     handleMenuClose();
-    window.open(`${process.env.REACT_APP_PORTAL_URL}`, "_blank");
+    window.open(`${process.env.REACT_APP_PORTAL_URL}`, '_blank');
   };
 
   const toggleSearchBar = () => {
@@ -300,8 +324,8 @@ export default function NavBar(props: NavigationBarProps) {
   const logout = () => {
     handleMenuClose();
     if (!isUserCurrentlyInLearn) {
-      eraseCookie("token");
-      dispatch(uiActions.setFlashMessage("ออกจากระบบเรียบร้อยแล้ว", "success"));
+      eraseCookie('token');
+      dispatch(uiActions.setFlashMessage('ออกจากระบบเรียบร้อยแล้ว', 'success'));
       setTimeout(() => {
         history.push(`${PATH}`);
         window.location.reload();
@@ -336,14 +360,14 @@ export default function NavBar(props: NavigationBarProps) {
     history.push(`${PATH}/search?query=${searchValue}`);
   });
 
-  const menuId = "primary-search-account-menu";
-  const mobileMenuId = "primary-search-account-menu-mobile";
+  const menuId = 'primary-search-account-menu';
+  const mobileMenuId = 'primary-search-account-menu-mobile';
 
   return (
     <div className={classes.grow}>
       <AppBar position="fixed" className={classes.appBar} elevation={0}>
         <Container
-          maxWidth={!pathname.includes(`${PATH}/learn/courses`) ? "lg" : false}
+          maxWidth={!pathname.includes(`${PATH}/learn/courses`) ? 'lg' : false}
         >
           <Toolbar>
             {/* DRAWER TOGGLE */}
@@ -387,7 +411,7 @@ export default function NavBar(props: NavigationBarProps) {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
-                  inputProps={{ "aria-label": "search" }}
+                  inputProps={{ 'aria-label': 'search' }}
                   onChange={(e) => setSearchValue(e?.target?.value ?? null)}
                 />
               </div>
@@ -437,15 +461,15 @@ export default function NavBar(props: NavigationBarProps) {
             {/* DESKTOP DROPDOWN */}
             <div className={classes.sectionDesktop}>
               <Divider orientation="vertical" className={classes.divider} />
-              <Tooltip title={login() ? "ดูโปรไฟล์" : ""}>
+              <Tooltip title={login() ? 'ดูโปรไฟล์' : ''}>
                 <Button
                   color="primary"
                   onClick={login() ? linkToProfile : linkToLogin}
                   size="small"
                   style={{
                     borderRadius: 50,
-                    padding: "10px 10px",
-                    margin: "6px 0",
+                    padding: '10px 10px',
+                    margin: '6px 0',
                   }}
                   startIcon={
                     <Avatar
@@ -458,7 +482,7 @@ export default function NavBar(props: NavigationBarProps) {
                     className={classes.bold}
                     noWrap
                   >
-                    {login() ? users.firstname : "เข้าสู่ระบบ"}
+                    {login() ? users.firstname : 'เข้าสู่ระบบ'}
                   </Typography>
                 </Button>
               </Tooltip>
@@ -469,14 +493,14 @@ export default function NavBar(props: NavigationBarProps) {
                 aria-controls={menuId}
                 onClick={handleProfileMenuOpen}
                 style={{
-                  margin: "6px 0",
+                  margin: '6px 0',
                 }}
               >
                 <ArrowDownIcon />
               </IconButton>
             </div>
             {/* MOBILE DROPDOWN */}
-            <Hidden only={["xs", "lg", "md", "xl"]}>
+            <Hidden only={['xs', 'lg', 'md', 'xl']}>
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
@@ -505,15 +529,24 @@ export default function NavBar(props: NavigationBarProps) {
         mobileMoreAnchorEl={mobileMoreAnchorEl}
         isMobileMenuOpen={isMobileMenuOpen}
         handleMobileMenuClose={handleMobileMenuClose}
-        linkToProfile={linkToProfile}
         linkToLogin={linkToLogin}
         linkToPortal={linkToPortal}
+        linkToProfile={linkToProfile}
+        linkToPrintCertificate={linkToPrintCertificate}
+        linkToCertificate={linkToCertificate}
+        linkToEditProfile={linkToEditProfile}
+        linkToChangePassword={linkToChangePassword}
       />
       <NavDropdownDesktop
         login={login}
         logout={logout}
+        users={users}
         linkToPortal={linkToPortal}
         linkToProfile={linkToProfile}
+        linkToPrintCertificate={linkToPrintCertificate}
+        linkToCertificate={linkToCertificate}
+        linkToEditProfile={linkToEditProfile}
+        linkToChangePassword={linkToChangePassword}
         anchorEl={anchorEl}
         menuId={menuId}
         isMenuOpen={isMenuOpen}
@@ -539,7 +572,7 @@ export default function NavBar(props: NavigationBarProps) {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              inputProps={{ "aria-label": "search" }}
+              inputProps={{ 'aria-label': 'search' }}
               onChange={(e) => setSearchValue(e?.target?.value ?? null)}
             />
           </div>

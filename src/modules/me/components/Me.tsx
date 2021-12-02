@@ -15,7 +15,7 @@ import {
   Person as PersonIcon,
   Edit as EditIcon,
   Lock as LockIcon,
-  FolderSpecial as FolderIcon,
+  ChromeReaderMode as FolderIcon,
   Print as PrintIcon,
   Flag as FlagIcon,
 } from '@material-ui/icons';
@@ -111,7 +111,7 @@ export default function Me() {
               alignItems="center"
               spacing={1}
             >
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -121,8 +121,8 @@ export default function Me() {
                 >
                   ผลการเรียนรู้ด้วยตนเอง หลักสูตรฝึกอบรมข้าราชการบรรจุใหม่
                 </Button>
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              </Grid> */}
+              <Grid item xs={12}>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -133,7 +133,7 @@ export default function Me() {
                   พิมพ์ประกาศนียบัตร ก.พ.
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -141,7 +141,7 @@ export default function Me() {
                   onClick={linkToCertificate}
                   fullWidth
                 >
-                  ประกาศนียบัตรทั้งหมด
+                  ประวัติการเรียน
                 </Button>
               </Grid>
               <Grid
@@ -151,7 +151,7 @@ export default function Me() {
                 alignItems="center"
                 spacing={1}
               ></Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Button
                   variant="outlined"
                   color="secondary"
@@ -159,10 +159,10 @@ export default function Me() {
                   onClick={linkToEditProfile}
                   fullWidth
                 >
-                  แก้ไขโปรไฟล์
+                  แก้ไขข้อมูลส่วนบุคคล
                 </Button>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <Button
                   variant="outlined"
                   color="secondary"
