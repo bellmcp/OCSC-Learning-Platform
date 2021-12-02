@@ -209,7 +209,7 @@ export default function Learn() {
   }
 
   function renderLearnModule() {
-    if (isLocalDateTimeLoading) {
+    if (isLocalDateTimeLoading || !accessible) {
       return <Loading height={380} />;
     } else if (accessible) {
       return (
