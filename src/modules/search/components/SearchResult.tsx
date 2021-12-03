@@ -1,14 +1,14 @@
 // @ts-nocheck
-import React, { useEffect, useState } from "react";
-import queryString from "query-string";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import queryString from 'query-string';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Typography,
@@ -16,16 +16,16 @@ import {
   Container,
   Grid,
   Divider,
-} from "@material-ui/core";
-import { Search as SearchIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import { Search as SearchIcon } from '@material-ui/icons';
 
-import * as coursesActions from "modules/courses/actions";
-import * as curriculumActions from "modules/curriculums/actions";
-import * as categoriesActions from "modules/categories/actions";
-import CourseItem from "modules/courses/components/CourseItem";
-import CurriculumItem from "modules/curriculums/components/CurriculumItem";
-import Header from "modules/ui/components/Header";
-import Loading from "modules/ui/components/Loading";
+import * as coursesActions from 'modules/courses/actions';
+import * as curriculumActions from 'modules/curriculums/actions';
+import * as categoriesActions from 'modules/categories/actions';
+import CourseItem from 'modules/courses/components/CourseItem';
+import CurriculumItem from 'modules/curriculums/components/CurriculumItem';
+import Header from 'modules/ui/components/Header';
+import Loading from 'modules/ui/components/Loading';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme: Theme) =>
     formControl: {
       margin: theme.spacing(1),
       minWidth: 240,
-      [theme.breakpoints.down("xs")]: {
-        width: "100%",
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
       },
     },
   })
@@ -46,12 +46,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SearchResult() {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const { search } = useLocation();
   var { query } = queryString.parse(search);
 
   if (query === undefined) {
-    query = "";
+    query = '';
   }
 
   const dispatch = useDispatch();
@@ -90,7 +90,7 @@ export default function SearchResult() {
   }, [dispatch]);
 
   useEffect(() => {
-    const curriculums_action = curriculumActions.loadCurriculums("");
+    const curriculums_action = curriculumActions.loadCurriculums('');
     dispatch(curriculums_action);
   }, [dispatch]);
 
@@ -161,16 +161,16 @@ export default function SearchResult() {
     <>
       <Header
         title="ผลการค้นหา"
-        icon={<SearchIcon fontSize="large" style={{ marginRight: "24px" }} />}
+        icon={<SearchIcon fontSize="large" style={{ marginRight: '24px' }} />}
       />
       <Container maxWidth="lg">
         <main className={classes.content}>
           <Box mt={3} mb={2}>
             <Grid
               container
-              direction={matches ? "row" : "column"}
-              justify={matches ? "space-between" : "center"}
-              alignItems={matches ? "flex-end" : "center"}
+              direction={matches ? 'row' : 'column'}
+              justify={matches ? 'space-between' : 'center'}
+              alignItems={matches ? 'flex-end' : 'center'}
             >
               <Grid item>
                 <Typography
@@ -178,56 +178,7 @@ export default function SearchResult() {
                   variant="h6"
                   align="center"
                   style={{
-                    fontSize: "1.7rem",
-                    marginBottom: matches ? 0 : 16,
-                    lineHeight: 1,
-                    fontWeight: 600,
-                  }}
-                >
-                  {query
-                    ? `รายวิชาที่เกี่ยวข้องกับ '${query}'`
-                    : "รายวิชาทั้งหมด"}
-                </Typography>
-              </Grid>
-              {matches && (
-                <Grid item>
-                  <Typography variant="body2" color="textSecondary">
-                    ผลการค้นหา {filteredCourseResults.length} รายการ
-                  </Typography>
-                </Grid>
-              )}
-            </Grid>
-            {!matches && (
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                <Typography variant="body2" color="textSecondary">
-                  ผลการค้นหา {filteredCourseResults.length} รายการ
-                </Typography>
-              </Grid>
-            )}
-          </Box>
-          {renderFilteredCoursesResult()}
-          <Box my={5}>
-            <Divider />
-          </Box>
-          <Box mt={3} mb={2}>
-            <Grid
-              container
-              direction={matches ? "row" : "column"}
-              justify={matches ? "space-between" : "center"}
-              alignItems={matches ? "flex-end" : "center"}
-            >
-              <Grid item>
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  align="center"
-                  style={{
-                    fontSize: "1.7rem",
+                    fontSize: '1.7rem',
                     marginBottom: matches ? 0 : 16,
                     lineHeight: 1,
                     fontWeight: 600,
@@ -235,7 +186,7 @@ export default function SearchResult() {
                 >
                   {query
                     ? `หลักสูตรที่เกี่ยวข้องกับ '${query}'`
-                    : "หลักสูตรทั้งหมด"}
+                    : 'หลักสูตรทั้งหมด'}
                 </Typography>
               </Grid>
               {matches && (
@@ -260,6 +211,57 @@ export default function SearchResult() {
             )}
           </Box>
           {renderFilteredCurriculumsResult()}
+
+          <Box my={5}>
+            <Divider />
+          </Box>
+
+          <Box mt={3} mb={2}>
+            <Grid
+              container
+              direction={matches ? 'row' : 'column'}
+              justify={matches ? 'space-between' : 'center'}
+              alignItems={matches ? 'flex-end' : 'center'}
+            >
+              <Grid item>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  align="center"
+                  style={{
+                    fontSize: '1.7rem',
+                    marginBottom: matches ? 0 : 16,
+                    lineHeight: 1,
+                    fontWeight: 600,
+                  }}
+                >
+                  {query
+                    ? `รายวิชาที่เกี่ยวข้องกับ '${query}'`
+                    : 'รายวิชาทั้งหมด'}
+                </Typography>
+              </Grid>
+              {matches && (
+                <Grid item>
+                  <Typography variant="body2" color="textSecondary">
+                    ผลการค้นหา {filteredCourseResults.length} รายการ
+                  </Typography>
+                </Grid>
+              )}
+            </Grid>
+            {!matches && (
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+              >
+                <Typography variant="body2" color="textSecondary">
+                  ผลการค้นหา {filteredCourseResults.length} รายการ
+                </Typography>
+              </Grid>
+            )}
+          </Box>
+          {renderFilteredCoursesResult()}
         </main>
       </Container>
     </>
