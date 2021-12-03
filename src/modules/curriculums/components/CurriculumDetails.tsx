@@ -333,7 +333,37 @@ export default function CurriculumDetails() {
                     </Grid>
                   </Grid>
 
-                  <Box mt={2} mb={4}>
+                  <Box mt={4} mb={4}>
+                    <Divider />
+                  </Box>
+                  <Grid
+                    container
+                    direction="row"
+                    justify={matches ? 'flex-start' : 'center'}
+                    alignItems="center"
+                  >
+                    <Typography
+                      style={{
+                        fontSize: '1.7rem',
+                        fontWeight: 600,
+                      }}
+                    >
+                      ลงทะเบียน
+                    </Typography>
+                  </Grid>
+                  <Box my={3}>
+                    <Grid
+                      container
+                      spacing={3}
+                      alignItems="center"
+                      direction="row"
+                      justify={matches ? 'flex-start' : 'center'}
+                    >
+                      {renderRegisterButton()}
+                    </Grid>
+                  </Box>
+
+                  <Box mt={5} mb={4}>
                     <Divider />
                   </Box>
                   <Grid
@@ -360,36 +390,6 @@ export default function CurriculumDetails() {
                       ))}
                     </Grid>
                   </Box>
-                </Box>
-
-                <Box mt={2} mb={4}>
-                  <Divider />
-                </Box>
-                <Grid
-                  container
-                  direction="row"
-                  justify={matches ? 'flex-start' : 'center'}
-                  alignItems="center"
-                >
-                  <Typography
-                    style={{
-                      fontSize: '1.7rem',
-                      fontWeight: 600,
-                    }}
-                  >
-                    ลงทะเบียน
-                  </Typography>
-                </Grid>
-                <Box my={3}>
-                  <Grid
-                    container
-                    spacing={3}
-                    alignItems="center"
-                    direction="row"
-                    justify={matches ? 'flex-start' : 'center'}
-                  >
-                    {renderRegisterButton()}
-                  </Grid>
                 </Box>
               </>
             )}

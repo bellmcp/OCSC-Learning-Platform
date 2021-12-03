@@ -136,7 +136,7 @@ export default function CourseRound({
       return (
         <Grid item>
           <Typography variant="body2" color="textSecondary">
-            ยังไม่เปิดให้ลงทะเบียน
+            ไม่เปิดให้ลงทะเบียน
           </Typography>
         </Grid>
       );
