@@ -368,19 +368,45 @@ export default function CurriculumDetails() {
                   </Box>
                   <Grid
                     container
-                    direction="row"
-                    justify={matches ? 'flex-start' : 'center'}
-                    alignItems="center"
+                    direction={matches ? 'row' : 'column'}
+                    justify={matches ? 'space-between' : 'center'}
+                    alignItems={matches ? 'flex-end' : 'center'}
                   >
-                    <Typography
-                      style={{
-                        fontSize: '1.7rem',
-                        fontWeight: 600,
-                      }}
-                    >
-                      หลักสูตรนี้ประกอบด้วย
-                    </Typography>
+                    <Grid item>
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        align="center"
+                        style={{
+                          fontSize: '1.7rem',
+                          marginBottom: matches ? 0 : 16,
+                          lineHeight: 1,
+                          fontWeight: 600,
+                        }}
+                      >
+                        หลักสูตรนี้ประกอบด้วย
+                      </Typography>
+                    </Grid>
+                    {matches && (
+                      <Grid item>
+                        <Typography variant="body2" color="textSecondary">
+                          {childCourses.length} รายวิชา
+                        </Typography>
+                      </Grid>
+                    )}
                   </Grid>
+                  {!matches && (
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Typography variant="body2" color="textSecondary">
+                        {childCourses.length} รายวิชา
+                      </Typography>
+                    </Grid>
+                  )}
                   <Box my={3}>
                     <Grid container spacing={1}>
                       {childCourses.map((course) => (
