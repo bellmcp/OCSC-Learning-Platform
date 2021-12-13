@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     height: '100%',
     display: 'flex',
-    padding: '15px',
+    padding: '30px 15px',
     paddingBottom: 0,
     flexDirection: 'column',
     position: 'relative',
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   actionArea: {
     borderRadius: 5,
+    overflow: 'visible',
   },
   focusHighlight: {},
   cardMedia: {
@@ -52,8 +53,16 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '90%',
     marginTop: '8px',
     borderRadius: theme.shape.borderRadius,
+    transition: '0.3s',
     boxShadow:
-      '0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0px rgba(0,0,0,0.14), 0 1px 3px 0px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.15), 0 -10px 0 -5px #eee, 0 -10px 1px -4px rgba(0,0,0,0.15), 0 -20px 0 -10px #eee, 0 -20px 1px -9px rgba(0,0,0,0.15)',
+      '0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0px rgb(0 0 0 / 14%), 0 1px 3px 0px rgb(0 0 0 / 12%), 0 -1px 1px rgb(0 0 0 / 15%), 0 -14px 0 -5px rgb(243 243 243), 0 -14px 5px -4px rgb(0 0 0 / 20%), 0 -28px 0 -10px rgb(238 238 238), 0px -28px 5px -9px rgb(0 0 0 / 20%)',
+    // // eslint-disable-next-line no-useless-computed-key
+    // ['@media (hover: hover) and (pointer: fine)']: {
+    //   '&:hover': {
+    //     boxShadow:
+    //       '0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0px rgb(0 0 0 / 14%), 0 1px 3px 0px rgb(0 0 0 / 12%), 0 -1px 1px rgb(0 0 0 / 15%), 0 -10px 0 -5px rgb(243 243 243), 0 -10px 5px -4px rgb(0 0 0 / 20%), 0 -22px 0 -10px rgb(238 238 238), 0px -22px 5px -9px rgb(0 0 0 / 20%)',
+    //   },
+    // },
   },
   cardDetail: {
     position: 'absolute',
@@ -133,6 +142,7 @@ export default function CurriculumItem({
             backgroundColor: 'lightgray',
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
+            borderLeft: `6px solid ${amber[500]}`,
           }}
         />
         <CardContent className={classes.cardContent}>
