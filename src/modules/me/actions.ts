@@ -55,7 +55,7 @@ function loadCourseCertificates() {
       });
     } catch (err) {
       if (err?.response?.status === 404) {
-        dispatch({ type: LOAD_CURRICULUM_CERTIFICATES_FAILURE });
+        dispatch({ type: LOAD_COURSE_CERTIFICATES_FAILURE });
       } else {
         dispatch({ type: LOAD_COURSE_CERTIFICATES_FAILURE });
         dispatch(
