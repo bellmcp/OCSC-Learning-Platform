@@ -70,7 +70,7 @@ export default function CourseRound({
   };
 
   const linkToLearn = () => {
-    history.push(`${PATH}/learn`);
+    history.push(`${PATH}/learn/courses/${courseId}`);
   };
 
   const registerCourse = () => {
