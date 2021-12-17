@@ -39,4 +39,6 @@ export interface MyCourseProps {
   thumbnail: string;
   seqFlow: boolean;
   localDateTime: string[];
+  showNumber?: boolean;
+  index?: number;
 }

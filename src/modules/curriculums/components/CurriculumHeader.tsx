@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from "@material-ui/core/styles";
+} from '@material-ui/core/styles';
 import {
   useMediaQuery,
   Container,
   Typography,
   Grid,
   Toolbar,
-} from "@material-ui/core";
-import { amber } from "@material-ui/core/colors";
+} from '@material-ui/core';
+import { amber } from '@material-ui/core/colors';
 
 interface CurriculumHeaderProps {
   title: string;
@@ -24,11 +24,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     header: {
       color: theme.palette.common.white,
-      backgroundSize: "cover",
-      backgroundPosition: "center center",
-      minHeight: "370px",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      minHeight: '370px',
       padding: theme.spacing(14, 0, 8),
-      textShadow: "0px 3px 3px rgba(0, 0, 0, 0.2)",
+      textShadow: '0px 3px 3px rgba(0, 0, 0, 0.2)',
     },
     subtitle: {
       marginTop: theme.spacing(4),
@@ -43,7 +43,7 @@ export default function CurriculumHeader({
 }: CurriculumHeaderProps) {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <>
@@ -52,21 +52,22 @@ export default function CurriculumHeader({
         className={classes.header}
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url(${imageUrl})`,
-          backgroundSize: "cover",
-          backgroundBlendMode: "darken",
+          backgroundSize: 'cover',
+          backgroundBlendMode: 'darken',
+          borderLeft: `8px solid ${amber[500]}`,
         }}
       >
-        <div style={{ position: "relative" }}>
+        <div style={{ position: 'relative' }}>
           <Container maxWidth="lg">
             <Grid
               container
               direction="column"
               justify="space-between"
-              alignItems={matches ? "flex-start" : "center"}
+              alignItems={matches ? 'flex-start' : 'center'}
             >
               <Typography
                 component="h2"
-                variant={matches ? "h6" : "body1"}
+                variant={matches ? 'h6' : 'body1'}
                 align="center"
                 gutterBottom
                 style={{ color: amber[500] }}
@@ -75,8 +76,8 @@ export default function CurriculumHeader({
               </Typography>
               <Typography
                 component="h1"
-                variant={matches ? "h3" : "h4"}
-                align={matches ? "left" : "center"}
+                variant={matches ? 'h3' : 'h4'}
+                align={matches ? 'left' : 'center'}
                 color="inherit"
                 gutterBottom
               >
@@ -84,7 +85,7 @@ export default function CurriculumHeader({
               </Typography>
               <Typography
                 component="h2"
-                variant={matches ? "h6" : "body1"}
+                variant={matches ? 'h6' : 'body1'}
                 align="center"
                 color="inherit"
               >

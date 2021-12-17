@@ -338,11 +338,13 @@ export default function MyCurriculumItem({
             <Grid container direction="column" spacing={2}>
               {myCourses
                 .filter((myCourse) => myCourse.curriculumRegistrationId === id)
-                .map((childCourse) => (
+                .map((childCourse, index) => (
                   <Grid item key={childCourse.id}>
                     <MyCourseItem
                       {...childCourse}
                       localDateTime={localDateTime}
+                      showNumber={true}
+                      index={index}
                     />
                   </Grid>
                 ))}

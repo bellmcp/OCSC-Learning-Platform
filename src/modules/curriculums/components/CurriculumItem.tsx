@@ -142,7 +142,7 @@ export default function CurriculumItem({
             backgroundColor: 'lightgray',
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
-            borderLeft: `6px solid ${amber[500]}`,
+            borderLeft: `8px solid ${amber[500]}`,
           }}
         />
         <CardContent className={classes.cardContent}>

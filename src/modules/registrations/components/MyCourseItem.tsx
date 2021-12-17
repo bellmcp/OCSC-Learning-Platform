@@ -65,6 +65,8 @@ export default function MyCourseItem({
   name,
   thumbnail,
   localDateTime,
+  showNumber,
+  index,
 }: MyCourseProps) {
   const classes = useStyles();
   const theme = useTheme();
@@ -114,6 +116,7 @@ export default function MyCourseItem({
                     component="h2"
                     style={{ lineHeight: '1.1', marginBottom: 4 }}
                   >
+                    {showNumber && `${index + 1}. `}
                     {name ? name : 'รายวิชา'}
                   </Typography>
                   <Typography variant="body1" component="p" gutterBottom>
