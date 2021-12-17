@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import {
   createStyles,
   makeStyles,
@@ -16,6 +16,7 @@ import {
   Container,
   Grid,
   Divider,
+  Button,
 } from '@material-ui/core';
 import { Search as SearchIcon } from '@material-ui/icons';
 
@@ -46,9 +47,11 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function SearchResult() {
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
   const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const { search } = useLocation();
   var { query } = queryString.parse(search);
+  const PATH = process.env.REACT_APP_BASE_PATH;
 
   if (query === undefined) {
     query = '';
@@ -71,7 +74,10 @@ export default function SearchResult() {
   useEffect(() => {
     setFilteredCourseResults(
       courses.filter((course) => {
-        return course.name.toLowerCase().includes(query.toLowerCase());
+        return (
+          course.name.toLowerCase().includes(query.toLowerCase()) ||
+          course.code.toLowerCase().includes(query.toLowerCase())
+        );
       })
     );
   }, [courses, query]);
@@ -79,7 +85,10 @@ export default function SearchResult() {
   useEffect(() => {
     setFilteredCurriculumResults(
       curriculums.filter((curriculum) => {
-        return curriculum.name.toLowerCase().includes(query.toLowerCase());
+        return (
+          curriculum.name.toLowerCase().includes(query.toLowerCase()) ||
+          curriculum.code.toLowerCase().includes(query.toLowerCase())
+        );
       })
     );
   }, [curriculums, query]);
@@ -99,6 +108,14 @@ export default function SearchResult() {
     dispatch(categories_action);
   }, [dispatch]);
 
+  const linkToCourses = () => {
+    history.push(`${PATH}/courses`);
+  };
+
+  const linkToCurriculums = () => {
+    history.push(`${PATH}/curriculums`);
+  };
+
   function renderFilteredCoursesResult() {
     if (isCoursesLoading) {
       return <Loading height={400} />;
@@ -106,6 +123,7 @@ export default function SearchResult() {
       return (
         <Grid
           container
+          direction="column"
           justify="center"
           alignItems="center"
           style={{ height: 411 }}
@@ -113,6 +131,16 @@ export default function SearchResult() {
           <Typography component="h2" variant="body1" color="textSecondary">
             ไม่พบผลลัพธ์การค้นหา
           </Typography>
+          <Box mt={2} mb={4}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ width: 200 }}
+              onClick={linkToCourses}
+            >
+              ดูรายวิชาทั้งหมด
+            </Button>
+          </Box>
         </Grid>
       );
     } else {
@@ -135,6 +163,7 @@ export default function SearchResult() {
       return (
         <Grid
           container
+          direction="column"
           justify="center"
           alignItems="center"
           style={{ height: 411 }}
@@ -142,6 +171,16 @@ export default function SearchResult() {
           <Typography component="h2" variant="body1" color="textSecondary">
             ไม่พบผลลัพธ์การค้นหา
           </Typography>
+          <Box mt={2} mb={4}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ width: 200 }}
+              onClick={linkToCurriculums}
+            >
+              ดูหลักสูตรทั้งหมด
+            </Button>
+          </Box>
         </Grid>
       );
     } else {
@@ -157,6 +196,112 @@ export default function SearchResult() {
     }
   }
 
+  function renderCurriculumSearchSection() {
+    return (
+      <>
+        <Box mt={3} mb={2}>
+          <Grid
+            container
+            direction={matches ? 'row' : 'column'}
+            justify={matches ? 'space-between' : 'center'}
+            alignItems={matches ? 'flex-end' : 'center'}
+          >
+            <Grid item>
+              <Typography
+                gutterBottom
+                variant="h6"
+                align="center"
+                style={{
+                  fontSize: '1.7rem',
+                  marginBottom: matches ? 0 : 16,
+                  lineHeight: 1,
+                  fontWeight: 600,
+                }}
+              >
+                {query
+                  ? `หลักสูตรที่เกี่ยวข้องกับ '${query}'`
+                  : 'หลักสูตรทั้งหมด'}
+              </Typography>
+            </Grid>
+            {matches && (
+              <Grid item>
+                <Typography variant="body2" color="textSecondary">
+                  ผลการค้นหา {filteredCurriculumResults.length} รายการ
+                </Typography>
+              </Grid>
+            )}
+          </Grid>
+          {!matches && (
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Typography variant="body2" color="textSecondary">
+                ผลการค้นหา {filteredCurriculumResults.length} รายการ
+              </Typography>
+            </Grid>
+          )}
+        </Box>
+        {renderFilteredCurriculumsResult()}
+      </>
+    );
+  }
+
+  function renderCourseSearchSection() {
+    return (
+      <>
+        <Box mt={3} mb={2}>
+          <Grid
+            container
+            direction={matches ? 'row' : 'column'}
+            justify={matches ? 'space-between' : 'center'}
+            alignItems={matches ? 'flex-end' : 'center'}
+          >
+            <Grid item>
+              <Typography
+                gutterBottom
+                variant="h6"
+                align="center"
+                style={{
+                  fontSize: '1.7rem',
+                  marginBottom: matches ? 0 : 16,
+                  lineHeight: 1,
+                  fontWeight: 600,
+                }}
+              >
+                {query
+                  ? `รายวิชาที่เกี่ยวข้องกับ '${query}'`
+                  : 'รายวิชาทั้งหมด'}
+              </Typography>
+            </Grid>
+            {matches && (
+              <Grid item>
+                <Typography variant="body2" color="textSecondary">
+                  ผลการค้นหา {filteredCourseResults.length} รายการ
+                </Typography>
+              </Grid>
+            )}
+          </Grid>
+          {!matches && (
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+            >
+              <Typography variant="body2" color="textSecondary">
+                ผลการค้นหา {filteredCourseResults.length} รายการ
+              </Typography>
+            </Grid>
+          )}
+        </Box>
+        {renderFilteredCoursesResult()}
+      </>
+    );
+  }
+
   return (
     <>
       <Header
@@ -165,103 +310,23 @@ export default function SearchResult() {
       />
       <Container maxWidth="lg">
         <main className={classes.content}>
-          <Box mt={3} mb={2}>
-            <Grid
-              container
-              direction={matches ? 'row' : 'column'}
-              justify={matches ? 'space-between' : 'center'}
-              alignItems={matches ? 'flex-end' : 'center'}
-            >
-              <Grid item>
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  align="center"
-                  style={{
-                    fontSize: '1.7rem',
-                    marginBottom: matches ? 0 : 16,
-                    lineHeight: 1,
-                    fontWeight: 600,
-                  }}
-                >
-                  {query
-                    ? `หลักสูตรที่เกี่ยวข้องกับ '${query}'`
-                    : 'หลักสูตรทั้งหมด'}
-                </Typography>
-              </Grid>
-              {matches && (
-                <Grid item>
-                  <Typography variant="body2" color="textSecondary">
-                    ผลการค้นหา {filteredCurriculumResults.length} รายการ
-                  </Typography>
-                </Grid>
-              )}
-            </Grid>
-            {!matches && (
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                <Typography variant="body2" color="textSecondary">
-                  ผลการค้นหา {filteredCurriculumResults.length} รายการ
-                </Typography>
-              </Grid>
-            )}
-          </Box>
-          {renderFilteredCurriculumsResult()}
-
-          <Box my={5}>
-            <Divider />
-          </Box>
-
-          <Box mt={3} mb={2}>
-            <Grid
-              container
-              direction={matches ? 'row' : 'column'}
-              justify={matches ? 'space-between' : 'center'}
-              alignItems={matches ? 'flex-end' : 'center'}
-            >
-              <Grid item>
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  align="center"
-                  style={{
-                    fontSize: '1.7rem',
-                    marginBottom: matches ? 0 : 16,
-                    lineHeight: 1,
-                    fontWeight: 600,
-                  }}
-                >
-                  {query
-                    ? `รายวิชาที่เกี่ยวข้องกับ '${query}'`
-                    : 'รายวิชาทั้งหมด'}
-                </Typography>
-              </Grid>
-              {matches && (
-                <Grid item>
-                  <Typography variant="body2" color="textSecondary">
-                    ผลการค้นหา {filteredCourseResults.length} รายการ
-                  </Typography>
-                </Grid>
-              )}
-            </Grid>
-            {!matches && (
-              <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-              >
-                <Typography variant="body2" color="textSecondary">
-                  ผลการค้นหา {filteredCourseResults.length} รายการ
-                </Typography>
-              </Grid>
-            )}
-          </Box>
-          {renderFilteredCoursesResult()}
+          {filteredCurriculumResults.length === 0 ? (
+            <>
+              {renderCourseSearchSection()}
+              <Box my={5}>
+                <Divider />
+              </Box>
+              {renderCurriculumSearchSection()}
+            </>
+          ) : (
+            <>
+              {renderCurriculumSearchSection()}
+              <Box my={5}>
+                <Divider />
+              </Box>
+              {renderCourseSearchSection()}
+            </>
+          )}
         </main>
       </Container>
     </>
