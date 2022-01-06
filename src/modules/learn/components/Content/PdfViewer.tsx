@@ -1,9 +1,9 @@
 //@ts-nocheck
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Document, Page, pdfjs } from "react-pdf";
-import { Grid, Box, Typography, Button, ButtonGroup } from "@material-ui/core";
-import { OpenInNew as NewTab } from "@material-ui/icons";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Document, Page, pdfjs } from 'react-pdf';
+import { Grid, Box, Typography, Button, ButtonGroup } from '@material-ui/core';
+import { OpenInNew as NewTab } from '@material-ui/icons';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const PDFDocumentWrapper = styled.div`
@@ -35,8 +35,10 @@ export default function PdfViewer({ url }) {
   }
 
   const linkToTargetFile = () => {
-    window.open(`${url}`, "_blank");
+    window.open(`${url}`, '_blank');
   };
+
+  const isExternalUrl = !url.includes('https://learningportal.ocsc.go.th');
 
   return (
     <>
@@ -51,7 +53,14 @@ export default function PdfViewer({ url }) {
       >
         <Grid item>
           <PDFDocumentWrapper>
-            <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
+            <Document
+              file={
+                isExternalUrl
+                  ? `https://api.allorigins.win/raw?url=${url}`
+                  : url
+              }
+              onLoadSuccess={onDocumentLoadSuccess}
+            >
               <Page pageNumber={pageNumber} />
             </Document>
           </PDFDocumentWrapper>
@@ -59,7 +68,7 @@ export default function PdfViewer({ url }) {
         <Grid item>
           <Box mt={2} mb={1}>
             <Typography variant="body2" color="textSecondary">
-              หน้า {pageNumber || (numPages ? 1 : "")} จาก {numPages || 1}
+              หน้า {pageNumber || (numPages ? 1 : '')} จาก {numPages || 1}
             </Typography>
           </Box>
         </Grid>
@@ -67,10 +76,10 @@ export default function PdfViewer({ url }) {
           <Grid item>
             <ButtonGroup variant="outlined" color="default">
               <Button disabled={pageNumber <= 1} onClick={previousPage}>
-                {"<"}
+                {'<'}
               </Button>
               <Button disabled={pageNumber >= numPages} onClick={nextPage}>
-                {">"}
+                {'>'}
               </Button>
             </ButtonGroup>
           </Grid>
