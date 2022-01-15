@@ -1,46 +1,39 @@
 // @ts-nocheck
-import React, { useEffect } from "react";
-import { getCookie } from "utils/cookies";
-import parseJwt from "utils/parseJwt";
-import { useDispatch, useSelector } from "react-redux";
-import { useMediaQuery, Typography, Badge, Grid, Box } from "@material-ui/core";
+import React from 'react';
+import { getCookie } from 'utils/cookies';
+import parseJwt from 'utils/parseJwt';
+import { useSelector } from 'react-redux';
+import { useMediaQuery, Typography, Badge, Grid, Box } from '@material-ui/core';
 import {
   createStyles,
   Theme,
   withStyles,
   useTheme,
-} from "@material-ui/core/styles";
-import { Inbox as InboxIcon } from "@material-ui/icons";
+} from '@material-ui/core/styles';
+import { Inbox as InboxIcon } from '@material-ui/icons';
 
-import * as actions from "../actions";
-import SupportItem from "./SupportItem";
-import Loading from "modules/ui/components/Loading";
+import SupportItem from './SupportItem';
+import Loading from 'modules/ui/components/Loading';
 
 const StyledBadge = withStyles((theme: Theme) =>
   createStyles({
     badge: {
       right: -18,
       top: 23,
-      padding: "0 4px",
+      padding: '0 4px',
     },
   })
 )(Badge);
 
 export default function SupportList() {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up("sm"));
-  const dispatch = useDispatch();
-  const token = getCookie("token");
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const token = getCookie('token');
   const userId = parseJwt(token).unique_name;
   const { isLoading, items: supports } = useSelector((state) => state.support);
   const mySupportList = supports.filter((support) => {
     return support.userId === userId;
   });
-
-  useEffect(() => {
-    const action = actions.loadSupports();
-    dispatch(action);
-  }, [dispatch]);
 
   const UNREAD_NOTIFICATION_COUNT = mySupportList.filter((support: any) => {
     return support.replyMessage !== null && support.isAcknowledged === false;
@@ -87,8 +80,8 @@ export default function SupportList() {
         gutterBottom
         component="h2"
         variant="h6"
-        style={{ fontSize: "1.7rem", fontWeight: 600 }}
-        align={matches ? "left" : "center"}
+        style={{ fontSize: '1.7rem', fontWeight: 600 }}
+        align={matches ? 'left' : 'center'}
       >
         <StyledBadge badgeContent={UNREAD_NOTIFICATION_COUNT} color="error">
           กล่องข้อความ
