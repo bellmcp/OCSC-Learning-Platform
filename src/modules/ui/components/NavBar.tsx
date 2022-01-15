@@ -204,13 +204,15 @@ export default function NavBar(props: NavigationBarProps) {
   const [mobileSearchDialogOpen, setMobileSearchDialogOpen] = useState(false);
 
   const token = getCookie('token');
-  const id = parseJwt(token).unique_name;
+  const userId = parseJwt(token).unique_name;
+
   useEffect(() => {
     if (login()) {
       const actionProfile = userActions.loadUser();
       dispatch(actionProfile);
     }
-  }, [dispatch, id]);
+  }, [dispatch, userId]);
+
   const { items: users } = useSelector((state: any) => state.user);
   const login = () => {
     if (token === null) {
@@ -224,16 +226,31 @@ export default function NavBar(props: NavigationBarProps) {
     }
     return false;
   };
-  const userId = parseJwt(token).unique_name;
+
   const { items: supports } = useSelector((state) => state.support);
   const mySupportList = supports.filter((support) => {
     return support.userId === userId;
   });
 
   useEffect(() => {
-    const action = supportActions.loadSupports();
-    dispatch(action);
-  }, [dispatch]);
+    const login = () => {
+      if (token === null) {
+        return false;
+      }
+      if (
+        (token !== '' || token !== undefined) &&
+        parseJwt(token).role === 'user'
+      ) {
+        return true;
+      }
+      return false;
+    };
+
+    if (login()) {
+      const action = supportActions.loadSupports();
+      dispatch(action);
+    }
+  }, [dispatch, token, pathname]);
 
   const UNREAD_NOTIFICATION_COUNT = mySupportList.filter((support: any) => {
     return support.replyMessage !== null && support.isAcknowledged === false;
