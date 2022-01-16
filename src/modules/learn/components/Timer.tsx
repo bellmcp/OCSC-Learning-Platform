@@ -1,6 +1,6 @@
 //@ts-nocheck
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Grid,
   Typography,
@@ -10,17 +10,19 @@ import {
   LinearProgressProps,
   Hidden,
   Box,
-} from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
+} from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
 
-import * as learnActions from "../actions";
-import * as uiActions from "modules/ui/actions";
+import * as learnActions from '../actions';
+import * as uiActions from 'modules/ui/actions';
 
 export default function Timer({
   contentId,
   activeContentView,
   currentContentView,
   courseRegistrationDetails,
+  contentListProgress,
+  setContentListProgress,
 }: any) {
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(0);
@@ -78,7 +80,8 @@ export default function Timer({
     if (contentId !== undefined) {
       const sequence = setInterval(() => {
         setProgress((prevProgress) => prevProgress + 1);
-        const isGoingToComplete = progress + 1 >= contentLength && !isCompleted;
+        const isGoingToComplete =
+          progress + 1 === contentLength && !isCompleted;
         const update_content_view_action = learnActions.updateContentView(
           courseRegistrationId,
           contentViewId,
@@ -90,13 +93,22 @@ export default function Timer({
         if (isGoingToComplete) {
           dispatch(
             uiActions.setFlashMessage(
-              "ยินดีด้วย คุณเรียนเนื้อหาครบเวลาที่กำหนดแล้ว",
-              "success"
+              'คุณเรียนเนื้อหานี้ครบเวลาที่กำหนดแล้ว',
+              'success'
             )
           );
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          const updatedContentListProgress = contentListProgress.map(
+            (contentList: any) => {
+              if (contentList.courseContentId === parseInt(contentId)) {
+                return {
+                  courseContentId: contentList.courseContentId,
+                  isCompleted: true,
+                };
+              }
+              return contentList;
+            }
+          );
+          setContentListProgress(updatedContentListProgress);
         }
       }, 60000);
       return () => {
@@ -118,7 +130,7 @@ export default function Timer({
   }, [contentId, initialContentMinutes]);
 
   useEffect(() => {
-    dispatch(uiActions.setFlashMessage("เริ่มจับเวลาเข้าเรียนแล้ว", "info"));
+    dispatch(uiActions.setFlashMessage('เริ่มจับเวลาเข้าเรียนแล้ว', 'info'));
   }, [dispatch, contentId]);
 
   function CircularProgressWithLabel(
@@ -179,21 +191,21 @@ export default function Timer({
           value={timer}
           style={{
             backgroundColor: `${grey[300]}`,
-            borderRadius: "50%",
+            borderRadius: '50%',
           }}
         />
       </Grid>
       <Grid item>
-        <Typography variant="h6" style={{ fontSize: "1rem" }}>
-          <Hidden only={["xs"]}>
+        <Typography variant="h6" style={{ fontSize: '1rem' }}>
+          <Hidden only={['xs']}>
             <b>เวลาเรียนสะสม</b>
-          </Hidden>{" "}
+          </Hidden>{' '}
           {progress}
-          {"/"}
-          {contentLength ? contentLength : "0"} นาที
+          {'/'}
+          {contentLength ? contentLength : '0'} นาที
         </Typography>
       </Grid>
-      <Grid item style={{ width: "100px" }}>
+      <Grid item style={{ width: '100px' }}>
         <LinearProgressWithLabel
           value={(progress / contentLength) * 100}
           color="primary"

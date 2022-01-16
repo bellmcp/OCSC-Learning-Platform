@@ -1,7 +1,7 @@
 // @ts-nocheck
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import {
   ListSubheader,
   List,
@@ -10,18 +10,18 @@ import {
   Box,
   Grid,
   Button,
-} from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
-import { ArrowBackIos as ArrowBackIcon } from "@material-ui/icons";
+} from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import { ArrowBackIos as ArrowBackIcon } from '@material-ui/icons';
 
-import * as registrationsActions from "modules/registrations/actions";
-import * as uiActions from "modules/ui/actions";
-import CourseContentList from "./ContentList";
+import * as registrationsActions from 'modules/registrations/actions';
+import * as uiActions from 'modules/ui/actions';
+import CourseContentList from './ContentList';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
+      width: '100%',
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
@@ -33,6 +33,8 @@ export default function SideBar({
   courseContents,
   contentViews,
   courseRegistrationDetails,
+  contentListProgress,
+  setContentListProgress,
 }: any) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -70,7 +72,7 @@ export default function SideBar({
       component="nav"
       subheader={
         <ListSubheader component="div" style={{ zIndex: 2 }}>
-          <Divider style={{ visibility: "hidden" }} />
+          <Divider style={{ visibility: 'hidden' }} />
           <Box mt={1} mb={3}>
             <Button
               variant="text"
@@ -85,16 +87,16 @@ export default function SideBar({
               <Typography
                 color="textPrimary"
                 style={{
-                  fontSize: "1.3rem",
+                  fontSize: '1.3rem',
                   fontWeight: 600,
-                  lineHeight: "1.2",
+                  lineHeight: '1.2',
                 }}
                 gutterBottom
               >
-                {course?.name ? course?.name : "รายวิชา"}
+                {course?.name ? course?.name : 'รายวิชา'}
               </Typography>
               <Typography variant="body1" color="textPrimary">
-                {course?.code ? course?.code : "รหัสวิชา"}
+                {course?.code ? course?.code : 'รหัสวิชา'}
               </Typography>
             </Box>
           </Box>
@@ -108,6 +110,8 @@ export default function SideBar({
         courseContents={courseContents}
         contentViews={contentViews}
         isSeqentialFlow={isSeqentialFlow}
+        contentListProgress={contentListProgress}
+        setContentListProgress={setContentListProgress}
       />
       <Divider variant="middle" />
       <Box my={4}>

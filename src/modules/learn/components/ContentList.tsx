@@ -1,8 +1,8 @@
 // @ts-nocheck
-import React from "react";
-import clsx from "clsx";
-import queryString from "query-string";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import React, { useEffect } from 'react';
+import clsx from 'clsx';
+import queryString from 'query-string';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
   List,
   ListItemIcon,
@@ -12,21 +12,21 @@ import {
   MenuItem,
   Grid,
   Badge,
-} from "@material-ui/core";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import { green } from "@material-ui/core/colors";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+} from '@material-ui/core';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { green } from '@material-ui/core/colors';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {
   getContentType,
   getContentTypeText,
   getContentTypeIcon,
   getContentTypeTitle,
-} from "utils/contentType";
+} from 'utils/contentType';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "100%",
+      width: '100%',
       maxWidth: 360,
       backgroundColor: theme.palette.background.paper,
     },
@@ -45,17 +45,28 @@ export default function ContentList({
   contentViews,
   handleMobileDialogClose,
   isSeqentialFlow,
+  contentListProgress,
+  setContentListProgress,
 }: any) {
   const classes = useStyles();
   const { pathname, search } = useLocation();
   const { contentId } = queryString.parse(search);
 
-  function getContentViewById(contentId: any) {
-    const result = contentViews.filter(
-      (contentView) => contentView.courseContentId === contentId
+  function getContentViewProgress(contentId: any) {
+    return contentListProgress.find(
+      (contentList: any) => contentList.courseContentId === parseInt(contentId)
     );
-    return result;
   }
+
+  useEffect(() => {
+    const progress = contentViews.map((contentView: any) => {
+      return {
+        courseContentId: contentView.courseContentId,
+        isCompleted: contentView.isCompleted,
+      };
+    });
+    setContentListProgress(progress);
+  }, [contentViews]);
 
   //SEQUENTIAL FLOW
   function isDisableContentViewItem(itemId) {
@@ -84,20 +95,20 @@ export default function ContentList({
               selected={parseInt(contentId) === courseContent?.id}
               className={clsx({
                 [classes.nested]: true,
-                [classes.completed]: getContentViewById(courseContent?.id)[0]
+                [classes.completed]: getContentViewProgress(courseContent?.id)
                   ?.isCompleted,
               })}
               component={RouterLink}
               to={`${pathname}?contentId=${courseContent?.id}`}
               onClick={handleMobileDialogClose && handleMobileDialogClose}
-              style={{ whiteSpace: "normal" }}
+              style={{ whiteSpace: 'normal' }}
             >
               <ListItemIcon>
                 <Badge
                   badgeContent={
-                    getContentViewById(courseContent?.id)[0]?.isCompleted ? (
+                    getContentViewProgress(courseContent?.id)?.isCompleted ? (
                       <CheckCircleIcon
-                        style={{ color: green[800], fontSize: "16px" }}
+                        style={{ color: green[800], fontSize: '16px' }}
                       />
                     ) : null
                   }
@@ -113,7 +124,7 @@ export default function ContentList({
                   <Typography
                     variant="body1"
                     color="textPrimary"
-                    style={{ lineHeight: "1.4" }}
+                    style={{ lineHeight: '1.4' }}
                   >
                     {courseContent?.name
                       ? courseContent?.name
@@ -135,7 +146,7 @@ export default function ContentList({
                       )}${
                         courseContent.minutes
                           ? `, ${courseContent.minutes} นาที`
-                          : ""
+                          : ''
                       }`}
                     </Typography>
                   )

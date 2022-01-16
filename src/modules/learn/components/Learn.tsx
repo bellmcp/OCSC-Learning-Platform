@@ -175,6 +175,8 @@ export default function Learn() {
   const [testStart, setTestStart] = useState(false);
   const [userTestAnswers, setUserTestAnswers] = useState('0');
 
+  const [contentListProgress, setContentListProgress] = useState([]);
+
   function renderTimer() {
     if (contentId !== undefined) {
       if (activeContentView[0]?.type === 'c') {
@@ -184,6 +186,8 @@ export default function Learn() {
             activeContentView={activeContentView}
             currentContentView={currentContentView[0]}
             courseRegistrationDetails={courseRegistrationDetails}
+            contentListProgress={contentListProgress}
+            setContentListProgress={setContentListProgress}
           />
         );
       } else if (activeContentView[0]?.type === 't') {
@@ -225,6 +229,8 @@ export default function Learn() {
               courseContents={courseContents}
               contentViews={contentViews}
               courseRegistrationDetails={courseRegistrationDetails}
+              contentListProgress={contentListProgress}
+              setContentListProgress={setContentListProgress}
             />
           </Drawer>
           <main className={classes.content}>
