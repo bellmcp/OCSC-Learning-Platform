@@ -47,6 +47,8 @@ export default function SideBarMobile({
   courseContents,
   contentViews,
   courseRegistrationDetails,
+  contentListProgress,
+  setContentListProgress,
 }) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -144,6 +146,8 @@ export default function SideBarMobile({
           courseContents={courseContents}
           contentViews={contentViews}
           handleMobileDialogClose={handleMobileDialogClose}
+          contentListProgress={contentListProgress}
+          setContentListProgress={setContentListProgress}
         />
         <Divider variant="middle" />
         <Box my={4}>

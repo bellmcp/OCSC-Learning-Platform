@@ -271,6 +271,8 @@ export default function Learn() {
             courseContents={courseContents}
             contentViews={contentViews}
             courseRegistrationDetails={courseRegistrationDetails}
+            contentListProgress={contentListProgress}
+            setContentListProgress={setContentListProgress}
           />
           {/* TIMER */}
           <div className={classes.timerWrapper}>
