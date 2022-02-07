@@ -81,6 +81,7 @@ export default function MyCourseItem({
   isChildCourse,
   handleUnEnrollDialogOpen,
   setUnEnrollInfo,
+  courseRoundId,
 }: MyCourseProps) {
   const classes = useStyles()
   const theme = useTheme()
@@ -111,6 +112,8 @@ export default function MyCourseItem({
       name: name,
       id: code,
       childLength: 0,
+      courseRoundId,
+      curriculumId: 0,
     })
     handleClose()
   }

@@ -136,6 +136,8 @@ export default function MyCurriculumItem({
       name: name,
       id: code,
       childLength: childCoursesLength,
+      courseRoundId: 0,
+      curriculumId,
     })
     handleClose()
   }

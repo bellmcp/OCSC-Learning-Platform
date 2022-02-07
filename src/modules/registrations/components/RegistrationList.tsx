@@ -1,6 +1,5 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
-import { get } from 'lodash'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
@@ -11,12 +10,6 @@ import {
   Box,
   Divider,
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  DialogActions,
-  TextField,
 } from '@material-ui/core'
 import {
   createStyles,
@@ -24,15 +17,13 @@ import {
   Theme,
   useTheme,
 } from '@material-ui/core/styles'
-import {
-  PlayArrow as LearnIcon,
-  Delete as DeleteIcon,
-} from '@material-ui/icons'
+import { PlayArrow as LearnIcon } from '@material-ui/icons'
 
 import * as registrationsActions from '../actions'
 import Header from 'modules/ui/components/Header'
 import MyCurriculumItem from './MyCurriculumItem'
 import MyCourseItem from './MyCourseItem'
+import UnEnrollDialog from './UnEnrollDialog'
 import Loading from 'modules/ui/components/Loading'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -67,15 +58,6 @@ const useStyles = makeStyles((theme: Theme) =>
       borderRadius: '4 0 0 0',
       [theme.breakpoints.down('xs')]: {
         display: 'none',
-      },
-    },
-    unEnrollButton: {
-      backgroundColor: '#c62828',
-      '&:disabled': {
-        backgroundColor: 'rgba(0, 0, 0, 0.12)',
-      },
-      '&:hover': {
-        backgroundColor: '#b31818',
       },
     },
   })
@@ -134,23 +116,13 @@ export default function RegistrationList() {
     name: '',
     id: '',
     childLength: 0,
+    courseRoundId: 0,
+    curriculumId: 0,
   })
-  const [unEnrollConfirm, setUnEnrollConfirm] = useState(false)
 
   const handleUnEnrollDialogOpen = (type: string) => {
     setType(type)
     setUnEnrollDialogVisible(true)
-  }
-  const handleChangeUnEnrollConfirmInput = (event) => {
-    if (event.target.value === get(unEnrollInfo, 'id', '')) {
-      setUnEnrollConfirm(true)
-    } else {
-      setUnEnrollConfirm(false)
-    }
-  }
-  const handleCloseUnEnrollDialog = () => {
-    setUnEnrollDialogVisible(false)
-    setUnEnrollConfirm(false)
   }
 
   function renderRegisteredCurriculumsList() {
@@ -288,69 +260,12 @@ export default function RegistrationList() {
           </div>
         </div>
       </Container>
-      <Dialog open={unEnrollDialogVisible} onClose={handleCloseUnEnrollDialog}>
-        <DialogTitle>
-          ยกเลิกการลงทะเบียน{type === 'curriculum' ? 'หลักสูตร' : 'รายวิชา'}?
-        </DialogTitle>
-        <DialogContent dividers>
-          <DialogContentText>
-            {type === 'curriculum' ? (
-              <div style={{ marginBottom: 24 }}>
-                <Typography variant='body1'>
-                  หลักสูตร{' '}
-                  <span style={{ fontWeight: 600 }}>
-                    "{get(unEnrollInfo, 'name', '')}"
-                  </span>{' '}
-                  และรายวิชาย่อย{' '}
-                  <span style={{ fontWeight: 600 }}>
-                    {get(unEnrollInfo, 'childLength', 0)} รายวิชา
-                  </span>{' '}
-                  จะถูกลบ
-                </Typography>
-              </div>
-            ) : (
-              <div style={{ marginBottom: 24 }}>
-                <Typography variant='body1'>
-                  รายวิชา{' '}
-                  <span style={{ fontWeight: 600 }}>
-                    "{get(unEnrollInfo, 'name', '')}"
-                  </span>{' '}
-                  จะถูกลบ
-                </Typography>
-              </div>
-            )}
-            <Typography variant='body1' style={{ marginBottom: 8 }}>
-              โปรดพิมพ์รหัส{type === 'curriculum' ? 'หลักสูตร' : 'รายวิชา'}{' '}
-              <span style={{ fontWeight: 600 }}>
-                {get(unEnrollInfo, 'id', '')}
-              </span>{' '}
-              เพื่อยืนยัน
-            </Typography>
-            <TextField
-              fullWidth
-              variant='outlined'
-              size='small'
-              onChange={handleChangeUnEnrollConfirmInput}
-            />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color='default' onClick={handleCloseUnEnrollDialog}>
-            กลับ
-          </Button>
-          <Button
-            color='secondary'
-            variant='contained'
-            disabled={!unEnrollConfirm}
-            disableElevation
-            onClick={handleCloseUnEnrollDialog}
-            startIcon={<DeleteIcon />}
-            className={classes.unEnrollButton}
-          >
-            ยกเลิกการลงทะเบียน
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <UnEnrollDialog
+        type={type}
+        unEnrollInfo={unEnrollInfo}
+        unEnrollDialogVisible={unEnrollDialogVisible}
+        setUnEnrollDialogVisible={setUnEnrollDialogVisible}
+      />
     </>
   )
 }
