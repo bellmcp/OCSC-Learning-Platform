@@ -190,7 +190,9 @@ function unEnrollCourse(courseRoundId) {
       })
       const { mesg } = data
       dispatch(uiActions.setFlashMessage(mesg, 'success'))
-      dispatch(push(`${PATH}/learn`))
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
     } catch (err) {
       const data = err.response.data
       const { mesg } = data
@@ -272,7 +274,9 @@ function unEnrollCurriculum(curriculumId) {
       })
       const { mesg } = data
       dispatch(uiActions.setFlashMessage(mesg, 'success'))
-      dispatch(push(`${PATH}/learn`))
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
     } catch (err) {
       const data = err.response.data
       const { mesg } = data
