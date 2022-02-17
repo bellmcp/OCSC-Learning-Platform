@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react'
 import { get } from 'lodash'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
   Typography,
@@ -13,8 +13,14 @@ import {
   DialogContentText,
   DialogActions,
   TextField,
+  useMediaQuery,
 } from '@material-ui/core'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import {
+  createStyles,
+  makeStyles,
+  Theme,
+  useTheme,
+} from '@material-ui/core/styles'
 import Alert from '@material-ui/lab/Alert'
 import { Delete as DeleteIcon } from '@material-ui/icons'
 
@@ -42,6 +48,8 @@ export default function UnEnrollDialog({
 }) {
   const classes = useStyles()
   const dispatch = useDispatch()
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
   const [unEnrollConfirm, setUnEnrollConfirm] = useState(false)
 
   const handleChangeUnEnrollConfirmInput = (event) => {
@@ -96,7 +104,7 @@ export default function UnEnrollDialog({
                   <span style={{ fontWeight: 600 }}>
                     "{get(unEnrollInfo, 'name', '')}"
                   </span>{' '}
-                  และรายวิชาย่อยทั้งหมด{' '}
+                  และรายวิชาในหลักสูตรทั้งหมด{' '}
                   <span style={{ fontWeight: 600 }}>
                     {get(unEnrollInfo, 'childLength', 0)} รายวิชา
                   </span>{' '}
@@ -127,7 +135,7 @@ export default function UnEnrollDialog({
             เพื่อยืนยัน
           </Typography>
           <TextField
-            autoFocus
+            autoFocus={matches}
             fullWidth
             variant='outlined'
             size='small'

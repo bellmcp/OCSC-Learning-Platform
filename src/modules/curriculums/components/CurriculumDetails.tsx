@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams, useHistory } from 'react-router-dom'
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from '@material-ui/core/styles';
+} from '@material-ui/core/styles'
 import {
   Typography,
   Container,
@@ -17,7 +17,11 @@ import {
   Avatar,
   Button,
   useMediaQuery,
-} from '@material-ui/core';
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+} from '@material-ui/core'
 import {
   Assignment as AssignmentIcon,
   Assessment as AssessmentIcon,
@@ -25,22 +29,23 @@ import {
   People as PeopleIcon,
   GpsFixed as TargetIcon,
   ArrowForwardIos as ArrowForwardIcon,
-} from '@material-ui/icons';
-import { isLogin } from 'utils/isLogin';
+  FiberManualRecord as Circle,
+} from '@material-ui/icons'
+import { isLogin } from 'utils/isLogin'
+import categoryColor from 'utils/categoryColor'
 
-import * as curriculumsActions from '../actions';
-import * as coursesActions from 'modules/courses/actions';
-import * as categoriesActions from 'modules/categories/actions';
-import * as registrationsActions from 'modules/registrations/actions';
-import CurriculumHeader from 'modules/curriculums/components/CurriculumHeader';
-import CourseItem from 'modules/courses/components/CourseItem';
-import Loading from 'modules/ui/components/Loading';
+import * as curriculumsActions from '../actions'
+import * as coursesActions from 'modules/courses/actions'
+import * as categoriesActions from 'modules/categories/actions'
+import * as registrationsActions from 'modules/registrations/actions'
+import CurriculumHeader from 'modules/curriculums/components/CurriculumHeader'
+import Loading from 'modules/ui/components/Loading'
 
 interface RenderCurriculumInfoProps {
-  index: number;
-  title: string;
-  info: string;
-  icon: React.ReactElement;
+  index: number
+  title: string
+  info: string
+  icon: React.ReactElement
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -75,79 +80,86 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: theme.typography.pxToRem(15),
       color: theme.palette.text.secondary,
     },
+    large: {
+      width: theme.spacing(10),
+      height: theme.spacing(9),
+      marginRight: theme.spacing(3),
+      marginTop: theme.spacing(1.5),
+      marginBottom: theme.spacing(1.5),
+    },
   })
-);
+)
 
 export default function CurriculumDetails() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
-  const { id }: any = useParams();
-  const history = useHistory();
-  const PATH = process.env.REACT_APP_BASE_PATH;
+  const classes = useStyles()
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
+  const { id }: any = useParams()
+  const history = useHistory()
+  const PATH = process.env.REACT_APP_BASE_PATH
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
-    useState(false);
+    useState(false)
   const [registerButtonLabel, setRegisterButtonLabel] =
-    useState('ลงทะเบียนหลักสูตร');
+    useState('ลงทะเบียนหลักสูตร')
 
-  const dispatch = useDispatch();
-  const [curriculum] = useSelector((state) => state.curriculums.items);
+  const dispatch = useDispatch()
+  const [curriculum] = useSelector((state) => state.curriculums.items)
   const { isLoading: isCurriculumLoading } = useSelector(
     (state) => state.curriculums
-  );
-  const { items: categories } = useSelector((state) => state.categories);
-  var { myCurriculums } = useSelector((state) => state.registrations);
-  const { child: childCourses } = useSelector((state) => state.curriculums);
+  )
+  const { items: categories } = useSelector((state) => state.categories)
+  var { myCurriculums } = useSelector((state) => state.registrations)
+  const { child: childCourses } = useSelector((state) => state.curriculums)
 
   if (myCurriculums === '') {
-    myCurriculums = [];
+    myCurriculums = []
   }
 
   useEffect(() => {
-    const curriculum_action = curriculumsActions.loadCurriculum(id);
-    dispatch(curriculum_action);
-  }, [dispatch, id]);
+    const curriculum_action = curriculumsActions.loadCurriculum(id)
+    dispatch(curriculum_action)
+  }, [dispatch, id])
 
   useEffect(() => {
     const curriculum_registrations_action =
-      registrationsActions.loadCurriculumRegistrations();
-    dispatch(curriculum_registrations_action);
-  }, [dispatch]);
+      registrationsActions.loadCurriculumRegistrations()
+    dispatch(curriculum_registrations_action)
+  }, [dispatch])
 
   useEffect(() => {
-    const curriculum_child_action = curriculumsActions.loadCurriculumChild(id);
-    dispatch(curriculum_child_action);
-  }, [dispatch, id]);
+    const curriculum_child_action = curriculumsActions.loadCurriculumChild(id)
+    dispatch(curriculum_child_action)
+  }, [dispatch, id])
 
   useEffect(() => {
-    const courses_action = coursesActions.loadCourses();
-    dispatch(courses_action);
-  }, [dispatch]);
+    const courses_action = coursesActions.loadCourses()
+    dispatch(courses_action)
+  }, [dispatch])
 
   useEffect(() => {
-    const categories_action = categoriesActions.loadCategories();
-    dispatch(categories_action);
-  }, [dispatch]);
+    const categories_action = categoriesActions.loadCategories()
+    dispatch(categories_action)
+  }, [dispatch])
 
   const linkToLogin = () => {
-    history.push(`${PATH}/login`);
-  };
+    history.push(`${PATH}/login`)
+  }
 
   const linkToLearn = () => {
-    history.push(`${PATH}/learn`);
-  };
+    history.push(`${PATH}/learn`)
+  }
 
   const registerCurriculum = () => {
-    const registration_action = registrationsActions.registerCurriculum(id);
-    dispatch(registration_action);
-    setIsRegisterButtonDisabled(true);
-    setRegisterButtonLabel('กำลังโหลด...');
+    const registration_action = registrationsActions.registerCurriculum(id)
+    dispatch(registration_action)
+    setIsRegisterButtonDisabled(true)
+    setRegisterButtonLabel('กำลังโหลด...')
     //PREVENT MULTIPLE REQUEST
     setTimeout(() => {
-      setIsRegisterButtonDisabled(false);
-      setRegisterButtonLabel('ลงทะเบียนหลักสูตร');
-    }, 3000);
-  };
+      setIsRegisterButtonDisabled(false)
+      setRegisterButtonLabel('ลงทะเบียนหลักสูตร')
+    }, 3000)
+  }
 
   const curriculumInfoPlaceholder = [
     {
@@ -174,7 +186,7 @@ export default function CurriculumDetails() {
       detail: curriculum?.targetGroup ? curriculum?.targetGroup : 'ไม่มีข้อมูล',
       icon: <TargetIcon />,
     },
-  ];
+  ]
 
   function RenderCurriculumInfo({
     index,
@@ -186,11 +198,11 @@ export default function CurriculumDetails() {
       <Box mb={4} key={index}>
         <Grid
           container
-          direction="row"
-          justify="flex-start"
-          alignItems="center"
+          direction='row'
+          justify='flex-start'
+          alignItems='center'
           spacing={2}
-          wrap="nowrap"
+          wrap='nowrap'
           style={{
             marginBottom: 4,
           }}
@@ -200,7 +212,7 @@ export default function CurriculumDetails() {
           </Grid>
           <Grid item>
             <Typography
-              variant="h6"
+              variant='h6'
               style={{
                 fontSize: '1.7rem',
                 lineHeight: '1.1',
@@ -213,8 +225,8 @@ export default function CurriculumDetails() {
         </Grid>
         <Grid>
           <Typography
-            variant="body2"
-            color="textSecondary"
+            variant='body2'
+            color='textSecondary'
             style={{ marginLeft: 58 }}
           >
             {info ? (
@@ -227,20 +239,20 @@ export default function CurriculumDetails() {
           </Typography>
         </Grid>
       </Box>
-    );
+    )
   }
 
   function renderRegisterButton() {
     if (!isLogin()) {
       return (
         <Grid item>
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant='body2' color='textSecondary'>
             โปรดเข้าสู่ระบบเพื่อลงทะเบียนหลักสูตร
           </Typography>
           <Box my={2}>
             <Button
-              color="secondary"
-              variant="contained"
+              color='secondary'
+              variant='contained'
               onClick={linkToLogin}
               fullWidth={!matches}
             >
@@ -248,7 +260,7 @@ export default function CurriculumDetails() {
             </Button>
           </Box>
         </Grid>
-      );
+      )
     } else if (
       isLogin() &&
       myCurriculums.filter(
@@ -257,13 +269,13 @@ export default function CurriculumDetails() {
     ) {
       return (
         <Grid item>
-          <Typography variant="body2" color="textSecondary">
+          <Typography variant='body2' color='textSecondary'>
             คุณลงทะเบียนหลักสูตรนี้แล้ว เข้าเรียนได้เลย
           </Typography>
           <Box my={2}>
             <Button
-              color="secondary"
-              variant="contained"
+              color='secondary'
+              variant='contained'
               endIcon={<ArrowForwardIcon />}
               onClick={linkToLearn}
               fullWidth={!matches}
@@ -272,13 +284,13 @@ export default function CurriculumDetails() {
             </Button>
           </Box>
         </Grid>
-      );
+      )
     } else {
       return (
         <Grid item>
           <Button
-            variant="contained"
-            color="secondary"
+            variant='contained'
+            color='secondary'
             endIcon={<ArrowForwardIcon />}
             onClick={registerCurriculum}
             disabled={isRegisterButtonDisabled}
@@ -286,7 +298,7 @@ export default function CurriculumDetails() {
             {registerButtonLabel}
           </Button>
         </Grid>
-      );
+      )
     }
   }
 
@@ -295,7 +307,7 @@ export default function CurriculumDetails() {
       <CurriculumHeader
         title={curriculum?.name ? curriculum?.name : 'หลักสูตร'}
         code={curriculum?.code ? curriculum?.code : 'รหัสหลักสูตร'}
-        icon={<PeopleIcon fontSize="large" style={{ marginRight: '24px' }} />}
+        icon={<PeopleIcon fontSize='large' style={{ marginRight: '24px' }} />}
         imageUrl={curriculum?.thumbnail}
       />
       <Container>
@@ -338,9 +350,9 @@ export default function CurriculumDetails() {
                   </Box>
                   <Grid
                     container
-                    direction="row"
+                    direction='row'
                     justify={matches ? 'flex-start' : 'center'}
-                    alignItems="center"
+                    alignItems='center'
                   >
                     <Typography
                       style={{
@@ -355,8 +367,8 @@ export default function CurriculumDetails() {
                     <Grid
                       container
                       spacing={3}
-                      alignItems="center"
-                      direction="row"
+                      alignItems='center'
+                      direction='row'
                       justify={matches ? 'flex-start' : 'center'}
                     >
                       {renderRegisterButton()}
@@ -375,8 +387,8 @@ export default function CurriculumDetails() {
                     <Grid item>
                       <Typography
                         gutterBottom
-                        variant="h6"
-                        align="center"
+                        variant='h6'
+                        align='center'
                         style={{
                           fontSize: '1.7rem',
                           marginBottom: matches ? 0 : 16,
@@ -384,12 +396,12 @@ export default function CurriculumDetails() {
                           fontWeight: 600,
                         }}
                       >
-                        หลักสูตรนี้ประกอบด้วย
+                        รายวิชาในหลักสูตร
                       </Typography>
                     </Grid>
                     {matches && (
                       <Grid item>
-                        <Typography variant="body2" color="textSecondary">
+                        <Typography variant='body2' color='textSecondary'>
                           {childCourses.length} รายวิชา
                         </Typography>
                       </Grid>
@@ -398,22 +410,78 @@ export default function CurriculumDetails() {
                   {!matches && (
                     <Grid
                       container
-                      direction="row"
-                      justify="center"
-                      alignItems="center"
+                      direction='row'
+                      justify='center'
+                      alignItems='center'
                     >
-                      <Typography variant="body2" color="textSecondary">
+                      <Typography variant='body2' color='textSecondary'>
                         {childCourses.length} รายวิชา
                       </Typography>
                     </Grid>
                   )}
-                  <Box my={3}>
+                  <Box my={2}>
                     <Grid container spacing={1}>
-                      {childCourses.map((course) => (
-                        <Grid item key={course.id} xs={12} sm={4} md={3}>
-                          <CourseItem {...course} categories={categories} />
-                        </Grid>
-                      ))}
+                      <List>
+                        {childCourses.map((course, id) => (
+                          <>
+                            {id !== 0 && <Divider variant='middle' />}
+                            <ListItem>
+                              <ListItemAvatar>
+                                <Avatar
+                                  variant='rounded'
+                                  src={course.thumbnail}
+                                  className={classes.large}
+                                />
+                              </ListItemAvatar>
+                              <ListItemText
+                                primary={`${id + 1}. ${course.name}`}
+                                primaryTypographyProps={{
+                                  style: {
+                                    lineHeight: '1.3',
+                                    fontWeight: 500,
+                                  },
+                                }}
+                                secondary={
+                                  <>
+                                    <Typography
+                                      variant='body2'
+                                      color='textPrimary'
+                                    >
+                                      {course.code}
+                                    </Typography>
+                                    <Typography
+                                      variant='body2'
+                                      style={{ marginTop: 8 }}
+                                    >
+                                      <Circle
+                                        style={{
+                                          color: categoryColor(
+                                            course.courseCategoryId
+                                          ),
+                                          fontSize: 12,
+                                          marginRight: 6,
+                                        }}
+                                      />
+                                      {
+                                        categories[course.courseCategoryId - 1]
+                                          ?.courseCategory
+                                      }
+                                    </Typography>
+                                  </>
+                                }
+                                secondaryTypographyProps={{
+                                  style: {
+                                    marginTop: 2,
+                                  },
+                                }}
+                              />
+                              {/* <ListItemSecondaryAction>
+                                ...
+                              </ListItemSecondaryAction> */}
+                            </ListItem>
+                          </>
+                        ))}
+                      </List>
                     </Grid>
                   </Box>
                 </Box>
@@ -423,5 +491,5 @@ export default function CurriculumDetails() {
         </div>
       </Container>
     </>
-  );
+  )
 }

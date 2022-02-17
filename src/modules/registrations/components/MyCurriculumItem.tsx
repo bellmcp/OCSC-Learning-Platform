@@ -455,7 +455,7 @@ export default function MyCurriculumItem({
             )}
           </ListItemIcon>
           <ListItemText>
-            {showChildCourses ? 'ซ่อน' : 'แสดง'}รายวิชาย่อย
+            {showChildCourses ? 'ซ่อน' : 'แสดง'}รายวิชาในหลักสูตร
           </ListItemText>
         </MenuItem>
       </Menu>
