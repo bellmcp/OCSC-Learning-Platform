@@ -1,9 +1,9 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
-import { getCookie, eraseCookie } from 'utils/cookies';
-import parseJwt from 'utils/parseJwt';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useLocation } from 'react-router-dom'
+import { getCookie, eraseCookie } from 'utils/cookies'
+import parseJwt from 'utils/parseJwt'
 import {
   fade,
   makeStyles,
@@ -11,7 +11,7 @@ import {
   createStyles,
   createMuiTheme,
   ThemeProvider,
-} from '@material-ui/core/styles';
+} from '@material-ui/core/styles'
 import {
   AppBar,
   Toolbar,
@@ -27,23 +27,23 @@ import {
   Tooltip,
   Dialog,
   Box,
-} from '@material-ui/core';
+} from '@material-ui/core'
 import {
   Menu as MenuIcon,
   Search as SearchIcon,
   KeyboardArrowDown as ArrowDownIcon,
-} from '@material-ui/icons';
-import { grey } from '@material-ui/core/colors';
-import { NavMenu, NavItem } from '@mui-treasury/components/menu/navigation';
-import { useLineNavigationMenuStyles } from '@mui-treasury/styles/navigationMenu/line';
+} from '@material-ui/icons'
+import { grey } from '@material-ui/core/colors'
+import { NavMenu, NavItem } from '@mui-treasury/components/menu/navigation'
+import { useLineNavigationMenuStyles } from '@mui-treasury/styles/navigationMenu/line'
 
-import * as uiActions from 'modules/ui/actions';
-import * as userActions from 'modules/user/actions';
-import * as supportActions from 'modules/support/actions';
-import useSearchInputState from '../hooks/useSearchInputState';
-import NavDrawer from './NavDrawer';
-import NavDropdownMobile from './NavDropdownMobile';
-import NavDropdownDesktop from './NavDropdownDesktop';
+import * as uiActions from 'modules/ui/actions'
+import * as userActions from 'modules/user/actions'
+import * as supportActions from 'modules/support/actions'
+import useSearchInputState from '../hooks/useSearchInputState'
+import NavDrawer from './NavDrawer'
+import NavDropdownMobile from './NavDropdownMobile'
+import NavDropdownDesktop from './NavDropdownDesktop'
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -54,7 +54,7 @@ const darkTheme = createMuiTheme({
   typography: {
     fontFamily: ['Prompt', 'sans-serif'].join(','),
   },
-});
+})
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -179,82 +179,82 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 600,
     },
   })
-);
+)
 
 interface NavigationBarProps {
-  active: number;
-  setActivePage: (id: number) => void;
+  active: number
+  setActivePage: (id: number) => void
 }
 
 export default function NavBar(props: NavigationBarProps) {
-  const classes = useStyles();
-  const history = useHistory();
-  const { pathname } = useLocation();
-  const dispatch = useDispatch();
-  const PATH = process.env.REACT_APP_BASE_PATH;
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const classes = useStyles()
+  const history = useHistory()
+  const { pathname } = useLocation()
+  const dispatch = useDispatch()
+  const PATH = process.env.REACT_APP_BASE_PATH
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null)
 
-  const LogoImage = require('assets/images/logo.svg');
+  const LogoImage = require('assets/images/logo.svg')
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSearchDialogOpen, setMobileSearchDialogOpen] = useState(false);
+  const isMenuOpen = Boolean(anchorEl)
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [mobileSearchDialogOpen, setMobileSearchDialogOpen] = useState(false)
 
-  const token = getCookie('token');
-  const userId = parseJwt(token).unique_name;
+  const token = getCookie('token')
+  const userId = parseJwt(token).unique_name
 
   useEffect(() => {
     if (login()) {
-      const actionProfile = userActions.loadUser();
-      dispatch(actionProfile);
+      const actionProfile = userActions.loadUser()
+      dispatch(actionProfile)
     }
-  }, [dispatch, userId]);
+  }, [dispatch, userId])
 
-  const { items: users } = useSelector((state: any) => state.user);
+  const { items: users } = useSelector((state: any) => state.user)
   const login = () => {
     if (token === null) {
-      return false;
+      return false
     }
     if (
       (token !== '' || token !== undefined) &&
       parseJwt(token).role === 'user'
     ) {
-      return true;
+      return true
     }
-    return false;
-  };
+    return false
+  }
 
-  const { items: supports } = useSelector((state) => state.support);
+  const { items: supports } = useSelector((state) => state.support)
   const mySupportList = supports.filter((support) => {
-    return support.userId === userId;
-  });
+    return support.userId === userId
+  })
 
   useEffect(() => {
     const login = () => {
       if (token === null) {
-        return false;
+        return false
       }
       if (
         (token !== '' || token !== undefined) &&
         parseJwt(token).role === 'user'
       ) {
-        return true;
+        return true
       }
-      return false;
-    };
+      return false
+    }
 
     if (login()) {
-      const action = supportActions.loadSupports();
-      dispatch(action);
+      const action = supportActions.loadSupports()
+      dispatch(action)
     }
-  }, [dispatch, token, pathname]);
+  }, [dispatch, token, pathname])
 
   const UNREAD_NOTIFICATION_COUNT = mySupportList.filter((support: any) => {
-    return support.replyMessage !== null && support.isAcknowledged === false;
-  }).length;
+    return support.replyMessage !== null && support.isAcknowledged === false
+  }).length
 
   const navigationItem = [
     {
@@ -270,128 +270,128 @@ export default function NavBar(props: NavigationBarProps) {
       url: `${PATH}/support`,
       notification: UNREAD_NOTIFICATION_COUNT,
     },
-  ];
+  ]
 
-  const isUserCurrentlyInLearn = pathname.includes(`${PATH}/learn/courses`);
+  const isUserCurrentlyInLearn = pathname.includes(`${PATH}/learn/courses`)
 
   const linkToHome = () => {
-    handleMenuClose();
+    handleMenuClose()
     if (!isUserCurrentlyInLearn) {
-      history.push(`${PATH}`);
+      history.push(`${PATH}`)
     } else {
-      dispatch(uiActions.setLearnExitDialog(true));
+      dispatch(uiActions.setLearnExitDialog(true))
     }
-  };
+  }
 
   const linkToLogin = () => {
-    handleMenuClose();
+    handleMenuClose()
     if (!isUserCurrentlyInLearn) {
-      history.push(`${PATH}/login`);
+      history.push(`${PATH}/login`)
     } else {
-      dispatch(uiActions.setLearnExitDialog(true));
+      dispatch(uiActions.setLearnExitDialog(true))
     }
-  };
+  }
 
   const linkToProfile = () => {
-    handleMenuClose();
+    handleMenuClose()
     if (!isUserCurrentlyInLearn) {
-      history.push(`${PATH}/me`);
+      history.push(`${PATH}/me`)
     } else {
-      dispatch(uiActions.setLearnExitDialog(true));
+      dispatch(uiActions.setLearnExitDialog(true))
     }
-  };
+  }
 
   const linkToPrintCertificate = () => {
-    handleMenuClose();
+    handleMenuClose()
     if (!isUserCurrentlyInLearn) {
-      history.push(`${PATH}/me/certificate`);
+      history.push(`${PATH}/me/certificate`)
     } else {
-      dispatch(uiActions.setLearnExitDialog(true));
+      dispatch(uiActions.setLearnExitDialog(true))
     }
-  };
+  }
 
   const linkToCertificate = () => {
-    handleMenuClose();
-    window.open(`${process.env.REACT_APP_PORTAL_URL}history`, '_blank');
-  };
+    handleMenuClose()
+    window.open(`${process.env.REACT_APP_PORTAL_URL}history`, '_blank')
+  }
 
   const linkToEditProfile = () => {
-    handleMenuClose();
-    window.open(`${process.env.REACT_APP_PORTAL_URL}edit`, '_blank');
-  };
+    handleMenuClose()
+    window.open(`${process.env.REACT_APP_PORTAL_URL}edit`, '_blank')
+  }
 
   const linkToChangePassword = () => {
-    handleMenuClose();
-    window.open(`${process.env.REACT_APP_PORTAL_URL}reset`, '_blank');
-  };
+    handleMenuClose()
+    window.open(`${process.env.REACT_APP_PORTAL_URL}reset`, '_blank')
+  }
 
   const linkToPortal = () => {
-    handleMenuClose();
-    window.open(`${process.env.REACT_APP_PORTAL_URL}`, '_blank');
-  };
+    handleMenuClose()
+    window.open(`${process.env.REACT_APP_PORTAL_URL}`, '_blank')
+  }
 
   const toggleSearchBar = () => {
-    setMobileSearchDialogOpen(true);
-  };
+    setMobileSearchDialogOpen(true)
+  }
 
   const toggleSearchBarClose = () => {
-    setMobileSearchDialogOpen(false);
-  };
+    setMobileSearchDialogOpen(false)
+  }
 
   const logout = () => {
-    handleMenuClose();
+    handleMenuClose()
     if (!isUserCurrentlyInLearn) {
-      eraseCookie('token');
-      dispatch(uiActions.setFlashMessage('ออกจากระบบเรียบร้อยแล้ว', 'success'));
+      eraseCookie('token')
+      dispatch(uiActions.setFlashMessage('ออกจากระบบเรียบร้อยแล้ว', 'success'))
       setTimeout(() => {
-        history.push(`${PATH}`);
-        window.location.reload();
-      }, 1000);
+        history.push(`${PATH}`)
+        window.location.reload()
+      }, 1000)
     } else {
-      dispatch(uiActions.setLearnExitDialog(true));
+      dispatch(uiActions.setLearnExitDialog(true))
     }
-  };
+  }
 
   const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    setMobileOpen(!mobileOpen)
+  }
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+    setMobileMoreAnchorEl(null)
+  }
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+    setAnchorEl(null)
+    handleMobileMenuClose()
+  }
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+    setMobileMoreAnchorEl(event.currentTarget)
+  }
 
   const [searchValue, setSearchValue] = useSearchInputState(() => {
-    history.push(`${PATH}/search?query=${searchValue}`);
-  });
+    history.push(`${PATH}/search?query=${searchValue}`)
+  })
 
-  const menuId = 'primary-search-account-menu';
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const menuId = 'primary-search-account-menu'
+  const mobileMenuId = 'primary-search-account-menu-mobile'
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed" className={classes.appBar} elevation={0}>
+      <AppBar position='fixed' className={classes.appBar} elevation={0}>
         <Container
           maxWidth={!pathname.includes(`${PATH}/learn/courses`) ? 'lg' : false}
         >
           <Toolbar>
             {/* DRAWER TOGGLE */}
-            <Hidden smUp implementation="css">
+            <Hidden smUp implementation='css'>
               <IconButton
-                edge="start"
-                color="primary"
+                edge='start'
+                color='primary'
                 className={classes.menuButton}
                 onClick={handleDrawerToggle}
               >
@@ -401,14 +401,14 @@ export default function NavBar(props: NavigationBarProps) {
             {/* SITE LOGO */}
             <img
               src={LogoImage}
-              alt="OCSC Logo"
+              alt='OCSC Logo'
               className={classes.logo}
               onClick={linkToHome}
             />
-            <Hidden mdDown implementation="css">
+            <Hidden mdDown implementation='css'>
               <Typography
-                color="textPrimary"
-                variant="h6"
+                color='textPrimary'
+                variant='h6'
                 noWrap
                 className={classes.title}
                 onClick={linkToHome}
@@ -423,7 +423,7 @@ export default function NavBar(props: NavigationBarProps) {
                   <SearchIcon />
                 </div>
                 <InputBase
-                  placeholder="ค้นหา"
+                  placeholder='ค้นหา'
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
@@ -435,11 +435,11 @@ export default function NavBar(props: NavigationBarProps) {
             </div>
             <div className={classes.grow} />
             {/* DESKTOP NAVIGATION */}
-            <Hidden xsDown implementation="css">
+            <Hidden xsDown implementation='css'>
               <ThemeProvider theme={darkTheme}>
                 <NavMenu
                   useStyles={useLineNavigationMenuStyles}
-                  color="inherit"
+                  color='inherit'
                   className={classes.navMenu}
                 >
                   {navigationItem.map((item) => (
@@ -452,18 +452,18 @@ export default function NavBar(props: NavigationBarProps) {
                       }
                       onClick={() => {
                         if (!isUserCurrentlyInLearn) {
-                          history.push(`${item.url}`);
-                          props.setActivePage(item.id);
+                          history.push(`${item.url}`)
+                          props.setActivePage(item.id)
                         } else {
-                          dispatch(uiActions.setLearnExitDialog(true));
+                          dispatch(uiActions.setLearnExitDialog(true))
                         }
                       }}
                     >
                       {login() && item.notification !== 0 ? (
                         <Badge
                           className={classes.badge}
-                          variant="dot"
-                          color="error"
+                          variant='dot'
+                          color='error'
                         >
                           <Typography noWrap>{item.title}</Typography>
                         </Badge>
@@ -477,12 +477,12 @@ export default function NavBar(props: NavigationBarProps) {
             </Hidden>
             {/* DESKTOP DROPDOWN */}
             <div className={classes.sectionDesktop}>
-              <Divider orientation="vertical" className={classes.divider} />
+              <Divider orientation='vertical' className={classes.divider} />
               <Tooltip title={login() ? 'ดูโปรไฟล์' : ''}>
                 <Button
-                  color="primary"
+                  color='primary'
                   onClick={login() ? linkToProfile : linkToLogin}
-                  size="small"
+                  size='small'
                   style={{
                     borderRadius: 50,
                     padding: '10px 10px',
@@ -495,7 +495,7 @@ export default function NavBar(props: NavigationBarProps) {
                   }
                 >
                   <Typography
-                    color="textPrimary"
+                    color='textPrimary'
                     className={classes.bold}
                     noWrap
                   >
@@ -504,9 +504,9 @@ export default function NavBar(props: NavigationBarProps) {
                 </Button>
               </Tooltip>
               <IconButton
-                color="primary"
-                edge="end"
-                aria-label="Toggle user dropdown menu"
+                color='primary'
+                edge='end'
+                aria-label='Toggle user dropdown menu'
                 aria-controls={menuId}
                 onClick={handleProfileMenuOpen}
                 style={{
@@ -521,13 +521,13 @@ export default function NavBar(props: NavigationBarProps) {
               <div className={classes.grow} />
             </Hidden>
             <div className={classes.sectionMobile}>
-              <IconButton onClick={toggleSearchBar} color="primary">
+              <IconButton onClick={toggleSearchBar} color='primary'>
                 <SearchIcon />
               </IconButton>
               <IconButton
                 aria-controls={mobileMenuId}
                 onClick={handleMobileMenuOpen}
-                color="inherit"
+                color='inherit'
               >
                 <Avatar
                   className={login() ? classes.loggedIn : classes.small}
@@ -583,8 +583,9 @@ export default function NavBar(props: NavigationBarProps) {
               <SearchIcon />
             </div>
             <InputBase
+              autoFocus
               defaultValue={searchValue}
-              placeholder="ค้นหา"
+              placeholder='ค้นหา'
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
@@ -596,5 +597,5 @@ export default function NavBar(props: NavigationBarProps) {
         </Box>
       </Dialog>
     </div>
-  );
+  )
 }
