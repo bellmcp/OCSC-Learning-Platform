@@ -178,6 +178,12 @@ const useStyles = makeStyles((theme: Theme) =>
     bold: {
       fontWeight: 600,
     },
+    topScrollPaper: {
+      alignItems: 'flex-start',
+    },
+    topPaperScrollBody: {
+      verticalAlign: 'top',
+    },
   })
 )
 
@@ -576,7 +582,14 @@ export default function NavBar(props: NavigationBarProps) {
         unreadNotificationCount={UNREAD_NOTIFICATION_COUNT}
         isUserCurrentlyInLearn={isUserCurrentlyInLearn}
       />
-      <Dialog open={mobileSearchDialogOpen} onClose={toggleSearchBarClose}>
+      <Dialog
+        open={mobileSearchDialogOpen}
+        onClose={toggleSearchBarClose}
+        classes={{
+          scrollPaper: classes.topScrollPaper,
+          paperScrollBody: classes.topPaperScrollBody,
+        }}
+      >
         <Box m={2}>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
