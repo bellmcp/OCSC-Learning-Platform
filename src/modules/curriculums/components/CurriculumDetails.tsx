@@ -374,7 +374,7 @@ export default function CurriculumDetails() {
                       {renderRegisterButton()}
                     </Grid>
                   </Box>
-
+                  {/* 
                   <Box mt={5} mb={4}>
                     <Divider />
                   </Box>
@@ -418,8 +418,8 @@ export default function CurriculumDetails() {
                         {childCourses.length} รายวิชา
                       </Typography>
                     </Grid>
-                  )}
-                  <Box my={2}>
+                  )} */}
+                  {/* <Box my={2}>
                     <Grid container spacing={1}>
                       <List>
                         {childCourses.map((course, id) => (
@@ -475,15 +475,12 @@ export default function CurriculumDetails() {
                                   },
                                 }}
                               />
-                              {/* <ListItemSecondaryAction>
-                                ...
-                              </ListItemSecondaryAction> */}
                             </ListItem>
                           </>
                         ))}
                       </List>
                     </Grid>
-                  </Box>
+                  </Box> */}
                 </Box>
               </>
             )}
