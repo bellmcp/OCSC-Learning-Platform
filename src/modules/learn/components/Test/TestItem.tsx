@@ -1,5 +1,5 @@
 //@ts-nocheck
-import React from 'react';
+import React from 'react'
 import {
   Avatar,
   Divider,
@@ -10,8 +10,8 @@ import {
   RadioGroup,
   Typography,
   Box,
-} from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+} from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(1.5),
     },
   })
-);
+)
 
 export default function TestItem({
   id,
@@ -48,35 +48,39 @@ export default function TestItem({
   register,
   errors,
 }) {
-  const classes = useStyles();
+  const classes = useStyles()
   const choices = [
     { id: 1, option: choice1, image: imgUrl1 },
     { id: 2, option: choice2, image: imgUrl2 },
     { id: 3, option: choice3, image: imgUrl3 },
     { id: 4, option: choice4, image: imgUrl4 },
     { id: 5, option: choice5, image: imgUrl5 },
-  ];
+  ]
 
   return (
     <>
       <Grid
         container
-        direction="row"
-        alignItems="center"
+        direction='row'
+        alignItems='center'
         spacing={2}
-        wrap="nowrap"
+        wrap='nowrap'
       >
         <Grid item>
           <Avatar className={classes.amber}>{no}</Avatar>
         </Grid>
         <Grid item>
           <Typography
-            component="h1"
-            variant="h6"
-            align="left"
+            component='h1'
+            variant='h6'
+            align='left'
             style={{ fontSize: '1rem', fontWeight: 600, lineHeight: '1.3' }}
           >
-            {question}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: question,
+              }}
+            ></div>
           </Typography>
         </Grid>
       </Grid>
@@ -86,14 +90,14 @@ export default function TestItem({
           <Grid
             container
             spacing={1}
-            direction="row"
-            justify="center"
-            alignItems="center"
-            alignContent="center"
-            wrap="nowrap"
+            direction='row'
+            justify='center'
+            alignItems='center'
+            alignContent='center'
+            wrap='nowrap'
           >
             <img
-              alt="รูปภาพโจทย์"
+              alt='รูปภาพโจทย์'
               src={imgUrl}
               style={{ width: '50%', minWidth: 250, height: 'auto' }}
             />
@@ -101,7 +105,7 @@ export default function TestItem({
         </Box>
       )}
       <form>
-        <FormControl component="fieldset">
+        <FormControl component='fieldset'>
           <RadioGroup aria-label={question} name={question}>
             <Grid className={classes.options} container spacing={0}>
               {choices.map((choice) => (
@@ -110,11 +114,11 @@ export default function TestItem({
                     <Grid
                       container
                       spacing={0}
-                      direction="row"
-                      justify="flex-start"
-                      alignItems="center"
-                      alignContent="center"
-                      wrap="nowrap"
+                      direction='row'
+                      justify='flex-start'
+                      alignItems='center'
+                      alignContent='center'
+                      wrap='nowrap'
                     >
                       <FormControlLabel
                         name={`testAnswer${no}`}
@@ -163,5 +167,5 @@ export default function TestItem({
         </FormControl>
       </form>
     </>
-  );
+  )
 }
