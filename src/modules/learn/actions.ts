@@ -1,69 +1,69 @@
 // @ts-nocheck
-import axios from "axios";
-import { push } from "connected-react-router";
-import { getCookie } from "utils/cookies";
-import parseJwt from "utils/parseJwt";
-import * as uiActions from "modules/ui/actions";
+import axios from 'axios'
+import { push } from 'connected-react-router'
+import { getCookie } from 'utils/cookies'
+import parseJwt from 'utils/parseJwt'
+import * as uiActions from 'modules/ui/actions'
 
-const CREATE_SESSION_REQUEST = "learning-platform/learn/CREATE_SESSION_REQUEST";
-const CREATE_SESSION_SUCCESS = "learning-platform/learn/CREATE_SESSION_SUCCESS";
-const CREATE_SESSION_FAILURE = "learning-platform/learn/CREATE_SESSION_FAILURE";
+const CREATE_SESSION_REQUEST = 'learning-platform/learn/CREATE_SESSION_REQUEST'
+const CREATE_SESSION_SUCCESS = 'learning-platform/learn/CREATE_SESSION_SUCCESS'
+const CREATE_SESSION_FAILURE = 'learning-platform/learn/CREATE_SESSION_FAILURE'
 const LOAD_CONTENT_VIEWS_REQUEST =
-  "learning-platform/learn/LOAD_CONTENT_VIEWS_REQUEST";
+  'learning-platform/learn/LOAD_CONTENT_VIEWS_REQUEST'
 const LOAD_CONTENT_VIEWS_SUCCESS =
-  "learning-platform/learn/LOAD_CONTENT_VIEWS_SUCCESS";
+  'learning-platform/learn/LOAD_CONTENT_VIEWS_SUCCESS'
 const LOAD_CONTENT_VIEWS_FAILURE =
-  "learning-platform/learn/LOAD_CONTENT_VIEWS_FAILURE";
+  'learning-platform/learn/LOAD_CONTENT_VIEWS_FAILURE'
 const UPDATE_CONTENT_VIEW_REQUEST =
-  "learning-platform/learn/UPDATE_CONTENT_VIEW_REQUEST";
+  'learning-platform/learn/UPDATE_CONTENT_VIEW_REQUEST'
 const UPDATE_CONTENT_VIEW_SUCCESS =
-  "learning-platform/learn/UPDATE_CONTENT_VIEW_SUCCESS";
+  'learning-platform/learn/UPDATE_CONTENT_VIEW_SUCCESS'
 const UPDATE_CONTENT_VIEW_FAILURE =
-  "learning-platform/learn/UPDATE_CONTENT_VIEW_FAILURE";
+  'learning-platform/learn/UPDATE_CONTENT_VIEW_FAILURE'
 const LOAD_EVALUATION_REQUEST =
-  "learning-platform/learn/LOAD_EVALUATION_REQUEST";
+  'learning-platform/learn/LOAD_EVALUATION_REQUEST'
 const LOAD_EVALUATION_SUCCESS =
-  "learning-platform/learn/LOAD_EVALUATION_SUCCESS";
+  'learning-platform/learn/LOAD_EVALUATION_SUCCESS'
 const LOAD_EVALUATION_FAILURE =
-  "learning-platform/learn/LOAD_EVALUATION_FAILURE";
+  'learning-platform/learn/LOAD_EVALUATION_FAILURE'
 const LOAD_EVALUATION_ITEMS_REQUEST =
-  "learning-platform/learn/LOAD_EVALUATION_ITEMS_REQUEST";
+  'learning-platform/learn/LOAD_EVALUATION_ITEMS_REQUEST'
 const LOAD_EVALUATION_ITEMS_SUCCESS =
-  "learning-platform/learn/LOAD_EVALUATION_ITEMS_SUCCESS";
+  'learning-platform/learn/LOAD_EVALUATION_ITEMS_SUCCESS'
 const LOAD_EVALUATION_ITEMS_FAILURE =
-  "learning-platform/learn/LOAD_EVALUATION_ITEMS_FAILURE";
+  'learning-platform/learn/LOAD_EVALUATION_ITEMS_FAILURE'
 const UPDATE_EVALUATION_REQUEST =
-  "learning-platform/learn/UPDATE_EVALUATION_REQUEST";
+  'learning-platform/learn/UPDATE_EVALUATION_REQUEST'
 const UPDATE_EVALUATION_SUCCESS =
-  "learning-platform/learn/UPDATE_EVALUATION_SUCCESS";
+  'learning-platform/learn/UPDATE_EVALUATION_SUCCESS'
 const UPDATE_EVALUATION_FAILURE =
-  "learning-platform/learn/UPDATE_EVALUATION_FAILURE";
-const LOAD_TEST_REQUEST = "learning-platform/learn/LOAD_TEST_REQUEST";
-const LOAD_TEST_SUCCESS = "learning-platform/learn/LOAD_TEST_SUCCESS";
-const LOAD_TEST_FAILURE = "learning-platform/learn/LOAD_TEST_FAILURE";
+  'learning-platform/learn/UPDATE_EVALUATION_FAILURE'
+const LOAD_TEST_REQUEST = 'learning-platform/learn/LOAD_TEST_REQUEST'
+const LOAD_TEST_SUCCESS = 'learning-platform/learn/LOAD_TEST_SUCCESS'
+const LOAD_TEST_FAILURE = 'learning-platform/learn/LOAD_TEST_FAILURE'
 const LOAD_TEST_ITEMS_REQUEST =
-  "learning-platform/learn/LOAD_TEST_ITEMS_REQUEST";
+  'learning-platform/learn/LOAD_TEST_ITEMS_REQUEST'
 const LOAD_TEST_ITEMS_SUCCESS =
-  "learning-platform/learn/LOAD_TEST_ITEMS_SUCCESS";
+  'learning-platform/learn/LOAD_TEST_ITEMS_SUCCESS'
 const LOAD_TEST_ITEMS_FAILURE =
-  "learning-platform/learn/LOAD_TEST_ITEMS_FAILURE";
-const UPDATE_TEST_REQUEST = "learning-platform/learn/UPDATE_TEST_REQUEST";
-const UPDATE_TEST_SUCCESS = "learning-platform/learn/UPDATE_TEST_SUCCESS";
-const UPDATE_TEST_FAILURE = "learning-platform/learn/UPDATE_TEST_FAILURE";
+  'learning-platform/learn/LOAD_TEST_ITEMS_FAILURE'
+const UPDATE_TEST_REQUEST = 'learning-platform/learn/UPDATE_TEST_REQUEST'
+const UPDATE_TEST_SUCCESS = 'learning-platform/learn/UPDATE_TEST_SUCCESS'
+const UPDATE_TEST_FAILURE = 'learning-platform/learn/UPDATE_TEST_FAILURE'
 const UPDATE_TEST_TRIES_REQUEST =
-  "learning-platform/learn/UPDATE_TEST_TRIES_REQUEST";
+  'learning-platform/learn/UPDATE_TEST_TRIES_REQUEST'
 const UPDATE_TEST_TRIES_SUCCESS =
-  "learning-platform/learn/UPDATE_TEST_TRIES_SUCCESS";
+  'learning-platform/learn/UPDATE_TEST_TRIES_SUCCESS'
 const UPDATE_TEST_TRIES_FAILURE =
-  "learning-platform/learn/UPDATE_TEST_TRIES_FAILURE";
+  'learning-platform/learn/UPDATE_TEST_TRIES_FAILURE'
 
-const PATH = process.env.REACT_APP_BASE_PATH;
+const PATH = process.env.REACT_APP_BASE_PATH
 
 function createSession() {
   return async (dispatch) => {
-    const token = getCookie("token");
-    const userId = parseJwt(token).unique_name;
-    dispatch({ type: CREATE_SESSION_REQUEST });
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
+    dispatch({ type: CREATE_SESSION_REQUEST })
     try {
       var { data } = await axios.post(
         `/Users/${userId}/Sessions`,
@@ -71,56 +71,56 @@ function createSession() {
         {
           headers: { Authorization: `Bearer ${token}` },
         }
-      );
+      )
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: CREATE_SESSION_SUCCESS,
         payload: { session: data },
-      });
+      })
       // dispatch(uiActions.setFlashMessage("สร้างเซสชันสำเร็จ", "success"));
     } catch (err) {
-      dispatch({ type: CREATE_SESSION_FAILURE });
+      dispatch({ type: CREATE_SESSION_FAILURE })
       dispatch(
         uiActions.setFlashMessage(
           `สร้างเซสชันไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
+          'error'
         )
-      );
+      )
     }
-  };
+  }
 }
 
 function loadContentViews(registrationId) {
   return async (dispatch: any, getState) => {
-    const token = getCookie("token");
-    const userId = parseJwt(token).unique_name;
-    dispatch({ type: LOAD_CONTENT_VIEWS_REQUEST });
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
+    dispatch({ type: LOAD_CONTENT_VIEWS_REQUEST })
     try {
       var { data } = await axios.get(
         `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews`
-      );
+      )
 
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: LOAD_CONTENT_VIEWS_SUCCESS,
         payload: {
           contentViews: data,
         },
-      });
+      })
     } catch (err) {
-      dispatch({ type: LOAD_CONTENT_VIEWS_FAILURE });
+      dispatch({ type: LOAD_CONTENT_VIEWS_FAILURE })
       dispatch(
         uiActions.setFlashMessage(
           `โหลดข้อมูลการเข้าเรียนไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
+          'error'
         )
-      );
+      )
     }
-  };
+  }
 }
 
 function updateContentView(
@@ -130,12 +130,12 @@ function updateContentView(
   showFlashMessage
 ) {
   return async (dispatch, getState) => {
-    const token = getCookie("token");
-    const userId = parseJwt(token).unique_name;
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
     const {
       learn: { sessions },
-    } = getState();
-    dispatch({ type: UPDATE_CONTENT_VIEW_REQUEST });
+    } = getState()
+    dispatch({ type: UPDATE_CONTENT_VIEW_REQUEST })
     try {
       var { data } = await axios.put(
         `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
@@ -149,91 +149,91 @@ function updateContentView(
             key: sessions.key,
           },
         }
-      );
+      )
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: UPDATE_CONTENT_VIEW_SUCCESS,
         payload: { contentSeconds: data },
-      });
+      })
       if (showFlashMessage) {
-        dispatch(uiActions.setFlashMessage("เวลาเรียนสะสม +1 นาที", "info"));
+        dispatch(uiActions.setFlashMessage('เวลาเรียนสะสม +1 นาที', 'info'))
       }
     } catch (err) {
-      dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE });
+      dispatch({ type: UPDATE_CONTENT_VIEW_FAILURE })
       if (err?.response?.status === 401) {
-        dispatch(push(`${PATH}/learn`));
+        dispatch(push(`${PATH}/learn`))
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
-            "error"
+            'error'
           )
-        );
+        )
       } else {
         dispatch(
           uiActions.setFlashMessage(
             `บันทึกเวลาเรียนสะสมไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-            "error"
+            'error'
           )
-        );
+        )
       }
     }
-  };
+  }
 }
 
 function loadEvaluation(evaluationId) {
   return async (dispatch: any, getState) => {
-    dispatch({ type: LOAD_EVALUATION_REQUEST });
+    dispatch({ type: LOAD_EVALUATION_REQUEST })
     try {
-      var { data } = await axios.get(`/Evaluations/${evaluationId}`);
+      var { data } = await axios.get(`/Evaluations/${evaluationId}`)
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: LOAD_EVALUATION_SUCCESS,
         payload: {
           evaluation: data,
         },
-      });
+      })
     } catch (err) {
-      dispatch({ type: LOAD_EVALUATION_FAILURE });
+      dispatch({ type: LOAD_EVALUATION_FAILURE })
       dispatch(
         uiActions.setFlashMessage(
           `โหลดข้อมูลแบบประเมิน ${evaluationId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
+          'error'
         )
-      );
+      )
     }
-  };
+  }
 }
 
 function loadEvaluationItems(evaluationId) {
   return async (dispatch: any, getState) => {
-    dispatch({ type: LOAD_EVALUATION_ITEMS_REQUEST });
+    dispatch({ type: LOAD_EVALUATION_ITEMS_REQUEST })
     try {
       var { data } = await axios.get(
         `/Evaluations/${evaluationId}/EvaluationItems`
-      );
+      )
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: LOAD_EVALUATION_ITEMS_SUCCESS,
         payload: {
           evaluationItems: data,
         },
-      });
+      })
     } catch (err) {
-      dispatch({ type: LOAD_EVALUATION_ITEMS_FAILURE });
+      dispatch({ type: LOAD_EVALUATION_ITEMS_FAILURE })
       dispatch(
         uiActions.setFlashMessage(
           `โหลดแบบประเมิน ${evaluationId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
+          'error'
         )
-      );
+      )
     }
-  };
+  }
 }
 
 function updateEvaluation(
@@ -243,12 +243,31 @@ function updateEvaluation(
   evaluationOpinion
 ) {
   return async (dispatch, getState) => {
-    const token = getCookie("token");
-    const userId = parseJwt(token).unique_name;
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
     const {
       learn: { sessions },
-    } = getState();
-    dispatch({ type: UPDATE_EVALUATION_REQUEST });
+    } = getState()
+
+    const noAnswerItems = []
+
+    const test = [...evaluationAnswer].forEach((item, index) => {
+      if (item === '0') noAnswerItems.push(index + 1)
+    })
+
+    if (evaluationAnswer.includes('0')) {
+      dispatch(
+        uiActions.setFlashMessage(
+          `คุณทำแบบประเมินไม่ครบทุกข้อ (ข้อ ${noAnswerItems.map(
+            (item) => item
+          )}) โปรดตรวจสอบอีกครั้ง`,
+          'error'
+        )
+      )
+      return
+    }
+
+    dispatch({ type: UPDATE_EVALUATION_REQUEST })
     try {
       var { data } = await axios.put(
         `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
@@ -263,107 +282,109 @@ function updateEvaluation(
             key: sessions.key,
           },
         }
-      );
+      )
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: UPDATE_EVALUATION_SUCCESS,
         payload: { evaluationAnswer: data },
-      });
-      window.location.reload();
+      })
+      window.location.reload()
       dispatch(
-        uiActions.setFlashMessage("บันทึกแบบประเมินเรียบร้อยแล้ว", "success")
-      );
+        uiActions.setFlashMessage('บันทึกแบบประเมินเรียบร้อยแล้ว', 'success')
+      )
     } catch (err) {
-      dispatch({ type: UPDATE_EVALUATION_FAILURE });
+      dispatch({ type: UPDATE_EVALUATION_FAILURE })
       if (err?.response?.status === 401) {
-        dispatch(push(`${PATH}/learn`));
+        dispatch(push(`${PATH}/learn`))
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
-            "error"
+            'error'
           )
-        );
+        )
       } else if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
-            "คุณทำแบบประเมินไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง",
-            "error"
+            `คุณทำแบบประเมินไม่ครบทุกข้อ (ข้อ ${noAnswerItems.map(
+              (item) => item
+            )}) โปรดตรวจสอบอีกครั้ง`,
+            'error'
           )
-        );
+        )
       } else {
         dispatch(
           uiActions.setFlashMessage(
             `บันทึกแบบประเมินไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-            "error"
+            'error'
           )
-        );
+        )
       }
     }
-  };
+  }
 }
 
 function loadTest(testId) {
   return async (dispatch: any, getState) => {
-    dispatch({ type: LOAD_TEST_REQUEST });
+    dispatch({ type: LOAD_TEST_REQUEST })
     try {
-      var { data } = await axios.get(`/Tests/${testId}`);
+      var { data } = await axios.get(`/Tests/${testId}`)
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: LOAD_TEST_SUCCESS,
         payload: {
           test: data,
         },
-      });
+      })
     } catch (err) {
-      dispatch({ type: LOAD_TEST_FAILURE });
+      dispatch({ type: LOAD_TEST_FAILURE })
       dispatch(
         uiActions.setFlashMessage(
           `โหลดข้อมูลแบบทดสอบ ${testId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
+          'error'
         )
-      );
+      )
     }
-  };
+  }
 }
 
 function loadTestItems(testId) {
   return async (dispatch: any, getState) => {
-    dispatch({ type: LOAD_TEST_ITEMS_REQUEST });
+    dispatch({ type: LOAD_TEST_ITEMS_REQUEST })
     try {
-      var { data } = await axios.get(`/Tests/${testId}/TestItems`);
+      var { data } = await axios.get(`/Tests/${testId}/TestItems`)
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: LOAD_TEST_ITEMS_SUCCESS,
         payload: {
           testItems: data,
         },
-      });
+      })
     } catch (err) {
-      dispatch({ type: LOAD_TEST_ITEMS_FAILURE });
+      dispatch({ type: LOAD_TEST_ITEMS_FAILURE })
       dispatch(
         uiActions.setFlashMessage(
           `โหลดแบบทดสอบ ${testId} ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-          "error"
+          'error'
         )
-      );
+      )
     }
-  };
+  }
 }
 
 function updateTest(registrationId, contentViewId, testAnswer) {
   return async (dispatch, getState) => {
-    const token = getCookie("token");
-    const userId = parseJwt(token).unique_name;
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
     const {
       learn: { sessions },
-    } = getState();
-    dispatch({ type: UPDATE_TEST_REQUEST });
+    } = getState()
+    dispatch({ type: UPDATE_TEST_REQUEST })
     try {
       var { data } = await axios.put(
         `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}`,
@@ -377,55 +398,55 @@ function updateTest(registrationId, contentViewId, testAnswer) {
             key: sessions.key,
           },
         }
-      );
+      )
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: UPDATE_TEST_SUCCESS,
         payload: { testAnswer: data },
-      });
-      window.location.reload();
+      })
+      window.location.reload()
       dispatch(
-        uiActions.setFlashMessage("บันทึกแบบทดสอบเรียบร้อยแล้ว", "success")
-      );
+        uiActions.setFlashMessage('บันทึกแบบทดสอบเรียบร้อยแล้ว', 'success')
+      )
     } catch (err) {
-      dispatch({ type: UPDATE_TEST_FAILURE });
+      dispatch({ type: UPDATE_TEST_FAILURE })
       if (err?.response?.status === 401) {
-        dispatch(push(`${PATH}/learn`));
+        dispatch(push(`${PATH}/learn`))
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
-            "error"
+            'error'
           )
-        );
+        )
       } else if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
-            "คุณทำแบบทดสอบไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง",
-            "error"
+            'คุณทำแบบทดสอบไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง',
+            'error'
           )
-        );
+        )
       } else {
         dispatch(
           uiActions.setFlashMessage(
             `บันทึกแบบทดสอบไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-            "error"
+            'error'
           )
-        );
+        )
       }
     }
-  };
+  }
 }
 
 function updateTestTries(registrationId, contentViewId) {
   return async (dispatch, getState) => {
-    const token = getCookie("token");
-    const userId = parseJwt(token).unique_name;
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
     const {
       learn: { sessions },
-    } = getState();
-    dispatch({ type: UPDATE_TEST_TRIES_REQUEST });
+    } = getState()
+    dispatch({ type: UPDATE_TEST_TRIES_REQUEST })
     try {
       var { data } = await axios.post(
         `/Users/${userId}/CourseRegistrations/${registrationId}/ContentViews/${contentViewId}/TestTries`,
@@ -439,42 +460,42 @@ function updateTestTries(registrationId, contentViewId) {
             key: sessions.key,
           },
         }
-      );
+      )
       if (data.length === 0) {
-        data = [];
+        data = []
       }
       dispatch({
         type: UPDATE_TEST_TRIES_SUCCESS,
-      });
-      dispatch(uiActions.setFlashMessage("เริ่มจับเวลาทำแบบทดสอบแล้ว", "info"));
+      })
+      dispatch(uiActions.setFlashMessage('เริ่มจับเวลาทำแบบทดสอบแล้ว', 'info'))
     } catch (err) {
-      dispatch({ type: UPDATE_TEST_TRIES_FAILURE });
+      dispatch({ type: UPDATE_TEST_TRIES_FAILURE })
       if (err?.response?.status === 401) {
-        dispatch(push(`${PATH}/learn`));
+        dispatch(push(`${PATH}/learn`))
         dispatch(
           uiActions.setFlashMessage(
             `ตรวจพบการเข้าเรียนจากหลายอุปกรณ์ โปรดตรวจสอบและลองใหม่อีกครั้ง`,
-            "error"
+            'error'
           )
-        );
+        )
       } else if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
-            "คุณทำแบบทดสอบครบจำนวนครั้งที่กำหนดแล้ว โปรดตรวจสอบอีกครั้ง",
-            "error"
+            'คุณทำแบบทดสอบครบจำนวนครั้งที่กำหนดแล้ว โปรดตรวจสอบอีกครั้ง',
+            'error'
           )
-        );
+        )
       } else {
-        window.location.reload();
+        window.location.reload()
         dispatch(
           uiActions.setFlashMessage(
             `บันทึกจำนวนครั้งการทำแบบทดสอบไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
-            "error"
+            'error'
           )
-        );
+        )
       }
     }
-  };
+  }
 }
 
 export {
@@ -518,4 +539,4 @@ export {
   loadTestItems,
   updateTest,
   updateTestTries,
-};
+}
