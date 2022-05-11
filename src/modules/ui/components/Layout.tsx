@@ -76,6 +76,10 @@ export default function Layout() {
     }
   }, [announcement, isAnnoucementLoading])
 
+  const isLearnModule =
+    pathname.includes(`${PATH}/learn/courses`) ||
+    pathname.includes(`${PATH}/democontent`)
+
   // //GET STATE FOR DEBUG
   // const loginState = useSelector((state) => state.login);
   // const userState = useSelector((state) => state.user);
@@ -105,7 +109,7 @@ export default function Layout() {
           setActivePage(99)
           break
       }
-      if (pathname.includes('/learn/courses')) {
+      if (isLearnModule) {
         setActivePage(1)
       }
     }
@@ -242,7 +246,7 @@ export default function Layout() {
           <Typography gutterBottom style={{ fontWeight: 600 }} variant='body1'>
             OCSC LEARNING SPACE (LEARNER PART)
             <br />
-            Version 1.0.0
+            Version 2.1.1
           </Typography>
           <Divider style={{ margin: '16px 0' }} />
           <Typography gutterBottom style={{ fontWeight: 600 }}>
@@ -336,9 +340,7 @@ export default function Layout() {
           </IconButton>
         }
         style={{
-          marginBottom: pathname.includes(`${PATH}/learn/courses`)
-            ? 60
-            : 'unset',
+          marginBottom: isLearnModule ? 60 : 'unset',
         }}
       >
         <Alert
@@ -350,7 +352,7 @@ export default function Layout() {
           {flashMessage}
         </Alert>
       </Snackbar>
-      {!pathname.includes(`${PATH}/learn/courses`) && <Footer />}
+      {!isLearnModule && <Footer />}
     </ThemeProvider>
   )
 }

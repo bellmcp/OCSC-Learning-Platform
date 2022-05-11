@@ -386,12 +386,14 @@ export default function NavBar(props: NavigationBarProps) {
   const menuId = 'primary-search-account-menu'
   const mobileMenuId = 'primary-search-account-menu-mobile'
 
+  const isLearnModule =
+    pathname.includes(`${PATH}/learn/courses`) ||
+    pathname.includes(`${PATH}/democontent`)
+
   return (
     <div className={classes.grow}>
       <AppBar position='fixed' className={classes.appBar} elevation={0}>
-        <Container
-          maxWidth={!pathname.includes(`${PATH}/learn/courses`) ? 'lg' : false}
-        >
+        <Container maxWidth={!isLearnModule ? 'lg' : false}>
           <Toolbar>
             {/* DRAWER TOGGLE */}
             <Hidden smUp implementation='css'>

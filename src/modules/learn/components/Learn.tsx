@@ -1,26 +1,26 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react';
-import queryString from 'query-string';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useLocation } from 'react-router-dom';
-import { Drawer, Toolbar, Box, Fab, Grid, Typography } from '@material-ui/core';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { Bookmarks as ArrowUpIcon, Lock as LockIcon } from '@material-ui/icons';
+import React, { useEffect, useState } from 'react'
+import queryString from 'query-string'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams, useLocation } from 'react-router-dom'
+import { Drawer, Toolbar, Box, Fab, Grid, Typography } from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import { Bookmarks as ArrowUpIcon, Lock as LockIcon } from '@material-ui/icons'
 
-import * as learnActions from '../actions';
-import * as coursesActions from 'modules/courses/actions';
-import * as registrationsActions from 'modules/registrations/actions';
-import SideBar from './SideBar';
-import SideBarMobile from './SideBarMobile';
-import ContentView from './ContentView';
-import Timer from './Timer';
-import TimerCountdown from './TimerCountdown';
-import Loading from 'modules/ui/components/Loading';
+import * as learnActions from '../actions'
+import * as coursesActions from 'modules/courses/actions'
+import * as registrationsActions from 'modules/registrations/actions'
+import SideBar from './SideBar'
+import SideBarMobile from './SideBarMobile'
+import ContentView from './ContentView'
+import Timer from './Timer'
+import TimerCountdown from './TimerCountdown'
+import Loading from 'modules/ui/components/Loading'
 
-import isBetween from 'utils/isBetween';
+import isBetween from 'utils/isBetween'
 
-const DRAWER_WIDTH = 300;
-const FOOTER_HEIGHT = 60;
+const DRAWER_WIDTH = 300
+const FOOTER_HEIGHT = 60
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -80,102 +80,102 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
   })
-);
+)
 
 export default function Learn() {
-  const classes = useStyles();
-  const { id: courseId }: any = useParams();
-  const { search } = useLocation();
-  const { contentId } = queryString.parse(search);
-  const dispatch = useDispatch();
-  const [accessible, setAccessible] = useState(true);
-  const [courseStart, setCourseStart] = useState('');
-  const [courseEnd, setCourseEnd] = useState('');
+  const classes = useStyles()
+  const { id: courseId }: any = useParams()
+  const { search } = useLocation()
+  const { contentId } = queryString.parse(search)
+  const dispatch = useDispatch()
+  const [accessible, setAccessible] = useState(true)
+  const [courseStart, setCourseStart] = useState('')
+  const [courseEnd, setCourseEnd] = useState('')
 
-  const [course] = useSelector((state) => state.courses.items);
-  var { contents: courseContents } = useSelector((state) => state.courses);
+  const [course] = useSelector((state) => state.courses.items)
+  var { contents: courseContents } = useSelector((state) => state.courses)
   const { myCourses, localDateTime, isLocalDateTimeLoading } = useSelector(
     (state) => state.registrations
-  );
-  const { contentViews } = useSelector((state) => state.learn);
+  )
+  const { contentViews } = useSelector((state) => state.learn)
   if (courseContents.length === 0) {
-    courseContents = [];
+    courseContents = []
   }
-  const { sessions: currentSession } = useSelector((state) => state.learn);
+  const { sessions: currentSession } = useSelector((state) => state.learn)
 
   const courseRegistrationDetails = myCourses.filter(
     (myCourse) => myCourse.courseId === parseInt(courseId)
-  );
-  const courseRegistrationId = courseRegistrationDetails[0]?.id;
+  )
+  const courseRegistrationId = courseRegistrationDetails[0]?.id
 
   const activeContentView = courseContents.filter(
     (courseContent) => courseContent.id === parseInt(contentId)
-  );
+  )
   const currentContentView = contentViews.filter(
     (contentView) => contentView.courseContentId === parseInt(contentId)
-  );
+  )
 
   useEffect(() => {
-    const load_local_date_time = registrationsActions.loadLocalDateTime();
-    dispatch(load_local_date_time);
-  }, [dispatch]);
+    const load_local_date_time = registrationsActions.loadLocalDateTime()
+    dispatch(load_local_date_time)
+  }, [dispatch])
 
   useEffect(() => {
-    const courses_action = coursesActions.loadCourse(courseId);
-    dispatch(courses_action);
-  }, [dispatch, courseId]);
+    const courses_action = coursesActions.loadCourse(courseId)
+    dispatch(courses_action)
+  }, [dispatch, courseId])
 
   useEffect(() => {
-    const course_content_action = coursesActions.loadCourseContents(courseId);
-    dispatch(course_content_action);
-  }, [dispatch, courseId]);
+    const course_content_action = coursesActions.loadCourseContents(courseId)
+    dispatch(course_content_action)
+  }, [dispatch, courseId])
 
   useEffect(() => {
     const course_registrations_action =
-      registrationsActions.loadCourseRegistrations();
-    dispatch(course_registrations_action);
-  }, [dispatch]);
+      registrationsActions.loadCourseRegistrations()
+    dispatch(course_registrations_action)
+  }, [dispatch])
 
   useEffect(() => {
     const content_view_action =
-      learnActions.loadContentViews(courseRegistrationId);
+      learnActions.loadContentViews(courseRegistrationId)
     if (courseRegistrationId !== undefined) {
-      dispatch(content_view_action);
+      dispatch(content_view_action)
     }
-  }, [dispatch, courseRegistrationId, contentId]);
+  }, [dispatch, courseRegistrationId, contentId])
 
   useEffect(() => {
-    const create_session_action = learnActions.createSession();
+    const create_session_action = learnActions.createSession()
     if (contentId !== undefined) {
-      dispatch(create_session_action);
+      dispatch(create_session_action)
     }
-    setTestStart(false);
-  }, [dispatch, contentId]);
+    setTestStart(false)
+  }, [dispatch, contentId])
 
   useEffect(() => {
-    setCourseStart(courseRegistrationDetails[0]?.courseStart);
-    setCourseEnd(courseRegistrationDetails[0]?.courseEnd);
-  }, [courseRegistrationDetails]);
+    setCourseStart(courseRegistrationDetails[0]?.courseStart)
+    setCourseEnd(courseRegistrationDetails[0]?.courseEnd)
+  }, [courseRegistrationDetails])
 
   useEffect(() => {
     if (courseStart && courseEnd) {
-      let check = isBetween(courseStart, courseEnd, localDateTime);
-      setAccessible(check);
+      let check = isBetween(courseStart, courseEnd, localDateTime)
+      setAccessible(check)
     }
-  }, [courseStart, courseEnd, localDateTime]);
+  }, [courseStart, courseEnd, localDateTime])
 
-  const [mobileDialogOpen, setMobileDialogOpen] = useState(false);
+  const [mobileDialogOpen, setMobileDialogOpen] = useState(false)
   const handleMobileDialogOpen = () => {
-    setMobileDialogOpen(true);
-  };
+    setMobileDialogOpen(true)
+  }
   const handleMobileDialogClose = () => {
-    setMobileDialogOpen(false);
-  };
+    setMobileDialogOpen(false)
+  }
 
-  const [testStart, setTestStart] = useState(false);
-  const [userTestAnswers, setUserTestAnswers] = useState('0');
+  const [testStart, setTestStart] = useState(false)
+  const [userTestAnswers, setUserTestAnswers] = useState('0')
 
-  const [contentListProgress, setContentListProgress] = useState([]);
+  const [contentListProgress, setContentListProgress] = useState([])
 
   function renderTimer() {
     if (contentId !== undefined) {
@@ -189,7 +189,7 @@ export default function Learn() {
             contentListProgress={contentListProgress}
             setContentListProgress={setContentListProgress}
           />
-        );
+        )
       } else if (activeContentView[0]?.type === 't') {
         if (testStart) {
           return (
@@ -198,31 +198,34 @@ export default function Learn() {
               courseRegistrationDetails={courseRegistrationDetails}
               userTestAnswers={userTestAnswers}
             />
-          );
+          )
         } else {
-          return null;
+          return null
         }
       } else {
-        return null;
+        return null
       }
     } else {
-      return null;
+      return null
     }
   }
 
+  console.log('courseRegistrationDetails', courseRegistrationDetails)
+  console.log('contentListProgress', contentListProgress)
+
   function renderLearnModule() {
     if (isLocalDateTimeLoading || !accessible) {
-      return <Loading height={380} />;
+      return <Loading height={380} />
     } else if (accessible) {
       return (
         <>
           <Drawer
             className={classes.drawer}
-            variant="permanent"
+            variant='permanent'
             classes={{
               paper: classes.drawerPaper,
             }}
-            anchor="left"
+            anchor='left'
           >
             <SideBar
               course={course}
@@ -249,8 +252,8 @@ export default function Learn() {
           </main>
           {/* MOBILE NAVIGATION */}
           <Fab
-            color="secondary"
-            aria-label="สารบัญ"
+            color='secondary'
+            aria-label='สารบัญ'
             variant={contentId === undefined ? 'extended' : 'round'}
             className={classes.fab}
             style={{
@@ -281,25 +284,25 @@ export default function Learn() {
             </Box>
           </div>
         </>
-      );
+      )
     } else {
       return (
         <Grid
           container
-          direction="column"
-          justify="center"
-          alignItems="center"
+          direction='column'
+          justify='center'
+          alignItems='center'
           style={{ height: 500 }}
         >
           <LockIcon
-            color="disabled"
+            color='disabled'
             style={{ fontSize: 54, marginBottom: 14 }}
           />
-          <Typography component="h2" variant="body2" color="textSecondary">
+          <Typography component='h2' variant='body2' color='textSecondary'>
             ไม่สามารถเข้าสู่บทเรียนได้
           </Typography>
         </Grid>
-      );
+      )
     }
   }
 
@@ -308,5 +311,5 @@ export default function Learn() {
       <Toolbar />
       {renderLearnModule()}
     </div>
-  );
+  )
 }
