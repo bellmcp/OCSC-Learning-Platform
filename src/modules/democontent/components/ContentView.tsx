@@ -193,7 +193,7 @@ export default function ContentView({ activeSource, setUrl }) {
                 style={{ textTransform: 'none' }}
                 onClick={() =>
                   setUrl(
-                    'http://help.websiteos.com/websiteos/example_of_a_simple_html_page.htm'
+                    'https://learningportal.ocsc.go.th/courses/KD00/status.html'
                   )
                 }
               >
