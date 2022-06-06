@@ -59,6 +59,13 @@ export default function Footer() {
     }
   }, [dispatch])
 
+  const parseLinkToDefaultColor = (text: string) => {
+    return text.replace(
+      '<a',
+      '<a style="color:#00A69C; text-decoration: none;"'
+    )
+  }
+
   function DesktopFooter() {
     return (
       <Grid
@@ -66,6 +73,7 @@ export default function Footer() {
         direction='row'
         justify='space-between'
         alignItems='center'
+        wrap='no-wrap'
       >
         <Box>
           <Typography variant='h6' color='inherit' align='left'>
@@ -73,7 +81,7 @@ export default function Footer() {
           </Typography>
           <Typography variant='body2' color='inherit' align='left'>
             {'Copyright © '} {new Date().getFullYear()}{' '}
-            <Link className={classes.link} href={OCSC_URL}>
+            <Link className={classes.link} href={OCSC_URL} underline='none'>
               {OCSC_NAME_EN}
             </Link>
           </Typography>
@@ -89,7 +97,11 @@ export default function Footer() {
             style={{ marginBottom: 8 }}
           >
             อีเมล{' '}
-            <Link href={`mailto:${OCSC_EMAIL}`} className={classes.link}>
+            <Link
+              href={`mailto:${OCSC_EMAIL}`}
+              className={classes.link}
+              underline='none'
+            >
               {OCSC_EMAIL}
             </Link>
           </Typography>
@@ -100,7 +112,11 @@ export default function Footer() {
               color='inherit'
               align='right'
             >
-              {value1}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: parseLinkToDefaultColor(value1),
+                }}
+              ></div>
             </Typography>
           )}
           {value2 && (
@@ -110,7 +126,11 @@ export default function Footer() {
               color='inherit'
               align='right'
             >
-              {value2}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: parseLinkToDefaultColor(value2),
+                }}
+              ></div>
             </Typography>
           )}
         </Box>
@@ -136,20 +156,32 @@ export default function Footer() {
           <Box lineHeight={1.2} fontSize={12} textAlign='center' mb={1}>
             {OCSC_ADDRESS}
           </Box>
-          <Box lineHeight={1.2} fontSize={12} textAlign='center' mb={1}>
+          <Box lineHeight={1.2} fontSize={12} textAlign='center' mb={2}>
             อีเมล{' '}
-            <Link href={`mailto:${OCSC_EMAIL}`} className={classes.link}>
+            <Link
+              href={`mailto:${OCSC_EMAIL}`}
+              className={classes.link}
+              underline='none'
+            >
               {OCSC_EMAIL}
             </Link>
           </Box>
           {value1 && (
-            <Box lineHeight={1.2} fontSize={12} textAlign='center'>
-              {value1}
+            <Box lineHeight={1.2} fontSize={12} textAlign='center' mb={1}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: parseLinkToDefaultColor(value1),
+                }}
+              ></div>
             </Box>
           )}
           {value2 && (
-            <Box lineHeight={1.2} fontSize={12} textAlign='center'>
-              {value2}
+            <Box lineHeight={1.2} fontSize={12} textAlign='center' mb={1}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: parseLinkToDefaultColor(value2),
+                }}
+              ></div>
             </Box>
           )}
         </Grid>
