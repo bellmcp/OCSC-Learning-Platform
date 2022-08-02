@@ -1,10 +1,10 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import Link from '@material-ui/core/Link';
+import React from 'react'
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardMedia from '@material-ui/core/CardMedia'
+import Link from '@material-ui/core/Link'
 
-import { PressProps } from '../types';
+import { PressProps } from '../types'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     cardMediaSmall: {
-      paddingTop: '75%', // 4:3
+      paddingTop: '80%', // 4:3
     },
     cardDetail: {
       position: 'absolute',
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
       transform: 'translateX(-50%)',
     },
   })
-);
+)
 
 export default function PressItem({
   id,
@@ -43,10 +43,10 @@ export default function PressItem({
   imageUrl,
   targetUrl,
 }: PressProps) {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
-    <Link href={targetUrl} target="_blank" rel="noreferrer">
+    <Link href={targetUrl} target='_blank' rel='noreferrer'>
       <Card className={classes.cardSmall} style={{ position: 'relative' }}>
         <CardMedia
           key={id}
@@ -54,13 +54,24 @@ export default function PressItem({
           image={imageUrl}
           title={headline}
           style={{
-            background: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75)), url('${imageUrl}')`,
+            background: `url('${imageUrl}')`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center top',
+            backgroundPosition: 'center center',
           }}
         />
-        <div className={classes.cardDetail}>{headline}</div>
+        {headline && (
+          <div
+            className={classes.cardDetail}
+            style={{
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              padding: '4px 16px',
+              borderRadius: 36,
+            }}
+          >
+            {headline}
+          </div>
+        )}
       </Card>
     </Link>
-  );
+  )
 }
