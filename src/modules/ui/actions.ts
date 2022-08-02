@@ -53,7 +53,7 @@ function loadFooterInfo() {
       dispatch({ type: LOAD_FOOTER_INFO_FAILURE })
       dispatch(
         setFlashMessage(
-          `โหลดประวัติการติดต่อเจ้าหน้าที่ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
+          `โหลดช่องทางการติดต่อสำนักงาน ก.พ. ไม่สำเร็จ เกิดข้อผิดพลาด ${err?.response?.status}`,
           'error'
         )
       )
