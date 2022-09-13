@@ -189,6 +189,7 @@ export default function Layout() {
         style={{
           zIndex: 9999999999,
           height: 2,
+          position: 'fixed',
           backgroundColor: theme.palette.primary.main,
           transition: 'all 5s ease 3s',
         }}
@@ -246,7 +247,7 @@ export default function Layout() {
           <Typography gutterBottom style={{ fontWeight: 600 }} variant='body1'>
             OCSC LEARNING SPACE (LEARNER PART)
             <br />
-            Version 2.1.3
+            Version 2.1.4
           </Typography>
           <Divider style={{ margin: '16px 0' }} />
           <Typography gutterBottom style={{ fontWeight: 600 }}>
