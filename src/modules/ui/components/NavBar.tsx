@@ -62,8 +62,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexGrow: 1,
     },
     appBar: {
-      backgroundColor: 'rgba(255, 255, 255, 0.85)',
-      backdropFilter: 'saturate(180%) blur(20px)',
+      backgroundColor: 'rgb(255, 255, 255)',
+      // backgroundColor: 'rgba(255, 255, 255, 0.85)',
+      // backdropFilter: 'saturate(180%) blur(20px)',
       boxShadow: 'rgb(0 0 0 / 15%) 0px 0px 10px',
       [theme.breakpoints.up('sm')]: {
         zIndex: theme.zIndex.drawer + 1,

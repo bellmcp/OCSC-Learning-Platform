@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     padding: theme.spacing(6, 2),
     marginTop: 'auto',
-    backgroundColor: process.env.REACT_APP_SECONDARY_COLOR_HEX,
+    // backgroundColor: process.env.REACT_APP_SECONDARY_COLOR_HEX,
+    backgroundImage: 'linear-gradient(180deg, #09348b, #06225b)',
   },
   link: {
     color: process.env.REACT_APP_TERTIARY_COLOR_HEX,
@@ -60,10 +61,7 @@ export default function Footer() {
   }, [dispatch])
 
   const parseLinkToDefaultColor = (text: string) => {
-    return text.replace(
-      '<a',
-      '<a style="color:#00A69C; text-decoration: none;"'
-    )
+    return text.replace(/<a/g, '<a class="footer_link"')
   }
 
   function DesktopFooter() {
@@ -81,7 +79,7 @@ export default function Footer() {
           </Typography>
           <Typography variant='body2' color='inherit' align='left'>
             {'Copyright © '} {new Date().getFullYear()}{' '}
-            <Link className={classes.link} href={OCSC_URL} underline='none'>
+            <Link className={classes.link} href={OCSC_URL} underline='hover'>
               {OCSC_NAME_EN}
             </Link>
           </Typography>
@@ -100,7 +98,7 @@ export default function Footer() {
             <Link
               href={`mailto:${OCSC_EMAIL}`}
               className={classes.link}
-              underline='none'
+              underline='hover'
             >
               {OCSC_EMAIL}
             </Link>
@@ -161,7 +159,7 @@ export default function Footer() {
             <Link
               href={`mailto:${OCSC_EMAIL}`}
               className={classes.link}
-              underline='none'
+              underline='hover'
             >
               {OCSC_EMAIL}
             </Link>
