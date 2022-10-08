@@ -380,7 +380,7 @@ export default function Layout() {
             bottom: 0,
             left: 0,
             width: '100vw',
-            zIndex: 99999,
+            zIndex: 1199,
             backgroundColor: 'rgba(255, 255, 255, 0.95)',
             // backdropFilter: 'saturate(180%) blur(20px)',
             boxShadow: 'rgb(0 0 0 / 15%) 0px 0px 10px',
