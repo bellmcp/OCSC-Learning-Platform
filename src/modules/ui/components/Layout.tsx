@@ -37,7 +37,7 @@ import Footer from './Footer'
 
 import { isLogin } from 'utils/isLogin'
 import * as pressesActions from 'modules/press/actions'
-import { setCookie, getCookie } from 'utils/cookies'
+import { setCookieSubDomain, getCookie } from 'utils/cookies'
 
 export default function Layout() {
   const { pathname } = useLocation()
@@ -186,7 +186,7 @@ export default function Layout() {
   }
 
   const handleClickAcceptCookie = () => {
-    setCookie('AcceptCookie', 'true', 9999)
+    setCookieSubDomain('AcceptCookie', 'true', 9999)
     setIsCookieBannerOpen(false)
   }
 
