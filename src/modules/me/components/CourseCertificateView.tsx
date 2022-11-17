@@ -121,7 +121,7 @@ export default function CourseCertificateView() {
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
-    documentTitle: `ประกาศนียบัตร-วิชา${certificateId}-${currentCertificate?.firstname}-${currentCertificate?.lastname}`,
+    documentTitle: `ประกาศนียบัตรวิชา${currentCertificate?.course}-${currentCertificate?.firstname} ${currentCertificate?.lastname}`,
     onBeforeGetContent: handleOnBeforeGetContent,
     onBeforePrint: handleBeforePrint,
     onAfterPrint: handleAfterPrint,
