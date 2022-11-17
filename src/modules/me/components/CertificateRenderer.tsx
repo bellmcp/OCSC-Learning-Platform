@@ -290,7 +290,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
             >
               <Grid
                 item
-                style={{ display: 'flex', padding: '0 50px' }}
+                style={{ display: 'flex', padding: '0 50px 70px' }}
                 direction='column'
               >
                 <img
