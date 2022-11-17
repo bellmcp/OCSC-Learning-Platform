@@ -369,66 +369,68 @@ export default function Layout() {
         </Alert>
       </Snackbar>
       {!isLearnModule && <Footer />}
-      <Slide
-        direction='up'
-        in={isCookieBannerOpen}
-        timeout={{ enter: 2000, exit: 1000 }}
-      >
-        <div
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            width: '100vw',
-            zIndex: 1199,
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            // backdropFilter: 'saturate(180%) blur(20px)',
-            boxShadow: 'rgb(0 0 0 / 15%) 0px 0px 10px',
-            display: 'flex',
-            alignItems: 'center',
-          }}
+      {!isLearnModule && (
+        <Slide
+          direction='up'
+          in={isCookieBannerOpen}
+          timeout={{ enter: 2000, exit: 1000 }}
         >
-          <Container maxWidth='lg'>
-            <Grid
-              container
-              spacing={2}
-              justify='space-between'
-              alignItems='center'
-              style={{ padding: '18px 12px' }}
-            >
-              <Grid item>
-                <Typography
-                  variant='body1'
-                  color='textPrimary'
-                  style={{ fontWeight: 500 }}
-                >
-                  เราใช้คุกกี้เพื่อพัฒนาประสิทธิภาพ
-                  และประสบการณ์ที่ดีในการใช้เว็บไซต์ของคุณ
-                </Typography>
-                <Typography variant='body2' color='textSecondary'>
-                  คุณสามารถศึกษารายละเอียดได้ที่{' '}
-                  <Link
-                    href='https://www.ocsc.go.th/cookies-policy'
-                    target='_blank'
+          <div
+            style={{
+              position: 'fixed',
+              bottom: 0,
+              left: 0,
+              width: '100vw',
+              zIndex: 1199,
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
+              // backdropFilter: 'saturate(180%) blur(20px)',
+              boxShadow: 'rgb(0 0 0 / 15%) 0px 0px 10px',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Container maxWidth='lg'>
+              <Grid
+                container
+                spacing={2}
+                justify='space-between'
+                alignItems='center'
+                style={{ padding: '18px 12px' }}
+              >
+                <Grid item>
+                  <Typography
+                    variant='body1'
+                    color='textPrimary'
+                    style={{ fontWeight: 500 }}
                   >
-                    นโยบายคุ้กกี้
-                  </Link>
-                </Typography>
+                    เราใช้คุกกี้เพื่อพัฒนาประสิทธิภาพ
+                    และประสบการณ์ที่ดีในการใช้เว็บไซต์ของคุณ
+                  </Typography>
+                  <Typography variant='body2' color='textSecondary'>
+                    คุณสามารถศึกษารายละเอียดได้ที่{' '}
+                    <Link
+                      href='https://www.ocsc.go.th/cookies-policy'
+                      target='_blank'
+                    >
+                      นโยบายคุ้กกี้
+                    </Link>
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant='contained'
+                    color='secondary'
+                    style={{ borderRadius: 24 }}
+                    onClick={handleClickAcceptCookie}
+                  >
+                    ยอมรับ
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Button
-                  variant='contained'
-                  color='secondary'
-                  style={{ borderRadius: 24 }}
-                  onClick={handleClickAcceptCookie}
-                >
-                  ยอมรับ
-                </Button>
-              </Grid>
-            </Grid>
-          </Container>
-        </div>
-      </Slide>
+            </Container>
+          </div>
+        </Slide>
+      )}
     </ThemeProvider>
   )
 }
