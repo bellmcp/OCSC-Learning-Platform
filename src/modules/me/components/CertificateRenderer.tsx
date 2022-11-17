@@ -58,13 +58,13 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
             >
               <Grid
                 item
-                style={{ display: 'flex', padding: '0 50px 75px' }}
+                style={{ display: 'flex', padding: '0 50px 100px' }}
                 direction='column'
               >
                 <Grid
                   container
                   justify='center'
-                  alignItems='center'
+                  alignItems='flex-end'
                   style={{ marginBottom: 10 }}
                   spacing={4}
                 >
@@ -85,8 +85,9 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                       src={this.props.coLogo}
                       style={{
                         width: 'auto',
-                        height: 150,
+                        height: 115,
                         alignSelf: 'center',
+                        marginBottom: -3,
                       }}
                     />
                   </Grid>
@@ -98,8 +99,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                   align='center'
                   style={{
                     fontSize: 30,
-                    marginBottom: this.props.text2 ? 15 : 10,
-                    lineHeight: '1.1',
+                    marginBottom: this.props.text2 ? 25 : 15,
+                    lineHeight: '1.2',
                   }}
                 >
                   {this.props.text1}
@@ -121,7 +122,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                     width: 470,
                     color: '#BCBEC0',
                     backgroundColor: '#BCBEC0',
-                    marginBottom: 50,
+                    marginBottom: 45,
                   }}
                 />
 
@@ -152,7 +153,11 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                   variant='h6'
                   color='textPrimary'
                   align='center'
-                  style={{ fontSize: 28, marginBottom: 38, lineHeight: '1.2' }}
+                  style={{
+                    fontSize: this.props.contentName.length >= 42 ? 25 : 28,
+                    marginBottom: 38,
+                    lineHeight: '1.2',
+                  }}
                 >
                   {this.props.isCurriculum ? 'หลักสูตร' : 'วิชา'}{' '}
                   {this.props.contentName}
@@ -188,7 +193,7 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                 <Grid
                   container
                   justify='center'
-                  alignItems='center'
+                  alignItems='flex-start'
                   style={{ marginBottom: 10 }}
                   spacing={4}
                 >
@@ -209,8 +214,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                           : signatureNull
                       }
                       style={{
-                        width: 180,
-                        height: 'auto',
+                        width: 'auto',
+                        height: 40,
                         alignSelf: 'center',
                         marginBottom: 10,
                       }}
@@ -249,8 +254,8 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                           : signatureNull
                       }
                       style={{
-                        width: 180,
-                        height: 'auto',
+                        width: 'auto',
+                        height: 40,
                         alignSelf: 'center',
                         marginBottom: 10,
                       }}
