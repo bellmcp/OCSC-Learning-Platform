@@ -104,7 +104,15 @@ export default class CertificateRenderer extends React.PureComponent<Props> {
                   }}
                 >
                   {this.props.text1}
-                  {this.props.text2 && <br />}
+                  {this.props.text2 && (
+                    <>
+                      <br />
+                      <span style={{ fontSize: 22, lineHeight: '40px' }}>
+                        ร่วมกับ
+                      </span>
+                      <br />
+                    </>
+                  )}
                   <span>{this.props.text2}</span>
                 </Typography>
                 <Typography
