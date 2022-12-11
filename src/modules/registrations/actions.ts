@@ -127,11 +127,10 @@ function registerCourse(courseRoundId) {
 
     // check registration condition
     try {
-      await axios.post(
-        `/Users/${items.id}/RegistrationConditions`,
-        {
-          courseId: parseInt(courseRoundId),
-        },
+      await axios.get(
+        `/Users/${items.id}/RegistrationConditions?courseId=${parseInt(
+          courseRoundId
+        )}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -227,6 +226,24 @@ function registerCurriculum(curriculumId) {
       user: { items },
     } = getState()
     const token = getCookie('token')
+
+    // check registration condition
+    try {
+      await axios.get(
+        `/Users/${items.id}/RegistrationConditions?curriculumId=${parseInt(
+          curriculumId
+        )}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+    } catch (err) {
+      const data = err.response.data
+      const { title, mesg } = data
+      dispatch(uiActions.openGlobalModal(title, mesg))
+      return
+    }
+
     dispatch({ type: CURRICULUM_REGISTRATION_REQUEST })
     try {
       var { data } = await axios.post(
