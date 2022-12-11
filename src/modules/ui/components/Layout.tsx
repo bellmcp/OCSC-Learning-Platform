@@ -263,7 +263,12 @@ export default function Layout() {
         )}
       </Dialog>
       {/* REGISTRATION CONDITION DIALOG */}
-      <Dialog open={isGlobalModalOpen} onClose={closeGlobalModal}>
+      <Dialog
+        open={isGlobalModalOpen}
+        onClose={closeGlobalModal}
+        fullWidth
+        maxWidth='sm'
+      >
         <DialogTitle style={{ margin: '16px 0' }}>
           <Typography
             variant='h5'

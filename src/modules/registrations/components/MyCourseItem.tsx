@@ -2,6 +2,10 @@
 import React, { useState } from 'react'
 import DayJS from 'react-dayjs'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import parseJwt from 'utils/parseJwt'
+
 import {
   createStyles,
   makeStyles,
@@ -33,6 +37,8 @@ import {
 import { green } from '@material-ui/core/colors'
 
 import isBetween from 'utils/isBetween'
+import { getCookie } from 'utils/cookies'
+import * as uiActions from 'modules/ui/actions'
 
 import { MyCourseProps } from '../types'
 
@@ -87,10 +93,26 @@ export default function MyCourseItem({
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('xs'))
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const isEligibleForAccess = isBetween(courseStart, courseEnd, localDateTime)
 
-  const linkToLecture = () => {
+  const linkToLecture = async () => {
+    const token = getCookie('token')
+    const userId = parseJwt(token).unique_name
+    try {
+      await axios.get(
+        `/Users/${userId}/ClassroomConditions?courseId=${parseInt(courseId)}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+    } catch (err) {
+      const data = err.response.data
+      const { title, mesg } = data
+      dispatch(uiActions.openGlobalModal(title, mesg))
+      return
+    }
     history.push(`${PATH}/learn/courses/${courseId}`)
   }
 
