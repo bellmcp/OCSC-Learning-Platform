@@ -44,10 +44,17 @@ export default function Layout() {
   const history = useHistory()
   const PATH = process.env.REACT_APP_BASE_PATH
   const dispatch = useDispatch()
-  const { isSnackbarOpen, isDialogOpen, flashMessage, alertType } = useSelector(
-    (state) => state.ui
-  )
+  const {
+    isSnackbarOpen,
+    isDialogOpen,
+    flashMessage,
+    alertType,
+    isGlobalModalOpen,
+    globalModalTitle,
+    globalModalMessage,
+  } = useSelector((state) => state.ui)
   const closeFlashMessage = () => dispatch(actions.clearFlashMessage())
+  const closeGlobalModal = () => dispatch(actions.clearGlobalModal())
 
   const [announcementDialogOpen, setAnnouncementDialogOpen] = useState(false)
 
@@ -254,6 +261,35 @@ export default function Layout() {
             </DialogActions>
           </>
         )}
+      </Dialog>
+      {/* REGISTRATION CONDITION DIALOG */}
+      <Dialog open={isGlobalModalOpen} onClose={closeGlobalModal}>
+        <DialogTitle style={{ margin: '16px 0' }}>
+          <Typography
+            variant='h5'
+            color='secondary'
+            align='center'
+            style={{ fontWeight: 600 }}
+          >
+            {globalModalTitle}
+          </Typography>
+        </DialogTitle>
+        <DialogContent style={{ padding: '0 32px' }}>
+          <Typography variant='body1' align='center' color='textPrimary'>
+            {globalModalMessage}
+          </Typography>
+        </DialogContent>
+        <DialogActions style={{ margin: '16px 0', marginTop: 24 }}>
+          <div style={{ flex: '1 0 0' }} />
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={closeGlobalModal}
+          >
+            รับทราบ
+          </Button>
+          <div style={{ flex: '1 0 0' }} />
+        </DialogActions>
       </Dialog>
       {/* DEBUG DIALOG */}
       <Dialog open={debugDialogOpen} onClose={handleDebugDialogClose}>

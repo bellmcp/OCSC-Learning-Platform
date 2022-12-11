@@ -4,6 +4,8 @@ import axios from 'axios'
 const SET_FLASH_MESSAGE = 'learning-platform/ui/SET_FLASH_MESSAGE'
 const CLEAR_FLASH_MESSAGE = 'learning-platform/ui/CLEAR_FLASH_MESSAGE'
 const SET_LEARN_EXIT_DIALOG = 'learning-platform/ui/SET_LEARN_EXIT_DIALOG'
+const OPEN_GLOBAL_MODAL = 'learning-platform/ui/OPEN_GLOBAL_MODAL'
+const CLEAR_GLOBAL_MODAL = 'learning-platform/ui/CLEAR_GLOBAL_MODAL'
 const LOAD_FOOTER_INFO_REQUEST = 'learning-platform/ui/LOAD_FOOTER_INFO_REQUEST'
 const LOAD_FOOTER_INFO_SUCCESS = 'learning-platform/ui/LOAD_FOOTER_INFO_SUCCESS'
 const LOAD_FOOTER_INFO_FAILURE = 'learning-platform/ui/LOAD_FOOTER_INFO_FAILURE'
@@ -30,6 +32,22 @@ function setLearnExitDialog(isOpen: boolean) {
     payload: {
       isOpen,
     },
+  }
+}
+
+function openGlobalModal(title: string, message: string) {
+  return {
+    type: OPEN_GLOBAL_MODAL,
+    payload: {
+      globalModalTitle: title,
+      globalModalMessage: message,
+    },
+  }
+}
+
+function clearGlobalModal() {
+  return {
+    type: CLEAR_GLOBAL_MODAL,
   }
 }
 
@@ -68,8 +86,12 @@ export {
   LOAD_FOOTER_INFO_REQUEST,
   LOAD_FOOTER_INFO_SUCCESS,
   LOAD_FOOTER_INFO_FAILURE,
+  OPEN_GLOBAL_MODAL,
+  CLEAR_GLOBAL_MODAL,
   setFlashMessage,
   clearFlashMessage,
   setLearnExitDialog,
+  openGlobalModal,
+  clearGlobalModal,
   loadFooterInfo,
 }

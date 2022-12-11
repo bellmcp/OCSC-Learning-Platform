@@ -124,6 +124,25 @@ function registerCourse(courseRoundId) {
       user: { items },
     } = getState()
     const token = getCookie('token')
+
+    // check registration condition
+    try {
+      await axios.post(
+        `/Users/${items.id}/RegistrationConditions`,
+        {
+          courseId: parseInt(courseRoundId),
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+    } catch (err) {
+      const data = err.response.data
+      const { title, mesg } = data
+      dispatch(uiActions.openGlobalModal(title, mesg))
+      return
+    }
+
     dispatch({ type: COURSE_REGISTRATION_REQUEST })
     try {
       var { data } = await axios.post(
