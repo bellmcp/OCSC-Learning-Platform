@@ -251,10 +251,6 @@ function updateEvaluation(
 
     const noAnswerItems = []
 
-    const test = [...evaluationAnswer].forEach((item, index) => {
-      if (item === '0') noAnswerItems.push(index + 1)
-    })
-
     if (evaluationAnswer.includes('0')) {
       dispatch(
         uiActions.setFlashMessage(

@@ -117,7 +117,7 @@ export default function CourseCertificateView() {
 
   const reactToPrintContent = useCallback(() => {
     return componentRef.current
-  }, [componentRef.current])
+  }, [componentRef.current]) //eslint-disable-line
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
@@ -137,7 +137,7 @@ export default function CourseCertificateView() {
     ) {
       onBeforeGetContentResolve.current()
     }
-  }, [onBeforeGetContentResolve.current, text])
+  }, [onBeforeGetContentResolve.current, text]) //eslint-disable-line
 
   function renderCertificateView() {
     if (isCourseCertificatesLoading || isCourseCertificateInfoLoading) {

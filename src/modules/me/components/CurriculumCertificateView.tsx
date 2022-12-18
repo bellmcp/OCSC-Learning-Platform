@@ -119,7 +119,7 @@ export default function CurriculumCertificateView() {
 
   const reactToPrintContent = useCallback(() => {
     return componentRef.current
-  }, [componentRef.current])
+  }, [componentRef.current]) //eslint-disable-line
 
   const handlePrint = useReactToPrint({
     content: reactToPrintContent,
@@ -139,7 +139,7 @@ export default function CurriculumCertificateView() {
     ) {
       onBeforeGetContentResolve.current()
     }
-  }, [onBeforeGetContentResolve.current, text])
+  }, [onBeforeGetContentResolve.current, text]) //eslint-disable-line
 
   function renderCertificateView() {
     if (isCurriculumCertificatesLoading || isCurriculumCertificateInfoLoading) {

@@ -218,7 +218,7 @@ export default function NavBar(props: NavigationBarProps) {
       const actionProfile = userActions.loadUser()
       dispatch(actionProfile)
     }
-  }, [dispatch, userId])
+  }, [dispatch, userId]) //eslint-disable-line
 
   const { items: users } = useSelector((state: any) => state.user)
   const login = () => {

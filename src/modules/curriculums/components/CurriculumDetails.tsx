@@ -17,10 +17,10 @@ import {
   Avatar,
   Button,
   useMediaQuery,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
+  // List,
+  // ListItem,
+  // ListItemText,
+  // ListItemAvatar,
 } from '@material-ui/core'
 import {
   Assignment as AssignmentIcon,
@@ -29,10 +29,10 @@ import {
   People as PeopleIcon,
   GpsFixed as TargetIcon,
   ArrowForwardIos as ArrowForwardIcon,
-  FiberManualRecord as Circle,
+  // FiberManualRecord as Circle,
 } from '@material-ui/icons'
 import { isLogin } from 'utils/isLogin'
-import categoryColor from 'utils/categoryColor'
+// import categoryColor from 'utils/categoryColor'
 
 import * as curriculumsActions from '../actions'
 import * as coursesActions from 'modules/courses/actions'
@@ -107,9 +107,9 @@ export default function CurriculumDetails() {
   const { isLoading: isCurriculumLoading } = useSelector(
     (state) => state.curriculums
   )
-  const { items: categories } = useSelector((state) => state.categories)
+  // const { items: categories } = useSelector((state) => state.categories)
   var { myCurriculums } = useSelector((state) => state.registrations)
-  const { child: childCourses } = useSelector((state) => state.curriculums)
+  // const { child: childCourses } = useSelector((state) => state.curriculums)
 
   if (myCurriculums === '') {
     myCurriculums = []

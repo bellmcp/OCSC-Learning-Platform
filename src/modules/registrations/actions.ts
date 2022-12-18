@@ -125,7 +125,6 @@ function registerCourse(courseRoundId) {
     } = getState()
     const token = getCookie('token')
 
-    // check registration condition
     try {
       await axios.get(
         `/Users/${items.id}/RegistrationConditions?courseId=${parseInt(
@@ -227,7 +226,6 @@ function registerCurriculum(curriculumId) {
     } = getState()
     const token = getCookie('token')
 
-    // check registration condition
     try {
       await axios.get(
         `/Users/${items.id}/RegistrationConditions?curriculumId=${parseInt(

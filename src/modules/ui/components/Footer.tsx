@@ -42,8 +42,8 @@ const OCSC_URL = 'https://www.ocsc.go.th/'
 const OCSC_ADDRESS =
   '47/111 หมู่ 4 ถนนติวานนท์ ตำบลตลาดขวัญ อำเภอเมือง จังหวัดนนทบุรี 11000'
 const OCSC_EMAIL = 'learningspace@ocsc.go.th'
-const OCSC_PHONE =
-  'โทรศัพท์ 02 547 1000 ต่อ 1795, 1807 และ 6942 (ภายในเวลาราชการ)'
+// const OCSC_PHONE =
+//   'โทรศัพท์ 02 547 1000 ต่อ 1795, 1807 และ 6942 (ภายในเวลาราชการ)'
 
 export default function Footer() {
   const classes = useStyles()
@@ -58,7 +58,7 @@ export default function Footer() {
       const footer_info_action = uiActions.loadFooterInfo()
       dispatch(footer_info_action)
     }
-  }, [dispatch])
+  }, [dispatch]) //eslint-disable-line
 
   const parseLinkToDefaultColor = (text: string) => {
     return text.replace(/<a/g, '<a class="footer_link"')

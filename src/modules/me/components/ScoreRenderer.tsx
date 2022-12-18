@@ -1,10 +1,10 @@
 //@ts-nocheck
-import * as React from 'react';
-import { get } from 'lodash';
-import { Typography, Grid, Container } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import * as React from 'react'
+import { get } from 'lodash'
+import { Typography, Grid, Container } from '@material-ui/core'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
-import ScoreTableRow from './ScoreTableRow';
+import ScoreTableRow from './ScoreTableRow'
 
 const theme = createMuiTheme({
   typography: {
@@ -21,11 +21,12 @@ const theme = createMuiTheme({
       main: '#EFAA1F',
     },
   },
-});
+})
 
 export default class ScoreRenderer extends React.PureComponent<Props> {
+  //eslint-disable-next-line
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   public render() {
@@ -95,20 +96,20 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
         title: 'ชุดวิชาที่ 5: การวางแผนปฏิบัติงานโครงการ และการดำเนินการตามแผน',
         value: this.props.s13,
       },
-    ];
+    ]
 
     const getTotalItem = () => {
-      let sum = 0;
+      let sum = 0
       for (let i = 0; i <= 13; i++) {
-        sum += parseInt(get(this.props, `s${i}`, 0));
+        sum += parseInt(get(this.props, `s${i}`, 0))
       }
-      return sum;
-    };
+      return sum
+    }
 
     const getPassStatus = () => {
-      if (this.props.pass) return <span style={{ color: 'green' }}>ผ่าน</span>;
-      else return <span style={{ color: 'red' }}>ไม่ผ่าน</span>;
-    };
+      if (this.props.pass) return <span style={{ color: 'green' }}>ผ่าน</span>
+      else return <span style={{ color: 'red' }}>ไม่ผ่าน</span>
+    }
 
     return (
       <ThemeProvider theme={theme}>
@@ -122,20 +123,20 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
         >
           <Grid
             container
-            direction="column"
-            justify="flex-start"
-            alignItems="center"
-            wrap="nowrap"
+            direction='column'
+            justify='flex-start'
+            alignItems='center'
+            wrap='nowrap'
           >
             <Grid
               item
               style={{ display: 'flex', width: '97%' }}
-              direction="column"
+              direction='column'
             >
               <Typography
-                variant="h5"
-                color="textPrimary"
-                align="center"
+                variant='h5'
+                color='textPrimary'
+                align='center'
                 style={{ fontSize: 15, marginTop: 50, marginBottom: 10 }}
               >
                 <b>
@@ -153,11 +154,11 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   margin: '5px 0',
                 }}
               />
-              <Grid container justify="space-between">
+              <Grid container justify='space-between'>
                 <Typography
-                  variant="h5"
-                  color="textPrimary"
-                  align="left"
+                  variant='h5'
+                  color='textPrimary'
+                  align='left'
                   style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
                   <b style={{ marginRight: 20 }}>ชื่อ - สกุล</b> :{' '}
@@ -165,36 +166,36 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                   {this.props.firstName} {this.props.lastName}
                 </Typography>
                 <Typography
-                  variant="h5"
-                  color="textPrimary"
-                  align="left"
+                  variant='h5'
+                  color='textPrimary'
+                  align='left'
                   style={{ fontSize: 13, marginTop: 10, marginBottom: 10 }}
                 >
                   <b>เลขประจำตัวประชาชน</b> : {this.props.id}
                 </Typography>
               </Grid>
               <Typography
-                variant="h5"
-                color="textPrimary"
-                align="left"
+                variant='h5'
+                color='textPrimary'
+                align='left'
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b style={{ marginRight: 25 }}>ตำแหน่ง</b> :{' '}
                 {this.props.jobTitle} {this.props.jobLevel}
               </Typography>
               <Typography
-                variant="h5"
-                color="textPrimary"
-                align="left"
+                variant='h5'
+                color='textPrimary'
+                align='left'
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b style={{ marginRight: 18 }}>หน่วยงาน</b> :{' '}
                 {this.props.department} {this.props.ministry}
               </Typography>
               <Typography
-                variant="h5"
-                color="textPrimary"
-                align="right"
+                variant='h5'
+                color='textPrimary'
+                align='right'
                 style={{ fontSize: 13, marginBottom: 10 }}
               >
                 <b>วันที่จบหลักสูตร</b> :{' '}
@@ -262,26 +263,26 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
                 </tr>
                 <tr>
                   <td
-                    colspan="3"
+                    colspan='3'
                     style={{ padding: 6, borderRight: '1px solid #000' }}
                   >
                     สรุปผลการเรียนรู้
                   </td>
-                  <td colspan="2">{getPassStatus()}</td>
+                  <td colspan='2'>{getPassStatus()}</td>
                 </tr>
               </table>
               <Typography
-                variant="h5"
-                color="textPrimary"
-                align="left"
+                variant='h5'
+                color='textPrimary'
+                align='left'
                 style={{ fontSize: 13, marginTop: 20, marginBottom: 5 }}
               >
                 <b>ผู้บันทึกคะแนน</b> : สำนักงาน ก.พ.
               </Typography>
               <Typography
-                variant="h5"
-                color="textPrimary"
-                align="left"
+                variant='h5'
+                color='textPrimary'
+                align='left'
                 style={{ fontSize: 13, marginTop: 5 }}
               >
                 * หมายเหตุ ​: คะแนน Post-test ที่ผู้เรียนทำได้ในแต่ละวิชา
@@ -291,6 +292,6 @@ export default class ScoreRenderer extends React.PureComponent<Props> {
           </Grid>
         </Container>
       </ThemeProvider>
-    );
+    )
   }
 }

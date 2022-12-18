@@ -30,6 +30,7 @@ const theme = createMuiTheme({
 })
 
 export default class CertificateRenderer extends React.PureComponent<Props> {
+  //eslint-disable-next-line
   constructor(props) {
     super(props)
   }

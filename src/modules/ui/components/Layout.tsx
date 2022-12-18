@@ -125,7 +125,7 @@ export default function Layout() {
       }
     }
     setInitialActivePage()
-  }, [pathname])
+  }, [pathname]) //eslint-disable-line
 
   const [activePage, setActivePage] = useState(0)
   const [isCookieBannerOpen, setIsCookieBannerOpen] = useState(true)

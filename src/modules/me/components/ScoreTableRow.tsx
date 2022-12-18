@@ -1,36 +1,37 @@
 //@ts-nocheck
-import * as React from 'react';
-import { get } from 'lodash';
+import * as React from 'react'
+import { get } from 'lodash'
 
 export default class ScoreTableRow extends React.PureComponent<Props> {
+  //eslint-disable-next-line
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   public render() {
     const getMinimumScore = (value: number) => {
-      return Math.floor(value * 0.6);
-    };
+      return Math.floor(value * 0.6)
+    }
 
     const getPassStatus = (value: number) => {
       if (
         parseInt(value) >=
         parseInt(getMinimumScore(get(this.props.value, '[0]', 0)))
       )
-        return <span style={{ color: 'green' }}>{value}</span>;
-      else return <span style={{ color: 'red' }}>{value}</span>;
-    };
+        return <span style={{ color: 'green' }}>{value}</span>
+      else return <span style={{ color: 'red' }}>{value}</span>
+    }
 
     const defaultStyle = {
       borderBottom: '1px solid #000',
       borderRight: '1px solid #000',
       padding: 6,
-    };
+    }
 
     const rightmostStyle = {
       borderBottom: '1px solid #000',
       padding: 6,
-    };
+    }
 
     return (
       <tr
@@ -75,6 +76,6 @@ export default class ScoreTableRow extends React.PureComponent<Props> {
           </>
         )}
       </tr>
-    );
+    )
   }
 }

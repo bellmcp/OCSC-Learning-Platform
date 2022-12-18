@@ -1,8 +1,8 @@
 // @ts-nocheck
-import React, { useEffect } from 'react';
-import clsx from 'clsx';
-import queryString from 'query-string';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import clsx from 'clsx'
+import queryString from 'query-string'
+import { Link as RouterLink, useLocation } from 'react-router-dom'
 import {
   List,
   ListItemIcon,
@@ -12,16 +12,16 @@ import {
   MenuItem,
   Grid,
   Badge,
-} from '@material-ui/core';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+} from '@material-ui/core'
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
+import { green } from '@material-ui/core/colors'
+import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import {
   getContentType,
   getContentTypeText,
   getContentTypeIcon,
   getContentTypeTitle,
-} from 'utils/contentType';
+} from 'utils/contentType'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
       borderLeft: `6px solid ${green[800]}`,
     },
   })
-);
+)
 
 export default function ContentList({
   courseContents,
@@ -48,14 +48,14 @@ export default function ContentList({
   contentListProgress,
   setContentListProgress,
 }: any) {
-  const classes = useStyles();
-  const { pathname, search } = useLocation();
-  const { contentId } = queryString.parse(search);
+  const classes = useStyles()
+  const { pathname, search } = useLocation()
+  const { contentId } = queryString.parse(search)
 
   function getContentViewProgress(contentId: any) {
     return contentListProgress.find(
       (contentList: any) => contentList.courseContentId === parseInt(contentId)
-    );
+    )
   }
 
   useEffect(() => {
@@ -63,25 +63,25 @@ export default function ContentList({
       return {
         courseContentId: contentView.courseContentId,
         isCompleted: contentView.isCompleted,
-      };
-    });
-    setContentListProgress(progress);
-  }, [contentViews]);
+      }
+    })
+    setContentListProgress(progress)
+  }, [contentViews]) //eslint-disable-line
 
   //SEQUENTIAL FLOW
   function isDisableContentViewItem(itemId) {
     if (isSeqentialFlow && itemId !== 0) {
-      return !contentViews[itemId - 1]?.isCompleted;
+      return !contentViews[itemId - 1]?.isCompleted
     }
-    return false;
+    return false
   }
 
   return (
-    <List component="div">
+    <List component='div'>
       {courseContents.length === 0 ? (
-        <Grid container justify="center" alignItems="center">
+        <Grid container justify='center' alignItems='center'>
           <Box my={6}>
-            <Typography variant="body2" color="textSecondary">
+            <Typography variant='body2' color='textSecondary'>
               ไม่มีเนื้อหารายวิชา
             </Typography>
           </Box>
@@ -122,8 +122,8 @@ export default function ContentList({
               <ListItemText
                 primary={
                   <Typography
-                    variant="body1"
-                    color="textPrimary"
+                    variant='body1'
+                    color='textPrimary'
                     style={{ lineHeight: '1.4' }}
                   >
                     {courseContent?.name
@@ -137,8 +137,8 @@ export default function ContentList({
                 secondary={
                   courseContent?.minutes && (
                     <Typography
-                      variant="body2"
-                      color="textSecondary"
+                      variant='body2'
+                      color='textSecondary'
                       style={{ marginTop: 2 }}
                     >
                       {`${getContentTypeText(
@@ -157,5 +157,5 @@ export default function ContentList({
         </>
       )}
     </List>
-  );
+  )
 }
