@@ -392,6 +392,7 @@ export default function MyCurriculumItem({
                     <MyCourseItem
                       {...childCourse}
                       isChildCourse={true}
+                      curriculumId={curriculumId}
                       localDateTime={localDateTime}
                       showNumber={true}
                       index={index}

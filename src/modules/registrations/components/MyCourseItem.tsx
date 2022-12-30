@@ -88,6 +88,7 @@ export default function MyCourseItem({
   handleUnEnrollDialogOpen,
   setUnEnrollInfo,
   courseRoundId,
+  curriculumId,
 }: MyCourseProps) {
   const classes = useStyles()
   const theme = useTheme()
@@ -100,19 +101,39 @@ export default function MyCourseItem({
   const linkToLecture = async () => {
     const token = getCookie('token')
     const userId = parseJwt(token).unique_name
-    try {
-      await axios.get(
-        `/Users/${userId}/ClassroomConditions?courseId=${parseInt(courseId)}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-    } catch (err) {
-      const data = err.response.data
-      const { title, mesg } = data
-      dispatch(uiActions.openGlobalModal(title, mesg))
-      return
+
+    if (isChildCourse) {
+      try {
+        await axios.get(
+          `/Users/${userId}/ClassroomConditions?curriculumId=${parseInt(
+            curriculumId
+          )}&courseId=${parseInt(courseId)}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+      } catch (err) {
+        const data = err.response.data
+        const { title, mesg } = data
+        dispatch(uiActions.openGlobalModal(title, mesg))
+        return
+      }
+    } else {
+      try {
+        await axios.get(
+          `/Users/${userId}/ClassroomConditions?courseId=${parseInt(courseId)}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        )
+      } catch (err) {
+        const data = err.response.data
+        const { title, mesg } = data
+        dispatch(uiActions.openGlobalModal(title, mesg))
+        return
+      }
     }
+
     history.push(`${PATH}/learn/courses/${courseId}`)
   }
 
