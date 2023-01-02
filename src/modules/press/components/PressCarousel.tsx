@@ -76,6 +76,9 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 0),
       zIndex: 2,
       outline: 'none !important',
+      '&:disabled': {
+        cursor: 'not-allowed',
+      },
     },
     buttonNext: {
       position: 'absolute',
@@ -86,6 +89,9 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 0),
       zIndex: 2,
       outline: 'none !important',
+      '&:disabled': {
+        cursor: 'not-allowed',
+      },
     },
     growButtonBack: {
       position: 'absolute',

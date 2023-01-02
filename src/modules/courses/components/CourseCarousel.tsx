@@ -1,28 +1,28 @@
 // @ts-nocheck
-import React from 'react';
+import React from 'react'
 import {
   CarouselProvider,
   Slider,
   Slide,
   ButtonBack,
   ButtonNext,
-} from 'pure-react-carousel';
-import { useMediaQuery, Grid, Typography } from '@material-ui/core/';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+} from 'pure-react-carousel'
+import { useMediaQuery, Grid, Typography } from '@material-ui/core/'
+import { makeStyles, useTheme } from '@material-ui/core/styles'
 import {
   ArrowForwardIosRounded as ArrowForward,
   ArrowBackIosRounded as ArrowBack,
-} from '@material-ui/icons';
-import CourseItem from './CourseItem';
-import Loading from 'modules/ui/components/Loading';
+} from '@material-ui/icons'
+import CourseItem from './CourseItem'
+import Loading from 'modules/ui/components/Loading'
 
-import { CategoryProps } from 'modules/categories/types';
-import { CourseProps } from '../types';
+import { CategoryProps } from 'modules/categories/types'
+import { CourseProps } from '../types'
 
 interface CourseCarouselProps {
-  courses: CourseProps;
-  categories: CategoryProps;
-  isLoading: boolean;
+  courses: CourseProps
+  categories: CategoryProps
+  isLoading: boolean
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -59,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       left: '-10px',
     },
+    '&:disabled': {
+      cursor: 'not-allowed',
+    },
   },
   buttonNext: {
     position: 'absolute',
@@ -71,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none !important',
     [theme.breakpoints.down('xs')]: {
       right: '-10px',
+    },
+    '&:disabled': {
+      cursor: 'not-allowed',
     },
   },
   growButtonBack: {
@@ -95,37 +101,37 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
     boxShadow: `0 0px 11px 15px ${theme.palette.background.default}`,
   },
-}));
+}))
 
 export default function CourseCarousel({
   courses,
   categories,
   isLoading,
 }: CourseCarouselProps) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
-  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
+  const classes = useStyles()
+  const theme = useTheme()
+  const isMdUp = useMediaQuery(theme.breakpoints.up('md'))
+  const isSmUp = useMediaQuery(theme.breakpoints.up('sm'))
 
   function renderFilteredResult() {
     if (isLoading) {
-      return <Loading height={410} />;
+      return <Loading height={410} />
     } else if (courses.length === 0) {
       return (
         <Grid
           container
-          justify="center"
-          alignItems="center"
+          justify='center'
+          alignItems='center'
           style={{ height: 410 }}
         >
-          <Typography component="h2" variant="body1" color="textSecondary">
+          <Typography component='h2' variant='body1' color='textSecondary'>
             ไม่พบผลลัพธ์การค้นหา
           </Typography>
         </Grid>
-      );
+      )
     } else {
       return (
-        <Grid container direction="row" justify="center" alignItems="center">
+        <Grid container direction='row' justify='center' alignItems='center'>
           <CarouselProvider
             naturalSlideWidth={100}
             naturalSlideHeight={135}
@@ -138,7 +144,7 @@ export default function CourseCarousel({
             <div className={classes.slider}>
               <div className={classes.growButtonBack} />
               <div className={classes.growButtonNext} />
-              <Slider className={classes.slide} aria-label="Courses carousel">
+              <Slider className={classes.slide} aria-label='Courses carousel'>
                 {courses.map((course: any) => (
                   <Slide key={course.id} index={course.id}>
                     <div className={classes.course}>
@@ -156,9 +162,9 @@ export default function CourseCarousel({
             </div>
           </CarouselProvider>
         </Grid>
-      );
+      )
     }
   }
 
-  return <>{renderFilteredResult()}</>;
+  return <>{renderFilteredResult()}</>
 }
