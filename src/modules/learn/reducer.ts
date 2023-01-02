@@ -20,10 +20,11 @@ import {
   LOAD_TEST_ITEMS_REQUEST,
   LOAD_TEST_ITEMS_SUCCESS,
   LOAD_TEST_ITEMS_FAILURE,
-} from "./actions";
+} from './actions'
 
 const initialState = {
   isLoading: false,
+  isContentViewsLoading: true,
   sessions: [],
   contentViews: [],
   contentSeconds: [],
@@ -31,75 +32,76 @@ const initialState = {
   evaluationItems: [],
   test: [],
   testItems: [],
-};
+}
 
 export default function (state = initialState, action: any) {
   switch (action.type) {
     case CREATE_SESSION_REQUEST:
-      return { ...state, isLoading: true, sessions: [] };
+      return { ...state, isLoading: true, sessions: [] }
     case LOAD_CONTENT_VIEWS_REQUEST:
-      return { ...state, isLoading: true, contentViews: [] };
+      return { ...state, isContentViewsLoading: true, contentViews: [] }
     case UPDATE_CONTENT_VIEW_REQUEST:
-      return { ...state, isLoading: true, contentSeconds: [] };
+      return { ...state, isLoading: true, contentSeconds: [] }
     case LOAD_EVALUATION_REQUEST:
-      return { ...state, isLoading: true, evaluation: [] };
+      return { ...state, isLoading: true, evaluation: [] }
     case LOAD_EVALUATION_ITEMS_REQUEST:
-      return { ...state, isLoading: true, evaluationItems: [] };
+      return { ...state, isLoading: true, evaluationItems: [] }
     case LOAD_TEST_REQUEST:
-      return { ...state, isLoading: true, test: [] };
+      return { ...state, isLoading: true, test: [] }
     case LOAD_TEST_ITEMS_REQUEST:
-      return { ...state, isLoading: true, testItems: [] };
+      return { ...state, isLoading: true, testItems: [] }
     case CREATE_SESSION_SUCCESS:
       return {
         ...state,
         isLoading: false,
         sessions: action.payload.session,
-      };
+      }
     case LOAD_CONTENT_VIEWS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        isContentViewsLoading: false,
         contentViews: action.payload.contentViews,
-      };
+      }
     case UPDATE_CONTENT_VIEW_SUCCESS:
       return {
         ...state,
         isLoading: false,
         contentSeconds: action.payload.contentSeconds,
-      };
+      }
     case LOAD_EVALUATION_SUCCESS:
       return {
         ...state,
         isLoading: false,
         evaluation: action.payload.evaluation,
-      };
+      }
     case LOAD_EVALUATION_ITEMS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         evaluationItems: action.payload.evaluationItems,
-      };
+      }
     case LOAD_TEST_SUCCESS:
       return {
         ...state,
         isLoading: false,
         test: action.payload.test,
-      };
+      }
     case LOAD_TEST_ITEMS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         testItems: action.payload.testItems,
-      };
-    case CREATE_SESSION_FAILURE:
+      }
     case LOAD_CONTENT_VIEWS_FAILURE:
+      return { ...state, isContentViewsLoading: false }
+    case CREATE_SESSION_FAILURE:
     case UPDATE_CONTENT_VIEW_FAILURE:
     case LOAD_EVALUATION_FAILURE:
     case LOAD_EVALUATION_ITEMS_FAILURE:
     case LOAD_TEST_FAILURE:
     case LOAD_TEST_ITEMS_FAILURE:
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false }
     default:
-      return state;
+      return state
   }
 }

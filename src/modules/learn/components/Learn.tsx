@@ -279,7 +279,11 @@ export default function Learn() {
           />
           {/* TIMER */}
           <div className={classes.timerWrapper}>
-            <Box mx={2} mt={1}>
+            <Box
+              mx={2}
+              my={1}
+              style={{ display: 'flex', alignItems: 'center', height: '48px' }}
+            >
               {renderTimer()}
             </Box>
           </div>

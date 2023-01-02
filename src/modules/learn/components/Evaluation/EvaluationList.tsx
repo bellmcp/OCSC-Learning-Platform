@@ -62,6 +62,7 @@ export default function EvaluationList({
   const [courseRegistrationId, setCourseRegistrationId] = useState(0)
   const {
     isLoading: isEvaluationLoading,
+    isContentViewsLoading,
     evaluation,
     evaluationItems,
   } = useSelector((state) => state.learn)
@@ -111,7 +112,7 @@ export default function EvaluationList({
   }
 
   function renderEvaluationList() {
-    if (isEvaluationLoading) {
+    if (isEvaluationLoading || isContentViewsLoading) {
       return <Loading height={380} />
     } else if (isCompleted) {
       return (
