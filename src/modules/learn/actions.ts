@@ -249,14 +249,10 @@ function updateEvaluation(
       learn: { sessions },
     } = getState()
 
-    const noAnswerItems = []
-
     if (evaluationAnswer.includes('0')) {
       dispatch(
         uiActions.setFlashMessage(
-          `คุณทำแบบประเมินไม่ครบทุกข้อ (ข้อ ${noAnswerItems.map(
-            (item) => item
-          )}) โปรดตรวจสอบอีกครั้ง`,
+          `คุณทำแบบประเมินไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง`,
           'error'
         )
       )
@@ -303,9 +299,7 @@ function updateEvaluation(
       } else if (err?.response?.status === 403) {
         dispatch(
           uiActions.setFlashMessage(
-            `คุณทำแบบประเมินไม่ครบทุกข้อ (ข้อ ${noAnswerItems.map(
-              (item) => item
-            )}) โปรดตรวจสอบอีกครั้ง`,
+            `คุณทำแบบประเมินไม่ครบทุกข้อ โปรดตรวจสอบอีกครั้ง`,
             'error'
           )
         )
