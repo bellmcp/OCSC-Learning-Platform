@@ -260,7 +260,7 @@ export default function Layout() {
                 variant='contained'
                 color='secondary'
                 onClick={handleAnnouncementDialogClose}
-                style={{ borderRadius: 24, width: 100 }}
+                style={{ width: 100 }}
               >
                 รับทราบ
               </Button>
@@ -305,7 +305,7 @@ export default function Layout() {
             variant='contained'
             color='secondary'
             onClick={closeGlobalModal}
-            style={{ borderRadius: 24, width: 100 }}
+            style={{ width: 100 }}
           >
             รับทราบ
           </Button>
