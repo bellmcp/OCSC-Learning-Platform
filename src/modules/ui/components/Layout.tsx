@@ -202,6 +202,10 @@ export default function Layout() {
     setIsCookieBannerOpen(!isCookieAccecpted)
   }, [])
 
+  const parseLinkToDefaultColor = (text: string) => {
+    return text.replaceAll(/<a/g, '<a class="footer_link"')
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -243,7 +247,9 @@ export default function Layout() {
               <Typography variant='body1' align='center' color='textPrimary'>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: get(announcement, 'mesg', 'ไม่มีข้อความ'),
+                    __html: parseLinkToDefaultColor(
+                      get(announcement, 'mesg', 'ไม่มีข้อความ')
+                    ),
                   }}
                 ></div>
               </Typography>
@@ -277,12 +283,20 @@ export default function Layout() {
             align='center'
             style={{ fontWeight: 600 }}
           >
-            {globalModalTitle}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: parseLinkToDefaultColor(globalModalTitle),
+              }}
+            ></div>
           </Typography>
         </DialogTitle>
         <DialogContent style={{ padding: '0 32px' }}>
           <Typography variant='body1' align='center' color='textPrimary'>
-            {globalModalMessage}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: parseLinkToDefaultColor(globalModalMessage),
+              }}
+            ></div>
           </Typography>
         </DialogContent>
         <DialogActions style={{ margin: '16px 0', marginTop: 24 }}>

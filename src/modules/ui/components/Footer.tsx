@@ -61,7 +61,7 @@ export default function Footer() {
   }, [dispatch]) //eslint-disable-line
 
   const parseLinkToDefaultColor = (text: string) => {
-    return text.replace(/<a/g, '<a class="footer_link"')
+    return text.replaceAll(/<a/g, '<a class="footer_link"')
   }
 
   function DesktopFooter() {
