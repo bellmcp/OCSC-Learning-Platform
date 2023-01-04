@@ -118,7 +118,7 @@ function loadCurriculumRegistrations() {
   }
 }
 
-function registerCourse(courseRoundId) {
+function registerCourse(courseRoundId, courseId) {
   return async (dispatch, getState) => {
     const {
       user: { items },
@@ -128,7 +128,7 @@ function registerCourse(courseRoundId) {
     try {
       await axios.get(
         `/Users/${items.id}/RegistrationConditions?courseId=${parseInt(
-          courseRoundId
+          courseId
         )}`,
         {
           headers: { Authorization: `Bearer ${token}` },

@@ -319,7 +319,7 @@ export default function Layout() {
           <Typography gutterBottom style={{ fontWeight: 600 }} variant='body1'>
             OCSC LEARNING SPACE (LEARNER PART)
             <br />
-            Version 2.1.7
+            Version 2.1.8
           </Typography>
           <Divider style={{ margin: '16px 0' }} />
           <Typography gutterBottom style={{ fontWeight: 600 }}>

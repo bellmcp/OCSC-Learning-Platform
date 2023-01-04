@@ -74,7 +74,10 @@ export default function CourseRound({
   }
 
   const registerCourse = () => {
-    const registration_action = registrationsActions.registerCourse(id)
+    const registration_action = registrationsActions.registerCourse(
+      id,
+      courseId
+    )
     dispatch(registration_action)
     setIsRegisterButtonDisabled(true)
     setRegisterButtonLabel('กำลังโหลด...')
