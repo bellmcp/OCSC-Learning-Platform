@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useState } from 'react'
-import DayJS from 'react-dayjs'
+import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
@@ -222,9 +222,13 @@ export default function MyCourseItem({
                       gutterBottom
                     >
                       <b>ลงทะเบียน </b>
-                      <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='DD MMM YYYY'
+                      >
                         {registrationDate ? registrationDate : 'ไม่มีข้อมูล'}
-                      </DayJS>
+                      </Moment>
                     </Typography>
                     <Typography
                       variant='caption'
@@ -233,13 +237,21 @@ export default function MyCourseItem({
                       style={{ lineHeight: '1.2' }}
                     >
                       <b>เข้าเรียนได้ </b>
-                      <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='DD MMM YYYY'
+                      >
                         {courseStart ? courseStart : 'ไม่มีข้อมูล'}
-                      </DayJS>{' '}
+                      </Moment>{' '}
                       ถึง{' '}
-                      <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='DD MMM YYYY'
+                      >
                         {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
-                      </DayJS>
+                      </Moment>
                     </Typography>
                   </Grid>
                   <Grid
@@ -304,9 +316,13 @@ export default function MyCourseItem({
                           >
                             <span style={{ color: green[800] }}>
                               <b>สำเร็จการศึกษา </b>
-                              <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                              <Moment
+                                add={{ years: 543 }}
+                                locale='th'
+                                format='DD MMM YYYY'
+                              >
                                 {completeDate ? completeDate : 'ไม่มีข้อมูล'}
-                              </DayJS>
+                              </Moment>
                             </span>
                           </Typography>
                         )}
@@ -364,9 +380,13 @@ export default function MyCourseItem({
                   >
                     <span style={{ color: green[800] }}>
                       <b>สำเร็จการศึกษา </b>
-                      <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='DD MMM YYYY'
+                      >
                         {completeDate ? completeDate : 'ไม่มีข้อมูล'}
-                      </DayJS>
+                      </Moment>
                     </span>
                   </Typography>
                 </Grid>
