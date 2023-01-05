@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import DayJS from 'react-dayjs'
+import Moment from 'react-moment'
 import {
   Typography,
   Box,
@@ -214,13 +214,13 @@ export default function CourseRound({
             </Grid>
             <Grid item xs={6}>
               <Typography variant='body2' color='textSecondary'>
-                <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                   {registrationStart}
-                </DayJS>{' '}
+                </Moment>{' '}
                 ถึง{' '}
-                <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                   {registrationEnd}
-                </DayJS>
+                </Moment>
               </Typography>
             </Grid>
           </Grid>
@@ -270,13 +270,13 @@ export default function CourseRound({
             </Grid>
             <Grid item xs={6}>
               <Typography variant='body2' color='textSecondary'>
-                <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                   {courseStart}
-                </DayJS>{' '}
+                </Moment>{' '}
                 ถึง{' '}
-                <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                   {courseEnd}
-                </DayJS>
+                </Moment>
               </Typography>
             </Grid>
           </Grid>
@@ -325,13 +325,13 @@ export default function CourseRound({
           </Grid>
           <Grid item xs={6}>
             <Typography variant='body2' color='textSecondary'>
-              <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+              <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                 {registrationStart}
-              </DayJS>{' '}
+              </Moment>{' '}
               ถึง{' '}
-              <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+              <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                 {registrationEnd}
-              </DayJS>
+              </Moment>
             </Typography>
           </Grid>
         </Grid>
@@ -363,13 +363,13 @@ export default function CourseRound({
           </Grid>
           <Grid item xs={6}>
             <Typography variant='body2' color='textSecondary'>
-              <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+              <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                 {courseStart}
-              </DayJS>{' '}
+              </Moment>{' '}
               ถึง{' '}
-              <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+              <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
                 {courseEnd}
-              </DayJS>
+              </Moment>
             </Typography>
           </Grid>
         </Grid>

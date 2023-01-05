@@ -239,39 +239,6 @@ export default function ContentView({
                 courseRegistrationDetails={courseRegistrationDetails}
               />
             )}
-            {/* <Box my={4}>
-              <Typography variant="body2" color="textSecondary">
-                FOR DEVELOPMENT
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Current content url: {activeSource}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                You are currently viewing this content via {browserName}{" "}
-                {fullBrowserVersion} on {osName}
-              </Typography>
-              <Typography variant="body2" color="error">
-                Current session id: {currentSession.id}, key:{" "}
-                {currentSession.key}, created at{" "}
-                <DayJS format="D/M/YYYY HH:mm" add={{ years: 543 }}>
-                  {currentSession.createDate}
-                </DayJS>
-              </Typography>
-              <Typography variant="body2" color="error">
-                Current course registration id: {registrationId}
-              </Typography>
-              <Typography variant="body2" color="error">
-                Current content id: {contentId}
-              </Typography>
-              <Typography variant="body2" color="error">
-                Current content view id: {currentContentView?.id}, User
-                cumulative content view seconds at start:{" "}
-                {currentContentView?.contentSeconds
-                  ? currentContentView?.contentSeconds
-                  : 0}
-                {" seconds "}({currentContentView?.contentSeconds / 60} minutes)
-              </Typography>
-            </Box> */}
           </Box>
         </Container>
       )}

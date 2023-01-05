@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import clsx from 'clsx'
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import DayJS from 'react-dayjs'
+import Moment from 'react-moment'
 import {
   createStyles,
   makeStyles,
@@ -225,9 +225,13 @@ export default function MyCurriculumItem({
                       gutterBottom
                     >
                       <b>ลงทะเบียน </b>
-                      <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='D MMM YYYY'
+                      >
                         {registrationDate ? registrationDate : 'ไม่มีข้อมูล'}
-                      </DayJS>
+                      </Moment>
                     </Typography>
                   </Grid>
                   <Grid
@@ -284,11 +288,15 @@ export default function MyCurriculumItem({
                               >
                                 <span style={{ color: green[800] }}>
                                   <b>สำเร็จการศึกษา </b>
-                                  <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                                  <Moment
+                                    add={{ years: 543 }}
+                                    locale='th'
+                                    format='D MMM YYYY'
+                                  >
                                     {completeDate
                                       ? completeDate
                                       : 'ไม่มีข้อมูล'}
-                                  </DayJS>
+                                  </Moment>
                                 </span>
                               </Typography>
                             )}
@@ -368,9 +376,13 @@ export default function MyCurriculumItem({
                   >
                     <span style={{ color: green[800] }}>
                       <b>สำเร็จการศึกษา </b>
-                      <DayJS format='D/M/YYYY' add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='D MMM YYYY'
+                      >
                         {completeDate ? completeDate : 'ไม่มีข้อมูล'}
-                      </DayJS>
+                      </Moment>
                     </span>
                   </Typography>
                 </Grid>

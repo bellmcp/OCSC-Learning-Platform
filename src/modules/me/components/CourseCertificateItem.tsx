@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import DayJS from 'react-dayjs';
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import Moment from 'react-moment'
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from '@material-ui/core/styles';
+} from '@material-ui/core/styles'
 import {
   useMediaQuery,
   Typography,
@@ -16,11 +16,11 @@ import {
   Box,
   Button,
   Divider,
-} from '@material-ui/core';
-import { Print as PrintIcon } from '@material-ui/icons';
-import { green, grey } from '@material-ui/core/colors';
+} from '@material-ui/core'
+import { Print as PrintIcon } from '@material-ui/icons'
+import { green, grey } from '@material-ui/core/colors'
 
-import { CourseCertificateProps } from '../types';
+import { CourseCertificateProps } from '../types'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
     },
   })
-);
+)
 
 export default function CourseCertificateItem({
   id,
@@ -47,15 +47,15 @@ export default function CourseCertificateItem({
   pass,
   note,
 }: CourseCertificateProps) {
-  const classes = useStyles();
-  const history = useHistory();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('xs'));
-  const PATH = process.env.REACT_APP_BASE_PATH;
+  const classes = useStyles()
+  const history = useHistory()
+  const theme = useTheme()
+  const matches = useMediaQuery(theme.breakpoints.down('xs'))
+  const PATH = process.env.REACT_APP_BASE_PATH
 
   const linkToCourseCertificate = () => {
-    history.push(`${PATH}/me/certificate/course/${id}`);
-  };
+    history.push(`${PATH}/me/certificate/course/${id}`)
+  }
 
   return (
     <Card>
@@ -68,7 +68,7 @@ export default function CourseCertificateItem({
         }}
       >
         <div className={classes.controls}>
-          <Grid container direction="column" justify="center">
+          <Grid container direction='column' justify='center'>
             <Box
               my={2}
               mx={3}
@@ -79,26 +79,26 @@ export default function CourseCertificateItem({
             >
               <Grid
                 container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-                wrap="nowrap"
+                direction='row'
+                justify='space-between'
+                alignItems='center'
+                wrap='nowrap'
               >
                 <Grid item>
                   <Typography
-                    variant="h6"
-                    component="h2"
+                    variant='h6'
+                    component='h2'
                     style={{ lineHeight: '1.1', marginBottom: 4 }}
                   >
                     {course}
                   </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
+                  <Typography variant='body1' component='p' gutterBottom>
                     รายวิชา {courseid}
                   </Typography>
                   <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
+                    variant='body2'
+                    component='p'
+                    color='textSecondary'
                     gutterBottom
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
@@ -110,22 +110,26 @@ export default function CourseCertificateItem({
                   </Typography>
                   {pass ? (
                     <Typography
-                      variant="caption"
-                      component="p"
-                      color="textSecondary"
+                      variant='caption'
+                      component='p'
+                      color='textSecondary'
                       style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>สำเร็จการศึกษา </b>
-                      <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='D MMM YYYY'
+                      >
                         {enddate}
-                      </DayJS>
+                      </Moment>
                     </Typography>
                   ) : (
                     <Typography
-                      variant="caption"
-                      component="p"
-                      color="textSecondary"
+                      variant='caption'
+                      component='p'
+                      color='textSecondary'
                       style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
@@ -134,28 +138,36 @@ export default function CourseCertificateItem({
                     </Typography>
                   )}
                   <Typography
-                    variant="caption"
-                    component="p"
-                    color="textSecondary"
+                    variant='caption'
+                    component='p'
+                    color='textSecondary'
                     style={{ lineHeight: '1.2' }}
                     gutterBottom
                   >
                     <b>ระยะเวลาเข้าเรียน </b>
-                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                    <Moment
+                      add={{ years: 543 }}
+                      locale='th'
+                      format='D MMM YYYY'
+                    >
                       {startdate}
-                    </DayJS>{' '}
+                    </Moment>{' '}
                     ถึง{' '}
-                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                    <Moment
+                      add={{ years: 543 }}
+                      locale='th'
+                      format='D MMM YYYY'
+                    >
                       {enddate}
-                    </DayJS>
+                    </Moment>
                   </Typography>
                 </Grid>
                 {!matches && (
                   <Grid item>
                     <Button
                       disabled={!pass}
-                      variant="outlined"
-                      color="secondary"
+                      variant='outlined'
+                      color='secondary'
                       startIcon={<PrintIcon />}
                       onClick={linkToCourseCertificate}
                     >
@@ -174,8 +186,8 @@ export default function CourseCertificateItem({
           <Box m={1}>
             <Button
               disabled={!pass}
-              variant="text"
-              color="secondary"
+              variant='text'
+              color='secondary'
               startIcon={<PrintIcon />}
               fullWidth
               onClick={linkToCourseCertificate}
@@ -186,5 +198,5 @@ export default function CourseCertificateItem({
         </>
       )}
     </Card>
-  );
+  )
 }

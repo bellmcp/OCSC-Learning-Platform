@@ -1,7 +1,7 @@
 //@ts-nocheck
-import React from "react";
-import { useDispatch } from "react-redux";
-import DayJS from "react-dayjs";
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import Moment from 'react-moment'
 import {
   Typography,
   Grid,
@@ -13,17 +13,17 @@ import {
   Button,
   Link,
   Badge,
-} from "@material-ui/core";
+} from '@material-ui/core'
 import {
   Check as CheckIcon,
   ChatBubbleOutlineOutlined as ChatBubbleIcon,
   ModeComment as ModeCommentIcon,
   AttachFile as AttachmentIcon,
-} from "@material-ui/icons";
+} from '@material-ui/icons'
 
-import * as supportActions from "modules/support/actions";
+import * as supportActions from 'modules/support/actions'
 
-import { SupportProps } from "../types";
+import { SupportProps } from '../types'
 
 export default function SupportItem({
   id,
@@ -36,12 +36,12 @@ export default function SupportItem({
   replyDate,
   isAcknowledged,
 }: SupportProps) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const markSupportAsRead = () => {
-    const mark_as_read_action = supportActions.markSupportAsRead(id);
-    dispatch(mark_as_read_action);
-  };
+    const mark_as_read_action = supportActions.markSupportAsRead(id)
+    dispatch(mark_as_read_action)
+  }
 
   const renderReadButton = () => {
     if (replyMessage !== null) {
@@ -50,29 +50,29 @@ export default function SupportItem({
           <CardActions>
             <Button
               onClick={markSupportAsRead}
-              color="primary"
-              variant="contained"
+              color='primary'
+              variant='contained'
               startIcon={<CheckIcon />}
               fullWidth
             >
               ทำเครื่องหมายว่าอ่านแล้ว
             </Button>
           </CardActions>
-        );
+        )
       } else {
         return (
           <CardActions>
             <Button
               disabled
-              color="primary"
-              variant="contained"
+              color='primary'
+              variant='contained'
               startIcon={<CheckIcon />}
               fullWidth
             >
               อ่านแล้ว
             </Button>
           </CardActions>
-        );
+        )
       }
     } else {
       return (
@@ -80,18 +80,18 @@ export default function SupportItem({
           <Divider />
           <Box m={2}>
             <Typography
-              variant="body2"
-              component="p"
-              align="center"
-              color="textSecondary"
+              variant='body2'
+              component='p'
+              align='center'
+              color='textSecondary'
             >
               โปรดรอการตอบกลับจากเจ้าหน้าที่
             </Typography>
           </Box>
         </>
-      );
+      )
     }
-  };
+  }
 
   return (
     <Box my={3}>
@@ -99,63 +99,68 @@ export default function SupportItem({
         <CardContent>
           <Box m={3}>
             <Typography
-              variant="body2"
-              color="secondary"
-              component="p"
-              style={{ fontWeight: "bold" }}
+              variant='body2'
+              color='secondary'
+              component='p'
+              style={{ fontWeight: 'bold' }}
               gutterBottom
             >
               เลขที่อ้างอิง: {id}
             </Typography>
             <Grid
               container
-              alignItems="center"
+              alignItems='center'
               style={{ marginBottom: 4 }}
-              wrap="nowrap"
+              wrap='nowrap'
             >
               <ChatBubbleIcon style={{ marginRight: 10 }} />
               <Typography
-                variant="h6"
-                component="h2"
+                variant='h6'
+                component='h2'
                 gutterBottom
-                style={{ lineHeight: "1.2" }}
+                style={{ lineHeight: '1.2' }}
               >
                 {subject}
               </Typography>
             </Grid>
             {message ? (
               <Typography
-                variant="body1"
-                component="p"
+                variant='body1'
+                component='p'
                 gutterBottom
-                style={{ marginBottom: 16, lineHeight: "1.3" }}
+                style={{ marginBottom: 16, lineHeight: '1.3' }}
               >
                 {message}
               </Typography>
             ) : null}
             <Typography
-              variant="caption"
-              component="p"
-              color="textSecondary"
-              style={{ lineHeight: "1.3", marginBottom: 2 }}
+              variant='caption'
+              component='p'
+              color='textSecondary'
+              style={{ lineHeight: '1.3', marginBottom: 2 }}
             >
               <b>ช่องทางติดต่อกลับ</b> {contact}
             </Typography>
-            <Typography variant="caption" component="p" color="textSecondary">
-              <b>ส่งเมื่อ</b>{" "}
-              <DayJS format="D/M/YYYY HH:mm" add={{ years: 543 }}>
+            <Typography variant='caption' component='p' color='textSecondary'>
+              <b>ส่งเมื่อ</b>{' '}
+              <Moment
+                add={{ years: 543 }}
+                locale='th'
+                format='D MMM YYYY HH:mm'
+              >
                 {createDate}
-              </DayJS>
+              </Moment>{' '}
+              น.
               {attachFile ? (
                 <>
                   <AttachmentIcon
                     style={{
                       fontSize: 14,
-                      marginLeft: "16px",
-                      marginRight: "4px",
+                      marginLeft: '16px',
+                      marginRight: '4px',
                     }}
                   />
-                  <Link href={attachFile} target="_blank" rel="noreferrer">
+                  <Link href={attachFile} target='_blank' rel='noreferrer'>
                     ไฟล์แนบ
                   </Link>
                 </>
@@ -166,38 +171,43 @@ export default function SupportItem({
             <>
               <Divider />
               <Box m={3}>
-                <Grid container alignItems="center" justify="flex-end">
-                  <Badge variant="dot" color="error" invisible={isAcknowledged}>
+                <Grid container alignItems='center' justify='flex-end'>
+                  <Badge variant='dot' color='error' invisible={isAcknowledged}>
                     <ModeCommentIcon />
                   </Badge>
                   <Typography
-                    variant="h6"
-                    component="h1"
+                    variant='h6'
+                    component='h1'
                     gutterBottom
-                    style={{ marginLeft: "10px" }}
+                    style={{ marginLeft: '10px' }}
                   >
                     ข้อความจากเจ้าหน้าที่
                   </Typography>
                 </Grid>
                 <Typography
-                  variant="body1"
-                  component="p"
+                  variant='body1'
+                  component='p'
                   gutterBottom
-                  align="right"
-                  style={{ lineHeight: "1.3", marginBottom: 16 }}
+                  align='right'
+                  style={{ lineHeight: '1.3', marginBottom: 16 }}
                 >
                   {replyMessage}
                 </Typography>
                 <Typography
-                  variant="caption"
-                  component="h2"
-                  align="right"
-                  color="textSecondary"
+                  variant='caption'
+                  component='h2'
+                  align='right'
+                  color='textSecondary'
                 >
-                  <b>ตอบกลับเมื่อ</b>{" "}
-                  <DayJS format="D/M/YYYY HH:mm" add={{ years: 543 }}>
+                  <b>ตอบกลับเมื่อ</b>{' '}
+                  <Moment
+                    add={{ years: 543 }}
+                    locale='th'
+                    format='D MMM YYYY HH:mm'
+                  >
                     {replyDate}
-                  </DayJS>
+                  </Moment>{' '}
+                  น.
                 </Typography>
               </Box>
             </>
@@ -206,5 +216,5 @@ export default function SupportItem({
         {renderReadButton()}
       </Card>
     </Box>
-  );
+  )
 }

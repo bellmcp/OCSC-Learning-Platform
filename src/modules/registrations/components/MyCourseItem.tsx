@@ -225,7 +225,7 @@ export default function MyCourseItem({
                       <Moment
                         add={{ years: 543 }}
                         locale='th'
-                        format='DD MMM YYYY'
+                        format='D MMM YYYY'
                       >
                         {registrationDate ? registrationDate : 'ไม่มีข้อมูล'}
                       </Moment>
@@ -240,7 +240,7 @@ export default function MyCourseItem({
                       <Moment
                         add={{ years: 543 }}
                         locale='th'
-                        format='DD MMM YYYY'
+                        format='D MMM YYYY'
                       >
                         {courseStart ? courseStart : 'ไม่มีข้อมูล'}
                       </Moment>{' '}
@@ -248,7 +248,7 @@ export default function MyCourseItem({
                       <Moment
                         add={{ years: 543 }}
                         locale='th'
-                        format='DD MMM YYYY'
+                        format='D MMM YYYY'
                       >
                         {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
                       </Moment>
@@ -319,7 +319,7 @@ export default function MyCourseItem({
                               <Moment
                                 add={{ years: 543 }}
                                 locale='th'
-                                format='DD MMM YYYY'
+                                format='D MMM YYYY'
                               >
                                 {completeDate ? completeDate : 'ไม่มีข้อมูล'}
                               </Moment>
@@ -383,7 +383,7 @@ export default function MyCourseItem({
                       <Moment
                         add={{ years: 543 }}
                         locale='th'
-                        format='DD MMM YYYY'
+                        format='D MMM YYYY'
                       >
                         {completeDate ? completeDate : 'ไม่มีข้อมูล'}
                       </Moment>

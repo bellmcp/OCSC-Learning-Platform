@@ -1,13 +1,13 @@
 // @ts-nocheck
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import DayJS from 'react-dayjs';
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import Moment from 'react-moment'
 import {
   createStyles,
   makeStyles,
   Theme,
   useTheme,
-} from '@material-ui/core/styles';
+} from '@material-ui/core/styles'
 import {
   useMediaQuery,
   Typography,
@@ -16,11 +16,11 @@ import {
   Box,
   Button,
   Divider,
-} from '@material-ui/core';
-import { Print as PrintIcon, Flag as FlagIcon } from '@material-ui/icons/';
-import { green, grey } from '@material-ui/core/colors';
+} from '@material-ui/core'
+import { Print as PrintIcon, Flag as FlagIcon } from '@material-ui/icons/'
+import { green, grey } from '@material-ui/core/colors'
 
-import { CurriculumCertificateProps } from '../types';
+import { CurriculumCertificateProps } from '../types'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
       flex: 1,
     },
   })
-);
+)
 
 export default function CurriculumCertificateItem({
   id,
@@ -47,75 +47,75 @@ export default function CurriculumCertificateItem({
   pass,
   note,
 }: CurriculumCertificateProps) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const history = useHistory();
-  const matches = useMediaQuery(theme.breakpoints.down('xs'));
-  const PATH = process.env.REACT_APP_BASE_PATH;
+  const classes = useStyles()
+  const theme = useTheme()
+  const history = useHistory()
+  const matches = useMediaQuery(theme.breakpoints.down('xs'))
+  const PATH = process.env.REACT_APP_BASE_PATH
 
   const linkToLecture = () => {
-    history.push(`${PATH}/me/certificate/curriculum/${id}`);
-  };
+    history.push(`${PATH}/me/certificate/curriculum/${id}`)
+  }
 
   const linkToOrientationScore = () => {
-    history.push(`${PATH}/me/score`);
-  };
+    history.push(`${PATH}/me/score`)
+  }
 
   const renderPrintCertificateButton = () => {
     if (curriculumid === '001M')
       return (
         <Button
           disabled={!pass}
-          variant="outlined"
-          color="secondary"
+          variant='outlined'
+          color='secondary'
           startIcon={<FlagIcon />}
           onClick={linkToOrientationScore}
         >
           ผลการเรียนรู้ด้วยตนเอง
         </Button>
-      );
+      )
     else
       return (
         <Button
           disabled={!pass}
-          variant="outlined"
-          color="secondary"
+          variant='outlined'
+          color='secondary'
           startIcon={<PrintIcon />}
           onClick={linkToLecture}
         >
           พิมพ์ประกาศนียบัตร
         </Button>
-      );
-  };
+      )
+  }
 
   const renderPrintCertificateButtonMobile = () => {
     if (curriculumid === '001M')
       return (
         <Button
           disabled={!pass}
-          variant="text"
-          color="secondary"
+          variant='text'
+          color='secondary'
           startIcon={<FlagIcon />}
           fullWidth
           onClick={linkToOrientationScore}
         >
           ผลการเรียนรู้ด้วยตนเอง
         </Button>
-      );
+      )
     else
       return (
         <Button
           disabled={!pass}
-          variant="text"
-          color="secondary"
+          variant='text'
+          color='secondary'
           startIcon={<PrintIcon />}
           fullWidth
           onClick={linkToLecture}
         >
           พิมพ์ประกาศนียบัตร
         </Button>
-      );
-  };
+      )
+  }
 
   return (
     <Card>
@@ -128,7 +128,7 @@ export default function CurriculumCertificateItem({
         }}
       >
         <div className={classes.controls}>
-          <Grid container direction="column" justify="center">
+          <Grid container direction='column' justify='center'>
             <Box
               my={2}
               mx={3}
@@ -139,26 +139,26 @@ export default function CurriculumCertificateItem({
             >
               <Grid
                 container
-                direction="row"
-                justify="space-between"
-                alignItems="center"
-                wrap="nowrap"
+                direction='row'
+                justify='space-between'
+                alignItems='center'
+                wrap='nowrap'
               >
                 <Grid item>
                   <Typography
-                    variant="h6"
-                    component="h2"
+                    variant='h6'
+                    component='h2'
                     style={{ lineHeight: '1.1', marginBottom: 4 }}
                   >
                     {curriculum}
                   </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
+                  <Typography variant='body1' component='p' gutterBottom>
                     หลักสูตร {curriculumid}
                   </Typography>
                   <Typography
-                    variant="body2"
-                    component="p"
-                    color="textSecondary"
+                    variant='body2'
+                    component='p'
+                    color='textSecondary'
                     gutterBottom
                     style={{ marginBottom: 8, fontWeight: 600 }}
                   >
@@ -170,22 +170,26 @@ export default function CurriculumCertificateItem({
                   </Typography>
                   {pass ? (
                     <Typography
-                      variant="caption"
-                      component="p"
-                      color="textSecondary"
+                      variant='caption'
+                      component='p'
+                      color='textSecondary'
                       style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
                       <b>สำเร็จการศึกษา </b>
-                      <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                      <Moment
+                        add={{ years: 543 }}
+                        locale='th'
+                        format='D MMM YYYY'
+                      >
                         {enddate}
-                      </DayJS>
+                      </Moment>
                     </Typography>
                   ) : (
                     <Typography
-                      variant="caption"
-                      component="p"
-                      color="textSecondary"
+                      variant='caption'
+                      component='p'
+                      color='textSecondary'
                       style={{ lineHeight: '1.2' }}
                       gutterBottom
                     >
@@ -194,20 +198,28 @@ export default function CurriculumCertificateItem({
                     </Typography>
                   )}
                   <Typography
-                    variant="caption"
-                    component="p"
-                    color="textSecondary"
+                    variant='caption'
+                    component='p'
+                    color='textSecondary'
                     style={{ lineHeight: '1.2' }}
                     gutterBottom
                   >
                     <b>ระยะเวลาเข้าเรียน </b>
-                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                    <Moment
+                      add={{ years: 543 }}
+                      locale='th'
+                      format='D MMM YYYY'
+                    >
                       {startdate}
-                    </DayJS>{' '}
+                    </Moment>{' '}
                     ถึง{' '}
-                    <DayJS format="D/M/YYYY" add={{ years: 543 }}>
+                    <Moment
+                      add={{ years: 543 }}
+                      locale='th'
+                      format='D MMM YYYY'
+                    >
                       {enddate}
-                    </DayJS>
+                    </Moment>
                   </Typography>
                 </Grid>
                 {!matches && <Grid item>{renderPrintCertificateButton()}</Grid>}
@@ -223,5 +235,5 @@ export default function CurriculumCertificateItem({
         </>
       )}
     </Card>
-  );
+  )
 }
