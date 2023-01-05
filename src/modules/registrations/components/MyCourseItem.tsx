@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useState } from 'react'
 import Moment from 'react-moment'
+import moment from 'moment'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
@@ -245,13 +246,17 @@ export default function MyCourseItem({
                         {courseStart ? courseStart : 'ไม่มีข้อมูล'}
                       </Moment>{' '}
                       ถึง{' '}
-                      <Moment
-                        add={{ years: 543 }}
-                        locale='th'
-                        format='D MMM YYYY'
-                      >
-                        {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
-                      </Moment>
+                      {moment(courseEnd).isSameOrAfter(moment('3000-01-01')) ? (
+                        <>ไม่มีกำหนด</>
+                      ) : (
+                        <Moment
+                          add={{ years: 543 }}
+                          locale='th'
+                          format='D MMM YYYY'
+                        >
+                          {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
+                        </Moment>
+                      )}
                     </Typography>
                   </Grid>
                   <Grid
@@ -293,17 +298,6 @@ export default function MyCourseItem({
                             >
                               เข้าเรียน
                             </Button>
-                            <Typography variant='caption' color='error'>
-                              {/* <b>FOR DEVELOPMENT</b>
-                            <br />
-                            courseStart: {courseStart.slice(0, 10)}
-                            <br />
-                            current: {localDateTime.toString()}
-                            <br />
-                            courseEnd: {courseEnd.slice(0, 10)}
-                            <br />
-                            isEligibleForAccess: {isEligibleForAccess.toString()} */}
-                            </Typography>
                           </Grid>
                         </Grid>
                         {isCompleted && (
