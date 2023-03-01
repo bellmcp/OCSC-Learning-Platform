@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react'
 import clsx from 'clsx'
 import { Link as RouterLink } from 'react-router-dom'
@@ -13,13 +12,7 @@ import {
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import { green } from '@material-ui/core/colors'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-// import {
-//   getContentType,
-//   getContentTypeText,
-//   getContentTypeIcon,
-//   getContentTypeTitle,
-// } from 'utils/contentType'
-// import { FormatLineSpacing } from '@material-ui/icons'
+import { getContentTypeIcon } from 'utils/contentType'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
