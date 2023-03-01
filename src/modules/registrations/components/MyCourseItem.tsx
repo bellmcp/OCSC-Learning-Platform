@@ -90,6 +90,7 @@ export default function MyCourseItem({
   setUnEnrollInfo,
   courseRoundId,
   curriculumId,
+  hideStartEnd,
 }: MyCourseProps) {
   const classes = useStyles()
   const theme = useTheme()
@@ -231,33 +232,37 @@ export default function MyCourseItem({
                         {registrationDate ? registrationDate : 'ไม่มีข้อมูล'}
                       </Moment>
                     </Typography>
-                    <Typography
-                      variant='caption'
-                      component='p'
-                      color='textSecondary'
-                      style={{ lineHeight: '1.2' }}
-                    >
-                      <b>เข้าเรียนได้ </b>
-                      <Moment
-                        add={{ years: 543 }}
-                        locale='th'
-                        format='D MMM YYYY'
+                    {!hideStartEnd && (
+                      <Typography
+                        variant='caption'
+                        component='p'
+                        color='textSecondary'
+                        style={{ lineHeight: '1.2' }}
                       >
-                        {courseStart ? courseStart : 'ไม่มีข้อมูล'}
-                      </Moment>{' '}
-                      ถึง{' '}
-                      {moment(courseEnd).isSameOrAfter(moment('3000-01-01')) ? (
-                        <>ไม่มีกำหนด</>
-                      ) : (
+                        <b>เข้าเรียนได้ </b>
                         <Moment
                           add={{ years: 543 }}
                           locale='th'
                           format='D MMM YYYY'
                         >
-                          {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
-                        </Moment>
-                      )}
-                    </Typography>
+                          {courseStart ? courseStart : 'ไม่มีข้อมูล'}
+                        </Moment>{' '}
+                        ถึง{' '}
+                        {moment(courseEnd).isSameOrAfter(
+                          moment('3000-01-01')
+                        ) ? (
+                          <>ไม่มีกำหนด</>
+                        ) : (
+                          <Moment
+                            add={{ years: 543 }}
+                            locale='th'
+                            format='D MMM YYYY'
+                          >
+                            {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
+                          </Moment>
+                        )}
+                      </Typography>
+                    )}
                   </Grid>
                   <Grid
                     item
