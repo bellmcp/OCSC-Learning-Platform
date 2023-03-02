@@ -153,8 +153,10 @@ export default function MyCurriculumItem({
       >
         <div className={classes.details}>
           <CardMedia
+            onClick={handleToggleChildCourseVisibility}
             image={thumbnail}
             style={{
+              cursor: 'pointer',
               background: `url('${thumbnail}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center center',
