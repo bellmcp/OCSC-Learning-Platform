@@ -157,7 +157,7 @@ export default function DemoContent() {
               <TextField
                 variant='outlined'
                 size='small'
-                placeholder='URL ของเนื้อหา (MP4, YouTube, PDF, HTML)'
+                placeholder='URL ของเนื้อหา (MP4, YouTube, Vimeo, PDF, HTML)'
                 fullWidth
                 value={url}
                 onChange={handleChangeUrl}

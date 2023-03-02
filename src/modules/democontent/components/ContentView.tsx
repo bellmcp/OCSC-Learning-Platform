@@ -13,7 +13,7 @@ import {
   Button,
 } from '@material-ui/core'
 import { useTheme } from '@material-ui/core/styles'
-import { getContentType } from 'utils/contentType'
+import { getContentType, getContentTypeTextDebug } from 'utils/contentType'
 import {
   Hd as HdIcon,
   ArrowDownward as ArrowBottom,
@@ -116,7 +116,7 @@ export default function ContentView({ activeSource, setUrl }) {
                     color='textSecondary'
                   >
                     <b>ประเภทเนื้อหา : </b>
-                    {getContentType(activeSource)}
+                    {getContentTypeTextDebug(activeSource)}
                   </Typography>
                 </Grid>
               )}
@@ -183,6 +183,12 @@ export default function ContentView({ activeSource, setUrl }) {
               </Button>
               <Button
                 style={{ textTransform: 'none' }}
+                onClick={() => setUrl('https://vimeo.com/226053498')}
+              >
+                Vimeo
+              </Button>
+              <Button
+                style={{ textTransform: 'none' }}
                 onClick={() =>
                   setUrl('http://www.africau.edu/images/default/sample.pdf')
                 }
@@ -192,9 +198,7 @@ export default function ContentView({ activeSource, setUrl }) {
               <Button
                 style={{ textTransform: 'none' }}
                 onClick={() =>
-                  setUrl(
-                    'https://learningportal.ocsc.go.th/courses/KD00/status.html'
-                  )
+                  setUrl('http://info.cern.ch/hypertext/WWW/TheProject.html')
                 }
               >
                 HTML

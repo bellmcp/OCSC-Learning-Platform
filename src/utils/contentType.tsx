@@ -20,11 +20,35 @@ export function getContentType(url: string) {
     return 'iframe'
   } else if (
     lowerCaseUrl.includes('youtube') ||
-    lowerCaseUrl.includes('youtu.be')
+    lowerCaseUrl.includes('youtu.be') ||
+    lowerCaseUrl.includes('vimeo')
   ) {
     return 'video'
   } else {
     return 'unknown'
+  }
+}
+
+export function getContentTypeTextDebug(url: string) {
+  const lowerCaseUrl = url?.toLowerCase()
+  if (lowerCaseUrl === null || lowerCaseUrl === undefined) {
+    return 'ไม่ทราบชนิดเนื้อหา'
+  }
+  if (lowerCaseUrl.includes('.mp4')) {
+    return 'วิดีโอ MP4'
+  } else if (lowerCaseUrl.includes('.pdf')) {
+    return 'เนื้อหา PDF'
+  } else if (lowerCaseUrl.includes('.htm') || lowerCaseUrl.includes('.html')) {
+    return 'เนื้อหา HTML'
+  } else if (
+    lowerCaseUrl.includes('youtube') ||
+    lowerCaseUrl.includes('youtu.be')
+  ) {
+    return 'วิดีโอ YouTube'
+  } else if (lowerCaseUrl.includes('vimeo')) {
+    return 'วิดีโอ Vimeo'
+  } else {
+    return 'ไม่ทราบชนิดเนื้อหา'
   }
 }
 
