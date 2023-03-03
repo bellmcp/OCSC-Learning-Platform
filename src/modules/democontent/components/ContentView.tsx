@@ -60,10 +60,16 @@ export default function ContentView({ activeSource, setUrl }) {
     }
   }
 
-  const truncate = (input) =>
-    input.length > 48
-      ? `${input.substring(0, 48)}...${input.slice(-10)}`
-      : input
+  const truncate = (input) => {
+    if (input.length > 45) {
+      return (
+        input.substr(0, 30) +
+        '...' +
+        input.substr(input.length - 10, input.length)
+      )
+    }
+    return input
+  }
 
   return (
     <>
