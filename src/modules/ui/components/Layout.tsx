@@ -317,18 +317,18 @@ export default function Layout() {
         <DialogTitle onClose={handleDebugDialogClose}>เกี่ยวกับ</DialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom style={{ fontWeight: 600 }} variant='body1'>
-            OCSC LEARNING SPACE (LEARNER PART)
+            OCSC Learning Space
             <br />
-            Version 2.1.8
+            Version 2.2.0
           </Typography>
           <Divider style={{ margin: '16px 0' }} />
           <Typography gutterBottom style={{ fontWeight: 600 }}>
             Developer
           </Typography>
           <Typography gutterBottom variant='body2'>
-            WUTIPAT KHAMNUANSIN (Front-End)
+            WUTIPAT KHAMNUANSIN
             <br />
-            ANUNYA PRASONGKIAT (Back-End)
+            ANUNYA PRASONGKIAT
           </Typography>
           <Divider style={{ margin: '16px 0' }} />
           <Typography gutterBottom style={{ fontWeight: 600 }}>

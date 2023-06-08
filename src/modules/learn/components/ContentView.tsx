@@ -13,7 +13,7 @@ import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab'
 import { useTheme } from '@material-ui/core/styles'
 import { getContentType, getContentTypeTitle } from 'utils/contentType'
 import {
-  Hd as HdIcon,
+  // Hd as HdIcon,
   ArrowBack as ArrowLeft,
   ArrowDownward as ArrowBottom,
 } from '@material-ui/icons'
