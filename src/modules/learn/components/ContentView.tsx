@@ -12,7 +12,6 @@ import {
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab'
 import { useTheme } from '@material-ui/core/styles'
 import { getContentType, getContentTypeTitle } from 'utils/contentType'
-import { generateContentSourceUrl } from 'utils/soureceUrl'
 import {
   Hd as HdIcon,
   ArrowBack as ArrowLeft,
@@ -42,14 +41,8 @@ export default function ContentView({
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
   // const registrationId = courseRegistrationDetails[0]?.id;
   const [activeSource, setActiveSource] = useState('')
-  const contentSourceUrl1 = generateContentSourceUrl(
-    isMobile,
-    activeContentView?.content1
-  )
-  const contentSourceUrl2 = generateContentSourceUrl(
-    isMobile,
-    activeContentView?.content2
-  )
+  const contentSourceUrl1 = activeContentView?.content1
+  const contentSourceUrl2 = activeContentView?.content2
 
   useEffect(() => {
     setActiveSource(contentSourceUrl1)
