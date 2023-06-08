@@ -57,16 +57,16 @@ export default function ContentView({
     }
   }
 
-  function checkVideoQuality() {
-    if (!isMobile) {
-      return (
-        <HdIcon
-          color='disabled'
-          style={{ marginLeft: 12, marginBottom: '-4px' }}
-        />
-      )
-    }
-  }
+  // function checkVideoQuality() {
+  //   if (!isMobile) {
+  //     return (
+  //       <HdIcon
+  //         color='disabled'
+  //         style={{ marginLeft: 12, marginBottom: '-4px' }}
+  //       />
+  //     )
+  //   }
+  // }
 
   function renderContentView() {
     switch (getContentType(activeSource)) {
@@ -166,9 +166,9 @@ export default function ContentView({
                           activeContentView?.type,
                           getContentType(activeContentView?.content1)
                         )}
-                    {matches && getContentType(activeSource) === 'video'
+                    {/* {matches && getContentType(activeSource) === 'video'
                       ? checkVideoQuality()
-                      : null}
+                      : null} */}
                   </Typography>
                 </Grid>
               </Grid>
