@@ -195,11 +195,19 @@ export default function ContentView({
                     </ToggleButton>
                     <ToggleButton
                       value={contentSourceUrl2}
+                      disabled={contentSourceUrl2 === ''}
+                      style={{
+                        opacity: contentSourceUrl2 === '' ? '0.5' : 'unset',
+                      }}
                       aria-label='ลิงก์สำรอง'
                     >
                       <Typography
                         variant='body2'
-                        color='textPrimary'
+                        color={
+                          contentSourceUrl2 === ''
+                            ? 'textSecondary'
+                            : 'textPrimary'
+                        }
                         style={{ fontWeight: 500, padding: '0 6px' }}
                       >
                         ลิงก์สำรอง
