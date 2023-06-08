@@ -64,14 +64,9 @@ export default function OrientationScoreView() {
   const onBeforeGetContentResolve = useRef<(() => void) | null>(null)
   const [loading, setLoading] = useState(false)
   const [text, setText] = useState('old boring text')
-  const handleAfterPrint = useCallback(() => {
-    console.log('`onAfterPrint` called') // tslint:disable-line no-console
-  }, [])
-  const handleBeforePrint = useCallback(() => {
-    console.log('`onBeforePrint` called') // tslint:disable-line no-console
-  }, [])
+  const handleAfterPrint = useCallback(() => {}, [])
+  const handleBeforePrint = useCallback(() => {}, [])
   const handleOnBeforeGetContent = useCallback(() => {
-    console.log('`onBeforeGetContent` called') // tslint:disable-line no-console
     setLoading(true)
     setText('Loading new text...')
 

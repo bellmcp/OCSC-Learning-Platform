@@ -210,9 +210,6 @@ export default function Learn() {
     }
   }
 
-  console.log('courseRegistrationDetails', courseRegistrationDetails)
-  console.log('contentListProgress', contentListProgress)
-
   function renderLearnModule() {
     if (isLocalDateTimeLoading || !accessible) {
       return <Loading height={380} />
