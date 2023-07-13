@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Moment from 'react-moment'
+import moment from 'moment'
 import {
   Typography,
   Box,
@@ -271,12 +272,16 @@ export default function CourseRound({
             <Grid item xs={6}>
               <Typography variant='body2' color='textSecondary'>
                 <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
-                  {courseStart}
+                  {courseStart ? courseStart : 'ไม่มีข้อมูล'}
                 </Moment>{' '}
                 ถึง{' '}
-                <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
-                  {courseEnd}
-                </Moment>
+                {moment(courseEnd).isSameOrAfter(moment('3000-01-01')) ? (
+                  <>ไม่มีกำหนด</>
+                ) : (
+                  <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
+                    {courseEnd ? courseEnd : 'ไม่มีข้อมูล'}
+                  </Moment>
+                )}
               </Typography>
             </Grid>
           </Grid>
