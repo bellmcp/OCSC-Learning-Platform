@@ -367,7 +367,7 @@ function loadTestItems(testId) {
   }
 }
 
-function updateTest(registrationId, contentViewId, testAnswer) {
+function updateTest(registrationId, contentViewId, testAnswer, maxScore) {
   return async (dispatch, getState) => {
     const token = getCookie('token')
     const userId = parseJwt(token).unique_name
@@ -392,13 +392,17 @@ function updateTest(registrationId, contentViewId, testAnswer) {
       if (data.length === 0) {
         data = []
       }
+      const score = data.score ? data.score : '-'
       dispatch({
         type: UPDATE_TEST_SUCCESS,
         payload: { testAnswer: data },
       })
-      window.location.reload()
       dispatch(
-        uiActions.setFlashMessage('บันทึกแบบทดสอบเรียบร้อยแล้ว', 'success')
+        uiActions.openGlobalModal(
+          'ส่งแบบทดสอบเรียบร้อยแล้ว',
+          `คุณได้คะแนน ${score} เต็ม ${maxScore} คะแนน`,
+          () => window.location.reload()
+        )
       )
     } catch (err) {
       dispatch({ type: UPDATE_TEST_FAILURE })

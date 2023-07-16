@@ -43,6 +43,7 @@ export default function (state = initialState, action: any) {
         isGlobalModalOpen: true,
         globalModalTitle: action.payload.globalModalTitle,
         globalModalMessage: action.payload.globalModalMessage,
+        globalModalCTAAction: action.payload.globalModalCTAAction,
       }
     case CLEAR_GLOBAL_MODAL:
       return {

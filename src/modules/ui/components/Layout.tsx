@@ -26,6 +26,7 @@ import {
 import {
   unstable_createMuiStrictModeTheme as createMuiTheme,
   ThemeProvider,
+  makeStyles,
 } from '@material-ui/core/styles'
 import { Close as CloseIcon } from '@material-ui/icons'
 import Alert from '@material-ui/lab/Alert'
@@ -39,7 +40,15 @@ import { isLogin } from 'utils/isLogin'
 import * as pressesActions from 'modules/press/actions'
 import { setCookieSubDomain, getCookie } from 'utils/cookies'
 
+const useStyles = makeStyles((theme: Theme) => ({
+  backDrop: {
+    backdropFilter: 'blur(5px)',
+    backgroundColor: 'rgba(0,0,30,0.4)',
+  },
+}))
+
 export default function Layout() {
+  const classes = useStyles()
   const { pathname } = useLocation()
   const history = useHistory()
   const PATH = process.env.REACT_APP_BASE_PATH
@@ -52,9 +61,16 @@ export default function Layout() {
     isGlobalModalOpen,
     globalModalTitle,
     globalModalMessage,
+    globalModalCTAAction,
   } = useSelector((state) => state.ui)
   const closeFlashMessage = () => dispatch(actions.clearFlashMessage())
-  const closeGlobalModal = () => dispatch(actions.clearGlobalModal())
+  const closeGlobalModal = (event, reason) => {
+    if (reason && reason === 'backdropClick') {
+      return
+    }
+    globalModalCTAAction && globalModalCTAAction()
+    dispatch(actions.clearGlobalModal())
+  }
 
   const [announcementDialogOpen, setAnnouncementDialogOpen] = useState(false)
 
@@ -275,6 +291,11 @@ export default function Layout() {
         onClose={closeGlobalModal}
         fullWidth
         maxWidth='sm'
+        BackdropProps={{
+          classes: {
+            root: classes.backDrop,
+          },
+        }}
       >
         <DialogTitle style={{ margin: '16px 0' }}>
           <Typography

@@ -127,10 +127,12 @@ export default function TestList({
 
   const handleFormSubmit = (event) => {
     event.preventDefault()
+    const maxScore = testItems.length
     const update_test_action = learnActions.updateTest(
       courseRegistrationId,
       contentViewId,
-      userTestAnswers
+      userTestAnswers,
+      maxScore
     )
     dispatch(update_test_action)
   }

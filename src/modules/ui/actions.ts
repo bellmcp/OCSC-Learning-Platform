@@ -35,12 +35,13 @@ function setLearnExitDialog(isOpen: boolean) {
   }
 }
 
-function openGlobalModal(title: string, message: string) {
+function openGlobalModal(title: string, message: string, action: any) {
   return {
     type: OPEN_GLOBAL_MODAL,
     payload: {
       globalModalTitle: title,
       globalModalMessage: message,
+      globalModalCTAAction: action,
     },
   }
 }

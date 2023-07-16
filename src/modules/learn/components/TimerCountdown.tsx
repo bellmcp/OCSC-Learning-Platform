@@ -89,11 +89,13 @@ export default function TimerCountdown({
               'info'
             )
           )
+          const maxScore = testItems.length
           // AUTO SUBMIT TEST WHEN TIME OUT
           const update_test_action = learnActions.updateTest(
             courseRegistrationId,
             contentViewId,
-            FinalUserTestAnswers
+            FinalUserTestAnswers,
+            maxScore
           )
           dispatch(update_test_action)
         } else {
