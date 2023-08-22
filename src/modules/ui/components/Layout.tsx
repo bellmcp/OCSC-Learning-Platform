@@ -222,6 +222,10 @@ export default function Layout() {
     return text.replaceAll(/<a/g, '<a class="footer_link"')
   }
 
+  const parseLinkToSnackBarColor = (text: string) => {
+    return text ? text.replaceAll(/<a/g, '<a class="snackbar_link"') : text
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -340,7 +344,7 @@ export default function Layout() {
           <Typography gutterBottom style={{ fontWeight: 600 }} variant='body1'>
             OCSC Learning Space
             <br />
-            Version 2.2.0
+            Version 2.2.1
           </Typography>
           <Divider style={{ margin: '16px 0' }} />
           <Typography gutterBottom style={{ fontWeight: 600 }}>
@@ -443,7 +447,11 @@ export default function Layout() {
           elevation={6}
           variant='filled'
         >
-          {flashMessage}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: parseLinkToSnackBarColor(flashMessage),
+            }}
+          ></div>
         </Alert>
       </Snackbar>
       {!isLearnModule && <Footer />}
