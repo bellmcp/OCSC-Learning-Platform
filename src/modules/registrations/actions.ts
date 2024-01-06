@@ -59,6 +59,12 @@ const CURRICULUM_UNENROLL_SUCCESS =
   'learning-platform/registrations/CURRICULUM_UNENROLL_SUCCESS'
 const CURRICULUM_UNENROLL_FAILURE =
   'learning-platform/registrations/CURRICULUM_UNENROLL_FAILURE'
+const COURSE_COMPLETE_REQUEST =
+  'learning-platform/registrations/COURSE_COMPLETE_REQUEST'
+const COURSE_COMPLETE_SUCCESS =
+  'learning-platform/registrations/COURSE_COMPLETE_SUCCESS'
+const COURSE_COMPLETE_FAILURE =
+  'learning-platform/registrations/COURSE_COMPLETE_FAILURE'
 
 const PATH = process.env.REACT_APP_BASE_PATH
 
@@ -320,6 +326,44 @@ function unEnrollCurriculum(curriculumId) {
   }
 }
 
+function completeCourse(registrationId) {
+  return async (dispatch, getState) => {
+    const {
+      user: { items },
+    } = getState()
+    const token = getCookie('token')
+    dispatch({ type: COURSE_COMPLETE_REQUEST })
+    try {
+      var { data } = await axios.patch(
+        `/Users/${items.id}/CourseRegistrations/${parseInt(
+          registrationId
+        )}/completed`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+      if (data.length === 0) {
+        data = []
+      }
+      dispatch({
+        type: COURSE_COMPLETE_SUCCESS,
+        payload: { curriculumComplete: data },
+      })
+      const { mesg } = data
+      dispatch(uiActions.setFlashMessage(mesg, 'success'))
+    } catch (err) {
+      const data = err.response.data
+      const { mesg } = data
+      dispatch({ type: COURSE_COMPLETE_FAILURE })
+      dispatch(uiActions.setFlashMessage(mesg, 'error'))
+    }
+  }
+}
+
 function updateCourseSatisfactionScore(registrationId, satisfactionScore) {
   return async (dispatch, getState) => {
     const {
@@ -459,6 +503,9 @@ export {
   CURRICULUM_UNENROLL_REQUEST,
   CURRICULUM_UNENROLL_SUCCESS,
   CURRICULUM_UNENROLL_FAILURE,
+  COURSE_COMPLETE_REQUEST,
+  COURSE_COMPLETE_SUCCESS,
+  COURSE_COMPLETE_FAILURE,
   loadCourseRegistrations,
   loadCurriculumRegistrations,
   registerCourse,
@@ -468,4 +515,5 @@ export {
   loadLocalDateTime,
   unEnrollCourse,
   unEnrollCurriculum,
+  completeCourse,
 }

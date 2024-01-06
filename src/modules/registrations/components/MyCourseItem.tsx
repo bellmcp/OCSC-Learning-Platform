@@ -34,13 +34,14 @@ import {
   MoreVert as MoreIcon,
   Info as InfoIcon,
   Delete as DeleteIcon,
+  School as SchoolIcon,
 } from '@material-ui/icons'
 import { green } from '@material-ui/core/colors'
 
 import isBetween from 'utils/isBetween'
 import { getCookie } from 'utils/cookies'
 import * as uiActions from 'modules/ui/actions'
-
+import * as registrationsActions from '../actions'
 import { MyCourseProps } from '../types'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -72,6 +73,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const PATH = process.env.REACT_APP_BASE_PATH
 
 export default function MyCourseItem({
+  id,
   courseRoundName,
   courseStart,
   courseEnd,
@@ -160,6 +162,10 @@ export default function MyCourseItem({
       courseRoundId,
       curriculumId: 0,
     })
+    handleClose()
+  }
+  const handleClickComplete = () => {
+    dispatch(registrationsActions.completeCourse(id))
     handleClose()
   }
 
@@ -413,6 +419,12 @@ export default function MyCourseItem({
             <InfoIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText>ข้อมูลรายวิชา</ListItemText>
+        </MenuItem>
+        <MenuItem dense onClick={handleClickComplete}>
+          <ListItemIcon className={classes.listItemIcon}>
+            <SchoolIcon fontSize='small' />
+          </ListItemIcon>
+          <ListItemText>ขอสำเร็จการศึกษา</ListItemText>
         </MenuItem>
         <MenuItem dense onClick={handleClickUnEnroll}>
           <ListItemIcon className={classes.listItemIcon}>
