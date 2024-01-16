@@ -159,7 +159,9 @@ export default function CourseRound({
     }
   }
 
-  if (maxStudents >= 100_000_000) {
+  const isInfiniteCourse = moment(courseEnd).isSameOrAfter(moment('3000-01-01'))
+
+  if (isInfiniteCourse) {
     return (
       <Grid container spacing={6}>
         <Grid item xs={12} sm={7}>
@@ -275,7 +277,7 @@ export default function CourseRound({
                   {courseStart ? courseStart : 'ไม่มีข้อมูล'}
                 </Moment>{' '}
                 ถึง{' '}
-                {moment(courseEnd).isSameOrAfter(moment('3000-01-01')) ? (
+                {isInfiniteCourse ? (
                   <>ไม่มีกำหนด</>
                 ) : (
                   <Moment add={{ years: 543 }} locale='th' format='D MMM YYYY'>
