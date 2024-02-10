@@ -333,13 +333,11 @@ export default function MyCourseItem({
                         )}
                       </Grid>
                     )}
-                    {!isChildCourse && (
-                      <Grid item style={{ marginLeft: 8 }}>
-                        <IconButton size='small' onClick={handleClick}>
-                          <MoreIcon />
-                        </IconButton>
-                      </Grid>
-                    )}
+                    <Grid item style={{ marginLeft: 8 }}>
+                      <IconButton size='small' onClick={handleClick}>
+                        <MoreIcon />
+                      </IconButton>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Box>
@@ -426,12 +424,14 @@ export default function MyCourseItem({
           </ListItemIcon>
           <ListItemText>ขอสำเร็จการศึกษา</ListItemText>
         </MenuItem>
-        <MenuItem dense onClick={handleClickUnEnroll}>
-          <ListItemIcon className={classes.listItemIcon}>
-            <DeleteIcon fontSize='small' />
-          </ListItemIcon>
-          <ListItemText>ยกเลิกการลงทะเบียนรายวิชา</ListItemText>
-        </MenuItem>
+        {!isChildCourse && (
+          <MenuItem dense onClick={handleClickUnEnroll}>
+            <ListItemIcon className={classes.listItemIcon}>
+              <DeleteIcon fontSize='small' />
+            </ListItemIcon>
+            <ListItemText>ยกเลิกการลงทะเบียนรายวิชา</ListItemText>
+          </MenuItem>
+        )}
       </Menu>
     </>
   )
