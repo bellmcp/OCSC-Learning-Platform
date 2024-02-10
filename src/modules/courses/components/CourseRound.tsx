@@ -81,12 +81,12 @@ export default function CourseRound({
     )
     dispatch(registration_action)
     setIsRegisterButtonDisabled(true)
-    setRegisterButtonLabel('กำลังโหลด...')
+    setRegisterButtonLabel('กำลังลงทะเบียน...')
     //PREVENT MULTIPLE REQUEST
     setTimeout(() => {
       setIsRegisterButtonDisabled(false)
       setRegisterButtonLabel('ลงทะเบียนเรียน')
-    }, 3000)
+    }, 5000)
   }
 
   function renderRegisterButton() {

@@ -153,12 +153,12 @@ export default function CurriculumDetails() {
     const registration_action = registrationsActions.registerCurriculum(id)
     dispatch(registration_action)
     setIsRegisterButtonDisabled(true)
-    setRegisterButtonLabel('กำลังโหลด...')
+    setRegisterButtonLabel('กำลังลงทะเบียน...')
     //PREVENT MULTIPLE REQUEST
     setTimeout(() => {
       setIsRegisterButtonDisabled(false)
       setRegisterButtonLabel('ลงทะเบียนหลักสูตร')
-    }, 3000)
+    }, 5000)
   }
 
   const curriculumInfoPlaceholder = [
